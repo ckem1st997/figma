@@ -1,0 +1,201 @@
+﻿@model figma.Models.Products
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>Thêm sản phẩm mới</h1>
+
+@*<form method="post" enctype="multipart/form-data" asp-controller="Products" asp-action="index">
+        <div class="form-group">
+            <div class="col-md-10">
+                <p>Upload one or more files using this form:</p>
+                <input type="file" name="files" multiple />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Upload" />
+            </div>
+        </div>
+    </form>*@
+
+
+@{
+    if (TempData["result"] != null)
+    {
+        <h3>Message: @TempData["result"]</h3>
+    }
+}
+
+@*<form asp-controller="Products" asp-action="index"
+      enctype="multipart/form-data" onsubmit="AJAXSubmit(this);return false;"
+      method="post">
+    <dl>
+        <dt>
+            <label for="FileUpload_FormFile">File</label>
+        </dt>
+        <dd>
+            <input id="files" type="file"
+                   name="files" multiple />
+        </dd>
+    </dl>
+
+    <input class="btn" type="submit" value="Upload" />
+
+    <div style="margin-top:15px">
+        <output name="result"></output>
+    </div>
+</form>
+
+<script>
+    async function AJAXSubmit(oFormElement) {
+        const formData = new FormData(oFormElement);
+        console.log(formData);
+        try {
+            const response = await fetch('/Products/hi', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (response.ok) {
+                //  window.location.href = '/';
+                console.log(response.ok);
+            }
+            console.log(response.statusText);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }*@
+</script>
+
+<hr />
+<form class="row" asp-action="Create" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="col-6">
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description" class="control-label"></label>
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Image"></label>
+            <input class="mb-2" id="files" accept="image/*" type="file"
+                   name="files" multiple />
+            @*<span asp-validation-for="Image" class="text-danger"></span>*@
+        </div>
+        <div class="form-group">
+            <label asp-for="Body" class="control-label"></label>
+            <input asp-for="Body" class="form-control" />
+            <span asp-validation-for="Body" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ProductCategorieID" class="control-label"></label>
+            <select asp-for="ProductCategorieID" class="form-control" asp-items="ViewBag.ProductCategorieID"></select>
+        </div>
+        <div class="form-group">
+            <label asp-for="Quantity" class="control-label"></label>
+            <input asp-for="Quantity" class="form-control" />
+            <span asp-validation-for="Quantity" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Factory" class="control-label"></label>
+            <input asp-for="Factory" class="form-control" />
+            <span asp-validation-for="Factory" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="form-group">
+            <label asp-for="Price" class="control-label"></label>
+            <input asp-for="Price" class="form-control" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="SaleOff" class="control-label"></label>
+            <input asp-for="SaleOff" class="form-control" />
+            <span asp-validation-for="SaleOff" class="text-danger"></span>
+        </div>
+        @*<div class="form-group">
+                <label asp-for="QuyCach" class="control-label"></label>
+                <input asp-for="QuyCach" class="form-control" />
+                <span asp-validation-for="QuyCach" class="text-danger"></span>
+            </div>*@
+        <div class="form-group">
+            <label asp-for="Sort" class="control-label"></label>
+            <input asp-for="Sort" class="form-control" />
+            <span asp-validation-for="Sort" class="text-danger"></span>
+        </div>
+        <div class="form-group form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="Hot" /> @Html.DisplayNameFor(model => model.Hot)
+            </label>
+        </div>
+        <div class="form-group form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="Home" /> @Html.DisplayNameFor(model => model.Home)
+            </label>
+        </div>
+        <div class="form-group form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="Active" /> Hiển thị lên Web
+            </label>
+        </div>
+        <div class="form-group">
+            <label asp-for="TitleMeta" class="control-label"></label>
+            <input asp-for="TitleMeta" class="form-control" />
+            <span asp-validation-for="TitleMeta" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="DescriptionMeta" class="control-label"></label>
+            <input asp-for="DescriptionMeta" class="form-control" />
+            <span asp-validation-for="DescriptionMeta" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="GiftInfo" class="control-label"></label>
+            <input asp-for="GiftInfo" class="form-control" />
+            <span asp-validation-for="GiftInfo" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Content" class="control-label"></label>
+            <input asp-for="Content" class="form-control" />
+            <span asp-validation-for="Content" class="text-danger"></span>
+        </div>
+        <div class="form-group form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="StatusProduct" />Còn hàng
+            </label>
+        </div>
+        <div class="form-group">
+            <label asp-for="CollectionID" class="control-label"></label>
+            <select asp-for="CollectionID" class="form-control" asp-items="ViewBag.CollectionID"></select>
+        </div>
+        <div class="form-group">
+            <label asp-for="BarCode" class="control-label"></label>
+            <input asp-for="BarCode" class="form-control" />
+            <span asp-validation-for="BarCode" class="text-danger"></span>
+        </div>
+        @*<div class="form-group">
+                <label asp-for="CreateDate" class="control-label"></label>
+                <input asp-for="CreateDate" class="form-control" />
+                <span asp-validation-for="CreateDate" class="text-danger"></span>
+            </div>*@
+        <div class="form-group">
+            <label asp-for="CreateBy" class="control-label"></label>
+            <input asp-for="CreateBy" class="form-control" />
+            <span asp-validation-for="CreateBy" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </div>
+</form>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

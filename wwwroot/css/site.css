@@ -1,0 +1,170 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px; /* Vertically center the text there */
+}
+img{
+       max-width:100%;
+    }
+header{
+    position:relative;
+}
+.navbar {
+    position:relative;
+    border: 1px solid #F1F1F1;
+}
+.info{
+    margin:10px;
+}
+.title-header {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    color: #666666;
+}
+.title-small {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 21px;
+    /* identical to box height */
+    text-align: center;
+    text-transform: uppercase;
+    /* dark grey */
+    color: #333333;
+    margin-top:30px;
+}
+.title-long {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 56px;
+    text-align: center;
+    text-transform: uppercase;
+    /* dark grey */
+    color: #333333;
+}
+.carousel-indicators li{
+    background-color:black;
+}
+.title-we {
+    text-align: center;
+    font-size: 28px !important;
+}
+.welcome {
+    margin-top: 50px;
+}
+.text-header {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 16px;
+    text-transform: uppercase;
+    /* dark grey */
+    color: #333333;
+    margin-left: 30px;
+    border-bottom: 0px solid #48CAB2;
+    text-decoration:none !important;
+}
+    .text-header:hover {
+        border-bottom: 2px solid #48CAB2;
+        color: #48CAB2 !important;
+    }
+
+@keyframes animates {
+    0% {
+        border-bottom-width:10px;     
+    }
+
+    50% {
+        border-bottom-width: 30px;
+    }
+
+    70% {
+        border-bottom-width: 50px;
+    }
+    100% {
+        border-bottom-width: 100px;
+    }
+}
+.list-trend1{
+    text-align:center;
+}
+.text-header1:hover {
+    border-bottom: 0px solid #48CAB2 !important;
+}
+.bi{
+    margin-right:10px;
+    font-size:25px;
+}

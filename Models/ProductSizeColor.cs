@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace figma.Models
+{
+    public class ProductSizeColor
+    {
+        public int Id { get; set; }
+
+        [Required]
+        public int ProductID { get; set; }
+
+        public int ColorID { get; set; }
+
+        public int SizeID { get; set; }
+
+        public virtual Color Color { get; set; }
+        public virtual Size Size { get; set; }
+        public virtual Products Products { get; set; }
+
+    }
+}

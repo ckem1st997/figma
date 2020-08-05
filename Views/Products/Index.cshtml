@@ -1,0 +1,89 @@
+﻿@model IEnumerable<figma.Models.Products>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    int i = 1;
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table text-center">
+    <thead>
+        <tr>
+            <th>
+                Stt
+            </th>
+            <th style="width:15%">
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th style="width:15%">
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Active)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateBy)
+            </th>
+            <th>
+                Chức năng
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @i
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @{
+                        string[] arrListStr = item.Image.Split(',');
+                    }
+                    <img class="" src="/@arrListStr[0]" />
+                </td>
+                <td>
+                    @{
+                        if (item.Active)
+                        {
+                            <span class="btn btn-success">Đang bán</span>
+                        }
+                        else
+                        {
+                            <span class="btn btn-danger">Chưa bán</span>
+                        }
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateBy)
+                </td>
+                <td>
+                    <a class="btn btn-success mb-2" asp-action="Details" asp-route-id="@item.ProductID">Thông tin</a>
+                    <br />
+                    <a class="btn btn-primary mb-2" asp-action="Edit" asp-route-id="@item.ProductID">Chỉnh sửa</a>
+                    <br />
+                    <a class="btn btn-warning mb-2" asp-action="DetailsSC" asp-route-id="@item.ProductID">Size, Color</a>
+                    <br />
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ProductID">Xóa</a>
+
+                </td>
+            </tr>
+            <p class="d-none"> @(i++)</p>
+;
+        }
+    </tbody>
+</table>
