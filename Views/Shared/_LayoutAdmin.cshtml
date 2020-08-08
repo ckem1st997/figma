@@ -22,19 +22,25 @@
     <!-- Custom fonts for this template-->
     <link href="~/Admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-    <script src='https://cdn.tiny.cloud/1/1bbcll4q1m43yz0jgo93a5odf1st8dmfwa6bubk9ucayv1h8/tinymce/5/tinymce.min.js' referrerpolicy="origin">
-    </script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />    <!-- Custom styles for this template-->
     <link href="~/Admin/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="~/Admin/css/style.min.css" rel="stylesheet" />
-    <script>
-        tinymce.init({
-            selector: '#mytextarea'
-        });
-    </script>
+    @*<script src="https://cdn.ckeditor.com/ckeditor5/21.0.0/classic/ckeditor.js"></script>*@
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+
 </head>
 
 <body id="page-top">
+
+
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -108,7 +114,8 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProduct" aria-expanded="true" aria-controls="collapseProduct">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProduct" aria-expanded="true"
+                   aria-controls="collapseProduct">
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>Phân loại sản phẩm</span>
                 </a>
@@ -123,6 +130,31 @@
                     </div>
                 </div>
             </li>
+
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseColor" aria-expanded="true"
+                   aria-controls="collapseColor">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Màu sắc và Size</span>
+                </a>
+                <div id="collapseColor" class="collapse" aria-labelledby="headingProduct" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Màu sắc</h6>
+                        <a class="collapse-item" asp-action="Index" asp-controller="Colors">Danh sách</a>
+                        <a class="collapse-item" asp-action="Create" asp-controller="Colors">Thêm mới</a>
+                        <h6 class="collapse-header">Size</h6>
+                        <a class="collapse-item" asp-action="Index" asp-controller="Sizes">Danh sách</a>
+                        <a class="collapse-item" asp-action="Create" asp-controller="Sizes">Thêm mới</a>
+                    </div>
+                </div>
+            </li>
+
+
+
+
+
+
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -416,8 +448,8 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="~/Admin/vendor/jquery/jquery.min.js"></script>
-    <script src="~/Admin/vendor/bootstrap/js/bootstrap.min.js"></script>
+    @*<script src="~/Admin/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Admin/vendor/bootstrap/js/bootstrap.min.js"></script>*@
 
     <!-- Core plugin JavaScript-->
     <script src="~/Admin/vendor/jquery-easing/jquery.easing.min.js"></script>

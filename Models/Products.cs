@@ -27,11 +27,11 @@ namespace figma.Models
         public string Image { get; set; }
 
 
-        [Display(Name = "Chú ý thêm cho sản phẩm")]
+        [Display(Name = "Nội dung ngắn")]
         public string Body { get; set; }
 
 
-        [Display(Name = "Loại sản phẩm")]
+        [Display(Name = "Danh mục sản phẩm")]
         public int ProductCategorieID { get; set; }
 
 
@@ -39,7 +39,7 @@ namespace figma.Models
         public int Quantity { get; set; }
 
 
-        [Display(Name = "Quốc gia")]
+        [Display(Name = "Xuất xứ")]
         [MaxLength(500)]
         public string Factory { get; set; }
 
@@ -52,12 +52,13 @@ namespace figma.Models
 
 
 
-        [Display(Name = "Giá Sale")]
+        [Display(Name = "Giá khuyến mãi")]
         [DataType(DataType.Currency)]
         [Column(TypeName = "decimal(18, 0)")]
         public decimal SaleOff { get; set; }
 
 
+        [Display(Name ="Quy cách")]
         [MaxLength(500)]
         public string QuyCach { get; set; }
 
@@ -66,24 +67,24 @@ namespace figma.Models
         public int Sort { get; set; }
 
 
-        [Display(Name = "Sản phẩm mới nhất")]
+        [Display(Name = "Bộ sưu tập mới nhất")]
         public bool Hot { get; set; }
 
 
-        [Display(Name = "Hiển thị trang chủ")]
+        [Display(Name = "Hiển trang chủ")]
         public bool Home { get; set; }
 
 
-        [Display(Name ="Trạng thái sản phẩm")]
+        [Display(Name ="Hoạt động")]
         public bool Active { get; set; }
 
 
-        [Display(Name = "Tiêu đề liên quan")]
+        [Display(Name = "Thẻ tiêu đề")]
         [MaxLength(100)]
         public string TitleMeta { get; set; }
 
 
-        [Display(Name = "Thẻ mô tả, sẽ hiển thị khi seach Google")]
+        [Display(Name = "Thẻ mô tả")]
         public string DescriptionMeta { get; set; }
 
 
@@ -91,7 +92,7 @@ namespace figma.Models
         public string GiftInfo { get; set; }
 
 
-        [Display(Name = "Mô tả về sản phẩm")]
+        [Display(Name = "Nội dung chi tiết")]
         public string Content { get; set; }
 
 

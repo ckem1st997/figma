@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="App_Data\**" />
+    <Compile Remove="wwwroot\ckeditor5-upload\**" />
+    <Content Remove="App_Data\**" />
+    <Content Remove="wwwroot\ckeditor5-upload\**" />
+    <EmbeddedResource Remove="App_Data\**" />
+    <EmbeddedResource Remove="wwwroot\ckeditor5-upload\**" />
+    <None Remove="App_Data\**" />
+    <None Remove="wwwroot\ckeditor5-upload\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="compilerconfig.json" />
   </ItemGroup>
 
@@ -1877,7 +1888,9 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.6" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore" Version="3.1.4" />
+    <PackageReference Include="OpenSSL.PrivateKeyDecoder" Version="1.3.0" />
     <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0" />
+    <PackageReference Include="System.Security.Cryptography.OpenSsl" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>

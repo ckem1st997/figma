@@ -47,16 +47,18 @@ namespace figma.Controllers
         }
 
         // GET: ProductSizeColors/Create
-        public IActionResult Create()
+        public IActionResult Create(int? id)
         {
+            Console.WriteLine(1);
+            Console.WriteLine(id.ToString());
+            ViewBag.IdSP = id;
+
             ViewData["ColorID"] = new SelectList(_context.Colors, "ColorID", "NameColor");
             ViewData["SizeID"] = new SelectList(_context.Sizes, "SizeID", "SizeProduct");
             return View();
         }
 
-        // POST: ProductSizeColors/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,ProductID,ColorID,SizeID")] ProductSizeColor productSizeColor)
@@ -85,8 +87,8 @@ namespace figma.Controllers
             {
                 return NotFound();
             }
-            ViewData["ColorID"] = new SelectList(_context.Colors, "ColorID", "ColorID", productSizeColor.ColorID);
-            ViewData["SizeID"] = new SelectList(_context.Sizes, "SizeID", "SizeID", productSizeColor.SizeID);
+            ViewData["ColorID"] = new SelectList(_context.Colors, "ColorID", "NameColor", productSizeColor.ColorID);
+            ViewData["SizeID"] = new SelectList(_context.Sizes, "SizeID", "SizeProduct", productSizeColor.SizeID);
             return View(productSizeColor);
         }
 
@@ -155,6 +157,8 @@ namespace figma.Controllers
             var productSizeColor = await _context.ProductSizeColors.FindAsync(id);
             _context.ProductSizeColors.Remove(productSizeColor);
             await _context.SaveChangesAsync();
+            TempData["StatusMessage"] = "Xóa Thành Công";
+
             return RedirectToAction(nameof(Index));
         }
 

@@ -93,6 +93,7 @@ namespace figma.Data
             modelBuilder.Entity<ProductLike>().HasOne(p => p.Members).WithMany(b => b.ProductLikes).HasForeignKey(p => p.MemberId).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<Products>().Property(p => p.CreateDate).HasDefaultValueSql("getdate()");
             modelBuilder.Entity<Products>().Property(p => p.CreateBy).HasDefaultValue("admin");
+            modelBuilder.Entity<Products>().Property(p => p.Sort).HasDefaultValue(1);
 
 
 

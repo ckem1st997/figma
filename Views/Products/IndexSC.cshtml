@@ -1,21 +1,32 @@
 ﻿@model IEnumerable<figma.Models.ProductSizeColor>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "IndexSC";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
+<h1>Danh sách màu và size</h1>
 <p>
-    <a asp-action="Create">Create New</a>
+    @foreach (var item in Model)
+    {
+        <a class="btn btn-success" asp-action="CreateSC" asp-route-id="@item.ProductID">Thêm mới</a>
+        break;
+    }
 </p>
+
 @{
     if (TempData["StatusMessage"] != null)
     {
-        <div class="alert alert-success" role="alert">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
             Message: @TempData["StatusMessage"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
     }
 }
+
+
 <table class="table">
     <thead>
         <tr>
@@ -45,9 +56,9 @@
                     @Html.DisplayFor(modelItem => item.Size.SizeProduct)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a class="btn btn-success" asp-action="EditSC" asp-route-id="@item.Id">Edit</a> |
+                    <a class="btn btn-success" asp-action="DetailsSC" asp-route-id="@item.Id">Details</a> |
+                    <a class="btn btn-success" asp-action="DeleteSC" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>
         }

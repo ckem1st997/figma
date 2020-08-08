@@ -47,6 +47,7 @@ namespace figma.Data
             //
             var size = new Size[]
             {
+            new Size{SizeProduct="Không Size"},
             new Size{SizeProduct="M"},
             new Size{SizeProduct="L"},
             new Size{SizeProduct="XL"},

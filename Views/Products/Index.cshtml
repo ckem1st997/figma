@@ -6,10 +6,10 @@
     int i = 1;
 }
 
-<h1>Index</h1>
+<h1>Danh sách sản phẩm</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-success" asp-action="Create">Thêm mới sản phẩm</a>
 </p>
 <table class="table text-center">
     <thead>
@@ -20,7 +20,7 @@
             <th style="width:15%">
                 @Html.DisplayNameFor(model => model.Name)
             </th>
-            <th style="width:15%">
+            <th style="width:10%">
                 @Html.DisplayNameFor(model => model.Image)
             </th>
             <th>
@@ -76,14 +76,13 @@
                     <br />
                     <a class="btn btn-primary mb-2" asp-action="Edit" asp-route-id="@item.ProductID">Chỉnh sửa</a>
                     <br />
-                    <a class="btn btn-warning mb-2" asp-action="DetailsSC" asp-route-id="@item.ProductID">Size, Color</a>
+                    <a class="btn btn-warning mb-2" asp-action="IndexSC" asp-route-idsp="@item.ProductID">Size, Color</a>
                     <br />
                     <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ProductID">Xóa</a>
 
                 </td>
             </tr>
             <p class="d-none"> @(i++)</p>
-;
         }
     </tbody>
 </table>

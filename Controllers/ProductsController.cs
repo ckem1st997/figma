@@ -33,31 +33,32 @@ namespace figma.Controllers
             _context = context;
         }
 
+
+        private static long ToUnixTime(DateTime date)
+        {
+            var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            Console.WriteLine(Convert.ToInt64((TimeZoneInfo.ConvertTimeToUtc(date, TimeZoneInfo.Local) - epoch).TotalSeconds));
+            return Convert.ToInt64((TimeZoneInfo.ConvertTimeToUtc(date, TimeZoneInfo.Local) - epoch).TotalSeconds);
+        }
+
         // viet ajax them hinh anh vao thư mục temp
         // xong trả về đường dẫn, thêm app img với src trả về
+
         [HttpPost]
         public async Task<IActionResult> createImage(List<IFormFile> filesadd)
         {
             DateTime dateTime = DateTime.Now;
-            //test and create folder
-            string createFolderDate = "" + dateTime.Year + "\\" + dateTime.Month + "\\" + dateTime.Day + "";
+            //  string createFolderDate = "" + dateTime.Year + "\\" + dateTime.Month + "\\" + dateTime.Day + "";
+            string createFolderDate = DateTime.Now.ToString("yyyy/MM/dd");
             string path = _hostingEnvironment.WebRootPath + @"\" + createFolderDate + "";
             Console.WriteLine(path);
             try
             {
-                // Determine whether the directory exists.
                 if (Directory.Exists(path))
                 {
                     Console.WriteLine("Path đã tồn tại !");
                 }
-
-                // Try to create the directory.
                 DirectoryInfo di = Directory.CreateDirectory(path);
-                Console.WriteLine("The directory was created successfully at {0}.", Directory.GetCreationTime(path));
-
-                // Delete the directory.
-                //  di.Delete();
-                //    Console.WriteLine("The directory was deleted successfully.");
             }
             catch (Exception e)
             {
@@ -70,7 +71,7 @@ namespace figma.Controllers
                 path = "image";
 
             if (filesadd == null || filesadd.Count == 0)
-                return Content("file not selected");
+                return Ok(new { imgNode = "" });
             long size = filesadd.Sum(f => f.Length);
             var filePaths = new List<string>();
             string sql = "";
@@ -84,13 +85,14 @@ namespace figma.Controllers
                         var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "" + path + "");
 
                         filePaths.Add(filePath);
-
-                        var fileNameWithPath = string.Concat(filePath, "\\", formFile.FileName);
+                        var randomname = DateTime.Now.ToFileTime() + Path.GetExtension(formFile.FileName);
+                        var fileNameWithPath = string.Concat(filePath, "\\", randomname);
 
                         using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
                         {
                             await formFile.CopyToAsync(stream);
                         }
+                        // resize
                         using (Image<Rgba32> image = (Image<Rgba32>)Image.Load(fileNameWithPath))
                         {
                             image.Mutate(x => x.Resize(image.Width > 720 ? 720 : image.Width, image.Height > 822 ? 822 : image.Height));
@@ -98,21 +100,50 @@ namespace figma.Controllers
                         }
 
                         if (sql.Length > 1)
-                            sql = "" + sql + "," + createFolderDate + "/" + formFile.FileName + "";
+                            sql = "" + sql + "," + createFolderDate + "/" + randomname + "";
                         else
-                            sql = "" + createFolderDate + "/" + formFile.FileName + "";
-                        sql = sql.Replace("\\", "/");
+                            sql = "" + createFolderDate + "/" + randomname + "";
+                        // sql = sql.Replace("\\", "/");
 
                     }
                 }
                 else
-                    return Ok(new { formFile.ContentType, r = false });
+                    return Ok(new { imgNode = "" });
             }
             return Ok(new
             {
-                sql
+                imgNode = sql
             });
         }
+
+        //delete file
+
+        [HttpPost]
+        public async Task<IActionResult> deleteImage(string filesadd)
+        {
+            var result = false;
+            var h = filesadd;
+
+            if (filesadd != null)
+            {
+
+                String filepath = Path.Combine(_hostingEnvironment.WebRootPath, filesadd);
+                if (System.IO.File.Exists(filepath))
+                {
+                    System.IO.File.Delete(filepath);
+                    result = true;
+                }
+
+            }
+            else
+                return Ok(new { result = false, h });
+            return Ok(new
+            {
+                result
+            });
+        }
+
+
 
         // code sao chép hình ảnh vào thư mục image
 
@@ -269,7 +300,7 @@ namespace figma.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductID,Name,Description,Image,Body,ProductCategorieID,Quantity,Factory,Price,SaleOff,QuyCach,Sort,Hot,Home,Active,TitleMeta,DescriptionMeta,GiftInfo,Content,StatusProduct,CollectionID,BarCode,CreateDate,CreateBy")] Products products, string deletefile)
+        public async Task<IActionResult> Edit(int id, [Bind("ProductID,Name,Description,Image,Body,ProductCategorieID,Quantity,Factory,Price,SaleOff,QuyCach,Sort,Hot,Home,Active,TitleMeta,DescriptionMeta,GiftInfo,Content,StatusProduct,CollectionID,BarCode,CreateDate,CreateBy")] Products products)
         {
             if (id != products.ProductID)
             {
@@ -278,22 +309,6 @@ namespace figma.Controllers
 
             if (ModelState.IsValid)
             {
-                if (deletefile != null)
-                {
-                    string[] arr = deletefile.Split(',');
-
-                    foreach (var item in arr)
-                    {
-                        //   item = item.Replace("", "");
-                        String filepath = Path.Combine(_hostingEnvironment.WebRootPath, item);
-                        if (System.IO.File.Exists(filepath))
-                        {
-                            System.IO.File.Delete(filepath);
-                            ///  Console.WriteLine("999");
-
-                        }
-                    }
-                }
                 try
                 {
                     _context.Update(products);
@@ -368,11 +383,124 @@ namespace figma.Controllers
             return _context.Products.Any(e => e.ProductID == id);
         }
 
+        //
+
+        public async Task<IActionResult> IndexSC(int? idsp)
+        {
+            var shopProductContext = _context.ProductSizeColors.Include(p => p.Color).Include(p => p.Size).Where(p => p.ProductID == idsp);
+            return View(await shopProductContext.ToListAsync());
+        }
+
+        //
+
+        public IActionResult CreateSC(int? id)
+        {
+            Console.WriteLine(1);
+            Console.WriteLine(id.ToString());
+            ViewBag.IdSP = id;
+
+            ViewData["ColorID"] = new SelectList(_context.Colors, "ColorID", "NameColor");
+            ViewData["SizeID"] = new SelectList(_context.Sizes, "SizeID", "SizeProduct");
+            return View();
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateSCC([Bind("Id,ProductID,ColorID,SizeID")] ProductSizeColor productSizeColor)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(productSizeColor);
+                await _context.SaveChangesAsync();
+                TempData["StatusMessage"] = "Tạo Thành Công";
+                return RedirectToAction(nameof(IndexSC), new { idsp = productSizeColor.ProductID });
+            }
+            ViewData["ColorID"] = new SelectList(_context.Colors, "ColorID", "NameColor", productSizeColor.ColorID);
+            ViewData["SizeID"] = new SelectList(_context.Sizes, "SizeID", "SizeProduct", productSizeColor.SizeID);
+            return View(productSizeColor);
+        }
+
+
         // Size and Color
-
-
-
         public async Task<IActionResult> DetailsSC(int? id)
+        {
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+            ViewBag.NameSP = from a in _context.Products
+                             where a.ProductID == id
+                             select a.Name;
+            ViewBag.Id = id;
+            Console.WriteLine(2);
+            Console.WriteLine(ViewBag.Id);
+            var productSizeColor = await _context.ProductSizeColors
+                .Include(p => p.Color)
+                .Include(p => p.Size)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (productSizeColor == null)
+            {
+                return NotFound();
+            }
+
+            return View(productSizeColor);
+        }
+
+        public async Task<IActionResult> EditSC(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var productSizeColor = await _context.ProductSizeColors.FirstOrDefaultAsync(m => m.Id == id);
+            if (productSizeColor == null)
+            {
+                return NotFound();
+            }
+            //  ViewBag.id = from a in _context.;
+            ViewData["ColorID"] = new SelectList(_context.Colors, "ColorID", "NameColor", productSizeColor.ColorID);
+            ViewData["SizeID"] = new SelectList(_context.Sizes, "SizeID", "SizeProduct", productSizeColor.SizeID);
+            return View(productSizeColor);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditSC(int id, [Bind("Id,ProductID,ColorID,SizeID")] ProductSizeColor productSizeColor)
+        {
+            if (id != productSizeColor.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(productSizeColor);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ProductSizeColorExists(productSizeColor.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(IndexSC), new { idsp = productSizeColor.ProductID });
+            }
+            ViewData["ColorID"] = new SelectList(_context.Colors, "ColorID", "NameColor", productSizeColor.ColorID);
+            ViewData["SizeID"] = new SelectList(_context.Sizes, "SizeID", "SizeProduct", productSizeColor.SizeID);
+            return View(productSizeColor);
+        }
+
+        public async Task<IActionResult> DeleteSC(int? id)
         {
             if (id == null)
             {
@@ -390,6 +518,44 @@ namespace figma.Controllers
 
             return View(productSizeColor);
         }
+
+        [HttpPost, ActionName("DeleteSC")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteSCConfirmed(int id)
+        {
+            var productSizeColor = await _context.ProductSizeColors.FindAsync(id);
+            _context.ProductSizeColors.Remove(productSizeColor);
+            await _context.SaveChangesAsync();
+            TempData["StatusMessage"] = "Xóa Thành Công";
+            return RedirectToAction(nameof(IndexSC), new { idsp = productSizeColor.ProductID });
+        }
+
+        private bool ProductSizeColorExists(int id)
+        {
+            return _context.ProductSizeColors.Any(e => e.Id == id);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
