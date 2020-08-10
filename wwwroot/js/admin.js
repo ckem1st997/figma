@@ -8,8 +8,8 @@
         //    $("#deletefile").val($("#deletefile").val() + "," + $(this).parent().children().attr('data-image'));
 
         AJAXSubmitDelete($(this).parent().children().attr('data-image'));
-        // console.log($(this).parent().children().attr('data-image'));
         $(this).parent().remove();
+        //   addBanner();
 
     }
 });
@@ -24,6 +24,20 @@ function addlist() {
     });
     $("#Image").val(str);
 }
+
+//
+function addBieu() {
+    var str = "";
+    $(".add-image-0 div.row .col-3 a").each(function () {
+        if (str.length == 0)
+            str = $(this).attr('data-image');
+        else
+            str = str + "," + $(this).attr('data-image');
+    });
+    $("#Image").val(str);
+}
+//
+
 
 $(document).ready(function () {
     // add img show từ file upload
@@ -44,8 +58,7 @@ $(document).ready(function () {
 
 // delete_cart_table
 function addTemp(a) {
-    // console.log($("table#cart-view tbody tr.item_2:eq(" + a + ")").attr('id'));
-    // lấy theo vị trí
+
     var id_sp_delete = parseInt($("table#cart-view tbody tr.item_2:eq(" + a + ")").attr('id'));
     $("table#cart-view tbody tr.item_2")[a].remove();
     var i = 0;
@@ -153,6 +166,26 @@ function AJAXSubmit(file) {
     });
 }
 
+function AJAXSubmitT(file) {
+
+    formData = new FormData();
+    formData.append("filesadd", file);
+    $.ajax({
+        type: 'POST',
+        url: '/Products/createImage',
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            $("#summernotePCT").summernote('insertImage', "/" + data.imgNode + "");
+        },
+        error: function (data) {
+            alert(data.responseText);
+        }
+    });
+}
+
 function AJAXSubmit1(file) {
 
     formData = new FormData();
@@ -186,6 +219,26 @@ function AJAXSubmit2(file) {
         processData: false,
         success: function (data) {
             $("#summernote2").summernote('insertImage', "/" + data.imgNode + "");
+        },
+        error: function (data) {
+            alert(data.responseText);
+        }
+    });
+}
+
+function AJAXSubmitB(file) {
+
+    formData = new FormData();
+    formData.append("filesadd", file);
+    $.ajax({
+        type: 'POST',
+        url: '/Products/createImage',
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            $("#summernotePCB").summernote('insertImage', "/" + data.imgNode + "");
         },
         error: function (data) {
             alert(data.responseText);
@@ -313,6 +366,118 @@ $('#summernote2').summernote({
     disableDragAndDrop: true,
 });
 
+$('#summernotePCT').summernote({
+    callbacks: {
+        onImageUpload: function (files) {
+            for (let i = 0; i < files.length; i++) {
+                AJAXSubmitT(files[i]);
+            }
+        },
+        onChange: function () {
+            var markupStr = $('#summernotePCT').summernote('code');
+            $("#DescriptionMeta").val(markupStr);
+        }
+    },
+    onInit: function () {
+        console.log('Summernote is launched');
+    }
+    ,
+    placeholder: 'Hello stand alone ui',
+    tabsize: 2,
+    height: 120,
+    onImageUpload: function (files, editor, welEditable) {
+        sendFile(files[0], editor, welEditable);
+    },
+    toolbar: [
+        ['style', ['style']],
+        ['font', ['bold', 'underline', 'clear']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['table', ['table']],
+        ['insert', ['link', 'picture', 'video']],
+        ['view', ['fullscreen', 'codeview', 'help']]
+    ], popover: {
+        image: [
+            ['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
+            ['float', ['floatLeft', 'floatRight', 'floatNone']],
+            ['remove', ['removeMedia']]
+        ],
+        link: [
+            ['link', ['linkDialogShow', 'unlink']]
+        ],
+        table: [
+            ['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
+            ['delete', ['deleteRow', 'deleteCol', 'deleteTable']],
+        ],
+        air: [
+            ['color', ['color']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['para', ['ul', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture']]
+        ]
+    },
+    disableDragAndDrop: true,
+});
+
+
+$('#summernotePCB').summernote({
+    callbacks: {
+        onImageUpload: function (files) {
+            for (let i = 0; i < files.length; i++) {
+                // console.log(files[i])
+                AJAXSubmitB(files[i]);
+            }
+        },
+        onChange: function () {
+            // console.log('onChange:', contents, $editable);
+            var markupStr = $('#summernotePCB').summernote('code');
+            //  console.log(markupStr);
+            $("#Body").val(markupStr);
+        }
+    },
+    onInit: function () {
+        console.log('Summernote is launched');
+    }
+    ,
+    placeholder: 'Hello stand alone ui',
+    tabsize: 2,
+    height: 120,
+    onImageUpload: function (files, editor, welEditable) {
+        sendFile(files[0], editor, welEditable);
+    },
+    toolbar: [
+        ['style', ['style']],
+        ['font', ['bold', 'underline', 'clear']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['table', ['table']],
+        ['insert', ['link', 'picture', 'video']],
+        ['view', ['fullscreen', 'codeview', 'help']]
+    ], popover: {
+        image: [
+            ['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
+            ['float', ['floatLeft', 'floatRight', 'floatNone']],
+            ['remove', ['removeMedia']]
+        ],
+        link: [
+            ['link', ['linkDialogShow', 'unlink']]
+        ],
+        table: [
+            ['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
+            ['delete', ['deleteRow', 'deleteCol', 'deleteTable']],
+        ],
+        air: [
+            ['color', ['color']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['para', ['ul', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture']]
+        ]
+    },
+    disableDragAndDrop: true,
+});
+
 /// create file
 
 async function AJAXSubmitCreate(oFormElement) {
@@ -346,6 +511,91 @@ async function AJAXSubmitCreate(oFormElement) {
     });
 
 }
+//
+
+
+function addBanner() {
+    var str = "";
+    $(".add-image-1 div.row .col-3 a").each(function () {
+        if (str.length == 0)
+            str = $(this).attr('data-image');
+        else
+            str = str + "," + $(this).attr('data-image');
+    });
+    $("#CoverImage").val(str);
+}
+
+
+//viet theo this
+async function AJAXSubmitCreateB(oFormElement) {
+    const formData = new FormData(oFormElement);
+    $.ajax({
+        type: 'POST',
+        url: '/Products/createImage',
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            console.log(data.imgNode);
+            if (data.imgNode.length > 0) {
+                var listimage = data.imgNode.split(",");
+                if (listimage.length > 1 || listimage != null)
+                    for (var i = 0; i < listimage.length; i++) {
+                        //  console.log($(oFormElement).children().children().next().children().first());
+                        $(oFormElement).children().children().next().children().append("<div class='col-3 mb-3 position-relative'><a data-image='" + listimage[i] + "' data-fancybox='gallery' class= '/" + listimage[i] + "' href = '/" + listimage[i] + "' ><img style='max-width:100%' src='/" + listimage[i] + "' /><span class='show--image-edit'>Xem ảnh</span><i class='far fa-eye show--image-edit i--one'></i></a ><i class='fas fa-trash'></i></div>");
+
+                    }
+                addBanner();
+                // addlist();
+            }
+            else {
+                alert("Xin vui lòng chọn ảnh !");
+            }
+        },
+        error: function (data) {
+            alert(data.responseText);
+        }
+    });
+
+}
+//
+
+async function AJAXSubmitCreateT(oFormElement) {
+    const formData = new FormData(oFormElement);
+    $.ajax({
+        type: 'POST',
+        url: '/Products/createImage',
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            //   console.log(data.imgNode);
+            if (data.imgNode.length > 0) {
+                var listimage = data.imgNode.split(",");
+                if (listimage.length > 1 || listimage != null)
+                    for (var i = 0; i < listimage.length; i++) {
+                        //  console.log($(oFormElement).children().children().next().children().first());
+                        $(oFormElement).children().children().next().children().children().remove();
+                        $(oFormElement).children().children().next().children().append("<div class='col-3 mb-3 position-relative'><a data-image='" + listimage[i] + "' data-fancybox='gallery' class= '/" + listimage[i] + "' href = '/" + listimage[i] + "' ><img style='max-width:100%' src='/" + listimage[i] + "' /><span class='show--image-edit'>Xem ảnh</span><i class='far fa-eye show--image-edit i--one'></i></a ><i class='fas fa-trash'></i></div>");
+
+                    }
+                addBieu();
+                // addlist();
+            }
+            else {
+                alert("Xin vui lòng chọn ảnh !");
+            }
+        },
+        error: function (data) {
+            alert(data.responseText);
+        }
+    });
+
+}
+
+
 
 // delete file
 
@@ -355,8 +605,8 @@ async function AJAXSubmitDelete(oFormElement) {
         url: '/Products/deleteImage',
         data: { filesadd: oFormElement },
         success: function (res) {
-            //  console.log(res.result);
-            addlist();
+            addBieu();
+            addBanner();
         },
         error: function (res) {
             alert(res.responseText);
@@ -369,7 +619,12 @@ async function AJAXSubmitDelete(oFormElement) {
 $('#summernote').summernote('pasteHTML', h);
 $('#summernote1').summernote('pasteHTML', j);
 $('#summernote2').summernote('pasteHTML', t);
-$('.note-editable').css('height','300px')
+//
+$('#summernotePCT').summernote('pasteHTML', t);
+$('#summernotePCB').summernote('pasteHTML', t);
+$('.note-editable').css('height', '300px')
+
+//summernotePCT
 
 
 

@@ -48,7 +48,7 @@ namespace figma.Models
 
 
         [Display(Name="Danh mục cha")]
-        public int ParentId { get; set; }
+        public int? ParentId { get; set; }
 
 
         [Display(Name = "Thẻ tiêu đề")]

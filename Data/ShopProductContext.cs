@@ -94,6 +94,7 @@ namespace figma.Data
             modelBuilder.Entity<Products>().Property(p => p.CreateDate).HasDefaultValueSql("getdate()");
             modelBuilder.Entity<Products>().Property(p => p.CreateBy).HasDefaultValue("admin");
             modelBuilder.Entity<Products>().Property(p => p.Sort).HasDefaultValue(1);
+            modelBuilder.Entity<ProductCategories>().Property(p => p.ParentId).HasDefaultValue(null);
 
 
 

@@ -49,15 +49,15 @@ namespace figma.Controllers
         public IActionResult Create()
         {
             ViewData["ParentId"] = new SelectList(_context.ProductCategories, "ProductCategorieID", "Name");
-            ViewData["null"] = new SelectList(_context.ProductCategories, null, "Danh mục cha");
             Console.WriteLine(ViewData["ParentId"]);
             return View();
         }
 
+
         // POST: ProductCategories/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+            [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ProductCategorieID,Name,Image,CoverImage,Url,Soft,Active,Home,ParentId,TitleMeta,DescriptionMeta,Body")] ProductCategories productCategories)
         {
@@ -65,8 +65,11 @@ namespace figma.Controllers
             {
                 _context.Add(productCategories);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Create));
+                TempData["result"] = "Thêm thành công ";
+                return RedirectToAction("Index", "ProductCategories");
             }
+            TempData["result"] = "Lỗi";
+
             return View(productCategories);
         }
 
