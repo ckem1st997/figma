@@ -111,7 +111,7 @@ $('#summernote').summernote({
     ,
     placeholder: 'Hello stand alone ui',
     tabsize: 2,
-    height: 120,
+    height: 300,
     onImageUpload: function (files, editor, welEditable) {
         sendFile(files[0], editor, welEditable);
     },
@@ -146,6 +146,243 @@ $('#summernote').summernote({
     },
     disableDragAndDrop: true,
 });
+
+
+$('.note-editable').change(function () {
+    var markupStr = $('#summernote').summernote('code');
+    console.log(markupStr);
+    $("#Body").val(markupStr);
+})
+
+$('#summernote1').summernote({
+    callbacks: {
+        onImageUpload: function (files) {
+            for (let i = 0; i < files.length; i++) {
+                // console.log(files[i])
+                AJAXSubmit1(files[i]);
+            }
+        },
+        onChange: function () {
+            // console.log('onChange:', contents, $editable);
+            var markupStr = $('#summernote1').summernote('code');
+            //  console.log(markupStr);
+            $("#Content").val(markupStr);
+        }
+    },
+    onInit: function () {
+        console.log('Summernote is launched');
+    }
+    ,
+    placeholder: 'Hello stand alone ui',
+    tabsize: 2,
+    height: 300,
+    onImageUpload: function (files, editor, welEditable) {
+        sendFile(files[0], editor, welEditable);
+    },
+    toolbar: [
+        ['style', ['style']],
+        ['font', ['bold', 'underline', 'clear']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['table', ['table']],
+        ['insert', ['link', 'picture', 'video']],
+        ['view', ['fullscreen', 'codeview', 'help']]
+    ], popover: {
+        image: [
+            ['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
+            ['float', ['floatLeft', 'floatRight', 'floatNone']],
+            ['remove', ['removeMedia']]
+        ],
+        link: [
+            ['link', ['linkDialogShow', 'unlink']]
+        ],
+        table: [
+            ['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
+            ['delete', ['deleteRow', 'deleteCol', 'deleteTable']],
+        ],
+        air: [
+            ['color', ['color']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['para', ['ul', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture']]
+        ]
+    },
+    disableDragAndDrop: true,
+});
+
+$('#summernote2').summernote({
+    callbacks: {
+        onImageUpload: function (files) {
+            for (let i = 0; i < files.length; i++) {
+                // console.log(files[i])
+                AJAXSubmit2(files[i]);
+            }
+        },
+        onChange: function () {
+            // console.log('onChange:', contents, $editable);
+            var markupStr = $('#summernote2').summernote('code');
+            //  console.log(markupStr);
+            $("#GiftInfo").val(markupStr);
+        }
+    },
+    onInit: function () {
+        console.log('Summernote is launched');
+    }
+    ,
+    placeholder: 'Hello stand alone ui',
+    tabsize: 2,
+    height: 300,
+    onImageUpload: function (files, editor, welEditable) {
+        sendFile(files[0], editor, welEditable);
+    },
+    toolbar: [
+        ['style', ['style']],
+        ['font', ['bold', 'underline', 'clear']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['table', ['table']],
+        ['insert', ['link', 'picture', 'video']],
+        ['view', ['fullscreen', 'codeview', 'help']]
+    ], popover: {
+        image: [
+            ['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
+            ['float', ['floatLeft', 'floatRight', 'floatNone']],
+            ['remove', ['removeMedia']]
+        ],
+        link: [
+            ['link', ['linkDialogShow', 'unlink']]
+        ],
+        table: [
+            ['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
+            ['delete', ['deleteRow', 'deleteCol', 'deleteTable']],
+        ],
+        air: [
+            ['color', ['color']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['para', ['ul', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture']]
+        ]
+    },
+    disableDragAndDrop: true,
+});
+
+$('#summernotePCT').summernote({
+    callbacks: {
+        onImageUpload: function (files) {
+            for (let i = 0; i < files.length; i++) {
+                AJAXSubmitT(files[i]);
+            }
+        },
+        onChange: function () {
+            var markupStr = $('#summernotePCT').summernote('code');
+            $("#DescriptionMeta").val(markupStr);
+        }
+    },
+    onInit: function () {
+        console.log('Summernote is launched');
+    }
+    ,
+    placeholder: 'Hello stand alone ui',
+    tabsize: 2,
+    height: 300,
+    onImageUpload: function (files, editor, welEditable) {
+        sendFile(files[0], editor, welEditable);
+    },
+    toolbar: [
+        ['style', ['style']],
+        ['font', ['bold', 'underline', 'clear']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['table', ['table']],
+        ['insert', ['link', 'picture', 'video']],
+        ['view', ['fullscreen', 'codeview', 'help']]
+    ], popover: {
+        image: [
+            ['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
+            ['float', ['floatLeft', 'floatRight', 'floatNone']],
+            ['remove', ['removeMedia']]
+        ],
+        link: [
+            ['link', ['linkDialogShow', 'unlink']]
+        ],
+        table: [
+            ['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
+            ['delete', ['deleteRow', 'deleteCol', 'deleteTable']],
+        ],
+        air: [
+            ['color', ['color']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['para', ['ul', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture']]
+        ]
+    },
+    disableDragAndDrop: true,
+});
+
+
+$('#summernotePCB').summernote({
+    callbacks: {
+        onImageUpload: function (files) {
+            for (let i = 0; i < files.length; i++) {
+                // console.log(files[i])
+                AJAXSubmitB(files[i]);
+            }
+        },
+        onChange: function () {
+            // console.log('onChange:', contents, $editable);
+            var markupStr = $('#summernotePCB').summernote('code');
+            //  console.log(markupStr);
+            $("#Body").val(markupStr);
+        }
+    },
+    onInit: function () {
+        console.log('Summernote is launched');
+    }
+    ,
+    placeholder: 'Hello stand alone ui',
+    tabsize: 2,
+    height: 300,
+    onImageUpload: function (files, editor, welEditable) {
+        sendFile(files[0], editor, welEditable);
+    },
+    toolbar: [
+        ['style', ['style']],
+        ['font', ['bold', 'underline', 'clear']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['table', ['table']],
+        ['insert', ['link', 'picture', 'video']],
+        ['view', ['fullscreen', 'codeview', 'help']]
+    ], popover: {
+        image: [
+            ['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
+            ['float', ['floatLeft', 'floatRight', 'floatNone']],
+            ['remove', ['removeMedia']]
+        ],
+        link: [
+            ['link', ['linkDialogShow', 'unlink']]
+        ],
+        table: [
+            ['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
+            ['delete', ['deleteRow', 'deleteCol', 'deleteTable']],
+        ],
+        air: [
+            ['color', ['color']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['para', ['ul', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture']]
+        ]
+    },
+    disableDragAndDrop: true,
+});
+
+/// create file
+
+
 function AJAXSubmit(file) {
 
     formData = new FormData();
@@ -245,240 +482,6 @@ function AJAXSubmitB(file) {
         }
     });
 }
-
-$('.note-editable').change(function () {
-    var markupStr = $('#summernote').summernote('code');
-    console.log(markupStr);
-    $("#Body").val(markupStr);
-})
-
-$('#summernote1').summernote({
-    callbacks: {
-        onImageUpload: function (files) {
-            for (let i = 0; i < files.length; i++) {
-                // console.log(files[i])
-                AJAXSubmit1(files[i]);
-            }
-        },
-        onChange: function () {
-            // console.log('onChange:', contents, $editable);
-            var markupStr = $('#summernote1').summernote('code');
-            //  console.log(markupStr);
-            $("#Content").val(markupStr);
-        }
-    },
-    onInit: function () {
-        console.log('Summernote is launched');
-    }
-    ,
-    placeholder: 'Hello stand alone ui',
-    tabsize: 2,
-    height: 120,
-    onImageUpload: function (files, editor, welEditable) {
-        sendFile(files[0], editor, welEditable);
-    },
-    toolbar: [
-        ['style', ['style']],
-        ['font', ['bold', 'underline', 'clear']],
-        ['color', ['color']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['table', ['table']],
-        ['insert', ['link', 'picture', 'video']],
-        ['view', ['fullscreen', 'codeview', 'help']]
-    ], popover: {
-        image: [
-            ['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
-            ['float', ['floatLeft', 'floatRight', 'floatNone']],
-            ['remove', ['removeMedia']]
-        ],
-        link: [
-            ['link', ['linkDialogShow', 'unlink']]
-        ],
-        table: [
-            ['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
-            ['delete', ['deleteRow', 'deleteCol', 'deleteTable']],
-        ],
-        air: [
-            ['color', ['color']],
-            ['font', ['bold', 'underline', 'clear']],
-            ['para', ['ul', 'paragraph']],
-            ['table', ['table']],
-            ['insert', ['link', 'picture']]
-        ]
-    },
-    disableDragAndDrop: true,
-});
-
-$('#summernote2').summernote({
-    callbacks: {
-        onImageUpload: function (files) {
-            for (let i = 0; i < files.length; i++) {
-                // console.log(files[i])
-                AJAXSubmit2(files[i]);
-            }
-        },
-        onChange: function () {
-            // console.log('onChange:', contents, $editable);
-            var markupStr = $('#summernote2').summernote('code');
-            //  console.log(markupStr);
-            $("#GiftInfo").val(markupStr);
-        }
-    },
-    onInit: function () {
-        console.log('Summernote is launched');
-    }
-    ,
-    placeholder: 'Hello stand alone ui',
-    tabsize: 2,
-    height: 120,
-    onImageUpload: function (files, editor, welEditable) {
-        sendFile(files[0], editor, welEditable);
-    },
-    toolbar: [
-        ['style', ['style']],
-        ['font', ['bold', 'underline', 'clear']],
-        ['color', ['color']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['table', ['table']],
-        ['insert', ['link', 'picture', 'video']],
-        ['view', ['fullscreen', 'codeview', 'help']]
-    ], popover: {
-        image: [
-            ['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
-            ['float', ['floatLeft', 'floatRight', 'floatNone']],
-            ['remove', ['removeMedia']]
-        ],
-        link: [
-            ['link', ['linkDialogShow', 'unlink']]
-        ],
-        table: [
-            ['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
-            ['delete', ['deleteRow', 'deleteCol', 'deleteTable']],
-        ],
-        air: [
-            ['color', ['color']],
-            ['font', ['bold', 'underline', 'clear']],
-            ['para', ['ul', 'paragraph']],
-            ['table', ['table']],
-            ['insert', ['link', 'picture']]
-        ]
-    },
-    disableDragAndDrop: true,
-});
-
-$('#summernotePCT').summernote({
-    callbacks: {
-        onImageUpload: function (files) {
-            for (let i = 0; i < files.length; i++) {
-                AJAXSubmitT(files[i]);
-            }
-        },
-        onChange: function () {
-            var markupStr = $('#summernotePCT').summernote('code');
-            $("#DescriptionMeta").val(markupStr);
-        }
-    },
-    onInit: function () {
-        console.log('Summernote is launched');
-    }
-    ,
-    placeholder: 'Hello stand alone ui',
-    tabsize: 2,
-    height: 120,
-    onImageUpload: function (files, editor, welEditable) {
-        sendFile(files[0], editor, welEditable);
-    },
-    toolbar: [
-        ['style', ['style']],
-        ['font', ['bold', 'underline', 'clear']],
-        ['color', ['color']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['table', ['table']],
-        ['insert', ['link', 'picture', 'video']],
-        ['view', ['fullscreen', 'codeview', 'help']]
-    ], popover: {
-        image: [
-            ['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
-            ['float', ['floatLeft', 'floatRight', 'floatNone']],
-            ['remove', ['removeMedia']]
-        ],
-        link: [
-            ['link', ['linkDialogShow', 'unlink']]
-        ],
-        table: [
-            ['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
-            ['delete', ['deleteRow', 'deleteCol', 'deleteTable']],
-        ],
-        air: [
-            ['color', ['color']],
-            ['font', ['bold', 'underline', 'clear']],
-            ['para', ['ul', 'paragraph']],
-            ['table', ['table']],
-            ['insert', ['link', 'picture']]
-        ]
-    },
-    disableDragAndDrop: true,
-});
-
-
-$('#summernotePCB').summernote({
-    callbacks: {
-        onImageUpload: function (files) {
-            for (let i = 0; i < files.length; i++) {
-                // console.log(files[i])
-                AJAXSubmitB(files[i]);
-            }
-        },
-        onChange: function () {
-            // console.log('onChange:', contents, $editable);
-            var markupStr = $('#summernotePCB').summernote('code');
-            //  console.log(markupStr);
-            $("#Body").val(markupStr);
-        }
-    },
-    onInit: function () {
-        console.log('Summernote is launched');
-    }
-    ,
-    placeholder: 'Hello stand alone ui',
-    tabsize: 2,
-    height: 120,
-    onImageUpload: function (files, editor, welEditable) {
-        sendFile(files[0], editor, welEditable);
-    },
-    toolbar: [
-        ['style', ['style']],
-        ['font', ['bold', 'underline', 'clear']],
-        ['color', ['color']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['table', ['table']],
-        ['insert', ['link', 'picture', 'video']],
-        ['view', ['fullscreen', 'codeview', 'help']]
-    ], popover: {
-        image: [
-            ['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
-            ['float', ['floatLeft', 'floatRight', 'floatNone']],
-            ['remove', ['removeMedia']]
-        ],
-        link: [
-            ['link', ['linkDialogShow', 'unlink']]
-        ],
-        table: [
-            ['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
-            ['delete', ['deleteRow', 'deleteCol', 'deleteTable']],
-        ],
-        air: [
-            ['color', ['color']],
-            ['font', ['bold', 'underline', 'clear']],
-            ['para', ['ul', 'paragraph']],
-            ['table', ['table']],
-            ['insert', ['link', 'picture']]
-        ]
-    },
-    disableDragAndDrop: true,
-});
-
-/// create file
 
 async function AJAXSubmitCreate(oFormElement) {
     const formData = new FormData(oFormElement);
@@ -616,13 +619,17 @@ async function AJAXSubmitDelete(oFormElement) {
 
 }
 
+$(document).ready(function () {
+    $('#summernotePCT').summernote('pasteHTML', pct);
+    $('#summernotePCB').summernote('pasteHTML', pcb);
+})
 $('#summernote').summernote('pasteHTML', h);
 $('#summernote1').summernote('pasteHTML', j);
 $('#summernote2').summernote('pasteHTML', t);
-//
-$('#summernotePCT').summernote('pasteHTML', t);
-$('#summernotePCB').summernote('pasteHTML', t);
-$('.note-editable').css('height', '300px')
+
+//$('.note-editable').css('height', '300px')
+
+
 
 //summernotePCT
 

@@ -21,12 +21,6 @@ namespace figma.Controllers
             _context = context;
         }
 
-        // GET: ProductCategories
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.ProductCategories.ToListAsync());
-        }
-
         // GET: ProductCategories/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -44,12 +38,12 @@ namespace figma.Controllers
 
             return View(productCategories);
         }
-
-        // GET: ProductCategories/Create
         public IActionResult Create()
         {
             ViewData["ParentId"] = new SelectList(_context.ProductCategories, "ProductCategorieID", "Name");
-            Console.WriteLine(ViewData["ParentId"]);
+            ViewBag.Productcato = _context.ProductCategories.ToList();
+
+            // Console.WriteLine(ViewData["ParentId"]);
             return View();
         }
 
@@ -57,7 +51,7 @@ namespace figma.Controllers
         // POST: ProductCategories/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-            [HttpPost]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ProductCategorieID,Name,Image,CoverImage,Url,Soft,Active,Home,ParentId,TitleMeta,DescriptionMeta,Body")] ProductCategories productCategories)
         {
@@ -66,7 +60,7 @@ namespace figma.Controllers
                 _context.Add(productCategories);
                 await _context.SaveChangesAsync();
                 TempData["result"] = "Thêm thành công ";
-                return RedirectToAction("Index", "ProductCategories");
+                return RedirectToAction(nameof(Create));
             }
             TempData["result"] = "Lỗi";
 
@@ -157,6 +151,8 @@ namespace figma.Controllers
         {
             return _context.ProductCategories.Any(e => e.ProductCategorieID == id);
         }
+
+
 
     }
 }

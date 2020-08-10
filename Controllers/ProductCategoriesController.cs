@@ -60,18 +60,21 @@ namespace figma.Controllers
             {
                 _context.Add(productCategories);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Create));
             }
             return View(productCategories);
         }
 
         // GET: ProductCategories/Edit/5
+        [Route("Csm/Edit/{id}")]
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
+            ViewData["ParentId"] = new SelectList(_context.ProductCategories, "ProductCategorieID", "Name");
 
             var productCategories = await _context.ProductCategories.FindAsync(id);
             if (productCategories == null)
@@ -85,6 +88,8 @@ namespace figma.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Route("Csm/Edit/{id}")]
+
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ProductCategorieID,Name,Image,CoverImage,Url,Soft,Active,Home,ParentId,TitleMeta,DescriptionMeta,Body")] ProductCategories productCategories)
         {
@@ -98,6 +103,8 @@ namespace figma.Controllers
                 try
                 {
                     _context.Update(productCategories);
+                    TempData["result"] = "Chỉnh sửa thành công ";
+
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -111,12 +118,12 @@ namespace figma.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Create), "Csm");
             }
             return View(productCategories);
         }
 
-        // GET: ProductCategories/Delete/5
+     [Route("Csm/Delete/{id}")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -135,14 +142,18 @@ namespace figma.Controllers
         }
 
         // POST: ProductCategories/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
+        [Route("Csm/Delete/{id}")]
+
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var productCategories = await _context.ProductCategories.FindAsync(id);
             _context.ProductCategories.Remove(productCategories);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            TempData["result"] = "Xóa thành công ";
+
+            return RedirectToAction(nameof(Create),"Csm");
         }
 
         private bool ProductCategoriesExists(int id)
