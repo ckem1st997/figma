@@ -14,50 +14,53 @@ namespace figma.Models
 
 
         [Required]
-        [Display(Name = "Thể loại")]
+        [Display(Name = "Tên danh mục")]
         [MaxLength(50)]
         public string Name { get; set; }
 
 
-        [Display(Name = "Hình ảnh")]
+
+        [Display(Name = "Biểu tượng")]
         [MaxLength(500)]
         public string Image { get; set; }
 
 
-        [Display(Name = "")]
+        [Display(Name = "Ảnh banner")]
         [MaxLength(500)]
         public string CoverImage { get; set; }
 
 
         [Display(Name = "Đường dẫn")]
         [MaxLength(500)]
-        [DataType(DataType.Url)]
         public string Url { get; set; }
 
 
+        [Display(Name ="Thứ tự")]
         public int Soft { get; set; }
 
 
+        [Display(Name ="Hoạt động")]
         public bool Active { get; set; }
 
 
-        [Display(Name = "Hiển thị trang chủ")]
+        [Display(Name = "Hiển trang chủ")]
         public bool Home { get; set; }
 
 
+        [Display(Name="Danh mục cha")]
         public int ParentId { get; set; }
 
 
-        [Display(Name = "Tiêu đề")]
+        [Display(Name = "Thẻ tiêu đề")]
         [MaxLength(100)]
         public string TitleMeta { get; set; }
 
 
-        [Display(Name = "Miêu tả")]
+        [Display(Name = "Thẻ mô tả")]
         public string DescriptionMeta { get; set; }
 
 
-        [Display(Name = "Mã Html")]
+        [Display(Name = "Nội dung sản phẩm")]
         public string Body { get; set; }
 
         public virtual List<Products> Products { get; set; }

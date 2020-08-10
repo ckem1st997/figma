@@ -13,16 +13,17 @@ namespace figma.Models
         public int ProductID { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Xin vui lòng nhập tên sản phẩm !")]
         [Display(Name = "Tên sản phẩm")]
         public string Name { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Xin vui lòng nhập mã sản phẩm !")]
         [Display(Name = "Mã sản phẩm")]
         public string Description { get; set; }
 
 
+        [Required(ErrorMessage ="Xin vui lòng chọn hình ảnh !")]
         [Display(Name = "Hình ảnh")]
         public string Image { get; set; }
 

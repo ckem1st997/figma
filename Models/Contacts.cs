@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace figma.Models
 {
-
+    //liên hệ
     public class Contacts
     {
         [Key]

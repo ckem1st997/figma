@@ -5,6 +5,9 @@
 .w-30 {
   width: 30%;
 }
+label {
+  font-weight: bold;
+}
 .form-group .section-image-list .col-3 {
   position: relative;
 }

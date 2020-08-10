@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace figma.Models
 {
+    // mạng xã hội
     public class ConfigSites
     {
         [Key]

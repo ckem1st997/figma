@@ -153,6 +153,46 @@ function AJAXSubmit(file) {
     });
 }
 
+function AJAXSubmit1(file) {
+
+    formData = new FormData();
+    formData.append("filesadd", file);
+    $.ajax({
+        type: 'POST',
+        url: '/Products/createImage',
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            $("#summernote1").summernote('insertImage', "/" + data.imgNode + "");
+        },
+        error: function (data) {
+            alert(data.responseText);
+        }
+    });
+}
+
+function AJAXSubmit2(file) {
+
+    formData = new FormData();
+    formData.append("filesadd", file);
+    $.ajax({
+        type: 'POST',
+        url: '/Products/createImage',
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            $("#summernote2").summernote('insertImage', "/" + data.imgNode + "");
+        },
+        error: function (data) {
+            alert(data.responseText);
+        }
+    });
+}
+
 $('.note-editable').change(function () {
     var markupStr = $('#summernote').summernote('code');
     console.log(markupStr);
@@ -164,14 +204,14 @@ $('#summernote1').summernote({
         onImageUpload: function (files) {
             for (let i = 0; i < files.length; i++) {
                 // console.log(files[i])
-                AJAXSubmit(files[i]);
+                AJAXSubmit1(files[i]);
             }
         },
         onChange: function () {
             // console.log('onChange:', contents, $editable);
-            var markupStr = $('#summernote').summernote('code');
+            var markupStr = $('#summernote1').summernote('code');
             //  console.log(markupStr);
-            $("#Body").val(markupStr);
+            $("#Content").val(markupStr);
         }
     },
     onInit: function () {
@@ -221,14 +261,14 @@ $('#summernote2').summernote({
         onImageUpload: function (files) {
             for (let i = 0; i < files.length; i++) {
                 // console.log(files[i])
-                AJAXSubmit(files[i]);
+                AJAXSubmit2(files[i]);
             }
         },
         onChange: function () {
             // console.log('onChange:', contents, $editable);
-            var markupStr = $('#summernote').summernote('code');
+            var markupStr = $('#summernote2').summernote('code');
             //  console.log(markupStr);
-            $("#Body").val(markupStr);
+            $("#GiftInfo").val(markupStr);
         }
     },
     onInit: function () {
@@ -325,6 +365,11 @@ async function AJAXSubmitDelete(oFormElement) {
 
 
 }
+
+$('#summernote').summernote('pasteHTML', h);
+$('#summernote1').summernote('pasteHTML', j);
+$('#summernote2').summernote('pasteHTML', t);
+$('.note-editable').css('height','300px')
 
 
 
