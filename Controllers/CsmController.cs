@@ -49,6 +49,7 @@ namespace figma.Controllers
         public IActionResult Create()
         {
             ViewData["ParentId"] = new SelectList(_context.ProductCategories, "ProductCategorieID", "Name");
+            ViewData["null"] = new SelectList(_context.ProductCategories, null, "Danh mục cha");
             Console.WriteLine(ViewData["ParentId"]);
             return View();
         }
