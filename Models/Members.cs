@@ -14,21 +14,21 @@ namespace figma.Models
         public int MemberId { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Chưa nhập thông tin")]
         [Display(Name = "Tài khoản")]
         [DataType(DataType.EmailAddress)]
         [MaxLength(50)]
         public string Email { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Chưa nhập thông tin")]
         [Display(Name = "Mật khẩu")]
         [DataType(DataType.Password)]
         //[MaxLength(60)]
         public string Password { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Chưa nhập thông tin")]
         [Display(Name = "Tên đầy đủ")]
         [MaxLength(50)]
         public string Fullname { get; set; }

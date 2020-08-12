@@ -14,12 +14,12 @@ namespace figma.Models
 
         public virtual Orders Orders { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Chưa nhập thông tin")]
         public int ProductID { get; set; }
 
         public virtual Products Products { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Chưa nhập thông tin")]
         [Display(Name ="Số lượng")]
         public int Quantity { get; set; }
 

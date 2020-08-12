@@ -54,7 +54,7 @@ namespace figma.Controllers
                 TempData["result"] = "Thêm thành công ";
                 return RedirectToAction(nameof(Create));
             }
-            TempData["result"] = "Lỗi";
+            TempData["result"] = "Lỗi, xin bạn vui lòng thử lại";
 
             return View(productCategories);
         }

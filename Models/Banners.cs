@@ -14,23 +14,23 @@ namespace figma.Models
         public int BannerID { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Chưa nhập thông tin")]
         [MaxLength(100)]
         [Display(Name ="Tên banner")]
         public string BannerName { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Chưa nhập thông tin")]
         [Display(Name = "Hình ảnh")]
         public string Image { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Chưa nhập thông tin")]
         [Display(Name ="Chiều rộng banner")]
         public int Width { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Chưa nhập thông tin")]
         [Display(Name = "Chiều dài banner")]
         public int Height { get; set; }
 

@@ -21,9 +21,8 @@
 <hr />
 
 
-<form asp-controller="Products" asp-action="createImage" enctype="multipart/form-data" onchange="AJAXSubmitCreateT(this);return false;" method="post">
+<form asp-controller="Products" asp-action="createImage" enctype="multipart/form-data" onchange="AJAXSubmitCreateOne(this);return false;" method="post">
     <div class="form-group bg-white font-weight-bold">
-
         <div class="section-image-title d-flex justify-content-between">
             <p class="text-danger mt-3 mb-1">Biểu tượng</p>
             <div class="m-3 ml-1">
@@ -34,7 +33,7 @@
                 </script>
             </div>
         </div>
-        <div class="section-image-list add-image-0 container">
+        <div class="section-image-list insert-two container">
             <div class="row">
             </div>
         </div>
@@ -42,7 +41,7 @@
 </form>
 
 
-<form asp-controller="Products" asp-action="createImage" enctype="multipart/form-data" onchange="AJAXSubmitCreateB(this);return false;" method="post">
+<form asp-controller="Products" asp-action="createImage" enctype="multipart/form-data" onchange="AJAXSubmitCreate(this);return false;" method="post">
     <div class="form-group bg-white font-weight-bold">
         <div class="section-image-title d-flex justify-content-between">
             <p class="text-danger mt-3 mb-1">Ảnh Banner</p>
@@ -55,80 +54,97 @@
                 </script>
             </div>
         </div>
-        <div class="section-image-list add-image-1 container">
+        <div class="section-image-list insert-one container">
             <div class="row">
             </div>
         </div>
     </div>
 </form>
 
-
-
 <div class="">
     <form asp-action="Create">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group w-50">
-            <label asp-for="Name" class="control-label"></label>
-            <input asp-for="Name" class="form-control" />
-            <span asp-validation-for="Name" class="text-danger"></span>
-        </div>
-        <div class="form-group d-none">
-            <label asp-for="Image" class="control-label"></label>
-            <input type="hidden" asp-for="Image" class="form-control" />
-            <span asp-validation-for="Image" class="text-danger"></span>
-        </div>
-        <div class="form-group d-none">
-            <label asp-for="CoverImage" class="control-label"></label>
-            <input type="hidden" asp-for="CoverImage" class="form-control" />
-            <span asp-validation-for="CoverImage" class="text-danger"></span>
-        </div>
-        <div class="form-group w-50">
-            <label asp-for="Url" class="control-label"></label>
-            <input asp-for="Url" class="form-control" />
-            <span asp-validation-for="Url" class="text-danger"></span>
-        </div>
-        <div class="form-group w-25">
-            <label asp-for="Soft" class="control-label"></label>
-            <input asp-for="Soft" class="form-control" />
-            <span asp-validation-for="Soft" class="text-danger"></span>
-        </div>
-        <div class="form-group form-check">
-            <label class="form-check-label">
-                <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
-            </label>
-        </div>
-        <div class="form-group form-check">
-            <label class="form-check-label">
-                <input class="form-check-input" asp-for="Home" /> @Html.DisplayNameFor(model => model.Home)
-            </label>
-        </div>
-        <div class="form-group w-25">
-            <label asp-for="ParentId" class="control-label"></label>
-            <select asp-for="ParentId" class="form-control" asp-items="ViewBag.ParentId">
-                <option value="">Danh mục cha</option>
-            </select>
-            <span asp-validation-for="ParentId" class="text-danger"></span>
-        </div>
-        <div class="form-group w-50">
-            <label asp-for="TitleMeta" class="control-label"></label>
-            <input asp-for="TitleMeta" class="form-control" />
-            <span asp-validation-for="TitleMeta" class="text-danger"></span>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group ">
+                        <label asp-for="ParentId" class="control-label"></label>
+                        <select asp-for="ParentId" class="form-control" asp-items="ViewBag.ParentId">
+                            <option value="">Danh mục cha</option>
+                        </select>
+                        <span asp-validation-for="ParentId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group d-none">
+                        <label asp-for="CoverImage" class="control-label"></label>
+                        <input asp-for="CoverImage" class="form-control" />
+                        <span asp-validation-for="CoverImage" class="text-danger"></span>
+                    </div>
+                    <div class="form-group d-none">
+                        <label asp-for="Image" class="control-label"></label>
+                        <input asp-for="Image" class="form-control" />
+                        <span asp-validation-for="Image" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group ">
+                        <label asp-for="Url" class="control-label"></label>
+                        <input asp-for="Url" class="form-control" />
+                        <span asp-validation-for="Url" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="col-6">
+
+                    <div class="form-group ">
+                        <label asp-for="TitleMeta" class="control-label"></label>
+                        <input asp-for="TitleMeta" class="form-control" />
+                        <span asp-validation-for="TitleMeta" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group ">
+                        <label asp-for="Soft" class="control-label"></label>
+                        <input asp-for="Soft" class="form-control" />
+                        <span asp-validation-for="Soft" class="text-danger"></span>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
+                        </label>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="Home" /> @Html.DisplayNameFor(model => model.Home)
+                        </label>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="form-group">
             <label asp-for="DescriptionMeta" class="control-label"></label>
-            <div id="summernotePCT"></div>
-
+            <div id="toolbar-containerDescriptionMeta"></div>
+            <div id="editorDescriptionMeta" class="bg-white">
+            </div>
             <input type="hidden" asp-for="DescriptionMeta" class="form-control" />
+            @*<script>
+                var d = '' + $("#Content").val() + '';
+
+            </script>*@
             <span asp-validation-for="DescriptionMeta" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Body" class="control-label"></label>
-            <div id="summernotePCB"></div>
-
+            <div id="toolbar-container"></div>
+            <div id="editor" class="bg-white">
+            </div>
             <input type="hidden" asp-for="Body" class="form-control" />
             <span asp-validation-for="Body" class="text-danger"></span>
         </div>
-        <div class="form-group">
+
+        <div class="form-group text-center">
             <input type="submit" value="Create" class="btn btn-primary" />
         </div>
     </form>
@@ -153,26 +169,34 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in ViewBag.Productcato)
+            @try
             {
-                <tr>
-                    <td>
-                        @item.Name
-                    </td>
+                @foreach (var item in ViewBag.Productcato)
+                {
+                    <tr>
+                        <td>
+                            @item.Name
+                        </td>
 
-                    <td>
-                        @item.Soft
-                    </td>
-                    <td>
-                        @item.Active
-                    </td>
+                        <td>
+                            @item.Soft
+                        </td>
+                        <td>
+                            @item.Active
+                        </td>
 
-                    <td>
-                        <a class="btn btn-danger" asp-action="Edit" asp-route-id="@item.ProductCategorieID">Edit</a> |
-                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ProductCategorieID">Delete</a>
-                    </td>
-                </tr>
+                        <td>
+                            <a class="btn btn-danger" asp-action="Edit" asp-route-id="@item.ProductCategorieID">Edit</a> |
+                            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ProductCategorieID">Delete</a>
+                        </td>
+                    </tr>
+                }
             }
+            catch (Exception)
+            {
+               
+            }
+
         </tbody>
     </table>
 </div>

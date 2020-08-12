@@ -14,7 +14,7 @@ namespace figma.Models
         public int ArticleCategorieID { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Chưa nhập thông tin")]
         [Display(Name = "Tên danh mục")]
         [MaxLength(50)]
         public string CategoryName { get; set; }

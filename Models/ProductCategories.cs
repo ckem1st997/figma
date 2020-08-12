@@ -13,19 +13,19 @@ namespace figma.Models
         public int ProductCategorieID { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage ="Chưa nhập thông tin")]
         [Display(Name = "Tên danh mục")]
         [MaxLength(50)]
         public string Name { get; set; }
 
 
 
-        [Display(Name = "Biểu tượng")]
+        [Display(Name = "Ảnh banner")]
         [MaxLength(500)]
         public string Image { get; set; }
 
 
-        [Display(Name = "Ảnh banner")]
+        [Display(Name = "Biểu tượng")]
         [MaxLength(500)]
         public string CoverImage { get; set; }
 

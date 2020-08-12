@@ -13,24 +13,24 @@ namespace figma.Models
         public int AdminId { get; set; }
 
         
-        [Required]
+        [Required(ErrorMessage = "Chưa nhập thông tin")]
         [Display(Name ="Tài khoản")]
         public string Username { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Chưa nhập thông tin")]
         [Display(Name = "Mật khẩu")]
         [DataType(DataType.Password)]
         //  [MaxLength(60)]
         public string Password { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Chưa nhập thông tin")]
         [Display(Name ="Trạng thái")]
         public bool Active { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Chưa nhập thông tin")]
         public int Role { get; set; }
     }
 }

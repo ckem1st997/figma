@@ -12,7 +12,7 @@ namespace figma.Models
         [Index]
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Chưa nhập thông tin")]
         public int ProductID { get; set; }
 
         public int ColorID { get; set; }

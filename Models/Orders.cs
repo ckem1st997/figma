@@ -24,28 +24,28 @@ namespace figma.Models
         public DateTime CreateDate { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Chưa nhập thông tin")]
         [Display(Name = "Thanh toán")]
         public bool Payment { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Chưa nhập thông tin")]
         [Display(Name = "Hình thức thanh toán")]
         public int TypePay { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Chưa nhập thông tin")]
         [Display(Name = "Hình thức vận chuyển")]
         public int Transport { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Chưa nhập thông tin")]
         [DataType(DataType.DateTime)]
         [Display(Name = "Ngày giao hàng")]
         public DateTime TransportDate { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Chưa nhập thông tin")]
         [Display(Name = "Trạng thái")]
         public int Status { get; set; }
 
@@ -58,25 +58,25 @@ namespace figma.Models
         public bool Viewed { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Chưa nhập thông tin")]
         [Display(Name ="Họ và tên")]
         [MaxLength(50)]
         public string CustomerInfo_Fullname { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Chưa nhập thông tin")]
         [Display(Name = "Địa chỉ")]
         [MaxLength(200)]
         public string CustomerInfo_Address { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Chưa nhập thông tin")]
         [Display(Name = "Số điện thoại")]
         [MaxLength(11)]
         public string CustomerInfo_Mobile { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Chưa nhập thông tin")]
         [Display(Name = "Email")]
         [DataType(DataType.EmailAddress)]
         [MaxLength(50)]

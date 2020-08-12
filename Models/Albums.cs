@@ -14,13 +14,13 @@ namespace figma.Models
         public int AlbumID { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Chưa nhập thông tin")]
         [Display(Name ="Tên Album")]
         [MaxLength(100)]
         public string Name { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Chưa nhập thông tin")]
         [Display(Name = "Danh sách hình ảnh")]
         public string ListImage { get; set; }
 

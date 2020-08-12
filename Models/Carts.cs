@@ -16,7 +16,7 @@ namespace figma.Models
         public string CartID { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Chưa nhập thông tin")]
         public int ProductID { get; set; }
 
 

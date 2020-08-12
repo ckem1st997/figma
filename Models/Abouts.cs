@@ -16,7 +16,7 @@ namespace figma.Models
         public int AboutID { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Chưa nhập thông tin")]
         [StringLength(100)]
         [Display(Name = "Hướng dẫn và chính sách")]
         public string Subject { get; set; }

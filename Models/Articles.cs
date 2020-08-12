@@ -14,13 +14,13 @@ namespace figma.Models
         public int ArticleID { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Chưa nhập thông tin")]
         [Display(Name = "Tên bài viết")]
         [MaxLength(100)]
         public string Subject { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Chưa nhập thông tin")]
         [Display(Name = "Nội dung")]
         [MaxLength(500)]
         public string Description { get; set; }
