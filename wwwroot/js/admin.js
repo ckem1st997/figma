@@ -1,22 +1,15 @@
 ﻿$(document).on('click', '.section-image-list div.row .col-3 i.fa-trash', function (e) {
 
     if (confirm("Bạn muốn muốn xóa sản phẩm này !")) {
-        //  console.log($(this).parent().children());
-        //if ($("#deletefile").val().length == 0)
-        //    $("#deletefile").val($(this).parent().children().attr('data-image'))
-        //else
-        //    $("#deletefile").val($("#deletefile").val() + "," + $(this).parent().children().attr('data-image'));
-
         AJAXSubmitDelete($(this).parent().children().attr('data-image'));
         $(this).parent().remove();
-        //   addBanner();
-
     }
+    addlistone();
 });
 //lấy list url product
-function addlist() {
+function addlistone() {
     var str = "";
-    $(".section-image-list div.row .col-3 a").each(function () {
+    $(".section-image-list.insert-one div.row .col-3 a").each(function () {
         if (str.length == 0)
             str = $(this).attr('data-image');
         else
@@ -52,7 +45,7 @@ $(document).ready(function () {
                 }
 
             }
-        addlist();
+        //  addlist();
     });
 });
 
@@ -73,7 +66,6 @@ function addTemp(a) {
     //  $("span.remove-cart a").attr('onclick', 'deleteCart(a)')
 }
 
-
 function readImage(file) {
     // Check if the file is an image.
     if (file.type.indexOf('image') === -1) {
@@ -90,299 +82,8 @@ function readImage(file) {
     return 2;
 }
 
-$('#summernote').summernote({
-    callbacks: {
-        onImageUpload: function (files) {
-            for (let i = 0; i < files.length; i++) {
-                // console.log(files[i])
-                AJAXSubmit(files[i]);
-            }
-        },
-        onChange: function () {
-            // console.log('onChange:', contents, $editable);
-            var markupStr = $('#summernote').summernote('code');
-            //  console.log(markupStr);
-            $("#Body").val(markupStr);
-        }
-    },
-    onInit: function () {
-        console.log('Summernote is launched');
-    }
-    ,
-    placeholder: 'Hello stand alone ui',
-    tabsize: 2,
-    height: 300,
-    onImageUpload: function (files, editor, welEditable) {
-        sendFile(files[0], editor, welEditable);
-    },
-    toolbar: [
-        ['style', ['style']],
-        ['font', ['bold', 'underline', 'clear']],
-        ['color', ['color']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['table', ['table']],
-        ['insert', ['link', 'picture', 'video']],
-        ['view', ['fullscreen', 'codeview', 'help']]
-    ], popover: {
-        image: [
-            ['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
-            ['float', ['floatLeft', 'floatRight', 'floatNone']],
-            ['remove', ['removeMedia']]
-        ],
-        link: [
-            ['link', ['linkDialogShow', 'unlink']]
-        ],
-        table: [
-            ['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
-            ['delete', ['deleteRow', 'deleteCol', 'deleteTable']],
-        ],
-        air: [
-            ['color', ['color']],
-            ['font', ['bold', 'underline', 'clear']],
-            ['para', ['ul', 'paragraph']],
-            ['table', ['table']],
-            ['insert', ['link', 'picture']]
-        ]
-    },
-    disableDragAndDrop: true,
-});
-
-
-$('.note-editable').change(function () {
-    var markupStr = $('#summernote').summernote('code');
-    console.log(markupStr);
-    $("#Body").val(markupStr);
-})
-
-$('#summernote1').summernote({
-    callbacks: {
-        onImageUpload: function (files) {
-            for (let i = 0; i < files.length; i++) {
-                // console.log(files[i])
-                AJAXSubmit1(files[i]);
-            }
-        },
-        onChange: function () {
-            // console.log('onChange:', contents, $editable);
-            var markupStr = $('#summernote1').summernote('code');
-            //  console.log(markupStr);
-            $("#Content").val(markupStr);
-        }
-    },
-    onInit: function () {
-        console.log('Summernote is launched');
-    }
-    ,
-    placeholder: 'Hello stand alone ui',
-    tabsize: 2,
-    height: 300,
-    onImageUpload: function (files, editor, welEditable) {
-        sendFile(files[0], editor, welEditable);
-    },
-    toolbar: [
-        ['style', ['style']],
-        ['font', ['bold', 'underline', 'clear']],
-        ['color', ['color']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['table', ['table']],
-        ['insert', ['link', 'picture', 'video']],
-        ['view', ['fullscreen', 'codeview', 'help']]
-    ], popover: {
-        image: [
-            ['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
-            ['float', ['floatLeft', 'floatRight', 'floatNone']],
-            ['remove', ['removeMedia']]
-        ],
-        link: [
-            ['link', ['linkDialogShow', 'unlink']]
-        ],
-        table: [
-            ['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
-            ['delete', ['deleteRow', 'deleteCol', 'deleteTable']],
-        ],
-        air: [
-            ['color', ['color']],
-            ['font', ['bold', 'underline', 'clear']],
-            ['para', ['ul', 'paragraph']],
-            ['table', ['table']],
-            ['insert', ['link', 'picture']]
-        ]
-    },
-    disableDragAndDrop: true,
-});
-
-$('#summernote2').summernote({
-    callbacks: {
-        onImageUpload: function (files) {
-            for (let i = 0; i < files.length; i++) {
-                // console.log(files[i])
-                AJAXSubmit2(files[i]);
-            }
-        },
-        onChange: function () {
-            // console.log('onChange:', contents, $editable);
-            var markupStr = $('#summernote2').summernote('code');
-            //  console.log(markupStr);
-            $("#GiftInfo").val(markupStr);
-        }
-    },
-    onInit: function () {
-        console.log('Summernote is launched');
-    }
-    ,
-    placeholder: 'Hello stand alone ui',
-    tabsize: 2,
-    height: 300,
-    onImageUpload: function (files, editor, welEditable) {
-        sendFile(files[0], editor, welEditable);
-    },
-    toolbar: [
-        ['style', ['style']],
-        ['font', ['bold', 'underline', 'clear']],
-        ['color', ['color']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['table', ['table']],
-        ['insert', ['link', 'picture', 'video']],
-        ['view', ['fullscreen', 'codeview', 'help']]
-    ], popover: {
-        image: [
-            ['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
-            ['float', ['floatLeft', 'floatRight', 'floatNone']],
-            ['remove', ['removeMedia']]
-        ],
-        link: [
-            ['link', ['linkDialogShow', 'unlink']]
-        ],
-        table: [
-            ['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
-            ['delete', ['deleteRow', 'deleteCol', 'deleteTable']],
-        ],
-        air: [
-            ['color', ['color']],
-            ['font', ['bold', 'underline', 'clear']],
-            ['para', ['ul', 'paragraph']],
-            ['table', ['table']],
-            ['insert', ['link', 'picture']]
-        ]
-    },
-    disableDragAndDrop: true,
-});
-
-$('#summernotePCT').summernote({
-    callbacks: {
-        onImageUpload: function (files) {
-            for (let i = 0; i < files.length; i++) {
-                AJAXSubmitT(files[i]);
-            }
-        },
-        onChange: function () {
-            var markupStr = $('#summernotePCT').summernote('code');
-            $("#DescriptionMeta").val(markupStr);
-        }
-    },
-    onInit: function () {
-        console.log('Summernote is launched');
-    }
-    ,
-    placeholder: 'Hello stand alone ui',
-    tabsize: 2,
-    height: 300,
-    onImageUpload: function (files, editor, welEditable) {
-        sendFile(files[0], editor, welEditable);
-    },
-    toolbar: [
-        ['style', ['style']],
-        ['font', ['bold', 'underline', 'clear']],
-        ['color', ['color']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['table', ['table']],
-        ['insert', ['link', 'picture', 'video']],
-        ['view', ['fullscreen', 'codeview', 'help']]
-    ], popover: {
-        image: [
-            ['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
-            ['float', ['floatLeft', 'floatRight', 'floatNone']],
-            ['remove', ['removeMedia']]
-        ],
-        link: [
-            ['link', ['linkDialogShow', 'unlink']]
-        ],
-        table: [
-            ['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
-            ['delete', ['deleteRow', 'deleteCol', 'deleteTable']],
-        ],
-        air: [
-            ['color', ['color']],
-            ['font', ['bold', 'underline', 'clear']],
-            ['para', ['ul', 'paragraph']],
-            ['table', ['table']],
-            ['insert', ['link', 'picture']]
-        ]
-    },
-    disableDragAndDrop: true,
-});
-
-
-$('#summernotePCB').summernote({
-    callbacks: {
-        onImageUpload: function (files) {
-            for (let i = 0; i < files.length; i++) {
-                // console.log(files[i])
-                AJAXSubmitB(files[i]);
-            }
-        },
-        onChange: function () {
-            // console.log('onChange:', contents, $editable);
-            var markupStr = $('#summernotePCB').summernote('code');
-            //  console.log(markupStr);
-            $("#Body").val(markupStr);
-        }
-    },
-    onInit: function () {
-        console.log('Summernote is launched');
-    }
-    ,
-    placeholder: 'Hello stand alone ui',
-    tabsize: 2,
-    height: 300,
-    onImageUpload: function (files, editor, welEditable) {
-        sendFile(files[0], editor, welEditable);
-    },
-    toolbar: [
-        ['style', ['style']],
-        ['font', ['bold', 'underline', 'clear']],
-        ['color', ['color']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['table', ['table']],
-        ['insert', ['link', 'picture', 'video']],
-        ['view', ['fullscreen', 'codeview', 'help']]
-    ], popover: {
-        image: [
-            ['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
-            ['float', ['floatLeft', 'floatRight', 'floatNone']],
-            ['remove', ['removeMedia']]
-        ],
-        link: [
-            ['link', ['linkDialogShow', 'unlink']]
-        ],
-        table: [
-            ['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
-            ['delete', ['deleteRow', 'deleteCol', 'deleteTable']],
-        ],
-        air: [
-            ['color', ['color']],
-            ['font', ['bold', 'underline', 'clear']],
-            ['para', ['ul', 'paragraph']],
-            ['table', ['table']],
-            ['insert', ['link', 'picture']]
-        ]
-    },
-    disableDragAndDrop: true,
-});
 
 /// create file
-
-
 function AJAXSubmit(file) {
 
     formData = new FormData();
@@ -403,85 +104,6 @@ function AJAXSubmit(file) {
     });
 }
 
-function AJAXSubmitT(file) {
-
-    formData = new FormData();
-    formData.append("filesadd", file);
-    $.ajax({
-        type: 'POST',
-        url: '/Products/createImage',
-        data: formData,
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: function (data) {
-            $("#summernotePCT").summernote('insertImage', "/" + data.imgNode + "");
-        },
-        error: function (data) {
-            alert(data.responseText);
-        }
-    });
-}
-
-function AJAXSubmit1(file) {
-
-    formData = new FormData();
-    formData.append("filesadd", file);
-    $.ajax({
-        type: 'POST',
-        url: '/Products/createImage',
-        data: formData,
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: function (data) {
-            $("#summernote1").summernote('insertImage', "/" + data.imgNode + "");
-        },
-        error: function (data) {
-            alert(data.responseText);
-        }
-    });
-}
-
-function AJAXSubmit2(file) {
-
-    formData = new FormData();
-    formData.append("filesadd", file);
-    $.ajax({
-        type: 'POST',
-        url: '/Products/createImage',
-        data: formData,
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: function (data) {
-            $("#summernote2").summernote('insertImage', "/" + data.imgNode + "");
-        },
-        error: function (data) {
-            alert(data.responseText);
-        }
-    });
-}
-
-function AJAXSubmitB(file) {
-
-    formData = new FormData();
-    formData.append("filesadd", file);
-    $.ajax({
-        type: 'POST',
-        url: '/Products/createImage',
-        data: formData,
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: function (data) {
-            $("#summernotePCB").summernote('insertImage', "/" + data.imgNode + "");
-        },
-        error: function (data) {
-            alert(data.responseText);
-        }
-    });
-}
 
 async function AJAXSubmitCreate(oFormElement) {
     const formData = new FormData(oFormElement);
@@ -493,20 +115,19 @@ async function AJAXSubmitCreate(oFormElement) {
         contentType: false,
         processData: false,
         success: function (data) {
-            console.log(data.imgNode);
+            //    console.log(data.imgNode);
             if (data.imgNode.length > 0) {
                 var listimage = data.imgNode.split(",");
                 if (listimage.length > 1 || listimage != null)
                     for (var i = 0; i < listimage.length; i++) {
-                        //  console.log(listimage[i]);
-                        $(".section-image-list div.row").append("<div class='col-3 mb-3 position-relative'><a data-image='" + listimage[i] + "' data-fancybox='gallery' class= '/" + listimage[i] + "' href = '/" + listimage[i] + "' ><img style='max-width:100%' src='/" + listimage[i] + "' /><span class='show--image-edit'>Xem ảnh</span><i class='far fa-eye show--image-edit i--one'></i></a ><i class='fas fa-trash'></i></div>");
-
+                        $(".section-image-list.insert-one div.row").append("<div class='col-3 mb-3 position-relative'><a data-image='" + listimage[i] + "' data-fancybox='gallery' class= '/" + listimage[i] + "' href = '/" + listimage[i] + "' ><img style='max-width:100%' src='/" + listimage[i] + "' /><span class='show--image-edit'>Xem ảnh</span><i class='far fa-eye show--image-edit i--one'></i></a ><i class='fas fa-trash'></i></div>");
                     }
-                addlist();
             }
             else {
                 alert("Xin vui lòng chọn ảnh !");
             }
+            addlistone();
+
         },
         error: function (data) {
             alert(data.responseText);
@@ -514,93 +135,6 @@ async function AJAXSubmitCreate(oFormElement) {
     });
 
 }
-//
-
-
-function addBanner() {
-    var str = "";
-    $(".add-image-1 div.row .col-3 a").each(function () {
-        if (str.length == 0)
-            str = $(this).attr('data-image');
-        else
-            str = str + "," + $(this).attr('data-image');
-    });
-    $("#CoverImage").val(str);
-}
-
-
-//viet theo this
-async function AJAXSubmitCreateB(oFormElement) {
-    const formData = new FormData(oFormElement);
-    $.ajax({
-        type: 'POST',
-        url: '/Products/createImage',
-        data: formData,
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: function (data) {
-            console.log(data.imgNode);
-            if (data.imgNode.length > 0) {
-                var listimage = data.imgNode.split(",");
-                if (listimage.length > 1 || listimage != null)
-                    for (var i = 0; i < listimage.length; i++) {
-                        //  console.log($(oFormElement).children().children().next().children().first());
-                        $(oFormElement).children().children().next().children().append("<div class='col-3 mb-3 position-relative'><a data-image='" + listimage[i] + "' data-fancybox='gallery' class= '/" + listimage[i] + "' href = '/" + listimage[i] + "' ><img style='max-width:100%' src='/" + listimage[i] + "' /><span class='show--image-edit'>Xem ảnh</span><i class='far fa-eye show--image-edit i--one'></i></a ><i class='fas fa-trash'></i></div>");
-
-                    }
-                addBanner();
-                // addlist();
-            }
-            else {
-                alert("Xin vui lòng chọn ảnh !");
-            }
-        },
-        error: function (data) {
-            alert(data.responseText);
-        }
-    });
-
-}
-//
-
-async function AJAXSubmitCreateT(oFormElement) {
-    const formData = new FormData(oFormElement);
-    $.ajax({
-        type: 'POST',
-        url: '/Products/createImage',
-        data: formData,
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: function (data) {
-            //   console.log(data.imgNode);
-            if (data.imgNode.length > 0) {
-                var listimage = data.imgNode.split(",");
-                if (listimage.length > 1 || listimage != null)
-                    for (var i = 0; i < listimage.length; i++) {
-                        //  console.log($(oFormElement).children().children().next().children().first());
-                        $(oFormElement).children().children().next().children().children().remove();
-                        $(oFormElement).children().children().next().children().append("<div class='col-3 mb-3 position-relative'><a data-image='" + listimage[i] + "' data-fancybox='gallery' class= '/" + listimage[i] + "' href = '/" + listimage[i] + "' ><img style='max-width:100%' src='/" + listimage[i] + "' /><span class='show--image-edit'>Xem ảnh</span><i class='far fa-eye show--image-edit i--one'></i></a ><i class='fas fa-trash'></i></div>");
-
-                    }
-                addBieu();
-                // addlist();
-            }
-            else {
-                alert("Xin vui lòng chọn ảnh !");
-            }
-        },
-        error: function (data) {
-            alert(data.responseText);
-        }
-    });
-
-}
-
-
-
-// delete file
 
 async function AJAXSubmitDelete(oFormElement) {
     $.ajax({
@@ -608,8 +142,7 @@ async function AJAXSubmitDelete(oFormElement) {
         url: '/Products/deleteImage',
         data: { filesadd: oFormElement },
         success: function (res) {
-            addBieu();
-            addBanner();
+
         },
         error: function (res) {
             alert(res.responseText);
@@ -618,20 +151,430 @@ async function AJAXSubmitDelete(oFormElement) {
 
 
 }
-
 $(document).ready(function () {
-    $('#summernotePCT').summernote('pasteHTML', pct);
-    $('#summernotePCB').summernote('pasteHTML', pcb);
+    console.log(window.top.DecoupledEditor);
 })
-$('#summernote').summernote('pasteHTML', h);
-$('#summernote1').summernote('pasteHTML', j);
-$('#summernote2').summernote('pasteHTML', t);
+class InsertImage extends Plugin {
+    init() {
+        const editor = this.editor;
 
-//$('.note-editable').css('height', '300px')
+        editor.ui.componentFactory.add('insertImage', locale => {
+            const view = new ButtonView(locale);
+
+            view.set({
+                label: 'Insert image',
+                icon: imageIcon,
+                tooltip: true
+            });
+
+            // Callback executed once the image is clicked.
+            view.on('execute', () => {
+                const imageUrl = prompt('Image URL');
+
+                editor.model.change(writer => {
+                    const imageElement = writer.createElement('image', {
+                        src: imageUrl
+                    });
+
+                    // Insert the image in the current selection location.
+                    editor.model.insertContent(imageElement, editor.model.document.selection);
+                });
+            });
+
+            return view;
+        });
+    }
+}
+//DecoupledEditor
+//    .create(document.querySelector('#editor'), {
+//        image: {
+
+//        },
+//        toolbar: { items: ['imageResize','tableColumn', 'tableRow', 'mergeTableCells', 'fontSize', 'fontColor', 'imageStyle:alignRight', '|', 'imageStyle:alignLeft', 'imageStyle:full', '|', 'imageTextAlternative', 'fontFamily', 'ckfinder', 'imageUpload', 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'underline', 'strikethrough', '|', 'outdent', 'indent', '|', 'bulletedList', 'numberedList', '|', 'undo', 'redo'] },
+//    })
+//    .then(editor => {
+//        const toolbarContainer = document.querySelector('#toolbar-container');
+//        toolbarContainer.appendChild(editor.ui.view.toolbar.element);
+//        //    editor.keystrokes.set('Ctrl+E', 'bold')
+//        // editor.config.get('imageStyle.toolbar');
+//        // editor.execute('bold');
+//        editor.editing.view.change(writer => { writer.setStyle('height', '300px', editor.editing.view.document.getRoot()); });
+
+//        editor.model.document.on('change:data', () => {
+//            $("#Body").val(editor.getData());
+//        });
+
+//        if (h != null)
+//            editor.setData(h);
+//    })
+//    .catch(error => {
+//        console.error(error);
+//    });
+
+////
 
 
+//DecoupledEditor
+//    .create(document.querySelector('#editorContent'), {
+//        toolbar: ['imageStyle:alignRight', '|', 'imageStyle:alignLeft', 'imageStyle:full', '|', 'imageTextAlternative', 'fontFamily', 'ckfinder', 'imageUpload', 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'underline', 'strikethrough', '|', 'outdent', 'indent', '|', 'bulletedList', 'numberedList', '|', 'undo', 'redo'],
+//    })
+//    .then(editor => {
+//        const toolbarContainer = document.querySelector('#toolbar-containerContent');
+//        toolbarContainer.appendChild(editor.ui.view.toolbar.element);
 
-//summernotePCT
+//        editor.model.document.on('change:data', () => {
+//            $("#Content").val(editor.getData());
+//        });
+//        if (j != null)
+//            editor.setData(j);
+//    })
+//    .catch(error => {
+//        console.error(error);
+//    });
+
+////
+
+
+//DecoupledEditor
+//    .create(document.querySelector('#editorGift'), {
+//        toolbar: ['imageStyle:alignRight', '|', 'imageStyle:alignLeft', 'imageStyle:full', '|', 'imageTextAlternative', 'fontFamily', 'ckfinder', 'imageUpload', 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'underline', 'strikethrough', '|', 'outdent', 'indent', '|', 'bulletedList', 'numberedList', '|', 'undo', 'redo'],
+//    })
+//    .then(editor => {
+//        const toolbarContainer = document.querySelector('#toolbar-containerGift');
+//        toolbarContainer.appendChild(editor.ui.view.toolbar.element);
+//        window.editor = editor;
+//        editor.model.document.on('change:data', () => {
+//            $("#GiftInfo").val(editor.getData());
+//        });
+//        if (t != null)
+//            editor.setData(t);
+//    })
+//    .catch(error => {
+//        console.error(error);
+//    });
+//
+
+DecoupledDocumentEditor
+    .create(document.querySelector('#editor'), {
+
+        toolbar: {
+            items: [
+                'heading',
+                '|',
+                'fontSize',
+                'fontFamily',
+                '|',
+                'bold',
+                'italic',
+                'underline',
+                'strikethrough',
+                'highlight',
+                '|',
+                'alignment',
+                '|',
+                'numberedList',
+                'bulletedList',
+                '|',
+                'indent',
+                'outdent',
+                '|',
+                'todoList',
+                'link',
+                'blockQuote',
+                'insertTable',
+                'mediaEmbed',
+                '|',
+                'undo',
+                'redo',
+                'CKFinder',
+                'code',
+                'fontColor',
+                'fontBackgroundColor',
+                'exportPdf',
+                'imageUpload'
+            ]
+        },
+        language: 'vi',
+        image: {
+            toolbar: [
+                'imageTextAlternative',
+                'imageStyle:full',
+                'imageStyle:side'
+            ]
+        },
+        table: {
+            contentToolbar: [
+                'tableColumn',
+                'tableRow',
+                'mergeTableCells'
+            ]
+        },
+        licenseKey: '',
+
+    })
+    .then(editor => {
+        window.editor = editor;
+        // Set a custom container for the toolbar.
+        //  document.querySelector('.#toolbar-container').appendChild(editor.ui.view.toolbar.element);
+        const toolbarContainer = document.querySelector('#toolbar-container');
+        toolbarContainer.appendChild(editor.ui.view.toolbar.element);
+        // document.querySelector('.ck-toolbar').classList.add('ck-reset_all');
+        editor.editing.view.change(writer => { writer.setStyle('height', '300px', editor.editing.view.document.getRoot()); });
+
+        editor.model.document.on('change:data', () => {
+            $("#Body").val(editor.getData());
+        });
+        if (h != null)
+            editor.setData(h);
+    })
+    .catch(error => {
+        console.error('Oops, something went wrong!');
+        console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
+        console.warn('Build id: 41bzk7yle337-ewx4ryyqqp75');
+        console.error(error);
+    });
+//
+DecoupledDocumentEditor
+    .create(document.querySelector('#editor'), {
+
+        toolbar: {
+            items: [
+                'heading',
+                '|',
+                'fontSize',
+                'fontFamily',
+                '|',
+                'bold',
+                'italic',
+                'underline',
+                'strikethrough',
+                'highlight',
+                '|',
+                'alignment',
+                '|',
+                'numberedList',
+                'bulletedList',
+                '|',
+                'indent',
+                'outdent',
+                '|',
+                'todoList',
+                'link',
+                'blockQuote',
+                'insertTable',
+                'mediaEmbed',
+                '|',
+                'undo',
+                'redo',
+                'CKFinder',
+                'code',
+                'fontColor',
+                'fontBackgroundColor',
+                'exportPdf',
+                'imageUpload'
+            ]
+        },
+        language: 'vi',
+        image: {
+            toolbar: [
+                'imageTextAlternative',
+                'imageStyle:full',
+                'imageStyle:side'
+            ]
+        },
+        table: {
+            contentToolbar: [
+                'tableColumn',
+                'tableRow',
+                'mergeTableCells'
+            ]
+        },
+        licenseKey: '',
+
+    })
+    .then(editor => {
+        window.editor = editor;
+        // Set a custom container for the toolbar.
+        //  document.querySelector('.#toolbar-container').appendChild(editor.ui.view.toolbar.element);
+        const toolbarContainer = document.querySelector('#toolbar-container');
+        toolbarContainer.appendChild(editor.ui.view.toolbar.element);
+        // document.querySelector('.ck-toolbar').classList.add('ck-reset_all');
+        editor.editing.view.change(writer => { writer.setStyle('height', '300px', editor.editing.view.document.getRoot()); });
+
+        editor.model.document.on('change:data', () => {
+            $("#Body").val(editor.getData());
+        });
+        if (h != null)
+            editor.setData(h);
+    })
+    .catch(error => {
+        console.error('Oops, something went wrong!');
+        console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
+        console.warn('Build id: 41bzk7yle337-ewx4ryyqqp75');
+        console.error(error);
+    });
+//
+DecoupledDocumentEditor
+    .create(document.querySelector('#editorContent'), {
+
+        toolbar: {
+            items: [
+                'heading',
+                '|',
+                'fontSize',
+                'fontFamily',
+                '|',
+                'bold',
+                'italic',
+                'underline',
+                'strikethrough',
+                'highlight',
+                '|',
+                'alignment',
+                '|',
+                'numberedList',
+                'bulletedList',
+                '|',
+                'indent',
+                'outdent',
+                '|',
+                'todoList',
+                'link',
+                'blockQuote',
+                'insertTable',
+                'mediaEmbed',
+                '|',
+                'undo',
+                'redo',
+                'CKFinder',
+                'code',
+                'fontColor',
+                'fontBackgroundColor',
+                'exportPdf',
+                'imageUpload'
+            ]
+        },
+        language: 'vi',
+        image: {
+            toolbar: [
+                'imageTextAlternative',
+                'imageStyle:full',
+                'imageStyle:side'
+            ]
+        },
+        table: {
+            contentToolbar: [
+                'tableColumn',
+                'tableRow',
+                'mergeTableCells'
+            ]
+        },
+        licenseKey: '',
+
+    })
+    .then(editor => {
+        window.editor = editor;
+        // Set a custom container for the toolbar.
+        //  document.querySelector('.#toolbar-container').appendChild(editor.ui.view.toolbar.element);
+        const toolbarContainer = document.querySelector('#toolbar-containerContent');
+        toolbarContainer.appendChild(editor.ui.view.toolbar.element);
+        // document.querySelector('.ck-toolbar').classList.add('ck-reset_all');
+        editor.editing.view.change(writer => { writer.setStyle('height', '300px', editor.editing.view.document.getRoot()); });
+
+        editor.model.document.on('change:data', () => {
+            $("#Content").val(editor.getData());
+        });
+        if (j != null)
+            editor.setData(j);
+    })
+    .catch(error => {
+        console.error('Oops, something went wrong!');
+        console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
+        console.warn('Build id: 41bzk7yle337-ewx4ryyqqp75');
+        console.error(error);
+    });
+
+//
+DecoupledDocumentEditor
+    .create(document.querySelector('#editorGift'), {
+
+        toolbar: {
+            items: [
+                'heading',
+                '|',
+                'fontSize',
+                'fontFamily',
+                '|',
+                'bold',
+                'italic',
+                'underline',
+                'strikethrough',
+                'highlight',
+                '|',
+                'alignment',
+                '|',
+                'numberedList',
+                'bulletedList',
+                '|',
+                'indent',
+                'outdent',
+                '|',
+                'todoList',
+                'link',
+                'blockQuote',
+                'insertTable',
+                'mediaEmbed',
+                '|',
+                'undo',
+                'redo',
+                'CKFinder',
+                'code',
+                'fontColor',
+                'fontBackgroundColor',
+                'exportPdf',
+                'imageUpload'
+            ]
+        },
+        language: 'vi',
+        image: {
+            toolbar: [
+                'imageTextAlternative',
+                'imageStyle:full',
+                'imageStyle:side'
+            ]
+        },
+        table: {
+            contentToolbar: [
+                'tableColumn',
+                'tableRow',
+                'mergeTableCells'
+            ]
+        },
+        licenseKey: '',
+
+    })
+    .then(editor => {
+        window.editor = editor;
+        // Set a custom container for the toolbar.
+        //  document.querySelector('.#toolbar-container').appendChild(editor.ui.view.toolbar.element);
+        const toolbarContainer = document.querySelector('#toolbar-containerGift');
+        toolbarContainer.appendChild(editor.ui.view.toolbar.element);
+        // document.querySelector('.ck-toolbar').classList.add('ck-reset_all');
+        editor.editing.view.change(writer => { writer.setStyle('height', '300px', editor.editing.view.document.getRoot()); });
+
+        editor.model.document.on('change:data', () => {
+            $("#GiftInfo").val(editor.getData());
+        });
+        if (t != null)
+            editor.setData(t);
+    })
+    .catch(error => {
+        console.error('Oops, something went wrong!');
+        console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
+        console.warn('Build id: 41bzk7yle337-ewx4ryyqqp75');
+        console.error(error);
+    });
+
 
 
 

@@ -20,21 +20,17 @@
 
 <form asp-controller="Products" asp-action="createImage" enctype="multipart/form-data" onchange="AJAXSubmitCreate(this);return false;" method="post">
     <div class="form-group bg-white font-weight-bold">
-        @*<label asp-for="Image" class="control-label"></label>*@
-
         <div class="section-image-title d-flex justify-content-between">
             <p class="text-danger mt-3 mb-1">Ảnh sản phẩm</p>
             <div class="m-3 ml-1">
                 <a class="">
-                    <input id="filesadd" accept="image/*" name="filesadd" type="file" multiple />@*Thêm ảnh từ máy tính*@
-
+                    <input id="filesadd" accept="image/*" name="filesadd" type="file" multiple />
                 </a>
-                @*<input class="btn" type="submit" value="Upload" />*@
                 <script>
                 </script>
             </div>
         </div>
-        <div class="section-image-list container">
+        <div class="section-image-list insert-one container">
             <div class="row">
             </div>
         </div>
@@ -45,127 +41,141 @@
 
 <form asp-action="Create" enctype="multipart/form-data">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="form-group w-50">
-        <label asp-for="Name" class="control-label"></label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group ">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group d-none">
+                    <label asp-for="Image"></label>
+                    <input asp-for="Image" class="form-control" />
+                    <span asp-validation-for="Image" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ProductCategorieID" class="control-label"></label>
+                    <select asp-for="ProductCategorieID" class="form-control" asp-items="ViewBag.ProductCategorieID"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Quantity" class="control-label"></label>
+                    <input asp-for="Quantity" class="form-control" />
+                    <span asp-validation-for="Quantity" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Factory" class="control-label"></label>
+                    <input asp-for="Factory" class="form-control" />
+                    <span asp-validation-for="Factory" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Price" class="control-label"></label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SaleOff" class="control-label"></label>
+                    <input asp-for="SaleOff" class="form-control" />
+                    <span asp-validation-for="SaleOff" class="text-danger"></span>
+                </div>
+                <div class="form-group d-none">
+                    <label asp-for="CreateBy" class="control-label"></label>
+                    <input asp-for="CreateBy" class="form-control" />
+                    <span asp-validation-for="CreateBy" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Home" /> @Html.DisplayNameFor(model => model.Home)
+                    </label>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label asp-for="Sort" class="control-label"></label>
+                    <input asp-for="Sort" class="form-control" />
+                    <span asp-validation-for="Sort" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="TitleMeta" class="control-label"></label>
+                    <input asp-for="TitleMeta" class="form-control" />
+                    <span asp-validation-for="TitleMeta" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DescriptionMeta" class="control-label"></label>
+                    <input asp-for="DescriptionMeta" class="form-control" />
+                    <span asp-validation-for="DescriptionMeta" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CollectionID" class="control-label"></label>
+                    <select asp-for="CollectionID" class="form-control" asp-items="ViewBag.CollectionID"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BarCode" class="control-label"></label>
+                    <input asp-for="BarCode" class="form-control" />
+                    <span asp-validation-for="BarCode" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="QuyCach" class="control-label"></label>
+                    <input asp-for="QuyCach" class="form-control" />
+                    <span asp-validation-for="QuyCach" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Hot" /> @Html.DisplayNameFor(model => model.Hot)
+                    </label>
+                </div>
+
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Active" /> Hiển thị lên Web
+                    </label>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="StatusProduct" />Còn hàng
+                    </label>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="form-group d-none">
-        <label asp-for="Image"></label>
-        <input asp-for="Image" class="form-control" />
-        <span asp-validation-for="Image" class="text-danger"></span>
-    </div>
-    <div class="form-group w-25">
-        <label asp-for="Description" class="control-label"></label>
-        <input asp-for="Description" class="form-control" />
-        <span asp-validation-for="Description" class="text-danger"></span>
-    </div>
-    <div class="form-group">
+
+  
+
+    <div class="form-group bg-white">
         <label asp-for="Body" class="control-label"></label>
-        <div id="summernote"></div>
+        <div id="toolbar-container"></div>
+        <div id="editor" class="bg-white"></div>
+
         <input type="hidden" asp-for="Body" class="form-control" />
         <span asp-validation-for="Body" class="text-danger"></span>
     </div>
-    <div class="form-group">
+    <div class="form-group bg-white">
         <label asp-for="Content" class="control-label"></label>
-        <div id="summernote1"></div>
-        <input asp-for="Content" class="form-control" />
+        <div id="toolbar-containerContent"></div>
+        <div id="editorContent"></div>
+        <input type="hidden" asp-for="Content" class="form-control" />
         <span asp-validation-for="Content" class="text-danger"></span>
     </div>
-    <div class="form-group w-25">
-        <label asp-for="ProductCategorieID" class="control-label"></label>
-        <select asp-for="ProductCategorieID" class="form-control" asp-items="ViewBag.ProductCategorieID"></select>
-    </div>
-    <div class="form-group w-25">
-        <label asp-for="Quantity" class="control-label"></label>
-        <input asp-for="Quantity" class="form-control" />
-        <span asp-validation-for="Quantity" class="text-danger"></span>
-    </div>
-    <div class="form-group w-25">
-        <label asp-for="Factory" class="control-label"></label>
-        <input asp-for="Factory" class="form-control" />
-        <span asp-validation-for="Factory" class="text-danger"></span>
-    </div>
-    <div class="form-group w-25">
-        <label asp-for="Price" class="control-label"></label>
-        <input asp-for="Price" class="form-control" />
-        <span asp-validation-for="Price" class="text-danger"></span>
-    </div>
-    <div class="form-group w-25">
-        <label asp-for="SaleOff" class="control-label"></label>
-        <input asp-for="SaleOff" class="form-control" />
-        <span asp-validation-for="SaleOff" class="text-danger"></span>
-    </div>
-    <div class="form-group d-none">
-        <label asp-for="CreateBy" class="control-label"></label>
-        <input asp-for="CreateBy" class="form-control" />
-        <span asp-validation-for="CreateBy" class="text-danger"></span>
-    </div>
-
-
-    <div class="form-group w-50">
-        <label asp-for="QuyCach" class="control-label"></label>
-        <input asp-for="QuyCach" class="form-control" />
-        <span asp-validation-for="QuyCach" class="text-danger"></span>
-    </div>
-    <div class="form-group w-25">
-        <label asp-for="Sort" class="control-label"></label>
-        <input asp-for="Sort" class="form-control" />
-        <span asp-validation-for="Sort" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="TitleMeta" class="control-label"></label>
-        <input asp-for="TitleMeta" class="form-control" />
-        <span asp-validation-for="TitleMeta" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="DescriptionMeta" class="control-label"></label>
-        <input asp-for="DescriptionMeta" class="form-control" />
-        <span asp-validation-for="DescriptionMeta" class="text-danger"></span>
-    </div>
-    <div class="form-group">
+    <div class="form-group bg-white">
         <label asp-for="GiftInfo" class="control-label"></label>
-        <div id="summernote2"></div>
-        <input asp-for="GiftInfo" class="form-control" />
+        <div id="toolbar-containerGift"></div>
+        <div id="editorGift"></div>
+        <input type="hidden" asp-for="GiftInfo" class="form-control" />
         <span asp-validation-for="GiftInfo" class="text-danger"></span>
     </div>
 
 
-    <div class="form-group w-25">
-        <label asp-for="CollectionID" class="control-label"></label>
-        <select asp-for="CollectionID" class="form-control" asp-items="ViewBag.CollectionID"></select>
-    </div>
-    <div class="form-group w-25">
-        <label asp-for="BarCode" class="control-label"></label>
-        <input asp-for="BarCode" class="form-control" />
-        <span asp-validation-for="BarCode" class="text-danger"></span>
-    </div>
-    <div class="form-group form-check">
-        <label class="form-check-label">
-            <input class="form-check-input" asp-for="Hot" /> @Html.DisplayNameFor(model => model.Hot)
-        </label>
-    </div>
-    <div class="form-group form-check">
-        <label class="form-check-label">
-            <input class="form-check-input" asp-for="Home" /> @Html.DisplayNameFor(model => model.Home)
-        </label>
-    </div>
-    <div class="form-group form-check">
-        <label class="form-check-label">
-            <input class="form-check-input" asp-for="Active" /> Hiển thị lên Web
-        </label>
-    </div>
-    <div class="form-group form-check">
-        <label class="form-check-label">
-            <input class="form-check-input" asp-for="StatusProduct" />Còn hàng
-        </label>
-    </div>
+
 
     <div class="form-group">
         <input type="submit" value="Create" class="btn btn-primary" />
     </div>
-    @*<div>
-            <a class="btn btn-success" asp-action="Index">Back to List</a>
-        </div>*@
 </form>
+

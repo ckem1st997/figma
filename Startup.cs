@@ -13,6 +13,7 @@ using figma.Data;
 using System.IO;
 using Microsoft.Extensions.FileProviders;
 
+
 namespace figma
 {
     public class Startup
@@ -23,8 +24,6 @@ namespace figma
         }
 
         public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IFileProvider>(new PhysicalFileProvider(
@@ -34,8 +33,6 @@ namespace figma
             services.AddDbContext<ShopProductContext>(options =>
         options.UseSqlServer(Configuration.GetConnectionString("ShopProductContext")));
         }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -63,5 +60,6 @@ namespace figma
                     pattern: "{controller=Home}/{action=Login1}/{id?}");
             });
         }
+
     }
 }

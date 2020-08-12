@@ -70,17 +70,14 @@ namespace figma.Data
 
             modelBuilder.Entity<ProductSizeColor>().HasOne(p => p.Size).WithMany(b => b.ProductSizeColors).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
 
-            //modelBuilder.Entity<ProductSizeColor>().HasOne(p => p.Products).WithMany(b => b.).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
-
             modelBuilder.Entity<Articles>().HasOne(p => p.ArticleCategories).WithMany(b => b.Articles).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<Carts>().HasKey(h => h.RecordID);
             modelBuilder.Entity<Carts>().HasOne(p => p.Products).WithMany(b => b.Carts).HasForeignKey(p => p.ProductID).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
 
 
             modelBuilder.Entity<Collection>().HasKey(h => h.CollectionID);
+            modelBuilder.Entity<Collection>().Property(p=>p.CreateDate).HasDefaultValueSql("getdate()");
             modelBuilder.Entity<Products>().HasOne(p => p.Collection).WithMany(b => b.Products).HasForeignKey(p => p.CollectionID).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
-
-            //modelBuilder.Entity<ProductLike>().HasOne(p => p.Products).WithMany(b => b.ProductLikes).HasForeignKey(p => p.ProductID).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<ReviewProduct>().HasOne(p => p.Products).WithMany(b => b.ReviewProducts).HasForeignKey(p => p.ProductId).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
 

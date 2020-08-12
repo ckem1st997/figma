@@ -34,13 +34,6 @@ namespace figma.Controllers
         }
 
 
-        private static long ToUnixTime(DateTime date)
-        {
-            var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-            Console.WriteLine(Convert.ToInt64((TimeZoneInfo.ConvertTimeToUtc(date, TimeZoneInfo.Local) - epoch).TotalSeconds));
-            return Convert.ToInt64((TimeZoneInfo.ConvertTimeToUtc(date, TimeZoneInfo.Local) - epoch).TotalSeconds);
-        }
-
 
         [HttpPost]
         public async Task<IActionResult> createImage(List<IFormFile> filesadd)
@@ -48,7 +41,7 @@ namespace figma.Controllers
             DateTime dateTime = DateTime.Now;
             //  string createFolderDate = "" + dateTime.Year + "\\" + dateTime.Month + "\\" + dateTime.Day + "";
             string createFolderDate = DateTime.Now.ToString("yyyy/MM/dd");
-            string path = _hostingEnvironment.WebRootPath + @"\" + createFolderDate + "";
+            string path = _hostingEnvironment.WebRootPath + @"\uploads\" + createFolderDate + "";
             Console.WriteLine(path);
             try
             {
@@ -98,9 +91,9 @@ namespace figma.Controllers
                         }
 
                         if (sql.Length > 1)
-                            sql = "" + sql + "," + createFolderDate + "/" + randomname + "";
+                            sql = "" + sql + ",uploads/" + createFolderDate + "/" + randomname + "";
                         else
-                            sql = "" + createFolderDate + "/" + randomname + "";
+                            sql = "uploads/" + createFolderDate + "/" + randomname + "";
                         // sql = sql.Replace("\\", "/");
 
                     }
@@ -203,7 +196,7 @@ namespace figma.Controllers
             {
                 return NotFound();
             }
-            ViewData["CollectionID"] = new SelectList(_context.Collections, "CollectionID", "CollectionID", products.CollectionID);
+            ViewData["CollectionID"] = new SelectList(_context.Collections, "CollectionID", "Name", products.CollectionID);
             ViewData["ProductCategorieID"] = new SelectList(_context.ProductCategories, "ProductCategorieID", "Name", products.ProductCategorieID);
             return View(products);
         }

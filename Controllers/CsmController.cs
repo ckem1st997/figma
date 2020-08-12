@@ -20,8 +20,6 @@ namespace figma.Controllers
         {
             _context = context;
         }
-
-        // GET: ProductCategories/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -42,15 +40,9 @@ namespace figma.Controllers
         {
             ViewData["ParentId"] = new SelectList(_context.ProductCategories, "ProductCategorieID", "Name");
             ViewBag.Productcato = _context.ProductCategories.ToList();
-
-            // Console.WriteLine(ViewData["ParentId"]);
             return View();
         }
 
-
-        // POST: ProductCategories/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ProductCategorieID,Name,Image,CoverImage,Url,Soft,Active,Home,ParentId,TitleMeta,DescriptionMeta,Body")] ProductCategories productCategories)
@@ -66,8 +58,6 @@ namespace figma.Controllers
 
             return View(productCategories);
         }
-
-        // GET: ProductCategories/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -83,9 +73,6 @@ namespace figma.Controllers
             return View(productCategories);
         }
 
-        // POST: ProductCategories/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ProductCategorieID,Name,Image,CoverImage,Url,Soft,Active,Home,ParentId,TitleMeta,DescriptionMeta,Body")] ProductCategories productCategories)
@@ -136,7 +123,6 @@ namespace figma.Controllers
             return View(productCategories);
         }
 
-        // POST: ProductCategories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -150,6 +136,26 @@ namespace figma.Controllers
         private bool ProductCategoriesExists(int id)
         {
             return _context.ProductCategories.Any(e => e.ProductCategorieID == id);
+        }
+
+        // Colletion
+        public IActionResult ListCollection()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ListCollection([Bind("CollectionID,Name,Description,Image,Body,Quantity,Factory,Price,Sort,Hot,Home,Active,TitleMeta,Content,StatusProduct,BarCode,CreateDate,CreateBy")] Collection collection)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(collection);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(collection);
+
         }
 
 

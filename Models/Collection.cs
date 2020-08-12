@@ -17,7 +17,7 @@ namespace figma.Models
         public string Name { get; set; }
 
 
-        [Display(Name = "Miêu tả")]
+        [Display(Name = "Mã bộ sưu tập")]
         public string Description { get; set; }
 
 
@@ -25,7 +25,7 @@ namespace figma.Models
         public string Image { get; set; }
 
 
-        [Display(Name = "Nội dung")]
+        [Display(Name = "Nội dung ngắn")]
         public string Body { get; set; }
 
 
@@ -33,7 +33,7 @@ namespace figma.Models
         public int Quantity { get; set; }
 
 
-        [Display(Name = "Quốc gia")]
+        [Display(Name = "Xuất xứ")]
         [MaxLength(500)]
         public string Factory { get; set; }
 
@@ -44,23 +44,28 @@ namespace figma.Models
         public decimal Price { get; set; }
 
 
+        [Display(Name ="Thứ tự hiển thị")]
         public int Sort { get; set; }
 
 
+        [Display(Name = "Bộ sưu tập mới nhất")]
         public bool Hot { get; set; }
 
 
+        [Display(Name = "Hiển trang chủ")]
         public bool Home { get; set; }
 
 
+        [Display(Name = "Hoạt động")]
         public bool Active { get; set; }
 
 
-        [Display(Name = "Tiêu đề")]
+        [Display(Name = "Thẻ tiêu đề")]
         [MaxLength(100)]
         public string TitleMeta { get; set; }
 
 
+        [Display(Name = "Nội dung chi tiết")]
         public string Content { get; set; }
 
 
