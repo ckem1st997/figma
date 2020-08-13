@@ -25,6 +25,8 @@
     <div class="form-group bg-white font-weight-bold">
         <div class="section-image-title d-flex justify-content-between">
             <p class="text-danger mt-3 mb-1">Biểu tượng</p>
+            <span asp-validation-for="CoverImage" class="text-danger"></span>
+
             <div class="m-3 ml-1">
                 <a class="">
                     <input id="filesadd" accept="image/*" name="filesadd" type="file" />
@@ -45,6 +47,7 @@
     <div class="form-group bg-white font-weight-bold">
         <div class="section-image-title d-flex justify-content-between">
             <p class="text-danger mt-3 mb-1">Ảnh Banner</p>
+            <span asp-validation-for="Image" class="text-danger"></span>
             <div class="m-3 ml-1">
                 <a class="">
                     <input id="filesadd" accept="image/*" name="filesadd" type="file" multiple />
@@ -62,7 +65,7 @@
 </form>
 
 <div class="">
-    <form asp-action="Create">
+    <form asp-action="ProductCategoriesCreate">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="container-fluid">
             <div class="row">
@@ -82,12 +85,11 @@
                     <div class="form-group d-none">
                         <label asp-for="CoverImage" class="control-label"></label>
                         <input asp-for="CoverImage" class="form-control" />
-                        <span asp-validation-for="CoverImage" class="text-danger"></span>
                     </div>
                     <div class="form-group d-none">
                         <label asp-for="Image" class="control-label"></label>
                         <input asp-for="Image" class="form-control" />
-                        <span asp-validation-for="Image" class="text-danger"></span>
+                       
                     </div>
 
                     <div class="form-group ">
@@ -107,7 +109,7 @@
 
                     <div class="form-group ">
                         <label asp-for="Soft" class="control-label"></label>
-                        <input asp-for="Soft" class="form-control" />
+                        <input asp-for="Soft" class="form-control" min="1" />
                         <span asp-validation-for="Soft" class="text-danger"></span>
                     </div>
                     <div class="form-group form-check">
@@ -175,22 +177,22 @@
                         </td>
 
                         <td>
-                            @item.Soft
+                           <img src="/@item.CoverImage"  asp-append-version="true" width="80" height="80"/>
                         </td>
                         <td>
                             @item.Active
                         </td>
 
                         <td>
-                            <a class="btn btn-danger" asp-action="Edit" asp-route-id="@item.ProductCategorieID">Edit</a> |
-                            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ProductCategorieID">Delete</a>
+                            <a class="btn btn-danger" asp-action="ProductCategoriesEdit" asp-route-id="@item.ProductCategorieID">Edit</a> |
+                            <a class="btn btn-danger" asp-action="ProductCategoriesDelete" asp-route-id="@item.ProductCategorieID">Delete</a>
                         </td>
                     </tr>
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-               
+                <text> @e.Message</text>
             }
 
         </tbody>

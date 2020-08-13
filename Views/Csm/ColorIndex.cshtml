@@ -1,0 +1,53 @@
+﻿@model IEnumerable<figma.Models.Color>
+
+@{
+    ViewData["Title"] = "ColorIndex";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@{
+    if (TempData["result"] != null)
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            Message: @TempData["result"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+}
+<h1>Thông tin màu sắc hiện có<</h1>
+
+<p>
+    <a asp-action="ColorCreate">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NameColor)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameColor)
+                </td>
+                <td>
+                    <a asp-action="ColorEdit" asp-route-id="@item.ColorID">Edit</a> |
+                    <a asp-action="ColorDetails" asp-route-id="@item.ColorID">Details</a> |
+                    <a asp-action="ColorDelete" asp-route-id="@item.ColorID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

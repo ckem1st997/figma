@@ -1,0 +1,49 @@
+﻿@model IEnumerable<figma.Models.Size>
+
+@{
+    ViewData["Title"] = "SizeIndex";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<p>Danh sách Size</p>
+
+@{
+    if (TempData["result"] != null)
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            Message: @TempData["result"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+}
+
+<p>
+    <a asp-action="SizeCreate">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SizeProduct)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SizeProduct)
+                </td>
+                <td>
+                    <a asp-action="SizeEdit" asp-route-id="@item.SizeID">Edit</a> |
+                    <a asp-action="SizeDetails" asp-route-id="@item.SizeID">Details</a> |
+                    <a asp-action="SizeDelete" asp-route-id="@item.SizeID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -40,12 +40,7 @@ namespace figma.Controllers
 
             return View(productCategories);
         }
-        public IActionResult Create()
-        {
-            ViewData["ParentId"] = new SelectList(_context.ProductCategories, "ProductCategorieID", "Name");
-            ViewBag.Productcato = _context.ProductCategories.ToList();
-            return View();
-        }
+
 
         #region Products
 
@@ -187,6 +182,7 @@ namespace figma.Controllers
         public async Task<IActionResult> ProductsSC(int? idsp)
         {
             var shopProductContext = _context.ProductSizeColors.Include(p => p.Color).Include(p => p.Size).Where(p => p.ProductID == idsp);
+            ViewBag.idsp = idsp;
             return View(await shopProductContext.ToListAsync());
         }
 
@@ -197,7 +193,6 @@ namespace figma.Controllers
             ViewData["SizeID"] = new SelectList(_context.Sizes, "SizeID", "SizeProduct");
             return View();
         }
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -215,8 +210,6 @@ namespace figma.Controllers
             return View(productSizeColor);
         }
 
-
-        // Size and Color
         public async Task<IActionResult> ProductsDetailsSC(int? id)
         {
 
@@ -254,7 +247,6 @@ namespace figma.Controllers
             {
                 return NotFound();
             }
-            //  ViewBag.id = from a in _context.;
             ViewData["ColorID"] = new SelectList(_context.Colors, "ColorID", "NameColor", productSizeColor.ColorID);
             ViewData["SizeID"] = new SelectList(_context.Sizes, "SizeID", "SizeProduct", productSizeColor.SizeID);
             return View(productSizeColor);
@@ -329,12 +321,9 @@ namespace figma.Controllers
             return _context.ProductSizeColors.Any(e => e.Id == id);
         }
 
-
-
         #endregion
 
-        #region ProductsSizeColors
-        // GET: ProductSizeColors
+        #region ProductsSizeColors       
         public async Task<IActionResult> ProductsSCIndex()
         {
             var shopProductContext = _context.ProductSizeColors.Include(p => p.Color).Include(p => p.Size);
@@ -348,9 +337,6 @@ namespace figma.Controllers
             return View();
         }
 
-        // POST: ProductSizeColors/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ProductsSCCreate([Bind("Id,ProductID,ColorID,SizeID")] ProductSizeColor productSizeColor)
@@ -385,9 +371,6 @@ namespace figma.Controllers
             return View(productSizeColor);
         }
 
-        // POST: ProductSizeColors/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ProductsSCEdit(int id, [Bind("Id,ProductID,ColorID,SizeID")] ProductSizeColor productSizeColor)
@@ -421,8 +404,6 @@ namespace figma.Controllers
             ViewData["SizeID"] = new SelectList(_context.Sizes, "SizeID", "SizeProduct", productSizeColor.SizeID);
             return View(productSizeColor);
         }
-
-        // GET: ProductSizeColors/Delete/5
         public async Task<IActionResult> ProductsSCDelete(int? id)
         {
             if (id == null)
@@ -442,7 +423,6 @@ namespace figma.Controllers
             return View(productSizeColor);
         }
 
-        // POST: ProductSizeColors/Delete/5
         [HttpPost, ActionName("ProductsSCDelete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -459,68 +439,37 @@ namespace figma.Controllers
         }
         #endregion
 
+        #region ProductsCategores
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        #region
+        public async Task<IActionResult> ProductCategoriesCreate()
+        {
+            ViewData["ParentId"] = new SelectList(_context.ProductCategories, "ProductCategorieID", "Name");
+            ViewBag.Productcato = await _context.ProductCategories.ToArrayAsync();
+            return View();
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductCategorieID,Name,Image,CoverImage,Url,Soft,Active,Home,ParentId,TitleMeta,DescriptionMeta,Body")] ProductCategories productCategories)
+        public async Task<IActionResult> ProductCategoriesCreate([Bind("ProductCategorieID,Name,Image,CoverImage,Url,Soft,Active,Home,ParentId,TitleMeta,DescriptionMeta,Body")] ProductCategories productCategories)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(productCategories);
                 await _context.SaveChangesAsync();
                 TempData["result"] = "Thêm thành công ";
-                return RedirectToAction(nameof(Create));
+                return RedirectToAction(nameof(ProductCategoriesCreate));
             }
-            TempData["result"] = "Lỗi, xin bạn vui lòng thử lại";
+            ViewBag.Productcato = await _context.ProductCategories.ToArrayAsync();
 
             return View(productCategories);
         }
-        public async Task<IActionResult> Edit(int? id)
+
+        public async Task<IActionResult> ProductCategoriesEdit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
+            ViewData["ParentId"] = new SelectList(_context.ProductCategories, "ProductCategorieID", "Name");
 
             var productCategories = await _context.ProductCategories.FindAsync(id);
             if (productCategories == null)
@@ -532,7 +481,7 @@ namespace figma.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductCategorieID,Name,Image,CoverImage,Url,Soft,Active,Home,ParentId,TitleMeta,DescriptionMeta,Body")] ProductCategories productCategories)
+        public async Task<IActionResult> ProductCategoriesEdit(int id, [Bind("ProductCategorieID,Name,Image,CoverImage,Url,Soft,Active,Home,ParentId,TitleMeta,DescriptionMeta,Body")] ProductCategories productCategories)
         {
             if (id != productCategories.ProductCategorieID)
             {
@@ -544,11 +493,13 @@ namespace figma.Controllers
                 try
                 {
                     _context.Update(productCategories);
+                    TempData["result"] = "Chỉnh sửa thành công ";
+
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProductCategoriesExists(productCategories.ProductCategorieID))
+                    if (!ProductCategoriesExistsS(productCategories.ProductCategorieID))
                     {
                         return NotFound();
                     }
@@ -557,13 +508,11 @@ namespace figma.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(ProductCategoriesCreate));
             }
             return View(productCategories);
         }
-
-        // GET: ProductCategories/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> ProductCategoriesDelete(int? id)
         {
             if (id == null)
             {
@@ -580,42 +529,319 @@ namespace figma.Controllers
             return View(productCategories);
         }
 
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("ProductCategoriesDelete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmedS(int id)
+        public async Task<IActionResult> ProductCategoriesDeleteConfirmed(int id)
         {
             var productCategories = await _context.ProductCategories.FindAsync(id);
             _context.ProductCategories.Remove(productCategories);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            TempData["result"] = "Xóa thành công ";
+
+            return RedirectToAction(nameof(ProductCategoriesCreate));
         }
 
-        private bool ProductCategoriesExists(int id)
+        private bool ProductCategoriesExistsS(int id)
         {
             return _context.ProductCategories.Any(e => e.ProductCategorieID == id);
         }
 
-        // Colletion
-        public IActionResult ListCollection()
+        #endregion
+
+        #region Color
+        // GET: Colors
+        public async Task<IActionResult> ColorIndex()
+        {
+            return View(await _context.Colors.ToListAsync());
+        }
+
+        // GET: Colors/Details/5
+        public async Task<IActionResult> ColorDetails(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var color = await _context.Colors
+                .FirstOrDefaultAsync(m => m.ColorID == id);
+            if (color == null)
+            {
+                return NotFound();
+            }
+
+            return View(color);
+        }
+
+        // GET: Colors/Create
+        public IActionResult ColorCreate()
         {
             return View();
         }
 
+        // POST: Colors/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ListCollection([Bind("CollectionID,Name,Description,Image,Body,Quantity,Factory,Price,Sort,Hot,Home,Active,TitleMeta,Content,StatusProduct,BarCode,CreateDate,CreateBy")] Collection collection)
+        public async Task<IActionResult> ColorCreate([Bind("ColorID,Code,NameColor")] Color color)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(collection);
+                _context.Add(color);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                TempData["result"] = "Tạo thành công !";
+                return RedirectToAction(nameof(ColorIndex));
             }
-            return View(collection);
-
+            return View(color);
         }
+
+        public async Task<IActionResult> ColorEdit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var color = await _context.Colors.FindAsync(id);
+            if (color == null)
+            {
+                return NotFound();
+            }
+            return View(color);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ColorEdit(int id, [Bind("ColorID,Code,NameColor")] Color color)
+        {
+            if (id != color.ColorID)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(color);
+                    TempData["result"] = "Chỉnh sửa thành công !";
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ColorExists(color.ColorID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(ColorIndex));
+            }
+            return View(color);
+        }
+
+        public async Task<IActionResult> ColorDelete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var color = await _context.Colors
+                .FirstOrDefaultAsync(m => m.ColorID == id);
+            if (color == null)
+            {
+                return NotFound();
+            }
+
+            return View(color);
+        }
+
+        [HttpPost, ActionName("ColorDelete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ColorDeleteConfirmed(int id)
+        {
+            var color = await _context.Colors.FindAsync(id);
+            _context.Colors.Remove(color);
+            await _context.SaveChangesAsync();
+            TempData["result"] = "Xóa thành công !";
+            return RedirectToAction(nameof(ColorIndex));
+        }
+
+        private bool ColorExists(int id)
+        {
+            return _context.Colors.Any(e => e.ColorID == id);
+        }
+        #endregion
+
+        #region Size
+        public async Task<IActionResult> SizeIndex()
+        {
+            return View(await _context.Sizes.ToListAsync());
+        }
+
+        public async Task<IActionResult> SizeDetails(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var size = await _context.Sizes
+                .FirstOrDefaultAsync(m => m.SizeID == id);
+            if (size == null)
+            {
+                return NotFound();
+            }
+
+            return View(size);
+        }
+
+        public IActionResult SizeCreate()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SizeCreate([Bind("SizeID,SizeProduct")] Size size)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(size);
+                await _context.SaveChangesAsync();
+                TempData["result"] = "Tạo thành công ";
+                return RedirectToAction(nameof(SizeIndex));
+            }
+            return View(size);
+        }
+
+        public async Task<IActionResult> SizeEdit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var size = await _context.Sizes.FindAsync(id);
+            if (size == null)
+            {
+                return NotFound();
+            }
+            return View(size);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SizeEdit(int id, [Bind("SizeID,SizeProduct")] Size size)
+        {
+            if (id != size.SizeID)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(size);
+                    await _context.SaveChangesAsync();
+                    TempData["result"] = "Chỉnh sửa thành công ";
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!SizeExists(size.SizeID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(SizeIndex));
+            }
+            return View(size);
+        }
+
+        public async Task<IActionResult> SizeDelete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var size = await _context.Sizes
+                .FirstOrDefaultAsync(m => m.SizeID == id);
+            if (size == null)
+            {
+                return NotFound();
+            }
+
+            return View(size);
+        }
+
+        [HttpPost, ActionName("SizeDelete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SizeDeleteConfirmed(int id)
+        {
+            var size = await _context.Sizes.FindAsync(id);
+            _context.Sizes.Remove(size);
+            await _context.SaveChangesAsync();
+            TempData["result"] = "Xóa thành công ";
+            return RedirectToAction(nameof(SizeIndex));
+        }
+
+        private bool SizeExists(int id)
+        {
+            return _context.Sizes.Any(e => e.SizeID == id);
+        }
+        #endregion
+
+        #region SpecialCategory (Tag)
+
+
 
 
         #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

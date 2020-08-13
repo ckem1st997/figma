@@ -7,11 +7,7 @@
 
 <h1>Danh sách màu và size</h1>
 <p>
-    @foreach (var item in Model)
-    {
-        <a class="btn btn-success" asp-action="ProductsCreateSC" asp-route-id="@item.ProductID">Thêm mới</a>
-        break;
-    }
+    <a class="btn btn-success" asp-action="ProductsCreateSC" asp-route-id="@ViewBag.idsp">Thêm mới</a>
 </p>
 
 @{

@@ -19,23 +19,25 @@ namespace figma.Models
         public string Name { get; set; }
 
 
-
+        [Required(ErrorMessage = "Bạn chưa nhập thông tin")]
         [Display(Name = "Ảnh banner")]
         [MaxLength(500)]
         public string Image { get; set; }
 
 
+        [Required(ErrorMessage = "Bạn chưa nhập thông tin")]
         [Display(Name = "Biểu tượng")]
         [MaxLength(500)]
         public string CoverImage { get; set; }
 
 
         [Display(Name = "Đường dẫn")]
-        [MaxLength(500)]
+        [MaxLength(500, ErrorMessage = "Tối đa 500 ký tự")]
         public string Url { get; set; }
 
 
-        [Display(Name ="Thứ tự")]
+        [Required(ErrorMessage = "Bạn chưa nhập thông tin")]
+        [Display(Name ="Thứ tự"), RegularExpression(@"\d+", ErrorMessage = "Chỉ nhập số nguyên dương")]   
         public int Soft { get; set; }
 
 
