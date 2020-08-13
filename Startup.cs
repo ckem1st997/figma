@@ -58,6 +58,9 @@ namespace figma
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Login1}/{id?}");
+                endpoints.MapControllerRoute(
+               name: "admin",
+               pattern: "{controller=Csm}/{action=ListProducts}/{id?}");
             });
         }
 

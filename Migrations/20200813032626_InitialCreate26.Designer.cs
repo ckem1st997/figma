@@ -10,8 +10,8 @@ using figma.Data;
 namespace figma.Migrations
 {
     [DbContext(typeof(ShopProductContext))]
-    [Migration("20200731091750_InitialCreate2")]
-    partial class InitialCreate2
+    [Migration("20200813032626_InitialCreate26")]
+    partial class InitialCreate26
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -332,7 +332,9 @@ namespace figma.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -674,8 +676,10 @@ namespace figma.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<int>("ParentId")
-                        .HasColumnType("int");
+                    b.Property<int?>("ParentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(null);
 
                     b.Property<int>("Soft")
                         .HasColumnType("int");
@@ -772,12 +776,17 @@ namespace figma.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CreateBy")
-                        .HasColumnType("nvarchar(max)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(max)")
+                        .HasDefaultValue("admin");
 
                     b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DescriptionMeta")
@@ -797,9 +806,11 @@ namespace figma.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Image")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
@@ -819,7 +830,9 @@ namespace figma.Migrations
                         .HasColumnType("decimal(18, 0)");
 
                     b.Property<int>("Sort")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(1);
 
                     b.Property<bool>("StatusProduct")
                         .HasColumnType("bit");

@@ -2,7 +2,7 @@
 
 namespace figma.Migrations
 {
-    public partial class InitialCreate15 : Migration
+    public partial class InitialCreate22 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

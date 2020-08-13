@@ -10,8 +10,8 @@ using figma.Data;
 namespace figma.Migrations
 {
     [DbContext(typeof(ShopProductContext))]
-    [Migration("20200811021647_InitialCreate18")]
-    partial class InitialCreate18
+    [Migration("20200813033020_InitialCreate22")]
+    partial class InitialCreate22
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

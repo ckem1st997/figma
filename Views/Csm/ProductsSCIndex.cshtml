@@ -1,0 +1,59 @@
+﻿@model IEnumerable<figma.Models.ProductSizeColor>
+
+@{
+    ViewData["Title"] = "ProductsSCIndex";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@{
+    if (TempData["StatusMessage"] != null)
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            Message: @TempData["StatusMessage"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+}
+
+<p>
+    <a asp-action="ProductsSCCreate">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Color)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Size)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Color.NameColor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Size.SizeProduct)
+                </td>
+                <td>
+                    <a asp-action="ProductsSCEdit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="ProductsSCDetails" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="ProductsSCDelete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

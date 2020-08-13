@@ -35,7 +35,8 @@ namespace figma.Models
         [Display(Name = "Danh mục sản phẩm")]
         public int ProductCategorieID { get; set; }
 
-
+        
+        [Required(ErrorMessage ="Bạn chưa nhập thông tin")]
         [Display(Name = "Số lượng")]
         public int Quantity { get; set; }
 
@@ -45,7 +46,7 @@ namespace figma.Models
         public string Factory { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Bạn chưa nhập thông tin")]
         [Display(Name = "Giá")]
         [DataType(DataType.Currency)]
         [Column(TypeName = "decimal(18, 0)")]
@@ -53,6 +54,7 @@ namespace figma.Models
 
 
 
+        [Required(ErrorMessage = "Bạn chưa nhập thông tin")]
         [Display(Name = "Giá khuyến mãi")]
         [DataType(DataType.Currency)]
         [Column(TypeName = "decimal(18, 0)")]
@@ -64,6 +66,7 @@ namespace figma.Models
         public string QuyCach { get; set; }
 
 
+        [Required(ErrorMessage = "Bạn chưa nhập thông tin")]
         [Display(Name = "Thứ tự hiển thị")]
         public int Sort { get; set; }
 

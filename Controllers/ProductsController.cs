@@ -207,7 +207,9 @@ namespace figma.Controllers
         {
             if (id != products.ProductID)
             {
-                return NotFound();
+                TempData["result"] = "Lỗi thao tác, xin vui lòng thử lại !";
+                return RedirectToAction(nameof(Index));
+
             }
 
             if (ModelState.IsValid)

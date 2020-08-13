@@ -18,11 +18,10 @@
     }
 }
 
-
 <h1>Danh sách sản phẩm</h1>
 
 <p>
-    <a class="btn btn-success" asp-action="Create">Thêm mới sản phẩm</a>
+    <a class="btn btn-success" asp-action="ProductsCreate">Thêm mới sản phẩm</a>
 </p>
 <table class="table text-center">
     <thead>
@@ -90,17 +89,17 @@
                         @Html.DisplayFor(modelItem => item.CreateBy)
                 </td>
                 <td>
-                    <a class="btn btn-success mb-2" asp-action="Details" asp-route-id="@item.ProductID">Thông tin</a>
+                    <a class="btn btn-success mb-2 d-none" asp-action="Details" asp-route-id="@item.ProductID">Thông tin</a>
                     <br />
-                    <a class="btn btn-primary mb-2" asp-action="Edit" asp-route-id="@item.ProductID">Chỉnh sửa</a>
+                    <a class="btn btn-primary mb-2" asp-action="ProductsEdit" asp-route-id="@item.ProductID">Chỉnh sửa</a>
                     <br />
-                    <a class="btn btn-warning mb-2" asp-action="IndexSC" asp-route-idsp="@item.ProductID">Size, Color</a>
+                    <a class="btn btn-warning mb-2" asp-action="ProductsSC" asp-route-idsp="@item.ProductID">Size, Color</a>
                     <br />
-                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ProductID">Xóa</a>
+                    <a class="btn btn-danger" asp-action="ProductsDelete" asp-route-id="@item.ProductID">Xóa</a>
 
                 </td>
             </tr>
-            @(i++)
+            <p class="d-none">@(i++)</p> 
         }
     </tbody>
 </table>
