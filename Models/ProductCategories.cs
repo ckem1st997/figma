@@ -37,7 +37,7 @@ namespace figma.Models
 
 
         [Required(ErrorMessage = "Bạn chưa nhập thông tin")]
-        [Display(Name ="Thứ tự"), RegularExpression(@"\d+", ErrorMessage = "Chỉ nhập số nguyên dương")]   
+        [Display(Name ="Thứ tự")]   
         public int Soft { get; set; }
 
 

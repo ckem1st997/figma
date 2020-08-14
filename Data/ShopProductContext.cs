@@ -65,214 +65,25 @@ namespace figma.Data
             modelBuilder.Entity<OrderDetails>().HasKey(t => new { t.OrdersID, t.ProductID });
             modelBuilder.Entity<OrderDetails>().HasOne(pt => pt.Orders).WithMany(p => p.OrderDetails).HasForeignKey(pt => pt.OrdersID).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<OrderDetails>().HasOne(pt => pt.Products).WithMany(p => p.OrderDetails).HasForeignKey(pt => pt.ProductID).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
-
             modelBuilder.Entity<ProductSizeColor>().HasOne(p => p.Color).WithMany(b => b.ProductSizeColors).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
-
             modelBuilder.Entity<ProductSizeColor>().HasOne(p => p.Size).WithMany(b => b.ProductSizeColors).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
-
             modelBuilder.Entity<Articles>().HasOne(p => p.ArticleCategories).WithMany(b => b.Articles).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<Carts>().HasKey(h => h.RecordID);
             modelBuilder.Entity<Carts>().HasOne(p => p.Products).WithMany(b => b.Carts).HasForeignKey(p => p.ProductID).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
-
-
             modelBuilder.Entity<Collection>().HasKey(h => h.CollectionID);
-            modelBuilder.Entity<Collection>().Property(p=>p.CreateDate).HasDefaultValueSql("getdate()");
+            modelBuilder.Entity<Collection>().Property(p => p.CreateDate).HasDefaultValueSql("getdate()");
             modelBuilder.Entity<Products>().HasOne(p => p.Collection).WithMany(b => b.Products).HasForeignKey(p => p.CollectionID).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
-
             modelBuilder.Entity<ReviewProduct>().HasOne(p => p.Products).WithMany(b => b.ReviewProducts).HasForeignKey(p => p.ProductId).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
-
             modelBuilder.Entity<ProductCategories>().HasKey(p => p.ProductCategorieID);
 
-
             modelBuilder.Entity<Products>().HasOne(p => p.ProductCategories).WithMany(b => b.Products).HasForeignKey(p => p.ProductCategorieID).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
-
-
             modelBuilder.Entity<ProductLike>().HasOne(p => p.Members).WithMany(b => b.ProductLikes).HasForeignKey(p => p.MemberId).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<Products>().Property(p => p.CreateDate).HasDefaultValueSql("getdate()");
             modelBuilder.Entity<Products>().Property(p => p.CreateBy).HasDefaultValue("admin");
             modelBuilder.Entity<Products>().Property(p => p.Sort).HasDefaultValue(1);
             modelBuilder.Entity<ProductCategories>().Property(p => p.ParentId).HasDefaultValue(null);
 
-
-
-
-
-            //modelBuilder.Entity<Carts>().HasOne(p => p.Products).WithMany(b => b.Carts).HasForeignKey(p=>p.ProductID).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
-
-
-
-            //     modelBuilder.Entity<ProductSize>().ToTable("ProductSize").Property(a => a.SizeID);
-            //     modelBuilder.Entity<Test>().Property(t => t.ngayTao).HasDefaultValueSql("getdate()");
-            //     modelBuilder.Entity<Test>().Property(t => t.ngayUpdate).HasDefaultValueSql("getdate()");
-            //     modelBuilder.Entity<Product>().Property(t => t.CreatedDate).HasDefaultValueSql("getdate()");
-            //     modelBuilder.Entity<Product>().Property(t => t.ModifiedDate).HasDefaultValueSql("getdate()");
-            //     modelBuilder.Entity<Product>().Property(t => t.Status).HasDefaultValue(1);
-
-            //     modelBuilder.Entity<ProductCategory>().Property(t => t.CreatedDate).HasDefaultValueSql("getdate()");
-            //     modelBuilder.Entity<ProductCategory>().Property(t => t.Status).HasDefaultValue(1);
-
-            //     modelBuilder.Entity<ProductCategory>().Property(t => t.Status).HasDefaultValue(1);
-            //     modelBuilder.Entity<ProductCategory>().Property(t => t.ShowOnHome).HasDefaultValue(1);
-            ////     modelBuilder.Entity<ProductCategory>().Property(t => t.ModifiedDate).HasDefaultValueSql("getdate()");
-            //     modelBuilder.Entity<About>().ToTable("About")
-            //         .Property(e => e.MetaTitle)
-            //         .IsUnicode(true);
-
-            //     modelBuilder.Entity<About>().ToTable("About")
-            //         .Property(e => e.CreatedBy)
-            //         .IsUnicode(false);
-
-            //     modelBuilder.Entity<About>().ToTable("About")
-            //         .Property(e => e.ModifiedBy)
-            //         .IsUnicode(false);
-
-            //     modelBuilder.Entity<About>().ToTable("About")
-            //         .Property(e => e.MetaDescriptions)
-            //         .IsFixedLength();
-
-            //     modelBuilder.Entity<Category>().ToTable("Category")
-            //         .Property(e => e.MetaTitle)
-            //         .IsUnicode(true);
-
-            //     modelBuilder.Entity<Category>().ToTable("Category")
-            //         .Property(e => e.CreatedBy)
-            //         .IsUnicode(false);
-
-            //     modelBuilder.Entity<Category>().ToTable("Category")
-            //         .Property(e => e.ModifiedBy)
-            //         .IsUnicode(false);
-
-            //     modelBuilder.Entity<Category>().ToTable("Category")
-            //         .Property(e => e.MetaDescriptions)
-            //         .IsFixedLength();
-
-            //     modelBuilder.Entity<Content>().ToTable("Content")
-            //         .Property(e => e.MetaTitle)
-            //         .IsUnicode(true);
-
-            //     modelBuilder.Entity<Content>().ToTable("Content")
-            //         .Property(e => e.CreatedBy)
-            //         .IsUnicode(false);
-
-            //     modelBuilder.Entity<Content>().ToTable("Content")
-            //         .Property(e => e.ModifiedBy)
-            //         .IsUnicode(false);
-
-            //     modelBuilder.Entity<Content>().ToTable("ContentContentTag")
-            //         .Property(e => e.MetaDescriptions)
-            //         .IsFixedLength();
-
-            //     modelBuilder.Entity<ContentTag>().ToTable("ContentTag")
-            //         .Property(e => e.TagID).IsUnicode(false);
-            //     modelBuilder.Entity<ContentTag>().HasKey(t => new { t.ContentID, t.TagID });
-
-            //     modelBuilder.Entity<Footer>().ToTable("Footer")
-            //         .Property(e => e.FooterID)
-            //         .IsUnicode(false);
-
-            //     modelBuilder.Entity<Order>().ToTable("Order")
-            //         .Property(e => e.ShipMobile)
-            //         .IsUnicode(false);
-
-            //     modelBuilder.Entity<OrderDetail>().ToTable("OrderDetail")
-            //         .Property(e => e.Price);
-            //     modelBuilder.Entity<OrderDetail>().ToTable("OrderDetail")
-            //   .HasKey(t => new { t.ProductID, t.OrderID });
-
-            //     modelBuilder.Entity<Product>().ToTable("Product")
-            //         .Property(e => e.ProductCode)
-            //         .IsUnicode(false);
-
-            //     modelBuilder.Entity<Product>().ToTable("Product")
-            //         .Property(e => e.MetaTitle)
-            //         .IsUnicode(true);
-
-            //     modelBuilder.Entity<Product>().ToTable("Product")
-            //         .Property(e => e.Price);
-
-            //     modelBuilder.Entity<Product>().ToTable("Product")
-            //         .Property(e => e.PromotionPrice);
-
-            //     modelBuilder.Entity<Product>().ToTable("Product")
-            //         .Property(e => e.CreatedBy)
-            //         .IsUnicode(false);
-
-            //     modelBuilder.Entity<Product>().ToTable("Product")
-            //         .Property(e => e.ModifiedBy)
-            //         .IsUnicode(false);
-
-            //     modelBuilder.Entity<Product>().ToTable("Product")
-            //         .Property(e => e.MetaDescriptions)
-            //         .IsFixedLength();
-
-            //     modelBuilder.Entity<ProductCategory>().ToTable("ProductCategory")
-            //         .Property(e => e.MetaTitle)
-            //         .IsUnicode(true);
-
-            //     modelBuilder.Entity<ProductCategory>().ToTable("ProductCategory")
-            //         .Property(e => e.CreatedBy)
-            //         .IsUnicode(false);
-
-            //     modelBuilder.Entity<ProductCategory>().ToTable("ProductCategory")
-            //         .Property(e => e.ModifiedBy)
-            //         .IsUnicode(false);
-
-            //     modelBuilder.Entity<ProductCategory>().ToTable("ProductCategory")
-            //         .Property(e => e.MetaDescriptions)
-            //         .IsFixedLength();
-
-            //     modelBuilder.Entity<Slide>().ToTable("Slide")
-            //         .Property(e => e.CreatedBy)
-            //         .IsUnicode(false);
-
-            //     modelBuilder.Entity<Slide>().ToTable("Slide")
-            //         .Property(e => e.ModifiedBy)
-            //         .IsUnicode(false);
-
-            //     modelBuilder.Entity<SystemConfig>().ToTable("SystemConfig")
-            //         .Property(e => e.ConfigID)
-            //         .IsUnicode(false);
-
-            //     modelBuilder.Entity<SystemConfig>().ToTable("SystemConfig")
-            //         .Property(e => e.Type)
-            //         .IsUnicode(false);
-
-            //     modelBuilder.Entity<SystemConfig>().ToTable("SystemConfig")
-            //         .HasNoKey();
-
-            //     modelBuilder.Entity<Tag>().ToTable("Tag")
-            //         .Property(e => e.TagID)
-            //         .IsUnicode(false);
-
-            //     modelBuilder.Entity<User>().ToTable("User")
-            //         .Property(e => e.UserName)
-            //         .IsUnicode(false);
-
-            //     modelBuilder.Entity<User>().ToTable("User")
-            //         .Property(e => e.Password)
-            //         .IsUnicode(false);
-
-            //     modelBuilder.Entity<User>().ToTable("User")
-            //         .Property(e => e.CreatedBy)
-            //         .IsUnicode(false);
-
-            //     modelBuilder.Entity<User>().ToTable("User")
-            //         .Property(e => e.ModifiedBy)
-            //         .IsUnicode(false);
         }
-
-
-        //public DbSet<> Students { get; set; }
-        //public DbSet<Enrollment> Enrollments { get; set; }
-        //public DbSet<Course> Courses { get; set; }
-
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<Course>().ToTable("Course");
-        //    modelBuilder.Entity<Enrollment>().ToTable("Enrollment");
-        //    modelBuilder.Entity<Student>().ToTable("Student");
-        //}
-
 
     }
 }

@@ -42,7 +42,7 @@ namespace figma.Models
 
 
         [Display(Name = "Xuất xứ")]
-        [MaxLength(500)]
+        [MaxLength(501)]
         public string Factory { get; set; }
 
 
@@ -51,7 +51,6 @@ namespace figma.Models
         [DataType(DataType.Currency)]
         [Column(TypeName = "decimal(18, 0)")]
         public decimal Price { get; set; }
-
 
 
         [Required(ErrorMessage = "Bạn chưa nhập thông tin")]
@@ -125,8 +124,6 @@ namespace figma.Models
         public virtual List<TagProducts> TagProducts { get; set; }
 
         public virtual List<OrderDetails> OrderDetails { get; set; }
-
-        //public virtual List<ProductSizeColor> ProductSizeColors { get; set; }
 
         public virtual List<Carts> Carts { get; set; }
 

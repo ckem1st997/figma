@@ -5,9 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using figma.Data;
 using figma.Models;
+using figma.OutFile;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
 
 namespace figma.Controllers
@@ -803,8 +805,337 @@ namespace figma.Controllers
 
         #region SpecialCategory (Tag)
 
+        public async Task<ActionResult> ListSpecialCategory()
+        {
+
+            return View(await _context.Tags.AsQueryable().OrderBy(a => a.Soft).ToListAsync());
+        }
+        public IActionResult SpecialCategory()
+        {
+            var tags = from a in _context.Tags
+                       orderby a.Soft ascending
+                       select a;
+            ViewBag.Tags = tags;
+            return View();
+        }
 
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SpecialCategory([Bind("TagID,Name,Soft,Active")] Tags tags)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(tags);
+                await _context.SaveChangesAsync();
+                TempData["result"] = "Thêm thành công ";
+                return RedirectToAction(nameof(SpecialCategory));
+            }
+            return View(tags);
+        }
+
+        // GET: Tags/Edit/5
+        public async Task<IActionResult> SpecialCategoryEdit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var tags = await _context.Tags.FindAsync(id);
+            if (tags == null)
+            {
+                return NotFound();
+            }
+            return View(tags);
+        }
+
+        // POST: Tags/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SpecialCategoryEdit(int id, [Bind("TagID,Name,Soft,Active")] Tags tags)
+        {
+            if (id != tags.TagID)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(tags);
+                    await _context.SaveChangesAsync();
+                    TempData["result"] = "Chỉnh sửa thành công ";
+
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!TagsExists(tags.TagID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(SpecialCategory));
+            }
+            return View(tags);
+        }
+
+        // GET: Tags/Delete/5
+        public async Task<IActionResult> SpecialCategoryDelete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var tags = await _context.Tags
+                .FirstOrDefaultAsync(m => m.TagID == id);
+            if (tags == null)
+            {
+                return NotFound();
+            }
+
+            return View(tags);
+        }
+
+        // POST: Tags/Delete/5
+        [HttpPost, ActionName("SpecialCategoryDelete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed5(int id)
+        {
+            var tags = await _context.Tags.FindAsync(id);
+            _context.Tags.Remove(tags);
+            await _context.SaveChangesAsync();
+            TempData["result"] = "Xóa thành công";
+
+            return RedirectToAction(nameof(SpecialCategory));
+        }
+
+        private bool TagsExists(int id)
+        {
+            return _context.Tags.Any(e => e.TagID == id);
+        }
+
+
+        #endregion
+
+        #region ProductsTags
+        public IActionResult SpecialCategoryProducts()
+        {
+            ViewBag.Tp = _context.TagProducts.Include(t => t.Products).Include(t => t.Tags);
+            ViewData["ProductID"] = new SelectList(_context.Products, "ProductID", "Name");
+            ViewData["TagID"] = new SelectList(_context.Tags, "TagID", "Name");
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SpecialCategoryProducts([Bind("TagID,ProductID")] TagProducts tagProducts)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(tagProducts);
+                await _context.SaveChangesAsync();
+                TempData["result"] = "Tạo thành công !";
+                return RedirectToAction(nameof(SpecialCategoryProducts));
+            }
+            ViewData["ProductID"] = new SelectList(_context.Products, "ProductID", "Name", tagProducts.ProductID);
+            ViewData["TagID"] = new SelectList(_context.Tags, "TagID", "Name", tagProducts.TagID);
+            TempData["result"] = "Tạo thất bại !";
+            return View(tagProducts);
+        }
+
+        //public async Task<IActionResult> SpecialCategoryProductsEdit(int? ido, int? idt)
+        //{
+        //    if (ido == null||idt==null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    ViewData["ProductID"] = new SelectList(_context.Products, "ProductID", "Description", idt);
+        //    ViewData["TagID"] = new SelectList(_context.Tags, "TagID", "Name", ido);
+        //    return View();
+        //}
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> SpecialCategoryProductsEdit(int? ido, int? idt, [Bind("TagID,ProductID")] TagProducts tagProducts)
+        //{
+        //    if (id != tagProducts.ProductID)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            _context.Update(tagProducts);
+        //            await _context.SaveChangesAsync();
+        //            TempData["result"] = "Thành công !";
+        //        }
+        //        catch (DbUpdateConcurrencyException)
+        //        {
+        //            if (!TagProductsExists(tagProducts.ProductID))
+        //            {
+        //                return NotFound();
+        //            }
+        //            else
+        //            {
+        //                throw;
+        //            }
+        //        }
+        //        return RedirectToAction(nameof(SpecialCategoryProducts));
+        //    }
+        //    ViewData["ProductID"] = new SelectList(_context.Products, "ProductID", "Name", tagProducts.ProductID);
+        //    ViewData["TagID"] = new SelectList(_context.Tags, "TagID", "Name", tagProducts.TagID);
+        //    return View(tagProducts);
+        //}
+
+        // GET: TagProducts/Delete/5
+        public async Task<IActionResult> SpecialCategoryProductsDelete(int? ido, int? idt)
+        {
+            if (ido == null || idt == null)
+            {
+                return NotFound();
+            }
+            ViewBag.id1 = ido;
+            ViewBag.id2 = idt;
+            return View();
+        }
+
+        // POST: TagProducts/Delete/5
+        [HttpPost]
+        public bool SpecialCategoryProductsDeleteConfirmed(int id1, int id2)
+        {
+            if (id1 == null || id2 == null)
+            {
+                return false;
+            }
+            var tagProducts = _context.TagProducts.Where(a => a.TagID == id1 && a.ProductID == id2).FirstOrDefault();
+            _context.TagProducts.Remove(tagProducts);
+            _context.SaveChanges();
+            //  TempData["result"] = "Thành công !";
+            return true;
+        }
+
+        private bool TagProductsExists(int id)
+        {
+            return _context.TagProducts.Any(e => e.ProductID == id);
+        }
+        #endregion
+
+        #region AticleCategories
+
+        public IActionResult ArticleCategories()
+        {
+            ViewBag.atgory = from a in _context.ArticleCategories
+                                    orderby a.CategorySort ascending
+                                    select a;
+            return View();
+        }
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ArticleCategories([Bind("ArticleCategorieID,CategoryName,Link,CategorySort,CategoryActive,ParentId,ShowHome,ShowMenu,Slug,Hot,TitleMeta,DescriptionMeta")] ArticleCategories articleCategories)
+        {
+            if (ModelState.IsValid)
+            {
+                SlugCovert slug = new SlugCovert();
+                articleCategories.Slug =slug.GenerateSlug(articleCategories.CategoryName);
+                _context.Add(articleCategories);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(ArticleCategories));
+            }
+            return View(articleCategories);
+        }
+        public async Task<IActionResult> ArticleCategoriesEdit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var articleCategories = await _context.ArticleCategories.FindAsync(id);
+            if (articleCategories == null)
+            {
+                return NotFound();
+            }
+            return View(articleCategories);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ArticleCategoriesEdit(int id, [Bind("ArticleCategorieID,CategoryName,Link,CategorySort,CategoryActive,ParentId,ShowHome,ShowMenu,Slug,Hot,TitleMeta,DescriptionMeta")] ArticleCategories articleCategories)
+        {
+            if (id != articleCategories.ArticleCategorieID)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(articleCategories);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ArticleCategoriesExists(articleCategories.ArticleCategorieID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(ArticleCategories));
+            }
+            return View(articleCategories);
+        }
+        public async Task<IActionResult> ArticleCategoriesDelete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var articleCategories = await _context.ArticleCategories
+                .FirstOrDefaultAsync(m => m.ArticleCategorieID == id);
+            if (articleCategories == null)
+            {
+                return NotFound();
+            }
+
+            return View(articleCategories);
+        }
+
+        [HttpPost, ActionName("ArticleCategoriesDelete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ArticleCategoriesDeleteConfirmed(int id)
+        {
+            var articleCategories = await _context.ArticleCategories.FindAsync(id);
+            _context.ArticleCategories.Remove(articleCategories);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(ArticleCategories));
+        }
+
+        private bool ArticleCategoriesExists(int id)
+        {
+            return _context.ArticleCategories.Any(e => e.ArticleCategorieID == id);
+        }
 
         #endregion
 

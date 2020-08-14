@@ -1,0 +1,40 @@
+﻿@model figma.Models.Tags
+
+@{
+    ViewData["Title"] = "SpecialCategoryDelete";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>SpecialCategoryDelete</h1>
+
+<h3>Bạn có muốn xóa ?</h3>
+<div>
+    <h4>Tags</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Soft)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Soft)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+    </dl>
+    
+    <form asp-action="SpecialCategoryDelete">
+        <input type="hidden" asp-for="TagID" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="SpecialCategory">Back to List</a>
+    </form>
+</div>

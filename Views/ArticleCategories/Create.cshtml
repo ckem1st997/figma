@@ -1,0 +1,81 @@
+﻿@model figma.Models.ArticleCategories
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>ArticleCategories</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CategoryName" class="control-label"></label>
+                <input asp-for="CategoryName" class="form-control" />
+                <span asp-validation-for="CategoryName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Link" class="control-label"></label>
+                <input asp-for="Link" class="form-control" />
+                <span asp-validation-for="Link" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CategorySort" class="control-label"></label>
+                <input asp-for="CategorySort" class="form-control" />
+                <span asp-validation-for="CategorySort" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CategoryActive" class="control-label"></label>
+                <input asp-for="CategoryActive" class="form-control" />
+                <span asp-validation-for="CategoryActive" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ParentId" class="control-label"></label>
+                <input asp-for="ParentId" class="form-control" />
+                <span asp-validation-for="ParentId" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="ShowHome" /> @Html.DisplayNameFor(model => model.ShowHome)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="ShowMenu" /> @Html.DisplayNameFor(model => model.ShowMenu)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Slug" class="control-label"></label>
+                <input asp-for="Slug" class="form-control" />
+                <span asp-validation-for="Slug" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Hot" /> @Html.DisplayNameFor(model => model.Hot)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="TitleMeta" class="control-label"></label>
+                <input asp-for="TitleMeta" class="form-control" />
+                <span asp-validation-for="TitleMeta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DescriptionMeta" class="control-label"></label>
+                <input asp-for="DescriptionMeta" class="form-control" />
+                <span asp-validation-for="DescriptionMeta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

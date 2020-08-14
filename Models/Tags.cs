@@ -28,5 +28,6 @@ namespace figma.Models
         public bool Active { get; set; }
 
         public virtual List<TagProducts> TagProducts { get; set; }
+
     }
 }

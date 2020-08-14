@@ -21,17 +21,17 @@ namespace figma.Models
 
 
         [MaxLength(500)]
-        [DataType(DataType.Url)]
+
         [Display(Name = "Đường dẫn")]
         public string Link { get; set; }
 
 
-        [Display(Name = "Sắp xếp danh mục")]
+        [Display(Name = "Thứ tự")]
         public int CategorySort { get; set; }
 
 
-        [Display(Name = "Kích hoạt")]
-        public int CategoryActive { get; set; }
+        [Display(Name = "Hoạt động")]
+        public bool CategoryActive { get; set; }
 
 
         public int ParentId { get; set; }
@@ -45,7 +45,7 @@ namespace figma.Models
         public bool ShowMenu { get; set; }
 
 
-        [Display(Name = "Dường dẫn")]
+        [Display(Name = "Đường dẫn")]
         [MaxLength(100)]
         public string Slug { get; set; }
 
@@ -54,12 +54,12 @@ namespace figma.Models
         public bool Hot { get; set; }
 
 
-        [Display(Name ="Tiêu đề")]
+        [Display(Name ="Thẻ tiêu đề")]
         [MaxLength(100)]
         public string TitleMeta { get; set; }
 
 
-        [Display(Name ="Miêu tả")]
+        [Display(Name ="Thẻ mô tả")]
         [MaxLength(500)]
         public string DescriptionMeta { get; set; }
 

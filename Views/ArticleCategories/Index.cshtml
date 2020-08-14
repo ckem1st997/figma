@@ -1,0 +1,96 @@
+﻿@model IEnumerable<figma.Models.ArticleCategories>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Link)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategorySort)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryActive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParentId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShowHome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShowMenu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Slug)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hot)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TitleMeta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescriptionMeta)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Link)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategorySort)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParentId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShowHome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShowMenu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Slug)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hot)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TitleMeta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescriptionMeta)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ArticleCategorieID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ArticleCategorieID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ArticleCategorieID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
