@@ -176,7 +176,7 @@ namespace figma.Controllers
                 return RedirectToAction(nameof(ListProducts));
             }
 
-            ViewData["CollectionID"] = new SelectList(_context.Collections, "CollectionID", "CollectionID", products.CollectionID);
+            ViewData["CollectionID"] = new SelectList(_context.Collections, "CollectionID", "Name", products.CollectionID);
             ViewData["ProductCategorieID"] = new SelectList(_context.ProductCategories, "ProductCategorieID", "Name", products.ProductCategorieID);
             return View(products);
         }
@@ -229,7 +229,7 @@ namespace figma.Controllers
                 }
                 return RedirectToAction(nameof(ListProducts));
             }
-            ViewData["CollectionID"] = new SelectList(_context.Collections, "CollectionID", "CollectionID", products.CollectionID);
+            ViewData["CollectionID"] = new SelectList(_context.Collections, "CollectionID", "Name", products.CollectionID);
             ViewData["ProductCategorieID"] = new SelectList(_context.ProductCategories, "ProductCategorieID", "Name", products.ProductCategorieID);
             return View(products);
         }
@@ -564,6 +564,8 @@ namespace figma.Controllers
                 TempData["result"] = "Thêm thành công ";
                 return RedirectToAction(nameof(ProductCategoriesCreate));
             }
+            ViewData["ParentId"] = new SelectList(_context.ProductCategories, "ProductCategorieID", "Name");
+
             ViewBag.Productcato = await _context.ProductCategories.ToArrayAsync();
 
             return View(productCategories);
@@ -1056,54 +1058,7 @@ namespace figma.Controllers
             return View(tagProducts);
         }
 
-        //public async Task<IActionResult> SpecialCategoryProductsEdit(int? ido, int? idt)
-        //{
-        //    if (ido == null||idt==null)
-        //    {
-        //        return NotFound();
-        //    }
 
-        //    ViewData["ProductID"] = new SelectList(_context.Products, "ProductID", "Description", idt);
-        //    ViewData["TagID"] = new SelectList(_context.Tags, "TagID", "Name", ido);
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> SpecialCategoryProductsEdit(int? ido, int? idt, [Bind("TagID,ProductID")] TagProducts tagProducts)
-        //{
-        //    if (id != tagProducts.ProductID)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            _context.Update(tagProducts);
-        //            await _context.SaveChangesAsync();
-        //            TempData["result"] = "Thành công !";
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            if (!TagProductsExists(tagProducts.ProductID))
-        //            {
-        //                return NotFound();
-        //            }
-        //            else
-        //            {
-        //                throw;
-        //            }
-        //        }
-        //        return RedirectToAction(nameof(SpecialCategoryProducts));
-        //    }
-        //    ViewData["ProductID"] = new SelectList(_context.Products, "ProductID", "Name", tagProducts.ProductID);
-        //    ViewData["TagID"] = new SelectList(_context.Tags, "TagID", "Name", tagProducts.TagID);
-        //    return View(tagProducts);
-        //}
-
-        // GET: TagProducts/Delete/5
         public async Task<IActionResult> SpecialCategoryProductsDelete(int? ido, int? idt)
         {
             if (ido == null || idt == null)
@@ -1269,9 +1224,9 @@ namespace figma.Controllers
             {
                 articles.View = 1;
                 articles.CreateDate = DateTime.Now;
-                articles.Hot =true;
+                articles.Hot = true;
                 _context.Add(articles);
-                
+
                 await _context.SaveChangesAsync();
                 TempData["result"] = "Thành công";
 
@@ -1381,32 +1336,33 @@ namespace figma.Controllers
         #endregion
 
         #region Collection
-        // GET: Collections
-        public async Task<IActionResult> ListCollection()
+
+        public async Task<IActionResult> ListCollectionBST()
         {
-            return View(await _context.Collections.ToListAsync());
+            return View(await _context.Collections.OrderBy(p => p.CollectionID).ToListAsync());
         }
 
-        public IActionResult Create()
+        public IActionResult ListCollection()
         {
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CollectionID,Name,Description,Image,Body,Quantity,Factory,Price,Sort,Hot,Home,Active,TitleMeta,Content,StatusProduct,BarCode,CreateDate,CreateBy")] Collection collection)
+        public async Task<IActionResult> ListCollection([Bind("CollectionID,Name,Description,Image,Body,Quantity,Factory,Price,Sort,Hot,Home,Active,TitleMeta,Content,StatusProduct,BarCode,CreateDate,CreateBy")] Collection collection)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(collection);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                TempData["result"] = "Thành công";
+                return RedirectToAction(nameof(ListCollectionBST));
             }
             return View(collection);
         }
 
         // GET: Collections/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> ListCollectionEdit(int? id)
         {
             if (id == null)
             {
@@ -1426,7 +1382,7 @@ namespace figma.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CollectionID,Name,Description,Image,Body,Quantity,Factory,Price,Sort,Hot,Home,Active,TitleMeta,Content,StatusProduct,BarCode,CreateDate,CreateBy")] Collection collection)
+        public async Task<IActionResult> ListCollectionEdit(int id, [Bind("CollectionID,Name,Description,Image,Body,Quantity,Factory,Price,Sort,Hot,Home,Active,TitleMeta,Content,StatusProduct,BarCode,CreateDate,CreateBy")] Collection collection)
         {
             if (id != collection.CollectionID)
             {
@@ -1439,6 +1395,8 @@ namespace figma.Controllers
                 {
                     _context.Update(collection);
                     await _context.SaveChangesAsync();
+                    TempData["result"] = "Thành công";
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -1451,38 +1409,21 @@ namespace figma.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(ListCollectionBST));
             }
-            return View(collection);
-        }
-
-        // GET: Collections/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var collection = await _context.Collections
-                .FirstOrDefaultAsync(m => m.CollectionID == id);
-            if (collection == null)
-            {
-                return NotFound();
-            }
-
             return View(collection);
         }
 
         // POST: Collections/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed9(int id)
+        [HttpPost]
+        public bool ListCollectionDelete(int id)
         {
-            var collection = await _context.Collections.FindAsync(id);
+            if (id == null)
+                return false;
+            var collection = _context.Collections.Find(id);
             _context.Collections.Remove(collection);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            _context.SaveChanges();
+            return true;
         }
 
         private bool CollectionExists(int id)

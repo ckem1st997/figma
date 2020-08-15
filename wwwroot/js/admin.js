@@ -171,7 +171,7 @@ async function AJAXSubmitCreateOneT(oFormElement) {
         contentType: false,
         processData: false,
         success: function (data) {
-            //    console.log(data.imgNode);
+            //console.log(data.imgNode);
             if (data.imgNode.length > 0) {
                 var listimage = data.imgNode.split(",");
                 if (listimage.length > 1 || listimage != null) {

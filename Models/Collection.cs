@@ -25,7 +25,7 @@ namespace figma.Models
         public string Image { get; set; }
 
 
-        [Display(Name = "Nội dung ngắn")]
+        [Display(Name = "Nội dung")]
         public string Body { get; set; }
 
 
@@ -39,7 +39,7 @@ namespace figma.Models
 
 
         [Display(Name = "Giá")]
-        [Range(1, 100), DataType(DataType.Currency)]
+        [DataType(DataType.Currency)]
         [Column(TypeName = "decimal(18, 0)")]
         public decimal Price { get; set; }
 
@@ -52,7 +52,7 @@ namespace figma.Models
         public bool Hot { get; set; }
 
 
-        [Display(Name = "Hiển trang chủ")]
+        [Display(Name = "Hiển thị trang chủ")]
         public bool Home { get; set; }
 
 

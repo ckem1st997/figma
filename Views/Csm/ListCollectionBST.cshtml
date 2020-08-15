@@ -1,0 +1,101 @@
+﻿@model IEnumerable<figma.Models.Collection>
+
+@{
+    ViewData["Title"] = "ListCollectionBST";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>Danh sách bộ sưu tập</h1>
+@{
+    if (TempData["result"] != null)
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            Message: @TempData["result"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+}
+<p>
+    <a asp-action="ListCollection">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                STT
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+
+            <th>
+                Hình ảnh
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Active)
+            </th>
+
+            <th>
+                Thao tác
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CollectionID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @if (item.Image.Contains("https"))
+                    {
+                        <img src="@item.Image" asp-append-version="true" width="80" height="80" />
+                    }
+                    else
+                    {
+                        <img src="/@item.Image" asp-append-version="true" width="80" height="80" />
+
+                    }
+                </td>
+
+                <td>
+                    @if (item.Active)
+                    {
+                        <span class="btn btn-danger">Hoạt động</span>
+                    }
+                    else
+                    {
+                        <span class="btn btn-danger">Chưa Active</span>
+
+                    }
+                </td>
+                <td>
+                    <a class="btn btn-success" asp-action="ListCollectionEdit" asp-route-id="@item.CollectionID">Edit</a> |
+                    <a class="btn btn-success" onclick="deleteLC(@item.CollectionID)">Delete</a>
+                    <script>
+                        function deleteLC(id) {
+                            if (confirm("Bạn có chắc chắn xóa không?")) {
+                                $.post("/Csm/ListCollectionDelete", { id: id }, function (data) {
+                                    if (data) {
+                                        if (confirm("Xóa thành công"))
+                                            window.location.assign('/Csm/ListCollectionBST')
+                                    } else {
+                                        alert("Quá trình thực hiện không thành công. Hãy thử lại");
+                                    }
+                                });
+                            }
+                        }
+                    </script>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
