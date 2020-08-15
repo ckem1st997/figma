@@ -18,7 +18,7 @@
 <hr />
 
 
-<form asp-controller="Products" asp-action="createImage" enctype="multipart/form-data" onchange="AJAXSubmitCreate(this);return false;" method="post">
+<form asp-controller="Csm" asp-action="createImage" enctype="multipart/form-data" onchange="AJAXSubmitCreate(this);return false;" method="post">
     <div class="form-group bg-white font-weight-bold">
         <div class="section-image-title d-flex justify-content-between">
             <p class="text-danger mt-3 mb-1">Ảnh sản phẩm</p>
@@ -159,9 +159,6 @@
             </div>
         </div>
     </div>
-
-
-
     <div class="form-group bg-white">
         <label asp-for="Body" class="control-label"></label>
         <div id="toolbar-container"></div>

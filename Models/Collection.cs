@@ -65,7 +65,7 @@ namespace figma.Models
         public string TitleMeta { get; set; }
 
 
-        [Display(Name = "Nội dung chi tiết")]
+        [Display(Name = "Nội dung")]
         public string Content { get; set; }
 
 

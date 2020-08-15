@@ -29,6 +29,6 @@ namespace figma.Models
         [Column(TypeName = "decimal(18, 0)")]
         public decimal Price { get; set; }
 
-
+ 
     }
 }

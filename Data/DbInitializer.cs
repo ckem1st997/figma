@@ -13,7 +13,7 @@ namespace figma.Data
             context.Database.EnsureCreated();
 
             // Look for any CategoryParents.
-            if (context.Collections.Any())
+            if (context.ProductCategories.Any())
             {
                 return;   // DB has been seeded
             }
@@ -33,18 +33,6 @@ namespace figma.Data
             }
             context.SaveChanges();
 
-            //var productcolor = new ProductSizeColor[]
-            //{
-            //new ProductSizeColor{ProductID=1,ColorID=1},
-            //new ProductSizeColor{ProductID=2,SizeID=1},
-            //new ProductSizeColor{ProductID=1,ColorID=1,SizeID=1},
-            //};
-            //foreach (ProductSizeColor s in productcolor)
-            //{
-            //    context.ProductSizeColors.Add(s);
-            //}
-            //context.SaveChanges()
-            //
             var size = new Size[]
             {
             new Size{SizeProduct="Không Size"},
@@ -77,9 +65,7 @@ namespace figma.Data
             //
             var productCategories = new ProductCategories[]
             {
-            new ProductCategories{Name="Váy",Soft=1,Home=false,Active=true,TitleMeta="Váy đẹp, rẻ 2019"},
-              new ProductCategories{Name="Váy Dạ Hội",ParentId=1,Soft=2,Home=false,Active=true,TitleMeta="Váy đẹp, rẻ 2019"},
-                new ProductCategories{Name="Váy Dài",ParentId=1,Soft=3,Home=false,Active=true,TitleMeta="Váy đẹp, rẻ 2019"},
+            new ProductCategories{Name="Váy",Image="https://ckeditor.com/apps/ckfinder/userfiles/files/Products/Rectangle%209.png",CoverImage="https://ckeditor.com/apps/ckfinder/userfiles/files/Products/Rectangle%209.png",Soft=1,Home=false,Active=true,TitleMeta="Váy đẹp, rẻ 2019"}
             };
             foreach (ProductCategories s in productCategories)
             {

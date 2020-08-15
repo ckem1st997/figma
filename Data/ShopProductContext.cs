@@ -67,7 +67,7 @@ namespace figma.Data
             modelBuilder.Entity<OrderDetails>().HasOne(pt => pt.Products).WithMany(p => p.OrderDetails).HasForeignKey(pt => pt.ProductID).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<ProductSizeColor>().HasOne(p => p.Color).WithMany(b => b.ProductSizeColors).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<ProductSizeColor>().HasOne(p => p.Size).WithMany(b => b.ProductSizeColors).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
-            modelBuilder.Entity<Articles>().HasOne(p => p.ArticleCategories).WithMany(b => b.Articles).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Articles>().HasOne(p => p.ArticleCategories).WithMany(b => b.Articles).HasForeignKey(py=>py.ArticleCategorieID).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<Carts>().HasKey(h => h.RecordID);
             modelBuilder.Entity<Carts>().HasOne(p => p.Products).WithMany(b => b.Carts).HasForeignKey(p => p.ProductID).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<Collection>().HasKey(h => h.CollectionID);

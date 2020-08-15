@@ -7,10 +7,14 @@ using figma.Data;
 using figma.Models;
 using figma.OutFile;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.ImageSharp.Processing;
 
 namespace figma.Controllers
 {
@@ -46,6 +50,106 @@ namespace figma.Controllers
 
         #region Products
 
+        [HttpPost]
+        public async Task<IActionResult> createImage(List<IFormFile> filesadd)
+        {
+            DateTime dateTime = DateTime.Now;
+            //  string createFolderDate = "" + dateTime.Year + "\\" + dateTime.Month + "\\" + dateTime.Day + "";
+            string createFolderDate = DateTime.Now.ToString("yyyy/MM/dd");
+            string path = _hostingEnvironment.WebRootPath + @"\uploads\" + createFolderDate + "";
+            Console.WriteLine(path);
+            try
+            {
+                if (Directory.Exists(path))
+                {
+                    Console.WriteLine("Path đã tồn tại !");
+                }
+                DirectoryInfo di = Directory.CreateDirectory(path);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("The process failed: {0}", e.ToString());
+            }
+            finally { }
+
+            // copy file
+            if (path == null)
+                path = "image";
+
+            if (filesadd == null || filesadd.Count == 0)
+                return Ok(new { imgNode = "" });
+            long size = filesadd.Sum(f => f.Length);
+            var filePaths = new List<string>();
+            string sql = "";
+            foreach (var formFile in filesadd)
+            {
+                if (FormFileExtensions.IsImage(formFile))
+                {
+                    if (formFile.Length > 0)
+                    {
+                        // full path to file in temp location
+                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "" + path + "");
+
+                        filePaths.Add(filePath);
+                        var randomname = DateTime.Now.ToFileTime() + Path.GetExtension(formFile.FileName);
+                        var fileNameWithPath = string.Concat(filePath, "\\", randomname);
+
+                        using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
+                        {
+                            await formFile.CopyToAsync(stream);
+                        }
+                        // resize
+                        using (Image<Rgba32> image = (Image<Rgba32>)Image.Load(fileNameWithPath))
+                        {
+                            image.Mutate(x => x.Resize(image.Width > 720 ? 720 : image.Width, image.Height > 822 ? 822 : image.Height));
+                            image.Save(fileNameWithPath);
+                        }
+
+                        if (sql.Length > 1)
+                            sql = "" + sql + ",uploads/" + createFolderDate + "/" + randomname + "";
+                        else
+                            sql = "uploads/" + createFolderDate + "/" + randomname + "";
+                        // sql = sql.Replace("\\", "/");
+
+                    }
+                }
+                else
+                    return Ok(new { imgNode = "" });
+            }
+            return Ok(new
+            {
+                imgNode = sql
+            });
+        }
+
+        //delete file
+
+        [HttpPost]
+        public async Task<IActionResult> deleteImage(string filesadd)
+        {
+            var result = false;
+            var h = filesadd;
+
+            if (filesadd != null)
+            {
+
+                String filepath = Path.Combine(_hostingEnvironment.WebRootPath, filesadd);
+                if (System.IO.File.Exists(filepath))
+                {
+                    System.IO.File.Delete(filepath);
+                    result = true;
+                }
+
+            }
+            else
+                return Ok(new { result = false, h });
+            return Ok(new
+            {
+                result
+            });
+        }
+
+        //
         public async Task<IActionResult> ListProducts()
         {
             var shopProductContext = _context.Products.Include(p => p.Collection).Include(p => p.ProductCategories);
@@ -586,7 +690,7 @@ namespace figma.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ColorCreate([Bind("ColorID,Code,NameColor")] Color color)
+        public async Task<IActionResult> ColorCreate([Bind("ColorID,Code,NameColor")] Models.Color color)
         {
             if (ModelState.IsValid)
             {
@@ -615,7 +719,7 @@ namespace figma.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ColorEdit(int id, [Bind("ColorID,Code,NameColor")] Color color)
+        public async Task<IActionResult> ColorEdit(int id, [Bind("ColorID,Code,NameColor")] Models.Color color)
         {
             if (id != color.ColorID)
             {
@@ -709,7 +813,7 @@ namespace figma.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SizeCreate([Bind("SizeID,SizeProduct")] Size size)
+        public async Task<IActionResult> SizeCreate([Bind("SizeID,SizeProduct")] Models.Size size)
         {
             if (ModelState.IsValid)
             {
@@ -738,7 +842,7 @@ namespace figma.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SizeEdit(int id, [Bind("SizeID,SizeProduct")] Size size)
+        public async Task<IActionResult> SizeEdit(int id, [Bind("SizeID,SizeProduct")] Models.Size size)
         {
             if (id != size.SizeID)
             {
@@ -1037,12 +1141,8 @@ namespace figma.Controllers
         public IActionResult ArticleCategories()
         {
             ViewBag.atgory = from a in _context.ArticleCategories
-                                    orderby a.CategorySort ascending
-                                    select a;
-            return View();
-        }
-        public IActionResult Create()
-        {
+                             orderby a.CategorySort ascending
+                             select a;
             return View();
         }
         [HttpPost]
@@ -1051,10 +1151,11 @@ namespace figma.Controllers
         {
             if (ModelState.IsValid)
             {
-                SlugCovert slug = new SlugCovert();
-                articleCategories.Slug =slug.GenerateSlug(articleCategories.CategoryName);
+                SlugCovert slugcv = new SlugCovert();
+                articleCategories.Slug = slugcv.UrlFriendly(articleCategories.CategoryName);
                 _context.Add(articleCategories);
                 await _context.SaveChangesAsync();
+                TempData["result"] = "Thành công";
                 return RedirectToAction(nameof(ArticleCategories));
             }
             return View(articleCategories);
@@ -1089,6 +1190,7 @@ namespace figma.Controllers
                 {
                     _context.Update(articleCategories);
                     await _context.SaveChangesAsync();
+                    TempData["result"] = "Thành công";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -1129,6 +1231,7 @@ namespace figma.Controllers
             var articleCategories = await _context.ArticleCategories.FindAsync(id);
             _context.ArticleCategories.Remove(articleCategories);
             await _context.SaveChangesAsync();
+            TempData["result"] = "Thành công";
             return RedirectToAction(nameof(ArticleCategories));
         }
 
@@ -1139,6 +1242,254 @@ namespace figma.Controllers
 
         #endregion
 
+        #region Aticle
+
+        public async Task<IActionResult> ListAticle()
+        {
+
+            return View(await _context.Articles.ToListAsync());
+        }
+
+        public IActionResult AticleCreate()
+        {
+            ViewBag.list = _context.Articles.ToList();
+            ViewData["ArticleCategorieID"] = new SelectList(_context.ArticleCategories, "ArticleCategorieID", "CategoryName");
+
+            return View();
+        }
+
+        // POST: Articles/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AticleCreate([Bind("ArticleID,Subject,Description,Body,Image,CreateDate,View,ArticleCategorieID,Active,Hot,Home,Url,TitleMeta,DescriptionMeta")] Articles articles)
+        {
+            if (ModelState.IsValid)
+            {
+                articles.View = 1;
+                articles.CreateDate = DateTime.Now;
+                articles.Hot =true;
+                _context.Add(articles);
+                
+                await _context.SaveChangesAsync();
+                TempData["result"] = "Thành công";
+
+                return RedirectToAction(nameof(ListAticle));
+            }
+            ViewBag.list = _context.Articles.ToList();
+            ViewData["ArticleCategorieID"] = new SelectList(_context.ArticleCategories, "ArticleCategorieID", "CategoryName");
+            return View(articles);
+        }
+
+        // GET: Articles/Edit/5
+        public async Task<IActionResult> ArticleEdit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var articles = await _context.Articles.FindAsync(id);
+            ViewData["ArticleCategorieID"] = new SelectList(_context.ArticleCategories, "ArticleCategorieID", "CategoryName");
+
+            if (articles == null)
+            {
+                return NotFound();
+            }
+            return View(articles);
+        }
+
+        // POST: Articles/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ArticleEdit(int id, [Bind("ArticleID,Subject,Description,Body,Image,CreateDate,View,ArticleCategorieID,Active,Hot,Home,Url,TitleMeta,DescriptionMeta")] Articles articles)
+        {
+            if (id != articles.ArticleID)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    articles.Hot = true;
+                    _context.Update(articles);
+                    await _context.SaveChangesAsync();
+                    TempData["result"] = "Thành công";
+
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ArticlesExists(articles.ArticleID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(ListAticle));
+            }
+            ViewData["ArticleCategorieID"] = new SelectList(_context.ArticleCategories, "ArticleCategorieID", "CategoryName");
+
+            return View(articles);
+        }
+
+        // GET: Articles/Delete/5
+        public async Task<IActionResult> ArticleDelete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var articles = await _context.Articles
+                .FirstOrDefaultAsync(m => m.ArticleID == id);
+            if (articles == null)
+            {
+                return NotFound();
+            }
+
+            return View(articles);
+        }
+
+
+
+        // POST: Articles/Delete/5
+        [HttpPost, ActionName("ArticleDelete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AticleDeleteConfirmed(int id)
+        {
+            var articles = await _context.Articles.FindAsync(id);
+            _context.Articles.Remove(articles);
+            await _context.SaveChangesAsync();
+            TempData["result"] = "Thành công";
+
+            return RedirectToAction(nameof(ListAticle));
+        }
+
+        private bool ArticlesExists(int id)
+        {
+            return _context.Articles.Any(e => e.ArticleID == id);
+        }
+
+        #endregion
+
+        #region Collection
+        // GET: Collections
+        public async Task<IActionResult> ListCollection()
+        {
+            return View(await _context.Collections.ToListAsync());
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("CollectionID,Name,Description,Image,Body,Quantity,Factory,Price,Sort,Hot,Home,Active,TitleMeta,Content,StatusProduct,BarCode,CreateDate,CreateBy")] Collection collection)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(collection);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(collection);
+        }
+
+        // GET: Collections/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var collection = await _context.Collections.FindAsync(id);
+            if (collection == null)
+            {
+                return NotFound();
+            }
+            return View(collection);
+        }
+
+        // POST: Collections/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("CollectionID,Name,Description,Image,Body,Quantity,Factory,Price,Sort,Hot,Home,Active,TitleMeta,Content,StatusProduct,BarCode,CreateDate,CreateBy")] Collection collection)
+        {
+            if (id != collection.CollectionID)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(collection);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!CollectionExists(collection.CollectionID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(collection);
+        }
+
+        // GET: Collections/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var collection = await _context.Collections
+                .FirstOrDefaultAsync(m => m.CollectionID == id);
+            if (collection == null)
+            {
+                return NotFound();
+            }
+
+            return View(collection);
+        }
+
+        // POST: Collections/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed9(int id)
+        {
+            var collection = await _context.Collections.FindAsync(id);
+            _context.Collections.Remove(collection);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool CollectionExists(int id)
+        {
+            return _context.Collections.Any(e => e.CollectionID == id);
+        }
+        #endregion
 
 
 

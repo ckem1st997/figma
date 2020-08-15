@@ -15,7 +15,7 @@ namespace figma.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.6")
+                .HasAnnotation("ProductVersion", "3.1.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -130,8 +130,8 @@ namespace figma.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CategoryActive")
-                        .HasColumnType("int");
+                    b.Property<bool>("CategoryActive")
+                        .HasColumnType("bit");
 
                     b.Property<string>("CategoryName")
                         .IsRequired()
@@ -187,9 +187,6 @@ namespace figma.Migrations
                     b.Property<int>("ArticleCategorieID")
                         .HasColumnType("int");
 
-                    b.Property<int>("ArticleCategoriesArticleCategorieID")
-                        .HasColumnType("int");
-
                     b.Property<string>("Body")
                         .HasColumnType("nvarchar(max)");
 
@@ -232,7 +229,7 @@ namespace figma.Migrations
 
                     b.HasKey("ArticleID");
 
-                    b.HasIndex("ArticleCategoriesArticleCategorieID");
+                    b.HasIndex("ArticleCategorieID");
 
                     b.ToTable("Articles");
                 });
@@ -656,6 +653,7 @@ namespace figma.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CoverImage")
+                        .IsRequired()
                         .HasColumnType("nvarchar(500)")
                         .HasMaxLength(500);
 
@@ -666,6 +664,7 @@ namespace figma.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Image")
+                        .IsRequired()
                         .HasColumnType("nvarchar(500)")
                         .HasMaxLength(500);
 
@@ -791,8 +790,8 @@ namespace figma.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Factory")
-                        .HasColumnType("nvarchar(500)")
-                        .HasMaxLength(500);
+                        .HasColumnType("nvarchar(501)")
+                        .HasMaxLength(501);
 
                     b.Property<string>("GiftInfo")
                         .HasColumnType("nvarchar(max)");
@@ -923,7 +922,8 @@ namespace figma.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
                     b.Property<int>("Soft")
                         .HasColumnType("int");
@@ -974,7 +974,7 @@ namespace figma.Migrations
                 {
                     b.HasOne("figma.Models.ArticleCategories", "ArticleCategories")
                         .WithMany("Articles")
-                        .HasForeignKey("ArticleCategoriesArticleCategorieID")
+                        .HasForeignKey("ArticleCategorieID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

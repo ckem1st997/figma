@@ -15,27 +15,27 @@ namespace figma.Models
 
 
         [Required(ErrorMessage = "Chưa nhập thông tin")]
-        [Display(Name = "Tên bài viết")]
+        [Display(Name = "Tiêu đề")]
         [MaxLength(100)]
         public string Subject { get; set; }
 
 
         [Required(ErrorMessage = "Chưa nhập thông tin")]
-        [Display(Name = "Nội dung")]
+        [Display(Name = "Trích dẫn ngắn")]
         [MaxLength(500)]
         public string Description { get; set; }
 
 
-        [Display(Name ="Mã Html")]
+        [Display(Name = "Nội dung")]
         public string Body { get; set; }
 
 
-        [Display(Name ="Hình ảnh")]
+        [Display(Name = "Hình ảnh đại diện")]
         public string Image { get; set; }
 
 
         [DataType(DataType.DateTime)]
-        [Display(Name ="Ngày tạo")]
+        [Display(Name = "Ngày tạo")]
         public DateTime CreateDate { get; set; }
 
 
@@ -43,10 +43,12 @@ namespace figma.Models
         public int View { get; set; }
 
 
+        [Required]
+        [Display(Name = "Danh mục bài viết")]
         public int ArticleCategorieID { get; set; }
 
 
-        [Display(Name ="Kích hoạt")]
+        [Display(Name = "Hoạt động")]
         public bool Active { get; set; }
 
 
@@ -54,26 +56,26 @@ namespace figma.Models
         public bool Hot { get; set; }
 
 
-        [Display(Name ="Hiển thị trang chủ")]
+        [Display(Name = "Hiển thị trang chủ")]
         public bool Home { get; set; }
 
 
-        [Display(Name = "Dường dẫn")]
+        [Display(Name = "Đường dẫn")]
         [MaxLength(300)]
         [DataType(DataType.Url)]
         public string Url { get; set; }
 
 
-        [Display(Name = "Tiêu đề")]
+        [Display(Name = "Thẻ tiêu đề")]
         [MaxLength(100)]
         public string TitleMeta { get; set; }
 
 
-        [Display(Name = "Miêu tả")]
+        [Display(Name = "Thẻ mô tả")]
         [MaxLength(500)]
         public string DescriptionMeta { get; set; }
 
-        public ArticleCategories ArticleCategories { get; set; }
+        public virtual ArticleCategories ArticleCategories { get; set; }
 
 
 

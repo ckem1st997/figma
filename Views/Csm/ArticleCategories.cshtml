@@ -5,7 +5,17 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1>ArticleCategories</h1>
+@{
+    if (TempData["result"] != null)
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            Message: @TempData["result"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+}
 
 <h4>ArticleCategories</h4>
 <hr />
@@ -29,10 +39,9 @@
                 <span asp-validation-for="CategorySort" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
-                <label asp-for="CategoryActive" class="form-control"></label>
-                <input class="form-check-input" type="checkbox" asp-for="CategoryActive" min="0" max="1" />
-                <span asp-validation-for="CategoryActive" class="text-danger"></span>
-
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="CategoryActive" /> @Html.DisplayNameFor(model => model.CategoryActive)
+                </label>
             </div>
 
             @*<div class="form-group">
@@ -67,7 +76,7 @@
             </div>
             <div class="form-group ">
                 <label asp-for="DescriptionMeta" class="control-label"></label>
-                <input asp-for="DescriptionMeta" class="form-control" style="height:300px" />
+                <input asp-for="DescriptionMeta" class="form-control" style="height:200px" />
                 <span asp-validation-for="DescriptionMeta" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -92,7 +101,9 @@
             <th>
                 Hoạt động
             </th>
-            <th></th>
+            <th>
+                Tính năng
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -109,15 +120,20 @@
                     </td>
 
                     <td>
+                        @if (item.CategoryActive)
+                        {
+                            <span class="btn btn-danger">Hoạt động</span>
+                        }
+                        else
+                        {
+                            <span class="btn btn-danger">Chưa Active</span>
 
-                        <input class="form-check-input" />@item.CategoryActive
-
+                        }
                     </td>
 
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.TagID">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.TagID">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.TagID">Delete</a>
+                        <a asp-action="ArticleCategoriesEdit" asp-route-id="@item.ArticleCategorieID">Edit</a> |
+                        <a asp-action="ArticleCategoriesDelete" asp-route-id="@item.ArticleCategorieID">Delete</a>
                     </td>
                 </tr>
             }

@@ -1,0 +1,131 @@
+﻿@model figma.Models.Articles
+
+@{
+    ViewData["Title"] = "ArticleEdit";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>ArticleEdit</h1>
+
+<h4>Articles</h4>
+<hr />
+<div class="">
+    <form asp-controller="Csm" asp-action="createImage"
+          enctype="multipart/form-data" onchange="AJAXSubmitCreateOneT(this);return false;"
+          method="post">
+        <div class="form-group bg-white font-weight-bold">
+            <div class="section-image-title d-flex justify-content-between">
+                <p class="text-danger mt-3 mb-1 ml-5">Ảnh bài viết</p>
+                <span asp-validation-for="Image" class="text-danger"></span>
+
+                <div class="m-3 ml-1">
+                    <a class="">
+                        <input id="filesadd" accept="image/*" name="filesadd" type="file" />@*Thêm ảnh từ máy tính*@
+                    </a>
+                </div>
+            </div>
+            <div class="section-image-list insert-two container">
+                <div class="row">
+                    @{
+                        if (Model.Image != null)
+                        {
+                            <div class="col-3 mb-3 position-relative">
+                                <a data-image="@Model.Image" data-fancybox="gallery" class="@Model.Image" href="/@Model.Image">
+                                    <img style="max-width:100%" class="" src="/@Model.Image" />
+                                    <span class="show--image-edit">Xem ảnh</span>
+                                    <i class="far fa-eye show--image-edit i--one"></i>
+                                </a>
+                                <i class="fas fa-trash"></i>
+                            </div>
+
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </form>
+    <form asp-action="ArticleEdit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="ArticleID" />
+        <div class="form-group w-25">
+            <label asp-for="Subject" class="control-label"></label>
+            <input asp-for="Subject" class="form-control" />
+            <span asp-validation-for="Subject" class="text-danger"></span>
+        </div>
+        <div class="form-group w-50">
+            <label asp-for="Description" class="control-label"></label>
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="form-group bg-white">
+            <label asp-for="Body" class="control-label"></label>
+            <div id="toolbar-container"></div>
+            <div id="editor" class="bg-white"></div>
+
+            <input asp-for="Body" class="form-control" />
+            <script>
+                var h = '' + $("#Body").val() + '';
+
+            </script>
+            <span asp-validation-for="Body" class="text-danger"></span>
+        </div>
+        <div class="form-group d-none">
+            <label asp-for="Image" class="control-label"></label>
+            <input asp-for="Image" class="form-control" />
+            <span asp-validation-for="Image" class="text-danger"></span>
+        </div>
+        @*<div class="form-group">
+                <label asp-for="CreateDate" class="control-label"></label>
+                <input asp-for="CreateDate" class="form-control" />
+                <span asp-validation-for="CreateDate" class="text-danger"></span>
+            </div>*@
+        <div class="form-group">
+                <label asp-for="View" class="control-label"></label>
+                <input asp-for="View" class="form-control" />
+                <span asp-validation-for="View" class="text-danger"></span>
+            </div>
+        <div class="form-group w-25">
+            <label asp-for="ArticleCategorieID" class="control-label"></label>
+            <select asp-for="ArticleCategorieID" class="form-control" asp-items="ViewBag.ArticleCategorieID"></select>
+            <span asp-validation-for="ArticleCategorieID" class="text-danger"></span>
+        </div>
+        <div class="form-group form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
+            </label>
+        </div>
+        @*<div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Hot" /> @Html.DisplayNameFor(model => model.Hot)
+                </label>
+            </div>*@
+        <div class="form-group form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="Home" /> @Html.DisplayNameFor(model => model.Home)
+            </label>
+        </div>
+        @*<div class="form-group">
+                <label asp-for="Url" class="control-label"></label>
+                <input asp-for="Url" class="form-control" />
+                <span asp-validation-for="Url" class="text-danger"></span>
+            </div>*@
+        <div class="form-group">
+            <label asp-for="TitleMeta" class="control-label"></label>
+            <input asp-for="TitleMeta" class="form-control" />
+            <span asp-validation-for="TitleMeta" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="DescriptionMeta" class="control-label"></label>
+            <input asp-for="DescriptionMeta" class="form-control" />
+            <span asp-validation-for="DescriptionMeta" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

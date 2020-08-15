@@ -63,7 +63,7 @@ namespace figma.Models
         [MaxLength(500)]
         public string DescriptionMeta { get; set; }
 
-        public List<Articles> Articles { get; set; }
+        public virtual ICollection<Articles> Articles { get; set; }
 
 
     }

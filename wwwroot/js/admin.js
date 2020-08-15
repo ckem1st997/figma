@@ -82,7 +82,7 @@ function AJAXSubmit(file) {
     formData.append("filesadd", file);
     $.ajax({
         type: 'POST',
-        url: '/Products/createImage',
+        url: '/Csm/createImage',
         data: formData,
         cache: false,
         contentType: false,
@@ -99,7 +99,7 @@ async function AJAXSubmitCreate(oFormElement) {
     const formData = new FormData(oFormElement);
     $.ajax({
         type: 'POST',
-        url: '/Products/createImage',
+        url: '/Csm/createImage',
         data: formData,
         cache: false,
         contentType: false,
@@ -131,7 +131,7 @@ async function AJAXSubmitCreateOne(oFormElement) {
     const formData = new FormData(oFormElement);
     $.ajax({
         type: 'POST',
-        url: '/Products/createImage',
+        url: '/Csm/createImage',
         data: formData,
         cache: false,
         contentType: false,
@@ -160,13 +160,52 @@ async function AJAXSubmitCreateOne(oFormElement) {
     });
 }
 
+//
+async function AJAXSubmitCreateOneT(oFormElement) {
+    const formData = new FormData(oFormElement);
+    $.ajax({
+        type: 'POST',
+        url: '/Csm/createImage',
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            //    console.log(data.imgNode);
+            if (data.imgNode.length > 0) {
+                var listimage = data.imgNode.split(",");
+                if (listimage.length > 1 || listimage != null) {
+                    $(".section-image-list.insert-two div.row").empty();
+                    for (var i = 0; i < listimage.length; i++) {
 
+                        $(".section-image-list.insert-two div.row").append("<div class='col-3 mb-3 position-relative'><a data-image='" + listimage[i] + "' data-fancybox='gallery' class= '/" + listimage[i] + "' href = '/" + listimage[i] + "' ><img style='max-width:100%' src='/" + listimage[i] + "' /><span class='show--image-edit'>Xem ảnh</span><i class='far fa-eye show--image-edit i--one'></i></a ><i class='fas fa-trash'></i></div>");
+                    }
+                }
+            }
+            else {
+                alert("Xin vui lòng chọn ảnh !");
+            }
+            var str = "";
+            $(".section-image-list.insert-two div.row .col-3 a").each(function () {
+                if (str.length == 0)
+                    str = $(this).attr('data-image');
+                else
+                    str = str + "," + $(this).attr('data-image');
+            });
+            $("#Image").val(str);
+
+        },
+        error: function (data) {
+            alert(data.responseText);
+        }
+    });
+}
 
 //
 async function AJAXSubmitDelete(oFormElement) {
     $.ajax({
         type: 'POST',
-        url: '/Products/deleteImage',
+        url: '/Csm/deleteImage',
         data: { filesadd: oFormElement },
         success: function (res) {
         },

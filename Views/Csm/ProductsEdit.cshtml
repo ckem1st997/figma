@@ -13,7 +13,7 @@
 <h4>Chỉnh sửa</h4>
 <hr />
 <div class="">
-    <form asp-controller="Products" asp-action="createImage"
+    <form asp-controller="Csm" asp-action="createImage"
           enctype="multipart/form-data" onchange="AJAXSubmitCreate(this);return false;"
           method="post">
         <div class="form-group bg-white font-weight-bold">
@@ -27,7 +27,7 @@
                     </a>
                 </div>
             </div>
-            <div class="section-image-list container">
+            <div class="section-image-list insert-one container">
                 <div class="row">
                     @{
                         if (Model.Image != null)
