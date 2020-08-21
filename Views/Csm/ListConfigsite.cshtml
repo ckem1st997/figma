@@ -1,0 +1,72 @@
+﻿@model IEnumerable<figma.Models.ConfigSites>
+
+@{
+    ViewData["Title"] = "ListConfigsite";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>Danh sách</h1>
+@{
+    if (TempData["result"] != null)
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            Message: @TempData["result"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+}
+<p>
+    <a asp-action="ListConfigsiteCreate">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                STT
+            </th>
+
+            <th>
+                Hình ảnh
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ConfigSiteID)
+                </td>
+
+                <td>
+                    @if (item.CoverImage != null)
+                    {
+                        <img src="/@item.CoverImage" height="80" width="80" asp-append-version="true" />
+                    }
+                </td>
+
+                <td>
+                    <a class="btn btn-success" asp-action="ListConfigsiteEdit" asp-route-id="@item.ConfigSiteID">Edit</a> |
+                    <a class="btn btn-success" onclick="deleteLC(@item.ConfigSiteID)">Delete</a>
+                    <script>
+                        function deleteLC(id) {
+                            if (confirm("Bạn có chắc chắn xóa không?")) {
+                                $.post("/Csm/ListConfigsiteDelete", { id: id }, function (data) {
+                                    if (data) {
+                                        if (confirm("Xóa thành công"))
+                                            window.location.assign('/Csm/ListConfigsite')
+                                    } else {
+                                        alert("Quá trình thực hiện không thành công. Hãy thử lại");
+                                    }
+                                });
+                            }
+                        }
+                    </script>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

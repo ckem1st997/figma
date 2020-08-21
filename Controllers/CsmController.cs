@@ -1,13 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using figma.Data;
 using figma.Models;
 using figma.OutFile;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
@@ -18,6 +24,7 @@ using SixLabors.ImageSharp.Processing;
 
 namespace figma.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CsmController : Controller
     {
 
@@ -30,25 +37,82 @@ namespace figma.Controllers
             _context = context;
             _hostingEnvironment = hostEnvironment;
         }
-        public async Task<IActionResult> Details(int? id)
+
+        //
+        public IActionResult Index()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var productCategories = await _context.ProductCategories
-                .FirstOrDefaultAsync(m => m.ProductCategorieID == id);
-            if (productCategories == null)
-            {
-                return NotFound();
-            }
-
-            return View(productCategories);
+            return View();
         }
 
 
-        #region Products
+
+        [HttpPost]
+        public async Task<IActionResult> createImage1(List<IFormFile> filesadd)
+        {
+            DateTime dateTime = DateTime.Now;
+            //  string createFolderDate = "" + dateTime.Year + "\\" + dateTime.Month + "\\" + dateTime.Day + "";
+            string createFolderDate = DateTime.Now.ToString("yyyy/MM/dd");
+            string path = _hostingEnvironment.WebRootPath + @"\uploads\" + createFolderDate + "";
+            Console.WriteLine(path);
+            try
+            {
+                if (Directory.Exists(path))
+                {
+                    Console.WriteLine("Path đã tồn tại !");
+                }
+                DirectoryInfo di = Directory.CreateDirectory(path);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("The process failed: {0}", e.ToString());
+            }
+            finally { }
+
+            // copy file
+            if (path == null)
+                path = "image";
+
+            if (filesadd == null || filesadd.Count == 0)
+                return Ok(new { imgNode = "" });
+            long size = filesadd.Sum(f => f.Length);
+            var filePaths = new List<string>();
+            string sql = "";
+            foreach (var formFile in filesadd)
+            {
+                if (FormFileExtensions.IsImage(formFile))
+                {
+                    if (formFile.Length > 0)
+                    {
+                        // full path to file in temp location
+                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "" + path + "");
+
+                        filePaths.Add(filePath);
+                        var randomname = DateTime.Now.ToFileTime() + Path.GetExtension(formFile.FileName);
+                        var fileNameWithPath = string.Concat(filePath, "\\", randomname);
+
+                        using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
+                        {
+                            await formFile.CopyToAsync(stream);
+                        }
+
+                        if (sql.Length > 1)
+                            sql = "" + sql + ",uploads/" + createFolderDate + "/" + randomname + "";
+                        else
+                            sql = "uploads/" + createFolderDate + "/" + randomname + "";
+                        // sql = sql.Replace("\\", "/");
+
+                    }
+                }
+                else
+                    return Ok(new { imgNode = "" });
+            }
+            return Ok(new
+            {
+                imgNode = sql
+            });
+        }
+
+        //
 
         [HttpPost]
         public async Task<IActionResult> createImage(List<IFormFile> filesadd)
@@ -148,6 +212,9 @@ namespace figma.Controllers
                 result
             });
         }
+
+        #region Products
+
 
         //
         public async Task<IActionResult> ListProducts()
@@ -1433,11 +1500,510 @@ namespace figma.Controllers
         #endregion
 
 
+        #region Contacts
+
+        // GET: Contacts
+        public async Task<IActionResult> ListContacts()
+        {
+            return View(await _context.Contacts.OrderBy(a => a.ContactID).ToListAsync());
+        }
 
 
+        public IActionResult ListContactsCreate()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ListContactsCreate([Bind("ContactID,Fullname,Address,Mobile,Email,Subject,Body,CreateDate")] Contacts contacts)
+        {
+            if (ModelState.IsValid)
+            {
+                contacts.CreateDate = DateTime.Now;
+                _context.Add(contacts);
+                await _context.SaveChangesAsync();
+                TempData["result"] = "Thành công";
+
+                return RedirectToAction(nameof(ListContacts));
+            }
+            return View(contacts);
+        }
+
+        // GET: Contacts/Edit/5
+        public async Task<IActionResult> ListContactsEdit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var contacts = await _context.Contacts.FindAsync(id);
+            if (contacts == null)
+            {
+                return NotFound();
+            }
+            return View(contacts);
+        }
+
+        // POST: Contacts/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ListContactsEdit(int id, [Bind("ContactID,Fullname,Address,Mobile,Email,Subject,Body,CreateDate")] Contacts contacts)
+        {
+            if (id != contacts.ContactID)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(contacts);
+                    await _context.SaveChangesAsync();
+                    TempData["result"] = "Thành công";
+
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ContactsExists(contacts.ContactID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(ListContacts));
+            }
+            return View(contacts);
+        }
 
 
+        [HttpPost]
+        public bool ListContactsDelete(int id)
+        {
+            if (id == null)
+                return false;
+            var contacts = _context.Contacts.Find(id);
+            _context.Contacts.Remove(contacts);
+            _context.SaveChanges();
+            return true;
+        }
 
+        private bool ContactsExists(int id)
+        {
+            return _context.Contacts.Any(e => e.ContactID == id);
+        }
+        #endregion
+
+        #region Configsite
+
+        public async Task<IActionResult> ListConfigsite()
+        {
+            return View(await _context.ConfigSites.OrderBy(a => a.ConfigSiteID).ToListAsync());
+        }
+
+        // GET: ConfigSites/Create
+        public IActionResult ListConfigsiteCreate()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ListConfigsiteCreate([Bind("ConfigSiteID,Facebook,GooglePlus,Youtube,Linkedin,Twitter,GoogleAnalytics,LiveChat,GoogleMap,Title,Description,ContactInfo,FooterInfo,Hotline,Email,CoverImage,SaleOffProgram")] ConfigSites configSites)
+        {
+
+            if (ModelState.IsValid)
+            {
+
+
+                _context.Add(configSites);
+                await _context.SaveChangesAsync();
+                TempData["result"] = "Thành công";
+                return RedirectToAction(nameof(ListConfigsite));
+            }
+            return View(configSites);
+        }
+
+        // GET: ConfigSites/Edit/5
+        public async Task<IActionResult> ListConfigsiteEdit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var configSites = await _context.ConfigSites.FindAsync(id);
+            if (configSites == null)
+            {
+                return NotFound();
+            }
+            return View(configSites);
+        }
+
+        // POST: ConfigSites/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ListConfigsiteEdit(int id, [Bind("ConfigSiteID,Facebook,GooglePlus,Youtube,Linkedin,Twitter,GoogleAnalytics,LiveChat,GoogleMap,Title,Description,ContactInfo,FooterInfo,Hotline,Email,CoverImage,SaleOffProgram")] ConfigSites configSites)
+        {
+            if (id != configSites.ConfigSiteID)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(configSites);
+                    await _context.SaveChangesAsync();
+                    TempData["result"] = "Thành công";
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ConfigSitesExists(configSites.ConfigSiteID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(ListConfigsite));
+            }
+            return View(configSites);
+        }
+
+
+        // POST: ConfigSites/Delete/5
+        [HttpPost]
+        public bool ListConfigsiteDelete(int id)
+        {
+            if (id == null)
+                return false;
+            var configSites = _context.ConfigSites.Find(id);
+            _context.ConfigSites.Remove(configSites);
+            _context.SaveChanges();
+            return true;
+        }
+
+        private bool ConfigSitesExists(int id)
+        {
+            return _context.ConfigSites.Any(e => e.ConfigSiteID == id);
+        }
+
+
+        #endregion
+
+        #region Banner
+        public async Task<IActionResult> ListBanner()
+        {
+            return View(await _context.Banners.OrderBy(a => a.BannerID).ToListAsync());
+        }
+
+
+        public IActionResult ListBannerCreate()
+        {
+            return View();
+        }
+
+        public void Resize(string h, int w, int he)
+        {
+            using (Image<Rgba32> image = (Image<Rgba32>)Image.Load(h))
+            {
+                image.Mutate(x => x.Resize(w, he));
+                image.Save(h);
+            }
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ListBannerCreate([Bind("BannerID,BannerName,CoverImage ,Width,Height,Active,GroupId,Url,Sort,Title,Content")] Banners banners)
+        {
+            if (ModelState.IsValid)
+            {
+                string h = "" + _hostingEnvironment.WebRootPath + "\\" + banners.CoverImage + "";
+                switch (banners.GroupId)
+                {
+                    case 1:
+                        Resize(h, 1440, 632);
+                        break;
+
+                    case 2:
+                        Resize(h, 465, 330);
+                        break;
+                    case 3:
+                        Resize(h, 770, 497);
+                        break;
+                    case 4:
+                        Resize(h, 650, 243);
+                        break;
+                }
+                _context.Add(banners);
+                await _context.SaveChangesAsync();
+                TempData["result"] = "Thành công ";
+                return RedirectToAction(nameof(ListBanner));
+            }
+            return View(banners);
+        }
+
+        // GET: Banners/Edit/5
+        public async Task<IActionResult> ListBannerEdit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var banners = await _context.Banners.FindAsync(id);
+            if (banners == null)
+            {
+                return NotFound();
+            }
+            return View(banners);
+        }
+
+        // POST: Banners/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ListBannerEdit(int id, [Bind("BannerID,BannerName,CoverImage ,Width,Height,Active,GroupId,Url,Sort,Title,Content")] Banners banners)
+        {
+            if (id != banners.BannerID)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    string h = "" + _hostingEnvironment.WebRootPath + "\\" + banners.CoverImage + "";
+                    switch (banners.GroupId)
+                    {
+                        case 1:
+                            Resize(h, 1440, 632);
+                            break;
+
+                        case 2:
+                            Resize(h, 465, 330);
+                            break;
+                        case 3:
+                            Resize(h, 770, 497);
+                            break;
+                        case 4:
+                            Resize(h, 650, 243);
+                            break;
+                    }
+                    _context.Update(banners);
+                    await _context.SaveChangesAsync();
+                    TempData["result"] = "Thành công ";
+
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!BannersExists(banners.BannerID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(ListBanner));
+            }
+            return View(banners);
+        }
+
+        [HttpPost]
+        public bool ListBannerDelete(int id)
+        {
+            if (id == null)
+                return false;
+            var banners = _context.Banners.Find(id);
+            _context.Banners.Remove(banners);
+            _context.SaveChanges();
+            return true;
+        }
+
+        private bool BannersExists(int id)
+        {
+            return _context.Banners.Any(e => e.BannerID == id);
+        }
+        #endregion
+
+
+        #region Admin
+
+        public class RegisterViewModel
+        {
+
+            [Required, MaxLength(50)]
+            public string Username { get; set; }
+
+            [Required, DataType(DataType.Password), MaxLength(20, ErrorMessage = "Mật khẩu phải ít hơn 20 kí tự"), MinLength(5, ErrorMessage = "Mật khẩu phải nhiều hơn 4 kí tự")]
+            public string Password { get; set; }
+
+            [DataType(DataType.Password), Compare(nameof(Password)), MaxLength(20, ErrorMessage = "Mật khẩu phải ít hơn 20 kí tự"), MinLength(5, ErrorMessage = "Mật khẩu phải nhiều hơn 4 kí tự")]
+            public string ConfirmPassword { get; set; }
+        }
+
+        public class LoginViewModel
+        {
+
+            [Required, MaxLength(50)]
+            public string Username { get; set; }
+
+            [Required, DataType(DataType.Password), MaxLength(20, ErrorMessage = "Mật khẩu phải ít hơn 20 kí tự"), MinLength(5, ErrorMessage = "Mật khẩu phải nhiều hơn 4 kí tự")]
+            public string Password { get; set; }
+        }
+
+
+        [AllowAnonymous]
+        [HttpGet]
+        public ActionResult LoginCsm()
+        {
+            try
+            {
+                HttpContext.SignOutAsync(
+CookieAuthenticationDefaults.AuthenticationScheme);
+            }
+            catch (Exception)
+            {
+
+                return View();
+
+            }
+
+            return View();
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<ActionResult> LoginCsm([Bind] LoginViewModel user, string returnUrl)
+        {
+            returnUrl = returnUrl ?? Url.Content("~/");
+            if (ModelState.IsValid)
+            {
+                if (ValidateAdmin(user.Username, user.Password))
+                {
+                    var users = _context.Admins.SingleOrDefault(a => a.Username == user.Username);
+                    if (users != null)
+                    {
+                        var userClaims = new List<Claim>()
+                {
+                    new Claim("UserName", users.Username),
+                    new Claim(ClaimTypes.Role, users.Role==null?"notAdmin":users.Role)
+                 };
+                        // add session
+                        //foreach (var item in userClaims)
+                        //{
+                        //    HttpContext.Session.SetString(item.Type, item.Value);
+
+                        //}
+                        var userIdentity = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                        var authProperties = new AuthenticationProperties
+                        {
+                            AllowRefresh = true,
+                            IsPersistent = true
+                        };
+                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(userIdentity), authProperties);
+                        //    Execute("shoponline@gmail.com", "Shop1997", "hopxc1997@gmail.com", "Nguyễn Khả Hợp", "Thanh toán", "Đã mua").Wait();
+                        //if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
+                        //   && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
+                        //{
+                        //    return Redirect(returnUrl);
+                        //}
+                        TempData["tq"] = "Thành công !";
+                        return RedirectToAction("Index", "Csm");
+
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Tên đăng nhập không tồn tại");
+                        return View(user);
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Tên đăng nhập hoặc mật khẩu không chính xác.");
+                    return View();
+                }
+            }
+            TempData["tq"] = "Thất bại !";
+
+            return View(user);
+        }
+
+        [AllowAnonymous]
+        public bool ValidateAdmin(string username, string password)
+        {
+            var admin = _context.Admins.SingleOrDefault(a => a.Username == username);
+            return admin != null && new PasswordHasher<Admins>().VerifyHashedPassword(new Admins(), admin.Password, password) == PasswordVerificationResult.Success;
+        }
+        //
+        [AllowAnonymous]
+        [HttpGet]
+        public ActionResult UserAccessDenied()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> Logout(string returnUrl = null)
+        {
+            returnUrl = returnUrl ?? Url.Content("~/");
+            await HttpContext.SignOutAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index");
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var dk = _context.Admins.Where(a => a.Username.Equals(model.Username)).SingleOrDefault();
+                if (dk != null)
+                {
+                    ModelState.AddModelError("", @"Tên đăng nhập này có rồi");
+                }
+                else
+                {
+                    var hashedPassword = new PasswordHasher<Admins>().HashPassword(new Admins(), model.Password);
+                    _context.Admins.Add(new Admins { Username = model.Username, Password = hashedPassword, Role = "Admin", Active = true });
+                    _context.SaveChanges();
+                    TempData["tq"] = "Thành công";
+                    return RedirectToAction("LoginCsm", "Csm");
+                }
+                ModelState.AddModelError("", "Lỗi đăng ký, xin vui lòng thử lại nha");
+
+            }
+            TempData["tq"] = "Thất bại";
+
+            return View(model);
+        }
+
+        #endregion
 
 
 

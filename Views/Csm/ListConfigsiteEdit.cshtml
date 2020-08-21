@@ -1,0 +1,156 @@
+﻿@model figma.Models.ConfigSites
+
+@{
+    ViewData["Title"] = "ListConfigsiteEdit";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<form asp-controller="Products" asp-action="createImage" enctype="multipart/form-data" onchange="AJAXSubmitCreateOne(this);return false;" method="post">
+    <div class="form-group bg-white font-weight-bold">
+        <div class="section-image-title d-flex justify-content-between">
+            <p class="text-danger mt-3 mb-1">Biểu tượng</p>
+            <span asp-validation-for="CoverImage" class="text-danger"></span>
+
+            <div class="m-3 ml-1">
+                <a class="">
+                    <input id="filesadd" accept="image/*" name="filesadd" type="file" />
+                </a>
+                <script>
+                </script>
+            </div>
+        </div>
+        <div class="section-image-list insert-two container">
+            <div class="row">
+                @{
+                    if (Model.CoverImage != null)
+                    {
+                        <div class="col-3 mb-3 position-relative">
+                            <a data-image="@Model.CoverImage" data-fancybox="gallery" class="@Model.CoverImage" href="/@Model.CoverImage">
+                                <img style="max-width:100%" class="" src="/@Model.CoverImage" />
+                                <span class="show--image-edit">Xem ảnh</span>
+                                <i class="far fa-eye show--image-edit i--one"></i>
+                            </a>
+                            <i class="fas fa-trash"></i>
+                        </div>
+
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</form>
+<hr />
+<div class="">
+    <form asp-action="ListConfigsiteEdit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="ConfigSiteID" />
+        <div class="form-group w-25">
+            <label asp-for="Title" class="control-label"></label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <div class="form-group w-50">
+            <label asp-for="Description" class="control-label"></label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ContactInfo" class="control-label"></label>
+            <div id="toolbar-container2"></div>
+            <div id="editor2" class="bg-white">
+            </div>
+            <input type="hidden" asp-for="ContactInfo" class="form-control" />
+            <script>
+                var c = '' + $("#ContactInfo").val() + '';
+
+            </script>
+            <span asp-validation-for="ContactInfo" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="FooterInfo" class="control-label"></label>
+            <div id="toolbar-container3"></div>
+            <div id="editor3" class="bg-white">
+            </div>
+            <input type="hidden" asp-for="FooterInfo" class="form-control" />
+            <script>
+                var f = '' + $("#FooterInfo").val() + '';
+
+            </script>
+            <span asp-validation-for="FooterInfo" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="SaleOffProgram" class="control-label"></label>
+            <div id="toolbar-container4"></div>
+            <div id="editor4" class="bg-white">
+            </div>
+            <input type="hidden" asp-for="SaleOffProgram" class="form-control" />
+            <script>
+                var s = '' + $("#SaleOffProgram").val() + '';
+
+            </script>
+            <span asp-validation-for="SaleOffProgram" class="text-danger"></span>
+        </div>
+        <div class="form-group w-25">
+            <label asp-for="Facebook" class="control-label"></label>
+            <input asp-for="Facebook" class="form-control" />
+            <span asp-validation-for="Facebook" class="text-danger"></span>
+        </div>
+        <div class="form-group w-25">
+            <label asp-for="GooglePlus" class="control-label"></label>
+            <input asp-for="GooglePlus" class="form-control" />
+            <span asp-validation-for="GooglePlus" class="text-danger"></span>
+        </div>
+        <div class="form-group w-25">
+            <label asp-for="Youtube" class="control-label"></label>
+            <input asp-for="Youtube" class="form-control" />
+            <span asp-validation-for="Youtube" class="text-danger"></span>
+        </div>
+        <div class="form-group w-25">
+            <label asp-for="Linkedin" class="control-label"></label>
+            <input asp-for="Linkedin" class="form-control" />
+            <span asp-validation-for="Linkedin" class="text-danger"></span>
+        </div>
+
+        <div class="form-group w-25">
+            <label asp-for="Hotline" class="control-label"></label>
+            <input asp-for="Hotline" class="form-control" />
+            <span asp-validation-for="Hotline" class="text-danger"></span>
+        </div>
+        <div class="form-group w-25">
+            <label asp-for="Email" class="control-label"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group w-25">
+            <label asp-for="Twitter" class="control-label"></label>
+            <input asp-for="Twitter" class="form-control" />
+            <span asp-validation-for="Twitter" class="text-danger"></span>
+        </div>
+        <div class="form-group w-50">
+            <label asp-for="GoogleAnalytics" class="control-label"></label>
+            <textarea asp-for="GoogleAnalytics" class="form-control"></textarea>
+            <span asp-validation-for="GoogleAnalytics" class="text-danger"></span>
+        </div>
+        <div class="form-group w-50">
+            <label asp-for="LiveChat" class="control-label"></label>
+            <textarea asp-for="LiveChat" class="form-control"></textarea>
+            <span asp-validation-for="LiveChat" class="text-danger"></span>
+        </div>
+        <div class="form-group w-50">
+            <label asp-for="GoogleMap" class="control-label"></label>
+            <textarea asp-for="GoogleMap" class="form-control"></textarea>
+            <span asp-validation-for="GoogleMap" class="text-danger"></span>
+        </div>
+
+        <div class="form-group d-none">
+            <label asp-for="CoverImage" class="control-label"></label>
+            <input asp-for="CoverImage" class="form-control" />
+            <span asp-validation-for="CoverImage" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+

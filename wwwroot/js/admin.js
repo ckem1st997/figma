@@ -129,9 +129,45 @@ async function AJAXSubmitCreate(oFormElement) {
 
 async function AJAXSubmitCreateOne(oFormElement) {
     const formData = new FormData(oFormElement);
+
     $.ajax({
         type: 'POST',
         url: '/Csm/createImage',
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            //    console.log(data.imgNode);
+            if (data.imgNode.length > 0) {
+                var listimage = data.imgNode.split(",");
+                if (listimage.length > 1 || listimage != null) {
+                    $(".section-image-list.insert-two div.row").empty();
+                    for (var i = 0; i < listimage.length; i++) {
+
+                        $(".section-image-list.insert-two div.row").append("<div class='col-3 mb-3 position-relative'><a data-image='" + listimage[i] + "' data-fancybox='gallery' class= '/" + listimage[i] + "' href = '/" + listimage[i] + "' ><img style='max-width:100%' src='/" + listimage[i] + "' /><span class='show--image-edit'>Xem ảnh</span><i class='far fa-eye show--image-edit i--one'></i></a ><i class='fas fa-trash'></i></div>");
+                    }
+                }
+            }
+            else {
+                alert("Xin vui lòng chọn ảnh !");
+            }
+            addtwo();
+
+        },
+        error: function (data) {
+            alert(data.responseText);
+        }
+    });
+}
+
+//
+async function AJAXSubmitCreateOnep(oFormElement) {
+    const formData = new FormData(oFormElement);
+
+    $.ajax({
+        type: 'POST',
+        url: '/Csm/createImage1',
         data: formData,
         cache: false,
         contentType: false,
@@ -605,6 +641,246 @@ DecoupledDocumentEditor.create(document.querySelector('#editorDescriptionMeta'),
 
     console.error(error);
 });
+
+//
+DecoupledDocumentEditor
+    .create(document.querySelector('#editor2'), {
+
+        toolbar: {
+            items: [
+                'heading',
+                '|',
+                'fontSize',
+                'fontFamily',
+                '|',
+                'bold',
+                'italic',
+                'underline',
+                'strikethrough',
+                'highlight',
+                '|',
+                'alignment',
+                '|',
+                'numberedList',
+                'bulletedList',
+                '|',
+                'indent',
+                'outdent',
+                '|',
+                'todoList',
+                'link',
+                'blockQuote',
+                'insertTable',
+                'mediaEmbed',
+                '|',
+                'undo',
+                'redo',
+                'CKFinder',
+                'code',
+                'fontColor',
+                'fontBackgroundColor',
+                'exportPdf',
+                'imageUpload'
+            ]
+        },
+        language: 'vi',
+        image: {
+            toolbar: [
+                'imageTextAlternative',
+                'imageStyle:full',
+                'imageStyle:side'
+            ]
+        },
+        table: {
+            contentToolbar: [
+                'tableColumn',
+                'tableRow',
+                'mergeTableCells'
+            ]
+        },
+        licenseKey: '',
+
+
+    })
+    .then(editor => {
+        window.editor = editor;
+        // Set a custom container for the toolbar.
+        //  document.querySelector('.#toolbar-container').appendChild(editor.ui.view.toolbar.element);
+        const toolbarContainer = document.querySelector('#toolbar-container2');
+        toolbarContainer.appendChild(editor.ui.view.toolbar.element);
+        // document.querySelector('.ck-toolbar').classList.add('ck-reset_all');
+        editor.editing.view.change(writer => { writer.setStyle('height', '300px', editor.editing.view.document.getRoot()); });
+        editor.model.document.on('change:data', () => {
+            $("#ContactInfo").val(editor.getData());
+        });
+        if (c != null)
+            editor.setData(h);
+    })
+    .catch(error => {
+
+        console.error(error);
+    });
+//
+DecoupledDocumentEditor
+    .create(document.querySelector('#editor3'), {
+
+        toolbar: {
+            items: [
+                'heading',
+                '|',
+                'fontSize',
+                'fontFamily',
+                '|',
+                'bold',
+                'italic',
+                'underline',
+                'strikethrough',
+                'highlight',
+                '|',
+                'alignment',
+                '|',
+                'numberedList',
+                'bulletedList',
+                '|',
+                'indent',
+                'outdent',
+                '|',
+                'todoList',
+                'link',
+                'blockQuote',
+                'insertTable',
+                'mediaEmbed',
+                '|',
+                'undo',
+                'redo',
+                'CKFinder',
+                'code',
+                'fontColor',
+                'fontBackgroundColor',
+                'exportPdf',
+                'imageUpload'
+            ]
+        },
+        language: 'vi',
+        image: {
+            toolbar: [
+                'imageTextAlternative',
+                'imageStyle:full',
+                'imageStyle:side'
+            ]
+        },
+        table: {
+            contentToolbar: [
+                'tableColumn',
+                'tableRow',
+                'mergeTableCells'
+            ]
+        },
+        licenseKey: '',
+
+
+    })
+    .then(editor => {
+        window.editor = editor;
+        // Set a custom container for the toolbar.
+        //  document.querySelector('.#toolbar-container').appendChild(editor.ui.view.toolbar.element);
+        const toolbarContainer = document.querySelector('#toolbar-container3');
+        toolbarContainer.appendChild(editor.ui.view.toolbar.element);
+        // document.querySelector('.ck-toolbar').classList.add('ck-reset_all');
+        editor.editing.view.change(writer => { writer.setStyle('height', '300px', editor.editing.view.document.getRoot()); });
+        editor.model.document.on('change:data', () => {
+            $("#FooterInfo").val(editor.getData());
+        });
+        if (f != null)
+            editor.setData(h);
+    })
+    .catch(error => {
+
+        console.error(error);
+    });
+
+//
+DecoupledDocumentEditor
+    .create(document.querySelector('#editor4'), {
+
+        toolbar: {
+            items: [
+                'heading',
+                '|',
+                'fontSize',
+                'fontFamily',
+                '|',
+                'bold',
+                'italic',
+                'underline',
+                'strikethrough',
+                'highlight',
+                '|',
+                'alignment',
+                '|',
+                'numberedList',
+                'bulletedList',
+                '|',
+                'indent',
+                'outdent',
+                '|',
+                'todoList',
+                'link',
+                'blockQuote',
+                'insertTable',
+                'mediaEmbed',
+                '|',
+                'undo',
+                'redo',
+                'CKFinder',
+                'code',
+                'fontColor',
+                'fontBackgroundColor',
+                'exportPdf',
+                'imageUpload'
+            ]
+        },
+        language: 'vi',
+        image: {
+            toolbar: [
+                'imageTextAlternative',
+                'imageStyle:full',
+                'imageStyle:side'
+            ]
+        },
+        table: {
+            contentToolbar: [
+                'tableColumn',
+                'tableRow',
+                'mergeTableCells'
+            ]
+        },
+        licenseKey: '',
+
+
+    })
+    .then(editor => {
+        window.editor = editor;
+        // Set a custom container for the toolbar.
+        //  document.querySelector('.#toolbar-container').appendChild(editor.ui.view.toolbar.element);
+        const toolbarContainer = document.querySelector('#toolbar-container4');
+        toolbarContainer.appendChild(editor.ui.view.toolbar.element);
+        // document.querySelector('.ck-toolbar').classList.add('ck-reset_all');
+        editor.editing.view.change(writer => { writer.setStyle('height', '300px', editor.editing.view.document.getRoot()); });
+        editor.model.document.on('change:data', () => {
+            $("#SaleOffProgram").val(editor.getData());
+        });
+        if (s != null)
+            editor.setData(h);
+    })
+    .catch(error => {
+
+        console.error(error);
+    });
+
+
+
+
 
 //DecoupledEditor
 //    .create(document.querySelector('#editor'), {

@@ -131,8 +131,8 @@
                 <div id="collapseProductContact" class="collapse" aria-labelledby="headingProduct" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Danh mục</h6>
-                        <a class="collapse-item" asp-action="Index" asp-controller="Banners">Danh sách quảng cáo</a>
-                        <a class="collapse-item" asp-action="Create" asp-controller="Banners">Thêm mới quảng cáo</a>
+                        <a class="collapse-item" asp-action="ListBanner" asp-controller="Csm">Danh sách quảng cáo</a>
+                        <a class="collapse-item" asp-action="ListBannerCreate" asp-controller="Csm">Thêm mới quảng cáo</a>
 
                     </div>
                 </div>
@@ -154,7 +154,40 @@
                     </div>
                 </div>
             </li>
-            <!-- Divider -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapserecruitmentCt" aria-expanded="true"
+                   aria-controls="collapserecruitmentCt">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Thông tin cửa hàng</span>
+                </a>
+                <div id="collapserecruitmentCt" class="collapse" aria-labelledby="headingProduct" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Thông tin cửa hàng</h6>
+                        <a class="collapse-item" asp-action="ListContacts" asp-controller="Csm">Danh sách</a>
+                        <a class="collapse-item" asp-action="ListContactsCreate" asp-controller="Csm">Thêm mới </a>
+
+                    </div>
+                </div>
+            </li>
+
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapserecruitmentCtc" aria-expanded="true"
+                   aria-controls="collapserecruitmentCtc">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Quản lý Fanpage</span>
+                </a>
+                <div id="collapserecruitmentCtc" class="collapse" aria-labelledby="headingProduct" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Thông tin Fanpage</h6>
+                        <a class="collapse-item" asp-action="ListConfigsite" asp-controller="Csm">Danh sách</a>
+                        <a class="collapse-item" asp-action="ListConfigsiteCreate" asp-controller="Csm">Thêm mới </a>
+
+                    </div>
+                </div>
+            </li>
+            <!-- Divider  -->
             <hr class="sidebar-divider">
 
             <!-- Heading -->
@@ -385,7 +418,7 @@
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" asp-action="Logout" asp-controller="Csm" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -439,7 +472,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" asp-controller="Csm" asp-action="Logout">Logout</a>
                 </div>
             </div>
         </div>

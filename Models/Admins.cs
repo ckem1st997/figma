@@ -31,6 +31,6 @@ namespace figma.Models
 
 
         [Required(ErrorMessage = "Chưa nhập thông tin")]
-        public int Role { get; set; }
+        public string Role { get; set; }
     }
 }

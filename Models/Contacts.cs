@@ -16,7 +16,7 @@ namespace figma.Models
 
 
         [Required(ErrorMessage = "Chưa nhập thông tin")]
-        [Display(Name ="Họ và tên")]
+        [Display(Name = "Họ và tên")]
         [MaxLength(50)]
         public string Fullname { get; set; }
 
@@ -40,17 +40,18 @@ namespace figma.Models
 
 
         [Required(ErrorMessage = "Chưa nhập thông tin")]
-        [Display(Name ="Nội dung")]
+        [Display(Name = "Nội dung")]
         [MaxLength(100)]
         public string Subject { get; set; }
 
 
         [Required(ErrorMessage = "Chưa nhập thông tin")]
         [MaxLength(4000)]
+        [Display(Name = "Thông tin thêm")]
         public string Body { get; set; }
 
 
-        [Display(Name ="Ngày tạo")]
+        [Display(Name = "Ngày tạo")]
         [DataType(DataType.DateTime)]
         public DateTime CreateDate { get; set; }
 

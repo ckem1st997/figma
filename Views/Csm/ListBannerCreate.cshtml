@@ -1,0 +1,96 @@
+﻿@model figma.Models.Banners
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<form enctype="multipart/form-data" onchange="AJAXSubmitCreateOnep(this);return false;" method="post">
+    <div class="form-group bg-white font-weight-bold">
+        <div class="section-image-title d-flex justify-content-between">
+            <p class="text-danger mt-3 mb-1">Biểu tượng</p>
+            <span asp-validation-for="CoverImage" class="text-danger"></span>
+
+            <div class="m-3 ml-1">
+                <a class="">
+                    <input id="filesadd" accept="image/*" name="filesadd" type="file" />
+                </a>
+                <script>
+                </script>
+            </div>
+        </div>
+        <div class="section-image-list insert-two container">
+            <div class="row">
+            </div>
+        </div>
+    </div>
+</form>
+<hr />
+<div class="">
+    <form asp-action="ListBannerCreate">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group w-50">
+            <label asp-for="BannerName " class="control-label"></label>
+            <input asp-for="BannerName" class="form-control" />
+            <span asp-validation-for="BannerName" class="text-danger"></span>
+        </div>
+        <div class="form-group w-50">
+            <label asp-for="Title" class="control-label"></label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <div class="form-group w-50">
+            <label asp-for="Content" class="control-label"></label>
+            <input asp-for="Content" class="form-control" />
+            <span asp-validation-for="Content" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="CoverImage" class="control-label"></label>
+            <input asp-for="CoverImage" class="form-control" />
+            <span asp-validation-for="CoverImage" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Width" class="control-label"></label>
+            <input asp-for="Width" class="form-control" />
+            <span asp-validation-for="Width" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Height" class="control-label"></label>
+            <input asp-for="Height" class="form-control" />
+            <span asp-validation-for="Height" class="text-danger"></span>
+        </div>
+        <div class="form-group form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
+            </label>
+        </div>
+        <div class="form-group">
+            <label asp-for="GroupId" class="control-label"></label>
+            <select asp-for="GroupId" onchange="getchang()">
+                <option value="1">Slide on Top 1440 x 632</option>
+                <option value="2">Banner Slide 465 x 330</option>
+                <option value="3">Banner Right Home 770 x 497</option>
+                <option value="4">Banner Left Home auto x 243</option>
+            </select>
+
+            <span asp-validation-for="GroupId" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Url" class="control-label"></label>
+            <input asp-for="Url" class="form-control" />
+            <span asp-validation-for="Url" class="text-danger"></span>
+        </div>
+        <div class="form-group w-25">
+            <label asp-for="Sort" class="control-label"></label>
+            <input asp-for="Sort" class="form-control" />
+            <span asp-validation-for="Sort" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+

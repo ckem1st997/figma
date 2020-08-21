@@ -10,8 +10,8 @@ using figma.Data;
 namespace figma.Migrations
 {
     [DbContext(typeof(ShopProductContext))]
-    [Migration("20200815030127_up1")]
-    partial class up1
+    [Migration("20200820024022_l")]
+    partial class l
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -247,9 +247,14 @@ namespace figma.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("BannerName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CoverImage")
+                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(500);
 
                     b.Property<int>("GroupId")
                         .HasColumnType("int");
@@ -257,12 +262,11 @@ namespace figma.Migrations
                     b.Property<int>("Height")
                         .HasColumnType("int");
 
-                    b.Property<string>("Image")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Soft")
+                    b.Property<int>("Sort")
                         .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Url")
                         .HasColumnType("nvarchar(500)")
@@ -401,6 +405,10 @@ namespace figma.Migrations
                     b.Property<string>("ContactInfo")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CoverImage")
+                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(500);
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(500)")
                         .HasMaxLength(500);
@@ -410,8 +418,7 @@ namespace figma.Migrations
                         .HasMaxLength(100);
 
                     b.Property<string>("Facebook")
-                        .HasColumnType("nvarchar(500)")
-                        .HasMaxLength(500);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FooterInfo")
                         .HasColumnType("nvarchar(max)");
@@ -439,10 +446,6 @@ namespace figma.Migrations
                     b.Property<string>("LiveChat")
                         .HasColumnType("nvarchar(4000)")
                         .HasMaxLength(4000);
-
-                    b.Property<string>("Logo")
-                        .HasColumnType("nvarchar(500)")
-                        .HasMaxLength(500);
 
                     b.Property<string>("SaleOffProgram")
                         .HasColumnType("nvarchar(max)");
