@@ -15,11 +15,11 @@ namespace figma.CustomHandler
     {
         public readonly ShopProductContext _context;
 
-        IHttpContextAccessor _httpContextAccessor = null;
-        public RolesAuthorizationHandler(ShopProductContext context, IHttpContextAccessor httpContextAccessor)
+        //     private readonly IHttpContextAccessor _httpContextAccessor;
+        public RolesAuthorizationHandler(ShopProductContext context/*, IHttpContextAccessor httpContextAccessor*/)
         {
             _context = context;
-            _httpContextAccessor = httpContextAccessor;
+            //   _httpContextAccessor = httpContextAccessor;
         }
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context,
                                                        RolesAuthorizationRequirement requirement)
@@ -47,8 +47,8 @@ namespace figma.CustomHandler
                 // Console.WriteLine(11111);
                 // Console.WriteLine(_httpContextAccessor.HttpContext.Session.GetString(ClaimTypes.Role));
                 // validRole = context1.Users.Where(p => roles.Contains(p.Role) && p.UserName == userName).ToList().Any();
-                validRole = _context.Admins.ToList().Where(p => roles.Contains(p.Role) && p.Username== userName).Any();
- 
+                validRole = _context.Admins.ToList().Where(p => roles.Contains(p.Role) && p.Username == userName).Any();
+
             }
 
             if (validRole)

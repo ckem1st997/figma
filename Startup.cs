@@ -46,6 +46,9 @@ namespace figma
          config.AccessDeniedPath = "/Csm/UserAccessDenied";
          // sau 10s sẽ tự out
          config.ExpireTimeSpan = TimeSpan.FromSeconds(50);
+         config.Cookie.HttpOnly = true;
+         config.Cookie.IsEssential = true;
+
      });
             //
             services.AddAuthorization(config =>
@@ -60,7 +63,7 @@ namespace figma
 
             services.AddScoped<IAuthorizationHandler, PoliciesAuthorizationHandler>();
             services.AddScoped<IAuthorizationHandler, RolesAuthorizationHandler>();
-
+            services.AddHttpContextAccessor();
             services.AddDistributedMemoryCache();
 
             services.AddSession(options =>
@@ -103,6 +106,7 @@ namespace figma
                 MinimumSameSitePolicy = SameSiteMode.Strict,
             };
             app.UseCookiePolicy(cookiePolicyOptions);
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -110,7 +114,7 @@ namespace figma
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 // endpoints.MapControllerRoute(
                 //name: "admin",
-                //pattern: "{controller=Csm}/{action=Index}/{id?}");
+                //pattern: "{controller=Csm}/{action=LoginCsm}/{id?}");
             });
         }
 

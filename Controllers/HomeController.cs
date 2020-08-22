@@ -29,6 +29,7 @@ namespace figma.Controllers
 
         public IActionResult Index()
         {
+
             return View();
         }
 
@@ -43,11 +44,10 @@ namespace figma.Controllers
 
             var userName = HttpContext.Session.GetString("UserName");
             var userId = HttpContext.Session.GetString("UserId");
-            //  var result = await _context.Members.SingleOrDefault(a => a.MemberId == int.Parse(userId) && a.Email == userName);
             var result = _context.Members.ToList().Where(a => a.MemberId == int.Parse(userId) && a.Email == userName);
-            //  Console.WriteLine(result);
-            return View(result);
-            // return View(_context.Members.ToList());
+            if (result != null)
+                return View(result);
+            return RedirectToAction(nameof(Index));
         }
 
         [AllowAnonymous]
@@ -169,9 +169,8 @@ namespace figma.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Logout(string returnUrl = null)
+        public async Task<IActionResult> Logout()
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
             await HttpContext.SignOutAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index");
@@ -191,8 +190,8 @@ namespace figma.Controllers
                 else
                 {
                     var hashedPassword = new PasswordHasher<Members>().HashPassword(new Members(), model.Password);
-                    _context.Members.AddAsync(new Members { Email = model.Username, Password = hashedPassword, Active = true, CreateDate = DateTime.Now, Fullname = model.Fullname, Mobile = model.Sdt.ToString() });
-                    _context.SaveChangesAsync();
+                    await _context.Members.AddAsync(new Members { Email = model.Username, Password = hashedPassword, Active = true, CreateDate = DateTime.Now, Fullname = model.Fullname, Mobile = model.Sdt.ToString() });
+                    await _context.SaveChangesAsync();
                     TempData["tq"] = "Đăng ký thành công";
                     return RedirectToAction("Login");
                 }

@@ -18,11 +18,11 @@ namespace figma.Controllers
     {
         private readonly IWebHostEnvironment _hostingEnvironment;
 
-        private readonly ShopProductContext _context;
+        //  private readonly ShopProductContext _context;
 
-        public UploadController(ShopProductContext context, IWebHostEnvironment hostEnvironment)
+        public UploadController(/*ShopProductContext context,*/ IWebHostEnvironment hostEnvironment)
         {
-            _context = context;
+            //  _context = context;
             _hostingEnvironment = hostEnvironment;
         }
 
@@ -102,7 +102,7 @@ namespace figma.Controllers
         //delete file
 
         [HttpPost]
-        public async Task<IActionResult> deleteImage(string filesadd)
+        public IActionResult deleteImage(string filesadd)
         {
             var result = false;
             var h = filesadd;

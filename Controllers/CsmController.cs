@@ -189,7 +189,7 @@ namespace figma.Controllers
         //delete file
 
         [HttpPost]
-        public async Task<IActionResult> deleteImage(string filesadd)
+        public IActionResult deleteImage(string filesadd)
         {
             var result = false;
             var h = filesadd;
@@ -1126,7 +1126,7 @@ namespace figma.Controllers
         }
 
 
-        public async Task<IActionResult> SpecialCategoryProductsDelete(int? ido, int? idt)
+        public IActionResult SpecialCategoryProductsDelete(int? ido, int? idt)
         {
             if (ido == null || idt == null)
             {
@@ -1141,7 +1141,7 @@ namespace figma.Controllers
         [HttpPost]
         public bool SpecialCategoryProductsDeleteConfirmed(int id1, int id2)
         {
-            if (id1 == null || id2 == null)
+            if (id1 < 1 || id2 < 1)
             {
                 return false;
             }
@@ -1485,7 +1485,7 @@ namespace figma.Controllers
         [HttpPost]
         public bool ListCollectionDelete(int id)
         {
-            if (id == null)
+            if (id < 1)
                 return false;
             var collection = _context.Collections.Find(id);
             _context.Collections.Remove(collection);
@@ -1587,7 +1587,7 @@ namespace figma.Controllers
         [HttpPost]
         public bool ListContactsDelete(int id)
         {
-            if (id == null)
+            if (id < 1)
                 return false;
             var contacts = _context.Contacts.Find(id);
             _context.Contacts.Remove(contacts);
@@ -1688,7 +1688,7 @@ namespace figma.Controllers
         [HttpPost]
         public bool ListConfigsiteDelete(int id)
         {
-            if (id == null)
+            if (id < 1)
                 return false;
             var configSites = _context.ConfigSites.Find(id);
             _context.ConfigSites.Remove(configSites);
@@ -1828,7 +1828,7 @@ namespace figma.Controllers
         [HttpPost]
         public bool ListBannerDelete(int id)
         {
-            if (id == null)
+            if (id < 1)
                 return false;
             var banners = _context.Banners.Find(id);
             _context.Banners.Remove(banners);
@@ -1868,9 +1868,9 @@ namespace figma.Controllers
             public string Password { get; set; }
         }
 
-
-        [AllowAnonymous]
+        [Route("/Csm")]
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult LoginCsm()
         {
             try
@@ -1888,8 +1888,8 @@ CookieAuthenticationDefaults.AuthenticationScheme);
             return View();
         }
 
-        [AllowAnonymous]
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ActionResult> LoginCsm([Bind] LoginViewModel user, string returnUrl)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
@@ -1960,9 +1960,9 @@ CookieAuthenticationDefaults.AuthenticationScheme);
             return View();
         }
 
-        public async Task<IActionResult> Logout(string returnUrl = null)
+        public async Task<IActionResult> Logout()
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
+            //  returnUrl = returnUrl ?? Url.Content("~/");
             await HttpContext.SignOutAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index");
@@ -1990,8 +1990,8 @@ CookieAuthenticationDefaults.AuthenticationScheme);
                 else
                 {
                     var hashedPassword = new PasswordHasher<Admins>().HashPassword(new Admins(), model.Password);
-                    _context.Admins.Add(new Admins { Username = model.Username, Password = hashedPassword, Role = "Admin", Active = true });
-                    _context.SaveChanges();
+                    await _context.Admins.AddAsync(new Admins { Username = model.Username, Password = hashedPassword, Role = "Admin", Active = true });
+                    await _context.SaveChangesAsync();
                     TempData["tq"] = "Thành công";
                     return RedirectToAction("LoginCsm", "Csm");
                 }
