@@ -43,9 +43,23 @@
                     @Html.DisplayFor(modelItem => item.NameColor)
                 </td>
                 <td>
-                    <a asp-action="ColorEdit" asp-route-id="@item.ColorID">Edit</a> |
-                    <a asp-action="ColorDetails" asp-route-id="@item.ColorID">Details</a> |
-                    <a asp-action="ColorDelete" asp-route-id="@item.ColorID">Delete</a>
+                    <a class="btn btn-success" asp-action="ColorEdit" asp-route-id="@item.ColorID">Edit</a> |
+                    <a class="btn btn-success" asp-action="ColorDetails" asp-route-id="@item.ColorID">Details</a> |
+                    <a class="btn btn-success" onclick="deleteLC(@item.ColorID)">Delete</a>
+                    <script>
+                                function deleteLC(id) {
+                                    if (confirm("Bạn có chắc chắn xóa không?")) {
+                                        $.post("/Csm/ColorDelete", { id: id }, function (data) {
+                                            if (data) {
+                                                if (confirm("Xóa thành công"))
+                                                    window.location.assign('/Csm/ColorIndex')
+                                            } else {
+                                                alert("Quá trình thực hiện không thành công. Hãy thử lại");
+                                            }
+                                        });
+                                    }
+                                }
+                    </script>
                 </td>
             </tr>
         }

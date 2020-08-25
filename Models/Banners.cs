@@ -12,8 +12,6 @@ namespace figma.Models
         [Key]
         [Index]
         public int BannerID { get; set; }
-
-
         public string BannerName { get; set; }
         [Display(Name = "Hình ảnh"), StringLength(500)]
         public string CoverImage { get; set; }
@@ -28,9 +26,9 @@ namespace figma.Models
         [Display(Name = "Đường dẫn"), StringLength(500, ErrorMessage = "Tối đa 500 ký tự"), UIHint("TextBox")]
         public string Url { get; set; }
         [Display(Name = "Thứ tự"), Required(ErrorMessage = "Hãy nhập thứ tự"), RegularExpression(@"\d+", ErrorMessage = "Chỉ nhập số nguyên"), UIHint("NumberBox")]
-        public int Sort { get; set; }
+        public int Soft { get; set; }
 
-        [Display(Name ="Tiêu đề")]
+        [Display(Name = "Tiêu đề")]
         public string Title { get; set; }
 
         [Display(Name = "Nội dung")]

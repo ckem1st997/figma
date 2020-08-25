@@ -330,7 +330,7 @@ DecoupledDocumentEditor
     })
     .catch(error => {
 
-        console.error(error);
+        //  console.error(error);
     });
 //
 DecoupledDocumentEditor
@@ -407,7 +407,7 @@ DecoupledDocumentEditor
             editor.setData(h);
     })
     .catch(error => {
-        console.error(error);
+        //  console.error(error);
     });
 //
 DecoupledDocumentEditor
@@ -484,7 +484,7 @@ DecoupledDocumentEditor
             editor.setData(j);
     })
     .catch(error => {
-        console.error(error);
+        // console.error(error);
     });
 
 //
@@ -562,7 +562,7 @@ DecoupledDocumentEditor
             editor.setData(t);
     })
     .catch(error => {
-        console.error(error);
+        //   console.error(error);
     });
 
 //
@@ -639,7 +639,7 @@ DecoupledDocumentEditor.create(document.querySelector('#editorDescriptionMeta'),
         editor.setData(d);
 }).catch(error => {
 
-    console.error(error);
+    //  console.error(error);
 });
 
 //
@@ -718,7 +718,7 @@ DecoupledDocumentEditor
     })
     .catch(error => {
 
-        console.error(error);
+        //   console.error(error);
     });
 //
 DecoupledDocumentEditor
@@ -796,7 +796,7 @@ DecoupledDocumentEditor
     })
     .catch(error => {
 
-        console.error(error);
+        //  console.error(error);
     });
 
 //
@@ -875,7 +875,7 @@ DecoupledDocumentEditor
     })
     .catch(error => {
 
-        console.error(error);
+        // console.error(error);
     });
 
 
@@ -907,6 +907,24 @@ DecoupledDocumentEditor
 //    .catch(error => {
 //        console.error(error);
 //    });
+
+
+//function autochange() {
+//    var data = $("input#ProductID").val();
+//    $.ajax({
+//        type: 'POST',
+//        url: '/Csm/AutoCompleteCity',
+//        data: { Prefix: data },
+//        dataType: "json",
+//        success: function (data) {
+//            console.log(data);
+//        },
+//        error: function (data) {
+//            console.log(data.responseText);
+//        }
+//    });
+//}
+
 
 
 

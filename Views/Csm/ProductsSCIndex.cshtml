@@ -1,4 +1,4 @@
-﻿@model IEnumerable<figma.Models.ProductSizeColor>
+﻿@model IEnumerable<figma.ViewModel.PSC>
 
 @{
     ViewData["Title"] = "ProductsSCIndex";
@@ -24,36 +24,65 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ProductID)
+                Tên sản phẩm
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Color)
+                Hình ảnh
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Size)
+                Màu sắc
+            </th>
+            <th>
+                Size
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductID)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Color.NameColor)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Size.SizeProduct)
-                </td>
-                <td>
-                    <a asp-action="ProductsSCEdit" asp-route-id="@item.Id">Edit</a> |
-                    @*<a asp-action="ProductsSCDetails" asp-route-id="@item.Id">Details</a> |*@
-                    <a asp-action="ProductsSCDelete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
-        }
+        @if (Model != null)
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td>
+
+                        @{
+                            if (item.image != null)
+                            {
+                                string[] arrListStr = item.image.Split(',');
+                                <img width="80" height="80" asp-append-version="true" src="/@arrListStr[0]" />
+                            }
+                        }
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.color)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.size)
+                    </td>
+                    <td>
+                        <a class="btn btn-success"  asp-action="ProductsSCEdit" asp-route-id="@item.id">Edit</a> |
+                        @*<a asp-action="ProductsSCDetails" asp-route-id="@item.Id">Details</a> |*@
+                        <a class="btn btn-danger" onclick="deleteLC(@item.id)">Delete</a>
+                        <script>
+                                function deleteLC(id) {
+                                    if (confirm("Bạn có chắc chắn xóa không?")) {
+                                        $.post("/Csm/ProductsSCDelete", { id: id }, function (data) {
+                                            if (data) {
+                                                if (confirm("Xóa thành công"))
+                                                    window.location.assign('/Csm/ProductsSCIndex')
+                                            } else {
+                                                alert("Quá trình thực hiện không thành công. Hãy thử lại");
+                                            }
+                                        });
+                                    }
+                                }
+                        </script>
+                    </td>
+                </tr>
+            }
     </tbody>
 </table>

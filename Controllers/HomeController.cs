@@ -44,10 +44,13 @@ namespace figma.Controllers
 
             var userName = HttpContext.Session.GetString("UserName");
             var userId = HttpContext.Session.GetString("UserId");
-            var result = _context.Members.ToList().Where(a => a.MemberId == int.Parse(userId) && a.Email == userName);
-            if (result != null)
-                return View(result);
-            return RedirectToAction(nameof(Index));
+            if (userId != null && userName != null)
+            {
+                var result = _context.Members.ToList().Where(a => a.MemberId == int.Parse(userId) && a.Email == userName);
+                if (result != null)
+                    return View(result);
+            }
+            return RedirectToAction(nameof(Login));
         }
 
         [AllowAnonymous]
@@ -62,6 +65,7 @@ namespace figma.Controllers
             return View();
         }
 
+        [Authorize]
         public IActionResult Privacy()
         {
             return View();
@@ -115,6 +119,7 @@ namespace figma.Controllers
                 {
                     new Claim("UserName", users.Email),
                     new Claim("UserId", users.MemberId.ToString()),
+                    new Claim(ClaimTypes.Actor, users.Active.ToString()),
                     new Claim(ClaimTypes.Role,users.Active?"Users":"Active"),
                     };
                         // add session
@@ -136,7 +141,7 @@ namespace figma.Controllers
                         {
                             return Redirect(returnUrl);
                         }
-                        return RedirectToAction("Index");
+                        return RedirectToAction(nameof(Index));
                     }
                     else
                     {

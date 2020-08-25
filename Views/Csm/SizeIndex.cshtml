@@ -39,9 +39,23 @@
                     @Html.DisplayFor(modelItem => item.SizeProduct)
                 </td>
                 <td>
-                    <a asp-action="SizeEdit" asp-route-id="@item.SizeID">Edit</a> |
-                    <a asp-action="SizeDetails" asp-route-id="@item.SizeID">Details</a> |
-                    <a asp-action="SizeDelete" asp-route-id="@item.SizeID">Delete</a>
+                    <a class="btn btn-success" asp-action="SizeEdit" asp-route-id="@item.SizeID">Edit</a> |
+                    <a class="btn btn-success" asp-action="SizeDetails" asp-route-id="@item.SizeID">Details</a> |
+                    <a class="btn btn-success" onclick="deleteLC(@item.SizeID)">Delete</a>
+                    <script>
+                                function deleteLC(id) {
+                                    if (confirm("Bạn có chắc chắn xóa không?")) {
+                                        $.post("/Csm/SizeDelete", { id: id }, function (data) {
+                                            if (data) {
+                                                if (confirm("Xóa thành công"))
+                                                    window.location.assign('/Csm/SizeIndex')
+                                            } else {
+                                                alert("Quá trình thực hiện không thành công. Hãy thử lại");
+                                            }
+                                        });
+                                    }
+                                }
+                    </script>
                 </td>
             </tr>
         }

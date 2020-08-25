@@ -261,7 +261,7 @@ namespace figma.Migrations
                     b.Property<int>("Height")
                         .HasColumnType("int");
 
-                    b.Property<int>("Sort")
+                    b.Property<int>("Soft")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -543,6 +543,10 @@ namespace figma.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -1029,7 +1033,7 @@ namespace figma.Migrations
                         .IsRequired();
 
                     b.HasOne("figma.Models.Products", "Products")
-                        .WithMany()
+                        .WithMany("ProductSizeColors")
                         .HasForeignKey("ProductsProductID");
 
                     b.HasOne("figma.Models.Size", "Size")

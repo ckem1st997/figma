@@ -40,52 +40,61 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @try
         {
-            <tr>
-                <td>
-                    @item.BannerID
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BannerName)
-                </td>
-                <td>
-                    @if (item.CoverImage != null)
-                    {
-                        <img src="/@item.CoverImage" height="80" width="100" asp-append-version="true" />
-                    }
-                </td>
-
-                <td>
-                    @if (item.Active)
-                    {
-                        <span class="btn btn-success">Hoạt động</span>
-                    }
-                    else
-                    {
-                        <span class="btn btn-success">Kích hoạt</span>
-                    }
-                </td>
-
-                <td>
-                    <a class="btn btn-success" asp-action="ListBannerEdit" asp-route-id="@item.BannerID">Edit</a> |
-                    <a class="btn btn-success" onclick="deleteLC(@item.BannerID)">Delete</a>
-                    <script>
-                        function deleteLC(id) {
-                            if (confirm("Bạn có chắc chắn xóa không?")) {
-                                $.post("/Csm/ListBannerDelete", { id: id }, function (data) {
-                                    if (data) {
-                                        if (confirm("Xóa thành công"))
-                                            window.location.assign('/Csm/ListBanner')
-                                    } else {
-                                        alert("Quá trình thực hiện không thành công. Hãy thử lại");
-                                    }
-                                });
-                            }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.BannerID
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BannerName)
+                    </td>
+                    <td>
+                        @if (item.CoverImage != null)
+                        {
+                            <img src="/@item.CoverImage" height="80" width="100" asp-append-version="true" />
                         }
-                    </script>
-                </td>
-            </tr>
+                    </td>
+
+                    <td>
+                        @if (item.Active)
+                        {
+                            <span class="btn btn-success">Hoạt động</span>
+                        }
+                        else
+                        {
+                            <span class="btn btn-success">Kích hoạt</span>
+                        }
+                    </td>
+
+                    <td>
+                        <a class="btn btn-success" asp-action="ListBannerEdit" asp-route-id="@item.BannerID">Edit</a> |
+                        <a class="btn btn-success" onclick="deleteLC(@item.BannerID)">Delete</a>
+                        <script>
+                            function deleteLC(id) {
+                                if (confirm("Bạn có chắc chắn xóa không?")) {
+                                    $.post("/Csm/ListBannerDelete", { id: id }, function (data) {
+                                        if (data) {
+                                            if (confirm("Xóa thành công"))
+                                                window.location.assign('/Csm/ListBanner')
+                                        } else {
+                                            alert("Quá trình thực hiện không thành công. Hãy thử lại");
+                                        }
+                                    });
+                                }
+                            }
+                        </script>
+                    </td>
+                </tr>
+            }
         }
+        catch (Exception)
+        {
+
+            throw;
+        }
+
     </tbody>
 </table>

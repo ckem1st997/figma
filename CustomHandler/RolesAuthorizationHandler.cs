@@ -47,7 +47,7 @@ namespace figma.CustomHandler
                 // Console.WriteLine(11111);
                 // Console.WriteLine(_httpContextAccessor.HttpContext.Session.GetString(ClaimTypes.Role));
                 // validRole = context1.Users.Where(p => roles.Contains(p.Role) && p.UserName == userName).ToList().Any();
-                validRole = _context.Admins.ToList().Where(p => roles.Contains(p.Role) && p.Username == userName).Any();
+                validRole = _context.Members.ToList().Where(p => roles.Contains(p.Role) && p.Email == userName).Any();
 
             }
 

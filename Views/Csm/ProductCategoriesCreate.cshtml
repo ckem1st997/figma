@@ -193,7 +193,21 @@
 
                         <td>
                             <a class="btn btn-danger" asp-action="ProductCategoriesEdit" asp-route-id="@item.ProductCategorieID">Edit</a> |
-                            <a class="btn btn-danger" asp-action="ProductCategoriesDelete" asp-route-id="@item.ProductCategorieID">Delete</a>
+                            <a class="btn btn-danger" onclick="deleteLC(@item.ProductCategorieID)">Delete</a>
+                            <script>
+                                function deleteLC(id) {
+                                    if (confirm("Bạn có chắc chắn xóa không?")) {
+                                        $.post("/Csm/ProductCategoriesDelete", { id: id }, function (data) {
+                                            if (data) {
+                                                if (confirm("Xóa thành công"))
+                                                    window.location.assign('/Csm/ProductCategoriesCreate')
+                                            } else {
+                                                alert("Quá trình thực hiện không thành công. Hãy thử lại");
+                                            }
+                                        });
+                                    }
+                                }
+                            </script>
                         </td>
                     </tr>
                 }

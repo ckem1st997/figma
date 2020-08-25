@@ -95,11 +95,25 @@
                     <br />
                     <a class="btn btn-warning mb-2" asp-action="ProductsSC" asp-route-idsp="@item.ProductID">Size, Color</a>
                     <br />
-                    <a class="btn btn-danger" asp-action="ProductsDelete" asp-route-id="@item.ProductID">Xóa</a>
-
+                    <a class="btn btn-danger" onclick="deleteLC(@item.ProductID)">Xóa</a>
+                    <script>
+                        function deleteLC(id) {
+                            if (confirm("Bạn có chắc chắn xóa không?")) {
+                                $.post("/Csm/ProductsDelete", { id: id }, function (data) {
+                                    if (data) {
+                                        if (confirm("Xóa thành công"))
+                                            window.location.assign('/Csm/Listproducts')
+                                    } else {
+                                        alert("Quá trình thực hiện không thành công. Hãy thử lại");
+                                    }
+                                });
+                            }
+                        }
+                    </script>
                 </td>
             </tr>
-            <p class="d-none">@(i++)</p> 
+            <p class="d-none">@(i++)</p>
+
         }
     </tbody>
 </table>

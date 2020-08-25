@@ -55,6 +55,9 @@ namespace figma.Models
         [Display(Name = "Trạng thái")]
         public bool Active { get; set; }
 
+        [Required(ErrorMessage = "Chưa nhập thông tin")]
+        public string Role { get; set; }
+
         public virtual List<ProductLike> ProductLikes { get; set; }
 
 

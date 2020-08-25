@@ -10,7 +10,9 @@ using figma.Models;
 using figma.OutFile;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -21,12 +23,23 @@ using Microsoft.EntityFrameworkCore;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
+using figma.ViewModel;
 
 namespace figma.Controllers
 {
     [Authorize(Roles = "Admin")]
+    // giới hạn kích thước file
+    //  [RequestFormLimits(MultipartBodyLengthLimit = 4096000)]
+    //[Authorize(AuthenticationSchemes = AuthSchemes)]
+
+
     public class CsmController : Controller
     {
+        // xác thực cả 2 loại
+        // private const string AuthSchemes =
+        //CookieAuthenticationDefaults.AuthenticationScheme + "," +
+        //JwtBearerDefaults.AuthenticationScheme;
+
 
         private readonly IWebHostEnvironment _hostingEnvironment;
 
@@ -43,8 +56,6 @@ namespace figma.Controllers
         {
             return View();
         }
-
-
 
         [HttpPost]
         public async Task<IActionResult> createImage1(List<IFormFile> filesadd)
@@ -142,14 +153,16 @@ namespace figma.Controllers
 
             if (filesadd == null || filesadd.Count == 0)
                 return Ok(new { imgNode = "" });
+            //   if(filesadd)
             long size = filesadd.Sum(f => f.Length);
             var filePaths = new List<string>();
             string sql = "";
             foreach (var formFile in filesadd)
             {
+
                 if (FormFileExtensions.IsImage(formFile))
                 {
-                    if (formFile.Length > 0)
+                    if (formFile.Length > 0 && formFile.Length <= 4096000)
                     {
                         // full path to file in temp location
                         var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "" + path + "");
@@ -176,6 +189,9 @@ namespace figma.Controllers
                         // sql = sql.Replace("\\", "/");
 
                     }
+                    else
+                        return Ok(new { imgNode = "" });
+
                 }
                 else
                     return Ok(new { imgNode = "" });
@@ -301,31 +317,15 @@ namespace figma.Controllers
             return View(products);
         }
 
-        public async Task<IActionResult> ProductsDelete(int? id)
+        [HttpPost]
+        [IgnoreAntiforgeryToken]
+        public bool ProductsDelete(int id, string listimage)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var products = await _context.Products
-                .Include(p => p.Collection)
-                .Include(p => p.ProductCategories)
-                .FirstOrDefaultAsync(m => m.ProductID == id);
-            if (products == null)
-            {
-                return NotFound();
-            }
-            return View(products);
-        }
-
-        [HttpPost, ActionName("ProductsDelete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ProductsDeleteConfirmed(int id, string listimage)
-        {
-            var products = await _context.Products.FindAsync(id);
+            if (id < 1)
+                return false;
+            var products = _context.Products.Find(id);
             _context.Products.Remove(products);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
             TempData["result"] = "Xóa sản phẩm thành công !";
 
             if (listimage != null)
@@ -342,7 +342,7 @@ namespace figma.Controllers
                     }
                 }
             }
-            return RedirectToAction(nameof(ListProducts));
+            return true;
         }
 
         private bool ProductsExists(int id)
@@ -497,19 +497,42 @@ namespace figma.Controllers
         #endregion
 
         #region ProductsSizeColors       
-        public async Task<IActionResult> ProductsSCIndex()
+        public IActionResult ProductsSCIndex()
         {
-            var shopProductContext = _context.ProductSizeColors.Include(p => p.Color).Include(p => p.Size);
-            return View(await shopProductContext.ToListAsync());
+
+            var query =
+                from post in _context.ProductSizeColors
+                join meta in _context.Sizes on post.SizeID equals meta.SizeID
+                join meta1 in _context.Colors on post.ColorID equals meta1.ColorID
+                join meta2 in _context.Products on post.ProductID equals meta2.ProductID
+                select new PSC { id = post.Id, name = meta2.Name, color = meta1.NameColor, size = meta.SizeProduct, image = meta2.Image };
+            //    var shopProductContext = _context.ProductSizeColors.Include(p => p.Color).Include(p => p.Size).Include(p => p.Products);
+            return View(query);
         }
 
         public IActionResult ProductsSCCreate()
         {
+            ViewData["ProductID"] = new SelectList(_context.Products, "ProductID", "Name");
+            //  Console.WriteLine(ViewData["ProductID"]);
             ViewData["ColorID"] = new SelectList(_context.Colors, "ColorID", "NameColor");
             ViewData["SizeID"] = new SelectList(_context.Sizes, "SizeID", "SizeProduct");
             return View();
         }
+        //
+        [IgnoreAntiforgeryToken]
+        // bộ lọc chống giả mạo ajax
+        // [AutoValidateAntiforgeryToken]
+        [HttpPost]
+        public JsonResult AutoCompleteCity(string Prefix)
+        {
+            //Searching records from list using LINQ query  
+            var ProductsName = (from N in _context.Products
+                                where N.Name.StartsWith(Prefix)
+                                select new { N.Name }).Take(3);
+            return Json(ProductsName);
+        }
 
+        //
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ProductsSCCreate([Bind("Id,ProductID,ColorID,SizeID")] ProductSizeColor productSizeColor)
@@ -577,33 +600,19 @@ namespace figma.Controllers
             ViewData["SizeID"] = new SelectList(_context.Sizes, "SizeID", "SizeProduct", productSizeColor.SizeID);
             return View(productSizeColor);
         }
-        public async Task<IActionResult> ProductsSCDelete(int? id)
+
+
+        [HttpPost]
+        [IgnoreAntiforgeryToken]
+        public bool ProductsSCDelete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var productSizeColor = await _context.ProductSizeColors
-                .Include(p => p.Color)
-                .Include(p => p.Size)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (productSizeColor == null)
-            {
-                return NotFound();
-            }
-
-            return View(productSizeColor);
-        }
-
-        [HttpPost, ActionName("ProductsSCDelete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var productSizeColor = await _context.ProductSizeColors.FindAsync(id);
+            if (id < 1)
+                return false;
+            var productSizeColor = _context.ProductSizeColors.Find(id);
             _context.ProductSizeColors.Remove(productSizeColor);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(ProductsSCIndex));
+            _context.SaveChanges();
+            TempData["StatusMessage"] = "Thành công !";
+            return true;
         }
 
         private bool ProductSizeColorExistsS(int id)
@@ -687,33 +696,18 @@ namespace figma.Controllers
             }
             return View(productCategories);
         }
-        public async Task<IActionResult> ProductCategoriesDelete(int? id)
+
+        [HttpPost]
+        [IgnoreAntiforgeryToken]
+        public bool ProductCategoriesDelete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var productCategories = await _context.ProductCategories
-                .FirstOrDefaultAsync(m => m.ProductCategorieID == id);
-            if (productCategories == null)
-            {
-                return NotFound();
-            }
-
-            return View(productCategories);
-        }
-
-        [HttpPost, ActionName("ProductCategoriesDelete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ProductCategoriesDeleteConfirmed(int id)
-        {
-            var productCategories = await _context.ProductCategories.FindAsync(id);
+            if (id < 1)
+                return false;
+            var productCategories = _context.ProductCategories.Find(id);
             _context.ProductCategories.Remove(productCategories);
-            await _context.SaveChangesAsync();
-            TempData["result"] = "Xóa thành công ";
+            _context.SaveChanges();
 
-            return RedirectToAction(nameof(ProductCategoriesCreate));
+            return true;
         }
 
         private bool ProductCategoriesExistsS(int id)
@@ -819,32 +813,18 @@ namespace figma.Controllers
             return View(color);
         }
 
-        public async Task<IActionResult> ColorDelete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var color = await _context.Colors
-                .FirstOrDefaultAsync(m => m.ColorID == id);
-            if (color == null)
-            {
-                return NotFound();
-            }
-
-            return View(color);
-        }
 
         [HttpPost, ActionName("ColorDelete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ColorDeleteConfirmed(int id)
+        [IgnoreAntiforgeryToken]
+        public bool ColorDeleteConfirmed(int id)
         {
-            var color = await _context.Colors.FindAsync(id);
+            if (id < 1)
+                return false;
+            var color = _context.Colors.Find(id);
             _context.Colors.Remove(color);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
             TempData["result"] = "Xóa thành công !";
-            return RedirectToAction(nameof(ColorIndex));
+            return true;
         }
 
         private bool ColorExists(int id)
@@ -942,32 +922,18 @@ namespace figma.Controllers
             return View(size);
         }
 
-        public async Task<IActionResult> SizeDelete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var size = await _context.Sizes
-                .FirstOrDefaultAsync(m => m.SizeID == id);
-            if (size == null)
-            {
-                return NotFound();
-            }
-
-            return View(size);
-        }
 
         [HttpPost, ActionName("SizeDelete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SizeDeleteConfirmed(int id)
+        [IgnoreAntiforgeryToken]
+        public bool SizeDeleteConfirmed(int id)
         {
-            var size = await _context.Sizes.FindAsync(id);
+            if (id < 1)
+                return false;
+            var size = _context.Sizes.Find(id);
             _context.Sizes.Remove(size);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
             TempData["result"] = "Xóa thành công ";
-            return RedirectToAction(nameof(SizeIndex));
+            return true;
         }
 
         private bool SizeExists(int id)
@@ -1139,17 +1105,19 @@ namespace figma.Controllers
 
         // POST: TagProducts/Delete/5
         [HttpPost]
-        public bool SpecialCategoryProductsDeleteConfirmed(int id1, int id2)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SpecialCategoryProductsDeleteConfirmed(int id1, int id2)
         {
             if (id1 < 1 || id2 < 1)
             {
-                return false;
+                TempData["result"] = "Thất bại!";
+                return View();
             }
             var tagProducts = _context.TagProducts.Where(a => a.TagID == id1 && a.ProductID == id2).FirstOrDefault();
             _context.TagProducts.Remove(tagProducts);
-            _context.SaveChanges();
-            //  TempData["result"] = "Thành công !";
-            return true;
+            await _context.SaveChangesAsync();
+            TempData["result"] = "Thành công !";
+            return Redirect(nameof(SpecialCategoryProducts));
         }
 
         private bool TagProductsExists(int id)
@@ -1480,17 +1448,36 @@ namespace figma.Controllers
             }
             return View(collection);
         }
-
+        //
         // POST: Collections/Delete/5
-        [HttpPost]
-        public bool ListCollectionDelete(int id)
+        public IActionResult ListCollectionDelete(int id)
         {
             if (id < 1)
-                return false;
+            {
+                TempData["result"] = "Lỗi";
+
+                return Redirect(nameof(ListCollection));
+            }
             var collection = _context.Collections.Find(id);
+            return View(collection);
+        }
+
+        // POST: Collections/Delete/5
+        [HttpPost, ActionName("ListCollectionDelete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ListCollectionDeleteha(int id)
+        {
+            if (id < 1)
+            {
+                TempData["result"] = "Lỗi";
+                return Redirect(nameof(ListCollection));
+            }
+            var collection = await _context.Collections.FindAsync(id);
             _context.Collections.Remove(collection);
-            _context.SaveChanges();
-            return true;
+            await _context.SaveChangesAsync();
+            TempData["result"] = "Thành công !";
+
+            return RedirectToAction(nameof(ListCollection));
         }
 
         private bool CollectionExists(int id)
@@ -1582,17 +1569,32 @@ namespace figma.Controllers
             }
             return View(contacts);
         }
-
-
-        [HttpPost]
-        public bool ListContactsDelete(int id)
+        public IActionResult ListContactsDelete(int id)
         {
             if (id < 1)
-                return false;
-            var contacts = _context.Contacts.Find(id);
+            {
+                TempData["result"] = "Lỗi";
+
+                return Redirect(nameof(ListContacts));
+            }
+            var collection = _context.Contacts.Find(id);
+            return View(collection);
+        }
+
+        [HttpPost, ActionName("ListContacts")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ListContactsDelete1111(int id)
+        {
+            if (id < 1)
+            {
+                TempData["result"] = "Lỗi";
+                return Redirect(nameof(ListContacts));
+            }
+            var contacts = await _context.Contacts.FindAsync(id);
             _context.Contacts.Remove(contacts);
-            _context.SaveChanges();
-            return true;
+            await _context.SaveChangesAsync();
+            TempData["result"] = "Thành công !";
+            return Redirect(nameof(ListContacts));
         }
 
         private bool ContactsExists(int id)
@@ -1726,7 +1728,7 @@ namespace figma.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ListBannerCreate([Bind("BannerID,BannerName,CoverImage ,Width,Height,Active,GroupId,Url,Sort,Title,Content")] Banners banners)
+        public async Task<IActionResult> ListBannerCreate([Bind("BannerID,BannerName,CoverImage ,Width,Height,Active,GroupId,Url,Soft,Title,Content")] Banners banners)
         {
             if (ModelState.IsValid)
             {
@@ -1776,7 +1778,7 @@ namespace figma.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ListBannerEdit(int id, [Bind("BannerID,BannerName,CoverImage ,Width,Height,Active,GroupId,Url,Sort,Title,Content")] Banners banners)
+        public async Task<IActionResult> ListBannerEdit(int id, [Bind("BannerID,BannerName,CoverImage ,Width,Height,Active,GroupId,Url,Soft,Title,Content")] Banners banners)
         {
             if (id != banners.BannerID)
             {
@@ -1826,6 +1828,7 @@ namespace figma.Controllers
         }
 
         [HttpPost]
+        [IgnoreAntiforgeryToken]
         public bool ListBannerDelete(int id)
         {
             if (id < 1)
@@ -1868,7 +1871,6 @@ namespace figma.Controllers
             public string Password { get; set; }
         }
 
-        [Route("/Csm")]
         [HttpGet]
         [AllowAnonymous]
         public ActionResult LoginCsm()

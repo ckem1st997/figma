@@ -9,7 +9,7 @@
 
 
 <div>
-    <a class="btn btn-danger" onclick="deleteArtCategory('@ViewBag.id1','@ViewBag.id2')">Xóa</a>
+    <a class="btn btn-danger" asp-action="SpecialCategoryProductsDeleteConfirmed" asp-route-id1="@ViewBag.id1" asp-route-id2="@ViewBag.id2">Xóa</a>
 </div>
 <script>
     function deleteArtCategory(id1,id2) {

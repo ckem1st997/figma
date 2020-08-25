@@ -128,6 +128,7 @@ namespace figma.Models
         public virtual List<Carts> Carts { get; set; }
 
         public virtual List<ProductLike> ProductLikes { get; set; }
+        public virtual List<ProductSizeColor> ProductSizeColors { get; set; }
 
         public virtual List<ReviewProduct> ReviewProducts { get; set; }
         public virtual Collection Collection { get; set; }
