@@ -22,6 +22,9 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using figma.OutFile;
+using figma.DAL;
 
 namespace figma
 {
@@ -57,7 +60,7 @@ namespace figma
          config.LoginPath = "/Home/Login"; // Path for the redirect to user login page    
          config.AccessDeniedPath = "/Csm/UserAccessDenied";
          // sau 10s sẽ tự out
-         config.ExpireTimeSpan = TimeSpan.FromSeconds(300);
+         config.ExpireTimeSpan = TimeSpan.FromSeconds(500);
          config.Cookie.HttpOnly = true;
          config.Cookie.IsEssential = true;
      });
@@ -109,7 +112,7 @@ namespace figma
             {
                 options.Cookie.Name = ".AdventureWorks.Session";
                 //out sau ? s
-                options.IdleTimeout = TimeSpan.FromSeconds(300);
+                options.IdleTimeout = TimeSpan.FromSeconds(500);
                 //options.IOTimeout = TimeSpan.FromSeconds(300);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
@@ -122,6 +125,9 @@ namespace figma
                 option.CompatibilityMode = PasswordHasherCompatibilityMode.IdentityV3;
                 option.IterationCount = 12000;
             });
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped(typeof(GenericRepository<>));
+            services.AddScoped<UnitOfWork>();
             services.AddRazorPages();
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

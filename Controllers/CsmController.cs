@@ -10,20 +10,19 @@ using figma.Models;
 using figma.OutFile;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
 using figma.ViewModel;
+using figma.CustomHandler;
+using figma.DAL;
 
 namespace figma.Controllers
 {
@@ -32,7 +31,6 @@ namespace figma.Controllers
     //  [RequestFormLimits(MultipartBodyLengthLimit = 4096000)]
     //[Authorize(AuthenticationSchemes = AuthSchemes)]
 
-
     public class CsmController : Controller
     {
         // xác thực cả 2 loại
@@ -40,20 +38,21 @@ namespace figma.Controllers
         //CookieAuthenticationDefaults.AuthenticationScheme + "," +
         //JwtBearerDefaults.AuthenticationScheme;
 
-
+        private readonly UnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _hostingEnvironment;
 
         private readonly ShopProductContext _context;
 
-        public CsmController(ShopProductContext context, IWebHostEnvironment hostEnvironment)
+        public CsmController(ShopProductContext context, IWebHostEnvironment hostEnvironment, UnitOfWork unitOfWork)
         {
+            _unitOfWork = unitOfWork;
             _context = context;
             _hostingEnvironment = hostEnvironment;
         }
-
         //
         public IActionResult Index()
         {
+
             return View();
         }
 
@@ -205,28 +204,22 @@ namespace figma.Controllers
         //delete file
 
         [HttpPost]
-        public IActionResult deleteImage(string filesadd)
+        public IActionResult DeleteImage(string filesadd)
         {
             var result = false;
-            var h = filesadd;
-
             if (filesadd != null)
             {
-
                 String filepath = Path.Combine(_hostingEnvironment.WebRootPath, filesadd);
                 if (System.IO.File.Exists(filepath))
                 {
                     System.IO.File.Delete(filepath);
                     result = true;
                 }
-
             }
             else
-                return Ok(new { result = false, h });
-            return Ok(new
-            {
-                result
-            });
+                return Ok(new { result, content = "Xóa thất bại !" });
+            return Ok(new { result, content = "Xóa thành công !" });
+
         }
 
         #region Products
@@ -319,7 +312,7 @@ namespace figma.Controllers
 
         [HttpPost]
         [IgnoreAntiforgeryToken]
-        public bool ProductsDelete(int id, string listimage)
+        public bool ProductsDelete(int id)
         {
             if (id < 1)
                 return false;
@@ -328,18 +321,13 @@ namespace figma.Controllers
             _context.SaveChanges();
             TempData["result"] = "Xóa sản phẩm thành công !";
 
-            if (listimage != null)
+            if (products.Image != null)
             {
-                string[] arr = listimage.Split(',');
+                string[] arr = products.Image.Split(',');
 
                 foreach (var item in arr)
                 {
-                    Console.WriteLine(item);
-                    String filepath = Path.Combine(_hostingEnvironment.WebRootPath, item);
-                    if (System.IO.File.Exists(filepath))
-                    {
-                        System.IO.File.Delete(filepath);
-                    }
+                    DeleteImage(item);
                 }
             }
             return true;

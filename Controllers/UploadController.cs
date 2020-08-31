@@ -17,24 +17,95 @@ namespace figma.Controllers
     public class UploadController : Controller
     {
         private readonly IWebHostEnvironment _hostingEnvironment;
-
-        //  private readonly ShopProductContext _context;
-
-        public UploadController(/*ShopProductContext context,*/ IWebHostEnvironment hostEnvironment)
+        public UploadController(IWebHostEnvironment hostEnvironment)
         {
-            //  _context = context;
             _hostingEnvironment = hostEnvironment;
         }
-
-
         [HttpPost]
-        public async Task<IActionResult> createImage(List<IFormFile> filesadd, int height, int width)
+        public async Task<IActionResult> CreateImage(List<IFormFile> filesadd, int width, int height)
         {
-            DateTime dateTime = DateTime.Now;
-            //  string createFolderDate = "" + dateTime.Year + "\\" + dateTime.Month + "\\" + dateTime.Day + "";
             string createFolderDate = DateTime.Now.ToString("yyyy/MM/dd");
             string path = _hostingEnvironment.WebRootPath + @"\uploads\" + createFolderDate + "";
-            Console.WriteLine(path);
+            CreateFolder(path);
+            if (path == null)
+                path = "image";
+            if (filesadd == null || filesadd.Count == 0)
+                return Ok(new { imgNode = "Không có hình ảnh được chọn", result = false });
+            var filePaths = new List<string>();
+            string sql = "";
+            foreach (var formFile in filesadd)
+            {
+                if (FormFileExtensions.IsImage(formFile))
+                {
+                    if (formFile.Length > 0 && formFile.Length <= 4096000)
+                    {
+                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "" + path + "");
+                        filePaths.Add(filePath);
+                        var randomname = DateTime.Now.ToFileTime() + Path.GetExtension(formFile.FileName);
+                        var fileNameWithPath = string.Concat(filePath, "\\", randomname);
+                        using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
+                        {
+                            await formFile.CopyToAsync(stream);
+                        }
+                        Resize(fileNameWithPath, width > 0 && width <= 720 ? width : 720, height > 0 && height <= 822 ? height : 822);
+                        if (sql.Length > 1)
+                            sql = "" + sql + ",uploads/" + createFolderDate + "/" + randomname + "";
+                        else
+                            sql = "uploads/" + createFolderDate + "/" + randomname + "";
+                        Console.WriteLine(filePaths);
+                    }
+                    else
+                    {
+                        return Ok(new { imgNode = "File được chọn phải có kích thước > 0 và <4M !", result = false });
+                    }
+                }
+                else
+                    return Ok(new { imgNode = "File được chọn có định dạng không phải là hình ảnh", result = false });
+            }
+            return Ok(new
+            {
+                imgNode = sql,
+                result = true,
+                width,
+                height
+
+            });
+        }
+
+        //delete file
+
+        [HttpPost]
+        public IActionResult DeleteImage(string filesadd)
+        {
+            var result = false;
+            if (filesadd != null)
+            {
+                String filepath = Path.Combine(_hostingEnvironment.WebRootPath, filesadd);
+                if (System.IO.File.Exists(filepath))
+                {
+                    System.IO.File.Delete(filepath);
+                    result = true;
+                }
+            }
+            else
+                return Ok(new { result, content = "Xóa thất bại !" });
+            return Ok(new { result, content = "Xóa thành công !" });
+
+        }
+
+        // resize
+
+        public void Resize(string h, int w, int he)
+        {
+            using (Image<Rgba32> image = (Image<Rgba32>)Image.Load(h))
+            {
+                image.Mutate(x => x.Resize(w, he));
+                image.Save(h);
+            }
+        }
+
+        public void CreateFolder(string path)
+        {
             try
             {
                 if (Directory.Exists(path))
@@ -48,82 +119,6 @@ namespace figma.Controllers
                 Console.WriteLine("The process failed: {0}", e.ToString());
             }
             finally { }
-
-            // copy file
-            if (path == null)
-                path = "image";
-
-            if (filesadd == null || filesadd.Count == 0)
-                return Ok(new { imgNode = "" });
-            long size = filesadd.Sum(f => f.Length);
-            var filePaths = new List<string>();
-            string sql = "";
-            foreach (var formFile in filesadd)
-            {
-                if (FormFileExtensions.IsImage(formFile))
-                {
-                    if (formFile.Length > 0)
-                    {
-                        // full path to file in temp location
-                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "" + path + "");
-
-                        filePaths.Add(filePath);
-                        var randomname = DateTime.Now.ToFileTime() + Path.GetExtension(formFile.FileName);
-                        var fileNameWithPath = string.Concat(filePath, "\\", randomname);
-
-                        using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
-                        {
-                            await formFile.CopyToAsync(stream);
-                        }
-                        // resize
-                        using (Image<Rgba32> image = (Image<Rgba32>)Image.Load(fileNameWithPath))
-                        {
-                            image.Mutate(x => x.Resize(width, height));
-                            image.Save(fileNameWithPath);
-                        }
-
-                        if (sql.Length > 1)
-                            sql = "" + sql + ",uploads/" + createFolderDate + "/" + randomname + "";
-                        else
-                            sql = "uploads/" + createFolderDate + "/" + randomname + "";
-                        // sql = sql.Replace("\\", "/");
-
-                    }
-                }
-                else
-                    return Ok(new { imgNode = "" });
-            }
-            return Ok(new
-            {
-                imgNode = sql
-            });
-        }
-
-        //delete file
-
-        [HttpPost]
-        public IActionResult deleteImage(string filesadd)
-        {
-            var result = false;
-            var h = filesadd;
-
-            if (filesadd != null)
-            {
-
-                String filepath = Path.Combine(_hostingEnvironment.WebRootPath, filesadd);
-                if (System.IO.File.Exists(filepath))
-                {
-                    System.IO.File.Delete(filepath);
-                    result = true;
-                }
-
-            }
-            else
-                return Ok(new { result = false, h });
-            return Ok(new
-            {
-                result
-            });
         }
     }
 }

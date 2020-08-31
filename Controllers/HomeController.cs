@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading;
 using System.Threading.Tasks;
 using figma.Data;
 using figma.Models;
@@ -12,24 +14,55 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using figma.DAL;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace figma.Controllers
 {
+    // [Developer("Joan Smith", "1", Reviewed = true)]
+    //  [Developer("Joan Smith1", "2", Reviewed = false)]
     public class HomeController : Controller
     {
+        //  private readonly ShopProductContext _context;
+        private readonly UnitOfWork _unitOfWork;
 
-        private readonly ShopProductContext _context;
-
-        public HomeController(ShopProductContext shopProductContext)
+        private IMemoryCache _iMemoryCache;
+        public HomeController(UnitOfWork unitOfWork, IMemoryCache inMemoryCache)
         {
-            _context = shopProductContext;
-
+            _iMemoryCache = inMemoryCache;
+            _unitOfWork = unitOfWork;
         }
 
+        #region CustomAttribute
+        //public static void GetAttribute(Type t)
+        //{
+        //    DeveloperAttribute[] MyAttributes =
+        // (DeveloperAttribute[])Attribute.GetCustomAttributes(t, typeof(DeveloperAttribute));
+
+        //    if (MyAttributes.Length == 0)
+        //    {
+        //        Console.WriteLine("The attribute was not found.");
+        //    }
+        //    else
+        //    {
+        //        for (int i = 0; i < MyAttributes.Length; i++)
+        //        {
+        //            // Get the Name value.
+        //            Console.WriteLine("The Name Attribute is: {0}.", MyAttributes[i].Name);
+        //            // Get the Level value.
+        //            Console.WriteLine("The Level Attribute is: {0}.", MyAttributes[i].Level);
+        //            // Get the Reviewed value.
+        //            Console.WriteLine("The Reviewed Attribute is: {0}.", MyAttributes[i].Reviewed);
+        //        }
+        //    }
+        //}
+        #endregion
+
+        //
 
         public IActionResult Index()
         {
-
+            //  GetAttribute(typeof(HomeController));
             return View();
         }
 
@@ -37,7 +70,6 @@ namespace figma.Controllers
         {
             return View();
         }
-
         [Authorize]
         public IActionResult Account()
         {
@@ -46,7 +78,7 @@ namespace figma.Controllers
             var userId = HttpContext.Session.GetString("UserId");
             if (userId != null && userName != null)
             {
-                var result = _context.Members.ToList().Where(a => a.MemberId == int.Parse(userId) && a.Email == userName);
+                var result = _unitOfWork.MemberRepository.Get(a => a.MemberId == int.Parse(userId) && a.Email == userName);
                 if (result != null)
                     return View(result);
             }
@@ -58,19 +90,16 @@ namespace figma.Controllers
         {
             return View();
         }
-
         [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
         }
-
         [Authorize]
         public IActionResult Privacy()
         {
             return View();
         }
-
         //
         public class RegisterViewModel
         {
@@ -112,7 +141,7 @@ namespace figma.Controllers
             {
                 if (ValidateAdmin(user.Username, user.Password))
                 {
-                    var users = _context.Members.SingleOrDefault(a => a.Email == user.Username);
+                    var users = _unitOfWork.MemberRepository.Get(a => a.Email == user.Username).SingleOrDefault();
                     if (users != null)
                     {
                         var userClaims = new List<Claim>()
@@ -129,13 +158,16 @@ namespace figma.Controllers
 
                         }
                         var userIdentity = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme);
-
                         var authProperties = new AuthenticationProperties
                         {
                             AllowRefresh = true,
                             IsPersistent = true
                         };
                         await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(userIdentity), authProperties);
+                        //  code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
+                        //Execute("shoponline@gmail.com", "Shop1997", "hopxc1997@gmail.com", "Nguyễn Khả Hợp", "Thanh toán", "Đã mua").Wait();
+                        //await _emailSender.SendEmailAsync("hopxc1997@gmail.com", "Confirm your email",
+                        //$"Please confirm your account by <a href='{HtmlEncoder.Default.Encode("123")}'>clicking here</a>.");
                         if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
                            && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
                         {
@@ -162,8 +194,7 @@ namespace figma.Controllers
         [AllowAnonymous]
         public bool ValidateAdmin(string username, string password)
         {
-            var admin = _context.Members.SingleOrDefault(a => a.Email == username);
-
+            var admin = _unitOfWork.MemberRepository.Get(a => a.Email == username).SingleOrDefault();
             return admin != null && new PasswordHasher<Members>().VerifyHashedPassword(new Members(), admin.Password, password) == PasswordVerificationResult.Success;
         }
         //
@@ -187,7 +218,7 @@ namespace figma.Controllers
         {
             if (ModelState.IsValid)
             {
-                var dk = _context.Members.Where(a => a.Email.Equals(model.Username)).SingleOrDefault();
+                var dk = _unitOfWork.MemberRepository.Get(a => a.Email.Equals(model.Username)).SingleOrDefault();
                 if (dk != null)
                 {
                     ModelState.AddModelError("", @"Tên đăng nhập này có rồi");
@@ -195,18 +226,21 @@ namespace figma.Controllers
                 else
                 {
                     var hashedPassword = new PasswordHasher<Members>().HashPassword(new Members(), model.Password);
-                    await _context.Members.AddAsync(new Members { Email = model.Username, Password = hashedPassword, Active = true, CreateDate = DateTime.Now, Fullname = model.Fullname, Mobile = model.Sdt.ToString() });
-                    await _context.SaveChangesAsync();
+                    _unitOfWork.MemberRepository.Insert(new Members { Email = model.Username, Password = hashedPassword, Active = true, CreateDate = DateTime.Now, Fullname = model.Fullname, Mobile = model.Sdt.ToString(), Role = "User" });
+                    await _unitOfWork.Save();
+                    _iMemoryCache.Remove("Members");
                     TempData["tq"] = "Đăng ký thành công";
-                    return RedirectToAction("Login");
+                    return RedirectToAction("Login", model);
                 }
-                // ModelState.AddModelError("", "Lỗi đăng ký, xin vui lòng thử lại nha");
-
             }
             TempData["tq"] = "Thất bại";
 
             return View(model);
         }
-
+        protected override void Dispose(bool disposing)
+        {
+            _unitOfWork.Dispose();
+            base.Dispose(disposing);
+        }
     }
 }

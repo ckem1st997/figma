@@ -14,9 +14,6 @@ namespace figma.OutFile
 
         public static bool IsImage(this IFormFile postedFile)
         {
-            //-------------------------------------------
-            //  Check the image mime types
-            //-------------------------------------------
             if (postedFile.ContentType.ToLower() != "image/jpg" &&
                         postedFile.ContentType.ToLower() != "image/jpeg" &&
                         postedFile.ContentType.ToLower() != "image/pjpeg" &&
@@ -27,9 +24,6 @@ namespace figma.OutFile
                 return false;
             }
 
-            //-------------------------------------------
-            //  Check the image extension
-            //-------------------------------------------
             if (Path.GetExtension(postedFile.FileName).ToLower() != ".jpg"
                 && Path.GetExtension(postedFile.FileName).ToLower() != ".png"
                 && Path.GetExtension(postedFile.FileName).ToLower() != ".gif"
@@ -37,19 +31,12 @@ namespace figma.OutFile
             {
                 return false;
             }
-
-            //-------------------------------------------
-            //  Attempt to read the file and check the first bytes
-            //-------------------------------------------
             try
             {
                 if (!postedFile.OpenReadStream().CanRead)
                 {
                     return false;
                 }
-                //------------------------------------------
-                //check whether the image size exceeding the limit or not
-
                 byte[] buffer = new byte[ImageMinimumBytes];
                 postedFile.OpenReadStream().Read(buffer, 0, ImageMinimumBytes);
                 string content = System.Text.Encoding.UTF8.GetString(buffer);
@@ -63,13 +50,6 @@ namespace figma.OutFile
             {
                 return false;
             }
-
-            //-------------------------------------------
-            //  Try to instantiate new Bitmap, if .NET will throw exception
-            //  we can assume that it's not a valid image
-            //-------------------------------------------
-
-
             return true;
         }
     }

@@ -13,6 +13,10 @@ namespace figma.Data
     //dotnet ef database update
     public class ShopProductContext : DbContext
     {
+        public ShopProductContext()
+        {
+        }
+
         public ShopProductContext(DbContextOptions<ShopProductContext> options)
             : base(options)
         {

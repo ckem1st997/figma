@@ -99,14 +99,14 @@ async function AJAXSubmitCreate(oFormElement) {
     const formData = new FormData(oFormElement);
     $.ajax({
         type: 'POST',
-        url: '/Csm/createImage',
+        url: '/Upload/CreateImage?width=720&height=822',
         data: formData,
         cache: false,
         contentType: false,
         processData: false,
         success: function (data) {
             //    console.log(data.imgNode);
-            if (data.imgNode.length > 0) {
+            if (data.result) {
                 var listimage = data.imgNode.split(",");
                 if (listimage.length > 1 || listimage != null)
                     for (var i = 0; i < listimage.length; i++) {
@@ -114,7 +114,7 @@ async function AJAXSubmitCreate(oFormElement) {
                     }
             }
             else {
-                alert("Xin vui lòng chọn ảnh !");
+                alert(data.imgNode);
             }
             addlistone();
 
