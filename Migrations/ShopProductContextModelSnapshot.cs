@@ -124,60 +124,9 @@ namespace figma.Migrations
                     b.ToTable("Albums");
                 });
 
-            modelBuilder.Entity("figma.Models.ArticleCategories", b =>
+            modelBuilder.Entity("figma.Models.Article", b =>
                 {
-                    b.Property<int>("ArticleCategorieID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("CategoryActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("CategoryName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<int>("CategorySort")
-                        .HasColumnType("int");
-
-                    b.Property<string>("DescriptionMeta")
-                        .HasColumnType("nvarchar(500)")
-                        .HasMaxLength(500);
-
-                    b.Property<bool>("Hot")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Link")
-                        .HasColumnType("nvarchar(500)")
-                        .HasMaxLength(500);
-
-                    b.Property<int>("ParentId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("ShowHome")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("ShowMenu")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Slug")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
-                    b.Property<string>("TitleMeta")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
-                    b.HasKey("ArticleCategorieID");
-
-                    b.ToTable("ArticleCategories");
-                });
-
-            modelBuilder.Entity("figma.Models.Articles", b =>
-                {
-                    b.Property<int>("ArticleID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -185,7 +134,7 @@ namespace figma.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
-                    b.Property<int>("ArticleCategorieID")
+                    b.Property<int>("ArticleCategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Body")
@@ -228,11 +177,62 @@ namespace figma.Migrations
                     b.Property<int>("View")
                         .HasColumnType("int");
 
-                    b.HasKey("ArticleID");
+                    b.HasKey("Id");
 
-                    b.HasIndex("ArticleCategorieID");
+                    b.HasIndex("ArticleCategoryId");
 
                     b.ToTable("Articles");
+                });
+
+            modelBuilder.Entity("figma.Models.ArticleCategory", b =>
+                {
+                    b.Property<int>("ArticleCategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("CategoryActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("CategoryName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<int>("CategorySort")
+                        .HasColumnType("int");
+
+                    b.Property<string>("DescriptionMeta")
+                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(500);
+
+                    b.Property<bool>("Hot")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("ParentId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("ShowHome")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("ShowMenu")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Slug")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("TitleMeta")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(500);
+
+                    b.HasKey("ArticleCategoryId");
+
+                    b.ToTable("ArticleCategories");
                 });
 
             modelBuilder.Entity("figma.Models.Banners", b =>
@@ -978,11 +978,11 @@ namespace figma.Migrations
                     b.ToTable("Videos");
                 });
 
-            modelBuilder.Entity("figma.Models.Articles", b =>
+            modelBuilder.Entity("figma.Models.Article", b =>
                 {
-                    b.HasOne("figma.Models.ArticleCategories", "ArticleCategories")
+                    b.HasOne("figma.Models.ArticleCategory", "ArticleCategory")
                         .WithMany("Articles")
-                        .HasForeignKey("ArticleCategorieID")
+                        .HasForeignKey("ArticleCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

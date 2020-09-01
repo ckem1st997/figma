@@ -79,9 +79,23 @@
                         @item.Active
                     </td>
                     <td>
-                        <a asp-action="SpecialCategoryEdit" asp-route-id="@item.TagID">Edit</a> |
+                        <a class="btn btn-success" asp-action="SpecialCategoryEdit" asp-route-id="@item.TagID">Edit</a> |
                         @*<a asp-action="SpecialCategoryDetails" asp-route-id="@item.TagID">Details</a> |*@
-                        <a asp-action="SpecialCategoryDelete" asp-route-id="@item.TagID">Delete</a>
+                        <a class="btn btn-success" onclick="deleteLC(@item.TagID)">Delete</a>
+                        <script>
+                        function deleteLC(id) {
+                            if (confirm("Bạn có chắc chắn xóa không?")) {
+                                $.post("/Csm/SpecialCategoryDelete", { id: id }, function (data) {
+                                    if (data) {
+                                        if (confirm("Xóa thành công"))
+                                            window.location.assign('/Csm/SpecialCategory')
+                                    } else {
+                                        alert("Quá trình thực hiện không thành công. Hãy thử lại");
+                                    }
+                                });
+                            }
+                        }
+                        </script>
                     </td>
                 </tr>
             }

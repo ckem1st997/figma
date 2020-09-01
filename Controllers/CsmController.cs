@@ -221,21 +221,21 @@ namespace figma.Controllers
             return Ok(new { result, content = "Xóa thành công !" });
 
         }
-
+        //
         #region Products
 
 
         //
-        public async Task<IActionResult> ListProducts()
+        public IActionResult ListProducts()
         {
-            var shopProductContext = _context.Products.Include(p => p.Collection).Include(p => p.ProductCategories);
-            return View(await shopProductContext.ToListAsync());
+            var shopProductContext = _unitOfWork.ProductRepository.Get(includeProperties: "Collection,ProductCategories");
+            return View(shopProductContext.ToList());
         }
 
         public IActionResult ProductsCreate()
         {
-            ViewData["CollectionID"] = new SelectList(_context.Collections, "CollectionID", "Name");
-            ViewData["ProductCategorieID"] = new SelectList(_context.ProductCategories, "ProductCategorieID", "Name");
+            ViewData["CollectionID"] = new SelectList(_unitOfWork.CollectionRepository.Get().ToList(), "CollectionID", "Name");
+            ViewData["ProductCategorieID"] = new SelectList(_unitOfWork.ProductCategoryRepository.Get().ToList(), "ProductCategorieID", "Name");
             return View();
         }
 
@@ -246,31 +246,30 @@ namespace figma.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(products);
-                await _context.SaveChangesAsync();
+                _unitOfWork.ProductRepository.Insert(products);
+                await _unitOfWork.Save();
                 TempData["result"] = "Thêm sản phẩm thành công !";
                 return RedirectToAction(nameof(ListProducts));
             }
-
-            ViewData["CollectionID"] = new SelectList(_context.Collections, "CollectionID", "Name", products.CollectionID);
-            ViewData["ProductCategorieID"] = new SelectList(_context.ProductCategories, "ProductCategorieID", "Name", products.ProductCategorieID);
+            ViewData["CollectionID"] = new SelectList(_unitOfWork.CollectionRepository.Get().ToList(), "CollectionID", "Name", products.CollectionID);
+            ViewData["ProductCategorieID"] = new SelectList(_unitOfWork.ProductCategoryRepository.Get().ToList(), "ProductCategorieID", "Name", products.ProductCategorieID);
             return View(products);
         }
 
-        public async Task<IActionResult> ProductsEdit(int? id)
+        public IActionResult ProductsEdit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var products = await _context.Products.FindAsync(id);
+            var products = _unitOfWork.ProductRepository.GetByID(id);
             if (products == null)
             {
                 return NotFound();
             }
-            ViewData["CollectionID"] = new SelectList(_context.Collections, "CollectionID", "Name", products.CollectionID);
-            ViewData["ProductCategorieID"] = new SelectList(_context.ProductCategories, "ProductCategorieID", "Name", products.ProductCategorieID);
+            ViewData["CollectionID"] = new SelectList(_unitOfWork.CollectionRepository.Get().ToList(), "CollectionID", "Name", products.CollectionID);
+            ViewData["ProductCategorieID"] = new SelectList(_unitOfWork.ProductCategoryRepository.Get().ToList(), "ProductCategorieID", "Name", products.ProductCategorieID);
             return View(products);
         }
 
@@ -287,21 +286,14 @@ namespace figma.Controllers
             {
                 try
                 {
-                    _context.Update(products);
-                    await _context.SaveChangesAsync();
+                    _unitOfWork.ProductRepository.Update(products);
+                    await _unitOfWork.Save();
                     TempData["result"] = "Chỉnh sửa sản phẩm thành công !";
 
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProductsExists(products.ProductID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    return NotFound();
                 }
                 return RedirectToAction(nameof(ListProducts));
             }
@@ -312,13 +304,13 @@ namespace figma.Controllers
 
         [HttpPost]
         [IgnoreAntiforgeryToken]
-        public bool ProductsDelete(int id)
+        public async Task<bool> ProductsDelete(int id)
         {
             if (id < 1)
                 return false;
-            var products = _context.Products.Find(id);
-            _context.Products.Remove(products);
-            _context.SaveChanges();
+            var products = _unitOfWork.ProductRepository.GetByID(id);
+            _unitOfWork.ProductRepository.Delete(products);
+            await _unitOfWork.Save();
             TempData["result"] = "Xóa sản phẩm thành công !";
 
             if (products.Image != null)
@@ -332,26 +324,21 @@ namespace figma.Controllers
             }
             return true;
         }
-
-        private bool ProductsExists(int id)
-        {
-            return _context.Products.Any(e => e.ProductID == id);
-        }
         #endregion
 
         #region Size,Color
-        public async Task<IActionResult> ProductsSC(int? idsp)
+        public IActionResult ProductsSC(int? idsp)
         {
-            var shopProductContext = _context.ProductSizeColors.Include(p => p.Color).Include(p => p.Size).Where(p => p.ProductID == idsp);
+            var shopProductContext = _unitOfWork.ProductSCRepository.Get(p => p.ProductID == idsp, includeProperties: "Color,Size");
             ViewBag.idsp = idsp;
-            return View(await shopProductContext.ToListAsync());
+            return View(shopProductContext.ToList());
         }
 
         public IActionResult ProductsCreateSC(int? id)
         {
             ViewBag.IdSP = id;
-            ViewData["ColorID"] = new SelectList(_context.Colors, "ColorID", "NameColor");
-            ViewData["SizeID"] = new SelectList(_context.Sizes, "SizeID", "SizeProduct");
+            ViewData["ColorID"] = new SelectList(_unitOfWork.ColorRepository.Get(), "ColorID", "NameColor");
+            ViewData["SizeID"] = new SelectList(_unitOfWork.SizeRepository.Get(), "SizeID", "SizeProduct");
             return View();
         }
 
@@ -361,55 +348,30 @@ namespace figma.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(productSizeColor);
-                await _context.SaveChangesAsync();
+                _unitOfWork.ProductSCRepository.Insert(productSizeColor);
+                await _unitOfWork.Save();
                 TempData["StatusMessage"] = "Tạo Thành Công";
                 return RedirectToAction(nameof(ProductsSC), new { idsp = productSizeColor.ProductID });
             }
-            ViewData["ColorID"] = new SelectList(_context.Colors, "ColorID", "NameColor", productSizeColor.ColorID);
-            ViewData["SizeID"] = new SelectList(_context.Sizes, "SizeID", "SizeProduct", productSizeColor.SizeID);
+            ViewData["ColorID"] = new SelectList(_unitOfWork.ColorRepository.Get(), "ColorID", "NameColor", productSizeColor.ColorID);
+            ViewData["SizeID"] = new SelectList(_unitOfWork.SizeRepository.Get(), "SizeID", "SizeProduct", productSizeColor.SizeID);
             return View(productSizeColor);
         }
 
-        public async Task<IActionResult> ProductsDetailsSC(int? id)
-        {
-
-            if (id == null)
-            {
-                return NotFound();
-            }
-            ViewBag.NameSP = from a in _context.Products
-                             where a.ProductID == id
-                             select a.Name;
-            ViewBag.Id = id;
-            Console.WriteLine(2);
-            Console.WriteLine(ViewBag.Id);
-            var productSizeColor = await _context.ProductSizeColors
-                .Include(p => p.Color)
-                .Include(p => p.Size)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (productSizeColor == null)
-            {
-                return NotFound();
-            }
-
-            return View(productSizeColor);
-        }
-
-        public async Task<IActionResult> ProductsEditSC(int? id)
+        public IActionResult ProductsEditSC(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var productSizeColor = await _context.ProductSizeColors.FirstOrDefaultAsync(m => m.Id == id);
+            var productSizeColor = _unitOfWork.ProductSCRepository.GetByID(id);
             if (productSizeColor == null)
             {
                 return NotFound();
             }
-            ViewData["ColorID"] = new SelectList(_context.Colors, "ColorID", "NameColor", productSizeColor.ColorID);
-            ViewData["SizeID"] = new SelectList(_context.Sizes, "SizeID", "SizeProduct", productSizeColor.SizeID);
+            ViewData["ColorID"] = new SelectList(_unitOfWork.ColorRepository.Get(), "ColorID", "NameColor", productSizeColor.ColorID);
+            ViewData["SizeID"] = new SelectList(_unitOfWork.SizeRepository.Get(), "SizeID", "SizeProduct", productSizeColor.SizeID);
             return View(productSizeColor);
         }
 
@@ -426,60 +388,32 @@ namespace figma.Controllers
             {
                 try
                 {
-                    _context.Update(productSizeColor);
-                    await _context.SaveChangesAsync();
+                    _unitOfWork.ProductSCRepository.Update(productSizeColor);
+                    await _unitOfWork.Save();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProductSizeColorExists(productSizeColor.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    return NotFound();
+
                 }
                 return RedirectToAction(nameof(ProductsSC), new { idsp = productSizeColor.ProductID });
             }
-            ViewData["ColorID"] = new SelectList(_context.Colors, "ColorID", "NameColor", productSizeColor.ColorID);
-            ViewData["SizeID"] = new SelectList(_context.Sizes, "SizeID", "SizeProduct", productSizeColor.SizeID);
-            return View(productSizeColor);
-        }
-
-        public async Task<IActionResult> ProductsDeleteSC(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var productSizeColor = await _context.ProductSizeColors
-                .Include(p => p.Color)
-                .Include(p => p.Size)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (productSizeColor == null)
-            {
-                return NotFound();
-            }
-
+            ViewData["ColorID"] = new SelectList(_unitOfWork.ColorRepository.Get(), "ColorID", "NameColor", productSizeColor.ColorID);
+            ViewData["SizeID"] = new SelectList(_unitOfWork.SizeRepository.Get(), "SizeID", "SizeProduct", productSizeColor.SizeID);
             return View(productSizeColor);
         }
 
         [HttpPost, ActionName("ProductsDeleteSC")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ProductsDeleteSCConfirmed(int id)
+        [IgnoreAntiforgeryToken]
+        public async Task<bool> ProductsDeleteSCConfirmed(int id)
         {
-            var productSizeColor = await _context.ProductSizeColors.FindAsync(id);
-            _context.ProductSizeColors.Remove(productSizeColor);
-            await _context.SaveChangesAsync();
+            if (id < 1)
+                return false;
+            var productSizeColor = _unitOfWork.ProductSCRepository.GetByID(id);
+            _unitOfWork.ProductSCRepository.Delete(productSizeColor);
+            await _unitOfWork.Save();
             TempData["StatusMessage"] = "Xóa Thành Công";
-            return RedirectToAction(nameof(ProductsSC), new { idsp = productSizeColor.ProductID });
-        }
-
-        private bool ProductSizeColorExists(int id)
-        {
-            return _context.ProductSizeColors.Any(e => e.Id == id);
+            return true;
         }
 
         #endregion
@@ -487,38 +421,36 @@ namespace figma.Controllers
         #region ProductsSizeColors       
         public IActionResult ProductsSCIndex()
         {
-
             var query =
-                from post in _context.ProductSizeColors
-                join meta in _context.Sizes on post.SizeID equals meta.SizeID
-                join meta1 in _context.Colors on post.ColorID equals meta1.ColorID
-                join meta2 in _context.Products on post.ProductID equals meta2.ProductID
+                from post in _unitOfWork.ProductSCRepository.Get()
+                join meta in _unitOfWork.SizeRepository.Get() on post.SizeID equals meta.SizeID
+                join meta1 in _unitOfWork.ColorRepository.Get() on post.ColorID equals meta1.ColorID
+                join meta2 in _unitOfWork.ProductRepository.Get() on post.ProductID equals meta2.ProductID
                 select new PSC { id = post.Id, name = meta2.Name, color = meta1.NameColor, size = meta.SizeProduct, image = meta2.Image };
-            //    var shopProductContext = _context.ProductSizeColors.Include(p => p.Color).Include(p => p.Size).Include(p => p.Products);
             return View(query);
         }
 
         public IActionResult ProductsSCCreate()
         {
-            ViewData["ProductID"] = new SelectList(_context.Products, "ProductID", "Name");
-            //  Console.WriteLine(ViewData["ProductID"]);
-            ViewData["ColorID"] = new SelectList(_context.Colors, "ColorID", "NameColor");
-            ViewData["SizeID"] = new SelectList(_context.Sizes, "SizeID", "SizeProduct");
+            ViewData["ProductID"] = new SelectList(_unitOfWork.ProductRepository.Get(), "ProductID", "Name");
+            ViewData["ColorID"] = new SelectList(_unitOfWork.ColorRepository.Get(), "ColorID", "NameColor");
+            ViewData["SizeID"] = new SelectList(_unitOfWork.SizeRepository.Get(), "SizeID", "SizeProduct");
             return View();
         }
         //
-        [IgnoreAntiforgeryToken]
+
         // bộ lọc chống giả mạo ajax
         // [AutoValidateAntiforgeryToken]
-        [HttpPost]
-        public JsonResult AutoCompleteCity(string Prefix)
-        {
-            //Searching records from list using LINQ query  
-            var ProductsName = (from N in _context.Products
-                                where N.Name.StartsWith(Prefix)
-                                select new { N.Name }).Take(3);
-            return Json(ProductsName);
-        }
+        //[HttpPost]
+        //[IgnoreAntiforgeryToken]
+        //public JsonResult AutoCompleteCity(string Prefix)
+        //{
+        //    //Searching records from list using LINQ query  
+        //    var ProductsName = (from N in _context.Products
+        //                        where N.Name.StartsWith(Prefix)
+        //                        select new { N.Name }).Take(3);
+        //    return Json(ProductsName);
+        //}
 
         //
         [HttpPost]
@@ -527,17 +459,16 @@ namespace figma.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(productSizeColor);
-                await _context.SaveChangesAsync();
+                _unitOfWork.ProductSCRepository.Insert(productSizeColor);
+                await _unitOfWork.Save();
                 TempData["StatusMessage"] = "Tạo thành công";
                 return RedirectToAction(nameof(ProductsSCIndex));
             }
-            ViewData["ColorID"] = new SelectList(_context.Colors, "ColorID", "NameColor", productSizeColor.ColorID);
-            ViewData["SizeID"] = new SelectList(_context.Sizes, "SizeID", "SizeProduct", productSizeColor.SizeID);
+            ViewData["ColorID"] = new SelectList(_unitOfWork.ColorRepository.Get(), "ColorID", "NameColor", productSizeColor.ColorID);
+            ViewData["SizeID"] = new SelectList(_unitOfWork.SizeRepository.Get(), "SizeID", "SizeProduct", productSizeColor.SizeID);
             return View(productSizeColor);
         }
 
-        // GET: ProductSizeColors/Edit/5
         public async Task<IActionResult> ProductsSCEdit(int? id)
         {
             if (id == null)
@@ -550,8 +481,8 @@ namespace figma.Controllers
             {
                 return NotFound();
             }
-            ViewData["ColorID"] = new SelectList(_context.Colors, "ColorID", "NameColor", productSizeColor.ColorID);
-            ViewData["SizeID"] = new SelectList(_context.Sizes, "SizeID", "SizeProduct", productSizeColor.SizeID);
+            ViewData["ColorID"] = new SelectList(_unitOfWork.ColorRepository.Get(), "ColorID", "NameColor", productSizeColor.ColorID);
+            ViewData["SizeID"] = new SelectList(_unitOfWork.SizeRepository.Get(), "SizeID", "SizeProduct", productSizeColor.SizeID);
             return View(productSizeColor);
         }
 
@@ -568,53 +499,40 @@ namespace figma.Controllers
             {
                 try
                 {
-                    _context.Update(productSizeColor);
-                    await _context.SaveChangesAsync();
+                    _unitOfWork.ProductSCRepository.Update(productSizeColor);
+                    await _unitOfWork.Save();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProductSizeColorExistsS(productSizeColor.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    return NotFound();
                 }
                 return RedirectToAction(nameof(ProductsSCIndex));
             }
-            ViewData["ColorID"] = new SelectList(_context.Colors, "ColorID", "NameColor", productSizeColor.ColorID);
-            ViewData["SizeID"] = new SelectList(_context.Sizes, "SizeID", "SizeProduct", productSizeColor.SizeID);
+            ViewData["ColorID"] = new SelectList(_unitOfWork.ColorRepository.Get(), "ColorID", "NameColor", productSizeColor.ColorID);
+            ViewData["SizeID"] = new SelectList(_unitOfWork.SizeRepository.Get(), "SizeID", "SizeProduct", productSizeColor.SizeID);
             return View(productSizeColor);
         }
 
-
         [HttpPost]
         [IgnoreAntiforgeryToken]
-        public bool ProductsSCDelete(int id)
+        public async Task<bool> ProductsSCDelete(int id)
         {
             if (id < 1)
                 return false;
-            var productSizeColor = _context.ProductSizeColors.Find(id);
-            _context.ProductSizeColors.Remove(productSizeColor);
-            _context.SaveChanges();
+            var productSizeColor = _unitOfWork.ProductSCRepository.GetByID(id);
+            _unitOfWork.ProductSCRepository.Delete(productSizeColor);
+            await _unitOfWork.Save();
             TempData["StatusMessage"] = "Thành công !";
             return true;
-        }
-
-        private bool ProductSizeColorExistsS(int id)
-        {
-            return _context.ProductSizeColors.Any(e => e.Id == id);
         }
         #endregion
 
         #region ProductsCategores
 
-        public async Task<IActionResult> ProductCategoriesCreate()
+        public IActionResult ProductCategoriesCreate()
         {
-            ViewData["ParentId"] = new SelectList(_context.ProductCategories, "ProductCategorieID", "Name");
-            ViewBag.Productcato = await _context.ProductCategories.ToArrayAsync();
+            ViewData["ParentId"] = new SelectList(_unitOfWork.ProductCategoryRepository.Get(), "ProductCategorieID", "Name");
+            ViewBag.Productcato = _unitOfWork.ProductCategoryRepository.Get().ToList();
             return View();
         }
         [HttpPost]
@@ -623,27 +541,26 @@ namespace figma.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(productCategories);
-                await _context.SaveChangesAsync();
+                _unitOfWork.ProductCategoryRepository.Insert(productCategories);
+                await _unitOfWork.Save();
                 TempData["result"] = "Thêm thành công ";
                 return RedirectToAction(nameof(ProductCategoriesCreate));
             }
-            ViewData["ParentId"] = new SelectList(_context.ProductCategories, "ProductCategorieID", "Name");
-
-            ViewBag.Productcato = await _context.ProductCategories.ToArrayAsync();
+            ViewData["ParentId"] = new SelectList(_unitOfWork.ProductCategoryRepository.Get(), "ProductCategorieID", "Name");
+            ViewBag.Productcato = _unitOfWork.ProductCategoryRepository.Get().ToList();
 
             return View(productCategories);
         }
 
-        public async Task<IActionResult> ProductCategoriesEdit(int? id)
+        public IActionResult ProductCategoriesEdit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-            ViewData["ParentId"] = new SelectList(_context.ProductCategories, "ProductCategorieID", "Name");
+            ViewData["ParentId"] = new SelectList(_unitOfWork.ProductCategoryRepository.Get(), "ProductCategorieID", "Name");
 
-            var productCategories = await _context.ProductCategories.FindAsync(id);
+            var productCategories = _unitOfWork.ProductCategoryRepository.GetByID(id);
             if (productCategories == null)
             {
                 return NotFound();
@@ -664,14 +581,14 @@ namespace figma.Controllers
             {
                 try
                 {
-                    _context.Update(productCategories);
+                    _unitOfWork.ProductCategoryRepository.Update(productCategories);
                     TempData["result"] = "Chỉnh sửa thành công ";
 
-                    await _context.SaveChangesAsync();
+                    await _unitOfWork.Save();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProductCategoriesExistsS(productCategories.ProductCategorieID))
+                    if (productCategories.ProductCategorieID != id)
                     {
                         return NotFound();
                     }
@@ -687,50 +604,24 @@ namespace figma.Controllers
 
         [HttpPost]
         [IgnoreAntiforgeryToken]
-        public bool ProductCategoriesDelete(int id)
+        public async Task<bool> ProductCategoriesDelete(int id)
         {
             if (id < 1)
                 return false;
-            var productCategories = _context.ProductCategories.Find(id);
-            _context.ProductCategories.Remove(productCategories);
-            _context.SaveChanges();
-
+            var productCategories = _unitOfWork.ProductCategoryRepository.GetByID(id);
+            _unitOfWork.ProductCategoryRepository.Delete(productCategories);
+            await _unitOfWork.Save();
             return true;
-        }
-
-        private bool ProductCategoriesExistsS(int id)
-        {
-            return _context.ProductCategories.Any(e => e.ProductCategorieID == id);
         }
 
         #endregion
 
         #region Color
         // GET: Colors
-        public async Task<IActionResult> ColorIndex()
+        public IActionResult ColorIndex()
         {
-            return View(await _context.Colors.ToListAsync());
+            return View(_unitOfWork.ColorRepository.Get().ToList());
         }
-
-        // GET: Colors/Details/5
-        public async Task<IActionResult> ColorDetails(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var color = await _context.Colors
-                .FirstOrDefaultAsync(m => m.ColorID == id);
-            if (color == null)
-            {
-                return NotFound();
-            }
-
-            return View(color);
-        }
-
-        // GET: Colors/Create
         public IActionResult ColorCreate()
         {
             return View();
@@ -745,22 +636,22 @@ namespace figma.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(color);
-                await _context.SaveChangesAsync();
+                _unitOfWork.ColorRepository.Insert(color);
+                await _unitOfWork.Save();
                 TempData["result"] = "Tạo thành công !";
                 return RedirectToAction(nameof(ColorIndex));
             }
             return View(color);
         }
 
-        public async Task<IActionResult> ColorEdit(int? id)
+        public IActionResult ColorEdit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var color = await _context.Colors.FindAsync(id);
+            var color = _unitOfWork.ColorRepository.GetByID(id);
             if (color == null)
             {
                 return NotFound();
@@ -781,20 +672,13 @@ namespace figma.Controllers
             {
                 try
                 {
-                    _context.Update(color);
+                    _unitOfWork.ColorRepository.Update(color);
                     TempData["result"] = "Chỉnh sửa thành công !";
-                    await _context.SaveChangesAsync();
+                    await _unitOfWork.Save();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ColorExists(color.ColorID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    return NotFound();
                 }
                 return RedirectToAction(nameof(ColorIndex));
             }
@@ -804,46 +688,24 @@ namespace figma.Controllers
 
         [HttpPost, ActionName("ColorDelete")]
         [IgnoreAntiforgeryToken]
-        public bool ColorDeleteConfirmed(int id)
+        public async Task<bool> ColorDeleteConfirmed(int id)
         {
             if (id < 1)
                 return false;
-            var color = _context.Colors.Find(id);
-            _context.Colors.Remove(color);
-            _context.SaveChanges();
+            var color = _unitOfWork.ColorRepository.GetByID(id);
+            _unitOfWork.ColorRepository.Delete(color);
+            await _unitOfWork.Save();
             TempData["result"] = "Xóa thành công !";
             return true;
         }
 
-        private bool ColorExists(int id)
-        {
-            return _context.Colors.Any(e => e.ColorID == id);
-        }
         #endregion
 
         #region Size
-        public async Task<IActionResult> SizeIndex()
+        public IActionResult SizeIndex()
         {
-            return View(await _context.Sizes.ToListAsync());
+            return View(_unitOfWork.SizeRepository.Get());
         }
-
-        public async Task<IActionResult> SizeDetails(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var size = await _context.Sizes
-                .FirstOrDefaultAsync(m => m.SizeID == id);
-            if (size == null)
-            {
-                return NotFound();
-            }
-
-            return View(size);
-        }
-
         public IActionResult SizeCreate()
         {
             return View();
@@ -854,22 +716,22 @@ namespace figma.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(size);
-                await _context.SaveChangesAsync();
+                _unitOfWork.SizeRepository.Insert(size);
+                await _unitOfWork.Save();
                 TempData["result"] = "Tạo thành công ";
                 return RedirectToAction(nameof(SizeIndex));
             }
             return View(size);
         }
 
-        public async Task<IActionResult> SizeEdit(int? id)
+        public IActionResult SizeEdit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var size = await _context.Sizes.FindAsync(id);
+            var size = _unitOfWork.SizeRepository.GetByID(id);
             if (size == null)
             {
                 return NotFound();
@@ -890,20 +752,13 @@ namespace figma.Controllers
             {
                 try
                 {
-                    _context.Update(size);
-                    await _context.SaveChangesAsync();
+                    _unitOfWork.SizeRepository.Update(size);
+                    await _unitOfWork.Save();
                     TempData["result"] = "Chỉnh sửa thành công ";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SizeExists(size.SizeID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    return NotFound();
                 }
                 return RedirectToAction(nameof(SizeIndex));
             }
@@ -913,35 +768,28 @@ namespace figma.Controllers
 
         [HttpPost, ActionName("SizeDelete")]
         [IgnoreAntiforgeryToken]
-        public bool SizeDeleteConfirmed(int id)
+        public async Task<bool> SizeDeleteConfirmed(int id)
         {
             if (id < 1)
                 return false;
-            var size = _context.Sizes.Find(id);
-            _context.Sizes.Remove(size);
-            _context.SaveChanges();
+            var size = _unitOfWork.SizeRepository.GetByID(id);
+            _unitOfWork.SizeRepository.Delete(size);
+            await _unitOfWork.Save();
             TempData["result"] = "Xóa thành công ";
             return true;
         }
-
-        private bool SizeExists(int id)
-        {
-            return _context.Sizes.Any(e => e.SizeID == id);
-        }
         #endregion
-
+        //
         #region SpecialCategory (Tag)
 
-        public async Task<ActionResult> ListSpecialCategory()
+        public ActionResult ListSpecialCategory()
         {
 
-            return View(await _context.Tags.AsQueryable().OrderBy(a => a.Soft).ToListAsync());
+            return View(_unitOfWork.TagRepository.Get(a => a.Active, q => q.OrderBy(a => a.Soft)).ToList());
         }
         public IActionResult SpecialCategory()
         {
-            var tags = from a in _context.Tags
-                       orderby a.Soft ascending
-                       select a;
+            var tags = _unitOfWork.TagRepository.Get(a => a.Active, q => q.OrderBy(a => a.Soft)).ToList();
             ViewBag.Tags = tags;
             return View();
         }
@@ -953,8 +801,8 @@ namespace figma.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(tags);
-                await _context.SaveChangesAsync();
+                _unitOfWork.TagRepository.Insert(tags);
+                await _unitOfWork.Save();
                 TempData["result"] = "Thêm thành công ";
                 return RedirectToAction(nameof(SpecialCategory));
             }
@@ -962,14 +810,14 @@ namespace figma.Controllers
         }
 
         // GET: Tags/Edit/5
-        public async Task<IActionResult> SpecialCategoryEdit(int? id)
+        public IActionResult SpecialCategoryEdit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var tags = await _context.Tags.FindAsync(id);
+            var tags = _unitOfWork.TagRepository.GetByID(id);
             if (tags == null)
             {
                 return NotFound();
@@ -977,9 +825,6 @@ namespace figma.Controllers
             return View(tags);
         }
 
-        // POST: Tags/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SpecialCategoryEdit(int id, [Bind("TagID,Name,Soft,Active")] Tags tags)
@@ -993,72 +838,42 @@ namespace figma.Controllers
             {
                 try
                 {
-                    _context.Update(tags);
-                    await _context.SaveChangesAsync();
+                    _unitOfWork.TagRepository.Update(tags);
+                    await _unitOfWork.Save();
                     TempData["result"] = "Chỉnh sửa thành công ";
 
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TagsExists(tags.TagID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    return NotFound();
                 }
                 return RedirectToAction(nameof(SpecialCategory));
             }
             return View(tags);
         }
 
-        // GET: Tags/Delete/5
-        public async Task<IActionResult> SpecialCategoryDelete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var tags = await _context.Tags
-                .FirstOrDefaultAsync(m => m.TagID == id);
-            if (tags == null)
-            {
-                return NotFound();
-            }
-
-            return View(tags);
-        }
 
         // POST: Tags/Delete/5
-        [HttpPost, ActionName("SpecialCategoryDelete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed5(int id)
+        [HttpPost]
+        [IgnoreAntiforgeryToken]
+        public async Task<bool> SpecialCategoryDelete(int id)
         {
-            var tags = await _context.Tags.FindAsync(id);
-            _context.Tags.Remove(tags);
-            await _context.SaveChangesAsync();
+            var tags = _unitOfWork.TagRepository.GetByID(id);
+            _unitOfWork.TagRepository.Delete(tags);
+            await _unitOfWork.Save();
             TempData["result"] = "Xóa thành công";
-
-            return RedirectToAction(nameof(SpecialCategory));
+            return true;
         }
-
-        private bool TagsExists(int id)
-        {
-            return _context.Tags.Any(e => e.TagID == id);
-        }
-
 
         #endregion
-
+        //
         #region ProductsTags
         public IActionResult SpecialCategoryProducts()
         {
-            ViewBag.Tp = _context.TagProducts.Include(t => t.Products).Include(t => t.Tags);
-            ViewData["ProductID"] = new SelectList(_context.Products, "ProductID", "Name");
-            ViewData["TagID"] = new SelectList(_context.Tags, "TagID", "Name");
+            //  ViewBag.Tp = _context.TagProducts.Include(t => t.Products).Include(t => t.Tags);
+            ViewBag.Tp = _unitOfWork.TagsProductsRepository.Get(includeProperties: "Products,Tags").ToList();
+            ViewData["ProductID"] = new SelectList(_unitOfWork.ProductRepository.Get().ToList(), "ProductID", "Name");
+            ViewData["TagID"] = new SelectList(_unitOfWork.TagRepository.Get().ToList(), "TagID", "Name");
             return View();
         }
 
@@ -1068,17 +883,16 @@ namespace figma.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(tagProducts);
-                await _context.SaveChangesAsync();
+                _unitOfWork.TagsProductsRepository.Insert(tagProducts);
+                await _unitOfWork.Save();
                 TempData["result"] = "Tạo thành công !";
                 return RedirectToAction(nameof(SpecialCategoryProducts));
             }
-            ViewData["ProductID"] = new SelectList(_context.Products, "ProductID", "Name", tagProducts.ProductID);
-            ViewData["TagID"] = new SelectList(_context.Tags, "TagID", "Name", tagProducts.TagID);
+            ViewData["ProductID"] = new SelectList(_unitOfWork.ProductRepository.Get().ToList(), "ProductID", "Name");
+            ViewData["TagID"] = new SelectList(_unitOfWork.TagRepository.Get().ToList(), "TagID", "Name");
             TempData["result"] = "Tạo thất bại !";
             return View(tagProducts);
         }
-
 
         public IActionResult SpecialCategoryProductsDelete(int? ido, int? idt)
         {
@@ -1091,9 +905,8 @@ namespace figma.Controllers
             return View();
         }
 
-        // POST: TagProducts/Delete/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [IgnoreAntiforgeryToken]
         public async Task<IActionResult> SpecialCategoryProductsDeleteConfirmed(int id1, int id2)
         {
             if (id1 < 1 || id2 < 1)
@@ -1101,16 +914,11 @@ namespace figma.Controllers
                 TempData["result"] = "Thất bại!";
                 return View();
             }
-            var tagProducts = _context.TagProducts.Where(a => a.TagID == id1 && a.ProductID == id2).FirstOrDefault();
-            _context.TagProducts.Remove(tagProducts);
-            await _context.SaveChangesAsync();
+            var tagProducts = _unitOfWork.TagsProductsRepository.Get(a => a.TagID == id1 && a.ProductID == id2).FirstOrDefault();
+            _unitOfWork.TagsProductsRepository.Delete(tagProducts);
+            await _unitOfWork.Save();
             TempData["result"] = "Thành công !";
             return Redirect(nameof(SpecialCategoryProducts));
-        }
-
-        private bool TagProductsExists(int id)
-        {
-            return _context.TagProducts.Any(e => e.ProductID == id);
         }
         #endregion
 
@@ -1118,34 +926,32 @@ namespace figma.Controllers
 
         public IActionResult ArticleCategories()
         {
-            ViewBag.atgory = from a in _context.ArticleCategories
-                             orderby a.CategorySort ascending
-                             select a;
+            ViewBag.atgory = _unitOfWork.ArticleCategoryRepository.Get(orderBy: q => q.OrderByDescending(a => a.CategorySort));
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ArticleCategories([Bind("ArticleCategorieID,CategoryName,Link,CategorySort,CategoryActive,ParentId,ShowHome,ShowMenu,Slug,Hot,TitleMeta,DescriptionMeta")] ArticleCategories articleCategories)
+        public async Task<IActionResult> ArticleCategories([Bind("ArticleCategoryId,CategoryName,Url,CategorySort,CategoryActive,ParentId,ShowHome,ShowMenu,Slug,Hot,TitleMeta,DescriptionMeta")] ArticleCategory articleCategories)
         {
             if (ModelState.IsValid)
             {
                 SlugCovert slugcv = new SlugCovert();
                 articleCategories.Slug = slugcv.UrlFriendly(articleCategories.CategoryName);
-                _context.Add(articleCategories);
-                await _context.SaveChangesAsync();
+                _unitOfWork.ArticleCategoryRepository.Insert(articleCategories);
+                await _unitOfWork.Save();
                 TempData["result"] = "Thành công";
                 return RedirectToAction(nameof(ArticleCategories));
             }
             return View(articleCategories);
         }
-        public async Task<IActionResult> ArticleCategoriesEdit(int? id)
+        public IActionResult ArticleCategoriesEdit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var articleCategories = await _context.ArticleCategories.FindAsync(id);
+            var articleCategories = _unitOfWork.ArticleCategoryRepository.GetByID(id);
             if (articleCategories == null)
             {
                 return NotFound();
@@ -1155,9 +961,9 @@ namespace figma.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ArticleCategoriesEdit(int id, [Bind("ArticleCategorieID,CategoryName,Link,CategorySort,CategoryActive,ParentId,ShowHome,ShowMenu,Slug,Hot,TitleMeta,DescriptionMeta")] ArticleCategories articleCategories)
+        public async Task<IActionResult> ArticleCategoriesEdit(int id, [Bind("ArticleCategoryId,CategoryName,Url,CategorySort,CategoryActive,ParentId,ShowHome,ShowMenu,Slug,Hot,TitleMeta,DescriptionMeta")] ArticleCategory articleCategories)
         {
-            if (id != articleCategories.ArticleCategorieID)
+            if (id != articleCategories.ArticleCategoryId)
             {
                 return NotFound();
             }
@@ -1166,110 +972,76 @@ namespace figma.Controllers
             {
                 try
                 {
-                    _context.Update(articleCategories);
-                    await _context.SaveChangesAsync();
+                    _unitOfWork.ArticleCategoryRepository.Update(articleCategories);
+                    await _unitOfWork.Save();
                     TempData["result"] = "Thành công";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ArticleCategoriesExists(articleCategories.ArticleCategorieID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    return NotFound();
                 }
                 return RedirectToAction(nameof(ArticleCategories));
             }
             return View(articleCategories);
         }
-        public async Task<IActionResult> ArticleCategoriesDelete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var articleCategories = await _context.ArticleCategories
-                .FirstOrDefaultAsync(m => m.ArticleCategorieID == id);
-            if (articleCategories == null)
-            {
-                return NotFound();
-            }
-
-            return View(articleCategories);
-        }
 
         [HttpPost, ActionName("ArticleCategoriesDelete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ArticleCategoriesDeleteConfirmed(int id)
+        [IgnoreAntiforgeryToken]
+        public async Task<bool> ArticleCategoriesDeleteConfirmed(int id)
         {
-            var articleCategories = await _context.ArticleCategories.FindAsync(id);
-            _context.ArticleCategories.Remove(articleCategories);
-            await _context.SaveChangesAsync();
+            if (id < 1)
+                return false;
+            var articleCategories = _unitOfWork.ArticleCategoryRepository.GetByID(id);
+            _unitOfWork.ArticleCategoryRepository.Delete(articleCategories);
+            await _unitOfWork.Save();
             TempData["result"] = "Thành công";
-            return RedirectToAction(nameof(ArticleCategories));
-        }
-
-        private bool ArticleCategoriesExists(int id)
-        {
-            return _context.ArticleCategories.Any(e => e.ArticleCategorieID == id);
+            return true;
         }
 
         #endregion
 
         #region Aticle
 
-        public async Task<IActionResult> ListAticle()
+        public IActionResult ListAticle()
         {
 
-            return View(await _context.Articles.ToListAsync());
+            return View(_unitOfWork.ArticleRepository.Get().ToList());
         }
 
         public IActionResult AticleCreate()
         {
-            ViewBag.list = _context.Articles.ToList();
-            ViewData["ArticleCategorieID"] = new SelectList(_context.ArticleCategories, "ArticleCategorieID", "CategoryName");
-
+            ViewBag.list = _unitOfWork.ArticleRepository.Get().ToList();
+            ViewData["ArticleCategorieId"] = new SelectList(_unitOfWork.ArticleCategoryRepository.Get(), "ArticleCategoryId", "CategoryName");
             return View();
         }
-
-        // POST: Articles/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AticleCreate([Bind("ArticleID,Subject,Description,Body,Image,CreateDate,View,ArticleCategorieID,Active,Hot,Home,Url,TitleMeta,DescriptionMeta")] Articles articles)
+        public async Task<IActionResult> AticleCreate([Bind("Subject,Description,Body,Image,CreateDate,View,ArticleCategoryId,Active,Hot,Home,Url,TitleMeta,DescriptionMeta")] Article articles)
         {
             if (ModelState.IsValid)
             {
-                articles.View = 1;
-                articles.CreateDate = DateTime.Now;
+                //articles.View = 1;
+                //articles.CreateDate = DateTime.Now;
                 articles.Hot = true;
-                _context.Add(articles);
-
-                await _context.SaveChangesAsync();
+                _unitOfWork.ArticleRepository.Insert(articles);
+                await _unitOfWork.Save();
                 TempData["result"] = "Thành công";
-
                 return RedirectToAction(nameof(ListAticle));
             }
-            ViewBag.list = _context.Articles.ToList();
-            ViewData["ArticleCategorieID"] = new SelectList(_context.ArticleCategories, "ArticleCategorieID", "CategoryName");
+            ViewBag.list = _unitOfWork.ArticleRepository.Get().ToList();
+            ViewData["ArticleCategorieId"] = new SelectList(_unitOfWork.ArticleCategoryRepository.Get(), "ArticleCategoryId", "CategoryName");
             return View(articles);
         }
 
-        // GET: Articles/Edit/5
-        public async Task<IActionResult> ArticleEdit(int? id)
+        public IActionResult ArticleEdit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var articles = await _context.Articles.FindAsync(id);
-            ViewData["ArticleCategorieID"] = new SelectList(_context.ArticleCategories, "ArticleCategorieID", "CategoryName");
+            var articles = _unitOfWork.ArticleRepository.GetByID(id);
+            ViewData["ArticleCategorieID"] = new SelectList(_unitOfWork.ArticleCategoryRepository.Get(), "ArticleCategoryId", "CategoryName");
 
             if (articles == null)
             {
@@ -1278,14 +1050,12 @@ namespace figma.Controllers
             return View(articles);
         }
 
-        // POST: Articles/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ArticleEdit(int id, [Bind("ArticleID,Subject,Description,Body,Image,CreateDate,View,ArticleCategorieID,Active,Hot,Home,Url,TitleMeta,DescriptionMeta")] Articles articles)
+        [AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> ArticleEdit(int id, [Bind("Id,Subject,Description,Body,Image,CreateDate,View,ArticleCategoryId,Active,Hot,Home,Url,TitleMeta,DescriptionMeta")] Article articles)
         {
-            if (id != articles.ArticleID)
+            if (id != articles.Id)
             {
                 return NotFound();
             }
@@ -1295,65 +1065,33 @@ namespace figma.Controllers
                 try
                 {
                     articles.Hot = true;
-                    _context.Update(articles);
-                    await _context.SaveChangesAsync();
+                    _unitOfWork.ArticleRepository.Update(articles);
+                    await _unitOfWork.Save();
                     TempData["result"] = "Thành công";
 
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ArticlesExists(articles.ArticleID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    return NotFound();
                 }
                 return RedirectToAction(nameof(ListAticle));
             }
-            ViewData["ArticleCategorieID"] = new SelectList(_context.ArticleCategories, "ArticleCategorieID", "CategoryName");
+            ViewData["ArticleCategorieID"] = new SelectList(_unitOfWork.ArticleCategoryRepository.Get(), "ArticleCategoryId", "CategoryName");
 
             return View(articles);
         }
 
-        // GET: Articles/Delete/5
-        public async Task<IActionResult> ArticleDelete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var articles = await _context.Articles
-                .FirstOrDefaultAsync(m => m.ArticleID == id);
-            if (articles == null)
-            {
-                return NotFound();
-            }
-
-            return View(articles);
-        }
-
-
-
-        // POST: Articles/Delete/5
         [HttpPost, ActionName("ArticleDelete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AticleDeleteConfirmed(int id)
+        [IgnoreAntiforgeryToken]
+        public async Task<bool> AticleDeleteConfirmed(int id)
         {
-            var articles = await _context.Articles.FindAsync(id);
-            _context.Articles.Remove(articles);
-            await _context.SaveChangesAsync();
+            if (id < 1)
+                return false;
+            var articles = _unitOfWork.ArticleRepository.GetByID(id);
+            _unitOfWork.ArticleRepository.Delete(articles);
+            await _unitOfWork.Save();
             TempData["result"] = "Thành công";
-
-            return RedirectToAction(nameof(ListAticle));
-        }
-
-        private bool ArticlesExists(int id)
-        {
-            return _context.Articles.Any(e => e.ArticleID == id);
+            return true;
         }
 
         #endregion
@@ -1995,32 +1733,11 @@ CookieAuthenticationDefaults.AuthenticationScheme);
 
         #endregion
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        protected override void Dispose(bool disposing)
+        {
+            _unitOfWork.Dispose();
+            base.Dispose(disposing);
+        }
 
     }
 }

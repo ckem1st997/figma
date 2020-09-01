@@ -1,4 +1,4 @@
-﻿@model IEnumerable<figma.Models.Articles>
+﻿@model IEnumerable<figma.Models.Article>
 
 @{
     ViewData["Title"] = "ListAticle";
@@ -48,13 +48,20 @@
                 </td>
 
                 <td>
-                    @if (item.Image.Contains("https"))
+                    @if (item.Image != null)
                     {
-                        <img src="@item.Image" asp-append-version="true" width="80" height="80" />
+                        if (item.Image.Contains("https"))
+                        {
+                            <img src="@item.Image" asp-append-version="true" width="80" height="80" />
+                        }
+                        else
+                        {
+                            <img src="/@item.Image" asp-append-version="true" width="80" height="80" />
+                        }
                     }
                     else
                     {
-                        <img src="/@item.Image" asp-append-version="true" width="80" height="80" />
+
 
                     }
                 </td>
@@ -69,8 +76,22 @@
                 </td>
 
                 <td>
-                    <a class="btn btn-success" asp-action="ArticleEdit" asp-route-id="@item.ArticleID">Edit</a> |
-                    <a class="btn btn-success" asp-action="ArticleDelete" asp-route-id="@item.ArticleID">Delete</a>
+                    <a class="btn btn-success" asp-action="ArticleEdit" asp-route-id="@item.Id">Edit</a> |
+                    <a class="btn btn-success" onclick="deleteLC(@item.Id)">Delete</a>
+                    <script>
+                        function deleteLC(id) {
+                            if (confirm("Bạn có chắc chắn xóa không?")) {
+                                $.post("/Csm/ArticleDelete", { id: id }, function (data) {
+                                    if (data) {
+                                        if (confirm("Xóa thành công"))
+                                            window.location.assign('/Csm/ListAticle')
+                                    } else {
+                                        alert("Quá trình thực hiện không thành công. Hãy thử lại");
+                                    }
+                                });
+                            }
+                        }
+                    </script>
                 </td>
             </tr>
         }

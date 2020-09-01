@@ -1,4 +1,4 @@
-﻿@model figma.Models.Articles
+﻿@model figma.Models.Article
 
 @{
     ViewData["Title"] = "AticleCreate";
@@ -44,10 +44,10 @@
     <form asp-action="AticleCreate">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group w-25">
-            <label asp-for="ArticleCategorieID" class="control-label"></label>
-            <select asp-for="ArticleCategorieID" class="form-control" asp-items="ViewBag.ArticleCategorieID">
+            <label asp-for="ArticleCategoryId" class="control-label"></label>
+            <select asp-for="ArticleCategoryId" class="form-control" asp-items="ViewBag.ArticleCategorieId">
             </select>
-            <span asp-validation-for="ArticleCategorieID" class="text-danger"></span>
+            <span asp-validation-for="ArticleCategoryId" class="text-danger"></span>
         </div>
         <div class="form-group w-50">
             <label asp-for="Subject" class="control-label"></label>
@@ -77,16 +77,6 @@
             <span asp-validation-for="Body" class="text-danger"></span>
         </div>
 
-        @*<div class="form-group">
-                    <label asp-for="CreateDate" class="control-label"></label>
-                    <input asp-for="CreateDate" class="form-control" />
-                    <span asp-validation-for="CreateDate" class="text-danger"></span>
-                </div>
-            <div class="form-group">
-                    <label asp-for="View" class="control-label"></label>
-                    <input asp-for="View" class="form-control" />
-                    <span asp-validation-for="View" class="text-danger"></span>
-                </div>*@
         <div class="form-group form-check">
             <label class="form-check-label">
                 <input class="form-check-input" asp-for="Home" /> @Html.DisplayNameFor(model => model.Home)
@@ -97,17 +87,7 @@
                 <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
             </label>
         </div>
-        @*<div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Hot" /> @Html.DisplayNameFor(model => model.Hot)
-                </label>
-            </div>*@
 
-        @*<div class="form-group">
-                <label asp-for="Url" class="control-label"></label>
-                <input asp-for="Url" class="form-control" />
-                <span asp-validation-for="Url" class="text-danger"></span>
-            </div>*@
         <div class="form-group w-75">
             <label asp-for="TitleMeta" class="control-label"></label>
             <input asp-for="TitleMeta" class="form-control" />

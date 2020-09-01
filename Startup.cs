@@ -60,7 +60,7 @@ namespace figma
          config.LoginPath = "/Home/Login"; // Path for the redirect to user login page    
          config.AccessDeniedPath = "/Csm/UserAccessDenied";
          // sau 10s sẽ tự out
-         config.ExpireTimeSpan = TimeSpan.FromSeconds(500);
+         config.ExpireTimeSpan = TimeSpan.FromSeconds(5000);
          config.Cookie.HttpOnly = true;
          config.Cookie.IsEssential = true;
      });
@@ -112,7 +112,7 @@ namespace figma
             {
                 options.Cookie.Name = ".AdventureWorks.Session";
                 //out sau ? s
-                options.IdleTimeout = TimeSpan.FromSeconds(500);
+                options.IdleTimeout = TimeSpan.FromSeconds(5000);
                 //options.IOTimeout = TimeSpan.FromSeconds(300);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;

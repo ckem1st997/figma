@@ -46,6 +46,7 @@ namespace figma.Data
             }
         }
 
+
         public virtual TEntity GetByID(object id)
         {
             return dbSet.Find(id);

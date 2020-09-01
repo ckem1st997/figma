@@ -9,12 +9,12 @@
 
 
 <div>
-    <a class="btn btn-danger" asp-action="SpecialCategoryProductsDeleteConfirmed" asp-route-id1="@ViewBag.id1" asp-route-id2="@ViewBag.id2">Xóa</a>
+    <a class="btn btn-danger" onclick="deleteArtCategory(@ViewBag.id1,@ViewBag.id2)">Xóa</a>
 </div>
 <script>
-    function deleteArtCategory(id1,id2) {
+    function deleteArtCategory(id1, id2) {
         if (confirm("Bạn có chắc chắn xóa nhóm này không?")) {
-            $.post("/Csm/SpecialCategoryProductsDeleteConfirmed", { id1: id1,id2:id2 }, function (data) {
+            $.post("/Csm/SpecialCategoryProductsDeleteConfirmed", { id1: id1, id2: id2 }, function (data) {
                 if (data) {
                     if (confirm("Xóa nhóm thành công"))
                         window.location.assign('/Csm/SpecialCategoryProducts')

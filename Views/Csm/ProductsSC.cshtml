@@ -54,7 +54,21 @@
                 <td>
                     @*<a class="btn btn-success" asp-action="ProductsCreateSC" asp-route-id="@item.Id">Edit</a> |*@
                     <a class="btn btn-success" asp-action="ProductsEditSC" asp-route-id="@item.Id">Edit</a> |
-                    <a class="btn btn-success" asp-action="ProductsDeleteSC" asp-route-id="@item.Id">Delete</a>
+                    <a class="btn btn-success" onclick="deleteLC(@item.Id)">Delete</a>
+                    <script>
+                        function deleteLC(id) {
+                            if (confirm("Bạn có chắc chắn xóa không?")) {
+                                $.post("/Csm/ProductsDeleteSC", { id: id }, function (data) {
+                                    if (data) {
+                                        if (confirm("Xóa thành công"))
+                                            window.location.assign('/Csm/ProductsSC?idsp='+@item.ProductID+'')
+                                    } else {
+                                        alert("Quá trình thực hiện không thành công. Hãy thử lại");
+                                    }
+                                });
+                            }
+                        }
+                    </script>
                 </td>
             </tr>
         }

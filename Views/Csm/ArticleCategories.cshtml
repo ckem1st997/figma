@@ -1,4 +1,4 @@
-﻿@model figma.Models.ArticleCategories
+﻿@model figma.Models.ArticleCategory
 
 @{
     ViewData["Title"] = "ArticleCategories";
@@ -29,9 +29,9 @@
                 <span asp-validation-for="CategoryName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Link" class="control-label"></label>
-                <input asp-for="Link" class="form-control" />
-                <span asp-validation-for="Link" class="text-danger"></span>
+                <label asp-for="Url" class="control-label"></label>
+                <input asp-for="Url" class="form-control" />
+                <span asp-validation-for="Url" class="text-danger"></span>
             </div>
             <div class="form-group w-25">
                 <label asp-for="CategorySort" class="control-label"></label>
@@ -44,31 +44,11 @@
                 </label>
             </div>
 
-            @*<div class="form-group">
-                    <label asp-for="ParentId" class="control-label"></label>
-                    <input asp-for="ParentId" class="form-control" />
-                    <span asp-validation-for="ParentId" class="text-danger"></span>
-                </div>*@
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="ShowHome" /> @Html.DisplayNameFor(model => model.ShowHome)
                 </label>
             </div>
-            @*<div class="form-group form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" asp-for="ShowMenu" /> @Html.DisplayNameFor(model => model.ShowMenu)
-                    </label>
-                </div>*@
-            @*<div class="form-group">
-                    <label asp-for="Slug" class="control-label"></label>
-                    <input asp-for="Slug" class="form-control" />
-                    <span asp-validation-for="Slug" class="text-danger"></span>
-                </div>*@
-            @*<div class="form-group form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" asp-for="Hot" /> @Html.DisplayNameFor(model => model.Hot)
-                    </label>
-                </div>*@
             <div class="form-group">
                 <label asp-for="TitleMeta" class="control-label"></label>
                 <input asp-for="TitleMeta" class="form-control" />
@@ -132,8 +112,22 @@
                     </td>
 
                     <td>
-                        <a asp-action="ArticleCategoriesEdit" asp-route-id="@item.ArticleCategorieID">Edit</a> |
-                        <a asp-action="ArticleCategoriesDelete" asp-route-id="@item.ArticleCategorieID">Delete</a>
+                        <a class="btn btn-success" asp-action="ArticleCategoriesEdit" asp-route-id="@item.ArticleCategoryId">Edit</a> |
+                        <a class="btn btn-success" onclick="deleteLC(@item.ArticleCategoryId)">Delete</a>
+                        <script>
+                            function deleteLC(id) {
+                                if (confirm("Bạn có chắc chắn xóa không?")) {
+                                    $.post("/Csm/ArticleCategoriesDelete", { id: id }, function (data) {
+                                        if (data) {
+                                            if (confirm("Xóa thành công"))
+                                                window.location.assign('/Csm/ArticleCategories')
+                                        } else {
+                                            alert("Quá trình thực hiện không thành công. Hãy thử lại");
+                                        }
+                                    });
+                                }
+                            }
+                        </script>
                     </td>
                 </tr>
             }

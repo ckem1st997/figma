@@ -1,4 +1,4 @@
-﻿@model figma.Models.Articles
+﻿@model figma.Models.Article
 
 @{
     ViewData["Title"] = "ArticleEdit";
@@ -20,7 +20,7 @@
 
                 <div class="m-3 ml-1">
                     <a class="">
-                        <input id="filesadd" accept="image/*" name="filesadd" type="file" />@*Thêm ảnh từ máy tính*@
+                        <input id="filesadd" accept="image/*" name="filesadd" type="file" />
                     </a>
                 </div>
             </div>
@@ -46,7 +46,7 @@
     </form>
     <form asp-action="ArticleEdit">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="ArticleID" />
+        <input type="hidden" asp-for="Id" />
         <div class="form-group w-25">
             <label asp-for="Subject" class="control-label"></label>
             <input asp-for="Subject" class="form-control" />
@@ -74,41 +74,29 @@
             <input asp-for="Image" class="form-control" />
             <span asp-validation-for="Image" class="text-danger"></span>
         </div>
-        @*<div class="form-group">
-                <label asp-for="CreateDate" class="control-label"></label>
-                <input asp-for="CreateDate" class="form-control" />
-                <span asp-validation-for="CreateDate" class="text-danger"></span>
-            </div>*@
+
         <div class="form-group">
                 <label asp-for="View" class="control-label"></label>
                 <input asp-for="View" class="form-control" />
                 <span asp-validation-for="View" class="text-danger"></span>
             </div>
         <div class="form-group w-25">
-            <label asp-for="ArticleCategorieID" class="control-label"></label>
-            <select asp-for="ArticleCategorieID" class="form-control" asp-items="ViewBag.ArticleCategorieID"></select>
-            <span asp-validation-for="ArticleCategorieID" class="text-danger"></span>
+            <label asp-for="ArticleCategoryId" class="control-label"></label>
+            <select asp-for="ArticleCategoryId" class="form-control" asp-items="ViewBag.ArticleCategorieID"></select>
+            <span asp-validation-for="ArticleCategoryId" class="text-danger"></span>
         </div>
         <div class="form-group form-check">
             <label class="form-check-label">
                 <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
             </label>
         </div>
-        @*<div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Hot" /> @Html.DisplayNameFor(model => model.Hot)
-                </label>
-            </div>*@
+
         <div class="form-group form-check">
             <label class="form-check-label">
                 <input class="form-check-input" asp-for="Home" /> @Html.DisplayNameFor(model => model.Home)
             </label>
         </div>
-        @*<div class="form-group">
-                <label asp-for="Url" class="control-label"></label>
-                <input asp-for="Url" class="form-control" />
-                <span asp-validation-for="Url" class="text-danger"></span>
-            </div>*@
+
         <div class="form-group">
             <label asp-for="TitleMeta" class="control-label"></label>
             <input asp-for="TitleMeta" class="form-control" />
@@ -125,7 +113,4 @@
     </form>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
