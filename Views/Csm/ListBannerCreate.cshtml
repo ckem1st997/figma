@@ -6,7 +6,7 @@
 }
 
 
-<form enctype="multipart/form-data" onchange="AJAXSubmitCreateOnep(this);return false;" method="post">
+<form enctype="multipart/form-data" onchange="AJAXSubmitCreateOne(this,1920,1080);return false;" method="post">
     <div class="form-group bg-white font-weight-bold">
         <div class="section-image-title d-flex justify-content-between">
             <p class="text-danger mt-3 mb-1">Biểu tượng</p>
@@ -45,7 +45,7 @@
             <input asp-for="Content" class="form-control" />
             <span asp-validation-for="Content" class="text-danger"></span>
         </div>
-        <div class="form-group">
+        <div class="form-group d-none">
             <label asp-for="CoverImage" class="control-label"></label>
             <input asp-for="CoverImage" class="form-control" />
             <span asp-validation-for="CoverImage" class="text-danger"></span>

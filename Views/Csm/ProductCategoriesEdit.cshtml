@@ -11,7 +11,7 @@
 <hr />
 
 
-<form asp-controller="Products" asp-action="createImage" enctype="multipart/form-data" onchange="AJAXSubmitCreateT(this);return false;" method="post">
+<form asp-controller="Products" asp-action="createImage" enctype="multipart/form-data" onchange="AJAXSubmitCreateOne(this,100,100);return false;" method="post">
     <div class="form-group bg-white font-weight-bold">
 
         <div class="section-image-title d-flex justify-content-between">
@@ -49,7 +49,7 @@
 </form>
 
 
-<form asp-controller="Products" asp-action="createImage" enctype="multipart/form-data" onchange="AJAXSubmitCreateB(this);return false;" method="post">
+<form asp-controller="Products" asp-action="createImage" enctype="multipart/form-data" onchange="AJAXSubmitCreate(this,720,1280);return false;" method="post">
     <div class="form-group bg-white font-weight-bold">
         <div class="section-image-title d-flex justify-content-between">
             <p class="text-danger mt-3 mb-1">Ảnh Banner</p>

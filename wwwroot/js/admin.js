@@ -95,17 +95,18 @@ function AJAXSubmit(file) {
         }
     });
 }
-async function AJAXSubmitCreate(oFormElement) {
+
+
+async function AJAXSubmitCreate(oFormElement,h,w) {
     const formData = new FormData(oFormElement);
     $.ajax({
         type: 'POST',
-        url: '/Upload/CreateImage?width=720&height=822',
+        url: '/Upload/CreateImage?width=' + h + '&height=' + w + '',
         data: formData,
         cache: false,
         contentType: false,
         processData: false,
         success: function (data) {
-            //    console.log(data.imgNode);
             if (data.result) {
                 var listimage = data.imgNode.split(",");
                 if (listimage.length > 1 || listimage != null)
@@ -125,14 +126,11 @@ async function AJAXSubmitCreate(oFormElement) {
     });
 
 }
-//
-
-async function AJAXSubmitCreateOne(oFormElement) {
+async function AJAXSubmitCreateOne(oFormElement,h,w) {
     const formData = new FormData(oFormElement);
-
     $.ajax({
         type: 'POST',
-        url: '/Csm/createImage',
+        url: '/Upload/CreateImage?width=' + h + '&height=' + w + '',
         data: formData,
         cache: false,
         contentType: false,
@@ -153,7 +151,6 @@ async function AJAXSubmitCreateOne(oFormElement) {
                 alert("Xin vui lòng chọn ảnh !");
             }
             addtwo();
-
         },
         error: function (data) {
             alert(data.responseText);
@@ -197,11 +194,11 @@ async function AJAXSubmitCreateOnep(oFormElement) {
 }
 
 //
-async function AJAXSubmitCreateOneT(oFormElement) {
+async function AJAXSubmitCreateOneT(oFormElement,h,w) {
     const formData = new FormData(oFormElement);
     $.ajax({
         type: 'POST',
-        url: '/Csm/createImage',
+        url: '/Upload/CreateImage?width=' + h + '&height=' + w + '',
         data: formData,
         cache: false,
         contentType: false,
@@ -877,37 +874,6 @@ DecoupledDocumentEditor
 
         // console.error(error);
     });
-
-
-
-
-
-//DecoupledEditor
-//    .create(document.querySelector('#editor'), {
-//        image: {
-
-//        },
-//        toolbar: { items: ['imageResize','tableColumn', 'tableRow', 'mergeTableCells', 'fontSize', 'fontColor', 'imageStyle:alignRight', '|', 'imageStyle:alignLeft', 'imageStyle:full', '|', 'imageTextAlternative', 'fontFamily', 'ckfinder', 'imageUpload', 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'underline', 'strikethrough', '|', 'outdent', 'indent', '|', 'bulletedList', 'numberedList', '|', 'undo', 'redo'] },
-//    })
-//    .then(editor => {
-//        const toolbarContainer = document.querySelector('#toolbar-container');
-//        toolbarContainer.appendChild(editor.ui.view.toolbar.element);
-//        //    editor.keystrokes.set('Ctrl+E', 'bold')
-//        // editor.config.get('imageStyle.toolbar');
-//        // editor.execute('bold');
-//        editor.editing.view.change(writer => { writer.setStyle('height', '300px', editor.editing.view.document.getRoot()); });
-
-//        editor.model.document.on('change:data', () => {
-//            $("#Body").val(editor.getData());
-//        });
-
-//        if (h != null)
-//            editor.setData(h);
-//    })
-//    .catch(error => {
-//        console.error(error);
-//    });
-
 
 //function autochange() {
 //    var data = $("input#ProductID").val();

@@ -56,152 +56,152 @@ namespace figma.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> createImage1(List<IFormFile> filesadd)
-        {
-            DateTime dateTime = DateTime.Now;
-            //  string createFolderDate = "" + dateTime.Year + "\\" + dateTime.Month + "\\" + dateTime.Day + "";
-            string createFolderDate = DateTime.Now.ToString("yyyy/MM/dd");
-            string path = _hostingEnvironment.WebRootPath + @"\uploads\" + createFolderDate + "";
-            Console.WriteLine(path);
-            try
-            {
-                if (Directory.Exists(path))
-                {
-                    Console.WriteLine("Path đã tồn tại !");
-                }
-                DirectoryInfo di = Directory.CreateDirectory(path);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("The process failed: {0}", e.ToString());
-            }
-            finally { }
+        //[HttpPost]
+        //public async Task<IActionResult> createImage1(List<IFormFile> filesadd)
+        //{
+        //    DateTime dateTime = DateTime.Now;
+        //    //  string createFolderDate = "" + dateTime.Year + "\\" + dateTime.Month + "\\" + dateTime.Day + "";
+        //    string createFolderDate = DateTime.Now.ToString("yyyy/MM/dd");
+        //    string path = _hostingEnvironment.WebRootPath + @"\uploads\" + createFolderDate + "";
+        //    Console.WriteLine(path);
+        //    try
+        //    {
+        //        if (Directory.Exists(path))
+        //        {
+        //            Console.WriteLine("Path đã tồn tại !");
+        //        }
+        //        DirectoryInfo di = Directory.CreateDirectory(path);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine("The process failed: {0}", e.ToString());
+        //    }
+        //    finally { }
 
-            // copy file
-            if (path == null)
-                path = "image";
+        //    // copy file
+        //    if (path == null)
+        //        path = "image";
 
-            if (filesadd == null || filesadd.Count == 0)
-                return Ok(new { imgNode = "" });
-            long size = filesadd.Sum(f => f.Length);
-            var filePaths = new List<string>();
-            string sql = "";
-            foreach (var formFile in filesadd)
-            {
-                if (FormFileExtensions.IsImage(formFile))
-                {
-                    if (formFile.Length > 0)
-                    {
-                        // full path to file in temp location
-                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "" + path + "");
+        //    if (filesadd == null || filesadd.Count == 0)
+        //        return Ok(new { imgNode = "" });
+        //    long size = filesadd.Sum(f => f.Length);
+        //    var filePaths = new List<string>();
+        //    string sql = "";
+        //    foreach (var formFile in filesadd)
+        //    {
+        //        if (FormFileExtensions.IsImage(formFile))
+        //        {
+        //            if (formFile.Length > 0)
+        //            {
+        //                // full path to file in temp location
+        //                var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "" + path + "");
 
-                        filePaths.Add(filePath);
-                        var randomname = DateTime.Now.ToFileTime() + Path.GetExtension(formFile.FileName);
-                        var fileNameWithPath = string.Concat(filePath, "\\", randomname);
+        //                filePaths.Add(filePath);
+        //                var randomname = DateTime.Now.ToFileTime() + Path.GetExtension(formFile.FileName);
+        //                var fileNameWithPath = string.Concat(filePath, "\\", randomname);
 
-                        using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
-                        {
-                            await formFile.CopyToAsync(stream);
-                        }
+        //                using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
+        //                {
+        //                    await formFile.CopyToAsync(stream);
+        //                }
 
-                        if (sql.Length > 1)
-                            sql = "" + sql + ",uploads/" + createFolderDate + "/" + randomname + "";
-                        else
-                            sql = "uploads/" + createFolderDate + "/" + randomname + "";
-                        // sql = sql.Replace("\\", "/");
+        //                if (sql.Length > 1)
+        //                    sql = "" + sql + ",uploads/" + createFolderDate + "/" + randomname + "";
+        //                else
+        //                    sql = "uploads/" + createFolderDate + "/" + randomname + "";
+        //                // sql = sql.Replace("\\", "/");
 
-                    }
-                }
-                else
-                    return Ok(new { imgNode = "" });
-            }
-            return Ok(new
-            {
-                imgNode = sql
-            });
-        }
+        //            }
+        //        }
+        //        else
+        //            return Ok(new { imgNode = "" });
+        //    }
+        //    return Ok(new
+        //    {
+        //        imgNode = sql
+        //    });
+        //}
 
-        //
+        ////
 
-        [HttpPost]
-        public async Task<IActionResult> createImage(List<IFormFile> filesadd)
-        {
-            DateTime dateTime = DateTime.Now;
-            //  string createFolderDate = "" + dateTime.Year + "\\" + dateTime.Month + "\\" + dateTime.Day + "";
-            string createFolderDate = DateTime.Now.ToString("yyyy/MM/dd");
-            string path = _hostingEnvironment.WebRootPath + @"\uploads\" + createFolderDate + "";
-            Console.WriteLine(path);
-            try
-            {
-                if (Directory.Exists(path))
-                {
-                    Console.WriteLine("Path đã tồn tại !");
-                }
-                DirectoryInfo di = Directory.CreateDirectory(path);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("The process failed: {0}", e.ToString());
-            }
-            finally { }
+        //[HttpPost]
+        //public async Task<IActionResult> createImage(List<IFormFile> filesadd)
+        //{
+        //    DateTime dateTime = DateTime.Now;
+        //    //  string createFolderDate = "" + dateTime.Year + "\\" + dateTime.Month + "\\" + dateTime.Day + "";
+        //    string createFolderDate = DateTime.Now.ToString("yyyy/MM/dd");
+        //    string path = _hostingEnvironment.WebRootPath + @"\uploads\" + createFolderDate + "";
+        //    Console.WriteLine(path);
+        //    try
+        //    {
+        //        if (Directory.Exists(path))
+        //        {
+        //            Console.WriteLine("Path đã tồn tại !");
+        //        }
+        //        DirectoryInfo di = Directory.CreateDirectory(path);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine("The process failed: {0}", e.ToString());
+        //    }
+        //    finally { }
 
-            // copy file
-            if (path == null)
-                path = "image";
+        //    // copy file
+        //    if (path == null)
+        //        path = "image";
 
-            if (filesadd == null || filesadd.Count == 0)
-                return Ok(new { imgNode = "" });
-            //   if(filesadd)
-            long size = filesadd.Sum(f => f.Length);
-            var filePaths = new List<string>();
-            string sql = "";
-            foreach (var formFile in filesadd)
-            {
+        //    if (filesadd == null || filesadd.Count == 0)
+        //        return Ok(new { imgNode = "" });
+        //    //   if(filesadd)
+        //    long size = filesadd.Sum(f => f.Length);
+        //    var filePaths = new List<string>();
+        //    string sql = "";
+        //    foreach (var formFile in filesadd)
+        //    {
 
-                if (FormFileExtensions.IsImage(formFile))
-                {
-                    if (formFile.Length > 0 && formFile.Length <= 4096000)
-                    {
-                        // full path to file in temp location
-                        var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "" + path + "");
+        //        if (FormFileExtensions.IsImage(formFile))
+        //        {
+        //            if (formFile.Length > 0 && formFile.Length <= 4096000)
+        //            {
+        //                // full path to file in temp location
+        //                var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "" + path + "");
 
-                        filePaths.Add(filePath);
-                        var randomname = DateTime.Now.ToFileTime() + Path.GetExtension(formFile.FileName);
-                        var fileNameWithPath = string.Concat(filePath, "\\", randomname);
+        //                filePaths.Add(filePath);
+        //                var randomname = DateTime.Now.ToFileTime() + Path.GetExtension(formFile.FileName);
+        //                var fileNameWithPath = string.Concat(filePath, "\\", randomname);
 
-                        using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
-                        {
-                            await formFile.CopyToAsync(stream);
-                        }
-                        // resize
-                        using (Image<Rgba32> image = (Image<Rgba32>)Image.Load(fileNameWithPath))
-                        {
-                            image.Mutate(x => x.Resize(image.Width > 720 ? 720 : image.Width, image.Height > 822 ? 822 : image.Height));
-                            image.Save(fileNameWithPath);
-                        }
+        //                using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
+        //                {
+        //                    await formFile.CopyToAsync(stream);
+        //                }
+        //                // resize
+        //                using (Image<Rgba32> image = (Image<Rgba32>)Image.Load(fileNameWithPath))
+        //                {
+        //                    image.Mutate(x => x.Resize(image.Width > 720 ? 720 : image.Width, image.Height > 822 ? 822 : image.Height));
+        //                    image.Save(fileNameWithPath);
+        //                }
 
-                        if (sql.Length > 1)
-                            sql = "" + sql + ",uploads/" + createFolderDate + "/" + randomname + "";
-                        else
-                            sql = "uploads/" + createFolderDate + "/" + randomname + "";
-                        // sql = sql.Replace("\\", "/");
+        //                if (sql.Length > 1)
+        //                    sql = "" + sql + ",uploads/" + createFolderDate + "/" + randomname + "";
+        //                else
+        //                    sql = "uploads/" + createFolderDate + "/" + randomname + "";
+        //                // sql = sql.Replace("\\", "/");
 
-                    }
-                    else
-                        return Ok(new { imgNode = "" });
+        //            }
+        //            else
+        //                return Ok(new { imgNode = "" });
 
-                }
-                else
-                    return Ok(new { imgNode = "" });
-            }
-            return Ok(new
-            {
-                imgNode = sql
-            });
-        }
+        //        }
+        //        else
+        //            return Ok(new { imgNode = "" });
+        //    }
+        //    return Ok(new
+        //    {
+        //        imgNode = sql
+        //    });
+        //}
 
-        //delete file
+        ////delete file
 
         [HttpPost]
         public IActionResult DeleteImage(string filesadd)
@@ -224,8 +224,6 @@ namespace figma.Controllers
         //
         #region Products
 
-
-        //
         public IActionResult ListProducts()
         {
             var shopProductContext = _unitOfWork.ProductRepository.Get(includeProperties: "Collection,ProductCategories");
@@ -627,9 +625,6 @@ namespace figma.Controllers
             return View();
         }
 
-        // POST: Colors/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ColorCreate([Bind("ColorID,Code,NameColor")] Models.Color color)
@@ -1098,9 +1093,9 @@ namespace figma.Controllers
 
         #region Collection
 
-        public async Task<IActionResult> ListCollectionBST()
+        public IActionResult ListCollectionBST()
         {
-            return View(await _context.Collections.OrderBy(p => p.CollectionID).ToListAsync());
+            return View(_unitOfWork.CollectionRepository.Get(orderBy: q => q.OrderByDescending(a => a.Sort)));
         }
 
         public IActionResult ListCollection()
@@ -1114,23 +1109,22 @@ namespace figma.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(collection);
-                await _context.SaveChangesAsync();
+                _unitOfWork.CollectionRepository.Insert(collection);
+                await _unitOfWork.Save();
                 TempData["result"] = "Thành công";
                 return RedirectToAction(nameof(ListCollectionBST));
             }
             return View(collection);
         }
 
-        // GET: Collections/Edit/5
-        public async Task<IActionResult> ListCollectionEdit(int? id)
+        public IActionResult ListCollectionEdit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var collection = await _context.Collections.FindAsync(id);
+            var collection = _unitOfWork.CollectionRepository.GetByID(id);
             if (collection == null)
             {
                 return NotFound();
@@ -1138,9 +1132,6 @@ namespace figma.Controllers
             return View(collection);
         }
 
-        // POST: Collections/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ListCollectionEdit(int id, [Bind("CollectionID,Name,Description,Image,Body,Quantity,Factory,Price,Sort,Hot,Home,Active,TitleMeta,Content,StatusProduct,BarCode,CreateDate,CreateBy")] Collection collection)
@@ -1154,56 +1145,34 @@ namespace figma.Controllers
             {
                 try
                 {
-                    _context.Update(collection);
-                    await _context.SaveChangesAsync();
+                    _unitOfWork.CollectionRepository.Update(collection);
+                    await _unitOfWork.Save();
                     TempData["result"] = "Thành công";
 
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CollectionExists(collection.CollectionID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    return NotFound();
                 }
                 return RedirectToAction(nameof(ListCollectionBST));
             }
             return View(collection);
         }
-        //
-        // POST: Collections/Delete/5
-        public IActionResult ListCollectionDelete(int id)
-        {
-            if (id < 1)
-            {
-                TempData["result"] = "Lỗi";
 
-                return Redirect(nameof(ListCollection));
-            }
-            var collection = _context.Collections.Find(id);
-            return View(collection);
-        }
-
-        // POST: Collections/Delete/5
         [HttpPost, ActionName("ListCollectionDelete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ListCollectionDeleteha(int id)
+        [IgnoreAntiforgeryToken]
+        public async Task<bool> ListCollectionDeleteha(int id)
         {
             if (id < 1)
             {
                 TempData["result"] = "Lỗi";
-                return Redirect(nameof(ListCollection));
+                return false;
             }
-            var collection = await _context.Collections.FindAsync(id);
-            _context.Collections.Remove(collection);
-            await _context.SaveChangesAsync();
+            var collection = _unitOfWork.CollectionRepository.GetByID(id);
+            _unitOfWork.CollectionRepository.Delete(collection);
+            await _unitOfWork.Save();
             TempData["result"] = "Thành công !";
-
-            return RedirectToAction(nameof(ListCollection));
+            return true;
         }
 
         private bool CollectionExists(int id)
@@ -1212,13 +1181,11 @@ namespace figma.Controllers
         }
         #endregion
 
-
         #region Contacts
 
-        // GET: Contacts
-        public async Task<IActionResult> ListContacts()
+        public IActionResult ListContacts()
         {
-            return View(await _context.Contacts.OrderBy(a => a.ContactID).ToListAsync());
+            return View(_unitOfWork.ContactRepository.Get(orderBy: a => a.OrderBy(q => q.CreateDate)));
         }
 
 
@@ -1234,24 +1201,21 @@ namespace figma.Controllers
             if (ModelState.IsValid)
             {
                 contacts.CreateDate = DateTime.Now;
-                _context.Add(contacts);
-                await _context.SaveChangesAsync();
+                _unitOfWork.ContactRepository.Insert(contacts);
+                await _unitOfWork.Save();
                 TempData["result"] = "Thành công";
-
                 return RedirectToAction(nameof(ListContacts));
             }
             return View(contacts);
         }
 
-        // GET: Contacts/Edit/5
-        public async Task<IActionResult> ListContactsEdit(int? id)
+        public IActionResult ListContactsEdit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
-            var contacts = await _context.Contacts.FindAsync(id);
+            var contacts = _unitOfWork.ContactRepository.GetByID(id);
             if (contacts == null)
             {
                 return NotFound();
@@ -1259,9 +1223,6 @@ namespace figma.Controllers
             return View(contacts);
         }
 
-        // POST: Contacts/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ListContactsEdit(int id, [Bind("ContactID,Fullname,Address,Mobile,Email,Subject,Body,CreateDate")] Contacts contacts)
@@ -1275,68 +1236,45 @@ namespace figma.Controllers
             {
                 try
                 {
-                    _context.Update(contacts);
-                    await _context.SaveChangesAsync();
+                    _unitOfWork.ContactRepository.Update(contacts);
+                    await _unitOfWork.Save();
                     TempData["result"] = "Thành công";
 
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ContactsExists(contacts.ContactID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    return NotFound();
                 }
                 return RedirectToAction(nameof(ListContacts));
             }
             return View(contacts);
         }
-        public IActionResult ListContactsDelete(int id)
+
+        [HttpPost, ActionName("ListContactsDelete")]
+        [IgnoreAntiforgeryToken]
+        public async Task<bool> ListContactsDelete(int id)
         {
             if (id < 1)
             {
                 TempData["result"] = "Lỗi";
-
-                return Redirect(nameof(ListContacts));
+                return false;
             }
-            var collection = _context.Contacts.Find(id);
-            return View(collection);
-        }
-
-        [HttpPost, ActionName("ListContacts")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ListContactsDelete1111(int id)
-        {
-            if (id < 1)
-            {
-                TempData["result"] = "Lỗi";
-                return Redirect(nameof(ListContacts));
-            }
-            var contacts = await _context.Contacts.FindAsync(id);
-            _context.Contacts.Remove(contacts);
-            await _context.SaveChangesAsync();
+            var contacts = _unitOfWork.ContactRepository.GetByID(id);
+            _unitOfWork.ContactRepository.Delete(contacts);
+            await _unitOfWork.Save();
             TempData["result"] = "Thành công !";
-            return Redirect(nameof(ListContacts));
+            return true;
         }
 
-        private bool ContactsExists(int id)
-        {
-            return _context.Contacts.Any(e => e.ContactID == id);
-        }
         #endregion
 
         #region Configsite
 
-        public async Task<IActionResult> ListConfigsite()
+        public IActionResult ListConfigsite()
         {
-            return View(await _context.ConfigSites.OrderBy(a => a.ConfigSiteID).ToListAsync());
+            return View(_unitOfWork.ConfigSiteRepository.Get().ToList());
         }
 
-        // GET: ConfigSites/Create
         public IActionResult ListConfigsiteCreate()
         {
             return View();
@@ -1349,25 +1287,22 @@ namespace figma.Controllers
 
             if (ModelState.IsValid)
             {
-
-
-                _context.Add(configSites);
-                await _context.SaveChangesAsync();
+                _unitOfWork.ConfigSiteRepository.Insert(configSites);
+                await _unitOfWork.Save();
                 TempData["result"] = "Thành công";
                 return RedirectToAction(nameof(ListConfigsite));
             }
             return View(configSites);
         }
 
-        // GET: ConfigSites/Edit/5
-        public async Task<IActionResult> ListConfigsiteEdit(int? id)
+        public IActionResult ListConfigsiteEdit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var configSites = await _context.ConfigSites.FindAsync(id);
+            var configSites = _unitOfWork.ConfigSiteRepository.GetByID(id);
             if (configSites == null)
             {
                 return NotFound();
@@ -1375,9 +1310,6 @@ namespace figma.Controllers
             return View(configSites);
         }
 
-        // POST: ConfigSites/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ListConfigsiteEdit(int id, [Bind("ConfigSiteID,Facebook,GooglePlus,Youtube,Linkedin,Twitter,GoogleAnalytics,LiveChat,GoogleMap,Title,Description,ContactInfo,FooterInfo,Hotline,Email,CoverImage,SaleOffProgram")] ConfigSites configSites)
@@ -1391,51 +1323,36 @@ namespace figma.Controllers
             {
                 try
                 {
-                    _context.Update(configSites);
-                    await _context.SaveChangesAsync();
+                    _unitOfWork.ConfigSiteRepository.Update(configSites);
+                    await _unitOfWork.Save();
                     TempData["result"] = "Thành công";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ConfigSitesExists(configSites.ConfigSiteID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    return NotFound();
                 }
                 return RedirectToAction(nameof(ListConfigsite));
             }
             return View(configSites);
         }
 
-
-        // POST: ConfigSites/Delete/5
         [HttpPost]
-        public bool ListConfigsiteDelete(int id)
+        [IgnoreAntiforgeryToken]
+        public async Task<bool> ListConfigsiteDelete(int id)
         {
             if (id < 1)
                 return false;
-            var configSites = _context.ConfigSites.Find(id);
-            _context.ConfigSites.Remove(configSites);
-            _context.SaveChanges();
+            var configSites = _unitOfWork.ConfigSiteRepository.GetByID(id);
+            _unitOfWork.ConfigSiteRepository.Delete(configSites);
+            await _unitOfWork.Save();
             return true;
         }
-
-        private bool ConfigSitesExists(int id)
-        {
-            return _context.ConfigSites.Any(e => e.ConfigSiteID == id);
-        }
-
-
         #endregion
 
         #region Banner
-        public async Task<IActionResult> ListBanner()
+        public IActionResult ListBanner()
         {
-            return View(await _context.Banners.OrderBy(a => a.BannerID).ToListAsync());
+            return View(_unitOfWork.BannerRepository.Get(orderBy: a => a.OrderBy(q => q.Soft)));
         }
 
 
@@ -1475,23 +1392,21 @@ namespace figma.Controllers
                         Resize(h, 650, 243);
                         break;
                 }
-                _context.Add(banners);
-                await _context.SaveChangesAsync();
+                _unitOfWork.BannerRepository.Insert(banners);
+                await _unitOfWork.Save();
                 TempData["result"] = "Thành công ";
                 return RedirectToAction(nameof(ListBanner));
             }
             return View(banners);
         }
-
-        // GET: Banners/Edit/5
-        public async Task<IActionResult> ListBannerEdit(int? id)
+        public IActionResult ListBannerEdit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var banners = await _context.Banners.FindAsync(id);
+            var banners = _unitOfWork.BannerRepository.GetByID(id);
             if (banners == null)
             {
                 return NotFound();
@@ -1499,9 +1414,6 @@ namespace figma.Controllers
             return View(banners);
         }
 
-        // POST: Banners/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ListBannerEdit(int id, [Bind("BannerID,BannerName,CoverImage ,Width,Height,Active,GroupId,Url,Soft,Title,Content")] Banners banners)
@@ -1532,21 +1444,14 @@ namespace figma.Controllers
                             Resize(h, 650, 243);
                             break;
                     }
-                    _context.Update(banners);
-                    await _context.SaveChangesAsync();
+                    _unitOfWork.BannerRepository.Update(banners);
+                    await _unitOfWork.Save();
                     TempData["result"] = "Thành công ";
 
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BannersExists(banners.BannerID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    return NotFound();
                 }
                 return RedirectToAction(nameof(ListBanner));
             }
@@ -1555,19 +1460,14 @@ namespace figma.Controllers
 
         [HttpPost]
         [IgnoreAntiforgeryToken]
-        public bool ListBannerDelete(int id)
+        public async Task<bool> ListBannerDelete(int id)
         {
             if (id < 1)
                 return false;
-            var banners = _context.Banners.Find(id);
-            _context.Banners.Remove(banners);
-            _context.SaveChanges();
+            var banners = _unitOfWork.BannerRepository.GetByID(id);
+            _unitOfWork.BannerRepository.Delete(banners);
+            await _unitOfWork.Save();
             return true;
-        }
-
-        private bool BannersExists(int id)
-        {
-            return _context.Banners.Any(e => e.BannerID == id);
         }
         #endregion
 
