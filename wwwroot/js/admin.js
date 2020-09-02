@@ -101,7 +101,7 @@ async function AJAXSubmitCreate(oFormElement,h,w) {
     const formData = new FormData(oFormElement);
     $.ajax({
         type: 'POST',
-        url: '/Upload/CreateImage?width=' + h + '&height=' + w + '',
+        url: '/Upload/CreateImage?width=' + w + '&height=' + h + '',
         data: formData,
         cache: false,
         contentType: false,
@@ -130,7 +130,7 @@ async function AJAXSubmitCreateOne(oFormElement,h,w) {
     const formData = new FormData(oFormElement);
     $.ajax({
         type: 'POST',
-        url: '/Upload/CreateImage?width=' + h + '&height=' + w + '',
+        url: '/Upload/CreateImage?width=' + w + '&height=' + h + '',
         data: formData,
         cache: false,
         contentType: false,
@@ -198,7 +198,7 @@ async function AJAXSubmitCreateOneT(oFormElement,h,w) {
     const formData = new FormData(oFormElement);
     $.ajax({
         type: 'POST',
-        url: '/Upload/CreateImage?width=' + h + '&height=' + w + '',
+        url: '/Upload/CreateImage?width=' + w + '&height=' + h + '',
         data: formData,
         cache: false,
         contentType: false,
