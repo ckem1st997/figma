@@ -94,9 +94,9 @@ namespace figma.Controllers
         [Authorize]
         public IActionResult Account()
         {
-
-            var userName = HttpContext.Session.GetString("UserName");
-            var userId = HttpContext.Session.GetString("UserId");
+            var claims = HttpContext.User.Claims;
+            var userName = claims.FirstOrDefault(c => c.Type == "UserName").Value;
+            var userId = claims.FirstOrDefault(c => c.Type == "UserId").Value;
             if (userId != null && userName != null)
             {
                 var result = _unitOfWork.MemberRepository.Get(a => a.MemberId == int.Parse(userId) && a.Email == userName);
@@ -122,36 +122,7 @@ namespace figma.Controllers
             return View();
         }
         //
-        public class RegisterViewModel
-        {
-            [Required(ErrorMessage = "Bạn chưa nhập thông tin"), Display(Name = "Họ và tên"), MaxLength(50, ErrorMessage = "Họ và tên phải ít hơn 20 kí tự"), MinLength(5, ErrorMessage = "Họ và tên phải nhiều hơn 4 kí tự")]
-            public string Fullname { get; set; }
 
-            [Display(Name = "Điện thoại"), DataType(DataType.PhoneNumber, ErrorMessage = "Hãy nhập đúng số điện thoại")]
-            public double Sdt { get; set; }
-
-            [Required(ErrorMessage = "Bạn chưa nhập thông tin"), MaxLength(50), Display(Name = "Email"), DataType(DataType.EmailAddress)]
-            public string Username { get; set; }
-
-            [Required(ErrorMessage = "Bạn chưa nhập thông tin"), DataType(DataType.Password), MaxLength(20, ErrorMessage = "Mật khẩu phải ít hơn 20 kí tự"), MinLength(5, ErrorMessage = "Mật khẩu phải nhiều hơn 4 kí tự")]
-            public string Password { get; set; }
-
-            [DataType(DataType.Password), Compare(nameof(Password), ErrorMessage = "Hai mật khẩu phải giống nhau"), MaxLength(20, ErrorMessage = "Mật khẩu phải ít hơn 20 kí tự"), MinLength(5, ErrorMessage = "Mật khẩu phải nhiều hơn 4 kí tự")]
-            public string ConfirmPassword { get; set; }
-        }
-
-        public class LoginViewModel
-        {
-
-            [Required, MaxLength(50), Display(Name = "Email"), DataType(DataType.EmailAddress)]
-            public string Username { get; set; }
-
-            [Required, DataType(DataType.Password), MaxLength(20, ErrorMessage = "Mật khẩu phải ít hơn 20 kí tự"), MinLength(5, ErrorMessage = "Mật khẩu phải nhiều hơn 4 kí tự")]
-            public string Password { get; set; }
-
-            [Display(Name = "Nhớ mật khẩu")]
-            public bool Remember { get; set; }
-        }
 
         [AllowAnonymous]
         [HttpPost]
@@ -172,12 +143,6 @@ namespace figma.Controllers
                     new Claim(ClaimTypes.Actor, users.Active.ToString()),
                     new Claim(ClaimTypes.Role,users.Active?"Users":"Active"),
                     };
-                        // add session
-                        foreach (var item in userClaims)
-                        {
-                            HttpContext.Session.SetString(item.Type, item.Value);
-
-                        }
                         var userIdentity = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme);
                         var authProperties = new AuthenticationProperties
                         {
@@ -185,10 +150,6 @@ namespace figma.Controllers
                             IsPersistent = true
                         };
                         await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(userIdentity), authProperties);
-                        //  code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
-                        //Execute("shoponline@gmail.com", "Shop1997", "hopxc1997@gmail.com", "Nguyễn Khả Hợp", "Thanh toán", "Đã mua").Wait();
-                        //await _emailSender.SendEmailAsync("hopxc1997@gmail.com", "Confirm your email",
-                        //$"Please confirm your account by <a href='{HtmlEncoder.Default.Encode("123")}'>clicking here</a>.");
                         if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
                            && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
                         {
@@ -201,7 +162,6 @@ namespace figma.Controllers
                         ModelState.AddModelError(string.Empty, "Tên đăng nhập không tồn tại");
                         return View(user);
                     }
-
                 }
                 else
                 {
@@ -232,8 +192,10 @@ namespace figma.Controllers
                 CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index");
         }
-        [AllowAnonymous]
+
+
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
@@ -259,18 +221,39 @@ namespace figma.Controllers
             return View(model);
         }
 
-        #region Layout
-        public IActionResult _Footer()
+        #region Account
+        public class RegisterViewModel
         {
-            return View();
+            [Required(ErrorMessage = "Bạn chưa nhập thông tin"), Display(Name = "Họ và tên"), MaxLength(50, ErrorMessage = "Họ và tên phải ít hơn 20 kí tự"), MinLength(5, ErrorMessage = "Họ và tên phải nhiều hơn 4 kí tự")]
+            public string Fullname { get; set; }
+
+            [Display(Name = "Điện thoại"), DataType(DataType.PhoneNumber, ErrorMessage = "Hãy nhập đúng số điện thoại")]
+            public double Sdt { get; set; }
+
+            [Required(ErrorMessage = "Bạn chưa nhập thông tin"), MaxLength(50), Display(Name = "Email"), DataType(DataType.EmailAddress)]
+            public string Username { get; set; }
+
+            [Required(ErrorMessage = "Bạn chưa nhập thông tin"), DataType(DataType.Password), MaxLength(20, ErrorMessage = "Mật khẩu phải ít hơn 20 kí tự"), MinLength(5, ErrorMessage = "Mật khẩu phải nhiều hơn 4 kí tự")]
+            public string Password { get; set; }
+
+            [DataType(DataType.Password), Compare(nameof(Password), ErrorMessage = "Hai mật khẩu phải giống nhau"), MaxLength(20, ErrorMessage = "Mật khẩu phải ít hơn 20 kí tự"), MinLength(5, ErrorMessage = "Mật khẩu phải nhiều hơn 4 kí tự")]
+            public string ConfirmPassword { get; set; }
         }
 
-        public IActionResult _Header()
+        public class LoginViewModel
         {
-            return View();
-        }
 
+            [Required, MaxLength(50), Display(Name = "Email"), DataType(DataType.EmailAddress)]
+            public string Username { get; set; }
+
+            [Required, DataType(DataType.Password), MaxLength(20, ErrorMessage = "Mật khẩu phải ít hơn 20 kí tự"), MinLength(5, ErrorMessage = "Mật khẩu phải nhiều hơn 4 kí tự")]
+            public string Password { get; set; }
+
+            [Display(Name = "Nhớ mật khẩu")]
+            public bool Remember { get; set; }
+        }
         #endregion
+
 
         protected override void Dispose(bool disposing)
         {

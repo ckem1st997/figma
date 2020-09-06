@@ -41,12 +41,11 @@ namespace figma.Controllers
         private readonly UnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _hostingEnvironment;
 
-        private readonly ShopProductContext _context;
+        //   private readonly ShopProductContext _context;
 
-        public CsmController(ShopProductContext context, IWebHostEnvironment hostEnvironment, UnitOfWork unitOfWork)
+        public CsmController(IWebHostEnvironment hostEnvironment, UnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _context = context;
             _hostingEnvironment = hostEnvironment;
         }
         public IActionResult Index()
@@ -155,8 +154,8 @@ namespace figma.Controllers
                 }
                 return RedirectToAction(nameof(ListProducts));
             }
-            ViewData["CollectionID"] = new SelectList(_context.Collections, "CollectionID", "Name", products.CollectionID);
-            ViewData["ProductCategorieID"] = new SelectList(_context.ProductCategories, "ProductCategorieID", "Name", products.ProductCategorieID);
+            ViewData["CollectionID"] = new SelectList(_unitOfWork.CollectionRepository.Get(), "CollectionID", "Name", products.CollectionID);
+            ViewData["ProductCategorieID"] = new SelectList(_unitOfWork.ProductCategoryRepository.Get(), "ProductCategorieID", "Name", products.ProductCategorieID);
             return View(products);
         }
 
@@ -327,14 +326,14 @@ namespace figma.Controllers
             return View(productSizeColor);
         }
 
-        public async Task<IActionResult> ProductsSCEdit(int? id)
+        public IActionResult ProductsSCEdit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var productSizeColor = await _context.ProductSizeColors.FindAsync(id);
+            var productSizeColor = _unitOfWork.ProductSCRepository.GetByID(id);
             if (productSizeColor == null)
             {
                 return NotFound();
@@ -725,7 +724,6 @@ namespace figma.Controllers
         #region ProductsTags
         public IActionResult SpecialCategoryProducts()
         {
-            //  ViewBag.Tp = _context.TagProducts.Include(t => t.Products).Include(t => t.Tags);
             ViewBag.Tp = _unitOfWork.TagsProductsRepository.Get(includeProperties: "Products,Tags").ToList();
             ViewData["ProductID"] = new SelectList(_unitOfWork.ProductRepository.Get().ToList(), "ProductID", "Name");
             ViewData["TagID"] = new SelectList(_unitOfWork.TagRepository.Get().ToList(), "TagID", "Name");
@@ -1035,10 +1033,6 @@ namespace figma.Controllers
             return true;
         }
 
-        private bool CollectionExists(int id)
-        {
-            return _context.Collections.Any(e => e.CollectionID == id);
-        }
         #endregion
 
         #region Contacts
@@ -1302,166 +1296,166 @@ namespace figma.Controllers
         #endregion
 
 
-        #region Admin
+        //        #region Admin
 
-        public class RegisterViewModel
-        {
+        //        public class RegisterViewModel
+        //        {
 
-            [Required, MaxLength(50)]
-            public string Username { get; set; }
+        //            [Required, MaxLength(50)]
+        //            public string Username { get; set; }
 
-            [Required, DataType(DataType.Password), MaxLength(20, ErrorMessage = "Mật khẩu phải ít hơn 20 kí tự"), MinLength(5, ErrorMessage = "Mật khẩu phải nhiều hơn 4 kí tự")]
-            public string Password { get; set; }
+        //            [Required, DataType(DataType.Password), MaxLength(20, ErrorMessage = "Mật khẩu phải ít hơn 20 kí tự"), MinLength(5, ErrorMessage = "Mật khẩu phải nhiều hơn 4 kí tự")]
+        //            public string Password { get; set; }
 
-            [DataType(DataType.Password), Compare(nameof(Password)), MaxLength(20, ErrorMessage = "Mật khẩu phải ít hơn 20 kí tự"), MinLength(5, ErrorMessage = "Mật khẩu phải nhiều hơn 4 kí tự")]
-            public string ConfirmPassword { get; set; }
-        }
+        //            [DataType(DataType.Password), Compare(nameof(Password)), MaxLength(20, ErrorMessage = "Mật khẩu phải ít hơn 20 kí tự"), MinLength(5, ErrorMessage = "Mật khẩu phải nhiều hơn 4 kí tự")]
+        //            public string ConfirmPassword { get; set; }
+        //        }
 
-        public class LoginViewModel
-        {
+        //        public class LoginViewModel
+        //        {
 
-            [Required, MaxLength(50)]
-            public string Username { get; set; }
+        //            [Required, MaxLength(50)]
+        //            public string Username { get; set; }
 
-            [Required, DataType(DataType.Password), MaxLength(20, ErrorMessage = "Mật khẩu phải ít hơn 20 kí tự"), MinLength(5, ErrorMessage = "Mật khẩu phải nhiều hơn 4 kí tự")]
-            public string Password { get; set; }
-        }
+        //            [Required, DataType(DataType.Password), MaxLength(20, ErrorMessage = "Mật khẩu phải ít hơn 20 kí tự"), MinLength(5, ErrorMessage = "Mật khẩu phải nhiều hơn 4 kí tự")]
+        //            public string Password { get; set; }
+        //        }
 
-        [HttpGet]
-        [AllowAnonymous]
-        public ActionResult LoginCsm()
-        {
-            try
-            {
-                HttpContext.SignOutAsync(
-CookieAuthenticationDefaults.AuthenticationScheme);
-            }
-            catch (Exception)
-            {
+        //        [HttpGet]
+        //        [AllowAnonymous]
+        //        public ActionResult LoginCsm()
+        //        {
+        //            try
+        //            {
+        //                HttpContext.SignOutAsync(
+        //CookieAuthenticationDefaults.AuthenticationScheme);
+        //            }
+        //            catch (Exception)
+        //            {
 
-                return View();
+        //                return View();
 
-            }
+        //            }
 
-            return View();
-        }
+        //            return View();
+        //        }
 
-        [HttpPost]
-        [AllowAnonymous]
-        public async Task<ActionResult> LoginCsm([Bind] LoginViewModel user, string returnUrl)
-        {
-            returnUrl = returnUrl ?? Url.Content("~/");
-            if (ModelState.IsValid)
-            {
-                if (ValidateAdmin(user.Username, user.Password))
-                {
-                    var users = _context.Admins.SingleOrDefault(a => a.Username == user.Username);
-                    if (users != null)
-                    {
-                        var userClaims = new List<Claim>()
-                {
-                    new Claim("UserName", users.Username),
-                    new Claim(ClaimTypes.Role, users.Role==null?"notAdmin":users.Role)
-                 };
-                        // add session
-                        //foreach (var item in userClaims)
-                        //{
-                        //    HttpContext.Session.SetString(item.Type, item.Value);
+        //        [HttpPost]
+        //        [AllowAnonymous]
+        //        public async Task<ActionResult> LoginCsm([Bind] LoginViewModel user, string returnUrl)
+        //        {
+        //            returnUrl = returnUrl ?? Url.Content("~/");
+        //            if (ModelState.IsValid)
+        //            {
+        //                if (ValidateAdmin(user.Username, user.Password))
+        //                {
+        //                    var users = _context.Admins.SingleOrDefault(a => a.Username == user.Username);
+        //                    if (users != null)
+        //                    {
+        //                        var userClaims = new List<Claim>()
+        //                {
+        //                    new Claim("UserName", users.Username),
+        //                    new Claim(ClaimTypes.Role, users.Role==null?"notAdmin":users.Role)
+        //                 };
+        //                        // add session
+        //                        //foreach (var item in userClaims)
+        //                        //{
+        //                        //    HttpContext.Session.SetString(item.Type, item.Value);
 
-                        //}
-                        var userIdentity = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme);
+        //                        //}
+        //                        var userIdentity = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme);
 
-                        var authProperties = new AuthenticationProperties
-                        {
-                            AllowRefresh = true,
-                            IsPersistent = true
-                        };
-                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(userIdentity), authProperties);
-                        //    Execute("shoponline@gmail.com", "Shop1997", "hopxc1997@gmail.com", "Nguyễn Khả Hợp", "Thanh toán", "Đã mua").Wait();
-                        //if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
-                        //   && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
-                        //{
-                        //    return Redirect(returnUrl);
-                        //}
-                        TempData["tq"] = "Thành công !";
-                        return RedirectToAction("Index", "Csm");
+        //                        var authProperties = new AuthenticationProperties
+        //                        {
+        //                            AllowRefresh = true,
+        //                            IsPersistent = true
+        //                        };
+        //                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(userIdentity), authProperties);
+        //                        //    Execute("shoponline@gmail.com", "Shop1997", "hopxc1997@gmail.com", "Nguyễn Khả Hợp", "Thanh toán", "Đã mua").Wait();
+        //                        //if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
+        //                        //   && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
+        //                        //{
+        //                        //    return Redirect(returnUrl);
+        //                        //}
+        //                        TempData["tq"] = "Thành công !";
+        //                        return RedirectToAction("Index", "Csm");
 
-                    }
-                    else
-                    {
-                        ModelState.AddModelError(string.Empty, "Tên đăng nhập không tồn tại");
-                        return View(user);
-                    }
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Tên đăng nhập hoặc mật khẩu không chính xác.");
-                    return View();
-                }
-            }
-            TempData["tq"] = "Thất bại !";
+        //                    }
+        //                    else
+        //                    {
+        //                        ModelState.AddModelError(string.Empty, "Tên đăng nhập không tồn tại");
+        //                        return View(user);
+        //                    }
+        //                }
+        //                else
+        //                {
+        //                    ModelState.AddModelError(string.Empty, "Tên đăng nhập hoặc mật khẩu không chính xác.");
+        //                    return View();
+        //                }
+        //            }
+        //            TempData["tq"] = "Thất bại !";
 
-            return View(user);
-        }
+        //            return View(user);
+        //        }
 
-        [AllowAnonymous]
-        public bool ValidateAdmin(string username, string password)
-        {
-            var admin = _context.Admins.SingleOrDefault(a => a.Username == username);
-            return admin != null && new PasswordHasher<Admins>().VerifyHashedPassword(new Admins(), admin.Password, password) == PasswordVerificationResult.Success;
-        }
-        //
-        [AllowAnonymous]
-        [HttpGet]
-        public ActionResult UserAccessDenied()
-        {
-            return View();
-        }
+        //        [AllowAnonymous]
+        //        public bool ValidateAdmin(string username, string password)
+        //        {
+        //            var admin = _context.Admins.SingleOrDefault(a => a.Username == username);
+        //            return admin != null && new PasswordHasher<Admins>().VerifyHashedPassword(new Admins(), admin.Password, password) == PasswordVerificationResult.Success;
+        //        }
+        //        //
+        //        [AllowAnonymous]
+        //        [HttpGet]
+        //        public ActionResult UserAccessDenied()
+        //        {
+        //            return View();
+        //        }
 
-        public async Task<IActionResult> Logout()
-        {
-            //  returnUrl = returnUrl ?? Url.Content("~/");
-            await HttpContext.SignOutAsync(
-                CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Index");
-        }
+        //        public async Task<IActionResult> Logout()
+        //        {
+        //            //  returnUrl = returnUrl ?? Url.Content("~/");
+        //            await HttpContext.SignOutAsync(
+        //                CookieAuthenticationDefaults.AuthenticationScheme);
+        //            return RedirectToAction("Index");
+        //        }
 
-        [AllowAnonymous]
-        [HttpGet]
-        public ActionResult Register()
-        {
-            return View();
-        }
+        //        [AllowAnonymous]
+        //        [HttpGet]
+        //        public ActionResult Register()
+        //        {
+        //            return View();
+        //        }
 
-        [AllowAnonymous]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var dk = _context.Admins.Where(a => a.Username.Equals(model.Username)).SingleOrDefault();
-                if (dk != null)
-                {
-                    ModelState.AddModelError("", @"Tên đăng nhập này có rồi");
-                }
-                else
-                {
-                    var hashedPassword = new PasswordHasher<Admins>().HashPassword(new Admins(), model.Password);
-                    await _context.Admins.AddAsync(new Admins { Username = model.Username, Password = hashedPassword, Role = "Admin", Active = true });
-                    await _context.SaveChangesAsync();
-                    TempData["tq"] = "Thành công";
-                    return RedirectToAction("LoginCsm", "Csm");
-                }
-                ModelState.AddModelError("", "Lỗi đăng ký, xin vui lòng thử lại nha");
+        //        [AllowAnonymous]
+        //        [HttpPost]
+        //        [ValidateAntiForgeryToken]
+        //        public async Task<IActionResult> Register(RegisterViewModel model)
+        //        {
+        //            if (ModelState.IsValid)
+        //            {
+        //                var dk = _context.Admins.Where(a => a.Username.Equals(model.Username)).SingleOrDefault();
+        //                if (dk != null)
+        //                {
+        //                    ModelState.AddModelError("", @"Tên đăng nhập này có rồi");
+        //                }
+        //                else
+        //                {
+        //                    var hashedPassword = new PasswordHasher<Admins>().HashPassword(new Admins(), model.Password);
+        //                    await _context.Admins.AddAsync(new Admins { Username = model.Username, Password = hashedPassword, Role = "Admin", Active = true });
+        //                    await _context.SaveChangesAsync();
+        //                    TempData["tq"] = "Thành công";
+        //                    return RedirectToAction("LoginCsm", "Csm");
+        //                }
+        //                ModelState.AddModelError("", "Lỗi đăng ký, xin vui lòng thử lại nha");
 
-            }
-            TempData["tq"] = "Thất bại";
+        //            }
+        //            TempData["tq"] = "Thất bại";
 
-            return View(model);
-        }
+        //            return View(model);
+        //        }
 
-        #endregion
+        //        #endregion
         protected override void Dispose(bool disposing)
         {
             _unitOfWork.Dispose();
