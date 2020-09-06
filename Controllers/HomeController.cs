@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using figma.DAL;
 using Microsoft.Extensions.Caching.Memory;
+using figma.ViewModel;
 
 namespace figma.Controllers
 {
@@ -32,7 +33,8 @@ namespace figma.Controllers
             _iMemoryCache = inMemoryCache;
             _unitOfWork = unitOfWork;
         }
-
+        private IEnumerable<Banners> Banners => _unitOfWork.BannerRepository.Get(a => a.Active, q => q.OrderBy(a => a.Soft));
+        private IEnumerable<ArticleCategory> ArticleCategories => _unitOfWork.ArticleCategoryRepository.Get(a => a.CategoryActive, q => q.OrderByDescending(a => a.CategorySort));
         #region CustomAttribute
         //public static void GetAttribute(Type t)
         //{
@@ -63,7 +65,24 @@ namespace figma.Controllers
         public IActionResult Index()
         {
             //  GetAttribute(typeof(HomeController));
-            return View();
+            var proCategories = _unitOfWork.ProductCategoryRepository.Get(a => a.Active && a.Home && a.ParentId == null, q => q.OrderByDescending(a => a.Soft));
+
+            ViewBag.tt = _unitOfWork.ConfigSiteRepository.Get(null, null, 1);
+            var items = proCategories.Select(category => new HomeViewModel.ItemBoxProductHome
+            {
+                ProductCategory = category,
+                Products = _unitOfWork.ProductRepository.Get(a => a.Active && a.Home && (a.ProductCategorieID == category.ProductCategorieID || a.ProductCategories.ParentId == category.ProductCategorieID), q => q.OrderByDescending(a => a.Sort), 8)
+            }).ToList();
+
+            var model = new HomeViewModel
+            {
+                Products = _unitOfWork.ProductRepository.Get(a => a.Active, q => q.OrderByDescending(a => a.Sort), 12),
+                ItemBoxProductHomes = items,
+                Banners = Banners,
+                Articles = _unitOfWork.ArticleRepository.Get(a => a.Active && a.Home, q => q.OrderByDescending(a => a.CreateDate), 3),
+                Albums = _unitOfWork.AlbumRepository.Get(a => a.Active, q => q.OrderByDescending(a => a.AlbumID), 4)
+            };
+            return View(model);
         }
 
         public IActionResult Login1()

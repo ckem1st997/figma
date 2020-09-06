@@ -44,24 +44,16 @@ namespace figma.DAL
         public GenericRepository<ProductCategories> ProductCategoryRepository => _productcategoryRepository ?? (_productcategoryRepository = new GenericRepository<ProductCategories>(_context));
         public GenericRepository<Albums> AlbumRepository => _albumRepository ?? (_albumRepository = new GenericRepository<Albums>(_context));
         public GenericRepository<Videos> VideoRepository => _videoRepository ?? (_videoRepository = new GenericRepository<Videos>(_context));
-
         public GenericRepository<ConfigSites> ConfigSiteRepository => _configRepository ?? (_configRepository = new GenericRepository<ConfigSites>(_context));
-
         public GenericRepository<Abouts> AboutRepository => _aboutRepository ?? (_aboutRepository = new GenericRepository<Abouts>(_context));
-
         public GenericRepository<Tags> TagRepository => _tagRepository ?? (_tagRepository = new GenericRepository<Tags>(_context));
         public GenericRepository<TagProducts> TagsProductsRepository => _tagProductsRepository ?? (_tagProductsRepository = new GenericRepository<TagProducts>(_context));
-
         public GenericRepository<Contacts> ContactRepository => _contactRepository ?? (_contactRepository = new GenericRepository<Contacts>(_context));
-
         public GenericRepository<Banners> BannerRepository => _bannerRepository ?? (_bannerRepository = new GenericRepository<Banners>(_context));
-
         public GenericRepository<Article> ArticleRepository => _articleRepository ?? (_articleRepository = new GenericRepository<Article>(_context));
         public GenericRepository<Size> SizeRepository => _sizeRepository ?? (_sizeRepository = new GenericRepository<Size>(_context));
         public GenericRepository<Color> ColorRepository => _colorRepository ?? (_colorRepository = new GenericRepository<Color>(_context));
-
         public GenericRepository<ArticleCategory> ArticleCategoryRepository => _artcategoryRepository ?? (_artcategoryRepository = new GenericRepository<ArticleCategory>(_context));
-
         public GenericRepository<Admins> AdminRepository => _adminRepository ?? (_adminRepository = new GenericRepository<Admins>(_context));
         public GenericRepository<ProductSizeColor> ProductSCRepository => _productSCRepository ?? (_productSCRepository = new GenericRepository<ProductSizeColor>(_context));
         public GenericRepository<Collection> CollectionRepository => _collectionRepository ?? (_collectionRepository = new GenericRepository<Collection>(_context));

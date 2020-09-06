@@ -27,7 +27,7 @@
                 STT
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BannerName)
+                Kiểu Banner
             </th>
             <th>
                 Hình ảnh
@@ -46,10 +46,24 @@
             {
                 <tr>
                     <td>
-                        @item.BannerID
+                        @item.Soft
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.BannerName)
+                        @switch (item.GroupId)
+                        {
+                            case 1:
+                                <span> Slide on Top 1440 x 632</span>
+                                break;
+                            case 2:
+                                <span>Banner Slide 465 x 330</span>
+                                break;
+                            case 3:
+                                <span>Banner To Home 700 x 497</span>
+                                break;
+                            case 4:
+                                <span> Banner Nhỏ Home auto x 243</span>
+                                break;
+                        }
                     </td>
                     <td>
                         @if (item.CoverImage != null)

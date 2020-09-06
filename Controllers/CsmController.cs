@@ -49,159 +49,12 @@ namespace figma.Controllers
             _context = context;
             _hostingEnvironment = hostEnvironment;
         }
-        //
         public IActionResult Index()
         {
 
             return View();
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> createImage1(List<IFormFile> filesadd)
-        //{
-        //    DateTime dateTime = DateTime.Now;
-        //    //  string createFolderDate = "" + dateTime.Year + "\\" + dateTime.Month + "\\" + dateTime.Day + "";
-        //    string createFolderDate = DateTime.Now.ToString("yyyy/MM/dd");
-        //    string path = _hostingEnvironment.WebRootPath + @"\uploads\" + createFolderDate + "";
-        //    Console.WriteLine(path);
-        //    try
-        //    {
-        //        if (Directory.Exists(path))
-        //        {
-        //            Console.WriteLine("Path đã tồn tại !");
-        //        }
-        //        DirectoryInfo di = Directory.CreateDirectory(path);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine("The process failed: {0}", e.ToString());
-        //    }
-        //    finally { }
-
-        //    // copy file
-        //    if (path == null)
-        //        path = "image";
-
-        //    if (filesadd == null || filesadd.Count == 0)
-        //        return Ok(new { imgNode = "" });
-        //    long size = filesadd.Sum(f => f.Length);
-        //    var filePaths = new List<string>();
-        //    string sql = "";
-        //    foreach (var formFile in filesadd)
-        //    {
-        //        if (FormFileExtensions.IsImage(formFile))
-        //        {
-        //            if (formFile.Length > 0)
-        //            {
-        //                // full path to file in temp location
-        //                var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "" + path + "");
-
-        //                filePaths.Add(filePath);
-        //                var randomname = DateTime.Now.ToFileTime() + Path.GetExtension(formFile.FileName);
-        //                var fileNameWithPath = string.Concat(filePath, "\\", randomname);
-
-        //                using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
-        //                {
-        //                    await formFile.CopyToAsync(stream);
-        //                }
-
-        //                if (sql.Length > 1)
-        //                    sql = "" + sql + ",uploads/" + createFolderDate + "/" + randomname + "";
-        //                else
-        //                    sql = "uploads/" + createFolderDate + "/" + randomname + "";
-        //                // sql = sql.Replace("\\", "/");
-
-        //            }
-        //        }
-        //        else
-        //            return Ok(new { imgNode = "" });
-        //    }
-        //    return Ok(new
-        //    {
-        //        imgNode = sql
-        //    });
-        //}
-
-        ////
-
-        //[HttpPost]
-        //public async Task<IActionResult> createImage(List<IFormFile> filesadd)
-        //{
-        //    DateTime dateTime = DateTime.Now;
-        //    //  string createFolderDate = "" + dateTime.Year + "\\" + dateTime.Month + "\\" + dateTime.Day + "";
-        //    string createFolderDate = DateTime.Now.ToString("yyyy/MM/dd");
-        //    string path = _hostingEnvironment.WebRootPath + @"\uploads\" + createFolderDate + "";
-        //    Console.WriteLine(path);
-        //    try
-        //    {
-        //        if (Directory.Exists(path))
-        //        {
-        //            Console.WriteLine("Path đã tồn tại !");
-        //        }
-        //        DirectoryInfo di = Directory.CreateDirectory(path);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine("The process failed: {0}", e.ToString());
-        //    }
-        //    finally { }
-
-        //    // copy file
-        //    if (path == null)
-        //        path = "image";
-
-        //    if (filesadd == null || filesadd.Count == 0)
-        //        return Ok(new { imgNode = "" });
-        //    //   if(filesadd)
-        //    long size = filesadd.Sum(f => f.Length);
-        //    var filePaths = new List<string>();
-        //    string sql = "";
-        //    foreach (var formFile in filesadd)
-        //    {
-
-        //        if (FormFileExtensions.IsImage(formFile))
-        //        {
-        //            if (formFile.Length > 0 && formFile.Length <= 4096000)
-        //            {
-        //                // full path to file in temp location
-        //                var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "" + path + "");
-
-        //                filePaths.Add(filePath);
-        //                var randomname = DateTime.Now.ToFileTime() + Path.GetExtension(formFile.FileName);
-        //                var fileNameWithPath = string.Concat(filePath, "\\", randomname);
-
-        //                using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
-        //                {
-        //                    await formFile.CopyToAsync(stream);
-        //                }
-        //                // resize
-        //                using (Image<Rgba32> image = (Image<Rgba32>)Image.Load(fileNameWithPath))
-        //                {
-        //                    image.Mutate(x => x.Resize(image.Width > 720 ? 720 : image.Width, image.Height > 822 ? 822 : image.Height));
-        //                    image.Save(fileNameWithPath);
-        //                }
-
-        //                if (sql.Length > 1)
-        //                    sql = "" + sql + ",uploads/" + createFolderDate + "/" + randomname + "";
-        //                else
-        //                    sql = "uploads/" + createFolderDate + "/" + randomname + "";
-        //                // sql = sql.Replace("\\", "/");
-
-        //            }
-        //            else
-        //                return Ok(new { imgNode = "" });
-
-        //        }
-        //        else
-        //            return Ok(new { imgNode = "" });
-        //    }
-        //    return Ok(new
-        //    {
-        //        imgNode = sql
-        //    });
-        //}
-
-        ////delete file
 
         [HttpPost]
         public IActionResult DeleteImage(string filesadd)
@@ -244,10 +97,18 @@ namespace figma.Controllers
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.ProductRepository.Insert(products);
-                await _unitOfWork.Save();
-                TempData["result"] = "Thêm sản phẩm thành công !";
-                return RedirectToAction(nameof(ListProducts));
+
+                if (products.SaleOff >= products.Price)
+                {
+                    ModelState.AddModelError("", @"Giá khuyến mãi lơn hơn giá bán. Bạn hãy nhập lại");
+                }
+                else
+                {
+                    _unitOfWork.ProductRepository.Insert(products);
+                    await _unitOfWork.Save();
+                    TempData["result"] = "Thêm sản phẩm thành công !";
+                    return RedirectToAction(nameof(ListProducts));
+                }
             }
             ViewData["CollectionID"] = new SelectList(_unitOfWork.CollectionRepository.Get().ToList(), "CollectionID", "Name", products.CollectionID);
             ViewData["ProductCategorieID"] = new SelectList(_unitOfWork.ProductCategoryRepository.Get().ToList(), "ProductCategorieID", "Name", products.ProductCategorieID);
@@ -287,7 +148,6 @@ namespace figma.Controllers
                     _unitOfWork.ProductRepository.Update(products);
                     await _unitOfWork.Save();
                     TempData["result"] = "Chỉnh sửa sản phẩm thành công !";
-
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -1352,7 +1212,7 @@ namespace figma.Controllers
         #region Banner
         public IActionResult ListBanner()
         {
-            return View(_unitOfWork.BannerRepository.Get(orderBy: a => a.OrderBy(q => q.Soft)));
+            return View(_unitOfWork.BannerRepository.Get(orderBy: a => a.OrderBy(q => q.GroupId)));
         }
 
 
@@ -1376,22 +1236,7 @@ namespace figma.Controllers
             if (ModelState.IsValid)
             {
                 string h = "" + _hostingEnvironment.WebRootPath + "\\" + banners.CoverImage + "";
-                switch (banners.GroupId)
-                {
-                    case 1:
-                        Resize(h, 1440, 632);
-                        break;
-
-                    case 2:
-                        Resize(h, 465, 330);
-                        break;
-                    case 3:
-                        Resize(h, 770, 497);
-                        break;
-                    case 4:
-                        Resize(h, 650, 243);
-                        break;
-                }
+                Resize(h, banners.Width, banners.Height);
                 _unitOfWork.BannerRepository.Insert(banners);
                 await _unitOfWork.Save();
                 TempData["result"] = "Thành công ";
@@ -1428,22 +1273,7 @@ namespace figma.Controllers
                 try
                 {
                     string h = "" + _hostingEnvironment.WebRootPath + "\\" + banners.CoverImage + "";
-                    switch (banners.GroupId)
-                    {
-                        case 1:
-                            Resize(h, 1440, 632);
-                            break;
-
-                        case 2:
-                            Resize(h, 465, 330);
-                            break;
-                        case 3:
-                            Resize(h, 770, 497);
-                            break;
-                        case 4:
-                            Resize(h, 650, 243);
-                            break;
-                    }
+                    Resize(h, banners.Width, banners.Height);
                     _unitOfWork.BannerRepository.Update(banners);
                     await _unitOfWork.Save();
                     TempData["result"] = "Thành công ";

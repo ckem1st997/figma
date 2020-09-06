@@ -3,11 +3,12 @@
 @{
     ViewData["Title"] = "Đăng nhập";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var returnUrl = @Context.Request.Query["returnurl"];
 }
 
 <div class="row d-flex justify-content-center mt-5">
     <div class="col-md-4">
-        <form asp-action="Login" asp-route-returnUrl="">
+        <form asp-action="Login" asp-route-returnUrl="@returnUrl">
             @{
                 if (TempData["tq"] != null)
                 {

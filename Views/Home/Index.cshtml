@@ -1,105 +1,115 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-
+﻿
+@model figma.ViewModel.HomeViewModel
+@{
+    foreach (var item in ViewBag.tt)
+    {
+        if (ViewData["Title"] != null)
+        {
+            ViewData["Title"] = item.Title;
+            ViewData["Description"] = item.Description;
+        }
+        else
+            ViewData["Title"] = "Shop Online";
+        break;
+    }
 }
 
 
 <div class="home-index">
     <div class="banner">
         <img class="" src="~/image/Rectangle 2.png" style="opacity:0;" />
+        @{
+            foreach (var item in Model.Banners.Where(a => a.GroupId == 1).Take(3))
+            {
+                <input type="hidden" class="srcBanners" value="@item.CoverImage" />
+            }
+        }
     </div>
     <div id="carouselExampleIndicators" class="carousel slide wow animate__fadeInUp" data-wow-duration="1s" data-wow-delay="0.5s" data-ride="carousel" style="margin:10px">
-
         <div class="carousel-inner">
-            <div class="carousel-item active container-fluid">
-                <div class="row">
-                    <div class="col-4  image-silde-1 carousel-item-info wow animate__fadeInUpBig" data-wow-duration="1s" data-wow-delay="0.5s">
-                        <img src="~/image/Rectangle 3.png" class="d-block w-100" alt="...">
-                        <div class="title-caro">
-                            <p class="title-small">Bộ sưu tập mới nhất xuân hè 2020</p>
-                            <p class="title-long text--1">sunny l’amour</p>
+            @{
+                if (Model.Banners.Where(a => a.GroupId == 2).Take(3).Count() <= 3 && Model.Banners.Where(a => a.GroupId == 2).Take(3).Count() > 0)
+                {
+                    int count = Model.Banners.Where(a => a.GroupId == 2).Take(3).Count();
+                    <div class="carousel-item active container-fluid">
+                        <div class="row">
+                            @{
+
+                                double delay = 1;
+                                string delayS = "" + delay + "s";
+                                foreach (var item in Model.Banners.Where(a => a.GroupId == 2).Take(3))
+                                {
+                                    <div class="col-@(12 / count) carousel-item-info wow animate__fadeInUpBig"
+                                         data-wow-duration=@delayS data-wow-delay="0.5s">
+                                        <img src="~/@item.CoverImage" class="d-block w-100" alt="...">
+                                        <div class="title-caro">
+                                            <p class="title-small">@item.Title</p>
+                                            <p class="title-long text--1">@item.Content</p>
+                                        </div>
+
+                                    </div>
+                                    delay = delay + 0.3;
+                                    delayS = "" + delay + "s";
+                                }
+                            }
                         </div>
 
                     </div>
-                    <div class="col-4 image-silde-2 carousel-item-info wow animate__fadeInUpBig" data-wow-duration="1.3s" data-wow-delay="0.5s">
-                        <img src="~/image/Rectangle 4.png" class="d-block w-100" alt="...">
-                        <div class="title-caro">
-                            <p class="title-small">Đừng bỏ lỡ các sản phẩm giảm giá hôm nay</p>
-                            <p class="title-long text--1">50% Off</p>
+                }
+                if (Model.Banners.Where(a => a.GroupId == 2).Skip(3).Take(3).Count() <= 3 && Model.Banners.Where(a => a.GroupId == 2).Skip(3).Take(3).Count() > 0)
+                {
+                    int count = Model.Banners.Where(a => a.GroupId == 2).Skip(3).Take(3).Count();
+                    <div class="carousel-item container-fluid">
+                        <div class="row">
+                            @{
+
+                                double delay = 1;
+                                string delayS = "" + delay + "s";
+                                foreach (var item in Model.Banners.Where(a => a.GroupId == 2).Skip(3).Take(3))
+                                {
+                                    <div class="col-@(12 / count) carousel-item-info" @*wow animate__fadeInUpBig"
+                                         data-wow-duration=@delayS data-wow-delay="0.5s"*@>
+                                        <img src="~/@item.CoverImage" class="d-block w-100" alt="...">
+                                        <div class="title-caro">
+                                            <p class="title-small">@item.Title</p>
+                                            <p class="title-long text--1">@item.Content</p>
+                                        </div>
+
+                                    </div>
+                                    delay = delay + 0.3;
+                                    delayS = "" + delay + "s";
+                                }
+                            }
                         </div>
-
                     </div>
-                    <div class="col-4 image-silde-3 carousel-item-info wow animate__fadeInUpBig" data-wow-duration="1.6s" data-wow-delay="0.5s">
-                        <img src="~/image/Rectangle 5.png" class="d-block w-100" alt="...">
-                        <div class="title-caro">
-                            <p class="title-small">Bộ sưu tập mới</p>
-                            <p class="title-long text--1">Spring 2020</p>
+                }
+                if (Model.Banners.Where(a => a.GroupId == 2).Skip(6).Take(3).Count() <= 3 && Model.Banners.Where(a => a.GroupId == 2).Skip(6).Take(3).Count() > 0)
+                {
+                    int count = Model.Banners.Where(a => a.GroupId == 2).Skip(6).Take(3).Count();
+                    <div class="carousel-item container-fluid">
+                        <div class="row">
+                            @{
+                                double delay = 1;
+                                string delayS = "" + delay + "s";
+                                foreach (var item in Model.Banners.Where(a => a.GroupId == 2).Skip(6).Take(3))
+                                {
+                                    <div class="col-@(12 / count) carousel-item-info" @*wow animate__fadeInUpBig"
+                                         data-wow-duration=@delayS data-wow-delay="0.5s"*@>
+                                        <img src="~/@item.CoverImage" class="d-block w-100" alt="...">
+                                        <div class="title-caro">
+                                            <p class="title-small">@item.Title</p>
+                                            <p class="title-long text--1">@item.Content</p>
+                                        </div>
+
+                                    </div>
+                                    delay = delay + 0.3;
+                                    delayS = "" + delay + "s";
+                                }
+                            }
                         </div>
-
                     </div>
-                </div>
-
-            </div>
-            <div class="carousel-item container-fluid">
-                <div class="row">
-                    <div class="col-4 image-silde-1 carousel-item-info">
-                        <img src="~/image/Rectangle 3.png" class="d-block w-100" alt="...">
-                        <div class="title-caro">
-                            <p class="title-small">Bộ sưu tập mới nhất xuân hè 2020</p>
-                            <p class="title-long text--1">sunny l’amour</p>
-                        </div>
-
-                    </div>
-                    <div class="col-4 image-silde-2 carousel-item-info">
-                        <img src="~/image/Rectangle 4.png" class="d-block w-100" alt="...">
-                        <div class="title-caro">
-                            <p class="title-small">Đừng bỏ lỡ các sản phẩm giảm giá hôm nay</p>
-                            <p class="title-long text--1">50% Off</p>
-                        </div>
-
-                    </div>
-                    <div class="col-4 image-silde-3 carousel-item-info">
-                        <img src="~/image/Rectangle 5.png" class="d-block w-100" alt="...">
-                        <div class="title-caro">
-                            <p class="title-small">Bộ sưu tập mới</p>
-                            <p class="title-long text--1">Spring 2020</p>
-                        </div>
-
-                    </div>
-                </div>
-
-
-            </div>
-            <div class="carousel-item container-fluid">
-                <div class="row">
-                    <div class="col-4 image-silde-1 carousel-item-info">
-                        <img src="~/image/Rectangle 3.png" class="d-block w-100" alt="...">
-                        <div class="title-caro">
-                            <p class="title-small">Bộ sưu tập mới nhất xuân hè 2020</p>
-                            <p class="title-long text--1">sunny l’amour</p>
-                        </div>
-
-                    </div>
-                    <div class="col-4 image-silde-2 carousel-item-info">
-                        <img src="~/image/Rectangle 4.png" class="d-block w-100" alt="...">
-                        <div class="title-caro">
-                            <p class="title-small">Đừng bỏ lỡ các sản phẩm giảm giá hôm nay</p>
-                            <p class="title-long text--1">50% Off</p>
-                        </div>
-
-                    </div>
-                    <div class="col-4 image-silde-3 carousel-item-info">
-                        <img src="~/image/Rectangle 5.png" class="d-block w-100" alt="...">
-                        <div class="title-caro">
-                            <p class="title-small">Bộ sưu tập mới</p>
-                            <p class="title-long text--1">Spring 2020</p>
-                        </div>
-
-                    </div>
-                </div>
-
-
-            </div>
+                }
+            }
 
         </div>
         <a class="carousel-control-prev carousel-btn" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -111,12 +121,27 @@
             <span class="sr-only">Next</span>
         </a>
         <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            @{
+
+                int countSlide = 0;
+                if ((Model.Banners.Where(a => a.GroupId == 2).Count()) % 3 != 0)
+                    countSlide = ((Model.Banners.Where(a => a.GroupId == 2).Count()) / 3) + 1;
+                else
+                    countSlide = (Model.Banners.Where(a => a.GroupId == 2).Count()) / 3;
+                for (int i = 0; i < countSlide; i++)
+                {
+                    if (i == 0)
+                    {
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    }
+                    else
+                    {
+                        <li data-target="#carouselExampleIndicators" data-slide-to="@i"></li>
+                    }
+                }
+            }
         </ol>
     </div>
-
     <div class="welcome">
         <div class="title-we mt-5 mb-5 wow animate__fadeInLeftBig" data-wow-duration="1s" data-wow-delay="0.5s">
             Chào mừng bạn đến với Lucas58
@@ -141,367 +166,90 @@
                     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                         <div class="container animate__zoomIn">
                             <div class="row " data-wow-duration="2s">
-                                <div class="col-lg-3 col-md-4 col-sm-6 col-6 wow animate__slideInUp" data-wow-duration="1s" data-wow-delay="0.5s">
-                                    <a asp-controller="Home" asp-action="Privacy">
-                                        <div class="card-product">
-                                            <div class="product-hover ">
-                                                <img src="/image/Rectangle 9 (2).png" />
-                                                <div class="card-tool w-100">
-                                                    <a class="card-tool-btn btn-1">
-                                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                                                        </svg>
-                                                    </a>
-                                                    <a class="card-tool-btn btn-2">
-                                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bag-dash bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M14 5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5zM1 4v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4H1z" />
-                                                            <path d="M8 1.5A2.5 2.5 0 0 0 5.5 4h-1a3.5 3.5 0 1 1 7 0h-1A2.5 2.5 0 0 0 8 1.5z" />
-                                                            <path fill-rule="evenodd" d="M5.5 10a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z" />
-                                                        </svg>
-                                                    </a>
-                                                </div>
+                                @{
+                                    if (Model.Products.Count() > 0)
+                                    {
+                                        double delay = 1;
+                                        string delayS = "" + delay + "s";
+                                        @foreach (var item in Model.Products)
+                                        {
+                                            string[] arrListStr = item.Image.Split(',');
+
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-6 wow animate__slideInUp"
+                                                 data-wow-duration="@delayS" data-wow-delay="0.5s">
+                                                <a asp-controller="Home" asp-action="Privacy">
+                                                    <div class="card-product">
+                                                        <div class="product-hover ">
+                                                            <img src="/@arrListStr[0]" />
+                                                            <div class="card-tool w-100">
+                                                                <a class="card-tool-btn btn-1">
+                                                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                                                                    </svg>
+                                                                </a>
+                                                                <a class="card-tool-btn btn-2">
+                                                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bag-dash bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path fill-rule="evenodd" d="M14 5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5zM1 4v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4H1z" />
+                                                                        <path d="M8 1.5A2.5 2.5 0 0 0 5.5 4h-1a3.5 3.5 0 1 1 7 0h-1A2.5 2.5 0 0 0 8 1.5z" />
+                                                                        <path fill-rule="evenodd" d="M5.5 10a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z" />
+                                                                    </svg>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        @{
+                                                            if (item.SaleOff > 0)
+                                                            {
+                                                                <span class="card-top card-sale">Sale @Math.Ceiling((item.Price / item.SaleOff) * 100 - 100)%</span>
+                                                            }
+                                                            else if (item.Hot)
+                                                            {
+                                                                <span class="card-top card-new">NEW</span>
+                                                            }
+                                                            else if (item.Sort < 5)
+                                                            {
+                                                                <span class="card-top card-top">TOP</span>
+
+                                                            }
+                                                        }
+
+                                                        <div class="review">
+                                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                                            </svg>
+                                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                                            </svg>
+                                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                                            </svg>
+                                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                                            </svg>
+                                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                                            </svg>
+                                                        </div>
+                                                        <p class="title-namesp">@item.Name</p>
+                                                        @{
+                                                            if (item.SaleOff > 0)
+                                                            {
+                                                                <p class="pricesp">@(item.SaleOff)đ  <del class="text-black-50">@(item.Price)đ</del></p>
+                                                            }
+                                                            else
+                                                            {
+                                                                <p class="pricesp">@(item.Price)đ</p>
+
+                                                            }
+                                                        }
+
+                                                    </div>
+                                                </a>
                                             </div>
-
-                                            <span class="card-top card-sale">Sale 24%</span>
-
-                                            <div class="review">
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                            </div>
-                                            <p class="title-namesp">VN STELLA hồng CỔ VUÔNG CHUN VAi TAY CỘC DỌC CÚC BỌC</p>
-                                            <p class="pricesp">550.000 đ</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-lg-3 col-md-4 col-sm-6 col-6 wow animate__slideInUp" data-wow-duration="1.5s" data-wow-delay="0.5s">
-                                    <a asp-controller="Home" asp-action="Privacy">
-                                        <div class="card-product">
-                                            <div class="product-hover">
-                                                <img src="/image/Rectangle 9 (2).png" />
-                                                <div class="card-tool w-100">
-                                                    <a class="card-tool-btn btn-1">
-                                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                                                        </svg>
-                                                    </a>
-                                                    <a class="card-tool-btn btn-2">
-                                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bag-dash bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M14 5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5zM1 4v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4H1z" />
-                                                            <path d="M8 1.5A2.5 2.5 0 0 0 5.5 4h-1a3.5 3.5 0 1 1 7 0h-1A2.5 2.5 0 0 0 8 1.5z" />
-                                                            <path fill-rule="evenodd" d="M5.5 10a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z" />
-                                                        </svg>
-                                                    </a>
-                                                </div>
-                                            </div>
-
-                                            <span class="card-top card-new">NEW</span>
-
-                                            <div class="review">
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                            </div>
-                                            <p class="title-namesp">VN STELLA hồng CỔ VUÔNG CHUN VAi TAY CỘC DỌC CÚC BỌC</p>
-                                            <p class="pricesp">550.000 đ</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-lg-3 col-md-4 col-sm-6 col-6 wow animate__slideInUp" data-wow-duration="2s" data-wow-delay="0.5s">
-                                    <a asp-controller="Home" asp-action="Privacy">
-                                        <div class="card-product">
-                                            <div class="product-hover">
-                                                <img src="/image/Rectangle 9 (2).png" />
-                                                <div class="card-tool w-100">
-                                                    <a class="card-tool-btn btn-1">
-                                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                                                        </svg>
-                                                    </a>
-                                                    <a class="card-tool-btn btn-2">
-                                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bag-dash bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M14 5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5zM1 4v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4H1z" />
-                                                            <path d="M8 1.5A2.5 2.5 0 0 0 5.5 4h-1a3.5 3.5 0 1 1 7 0h-1A2.5 2.5 0 0 0 8 1.5z" />
-                                                            <path fill-rule="evenodd" d="M5.5 10a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z" />
-                                                        </svg>
-                                                    </a>
-                                                </div>
-                                            </div>
-
-                                            <span class="card-top card-top">TOP</span>
-
-                                            <div class="review">
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                            </div>
-                                            <p class="title-namesp">VN STELLA hồng CỔ VUÔNG CHUN VAi TAY CỘC DỌC CÚC BỌC</p>
-                                            <p class="pricesp">550.000 đ</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-lg-3 col-md-4 col-sm-6 col-6 wow animate__slideInUp" data-wow-duration="2.5s" data-wow-delay="0.5s">
-                                    <a asp-controller="Home" asp-action="Privacy">
-                                        <div class="card-product">
-                                            <div class="product-hover">
-                                                <img src="/image/Rectangle 9 (2).png" />
-                                                <div class="card-tool w-100">
-                                                    <a class="card-tool-btn btn-1">
-                                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                                                        </svg>
-                                                    </a>
-                                                    <a class="card-tool-btn btn-2">
-                                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bag-dash bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M14 5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5zM1 4v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4H1z" />
-                                                            <path d="M8 1.5A2.5 2.5 0 0 0 5.5 4h-1a3.5 3.5 0 1 1 7 0h-1A2.5 2.5 0 0 0 8 1.5z" />
-                                                            <path fill-rule="evenodd" d="M5.5 10a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z" />
-                                                        </svg>
-                                                    </a>
-                                                </div>
-                                            </div>
-
-                                            <span class="card-top card-sale">Sale 24%</span>
-
-                                            <div class="review">
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                            </div>
-                                            <p class="title-namesp">VN STELLA hồng CỔ VUÔNG CHUN VAi TAY CỘC DỌC CÚC BỌC</p>
-                                            <p class="pricesp">550.000 đ</p>
-                                        </div>
-                                    </a>
-                                </div>
-
-                                <div class="col-lg-3 col-md-4 col-sm-6 col-6 wow animate__slideInUp" data-wow-duration="2.5s" data-wow-delay="0.5s">
-                                    <a asp-controller="Home" asp-action="Privacy">
-                                        <div class="card-product">
-                                            <div class="product-hover">
-                                                <img src="/image/Rectangle 9 (2).png" />
-                                                <div class="card-tool w-100">
-                                                    <a class="card-tool-btn btn-1">
-                                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                                                        </svg>
-                                                    </a>
-                                                    <a class="card-tool-btn btn-2">
-                                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bag-dash bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M14 5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5zM1 4v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4H1z" />
-                                                            <path d="M8 1.5A2.5 2.5 0 0 0 5.5 4h-1a3.5 3.5 0 1 1 7 0h-1A2.5 2.5 0 0 0 8 1.5z" />
-                                                            <path fill-rule="evenodd" d="M5.5 10a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z" />
-                                                        </svg>
-                                                    </a>
-                                                </div>
-                                            </div>
-
-                                            <span class="card-top card-sale">Sale 24%</span>
-
-                                            <div class="review">
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                            </div>
-                                            <p class="title-namesp">VN STELLA hồng CỔ VUÔNG CHUN VAi TAY CỘC DỌC CÚC BỌC</p>
-                                            <p class="pricesp">550.000 đ</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-lg-3 col-md-4 col-sm-6 col-6 wow animate__slideInUp" data-wow-duration="2s" data-wow-delay="0.5s">
-                                    <a asp-controller="Home" asp-action="Privacy">
-                                        <div class="card-product">
-                                            <div class="product-hover">
-                                                <img src="/image/Rectangle 9 (2).png" />
-                                                <div class="card-tool w-100">
-                                                    <a class="card-tool-btn btn-1">
-                                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                                                        </svg>
-                                                    </a>
-                                                    <a class="card-tool-btn btn-2">
-                                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bag-dash bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M14 5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5zM1 4v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4H1z" />
-                                                            <path d="M8 1.5A2.5 2.5 0 0 0 5.5 4h-1a3.5 3.5 0 1 1 7 0h-1A2.5 2.5 0 0 0 8 1.5z" />
-                                                            <path fill-rule="evenodd" d="M5.5 10a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z" />
-                                                        </svg>
-                                                    </a>
-                                                </div>
-                                            </div>
-
-                                            <span class="card-top card-new">NEW</span>
-
-                                            <div class="review">
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                            </div>
-                                            <p class="title-namesp">VN STELLA hồng CỔ VUÔNG CHUN VAi TAY CỘC DỌC CÚC BỌC</p>
-                                            <p class="pricesp">550.000 đ</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-lg-3 col-md-4 col-sm-6 col-6 wow animate__slideInUp" data-wow-duration="1.5s" data-wow-delay="0.5s">
-                                    <a asp-controller="Home" asp-action="Privacy">
-                                        <div class="card-product">
-                                            <div class="product-hover">
-                                                <img src="/image/Rectangle 9 (2).png" />
-                                                <div class="card-tool w-100">
-                                                    <a class="card-tool-btn btn-1">
-                                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                                                        </svg>
-                                                    </a>
-                                                    <a class="card-tool-btn btn-2">
-                                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bag-dash bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M14 5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5zM1 4v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4H1z" />
-                                                            <path d="M8 1.5A2.5 2.5 0 0 0 5.5 4h-1a3.5 3.5 0 1 1 7 0h-1A2.5 2.5 0 0 0 8 1.5z" />
-                                                            <path fill-rule="evenodd" d="M5.5 10a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z" />
-                                                        </svg>
-                                                    </a>
-                                                </div>
-                                            </div>
-
-                                            <span class="card-top card-top">TOP</span>
-
-                                            <div class="review">
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                            </div>
-                                            <p class="title-namesp">VN STELLA hồng CỔ VUÔNG CHUN VAi TAY CỘC DỌC CÚC BỌC</p>
-                                            <p class="pricesp">550.000 đ</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-lg-3 col-md-4 col-sm-6 col-6 wow animate__slideInUp" data-wow-duration="0.5s" data-wow-delay="0.5s">
-                                    <a asp-controller="Home" asp-action="Privacy">
-                                        <div class="card-product">
-                                            <div class="product-hover">
-                                                <img src="/image/Rectangle 9 (2).png" />
-                                                <div class="card-tool w-100">
-                                                    <a class="card-tool-btn btn-1">
-                                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                                                        </svg>
-                                                    </a>
-                                                    <a class="card-tool-btn btn-2">
-                                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bag-dash bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M14 5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5zM1 4v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4H1z" />
-                                                            <path d="M8 1.5A2.5 2.5 0 0 0 5.5 4h-1a3.5 3.5 0 1 1 7 0h-1A2.5 2.5 0 0 0 8 1.5z" />
-                                                            <path fill-rule="evenodd" d="M5.5 10a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z" />
-                                                        </svg>
-                                                    </a>
-                                                </div>
-                                            </div>
-
-                                            <span class="card-top card-sale">Sale 24%</span>
-
-                                            <div class="review">
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                            </div>
-                                            <p class="title-namesp">VN STELLA hồng CỔ VUÔNG CHUN VAi TAY CỘC DỌC CÚC BỌC</p>
-                                            <p class="pricesp">550.000 đ</p>
-                                        </div>
-                                    </a>
-                                </div>
+                                            delay = delay + 0.3;
+                                            delayS = "" + delay + "s";
+                                        }
+                                    }
+                                }
                             </div>
 
                         </div>
@@ -554,53 +302,6 @@
                                         </div>
                                     </a>
                                 </div>
-                                <div class="col-lg-3 col-md-4 col-sm-6 col-6 animate__slideInUp" data-wow-duration="2.5s" data-wow-delay="0.5s">
-                                    <a asp-controller="Home" asp-action="Privacy">
-                                        <div class="card-product">
-                                            <div class="product-hover">
-                                                <img src="/image/Rectangle 9 (2).png" />
-                                                <div class="card-tool w-100">
-                                                    <a class="card-tool-btn btn-1">
-                                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                                                        </svg>
-                                                    </a>
-                                                    <a class="card-tool-btn btn-2">
-                                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bag-dash bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M14 5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5zM1 4v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4H1z" />
-                                                            <path d="M8 1.5A2.5 2.5 0 0 0 5.5 4h-1a3.5 3.5 0 1 1 7 0h-1A2.5 2.5 0 0 0 8 1.5z" />
-                                                            <path fill-rule="evenodd" d="M5.5 10a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z" />
-                                                        </svg>
-                                                    </a>
-                                                </div>
-                                            </div>
-
-                                            <span class="card-top card-sale">Sale 24%</span>
-
-                                            <div class="review">
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                            </div>
-                                            <p class="title-namesp">VN STELLA hồng CỔ VUÔNG CHUN VAi TAY CỘC DỌC CÚC BỌC</p>
-                                            <p class="pricesp">550.000 đ</p>
-                                        </div>
-                                    </a>
-                                </div>
-
-
                             </div>
 
                         </div>
@@ -653,143 +354,6 @@
                                         </div>
                                     </a>
                                 </div>
-                                <div class="col-lg-3 col-md-4 col-sm-6 col-6  animate__slideInUp" data-wow-duration="1.5s" data-wow-delay="0.5s">
-                                    <a asp-controller="Home" asp-action="Privacy">
-                                        <div class="card-product">
-                                            <div class="product-hover">
-                                                <img src="/image/Rectangle 9 (2).png" />
-                                                <div class="card-tool w-100">
-                                                    <a class="card-tool-btn btn-1">
-                                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                                                        </svg>
-                                                    </a>
-                                                    <a class="card-tool-btn btn-2">
-                                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bag-dash bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M14 5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5zM1 4v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4H1z" />
-                                                            <path d="M8 1.5A2.5 2.5 0 0 0 5.5 4h-1a3.5 3.5 0 1 1 7 0h-1A2.5 2.5 0 0 0 8 1.5z" />
-                                                            <path fill-rule="evenodd" d="M5.5 10a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z" />
-                                                        </svg>
-                                                    </a>
-                                                </div>
-                                            </div>
-
-                                            <span class="card-top card-new">NEW</span>
-
-                                            <div class="review">
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                            </div>
-                                            <p class="title-namesp">VN STELLA hồng CỔ VUÔNG CHUN VAi TAY CỘC DỌC CÚC BỌC</p>
-                                            <p class="pricesp">550.000 đ</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-lg-3 col-md-4 col-sm-6 col-6 animate__slideInUp" data-wow-duration="2s" data-wow-delay="0.5s">
-                                    <a asp-controller="Home" asp-action="Privacy">
-                                        <div class="card-product">
-                                            <div class="product-hover">
-                                                <img src="/image/Rectangle 9 (2).png" />
-                                                <div class="card-tool w-100">
-                                                    <a class="card-tool-btn btn-1">
-                                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                                                        </svg>
-                                                    </a>
-                                                    <a class="card-tool-btn btn-2">
-                                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bag-dash bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M14 5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5zM1 4v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4H1z" />
-                                                            <path d="M8 1.5A2.5 2.5 0 0 0 5.5 4h-1a3.5 3.5 0 1 1 7 0h-1A2.5 2.5 0 0 0 8 1.5z" />
-                                                            <path fill-rule="evenodd" d="M5.5 10a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z" />
-                                                        </svg>
-                                                    </a>
-                                                </div>
-                                            </div>
-
-                                            <span class="card-top card-top">TOP</span>
-
-                                            <div class="review">
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                            </div>
-                                            <p class="title-namesp">VN STELLA hồng CỔ VUÔNG CHUN VAi TAY CỘC DỌC CÚC BỌC</p>
-                                            <p class="pricesp">550.000 đ</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-lg-3 col-md-4 col-sm-6 col-6 animate__slideInUp" data-wow-duration="2.5s" data-wow-delay="0.5s">
-                                    <a asp-controller="Home" asp-action="Privacy">
-                                        <div class="card-product">
-                                            <div class="product-hover">
-                                                <img src="/image/Rectangle 9 (2).png" />
-                                                <div class="card-tool w-100">
-                                                    <a class="card-tool-btn btn-1">
-                                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                                                        </svg>
-                                                    </a>
-                                                    <a class="card-tool-btn btn-2">
-                                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bag-dash bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M14 5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5zM1 4v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4H1z" />
-                                                            <path d="M8 1.5A2.5 2.5 0 0 0 5.5 4h-1a3.5 3.5 0 1 1 7 0h-1A2.5 2.5 0 0 0 8 1.5z" />
-                                                            <path fill-rule="evenodd" d="M5.5 10a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z" />
-                                                        </svg>
-                                                    </a>
-                                                </div>
-                                            </div>
-
-                                            <span class="card-top card-sale">Sale 24%</span>
-
-                                            <div class="review">
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                            </div>
-                                            <p class="title-namesp">VN STELLA hồng CỔ VUÔNG CHUN VAi TAY CỘC DỌC CÚC BỌC</p>
-                                            <p class="pricesp">550.000 đ</p>
-                                        </div>
-                                    </a>
-                                </div>
-
-
                             </div>
 
                         </div>
@@ -842,481 +406,11 @@
                                         </div>
                                     </a>
                                 </div>
-                                <div class="col-lg-3 col-md-4 col-sm-6 col-6  animate__slideInUp" data-wow-duration="1.5s" data-wow-delay="0.5s">
-                                    <a asp-controller="Home" asp-action="Privacy">
-                                        <div class="card-product">
-                                            <div class="product-hover">
-                                                <img src="/image/Rectangle 9 (2).png" />
-                                                <div class="card-tool w-100">
-                                                    <a class="card-tool-btn btn-1">
-                                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                                                        </svg>
-                                                    </a>
-                                                    <a class="card-tool-btn btn-2">
-                                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bag-dash bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M14 5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5zM1 4v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4H1z" />
-                                                            <path d="M8 1.5A2.5 2.5 0 0 0 5.5 4h-1a3.5 3.5 0 1 1 7 0h-1A2.5 2.5 0 0 0 8 1.5z" />
-                                                            <path fill-rule="evenodd" d="M5.5 10a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z" />
-                                                        </svg>
-                                                    </a>
-                                                </div>
-                                            </div>
-
-                                            <span class="card-top card-new">NEW</span>
-
-                                            <div class="review">
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                            </div>
-                                            <p class="title-namesp">VN STELLA hồng CỔ VUÔNG CHUN VAi TAY CỘC DỌC CÚC BỌC</p>
-                                            <p class="pricesp">550.000 đ</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-lg-3 col-md-4 col-sm-6 col-6 animate__slideInUp" data-wow-duration="2s" data-wow-delay="0.5s">
-                                    <a asp-controller="Home" asp-action="Privacy">
-                                        <div class="card-product">
-                                            <div class="product-hover">
-                                                <img src="/image/Rectangle 9 (2).png" />
-                                                <div class="card-tool w-100">
-                                                    <a class="card-tool-btn btn-1">
-                                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                                                        </svg>
-                                                    </a>
-                                                    <a class="card-tool-btn btn-2">
-                                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bag-dash bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd" d="M14 5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5zM1 4v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4H1z" />
-                                                            <path d="M8 1.5A2.5 2.5 0 0 0 5.5 4h-1a3.5 3.5 0 1 1 7 0h-1A2.5 2.5 0 0 0 8 1.5z" />
-                                                            <path fill-rule="evenodd" d="M5.5 10a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z" />
-                                                        </svg>
-                                                    </a>
-                                                </div>
-                                            </div>
-
-                                            <span class="card-top card-top">TOP</span>
-
-                                            <div class="review">
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                                </svg>
-                                            </div>
-                                            <p class="title-namesp">VN STELLA hồng CỔ VUÔNG CHUN VAi TAY CỘC DỌC CÚC BỌC</p>
-                                            <p class="pricesp">550.000 đ</p>
-                                        </div>
-                                    </a>
-                                </div>
-
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
-            @*<div class="navbar-nav flex-grow-1 container">
-                    <div class="row">
-                        <div class="col-12 list-trend1">
-
-                            <a class=" text-header1 text-header wow animate__fadeInUpBig" data-wow-duration="1s" data-wow-delay="0.5s" asp-area="" asp-controller="Home" asp-action="Index">Hàng mới về</a>
-                            <a class=" text-header1 text-header wow animate__fadeInUpBig" data-wow-duration="1.3s" data-wow-delay="0.5s" asp-area="" asp-controller="Home" asp-action="Index">Xu hướng</a>
-                            <a class="text-header1 text-header wow animate__fadeInUpBig" data-wow-duration="1.6s" data-wow-delay="0.5s" asp-area="" asp-controller="Home" asp-action="Index">Nổi bật</a>
-                            <a class=" text-header1 text-header wow animate__fadeInUpBig" data-wow-duration="1.9s" data-wow-delay="0.5s" asp-area="" asp-controller="Home" asp-action="Index">Đặc điểm</a>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="container animate__zoomIn">
-                    <div class="row " data-wow-duration="2s">
-                        <div class="col-lg-3 col-md-4 col-sm-6 col-6 wow animate__slideInUp" data-wow-duration="1s" data-wow-delay="0.5s">
-                            <a asp-controller="Home" asp-action="Privacy">
-                                <div class="card-product">
-                                    <div class="product-hover ">
-                                        <img src="/image/Rectangle 9 (2).png" />
-                                        <div class="card-tool w-100">
-                                            <a class="card-tool-btn btn-1">
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                                                </svg>
-                                            </a>
-                                            <a class="card-tool-btn btn-2">
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bag-dash bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" d="M14 5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5zM1 4v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4H1z" />
-                                                    <path d="M8 1.5A2.5 2.5 0 0 0 5.5 4h-1a3.5 3.5 0 1 1 7 0h-1A2.5 2.5 0 0 0 8 1.5z" />
-                                                    <path fill-rule="evenodd" d="M5.5 10a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z" />
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </div>
-
-                                    <span class="card-top card-sale">Sale 24%</span>
-
-                                    <div class="review">
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                    </div>
-                                    <p class="title-namesp">VN STELLA hồng CỔ VUÔNG CHUN VAi TAY CỘC DỌC CÚC BỌC</p>
-                                    <p class="pricesp">550.000 đ</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-sm-6 col-6 wow animate__slideInUp" data-wow-duration="1.5s" data-wow-delay="0.5s">
-                            <a asp-controller="Home" asp-action="Privacy">
-                                <div class="card-product">
-                                    <div class="product-hover">
-                                        <img src="/image/Rectangle 9 (2).png" />
-                                        <div class="card-tool w-100">
-                                            <a class="card-tool-btn btn-1">
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                                                </svg>
-                                            </a>
-                                            <a class="card-tool-btn btn-2">
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bag-dash bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" d="M14 5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5zM1 4v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4H1z" />
-                                                    <path d="M8 1.5A2.5 2.5 0 0 0 5.5 4h-1a3.5 3.5 0 1 1 7 0h-1A2.5 2.5 0 0 0 8 1.5z" />
-                                                    <path fill-rule="evenodd" d="M5.5 10a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z" />
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </div>
-
-                                    <span class="card-top card-new">NEW</span>
-
-                                    <div class="review">
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                    </div>
-                                    <p class="title-namesp">VN STELLA hồng CỔ VUÔNG CHUN VAi TAY CỘC DỌC CÚC BỌC</p>
-                                    <p class="pricesp">550.000 đ</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-sm-6 col-6 wow animate__slideInUp" data-wow-duration="2s" data-wow-delay="0.5s">
-                            <a asp-controller="Home" asp-action="Privacy">
-                                <div class="card-product">
-                                    <div class="product-hover">
-                                        <img src="/image/Rectangle 9 (2).png" />
-                                        <div class="card-tool w-100">
-                                            <a class="card-tool-btn btn-1">
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                                                </svg>
-                                            </a>
-                                            <a class="card-tool-btn btn-2">
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bag-dash bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" d="M14 5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5zM1 4v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4H1z" />
-                                                    <path d="M8 1.5A2.5 2.5 0 0 0 5.5 4h-1a3.5 3.5 0 1 1 7 0h-1A2.5 2.5 0 0 0 8 1.5z" />
-                                                    <path fill-rule="evenodd" d="M5.5 10a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z" />
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </div>
-
-                                    <span class="card-top card-top">TOP</span>
-
-                                    <div class="review">
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                    </div>
-                                    <p class="title-namesp">VN STELLA hồng CỔ VUÔNG CHUN VAi TAY CỘC DỌC CÚC BỌC</p>
-                                    <p class="pricesp">550.000 đ</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-sm-6 col-6 wow animate__slideInUp" data-wow-duration="2.5s" data-wow-delay="0.5s">
-                            <a asp-controller="Home" asp-action="Privacy">
-                                <div class="card-product">
-                                    <div class="product-hover">
-                                        <img src="/image/Rectangle 9 (2).png" />
-                                        <div class="card-tool w-100">
-                                            <a class="card-tool-btn btn-1">
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                                                </svg>
-                                            </a>
-                                            <a class="card-tool-btn btn-2">
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bag-dash bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" d="M14 5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5zM1 4v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4H1z" />
-                                                    <path d="M8 1.5A2.5 2.5 0 0 0 5.5 4h-1a3.5 3.5 0 1 1 7 0h-1A2.5 2.5 0 0 0 8 1.5z" />
-                                                    <path fill-rule="evenodd" d="M5.5 10a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z" />
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </div>
-
-                                    <span class="card-top card-sale">Sale 24%</span>
-
-                                    <div class="review">
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                    </div>
-                                    <p class="title-namesp">VN STELLA hồng CỔ VUÔNG CHUN VAi TAY CỘC DỌC CÚC BỌC</p>
-                                    <p class="pricesp">550.000 đ</p>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="col-lg-3 col-md-4 col-sm-6 col-6 wow animate__slideInUp" data-wow-duration="2.5s" data-wow-delay="0.5s">
-                            <a asp-controller="Home" asp-action="Privacy">
-                                <div class="card-product">
-                                    <div class="product-hover">
-                                        <img src="/image/Rectangle 9 (2).png" />
-                                        <div class="card-tool w-100">
-                                            <a class="card-tool-btn btn-1">
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                                                </svg>
-                                            </a>
-                                            <a class="card-tool-btn btn-2">
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bag-dash bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" d="M14 5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5zM1 4v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4H1z" />
-                                                    <path d="M8 1.5A2.5 2.5 0 0 0 5.5 4h-1a3.5 3.5 0 1 1 7 0h-1A2.5 2.5 0 0 0 8 1.5z" />
-                                                    <path fill-rule="evenodd" d="M5.5 10a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z" />
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </div>
-
-                                    <span class="card-top card-sale">Sale 24%</span>
-
-                                    <div class="review">
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                    </div>
-                                    <p class="title-namesp">VN STELLA hồng CỔ VUÔNG CHUN VAi TAY CỘC DỌC CÚC BỌC</p>
-                                    <p class="pricesp">550.000 đ</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-sm-6 col-6 wow animate__slideInUp" data-wow-duration="2s" data-wow-delay="0.5s">
-                            <a asp-controller="Home" asp-action="Privacy">
-                                <div class="card-product">
-                                    <div class="product-hover">
-                                        <img src="/image/Rectangle 9 (2).png" />
-                                        <div class="card-tool w-100">
-                                            <a class="card-tool-btn btn-1">
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                                                </svg>
-                                            </a>
-                                            <a class="card-tool-btn btn-2">
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bag-dash bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" d="M14 5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5zM1 4v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4H1z" />
-                                                    <path d="M8 1.5A2.5 2.5 0 0 0 5.5 4h-1a3.5 3.5 0 1 1 7 0h-1A2.5 2.5 0 0 0 8 1.5z" />
-                                                    <path fill-rule="evenodd" d="M5.5 10a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z" />
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </div>
-
-                                    <span class="card-top card-new">NEW</span>
-
-                                    <div class="review">
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                    </div>
-                                    <p class="title-namesp">VN STELLA hồng CỔ VUÔNG CHUN VAi TAY CỘC DỌC CÚC BỌC</p>
-                                    <p class="pricesp">550.000 đ</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-sm-6 col-6 wow animate__slideInUp" data-wow-duration="1.5s" data-wow-delay="0.5s">
-                            <a asp-controller="Home" asp-action="Privacy">
-                                <div class="card-product">
-                                    <div class="product-hover">
-                                        <img src="/image/Rectangle 9 (2).png" />
-                                        <div class="card-tool w-100">
-                                            <a class="card-tool-btn btn-1">
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                                                </svg>
-                                            </a>
-                                            <a class="card-tool-btn btn-2">
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bag-dash bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" d="M14 5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5zM1 4v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4H1z" />
-                                                    <path d="M8 1.5A2.5 2.5 0 0 0 5.5 4h-1a3.5 3.5 0 1 1 7 0h-1A2.5 2.5 0 0 0 8 1.5z" />
-                                                    <path fill-rule="evenodd" d="M5.5 10a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z" />
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </div>
-
-                                    <span class="card-top card-top">TOP</span>
-
-                                    <div class="review">
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                    </div>
-                                    <p class="title-namesp">VN STELLA hồng CỔ VUÔNG CHUN VAi TAY CỘC DỌC CÚC BỌC</p>
-                                    <p class="pricesp">550.000 đ</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-sm-6 col-6 wow animate__slideInUp" data-wow-duration="0.5s" data-wow-delay="0.5s">
-                            <a asp-controller="Home" asp-action="Privacy">
-                                <div class="card-product">
-                                    <div class="product-hover">
-                                        <img src="/image/Rectangle 9 (2).png" />
-                                        <div class="card-tool w-100">
-                                            <a class="card-tool-btn btn-1">
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                                                </svg>
-                                            </a>
-                                            <a class="card-tool-btn btn-2">
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bag-dash bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" d="M14 5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5zM1 4v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4H1z" />
-                                                    <path d="M8 1.5A2.5 2.5 0 0 0 5.5 4h-1a3.5 3.5 0 1 1 7 0h-1A2.5 2.5 0 0 0 8 1.5z" />
-                                                    <path fill-rule="evenodd" d="M5.5 10a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z" />
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </div>
-
-                                    <span class="card-top card-sale">Sale 24%</span>
-
-                                    <div class="review">
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                        </svg>
-                                    </div>
-                                    <p class="title-namesp">VN STELLA hồng CỔ VUÔNG CHUN VAi TAY CỘC DỌC CÚC BỌC</p>
-                                    <p class="pricesp">550.000 đ</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
-                </div>*@
         </div>
     </div>
     <div class="welcome bst mt-5">
@@ -1330,26 +424,33 @@
             </div>
             <div class="container-fluid mt-5">
                 <div class="row">
-                    <div class="col-6 image-ava4 wow animate__zoomIn dichlen">
-                        <img src="~/image/Rectangle 14.png" />
-                    </div>
-                    <div class="col-6 container-fluid">
-                        <div class="row">
-                            <div class="col-6 image-ava1 wow animate__zoomInDown dichlen">
-                                <img src="~/image/Rectangle 15.png" />
-                            </div>
-                            <div class="col-6 image-ava2 wow animate__zoomIn dichlen">
-                                <img src="~/image/Rectangle 16.png" />
-                            </div>
-                            <div class="col-12 image-ava3 wow animate__zoomInDown mt-3 dichlen">
-                                <img src="~/image/Rectangle 17.png" />
-                            </div>
+                    @foreach (var item in Model.Banners.Where(a => a.GroupId == 3))
+                    {
+                        <div class="col-6 image-ava4 wow animate__zoomIn dichlen">
+                            <img src="~/@item.CoverImage" />
                         </div>
-
+                        break;
+                    }
+                    <div class="col-6 container-fluid">
+                        <div class="row h-100">
+                            @foreach (var item in Model.Banners.Where(a => a.GroupId == 4))
+                            {
+                                if (item.Width < 699)
+                                {
+                                    <div class="col-6 h-50  wow animate__zoomInDown dichlen">
+                                        <img src="~/@item.CoverImage" />
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-12  wow animate__zoomInDown dichlen">
+                                        <img src="~/@item.CoverImage" />
+                                    </div>
+                                }
+                            }
+                        </div>
                     </div>
-
                 </div>
-
             </div>
         </div>
     </div>
@@ -1372,8 +473,6 @@
                     </div>
                     <a class="info-continue">Xem thêm</a>
                 </div>
-
-
             </div>
             <div class="col-4 wow animate__fadeInLeft info-update" data-wow-duration="1.5s" data-wow-delay="0.5s">
                 <div class="box-shadow">
@@ -1399,7 +498,6 @@
             </div>
         </div>
     </div>
-
 </div>
 <div class="modal fade" id="exampleModal5" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered mw-100" role="document">
@@ -1423,12 +521,9 @@
                         <input type="text" class="form-control " id="" placeholder="NHẬP EMAIL CỦA BẠN">
                         <button>Lấy mã</button>
                     </div>
-
                 </div>
-
             </div>
         </div>
-
     </div>
 </div>
 

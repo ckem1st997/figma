@@ -47,12 +47,11 @@ namespace figma.Controllers
                         {
                             await formFile.CopyToAsync(stream);
                         }
-                        Resize(fileNameWithPath, width > 0 && width <= 720 ? width : 720, height > 0 && height <= 822 ? height : 822);
+                        Resize(fileNameWithPath, width > 0 ? width : 720, height > 0 ? height : 822);
                         if (sql.Length > 1)
                             sql = "" + sql + ",uploads/" + createFolderDate + "/" + randomname + "";
                         else
                             sql = "uploads/" + createFolderDate + "/" + randomname + "";
-                        Console.WriteLine(filePaths);
                     }
                     else
                     {
@@ -75,21 +74,23 @@ namespace figma.Controllers
         //delete file
 
         [HttpPost]
+        [IgnoreAntiforgeryToken]
         public IActionResult DeleteImage(string filesadd)
         {
             var result = false;
             if (filesadd != null)
             {
-                String filepath = Path.Combine(_hostingEnvironment.WebRootPath, filesadd);
+
+                string filepath = Path.Combine(_hostingEnvironment.WebRootPath, filesadd.Replace("/","\\"));
+                Console.WriteLine(filepath);
                 if (System.IO.File.Exists(filepath))
                 {
                     System.IO.File.Delete(filepath);
-                    result = true;
+                    return Ok(new { result = true, content = "Xóa thành công !" });
                 }
             }
-            else
-                return Ok(new { result, content = "Xóa thất bại !" });
-            return Ok(new { result, content = "Xóa thành công !" });
+            return Ok(new { result, content = "Xóa thất bại !" });
+
 
         }
 

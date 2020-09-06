@@ -56,11 +56,11 @@ namespace figma
      .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, config =>
      {
 
-         config.Cookie.Name = "UserLoginCookie"; // Name of cookie     
+         //  config.Cookie.Name = "UserLoginCookie"; // Name of cookie     
          config.LoginPath = "/Home/Login"; // Path for the redirect to user login page    
          config.AccessDeniedPath = "/Csm/UserAccessDenied";
          // sau 10s sẽ tự out
-         config.ExpireTimeSpan = TimeSpan.FromSeconds(5000);
+         config.ExpireTimeSpan = TimeSpan.FromHours(1);
          config.Cookie.HttpOnly = true;
          config.Cookie.IsEssential = true;
      });
@@ -112,8 +112,7 @@ namespace figma
             {
                 options.Cookie.Name = ".AdventureWorks.Session";
                 //out sau ? s
-                options.IdleTimeout = TimeSpan.FromSeconds(5000);
-                //options.IOTimeout = TimeSpan.FromSeconds(300);
+                options.IdleTimeout = TimeSpan.FromHours(1);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });

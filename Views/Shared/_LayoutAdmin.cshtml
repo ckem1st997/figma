@@ -31,7 +31,7 @@
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" asp-controller="Csm">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -41,7 +41,7 @@
             <hr class="sidebar-divider my-0">
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" asp-controller="Csm">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span>
                 </a>
@@ -87,22 +87,6 @@
                         <a class="collapse-item" asp-action="ArticleCategories" asp-controller="Csm">Quản lý danh mục</a>
                         <a class="collapse-item" asp-action="AticleCreate" asp-controller="Csm">Thêm mới bài viết</a>
                         <a class="collapse-item" asp-action="ListAticle" asp-controller="Csm">Danh sách bài viết</a>
-                    </div>
-                </div>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProduct" aria-expanded="true"
-                   aria-controls="collapseProduct">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Quản lý liên hệ</span>
-                </a>
-                <div id="collapseProduct" class="collapse" aria-labelledby="headingProduct" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Danh mục</h6>
-                        <a class="collapse-item" asp-action="Index" asp-controller="ProductSizeColors">Danh sách liên hệ</a>
-                        <a class="collapse-item" asp-action="Create" asp-controller="ProductSizeColors">Thêm mới liên hệ</a>
-
                     </div>
                 </div>
             </li>
@@ -159,19 +143,17 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapserecruitmentCt" aria-expanded="true"
                    aria-controls="collapserecruitmentCt">
                     <i class="fas fa-fw fa-wrench"></i>
-                    <span>Thông tin cửa hàng</span>
+                    <span>Quản lý liên hệ</span>
                 </a>
                 <div id="collapserecruitmentCt" class="collapse" aria-labelledby="headingProduct" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Thông tin cửa hàng</h6>
+                        <h6 class="collapse-header">Quản lý liên hệ</h6>
                         <a class="collapse-item" asp-action="ListContacts" asp-controller="Csm">Danh sách</a>
                         <a class="collapse-item" asp-action="ListContactsCreate" asp-controller="Csm">Thêm mới </a>
 
                     </div>
                 </div>
             </li>
-
-
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapserecruitmentCtc" aria-expanded="true"
                    aria-controls="collapserecruitmentCtc">
@@ -453,8 +435,7 @@
         <!-- End of Content Wrapper -->
 
     </div>
-    <!-- End of Page Wrapper -->
-    <!-- Scroll to Top Button-->
+
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
@@ -489,11 +470,11 @@
     <script src="~/Admin/js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="~/Admin/vendor/chart.js/Chart.min.js"></script>
+    @*<script src="~/Admin/vendor/chart.js/Chart.min.js"></script>*@
 
     <!-- Page level custom scripts -->
-    <script src="~/Admin/js/demo/chart-area-demo.js"></script>
-    <script src="~/Admin/js/demo/chart-pie-demo.js"></script>
+    @*<script src="~/Admin/js/demo/chart-area-demo.js"></script>
+    <script src="~/Admin/js/demo/chart-pie-demo.js"></script>*@
     <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 

@@ -33,6 +33,10 @@ $(".info .row .col-4").hover(
 
 $(document).ready(function () {
     $("#exampleModal5").modal('show');
+    if (!$("div.carousel-inner div").hasClass("carousel-item")) {
+        $("#carouselExampleIndicators").hide();
+    }
+
     $(window).scroll(function (event) {
         var pos_body = $('html,body').scrollTop();
         // console.log(pos_body);
@@ -50,23 +54,6 @@ $(document).ready(function () {
             $("#s1").removeClass("h_img");
             $(".menu_Ao_list").removeClass("menu1");
         }
-        //if (pos_body > 50) {
-        //    $('.image-silde-1').addClass('animate__animated animate__backInLeft animate__delay-1s');
-        //    $('.image-silde-2').addClass('animate__animated animate__backInRight animate__delay-1s');
-        //    $('.image-silde-3').addClass('animate__animated animate__backInUp animate__delay-1s');
-        //}
-        //if (pos_body > 552) {
-        //    $('.card-product').addClass('animate__animated animate__backInUp animate__delay-1s');
-        //}
-        //if (pos_body > 1600) {
-        //    $('.image-ava1').addClass('animate__animated animate__backInLeft ');
-        //    $('.image-ava2').addClass('animate__animated animate__backInRight ');
-        //    $('.image-ava3').addClass('animate__animated animate__backInUp ');
-        //    $('.image-ava4').addClass('animate__animated animate__backInLeft ');
-        //}
-        //if (pos_body > 2100) {
-        //    $('div.list-trend div.col-4').addClass('animate__animated animate__flipInY animate__delay-1s');
-        //}
     });
     $('.back-to-top').click(function (event) {
         $('html,body').animate({ scrollTop: 0 }, 1400);
@@ -92,12 +79,20 @@ $(document).ready(function () {
             $(this).next("#quantity").val(1);
         }
     });
+    var a = $(".srcBanners").val();
+    var listimage = a.split(",");
+    console.log(listimage);
     $("#example,.home-index div.banner").vegas({
         delay: 9000,
         slides: [
-            { src: "/image/Rectangle 2.png" },
-            { src: "//product.hstatic.net/1000253775/product/857939080e9ef5c0ac8f_f7991ab4a5504597b32aeadf9062e146_master.jpg" },
-            { src: "//product.hstatic.net/1000253775/product/2eb18cb3bb25407b1934_92d99503a1164e5ba27b74daaa5d2b82_master.jpg" }
+
+            $("input.srcBanners:nth-child(2)").val() != null ? { src: "" + $('input.srcBanners:nth-child(2)').val() + "" } : { src: "//product.hstatic.net/1000253775/product/857939080e9ef5c0ac8f_f7991ab4a5504597b32aeadf9062e146_master.jpg" },
+            $("input.srcBanners:nth-child(3)").val() != null ? { src: "" + $('input.srcBanners:nth-child(3)').val() + "" } : { src: "//product.hstatic.net/1000253775/product/2eb18cb3bb25407b1934_92d99503a1164e5ba27b74daaa5d2b82_master.jpg" },
+            $("input.srcBanners:nth-child(4)").val() != null ? { src: "" + $('input.srcBanners:nth-child(4)').val() + "" } : { src: "//product.hstatic.net/1000253775/product/857939080e9ef5c0ac8f_f7991ab4a5504597b32aeadf9062e146_master.jpg" },
+
+            //{ src: "//product.hstatic.net/1000253775/product/857939080e9ef5c0ac8f_f7991ab4a5504597b32aeadf9062e146_master.jpg" },
+            //{ src: "//product.hstatic.net/1000253775/product/2eb18cb3bb25407b1934_92d99503a1164e5ba27b74daaa5d2b82_master.jpg" },
+
         ],
         animation: 'kenburnsUpLeft',
         transition: 'fade'

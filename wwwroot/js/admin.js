@@ -97,7 +97,7 @@ function AJAXSubmit(file) {
 }
 
 
-async function AJAXSubmitCreate(oFormElement,h,w) {
+async function AJAXSubmitCreate(oFormElement, h, w) {
     const formData = new FormData(oFormElement);
     $.ajax({
         type: 'POST',
@@ -126,7 +126,7 @@ async function AJAXSubmitCreate(oFormElement,h,w) {
     });
 
 }
-async function AJAXSubmitCreateOne(oFormElement,h,w) {
+async function AJAXSubmitCreateOne(oFormElement, h, w) {
     const formData = new FormData(oFormElement);
     $.ajax({
         type: 'POST',
@@ -194,7 +194,7 @@ async function AJAXSubmitCreateOnep(oFormElement) {
 }
 
 //
-async function AJAXSubmitCreateOneT(oFormElement,h,w) {
+async function AJAXSubmitCreateOneT(oFormElement, h, w) {
     const formData = new FormData(oFormElement);
     $.ajax({
         type: 'POST',
@@ -238,9 +238,10 @@ async function AJAXSubmitCreateOneT(oFormElement,h,w) {
 async function AJAXSubmitDelete(oFormElement) {
     $.ajax({
         type: 'POST',
-        url: '/Csm/deleteImage',
+        url: '/Upload/DeleteImage',
         data: { filesadd: oFormElement },
         success: function (res) {
+            alert(res.content)
         },
         error: function (res) {
             alert(res.responseText);
@@ -874,7 +875,27 @@ DecoupledDocumentEditor
 
         // console.error(error);
     });
-
+$("#GroupId").change(function () {
+    var id = parseInt($("#GroupId").val());
+    switch (id) {
+        case 1:
+            $("#Height").val(632);
+            $("#Width").val(1440);
+            break;
+        case 2:
+            $("#Height").val(330);
+            $("#Width").val(465);
+            break;
+        case 3:
+            $("#Height").val(497);
+            $("#Width").val(700);
+            break;
+        case 4:
+            $("#Height").val(243);
+            $("#Width").val(335);
+            break;
+    }
+});
 //function autochange() {
 //    var data = $("input#ProductID").val();
 //    $.ajax({

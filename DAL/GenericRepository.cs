@@ -20,7 +20,7 @@ namespace figma.Data
 
         public virtual IEnumerable<TEntity> Get(
             Expression<Func<TEntity, bool>> filter = null,
-            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, int records = 0,
             string includeProperties = "")
         {
             IQueryable<TEntity> query = dbSet;
@@ -36,14 +36,20 @@ namespace figma.Data
                 query = query.Include(includeProperty);
             }
 
-            if (orderBy != null)
+            if (records > 0 && orderBy != null)
             {
-                return orderBy(query).ToList();
+                query = orderBy(query).Take(records);
             }
-            else
+            else if (orderBy != null && records == 0)
             {
-                return query.ToList();
+                query = orderBy(query);
             }
+            else if (orderBy == null && records > 0)
+            {
+                query = query.Take(records);
+            }
+
+            return query;
         }
 
 
