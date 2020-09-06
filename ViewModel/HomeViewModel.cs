@@ -21,43 +21,45 @@ namespace figma.ViewModel
             public IEnumerable<Products> Products { get; set; }
         }
     }
-    public class ContactViewModel
-    {
-        public ConfigSites ConfigSite { get; set; }
-        public Contacts Contact { get; set; }
-        public int Result { get; set; }
-    }
-    public class HeaderViewModel
-    {
-        public IEnumerable<ArticleCategory> ArticleCategories { get; set; }
-        public IEnumerable<ProductCategories> ProductCategories { get; set; }
-        public IEnumerable<Abouts> Abouts { get; set; }
-    }
-    public class LeftAboutViewModel
-    {
-        public int AboutId { get; set; }
-        public IEnumerable<Abouts> Abouts { get; set; }
-        public IEnumerable<Banners> Banners { get; set; }
-    }
-    public class ArticleCategoryDetailViewModel
-    {
-        public ArticleCategory ArticleCategory { get; set; }
+    //public class ContactViewModel
+    //{
+    //    public ConfigSites ConfigSite { get; set; }
+    //    public Contacts Contact { get; set; }
+    //    public int Result { get; set; }
+    //}
+    //public class HeaderViewModel
+    //{
+    //    public IEnumerable<ArticleCategory> ArticleCategories { get; set; }
+    //    public IEnumerable<ProductCategories> ProductCategories { get; set; }
+    //    public IEnumerable<Abouts> Abouts { get; set; }
+
+    //    public IEnumerable<ConfigSites> ConfigSites { get; set; }
+    //}
+    //public class LeftAboutViewModel
+    //{
+    //    public int AboutId { get; set; }
+    //    public IEnumerable<Abouts> Abouts { get; set; }
+    //    public IEnumerable<Banners> Banners { get; set; }
+    //}
+    //public class ArticleCategoryDetailViewModel
+    //{
+    //    public ArticleCategory ArticleCategory { get; set; }
  
-        public IEnumerable<Banners> Banners { get; set; }
-        public IEnumerable<ArticleCategory> Categories { get; set; }
-    }
+    //    public IEnumerable<Banners> Banners { get; set; }
+    //    public IEnumerable<ArticleCategory> Categories { get; set; }
+    //}
   
 
-    public class FooterViewModel
-    {
-        public IEnumerable<Abouts> Abouts { get; set; }
-        public IEnumerable<ProductCategories> ProductCategories { get; set; }
-        public ConfigSites ConfigSite { get; set; }
-    }
+    //public class FooterViewModel
+    //{
+    //    public IEnumerable<Abouts> Abouts { get; set; }
+    //    public IEnumerable<ProductCategories> ProductCategories { get; set; }
+    //    public ConfigSites ConfigSite { get; set; }
+    //}
 
-    public class AlbumViewModel
-    {
-        public Albums Album { get; set; }
-        public IEnumerable<Albums> Albums { get; set; }
-    }
+    //public class AlbumViewModel
+    //{
+    //    public Albums Album { get; set; }
+    //    public IEnumerable<Albums> Albums { get; set; }
+    //}
 }

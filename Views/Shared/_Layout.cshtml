@@ -13,61 +13,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="~/fontawesome-pro-5.0.13/css/all.css">
     <link rel="stylesheet" href="~/vegas/vegas.css">
-    <link rel="stylesheet" href="~/mmenu-js-master/dist/mmenu.css">
-    @*<link rel="stylesheet" href="~/mmenu-light-master/dist/mmenu-light.css">*@
+    <link href="~/mmenu-light-master/dist/mmenu-light.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/slick-1.8.1/slick/slick.css">
-    <link rel="stylesheet" href="~/slick-1.8.1/slick/slick-theme.css">
+    @*<link rel="stylesheet" href="~/slick-1.8.1/slick/slick-theme.css">*@
     <link rel="stylesheet" href="~/WOW-master/css/libs/animate.css">
 </head>
 <body>
-    <partial name="/Views/Home/_Header.cshtml" />
-    @*phone*@
-    <div class="hotline-phone-ring-wrap">
-        <div class="hotline-phone-ring">
-            <div class="hotline-phone-ring-circle"></div>
-            <div class="hotline-phone-ring-circle-fill"></div>
-            <div class="hotline-phone-ring-img-circle">
-                <a href="tel:0987654321" class="pps-btn-img">
-                    <img src="https://nguyenhung.net/wp-content/uploads/2019/05/icon-call-nh.png" alt="Gọi điện thoại" width="50">
-                </a>
-            </div>
-        </div>
-        <div class="hotline-bar">
-            <a href="tel:0987654321">
-                <span class="text-hotline">0987.654.321</span>
-            </a>
-        </div>
+    <div>
+        @await Component.InvokeAsync("HeaderList")
     </div>
 
-    <script src="~/mmenu-light-master/dist/mmenu-light.js"></script>
-    @*<script src="~/mmenu-js-master/dist/mmenu.js"></script>*@
-    <script>
-        document.addEventListener(
-            "DOMContentLoaded", () => {
-                const menu = new MmenuLight(
-                    document.querySelector("#menu-hide"),
-                    "(max-width: 992px)"
-                );
-                const navigator = menu.navigation({
-
-                });
-                const drawer = menu.offcanvas();
-
-                document.querySelector("button[href='#menu-hide']")
-                    .addEventListener("click", (evnt) => {
-                        evnt.preventDefault();
-                        drawer.open();
-                    });
-            }
-        );
-    </script>
-    <div class="container-fluid p-0">
+    <div>
+        @await Component.InvokeAsync("Phone")
+    </div>
+    <div class="container-fluid">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-    @*<partial name="Social.cshtml" />*@
-    <partial name="/Views/Home/_Footer.cshtml" />
+
+    <div>
+        @await Component.InvokeAsync("FooterList")
+    </div>
 
     <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

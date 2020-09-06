@@ -1,4 +1,4 @@
-﻿@model figma.ViewModel.HomeViewModel
+﻿@model figma.ViewModel.HeaderViewModel
 
 <header>
     <div class="info">
@@ -7,7 +7,7 @@
                 @{
                     @foreach (var item in Model.ConfigSites)
                     {
-                        <div class="col-lg-3 col-md-4 col-sm-4 col-12 col- info-lucas hotline">
+                        <div class="col-lg-3 col-md-4 col-sm-4 col-12 info-lucas hotline">
 
                             @if (item.Hotline != null)
                             {
@@ -24,15 +24,15 @@
                         <div class="col-lg-4 col-md-6 col-sm-6 col-12 info-lucas linkFanpage d-none d-lg-block">
                             <div class="container-fluid">
                                 <div class="row">
-                                    <div class="col-4 title-header">
+                                    <a class="col-4 title-header" href="@item.Linkedin">
                                         Facebook
-                                    </div>
-                                    <div class="col-4 title-header">
+                                    </a> 
+                                    <a class="col-4 title-header"  href="@item.Twitter">
                                         Twitter
-                                    </div>
-                                    <div class="col-4 title-header">
+                                    </a>
+                                    <a class="col-4 title-header"  href="@item.GoogleAnalytics">
                                         Instagram
-                                    </div>
+                                    </a>
                                 </div>
                             </div>
 
@@ -115,3 +115,4 @@
         </div>
     </nav>
 </header>
+<script src="~/mmenu-light-master/dist/mmenu-light.js"></script>

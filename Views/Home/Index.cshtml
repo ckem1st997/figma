@@ -3,7 +3,7 @@
 @{
     foreach (var item in ViewBag.tt)
     {
-        if (ViewData["Title"] != null)
+        if (item.Title != null)
         {
             ViewData["Title"] = item.Title;
             ViewData["Description"] = item.Description;

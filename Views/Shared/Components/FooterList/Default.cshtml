@@ -1,7 +1,7 @@
-﻿@model figma.ViewModel.HomeViewModel
+﻿@model IEnumerable<figma.Models.ConfigSites>
 
 @{
-    foreach (var item in Model.ConfigSites)
+    foreach (var item in Model)
     {
         <footer class="">
             <div class="container">
@@ -26,11 +26,11 @@
                                 @{
                                     if (item.Youtube != null)
                                     {
-                                        @item.Youtube
+                                        <label> INSTAGRAM: @item.Youtube</label>
                                     }
                                     else
                                     {
-                                        <label>Lucas58.official</label>
+                                        <label>INSTAGRAM: Lucas58.official</label>
                                     }
                                 }
                                 <br />
@@ -40,11 +40,13 @@
                                 @{
                                     if (item.nameShopee != null)
                                     {
-                                        @item.nameShopee
+                                        <label>
+                                            SHOPEE:  @item.nameShopee
+                                        </label>
                                     }
                                     else
                                     {
-                                        <label>Lucas58𝐋𝐮𝐜𝐚𝐬𝟓𝟖</label>
+                                        <label>SHOPEE: Lucas58𝐋𝐮𝐜𝐚𝐬𝟓𝟖</label>
                                     }
                                 }
 
@@ -53,15 +55,17 @@
                             <a class="text-white" href="@item.urlWeb">
 
                                 <i class="fas fa-long-arrow-alt-right border border-primary bg-primary mr-1 mt-4"></i> ️
-                                WEB :
+
                                 @{
                                     if (item.urlWeb != null)
                                     {
-                                        @item.urlWeb
+                                        <label>
+                                            SHOPEE:  @item.urlWeb
+                                        </label>
                                     }
                                     else
                                     {
-                                        <label>Lucas58.com.vn</label>
+                                        <label>WEB: Lucas58.com.vn</label>
                                     }
                                 }  <br />
                             </a>
@@ -118,25 +122,25 @@
                         <h4 class="text-white">
                             LINKS NHANH
                         </h4>
-                        <div class="info-fanpage mt-4 text-white">
+                        <div class="info-fanpage mt-4 ">
                             <ul class="list-group">
                                 <li>
-                                    <a asp-action="Index">
+                                    <a asp-action="Index" class="text-white">
                                         Trang chủ
                                     </a>
                                 </li>
                                 <li>
-                                    <a asp-action="Index">
+                                    <a asp-action="Index" class="text-white">
                                         Sản phẩm
                                     </a>
                                 </li>
                                 <li>
-                                    <a asp-action="Index">
+                                    <a asp-action="Index" class="text-white">
                                         Blog
                                     </a>
                                 </li>
                                 <li>
-                                    <a asp-action="Index">
+                                    <a asp-action="Index" class="text-white">
                                         Liên hệ
                                     </a>
                                 </li>
