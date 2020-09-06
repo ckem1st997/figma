@@ -1,0 +1,239 @@
+﻿@model figma.ViewModel.HomeViewModel
+
+@{
+    foreach (var item in Model.ConfigSites)
+    {
+        <footer class="">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-3  col-lg-6 col-md-6 col-sm-6 col-12 info-lucas">
+                        <h4>
+                            @if (item.CoverImage != null)
+                            {
+                                <img src="~/@item.CoverImage" />
+                            }
+                            else
+                            {
+                                <img src="~/image/logo lucas-01 1.png" />
+                            }
+                        </h4>
+
+                        <div class="info-fanpage mb-4 text-white">
+                            Enjoy shopping with us:<br />
+
+                            <a class="text-white" href="@item.GoogleAnalytics">
+                                <i class="fas fa-long-arrow-alt-right border border-primary bg-primary mr-1 mt-4"></i>
+                                @{
+                                    if (item.Youtube != null)
+                                    {
+                                        @item.Youtube
+                                    }
+                                    else
+                                    {
+                                        <label>Lucas58.official</label>
+                                    }
+                                }
+                                <br />
+                            </a>
+                            <a class="text-white" href="@item.LiveChat">
+                                <i class="fas fa-long-arrow-alt-right border border-primary bg-primary mr-1 mt-4"></i>
+                                @{
+                                    if (item.nameShopee != null)
+                                    {
+                                        @item.nameShopee
+                                    }
+                                    else
+                                    {
+                                        <label>Lucas58𝐋𝐮𝐜𝐚𝐬𝟓𝟖</label>
+                                    }
+                                }
+
+                                <br />
+                            </a>
+                            <a class="text-white" href="@item.urlWeb">
+
+                                <i class="fas fa-long-arrow-alt-right border border-primary bg-primary mr-1 mt-4"></i> ️
+                                WEB :
+                                @{
+                                    if (item.urlWeb != null)
+                                    {
+                                        @item.urlWeb
+                                    }
+                                    else
+                                    {
+                                        <label>Lucas58.com.vn</label>
+                                    }
+                                }  <br />
+                            </a>
+                        </div>
+                        <div class="info-icon">
+                            <a href="@item.Linkedin"><i class="fab fa-facebook-f"></i></a>
+                            <a href="@item.Twitter"> <i class="fab fa-twitter"></i></a>
+                            <a href="@item.GooglePlus"><i class="fab fa-google-plus-g"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-12 info-lucas">
+                        <h4 class="text-white">
+                            LIÊN HỆ
+                        </h4>
+                        <div class="info-fanpage container mt-4 text-white">
+                            <div class="row">
+                                <div class="col-1">
+                                    <i class="fas fa-home">
+                                    </i>
+                                </div>
+                                <div class="col-9 content-main-fanpage">
+                                    @{
+                                        if (item.ContactInfo != null)
+                                        {
+                                            @Html.Raw(item.ContactInfo)
+                                        }
+                                        else
+                                        {
+                                            <div>📍 168 Nguyễn Thái Học, Ba Đình, Hà Nội ( Bến Xe Kim Mã )</div>
+                                            <div>📍 96 Bùi Thị Xuân, Hai Bà Trưng, Hà Nội</div>
+                                            <div> 📍 177 Cầu Giấy, Cầu Giấy, Hà Nội (Bưu Điện Cầu Giấy )</div>
+                                        }
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="icon icon-phone-number text-white">
+                            <i class="fas fa-phone-volume"></i>
+                            <span>
+
+                                @if (item.Hotline != null)
+                                {
+                                    <label>Hotline: @item.Hotline</label>
+                                }
+                                else
+                                {
+                                    <label>Hotline: 0989999999</label>
+                                }
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-12 info-lucas">
+                        <h4 class="text-white">
+                            LINKS NHANH
+                        </h4>
+                        <div class="info-fanpage mt-4 text-white">
+                            <ul class="list-group">
+                                <li>
+                                    <a asp-action="Index">
+                                        Trang chủ
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-action="Index">
+                                        Sản phẩm
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-action="Index">
+                                        Blog
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-action="Index">
+                                        Liên hệ
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-12 info-lucas">
+                        <h4 class="text-white">
+                            FACEBOOK FANPAGE
+                        </h4>
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fremcuanaman%2F&tabs&width=340&height=214&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true" width="340" height="214" style="border: none; overflow: hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    }
+}
+@*<footer class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-3  col-lg-6 col-md-6 col-sm-6 col-12 info-lucas">
+                    <h4>
+                        <img src="~/image/logo lucas-01 1.png" />
+                    </h4>
+                    <div class="info-fanpage mb-4 text-white">
+                        Enjoy shopping with us1:<br />
+
+                        <i class="fas fa-long-arrow-alt-right border border-primary bg-primary mr-1 mt-4"></i> INSTAGRAM : Lucas58.official <br />
+                        <i class="fas fa-long-arrow-alt-right border border-primary bg-primary mr-1 mt-4"></i> SHOPEE : Lucas58𝐋𝐮𝐜𝐚𝐬𝟓𝟖 <br />
+                        <i class="fas fa-long-arrow-alt-right border border-primary bg-primary mr-1 mt-4"></i> ️WEB : Lucas58.com.vn<br />
+                    </div>
+                    <div class="info-icon">
+                        <i class="fab fa-facebook-f"></i>
+                        <i class="fab fa-twitter"></i>
+                        <i class="fab fa-google-plus-g"></i>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-12 info-lucas">
+                    <h4 class="text-white">
+                        LIÊN HỆ
+                    </h4>
+                    <div class="info-fanpage container mt-4 text-white">
+                        <div class="row">
+                            <div class="col-1">
+                                <i class="fas fa-home">
+                                </i>
+                            </div>
+                            <div class="col-9 content-main-fanpage">
+                                <div>📍 168 Nguyễn Thái Học, Ba Đình, Hà Nội ( Bến Xe Kim Mã )</div>
+                                <div>📍 96 Bùi Thị Xuân, Hai Bà Trưng, Hà Nội</div>
+                                <div> 📍 177 Cầu Giấy, Cầu Giấy, Hà Nội (Bưu Điện Cầu Giấy )</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="icon icon-phone-number text-white">
+                        <i class="fas fa-phone-volume"></i>
+                        <span>0982901212</span>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-12 info-lucas">
+                    <h4 class="text-white">
+                        LINKS NHANH
+                    </h4>
+                    <div class="info-fanpage mt-4 text-white">
+                        <ul class="list-group">
+                            <li>
+                                <a>
+                                    Trang chủ
+                                </a>
+                            </li>
+                            <li>
+                                <a>
+                                    Sản phẩm
+                                </a>
+                            </li>
+                            <li>
+                                <a>
+                                    Blog
+                                </a>
+                            </li>
+                            <li>
+                                <a>
+                                    Liên hệ
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-12 info-lucas">
+                    <h4 class="text-white">
+                        FACEBOOK FANPAGE
+                    </h4>
+                    <img class="mt-4" src="~/image/Rectangle 15.png" />
+
+                </div>
+            </div>
+        </div>
+    </footer>*@

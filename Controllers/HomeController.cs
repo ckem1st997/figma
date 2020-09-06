@@ -34,6 +34,7 @@ namespace figma.Controllers
             _unitOfWork = unitOfWork;
         }
         private IEnumerable<Banners> Banners => _unitOfWork.BannerRepository.Get(a => a.Active, q => q.OrderBy(a => a.Soft));
+        private IEnumerable<ConfigSites> ConfigSites => _unitOfWork.ConfigSiteRepository.Get().ToList();
         private IEnumerable<ArticleCategory> ArticleCategories => _unitOfWork.ArticleCategoryRepository.Get(a => a.CategoryActive, q => q.OrderByDescending(a => a.CategorySort));
         #region CustomAttribute
         //public static void GetAttribute(Type t)
@@ -80,7 +81,8 @@ namespace figma.Controllers
                 ItemBoxProductHomes = items,
                 Banners = Banners,
                 Articles = _unitOfWork.ArticleRepository.Get(a => a.Active && a.Home, q => q.OrderByDescending(a => a.CreateDate), 3),
-                Albums = _unitOfWork.AlbumRepository.Get(a => a.Active, q => q.OrderByDescending(a => a.AlbumID), 4)
+                Albums = _unitOfWork.AlbumRepository.Get(a => a.Active, q => q.OrderByDescending(a => a.AlbumID), 4),
+                ConfigSites = ConfigSites
             };
             return View(model);
         }
@@ -256,6 +258,20 @@ namespace figma.Controllers
 
             return View(model);
         }
+
+        #region Layout
+        public IActionResult _Footer()
+        {
+            return View();
+        }
+
+        public IActionResult _Header()
+        {
+            return View();
+        }
+
+        #endregion
+
         protected override void Dispose(bool disposing)
         {
             _unitOfWork.Dispose();

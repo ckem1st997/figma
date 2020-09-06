@@ -12,6 +12,7 @@ namespace figma.ViewModel
         public IEnumerable<Article> Articles { get; set; }
         public IEnumerable<Products> Products { get; set; }
         public IEnumerable<Albums> Albums { get; set; }
+        public IEnumerable<ConfigSites> ConfigSites { get; set; }
         public IEnumerable<ItemBoxProductHome> ItemBoxProductHomes { get; set; }
 
         public class ItemBoxProductHome

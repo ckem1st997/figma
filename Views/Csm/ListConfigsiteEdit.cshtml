@@ -96,6 +96,11 @@
             <span asp-validation-for="Facebook" class="text-danger"></span>
         </div>
         <div class="form-group w-25">
+            <label asp-for="Linkedin" class="control-label"></label>
+            <input asp-for="Linkedin" class="form-control" />
+            <span asp-validation-for="Linkedin" class="text-danger"></span>
+        </div>
+        <div class="form-group w-25">
             <label asp-for="GooglePlus" class="control-label"></label>
             <input asp-for="GooglePlus" class="form-control" />
             <span asp-validation-for="GooglePlus" class="text-danger"></span>
@@ -105,16 +110,34 @@
             <input asp-for="Youtube" class="form-control" />
             <span asp-validation-for="Youtube" class="text-danger"></span>
         </div>
-        <div class="form-group w-25">
-            <label asp-for="Linkedin" class="control-label"></label>
-            <input asp-for="Linkedin" class="form-control" />
-            <span asp-validation-for="Linkedin" class="text-danger"></span>
+        <div class="form-group w-50">
+            <label asp-for="GoogleAnalytics" class="control-label"></label>
+            <textarea asp-for="GoogleAnalytics" class="form-control"></textarea>
+            <span asp-validation-for="GoogleAnalytics" class="text-danger"></span>
         </div>
 
         <div class="form-group w-25">
             <label asp-for="Hotline" class="control-label"></label>
             <input asp-for="Hotline" class="form-control" />
             <span asp-validation-for="Hotline" class="text-danger"></span>
+        </div>
+
+
+        <div class="form-group w-25">
+            <label asp-for="nameShopee" class="control-label"></label>
+            <input asp-for="nameShopee" class="form-control" />
+            <span asp-validation-for="nameShopee" class="text-danger"></span>
+        </div>
+        <div class="form-group w-50">
+            <label asp-for="LiveChat" class="control-label"></label>
+            <textarea asp-for="LiveChat" class="form-control"></textarea>
+            <span asp-validation-for="LiveChat" class="text-danger"></span>
+        </div>
+
+        <div class="form-group w-25">
+            <label asp-for="urlWeb" class="control-label"></label>
+            <input asp-for="urlWeb" class="form-control" />
+            <span asp-validation-for="urlWeb" class="text-danger"></span>
         </div>
         <div class="form-group w-25">
             <label asp-for="Email" class="control-label"></label>
@@ -126,16 +149,8 @@
             <input asp-for="Twitter" class="form-control" />
             <span asp-validation-for="Twitter" class="text-danger"></span>
         </div>
-        <div class="form-group w-50">
-            <label asp-for="GoogleAnalytics" class="control-label"></label>
-            <textarea asp-for="GoogleAnalytics" class="form-control"></textarea>
-            <span asp-validation-for="GoogleAnalytics" class="text-danger"></span>
-        </div>
-        <div class="form-group w-50">
-            <label asp-for="LiveChat" class="control-label"></label>
-            <textarea asp-for="LiveChat" class="form-control"></textarea>
-            <span asp-validation-for="LiveChat" class="text-danger"></span>
-        </div>
+
+
         <div class="form-group w-50">
             <label asp-for="GoogleMap" class="control-label"></label>
             <textarea asp-for="GoogleMap" class="form-control"></textarea>

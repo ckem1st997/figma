@@ -1142,7 +1142,7 @@ namespace figma.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ListConfigsiteCreate([Bind("ConfigSiteID,Facebook,GooglePlus,Youtube,Linkedin,Twitter,GoogleAnalytics,LiveChat,GoogleMap,Title,Description,ContactInfo,FooterInfo,Hotline,Email,CoverImage,SaleOffProgram")] ConfigSites configSites)
+        public async Task<IActionResult> ListConfigsiteCreate([Bind("ConfigSiteID,Facebook,GooglePlus,Youtube,Linkedin,Twitter,GoogleAnalytics,LiveChat,GoogleMap,Title,Description,ContactInfo,FooterInfo,Hotline,Email,CoverImage,SaleOffProgram,nameShopee,urlWeb")] ConfigSites configSites)
         {
 
             if (ModelState.IsValid)
@@ -1172,7 +1172,7 @@ namespace figma.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ListConfigsiteEdit(int id, [Bind("ConfigSiteID,Facebook,GooglePlus,Youtube,Linkedin,Twitter,GoogleAnalytics,LiveChat,GoogleMap,Title,Description,ContactInfo,FooterInfo,Hotline,Email,CoverImage,SaleOffProgram")] ConfigSites configSites)
+        public async Task<IActionResult> ListConfigsiteEdit(int id, [Bind("ConfigSiteID,Facebook,GooglePlus,Youtube,Linkedin,Twitter,GoogleAnalytics,LiveChat,GoogleMap,Title,Description,ContactInfo,FooterInfo,Hotline,Email,CoverImage,SaleOffProgram,nameShopee,urlWeb")] ConfigSites configSites)
         {
             if (id != configSites.ConfigSiteID)
             {
@@ -1462,7 +1462,6 @@ CookieAuthenticationDefaults.AuthenticationScheme);
         }
 
         #endregion
-
         protected override void Dispose(bool disposing)
         {
             _unitOfWork.Dispose();
