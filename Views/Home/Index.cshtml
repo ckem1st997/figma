@@ -1,7 +1,7 @@
 ﻿
 @model figma.ViewModel.HomeViewModel
 @{
-    foreach (var item in ViewBag.tt)
+    foreach (var item in Model.ConfigSites)
     {
         if (item.Title != null)
         {

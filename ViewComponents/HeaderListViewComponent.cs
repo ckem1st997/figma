@@ -1,6 +1,7 @@
 ﻿using figma.DAL;
 using figma.ViewModel;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,12 +20,13 @@ namespace figma.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
+
             var items = new HeaderViewModel()
             {
                 ConfigSites = await _unitOfWork.ConfigSiteRepository.GetAync(),
                 Abouts = await _unitOfWork.AboutRepository.GetAync(),
                 ArticleCategories = await _unitOfWork.ArticleCategoryRepository.GetAync(),
-                ProductCategories = await _unitOfWork.ProductCategoryRepository.GetAync()
+                ProductCategories = await _unitOfWork.ProductCategoryRepository.GetAync(a => a.Active && a.Home, q => q.OrderBy(a => a.Soft))
             };
             return View(items);
         }
