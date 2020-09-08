@@ -35,6 +35,7 @@ namespace figma.Controllers
         }
         private IEnumerable<Banners> Banners => _unitOfWork.BannerRepository.Get(a => a.Active, q => q.OrderBy(a => a.Soft));
         private IEnumerable<ConfigSites> ConfigSites => _unitOfWork.ConfigSiteRepository.Get().ToList();
+        private IEnumerable<ProductCategories> ProductCategories => _unitOfWork.ProductCategoryRepository.Get(a => a.Active, q => q.OrderByDescending(a => a.Soft));
         private IEnumerable<ArticleCategory> ArticleCategories => _unitOfWork.ArticleCategoryRepository.Get(a => a.CategoryActive, q => q.OrderByDescending(a => a.CategorySort));
         #region CustomAttribute
         //public static void GetAttribute(Type t)
@@ -87,10 +88,39 @@ namespace figma.Controllers
             return View(model);
         }
 
+
+        [Route("{name}-{proId}.html")]
+        public IActionResult Product(int proId = 0)
+        {
+            var product = _unitOfWork.ProductRepository.GetByID(proId);
+            if (product == null)
+            {
+                return RedirectToActionPermanent("Index");
+            }
+
+            //var products = await _unitOfWork.ProductRepository.GetAync(
+            //    a => a.Active && a.ProductCategorieID == product.ProductCategorieID && a.ProductID != proId,
+            //    q => q.OrderByDescending(a => a.Sort), 24);
+            var model = new ProductDetailViewModel
+            {
+                Product = product,
+                // Products = products,
+                //  RootCategory = ProductCategories.SingleOrDefault(a => a.ProductCategorieID == product.ProductCategories.ParentId)
+            };
+
+            return View(model);
+        }
+
+
+
+
+
         public IActionResult Login1()
         {
             return View();
         }
+
+
         [Authorize]
         public IActionResult Account()
         {

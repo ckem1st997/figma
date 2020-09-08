@@ -1,9 +1,19 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-<head>
+<head xmlns="http://www.w3.org/1999/xhtml" prefix="og:http://ogp.me/ns# fb:http://www.facebook.com/2008/fbml">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"]</title>
+    <title>@Html.Raw(ViewData["Title"])</title>
+    <meta name="description" content="@Html.Raw(ViewBag.Description)" />
+    <meta name="keywords" content="@ViewBag.Keywords" />
+    <meta name="robots" content="index,follow" />
+    <link rel="shortcut icon" href="~/image/logo.png">
+    <meta property="og:locale" content="vi_VN">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="@ViewBag.Title">
+    <meta property="og:description" content="@Html.Raw(ViewBag.Description)">
+    <meta property="og:site_name" content="@ViewBag.Title">
+    <meta property="og:image" content="@ViewBag.ImagShare" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
     <link href="~/css/style.css" rel="stylesheet" />

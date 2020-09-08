@@ -21,6 +21,13 @@ namespace figma.ViewModel
             public IEnumerable<Products> Products { get; set; }
         }
     }
+    public class ProductDetailViewModel
+    {
+        public Products Product { get; set; }
+        public IEnumerable<Products> Products { get; set; }
+        public ProductCategories RootCategory { get; set; }
+        public IEnumerable<Banners> Banners { get; set; }
+    }
     //public class ContactViewModel
     //{
     //    public ConfigSites ConfigSite { get; set; }
@@ -44,11 +51,11 @@ namespace figma.ViewModel
     //public class ArticleCategoryDetailViewModel
     //{
     //    public ArticleCategory ArticleCategory { get; set; }
- 
+
     //    public IEnumerable<Banners> Banners { get; set; }
     //    public IEnumerable<ArticleCategory> Categories { get; set; }
     //}
-  
+
 
     //public class FooterViewModel
     //{
