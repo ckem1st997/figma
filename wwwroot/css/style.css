@@ -70,6 +70,9 @@ a:hover {
     content: '\f0a8' !important;
     font-family: FontAwesome !important;
 }*/
+.slider-nav button {
+  display: none !important;
+}
 .carousel-control-next-icon {
   background-image: url("../image/arrow-right-solid.svg");
 }

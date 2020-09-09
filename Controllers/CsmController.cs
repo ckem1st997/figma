@@ -275,15 +275,23 @@ namespace figma.Controllers
 
         #endregion
 
-        #region ProductsSizeColors       
+        #region ProductsSizeColors      
+
+        private IEnumerable<ProductSizeColor> ProductSizeColors => _unitOfWork.ProductSCRepository.Get(includeProperties: "Size,Color").ToList();
+        private IEnumerable<Products> Products => _unitOfWork.ProductRepository.Get().ToList();
         public IActionResult ProductsSCIndex()
         {
-            var query =
-                from post in _unitOfWork.ProductSCRepository.Get()
-                join meta in _unitOfWork.SizeRepository.Get() on post.SizeID equals meta.SizeID
-                join meta1 in _unitOfWork.ColorRepository.Get() on post.ColorID equals meta1.ColorID
-                join meta2 in _unitOfWork.ProductRepository.Get() on post.ProductID equals meta2.ProductID
-                select new PSC { id = post.Id, name = meta2.Name, color = meta1.NameColor, size = meta.SizeProduct, image = meta2.Image };
+            //var query =
+            //    from post in _unitOfWork.ProductSCRepository.Get()
+            //    join meta in _unitOfWork.SizeRepository.Get() on post.SizeID equals meta.SizeID
+            //    join meta1 in _unitOfWork.ColorRepository.Get() on post.ColorID equals meta1.ColorID
+            //    join meta2 in _unitOfWork.ProductRepository.Get() on post.ProductID equals meta2.ProductID
+            //    select new PSC { id = post.Id, name = meta2.Name, color = meta1.NameColor, size = meta.SizeProduct, image = meta2.Image }; 
+            var query = new ProductSCViewModel()
+            {
+                ProductSizeColors = ProductSizeColors,
+                Products = Products
+            };
             return View(query);
         }
 

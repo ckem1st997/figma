@@ -25,9 +25,22 @@ namespace figma.ViewModel
     {
         public Products Product { get; set; }
         public IEnumerable<Products> Products { get; set; }
+        public IEnumerable<Products> ViewProducts { get; set; }
         public ProductCategories RootCategory { get; set; }
+        public Collection Collection { get; set; }
+        public IEnumerable<TagProducts> TagProducts { get; set; }
+        public IEnumerable<ProductSizeColor> ProductSizeColors { get; set; }
         public IEnumerable<Banners> Banners { get; set; }
     }
+
+    public class ProductSCViewModel
+    {
+        public IEnumerable<Products> Products { get; set; }
+        public IEnumerable<ProductSizeColor> ProductSizeColors { get; set; }
+        //public IEnumerable<Color> Colors { get; set; }
+        //public IEnumerable<Size> Sizes { get; set; }
+    }
+
     //public class ContactViewModel
     //{
     //    public ConfigSites ConfigSite { get; set; }

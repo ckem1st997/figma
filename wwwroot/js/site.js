@@ -61,7 +61,7 @@ $(document).ready(function () {
         //    $('.banner img').addClass('animate__animated animate__fadeInLeft');
         //    $('.banner img').addClass('animate__backInRight');
         //}
-        if (pos_body > 10) {
+        if (pos_body > 500) {
             $(".menu-scroll").addClass("co-dinh-menu");
             $("#s1").addClass("h_img");
             $(".menu_Ao_list").addClass("menu1");

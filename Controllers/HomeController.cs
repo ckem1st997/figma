@@ -36,6 +36,8 @@ namespace figma.Controllers
         private IEnumerable<Banners> Banners => _unitOfWork.BannerRepository.Get(a => a.Active, q => q.OrderBy(a => a.Soft));
         private IEnumerable<ConfigSites> ConfigSites => _unitOfWork.ConfigSiteRepository.Get().ToList();
         private IEnumerable<ProductCategories> ProductCategories => _unitOfWork.ProductCategoryRepository.Get(a => a.Active, q => q.OrderByDescending(a => a.Soft));
+        private IEnumerable<ProductSizeColor> ProductSizeColors => _unitOfWork.ProductSCRepository.Get(includeProperties: "Size,Color").ToList();
+        private IEnumerable<Collection> Collections => _unitOfWork.CollectionRepository.Get(a => a.Active);
         private IEnumerable<ArticleCategory> ArticleCategories => _unitOfWork.ArticleCategoryRepository.Get(a => a.CategoryActive, q => q.OrderByDescending(a => a.CategorySort));
         #region CustomAttribute
         //public static void GetAttribute(Type t)
@@ -63,9 +65,18 @@ namespace figma.Controllers
         #endregion
 
         //
-
         public IActionResult Index()
         {
+            //HttpContext.Response.Cookies.Append(
+            //         "cardId",Guid.NewGuid().ToString(),
+            //         new CookieOptions() { SameSite = SameSiteMode.Lax });
+            //  HttpContext.Response.Cookies.Delete("name");
+            //foreach (var item in HttpContext.Request.Cookies.Where(a => a.Key == "name"))
+            //{
+            //    Console.WriteLine(item);
+            //}
+
+
             //  GetAttribute(typeof(HomeController));
             //var proCategories = _unitOfWork.ProductCategoryRepository.Get(a => a.Active && a.Home && a.ParentId == null, q => q.OrderByDescending(a => a.Soft));
 
@@ -89,25 +100,34 @@ namespace figma.Controllers
         }
 
 
+
         [Route("{name}-{proId}.html")]
         public IActionResult Product(int proId = 0)
         {
+            Console.WriteLine(HttpContext.Request.Cookies.FirstOrDefault(a => a.Key.Contains("viewProducts")).Value);
+            HttpContext.Response.Cookies.Append(
+                     "viewProducts", "" + HttpContext.Request.Cookies.FirstOrDefault(a => a.Key.Contains("viewProducts")).Value + "," + proId + "",
+                     new CookieOptions() { SameSite = SameSiteMode.Lax });
+            ViewBag.view = HttpContext.Request.Cookies.FirstOrDefault(a => a.Key.Contains("viewProducts")).Value;
             var product = _unitOfWork.ProductRepository.GetByID(proId);
             if (product == null)
             {
                 return RedirectToActionPermanent("Index");
             }
-
-            //var products = await _unitOfWork.ProductRepository.GetAync(
-            //    a => a.Active && a.ProductCategorieID == product.ProductCategorieID && a.ProductID != proId,
-            //    q => q.OrderByDescending(a => a.Sort), 24);
+            var tagP = _unitOfWork.TagsProductsRepository.Get(a => a.ProductID == proId, includeProperties: "Tags,Products");
+            var products = _unitOfWork.ProductRepository.Get(
+                a => a.Active && a.ProductCategorieID == product.ProductCategorieID && a.ProductID != proId,
+                q => q.OrderByDescending(a => a.Sort), 8);
             var model = new ProductDetailViewModel
             {
                 Product = product,
-                // Products = products,
-                //  RootCategory = ProductCategories.SingleOrDefault(a => a.ProductCategorieID == product.ProductCategories.ParentId)
+                Products = products,
+                ViewProducts = _unitOfWork.ProductRepository.Get().ToList(),
+                RootCategory = ProductCategories.SingleOrDefault(a => a.ProductCategorieID == product.ProductCategorieID),
+                Collection = Collections.SingleOrDefault(a => a.CollectionID == product.CollectionID),
+                TagProducts = tagP,
+                ProductSizeColors = ProductSizeColors
             };
-
             return View(model);
         }
 

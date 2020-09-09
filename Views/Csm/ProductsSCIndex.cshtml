@@ -1,4 +1,4 @@
-﻿@model IEnumerable<figma.ViewModel.PSC>
+﻿@model figma.ViewModel.ProductSCViewModel
 
 @{
     ViewData["Title"] = "ProductsSCIndex";
@@ -40,46 +40,53 @@
     </thead>
     <tbody>
         @if (Model != null)
-            @foreach (var item in Model)
+            @foreach (var item in Model.ProductSizeColors)
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.name)
-                    </td>
-                    <td>
-
-                        @{
-                            if (item.image != null)
+                        @foreach (var item1 in Model.Products.Where(a=>a.ProductID==item.ProductID))
+                        {
+                            if (item1.ProductID == item.ProductID)
                             {
-                                string[] arrListStr = item.image.Split(',');
-                                <img width="80" height="80" asp-append-version="true" src="/@arrListStr[0]" />
+                                @Html.DisplayFor(modelItem => item1.Name)
                             }
+                            break;
                         }
+                    </td>
+                    <td>
+
+                        @*@{
+                                if (item.Products.Image != null)
+                                {
+                                    string[] arrListStr = item.Products.Image.Split(',');
+                                    <img width="80" height="80" asp-append-version="true" src="/@arrListStr[0]" />
+                                }
+                            }*@
 
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.color)
+                        @Html.DisplayFor(modelItem => item.Color.NameColor)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.size)
+                        @Html.DisplayFor(modelItem => item.Size.SizeProduct)
                     </td>
                     <td>
-                        <a class="btn btn-success"  asp-action="ProductsSCEdit" asp-route-id="@item.id">Edit</a> |
+                        <a class="btn btn-success" asp-action="ProductsSCEdit" asp-route-id="@item.Id">Edit</a> |
                         @*<a asp-action="ProductsSCDetails" asp-route-id="@item.Id">Details</a> |*@
-                        <a class="btn btn-danger" onclick="deleteLC(@item.id)">Delete</a>
+                        <a class="btn btn-danger" onclick="deleteLC(@item.Id)">Delete</a>
                         <script>
-                                function deleteLC(id) {
-                                    if (confirm("Bạn có chắc chắn xóa không?")) {
-                                        $.post("/Csm/ProductsSCDelete", { id: id }, function (data) {
-                                            if (data) {
-                                                if (confirm("Xóa thành công"))
-                                                    window.location.assign('/Csm/ProductsSCIndex')
-                                            } else {
-                                                alert("Quá trình thực hiện không thành công. Hãy thử lại");
-                                            }
-                                        });
-                                    }
+                            function deleteLC(id) {
+                                if (confirm("Bạn có chắc chắn xóa không?")) {
+                                    $.post("/Csm/ProductsSCDelete", { id: id }, function (data) {
+                                        if (data) {
+                                            if (confirm("Xóa thành công"))
+                                                window.location.assign('/Csm/ProductsSCIndex')
+                                        } else {
+                                            alert("Quá trình thực hiện không thành công. Hãy thử lại");
+                                        }
+                                    });
                                 }
+                            }
                         </script>
                     </td>
                 </tr>
