@@ -18,6 +18,18 @@ $(".info .row .col-4").hover(
     }
 );
 
+//$(document).ready(function () {
+//    $(".btn-show-mobile").click(function () {
+//        $('#site-nav--mobile').addClass("active");
+//        $('#site-overlay').addClass("active");
+//    });
+//    //
+//    $("#site-overlay").click(function () {
+//        $('#site-overlay').removeClass("active");
+//        $('#site-nav--mobile').removeClass("active");
+//    });
+//});
+
 //$(".navbar-nav li ul li").hover(
 //    function () {
 //        console.log($(this).children().text());
@@ -33,7 +45,7 @@ $(".info .row .col-4").hover(
 document.addEventListener(
     "DOMContentLoaded", () => {
         const menu = new MmenuLight(
-            document.querySelector("#menu-hide"),
+            document.querySelector("#nav"),
             "(max-width: 992px)"
         );
         const navigator = menu.navigation({
@@ -41,7 +53,7 @@ document.addEventListener(
         });
         const drawer = menu.offcanvas();
 
-        document.querySelector("button[href='#menu-hide']")
+        document.querySelector("button[href='#nav']")
             .addEventListener("click", (evnt) => {
                 evnt.preventDefault();
                 drawer.open();

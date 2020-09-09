@@ -107,7 +107,13 @@ namespace figma.Controllers
             Console.WriteLine(HttpContext.Request.Cookies.FirstOrDefault(a => a.Key.Contains("viewProducts")).Value);
             HttpContext.Response.Cookies.Append(
                      "viewProducts", "" + HttpContext.Request.Cookies.FirstOrDefault(a => a.Key.Contains("viewProducts")).Value + "," + proId + "",
-                     new CookieOptions() { SameSite = SameSiteMode.Lax });
+                     new CookieOptions()
+                     {
+                         SameSite = SameSiteMode.Lax,
+                         Secure = true,
+                         // hết hạn sau 1 day
+                         Expires = new DateTimeOffset(DateTime.Now.AddDays(1))
+                     });
             ViewBag.view = HttpContext.Request.Cookies.FirstOrDefault(a => a.Key.Contains("viewProducts")).Value;
             var product = _unitOfWork.ProductRepository.GetByID(proId);
             if (product == null)
