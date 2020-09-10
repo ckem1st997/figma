@@ -151,6 +151,7 @@ async function AJAXSubmitCreateOne(oFormElement, h, w) {
                 alert("Xin vui lòng chọn ảnh !");
             }
             addtwo();
+  
         },
         error: function (data) {
             alert(data.responseText);
@@ -295,10 +296,14 @@ DecoupledDocumentEditor
         },
         language: 'vi',
         image: {
+
             toolbar: [
                 'imageTextAlternative',
                 'imageStyle:full',
-                'imageStyle:side'
+                'imageStyle:side',
+                'imageResize',
+                'alignLeft', 'alignCenter', 'alignRight'
+
             ]
         },
         table: {

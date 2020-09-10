@@ -52,11 +52,11 @@
                     {
                         if (item.Image.Contains("https"))
                         {
-                            <img src="@item.Image" asp-append-version="true" width="80" height="80" />
+                            <img src="@item.Image" asp-append-version="true" />
                         }
                         else
                         {
-                            <img src="/@item.Image" asp-append-version="true" width="80" height="80" />
+                            <img src="/@item.Image" asp-append-version="true" height="235" width="350" />
                         }
                     }
                     else

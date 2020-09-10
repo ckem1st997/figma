@@ -104,7 +104,6 @@ namespace figma.Controllers
         [Route("{name}-{proId}.html")]
         public IActionResult Product(int proId = 0)
         {
-            Console.WriteLine(HttpContext.Request.Cookies.FirstOrDefault(a => a.Key.Contains("viewProducts")).Value);
             HttpContext.Response.Cookies.Append(
                      "viewProducts", "" + HttpContext.Request.Cookies.FirstOrDefault(a => a.Key.Contains("viewProducts")).Value + "," + proId + "",
                      new CookieOptions()
@@ -138,8 +137,34 @@ namespace figma.Controllers
         }
 
 
+        [Route("{namearicle}/{name}-{blogId}.html")]
+        public async Task<IActionResult> Review(string namearicle, int blogId = 0)
+        {
+            var ar = _unitOfWork.ArticleRepository.GetByID(blogId);
+            var listAr = await _unitOfWork.ArticleRepository.GetAync(a => a.Active && a.Home && a.Id != ar.Id && a.ArticleCategoryId == ar.ArticleCategoryId, q => q.OrderBy(a => a.CreateDate), 4);
+            ViewBag.namearicle = namearicle;
+            var model = new ReviewViewModel()
+            {
+                Article = ar,
+                Articles = listAr
+            };
 
+            return View(model);
+        }
 
+        [Route("ListReview")]
+        public async Task<IActionResult> ListReview()
+        {
+            var ar = await _unitOfWork.ArticleRepository.GetAync();
+            var listAr = await _unitOfWork.ArticleCategoryRepository.GetAync(a => a.CategoryActive && a.ShowHome && a.ShowHome);
+            var model = new ReviewViewModel()
+            {
+                Articles = ar,
+                ListArticles = listAr
+            };
+
+            return View(model);
+        }
 
         public IActionResult Login1()
         {

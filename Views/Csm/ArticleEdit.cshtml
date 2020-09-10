@@ -11,7 +11,7 @@
 <hr />
 <div class="">
     <form asp-controller="Csm" asp-action="createImage"
-          enctype="multipart/form-data" onchange="AJAXSubmitCreateOne(this,100,100);return false;"
+          enctype="multipart/form-data" onchange="AJAXSubmitCreate(this,535,850);return false;"
           method="post">
         <div class="form-group bg-white font-weight-bold">
             <div class="section-image-title d-flex justify-content-between">
@@ -24,7 +24,7 @@
                     </a>
                 </div>
             </div>
-            <div class="section-image-list insert-two container">
+            <div class="section-image-list insert-one container">
                 <div class="row">
                     @{
                         if (Model.Image != null)
@@ -57,7 +57,7 @@
             <input asp-for="Description" class="form-control" />
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
-        <div class="form-group bg-white">
+        <div class="form-group bg-white" style="max-width:760px">
             <label asp-for="Body" class="control-label"></label>
             <div id="toolbar-container"></div>
             <div id="editor" class="bg-white"></div>
@@ -76,10 +76,10 @@
         </div>
 
         <div class="form-group">
-                <label asp-for="View" class="control-label"></label>
-                <input asp-for="View" class="form-control" />
-                <span asp-validation-for="View" class="text-danger"></span>
-            </div>
+            <label asp-for="View" class="control-label"></label>
+            <input asp-for="View" class="form-control" />
+            <span asp-validation-for="View" class="text-danger"></span>
+        </div>
         <div class="form-group w-25">
             <label asp-for="ArticleCategoryId" class="control-label"></label>
             <select asp-for="ArticleCategoryId" class="form-control" asp-items="ViewBag.ArticleCategorieID"></select>
@@ -106,6 +106,11 @@
             <label asp-for="DescriptionMeta" class="control-label"></label>
             <input asp-for="DescriptionMeta" class="form-control" />
             <span asp-validation-for="DescriptionMeta" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="KeyWord" class="control-label"></label>
+            <input asp-for="KeyWord" class="form-control" />
+            <span asp-validation-for="KeyWord" class="text-danger"></span>
         </div>
         <div class="form-group">
             <input type="submit" value="Save" class="btn btn-primary" />

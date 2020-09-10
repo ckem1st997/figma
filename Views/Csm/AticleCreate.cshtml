@@ -20,7 +20,7 @@
 <hr />
 
 
-<form asp-controller="Csm" asp-action="createImage" enctype="multipart/form-data" onchange="AJAXSubmitCreateOne(this,100,100);return false;" method="post">
+<form asp-controller="Csm" asp-action="createImage" enctype="multipart/form-data" onchange="AJAXSubmitCreate(this,535,850);return false;" method="post">
     <div class="form-group bg-white font-weight-bold">
         <div class="section-image-title d-flex justify-content-between">
             <p class="text-danger mt-3 mb-1">Ảnh bài viết</p>
@@ -28,13 +28,13 @@
 
             <div class="m-3 ml-1">
                 <a class="">
-                    <input id="filesadd" accept="image/*" name="filesadd" type="file"/>
+                    <input id="filesadd" accept="image/*" name="filesadd" type="file" />
                 </a>
                 <script>
                 </script>
             </div>
         </div>
-        <div class="section-image-list insert-two container">
+        <div class="section-image-list insert-one container">
             <div class="row">
             </div>
         </div>
@@ -64,7 +64,7 @@
             <input asp-for="Description" class="form-control" style="height:150px" />
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
-        <div class="form-group bg-white">
+        <div class="form-group bg-white " style="max-width:760px">
             <label asp-for="Body" class="control-label"></label>
             <div id="toolbar-container"></div>
             <div id="editor" class="bg-white"></div>
@@ -97,6 +97,11 @@
             <label asp-for="DescriptionMeta" class="control-label"></label>
             <input asp-for="DescriptionMeta" class="form-control" style="height:200px" />
             <span asp-validation-for="DescriptionMeta" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="KeyWord" class="control-label"></label>
+            <input asp-for="KeyWord" class="form-control" />
+            <span asp-validation-for="KeyWord" class="text-danger"></span>
         </div>
         <div class="form-group text-center">
             <input type="submit" value="Create" class="btn btn-primary" />

@@ -1,12 +1,24 @@
-﻿@{
-    ViewData["Title"] = "Review";
+﻿@model figma.ViewModel.ReviewViewModel
 
+@{
+    if (Model.Article != null)
+    {
+        ViewData["Title"] = Model.Article.TitleMeta ?? "Review";
+        ViewData["Description"] = Model.Article.DescriptionMeta ?? "Sản phẩm";
+
+        if (Model.Article.Image != null)
+        {
+            // ViewBag.ImagShare = Request.Url?.GetLeftPart(UriPartial.Authority) + Path.Combine("/images/products/", Model.Product.Image.Split(',')[0]);
+            ViewBag.ImagShare = Model.Article.Image;
+        }
+    }
+    else
+    {
+        ViewData["Title"] = "Review";
+        ViewData["Description"] = "Sản phẩm";
+    }
+    SlugCovert slugCovert = new SlugCovert();
 }
-<head>
-    @*<script src="~/js/site.js"></script>*@
-    @*<link href="~/css/style.css" rel="stylesheet" />*@
-</head>
-
 
 <div class="breadcrumb-shop">
     <div class="cpd5 ">
@@ -23,197 +35,154 @@
 <div id="reviewblog" class="ReviewDetail-page" data-style="style_01">
     <input type="hidden" id="rvInfo" value="">
     <div class="container">
-
-        <div class="row review-detail-wrapper">
-            <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 review-detail-post">
-                <div class="review-detail-post-title mb-4">
-                    <div class="post-title wow animate__fadeInLeftBig" data-wow-duration="1s" data-wow-delay="0.5s">
-                        Bộ sưu tập thời trang mùa xuân 2020 của nhà thiết kế tadashi shoji
-                    </div>
-                    <div class="post-info text-center mt-2 wow animate__fadeInUpBig" data-wow-duration="1.5s" data-wow-delay="0.5s">
-                        <span class="by">By Admin on </span>
-                        <i class="far fa-window-minimize ml-2"></i>
-                        <span class="date">January 10, 2019</span>
-                        <span class="view"> <i class="far fa-eye"></i>152 Views</span>
-                        <span class="cmt"><i class="far fa-comments"></i>3 Bình luận</span>
-                    </div>
-                </div>
-                <p class="">
-                    <img class="img-fluid" src="~/image/Rectangle 79.png" />
-                </p>
-                <div class="title-main-ct font-weight-normal wow animate__fadeInUpBig" data-wow-duration="1s" data-wow-delay="0.5s">
-                    Xin chào các cô gái! Bạn biết nhà thiết kế thời trang đầy tài năng Tadashi Shoji, ông đã ra bộ sưu tập mới nhất để dạo phố mùa xuân 2020 bạn đã biết chưa? Tôi chắc chắn rằng khi nhìn thấy bộ sưu tập này các bạn sẽ thích chúng, hãy cùng Lucas ngắm nhìn BST thời trang mùa xuân 2020 của nhà thiết kế tadashi shoji tuyệt vời như thế nào ngay hôm nay nhé!
-                </div>
-                <div class="title-main main-bold font-weight-normal wow animate__fadeInLeftBig" data-wow-duration="1s" data-wow-delay="0.5s">
-                    Tông màu trắng cũng chính là gam chủ đạo ở phần đầu BST, như tượng trưng cho sắc trắng tinh khôi của giọt sương sớm.
-                </div>
-                <div class="title-main-ct wow animate__fadeInUpBig" data-wow-duration="1s" data-wow-delay="0.5s">
-                    Tadashi Shoji có kinh nghiệm về thời trang được hơn 30 năm, lúc đầu ông chỉ là một nghệ sĩ, sau khi từ Ngật Bản chuyển đến Los Angeles vào những năm 70 ông bắt tay vào thiết kế thời trang, đây cũng là niềm đam mê trong cuộc đời ông. Chẳng có gì đáng ngạc nhiên khi tất cả mọi phụ nữ đều yêu mến những thiết kế của ông, từ bà nội trợ đến những người phụ nữ thành đạt bước chân trên thảm đỏ, bởi những thiết kế của ông dành một tình cảm đặc biệt dành riêng cho phụ nữ, tình cảm tôn vinh cái đẹp như một nữ thần của họ.
-                    <br />
-                    <br />
-                    Với bộ sưu tập mùa xuân 2020 lần này Tadashi Shoji mang đến vẻ đẹp mơ màng, đầy lãng mạn
-
-                </div>
-                <div class="container-fluid p-0 wow animate__fadeInLeftBig" data-wow-duration="1s" data-wow-delay="0.5s">
-                    <div class="row">
-                        <div class="col-6 p-0">
-                            <img src="~/image/Rectangle 81.png" />
+        @{
+            if (Model.Article != null)
+            {
+                <div class="row review-detail-wrapper">
+                    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 review-detail-post">
+                        <div class="review-detail-post-title mb-4">
+                            <div class="post-title wow animate__fadeInLeftBig" data-wow-duration="1s" data-wow-delay="0.5s">
+                                @Model.Article.Subject
+                            </div>
+                            <div class="post-info text-center mt-2 wow animate__fadeInUpBig" data-wow-duration="1.5s" data-wow-delay="0.5s">
+                                <span class="by">By Admin on </span>
+                                <i class="far fa-window-minimize ml-2"></i>
+                                <span class="date"> @Model.Article.CreateDate</span>
+                                <span class="view"> <i class="far fa-eye"></i> @Model.Article.View Views</span>
+                                <span class="cmt"><i class="far fa-comments"></i> 22 Bình luận</span>
+                            </div>
                         </div>
-
-                        <div class="col-6 title-main-ct">
-                            mạn cho người mặc, như một người phụ nữ lãng mạn trên đất Pháp, sự ngọt ngào của ren kết hợp với hoa điểm xuyến đã tạo được bước đột phá mạnh, chị em gái khó lòng kiềm chế khi không tự thưởng cho mình một bộ váy đầm đẹp trong bộ sưu tập của ông.
+                        <div class="review-blog">
+                            @Html.Raw(Model.Article.Body)
                             <br />
-                            Màu sắc được ông lựa chọn đa phần là màu tươi sáng rất phù hợp với không khí mùa xuân ấm áp, những điểm nhấn thường là nét cut out táo bạo phối ren mềm mại. Họa tiết nhẹ nhàng, thanh lịch, bạn gái rất dễ dàng lấy điểm vào mùa xuân với bộ sưu tập thời trang mới nhất này.
-
-                        </div>
-                    </div>
-                </div>
-                <br />
-                <div class="title-main-ct wow animate__fadeInUp" data-wow-duration="1s" data-wow-delay="0.5s">
-                    E ấp như sương không có nghĩa là Tadashi Shoji chỉ tập trung vào những thiết kế “kín cổng cao tường”. Ngược lại, ẩn sau lớp sương mỏng tang là vô vàn sắc thái gợi cảm, ôm trọn cả vẻ quyến rũ. Để làm nổi bật được những điểm hấp dẫn nhất của sương, cũng chính là tôn lên sức hút của phái đẹp, Tadashi Shoji đã khai thác chất liệu vô cùng đa dạng, linh hoạt đan xen giữa xuyên thấu, ánh kim. Đồng thời, kỹ thuật cut-out tinh xảo với những thiết kế xẻ ngực, khoét hông cao đều cho thấy sự táo bạo, dạn dĩ nhưng không hề đánh mất nét nữ tính mà nhà tạo mốt luôn gìn giữ trong phong cách chế tác.
-                </div>
-                <br />
-                <div class="tag-hot text-center">
-                    <div>
-                        #fashion&nbsp;&nbsp;#spring&nbsp;&nbsp;#2020 &nbsp;&nbsp;#fashioncollection
-                    </div>
-                </div>
-                <br />
-                <div class="share-social text-center">
-                    <span class="font-weight-bold"> Share: &nbsp;</span>
-                    <i class="fab fa-facebook-f mr-3"></i>
-
-                    <i class="fab fa-twitter mr-3"></i>
-                    <i class="fab fa-google-plus-g"></i>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 review-detail-latest review-detail-post">
-
-                <div class="post-title w-100 mb-5">
-                    LATEST POST
-                </div>
-
-
-                <div class="review-detail-latest-content wow animate__fadeInUpBig" data-wow-duration="1s" data-wow-delay="0.5s">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <img class="" src="~/image/Rectangle 82.png" />
-                            <div class="col-7">
-                                <span class="col-7 title-main">Maison - Top shop giới thiệu... </span>
-                                <br />
-                                <span class="date-info">07/01/2019</span>
+                            <div class="share-social text-center">
+                                <span class="font-weight-bold"> Share: &nbsp;</span>
+                                <i class="fab fa-facebook-f mr-3"></i>
+                                <i class="fab fa-twitter mr-3"></i>
+                                <i class="fab fa-google-plus-g"></i>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="review-detail-latest-content wow animate__fadeInUpBig" data-wow-duration="1.5s" data-wow-delay="0.5s">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <img class="" src="~/image/Rectangle 82 (1).png" />
-                            <div class="col-7">
-                                <span class=" col-7 title-main">"Nín thở" trước bộ sưu tập lộng... </span>
-                                <br />
-                                <span class="date-info">07/01/2019</span>
+                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 review-detail-latest review-detail-post">
+
+                        <div class="post-title w-100 mb-5">
+                            LATEST POST
+                        </div>
+                        @{
+                            if (Model.Articles != null)
+                                foreach (var item in Model.Articles)
+                                {
+                                    <div class="review-detail-latest-content wow animate__fadeInUpBig" data-wow-duration="1s" data-wow-delay="0.5s">
+                                        <a style="text-decoration:none" asp-route-blogId=@item.Id asp-route-namearicle=@ViewBag.namearicle asp-route-name=@slugCovert.UrlFriendly(item.Subject) asp-action="Review">
+                                            <div class="d-flex justify-content-between">
+                                                <img class="" src="~/@item.Image" />
+                                                <div class="">
+                                                    <div class="title-main test2 mb-3 ml-2">@item.TitleMeta</div>
+                                                    <span class="date-info">@item.CreateDate.Date</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                }
+                        }
+
+                        @*<div class="review-detail-latest-content wow animate__fadeInUpBig" data-wow-duration="1.5s" data-wow-delay="0.5s">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <img class="" src="~/image/Rectangle 82 (1).png" />
+                                        <div class="col-7">
+                                            <span class=" col-7 title-main">"Nín thở" trước bộ sưu tập lộng... </span>
+                                            <br />
+                                            <span class="date-info">07/01/2019</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="review-detail-latest-content border-0 wow animate__fadeInUpBig" data-wow-duration="2s" data-wow-delay="0.5s">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <img class="" src="~/image/Rectangle 82 (2).png" />
+                                        <div class="col-7">
+                                            <span class="col-7 title-main">BST thời trang từ các thương hiệu...</span>
+                                            <br />
+                                            <span class="date-info">03/01/2019</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>*@
+                        <div class="post-title w-100 mb-3 text-left">
+                            Từ khóa
+                        </div>
+                        <div class="key-word container p-0">
+                            <div class="row">
+                                <div class="col-8">
+                                    @{
+                                        string[] arrListview = Model.Article.KeyWord.Split(',');
+                                        if (arrListview.Length > 0)
+                                            foreach (var item in arrListview)
+                                            {
+                                                if (item.Length > 0)
+                                                {
+                                                    <label>
+                                                        @item
+                                                    </label>
+                                                }
+                                            }
+                                    }
+
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="review-detail-latest-content border-0 wow animate__fadeInUpBig" data-wow-duration="2s" data-wow-delay="0.5s">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <img class="" src="~/image/Rectangle 82 (2).png" />
-                            <div class="col-7">
-                                <span class="col-7 title-main">BST thời trang từ các thương hiệu...</span>
-                                <br />
-                                <span class="date-info">03/01/2019</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="post-title w-100 mb-3 text-left">
-                    Từ khóa
-                </div>
-                <div class="key-word container p-0">
-                    <div class="row">
-                        <div class="col-8">
-                            <label>
-                                Fashion
-                            </label>
 
-                            <label>
-                                2020
-                            </label>
-                            <label>
-                                Fashion Show
-                            </label>
-
-                            <label>
-                                BST
-                            </label>
-                            <label>
-                                Xuân hè 2020
-                            </label>
-
-                            <label>
-                                Magazines
-                            </label>
-                            <label>
-                                Poster
-                            </label>
-
-                            <label>
-                                Collection
-                            </label>
-                        </div>
-                    </div>
                 </div>
-            </div>
-        </div>
+            }
+        }
+
     </div>
 </div>
+
 
 <div class="welcome tintuc">
     <p class="title-long title-we mb-5 mt-5 wow animate__fadeInLeftBig" data-wow-duration="1s" data-wow-delay="0.5s">
         Tin tức
     </p>
-    <div class="list-trend d-flex justify-content-center">
-        <div class="wow animate__fadeInLeft info-update" data-wow-duration="1s" data-wow-delay="0.5s">
-            <div class="box-shadow">
-                <img src="~/image/Rectangle 63 (1).png" />
-                <div class="info">
-                    <p class="info-date"> 30 tháng 8, 2020</p>
-                    <h5 class="info-title"> LUCAS VIP MEMBER</h5>
-                    <spn class="info-text"> ĐIỀU KIỆN THAM GIA CHƯƠNG TRÌNH : 1.TÍCH LUỸ SỐ ĐIỂM TƯƠNG ĐƯƠNG SỐ TIỀN MUA HÀNG TRÊN 3.000.000VND QUÝ KHÁCH SẼ SỞ HỮU...</spn>
+    <div class="list-trend d-flex justify-content-center container">
+        <div class="row">
+            <div class="col-4 wow animate__fadeInLeft info-update" data-wow-duration="1s" data-wow-delay="0.5s">
+                <div class="box-shadow">
+                    <img src="~/image/Rectangle 63 (1).png" />
+                    <div class="info">
+                        <p class="info-date"> 30 tháng 8, 2020</p>
+                        <h5 class="info-title"> LUCAS VIP MEMBER</h5>
+                        <spn class="info-text"> ĐIỀU KIỆN THAM GIA CHƯƠNG TRÌNH : 1.TÍCH LUỸ SỐ ĐIỂM TƯƠNG ĐƯƠNG SỐ TIỀN MUA HÀNG TRÊN 3.000.000VND QUÝ KHÁCH SẼ SỞ HỮU...</spn>
+                    </div>
+                    <a class="info-continue">Xem thêm</a>
                 </div>
-                <a class="info-continue">Xem thêm</a>
             </div>
-
-
-        </div>
-        <div class="wow animate__fadeInLeft info-update" data-wow-duration="1.5s" data-wow-delay="0.5s">
-            <div class="box-shadow">
-                <img src="~/image/Rectangle 63.png" />
-                <div class="info">
-                    <p class="info-date"> 30 tháng 8, 2020</p>
-                    <h5 class="info-title"> SALE upto 70% TẤT CẢ SẢN PHẨM</h5>
-                    <spn class="info-text"> Rộn ràng đón mừng năm mới 2019 với chương trình SALE lớn nhất trong năm tại LUCAS - ưu đãi lên đến 70% cho tất cả các sản phẩm</spn>
+            <div class="col-4 wow animate__fadeInLeft info-update" data-wow-duration="1.5s" data-wow-delay="0.5s">
+                <div class="box-shadow">
+                    <img src="~/image/Rectangle 63.png" />
+                    <div class="info">
+                        <p class="info-date"> 30 tháng 8, 2020</p>
+                        <h5 class="info-title"> SALE upto 70% TẤT CẢ SẢN PHẨM</h5>
+                        <spn class="info-text"> Rộn ràng đón mừng năm mới 2019 với chương trình SALE lớn nhất trong năm tại LUCAS - ưu đãi lên đến 70% cho tất cả các sản phẩm</spn>
+                    </div>
+                    <a class="info-continue">Xem thêm</a>
                 </div>
-                <a class="info-continue">Xem thêm</a>
             </div>
-        </div>
-        <div class="wow animate__fadeInLeft info-update" data-wow-duration="2s" data-wow-delay="0.5s">
-            <div class="box-shadow">
-                <img src="~/image/Rectangle 63 (2).png" />
-                <div class="info">
-                    <p class="info-date"> 30 tháng 8, 2020</p>
-                    <h5 class="info-title">SALE upto 70% TẤT CẢ SẢN PHẨM</h5>
-                    <spn class="info-text">Mùa giáng sinh - mùa của những " MÓN QUÀ" đã chính thức tới rồi .🎅🏻🎅🏻🎅🏻 Như một lời cảm ơn đến các LUCAS girls, Noel này...</spn>
+            <div class="col-4 wow animate__fadeInLeft info-update" data-wow-duration="2s" data-wow-delay="0.5s">
+                <div class="box-shadow">
+                    <img src="~/image/Rectangle 63 (2).png" />
+                    <div class="info">
+                        <p class="info-date"> 30 tháng 8, 2020</p>
+                        <h5 class="info-title">SALE upto 70% TẤT CẢ SẢN PHẨM</h5>
+                        <spn class="info-text">Mùa giáng sinh - mùa của những " MÓN QUÀ" đã chính thức tới rồi .🎅🏻🎅🏻🎅🏻 Như một lời cảm ơn đến các LUCAS girls, Noel này...</spn>
+                    </div>
+                    <a class="info-continue">Xem thêm</a>
                 </div>
-                <a class="info-continue">Xem thêm</a>
             </div>
         </div>
     </div>
-
 </div>
 

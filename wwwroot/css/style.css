@@ -60,6 +60,14 @@ a {
 a:hover {
   color: #48CAB2;
 }
+.review-blog p span {
+  font-weight: normal !important;
+}
+div.test2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 70%;
+}
 /*.slick-next:before {
     content: '\f0a9' !important;
     font-family: FontAwesome !important;

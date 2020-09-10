@@ -1,0 +1,40 @@
+﻿@model figma.ViewModel.ReviewViewModel
+@{
+    ViewData["Title"] = "Blog";
+    ViewData["Description"] = "Tin tức mới nhất";
+
+    SlugCovert slugCovert = new SlugCovert();
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    if (Model != null)
+        foreach (var item in Model.ListArticles)
+        {
+            <div class="container">
+                <h3 class="mb-5 text-center">@item.CategoryName</h3>
+                <div class="row">
+                    @foreach (var itemlist in Model.Articles)
+                    {
+                        if (item.ArticleCategoryId == itemlist.ArticleCategoryId)
+                        {
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-12 wow animate__fadeInUpBig mb-5" data-wow-duration="1s" data-wow-delay="0.5s">
+                                <a style="text-decoration:none" asp-route-blogId=@itemlist.Id asp-route-namearicle=@item.Slug asp-route-name=@slugCovert.UrlFriendly(itemlist.TitleMeta) asp-action="Review">
+                                    <div class="">
+                                        <img class="mb-3" src="~/@itemlist.Image" />
+                                        <div class="title-main test2 mb-3 ml-2">@itemlist.Subject</div>
+                                        <span class="date-info mt-2">@itemlist.CreateDate.Date</span>
+                                    </div>
+                                </a>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        }
+
+}
+
+
+
+

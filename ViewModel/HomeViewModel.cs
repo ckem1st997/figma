@@ -41,6 +41,18 @@ namespace figma.ViewModel
         //public IEnumerable<Size> Sizes { get; set; }
     }
 
+    public class ReviewViewModel
+    {
+        public Article Article { get; set; }
+        public IEnumerable<Article> Articles { get; set; }
+        public IEnumerable<ArticleCategory> ListArticles { get; set; }
+
+    }
+
+
+
+
+
     //public class ContactViewModel
     //{
     //    public ConfigSites ConfigSite { get; set; }
