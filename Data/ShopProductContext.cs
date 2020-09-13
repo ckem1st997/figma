@@ -12,6 +12,8 @@ namespace figma.Data
 
     //dotnet ef migrations add InitialCreate1
     //dotnet ef database update
+    //EntityFrameworkCore\Update-Database
+    //EntityFrameworkCore\Add-Migration
     public class ShopProductContext : DbContext
     {
         public ShopProductContext()
@@ -50,9 +52,9 @@ namespace figma.Data
         public virtual DbSet<Size> Sizes { get; set; }
 
 
-        public virtual DbSet<Orders> Orders { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
 
-        public virtual DbSet<OrderDetails> OrderDetails { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
 
         public virtual DbSet<ProductSizeColor> ProductSizeColors { get; set; }
         public virtual DbSet<Article> Articles { get; set; }
@@ -68,11 +70,11 @@ namespace figma.Data
             modelBuilder.Entity<TagProducts>().HasOne(pt => pt.Tags).WithMany(p => p.TagProducts).HasForeignKey(pt => pt.TagID).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<TagProducts>().HasOne(pt => pt.Products).WithMany(p => p.TagProducts).HasForeignKey(pt => pt.ProductID).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<Products>().HasKey(h => h.ProductID);
-            modelBuilder.Entity<Orders>().HasKey(h => h.OrdersID);
+            modelBuilder.Entity<Order>().HasKey(h => h.Id);
 
-            modelBuilder.Entity<OrderDetails>().HasKey(t => new { t.OrdersID, t.ProductID });
-            modelBuilder.Entity<OrderDetails>().HasOne(pt => pt.Orders).WithMany(p => p.OrderDetails).HasForeignKey(pt => pt.OrdersID).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
-            modelBuilder.Entity<OrderDetails>().HasOne(pt => pt.Products).WithMany(p => p.OrderDetails).HasForeignKey(pt => pt.ProductID).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<OrderDetail>().HasKey(t => new { t.OrderId, t.ProductId });
+            modelBuilder.Entity<OrderDetail>().HasOne(pt => pt.Order).WithMany(p => p.OrderDetails).HasForeignKey(pt => pt.OrderId).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<OrderDetail>().HasOne(pt => pt.Product).WithMany(p => p.OrderDetails).HasForeignKey(pt => pt.ProductId).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<ProductSizeColor>().HasOne(p => p.Color).WithMany(b => b.ProductSizeColors).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<ProductSizeColor>().HasOne(p => p.Size).WithMany(b => b.ProductSizeColors).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<Article>().HasOne(p => p.ArticleCategory).WithMany(b => b.Articles).HasForeignKey(py => py.ArticleCategoryId).OnDelete(DeleteBehavior.Cascade);
@@ -90,7 +92,7 @@ namespace figma.Data
             modelBuilder.Entity<Products>().Property(p => p.CreateBy).HasDefaultValue("admin");
             modelBuilder.Entity<Products>().Property(p => p.Sort).HasDefaultValue(1);
             modelBuilder.Entity<ProductCategories>().Property(p => p.ParentId).HasDefaultValue(null);
-
+            base.OnModelCreating(modelBuilder);
         }
 
     }

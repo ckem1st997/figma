@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using figma.Data;
 
 namespace figma.Migrations
 {
     [DbContext(typeof(ShopProductContext))]
-    partial class ShopProductContextModelSnapshot : ModelSnapshot
+    [Migration("20200911101309_nhdsads")]
+    partial class nhdsads
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

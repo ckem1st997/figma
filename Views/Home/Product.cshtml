@@ -21,7 +21,7 @@
                 <li class="breadcrumb-item"><a asp-action="Index">Home</a></li>
                 <li class="breadcrumb-item"><a href="#">Danh mục</a></li>
                 <li class="breadcrumb-item"><a asp-action="" asp-route-data="@Model.RootCategory.ProductCategorieID">@Model.RootCategory.Name</a></li>
-                <li class="breadcrumb-item active id_check_idsp d-none" aria-current="page">@Model.Product.ProductID</li>
+                <li class="breadcrumb-item active id_check_idsp d-none" value="@Model.Product.ProductID" aria-current="page">@Model.Product.ProductID</li>
             </ol>
         </nav>
     </div>
@@ -76,7 +76,7 @@
                         if (Model.Product.SaleOff > 0)
                         {
                             <span class="pro-price-del"><del class="compare-price">@Model.Product.Price₫</del></span>
-                            <span class="giaban">@Model.Product.SaleOff₫</span>
+                            <span class="giaban" >@Model.Product.SaleOff₫</span>
                         }
                         else
                         {

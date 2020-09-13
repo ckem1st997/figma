@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using figma.Data;
 
 namespace figma.Migrations
 {
     [DbContext(typeof(ShopProductContext))]
-    partial class ShopProductContextModelSnapshot : ModelSnapshot
+    [Migration("20200911094009_updateOrder")]
+    partial class updateOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -567,49 +569,70 @@ namespace figma.Migrations
                     b.ToTable("Members");
                 });
 
-            modelBuilder.Entity("figma.Models.Order", b =>
+            modelBuilder.Entity("figma.Models.OrderDetails", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("OrdersID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductID")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18, 0)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrdersID", "ProductID");
+
+                    b.HasIndex("ProductID");
+
+                    b.ToTable("OrderDetails");
+                });
+
+            modelBuilder.Entity("figma.Models.Orders", b =>
+                {
+                    b.Property<int>("OrdersID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(200)")
-                        .HasMaxLength(200);
-
-                    b.Property<string>("Body")
-                        .HasColumnType("nvarchar(200)")
-                        .HasMaxLength(200);
-
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("CustomerInfo_Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("CustomerInfo_Body")
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("CustomerInfo_Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<string>("Fullname")
+                    b.Property<string>("CustomerInfo_Fullname")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<string>("Gender")
+                    b.Property<string>("CustomerInfo_Gender")
                         .HasColumnType("nvarchar(10)")
                         .HasMaxLength(10);
+
+                    b.Property<string>("CustomerInfo_Mobile")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(11)")
+                        .HasMaxLength(11);
 
                     b.Property<string>("MaDonHang")
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<string>("Mobile")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(11)")
-                        .HasMaxLength(11);
-
-                    b.Property<int?>("OrderMemberId")
+                    b.Property<int>("OrderMemberId")
                         .HasColumnType("int");
 
                     b.Property<bool>("Payment")
@@ -633,30 +656,9 @@ namespace figma.Migrations
                     b.Property<bool>("Viewed")
                         .HasColumnType("bit");
 
-                    b.HasKey("Id");
+                    b.HasKey("OrdersID");
 
                     b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("figma.Models.OrderDetail", b =>
-                {
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal?>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("OrderId", "ProductId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("OrderDetails");
                 });
 
             modelBuilder.Entity("figma.Models.ProductCategories", b =>
@@ -1008,17 +1010,17 @@ namespace figma.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("figma.Models.OrderDetail", b =>
+            modelBuilder.Entity("figma.Models.OrderDetails", b =>
                 {
-                    b.HasOne("figma.Models.Order", "Order")
+                    b.HasOne("figma.Models.Orders", "Orders")
                         .WithMany("OrderDetails")
-                        .HasForeignKey("OrderId")
+                        .HasForeignKey("OrdersID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("figma.Models.Products", "Product")
+                    b.HasOne("figma.Models.Products", "Products")
                         .WithMany("OrderDetails")
-                        .HasForeignKey("ProductId")
+                        .HasForeignKey("ProductID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -96,8 +96,6 @@
                         <input asp-for="Factory" class="form-control" />
                         <span asp-validation-for="Factory" class="text-danger"></span>
                     </div>
-
-
                     <div class="form-group form-check">
                         <label class="form-check-label">
                             <input class="form-check-input" asp-for="Hot" /> @Html.DisplayNameFor(model => model.Hot)
@@ -121,12 +119,6 @@
                         <input asp-for="TitleMeta" class="form-control" />
                         <span asp-validation-for="TitleMeta" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="DescriptionMeta" class="control-label"></label>
-                        <input asp-for="DescriptionMeta" class="form-control" />
-                        <span asp-validation-for="DescriptionMeta" class="text-danger"></span>
-                    </div>
-
                     <div class="form-group">
                         <label asp-for="BarCode" class="control-label"></label>
                         <input asp-for="BarCode" class="form-control" />
@@ -170,43 +162,29 @@
                 </div>
             </div>
         </div>
-
-
         <div class="form-group bg-white">
             <label asp-for="Body" class="control-label"></label>
-            <div id="toolbar-container"></div>
-            <div id="editor" class="bg-white">
-            </div>
+            <div id="Body"></div>
             <input type="hidden" asp-for="Body" class="form-control" />
-            <script>
-                var h = '' + $("#Body").val() + '';
-
-            </script>
             <span asp-validation-for="Body" class="text-danger"></span>
         </div>
         <div class="form-group bg-white">
             <label asp-for="GiftInfo" class="control-label"></label>
-            <div id="toolbar-containerGift"></div>
-            <div id="editorGift"></div>
+            <div id="GiftInfo"></div>
             <input type="hidden" asp-for="GiftInfo" class="form-control" />
-            <script>
-                var t = '' + $("#GiftInfo").val() + '';
-
-            </script>
             <span asp-validation-for="GiftInfo" class="text-danger"></span>
         </div>
         <div class="form-group bg-white">
             <label asp-for="Content" class="control-label"></label>
-            <div id="toolbar-containerContent"></div>
-            <div id="editorContent"></div>
+            <div id="Content"></div>
             <input type="hidden" asp-for="Content" class="form-control" />
-            <script>
-                var j = '' + $("#Content").val() + '';
-
-            </script>
             <span asp-validation-for="Content" class="text-danger"></span>
         </div>
-
+        <div class="form-group">
+            <label asp-for="DescriptionMeta" class="control-label"></label>
+            <input asp-for="DescriptionMeta" class="form-control" />
+            <span asp-validation-for="DescriptionMeta" class="text-danger"></span>
+        </div>
         <div class="form-group">
             <input type="submit" value="Save" class="btn btn-primary" />
         </div>

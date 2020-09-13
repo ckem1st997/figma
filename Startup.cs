@@ -18,12 +18,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
 using figma.CustomHandler;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using Microsoft.AspNetCore.Http.Features;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using figma.OutFile;
+
 using figma.DAL;
 
 namespace figma

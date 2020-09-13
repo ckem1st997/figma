@@ -123,7 +123,7 @@ namespace figma.Models
 
         public virtual List<TagProducts> TagProducts { get; set; }
 
-        public virtual List<OrderDetails> OrderDetails { get; set; }
+        public virtual List<OrderDetail> OrderDetails { get; set; }
 
         public virtual List<Carts> Carts { get; set; }
 

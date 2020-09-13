@@ -18,29 +18,6 @@ $(".info .row .col-4").hover(
     }
 );
 
-//$(document).ready(function () {
-//    $(".btn-show-mobile").click(function () {
-//        $('#site-nav--mobile').addClass("active");
-//        $('#site-overlay').addClass("active");
-//    });
-//    //
-//    $("#site-overlay").click(function () {
-//        $('#site-overlay').removeClass("active");
-//        $('#site-nav--mobile').removeClass("active");
-//    });
-//});
-
-//$(".navbar-nav li ul li").hover(
-//    function () {
-//        console.log($(this).children().text());
-//        $(this).children().toggleClass("animate__animated animate__bounce");
-//    }
-//);
-//$("img").hover(
-//    function () {
-//        $(this).toggleClass("animate__animated animate__pulse");
-//    }
-//);
 
 document.addEventListener(
     "DOMContentLoaded", () => {
@@ -108,8 +85,7 @@ $(document).ready(function () {
             $(this).next("#quantity").val(1);
         }
     });
-    var a = $(".srcBanners").val();
-    var listimage = a.split(",");
+
     $("#example,.home-index div.banner").vegas({
         delay: 9000,
         slides: [
@@ -126,45 +102,40 @@ $(document).ready(function () {
         transition: 'fade'
 
     });
-    $(".card-product img").hover(function (event) {
-        //console.log($(this).parent().next("div.card-tool"));
-        //$(this).parent().next("div.card-tool").css("opacity", "1");
-        //$(this).parent().next("div.card-tool").find(".card-tool-btn").css("bottom", "35%");
-        //var hide_btn = $(this).parent().children()[1];
-        //$(this).parent().children()[2].css("opacity", "1");
-        //$(this).parent().children()[2].css("bottom", "35%");
-        //$(".card-tool").css("opacity", "1");
-        //$(".card-tool .card-tool-btn").css("bottom", "35%");
-
+    $("#variant-swatch-0 .select-swap .swatch-element").click(function () {
+        // console.log("haha");
+        if (!$(this).hasClass("soldout")) {
+            $(".select-swap .swatch-element").removeClass("checked");
+            $(this).addClass("checked");
+            $("#variant-swatch-1 .select-swap .swatch-element:nth-child(1)").addClass("checked");
+        }
+        //var i = $(".id_check_idsp").html();
+        //var l = $("#variant-swatch-0 .select-swap .swatch-element.checked").attr("data-value");
     });
-    //$(".card-product img").mouseout(function (event) {
-    //    $(".card-tool").css("opacity", "0");
-    //    $(".card-tool .card-tool-btn").css("bottom", "0%");
-
-    //});
     $("#variant-swatch-1 .select-swap .swatch-element").click(function () {
-        console.log("haha");
+        // console.log("haha");
         if (!$(this).hasClass("soldout")) {
             $("#variant-swatch-1 .select-swap .swatch-element").removeClass("checked");
             $(this).addClass("checked");
         }
 
     });
-    $("#variant-swatch-0 .select-swap .swatch-element").click(function () {
-        console.log("haha");
-        if (!$(this).hasClass("soldout")) {
-            $(".select-swap .swatch-element").removeClass("checked");
-            $(this).addClass("checked");
-        }
-        //var i = $(".id_check_idsp").html();
-        //var l = $("#variant-swatch-0 .select-swap .swatch-element.checked").attr("data-value");
-    });
+
 
     $("#add-to-cart").off("click").click(function () {
         if ($("#variant-swatch-0 .select-swap .swatch-element.checked").hasClass("checked") != true || $("#variant-swatch-1 .select-swap .swatch-element.checked").hasClass("checked") != true)
             alert("Xin bạn vui lòng chọn sản phẩm và size yêu thích nha !");
         else {
-            //var id_SP1 = $("span.sku-number").html();
+            var id_SP = $(".id_check_idsp").val();
+            console.log(id_SP);
+            var Price_SP = $(".giaban").html();
+            console.log(Price_SP.slice(0, Price_SP.length-1));
+            var Count_SP = $("#quantity").val();
+            console.log(Count_SP);
+            var Color_SP = $("#variant-swatch-0 .select-swap .swatch-element.checked ").attr("data-value");
+            console.log(Color_SP);
+            var Size_SP = $("#variant-swatch-1 .select-swap .swatch-element.checked").attr("data-value");
+            console.log(Size_SP);
             //var name_SP1 = $("div.product-title h1").html();
             //var price_SP1 = $("div#price-preview .pro-price").html().replace(',', '').replace('₫', '');
             //var sl1 = $("#quantity").val();

@@ -151,7 +151,7 @@ async function AJAXSubmitCreateOne(oFormElement, h, w) {
                 alert("Xin vui lòng chọn ảnh !");
             }
             addtwo();
-  
+
         },
         error: function (data) {
             alert(data.responseText);
@@ -254,87 +254,87 @@ async function AJAXSubmitDelete(oFormElement) {
 
 ////
 
-DecoupledDocumentEditor
-    .create(document.querySelector('#editor'), {
+//DecoupledDocumentEditor
+//    .create(document.querySelector('#editor'), {
 
-        toolbar: {
-            items: [
-                'heading',
-                '|',
-                'fontSize',
-                'fontFamily',
-                '|',
-                'bold',
-                'italic',
-                'underline',
-                'strikethrough',
-                'highlight',
-                '|',
-                'alignment',
-                '|',
-                'numberedList',
-                'bulletedList',
-                '|',
-                'indent',
-                'outdent',
-                '|',
-                'todoList',
-                'link',
-                'blockQuote',
-                'insertTable',
-                'mediaEmbed',
-                '|',
-                'undo',
-                'redo',
-                'CKFinder',
-                'code',
-                'fontColor',
-                'fontBackgroundColor',
-                'exportPdf',
-                'imageUpload'
-            ]
-        },
-        language: 'vi',
-        image: {
+//        toolbar: {
+//            items: [
+//                'heading',
+//                '|',
+//                'fontSize',
+//                'fontFamily',
+//                '|',
+//                'bold',
+//                'italic',
+//                'underline',
+//                'strikethrough',
+//                'highlight',
+//                '|',
+//                'alignment',
+//                '|',
+//                'numberedList',
+//                'bulletedList',
+//                '|',
+//                'indent',
+//                'outdent',
+//                '|',
+//                'todoList',
+//                'link',
+//                'blockQuote',
+//                'insertTable',
+//                'mediaEmbed',
+//                '|',
+//                'undo',
+//                'redo',
+//                'CKFinder',
+//                'code',
+//                'fontColor',
+//                'fontBackgroundColor',
+//                'exportPdf',
+//                'imageUpload'
+//            ]
+//        },
+//        language: 'vi',
+//        image: {
 
-            toolbar: [
-                'imageTextAlternative',
-                'imageStyle:full',
-                'imageStyle:side',
-                'imageResize',
-                'alignLeft', 'alignCenter', 'alignRight'
+//            toolbar: [
+//                'imageTextAlternative',
+//                'imageStyle:full',
+//                'imageStyle:side',
+//                'imageResize',
+//                'alignLeft', 'alignCenter', 'alignRight'
 
-            ]
-        },
-        table: {
-            contentToolbar: [
-                'tableColumn',
-                'tableRow',
-                'mergeTableCells'
-            ]
-        },
-        licenseKey: '',
+//            ]
+//        },
+//        table: {
+//            contentToolbar: [
+//                'tableColumn',
+//                'tableRow',
+//                'mergeTableCells'
+//            ]
+//        },
+//        licenseKey: '',
 
-    })
-    .then(editor => {
-        window.editor = editor;
-        // Set a custom container for the toolbar.
-        //  document.querySelector('.#toolbar-container').appendChild(editor.ui.view.toolbar.element);
-        const toolbarContainer = document.querySelector('#toolbar-container');
-        toolbarContainer.appendChild(editor.ui.view.toolbar.element);
-        // document.querySelector('.ck-toolbar').classList.add('ck-reset_all');
-        editor.editing.view.change(writer => { writer.setStyle('height', '300px', editor.editing.view.document.getRoot()); });
+//    })
+//    .then(editor => {
+//        window.editor = editor;
+//        // Set a custom container for the toolbar.
+//        //  document.querySelector('.#toolbar-container').appendChild(editor.ui.view.toolbar.element);
+//        const toolbarContainer = document.querySelector('#toolbar-container');
+//        toolbarContainer.appendChild(editor.ui.view.toolbar.element);
+//        // document.querySelector('.ck-toolbar').classList.add('ck-reset_all');
+//        editor.editing.view.change(writer => { writer.setStyle('height', '300px', editor.editing.view.document.getRoot()); });
 
-        editor.model.document.on('change:data', () => {
-            $("#Body").val(editor.getData());
-        });
-        if (h != null)
-            editor.setData(h);
-    })
-    .catch(error => {
+//        editor.model.document.on('change:data', () => {
+//            $("#Body").val(editor.getData());
+//        });
+//        if (h != null)
+//            editor.setData(h);
+//    })
+//    .catch(error => {
 
-        //  console.error(error);
-    });
+//        //  console.error(error);
+//    });
 //
 DecoupledDocumentEditor
     .create(document.querySelector('#editor'), {
@@ -570,80 +570,80 @@ DecoupledDocumentEditor
 
 //
 
-DecoupledDocumentEditor.create(document.querySelector('#editorDescriptionMeta'), {
+//DecoupledDocumentEditor.create(document.querySelector('#editorDescriptionMeta'), {
 
-    toolbar: {
-        items: [
-            'heading',
-            '|',
-            'fontSize',
-            'fontFamily',
-            '|',
-            'bold',
-            'italic',
-            'underline',
-            'strikethrough',
-            'highlight',
-            '|',
-            'alignment',
-            '|',
-            'numberedList',
-            'bulletedList',
-            '|',
-            'indent',
-            'outdent',
-            '|',
-            'todoList',
-            'link',
-            'blockQuote',
-            'insertTable',
-            'mediaEmbed',
-            '|',
-            'undo',
-            'redo',
-            'CKFinder',
-            'code',
-            'fontColor',
-            'fontBackgroundColor',
-            'exportPdf',
-            'imageUpload'
-        ]
-    },
-    language: 'vi',
-    image: {
-        toolbar: [
-            'imageTextAlternative',
-            'imageStyle:full',
-            'imageStyle:side'
-        ]
-    },
-    table: {
-        contentToolbar: [
-            'tableColumn',
-            'tableRow',
-            'mergeTableCells'
-        ]
-    },
-    licenseKey: '',
+//    toolbar: {
+//        items: [
+//            'heading',
+//            '|',
+//            'fontSize',
+//            'fontFamily',
+//            '|',
+//            'bold',
+//            'italic',
+//            'underline',
+//            'strikethrough',
+//            'highlight',
+//            '|',
+//            'alignment',
+//            '|',
+//            'numberedList',
+//            'bulletedList',
+//            '|',
+//            'indent',
+//            'outdent',
+//            '|',
+//            'todoList',
+//            'link',
+//            'blockQuote',
+//            'insertTable',
+//            'mediaEmbed',
+//            '|',
+//            'undo',
+//            'redo',
+//            'CKFinder',
+//            'code',
+//            'fontColor',
+//            'fontBackgroundColor',
+//            'exportPdf',
+//            'imageUpload'
+//        ]
+//    },
+//    language: 'vi',
+//    image: {
+//        toolbar: [
+//            'imageTextAlternative',
+//            'imageStyle:full',
+//            'imageStyle:side'
+//        ]
+//    },
+//    table: {
+//        contentToolbar: [
+//            'tableColumn',
+//            'tableRow',
+//            'mergeTableCells'
+//        ]
+//    },
+//    licenseKey: '',
 
-}).then(editor => {
-    window.editor = editor;
-    // Set a custom container for the toolbar.
-    //  document.querySelector('.#toolbar-container').appendChild(editor.ui.view.toolbar.element);
-    const toolbarContainer = document.querySelector('#toolbar-containerDescriptionMeta');
-    toolbarContainer.appendChild(editor.ui.view.toolbar.element);
-    // document.querySelector('.ck-toolbar').classList.add('ck-reset_all');
-    editor.editing.view.change(writer => { writer.setStyle('height', '300px', editor.editing.view.document.getRoot()); });
+//}).then(editor => {
+//    window.editor = editor;
+//    // Set a custom container for the toolbar.
+//    //  document.querySelector('.#toolbar-container').appendChild(editor.ui.view.toolbar.element);
+//    const toolbarContainer = document.querySelector('#toolbar-containerDescriptionMeta');
+//    toolbarContainer.appendChild(editor.ui.view.toolbar.element);
+//    // document.querySelector('.ck-toolbar').classList.add('ck-reset_all');
+//    editor.editing.view.change(writer => { writer.setStyle('height', '300px', editor.editing.view.document.getRoot()); });
 
-    editor.model.document.on('change:data', () => {
-        $("#DescriptionMeta").val(editor.getData());
-    });
-    if (d != null)
-        editor.setData(d);
-}).catch(error => {
+//    editor.model.document.on('change:data', () => {
+//        $("#DescriptionMeta").val(editor.getData());
+//    });
+//    if (d != null)
+//        editor.setData(d);
+//}).catch(error => {
 
-    //  console.error(error);
-});
+//    //  console.error(error);
+//});
 
 //
 DecoupledDocumentEditor
@@ -901,21 +901,123 @@ $("#GroupId").change(function () {
             break;
     }
 });
-//function autochange() {
-//    var data = $("input#ProductID").val();
-//    $.ajax({
-//        type: 'POST',
-//        url: '/Csm/AutoCompleteCity',
-//        data: { Prefix: data },
-//        dataType: "json",
-//        success: function (data) {
-//            console.log(data);
-//        },
-//        error: function (data) {
-//            console.log(data.responseText);
-//        }
-//    });
-//}
+$('#DescriptionMeta').summernote({
+    placeholder: 'Mời bạn soạn thảo',
+    tabsize: 2,
+    height: 500,              // set editor height
+    minHeight: null,             // set minimum height of editor
+    maxHeight: null,             // set maximum height of editor
+    focus: true,
+    toolbar: [
+        ['style', ['style']],
+        ['font', ['bold', 'underline', 'clear']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['table', ['table']],
+        ['insert', ['link', 'picture', 'video']],
+        ['view', ['fullscreen', 'codeview', 'help']]
+    ]
+});
+
+$('#DescriptionMeta').on('summernote.change', function (we, contents, $editable) {
+    var markupStr = $('#DescriptionMeta').summernote('code');
+    $("input#DescriptionMeta").val(markupStr);
+});
+
+//
+$('#Body').summernote({
+    placeholder: 'Mời bạn soạn thảo',
+    tabsize: 2,
+    height: 500,              // set editor height
+    minHeight: null,             // set minimum height of editor
+    maxHeight: null,             // set maximum height of editor
+    focus: true,
+    toolbar: [
+        ['style', ['style']],
+        ['font', ['bold', 'underline', 'clear']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['table', ['table']],
+        ['insert', ['link', 'picture', 'video']],
+        ['view', ['fullscreen', 'codeview', 'help']]
+    ]
+});
+
+$('#Body').on('summernote.change', function (we, contents, $editable) {
+    var markupStr = $('#Body').summernote('code');
+    $("input#Body").val(markupStr);
+});
+
+//
+
+$('#Content').summernote({
+    placeholder: 'Mời bạn soạn thảo',
+    tabsize: 2,
+    height: 500,              // set editor height
+    minHeight: null,             // set minimum height of editor
+    maxHeight: null,             // set maximum height of editor
+    focus: true,
+    toolbar: [
+        ['style', ['style']],
+        ['font', ['bold', 'underline', 'clear']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['table', ['table']],
+        ['insert', ['link', 'picture', 'video']],
+        ['view', ['fullscreen', 'codeview', 'help']]
+    ]
+});
+
+$('#Content').on('summernote.change', function (we, contents, $editable) {
+    var markupStr = $('#Content').summernote('code');
+    $("input#Content").val(markupStr);
+});
+
+
+//
+
+$('#GiftInfo').summernote({
+    placeholder: 'Mời bạn soạn thảo',
+    tabsize: 2,
+    height: 500,              // set editor height
+    minHeight: null,             // set minimum height of editor
+    maxHeight: null,             // set maximum height of editor
+    focus: true,
+    toolbar: [
+        ['style', ['style']],
+        ['font', ['bold', 'underline', 'clear']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['table', ['table']],
+        ['insert', ['link', 'picture', 'video']],
+        ['view', ['fullscreen', 'codeview', 'help']]
+    ]
+});
+
+$('#GiftInfo').on('summernote.change', function (we, contents, $editable) {
+    var markupStr = $('#GiftInfo').summernote('code');
+    $("input#GiftInfo").val(markupStr);
+});
+
+//
+$("#btntest").click(function () {
+    var markupStr = $('#summernote').summernote('code');
+    console.log(markupStr);
+});
+$("#btntest2").click(function () {
+    var markupStr = $('#summernote').summernote('code');
+    $('#summernote1').summernote('code', markupStr);
+    console.log(markupStr);
+});
+
+$(document).ready(function () {
+    $('#Body').summernote('code', $("input#Body").val());
+    $('#DescriptionMeta').summernote('code', $("input#DescriptionMeta").val());
+    $('#Content').summernote('code', $("input#Content").val());
+    $('#GiftInfo').summernote('code', $("input#GiftInfo").val());
+})
+
+
 
 
 
