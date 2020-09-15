@@ -19,6 +19,9 @@ using figma.ViewModel;
 
 namespace figma.Controllers
 {
+    // lấy dữ liệu, phân trang, sắp xếp
+
+
     // [Developer("Joan Smith", "1", Reviewed = true)]
     //  [Developer("Joan Smith1", "2", Reviewed = false)]
     public class HomeController : Controller

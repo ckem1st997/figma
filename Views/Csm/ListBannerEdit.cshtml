@@ -40,73 +40,71 @@
     </div>
 </form>
 <hr />
-<div class="">
-    <form asp-action="ListBannerEdit">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="BannerID" />
+<form asp-action="ListBannerEdit">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="BannerID" />
 
-        <div class="form-group w-50">
-            <label asp-for="BannerName " class="control-label"></label>
-            <input asp-for="BannerName" class="form-control" />
-            <span asp-validation-for="BannerName" class="text-danger"></span>
-        </div>
-        <div class="form-group w-50">
-            <label asp-for="Title" class="control-label"></label>
-            <input asp-for="Title" class="form-control" />
-            <span asp-validation-for="Title" class="text-danger"></span>
-        </div>
-        <div class="form-group w-50">
-            <label asp-for="Content" class="control-label"></label>
-            <input asp-for="Content" class="form-control" />
-            <span asp-validation-for="Content" class="text-danger"></span>
-        </div>
-        <div class="form-group d-none">
-            <label asp-for="CoverImage" class="control-label"></label>
-            <input asp-for="CoverImage" class="form-control" />
-            <span asp-validation-for="CoverImage" class="text-danger"></span>
-        </div>
-        <div class="form-group w-25">
-            <label asp-for="Width" class="control-label"></label>
-            <input asp-for="Width" class="form-control" />
-            <span asp-validation-for="Width" class="text-danger"></span>
-        </div>
-        <div class="form-group w-25">
-            <label asp-for="Height" class="control-label"></label>
-            <input asp-for="Height" class="form-control" />
-            <span asp-validation-for="Height" class="text-danger"></span>
-        </div>
-        <div class="form-group form-check">
-            <label class="form-check-label">
-                <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
-            </label>
-        </div>
-        <div class="form-group">
-            <label asp-for="GroupId" class="control-label"></label>
-            <br />
-            <select asp-for="GroupId">
-                <option value="1">Slide on Top 1440 x 632</option>
-                <option value="2">Banner Slide 465 x 330 (áp dụng với slide có 3 banner)</option>
-                <option value="3">Banner To Home 700 x 497</option>
-                <option value="4">Banner Nhỏ Home auto x 243</option>
-            </select>
+    <div class="form-group w-50">
+        <label asp-for="BannerName " class="control-label"></label>
+        <input asp-for="BannerName" class="form-control" />
+        <span asp-validation-for="BannerName" class="text-danger"></span>
+    </div>
+    <div class="form-group w-50">
+        <label asp-for="Title" class="control-label"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Content" class="control-label"></label>
+        <input asp-for="Content" class="form-control" />
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+    <div class="form-group d-none">
+        <label asp-for="CoverImage" class="control-label"></label>
+        <input asp-for="CoverImage" class="form-control" />
+        <span asp-validation-for="CoverImage" class="text-danger"></span>
+    </div>
+    <div class="form-group w-25">
+        <label asp-for="Width" class="control-label"></label>
+        <input asp-for="Width" class="form-control" />
+        <span asp-validation-for="Width" class="text-danger"></span>
+    </div>
+    <div class="form-group w-25">
+        <label asp-for="Height" class="control-label"></label>
+        <input asp-for="Height" class="form-control" />
+        <span asp-validation-for="Height" class="text-danger"></span>
+    </div>
+    <div class="form-group form-check">
+        <label class="form-check-label">
+            <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
+        </label>
+    </div>
+    <div class="form-group">
+        <label asp-for="GroupId" class="control-label"></label>
+        <br />
+        <select asp-for="GroupId">
+            <option value="1">Slide on Top 1440 x 632</option>
+            <option value="2">Banner Slide 465 x 330 (áp dụng với slide có 3 banner)</option>
+            <option value="3">Banner To Home 700 x 497</option>
+            <option value="4">Banner Nhỏ Home auto x 243</option>
+        </select>
 
-            <span asp-validation-for="GroupId" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Url" class="control-label"></label>
-            <input asp-for="Url" class="form-control" />
-            <span asp-validation-for="Url" class="text-danger"></span>
-        </div>
-        <div class="form-group w-25">
-            <label asp-for="Soft" class="control-label"></label>
-            <input asp-for="Soft" class="form-control" />
-            <span asp-validation-for="Soft" class="text-danger"></span>
-        </div>
+        <span asp-validation-for="GroupId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Url" class="control-label"></label>
+        <input asp-for="Url" class="form-control" />
+        <span asp-validation-for="Url" class="text-danger"></span>
+    </div>
+    <div class="form-group w-25">
+        <label asp-for="Soft" class="control-label"></label>
+        <input asp-for="Soft" class="form-control" />
+        <span asp-validation-for="Soft" class="text-danger"></span>
+    </div>
 
-        <div class="form-group">
-            <input type="submit" value="Edit" class="btn btn-primary" />
-        </div>
-    </form>
-</div>
+    <div class="form-group">
+        <input type="submit" value="Edit" class="btn btn-primary" />
+    </div>
+</form>
 
 

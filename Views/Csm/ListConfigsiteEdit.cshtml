@@ -56,38 +56,20 @@
         </div>
         <div class="form-group">
             <label asp-for="ContactInfo" class="control-label"></label>
-            <div id="toolbar-container2"></div>
-            <div id="editor2" class="bg-white">
-            </div>
+            <div id="ContactInfo"></div>
             <input type="hidden" asp-for="ContactInfo" class="form-control" />
-            <script>
-                var c = '' + $("#ContactInfo").val() + '';
-
-            </script>
             <span asp-validation-for="ContactInfo" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="FooterInfo" class="control-label"></label>
-            <div id="toolbar-container3"></div>
-            <div id="editor3" class="bg-white">
-            </div>
+            <div id="FooterInfo"></div>
             <input type="hidden" asp-for="FooterInfo" class="form-control" />
-            <script>
-                var f = '' + $("#FooterInfo").val() + '';
-
-            </script>
             <span asp-validation-for="FooterInfo" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="SaleOffProgram" class="control-label"></label>
-            <div id="toolbar-container4"></div>
-            <div id="editor4" class="bg-white">
-            </div>
+            <div id="SaleOffProgram"></div>
             <input type="hidden" asp-for="SaleOffProgram" class="form-control" />
-            <script>
-                var s = '' + $("#SaleOffProgram").val() + '';
-
-            </script>
             <span asp-validation-for="SaleOffProgram" class="text-danger"></span>
         </div>
         <div class="form-group w-25">
@@ -121,8 +103,6 @@
             <input asp-for="Hotline" class="form-control" />
             <span asp-validation-for="Hotline" class="text-danger"></span>
         </div>
-
-
         <div class="form-group w-25">
             <label asp-for="nameShopee" class="control-label"></label>
             <input asp-for="nameShopee" class="form-control" />
@@ -149,8 +129,6 @@
             <input asp-for="Twitter" class="form-control" />
             <span asp-validation-for="Twitter" class="text-danger"></span>
         </div>
-
-
         <div class="form-group w-50">
             <label asp-for="GoogleMap" class="control-label"></label>
             <textarea asp-for="GoogleMap" class="form-control"></textarea>

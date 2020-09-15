@@ -336,550 +336,7 @@ async function AJAXSubmitDelete(oFormElement) {
 //        //  console.error(error);
 //    });
 //
-DecoupledDocumentEditor
-    .create(document.querySelector('#editor'), {
 
-        toolbar: {
-            items: [
-                'heading',
-                '|',
-                'fontSize',
-                'fontFamily',
-                '|',
-                'bold',
-                'italic',
-                'underline',
-                'strikethrough',
-                'highlight',
-                '|',
-                'alignment',
-                '|',
-                'numberedList',
-                'bulletedList',
-                '|',
-                'indent',
-                'outdent',
-                '|',
-                'todoList',
-                'link',
-                'blockQuote',
-                'insertTable',
-                'mediaEmbed',
-                '|',
-                'undo',
-                'redo',
-                'CKFinder',
-                'code',
-                'fontColor',
-                'fontBackgroundColor',
-                'exportPdf',
-                'imageUpload'
-            ]
-        },
-        language: 'vi',
-        image: {
-            toolbar: [
-                'imageTextAlternative',
-                'imageStyle:full',
-                'imageStyle:side'
-            ]
-        },
-        table: {
-            contentToolbar: [
-                'tableColumn',
-                'tableRow',
-                'mergeTableCells'
-            ]
-        },
-        licenseKey: '',
-
-    })
-    .then(editor => {
-        window.editor = editor;
-        // Set a custom container for the toolbar.
-        //  document.querySelector('.#toolbar-container').appendChild(editor.ui.view.toolbar.element);
-        const toolbarContainer = document.querySelector('#toolbar-container');
-        toolbarContainer.appendChild(editor.ui.view.toolbar.element);
-        // document.querySelector('.ck-toolbar').classList.add('ck-reset_all');
-        editor.editing.view.change(writer => { writer.setStyle('height', '300px', editor.editing.view.document.getRoot()); });
-
-        editor.model.document.on('change:data', () => {
-            $("#Body").val(editor.getData());
-        });
-        if (h != null)
-            editor.setData(h);
-    })
-    .catch(error => {
-        //  console.error(error);
-    });
-//
-DecoupledDocumentEditor
-    .create(document.querySelector('#editorContent'), {
-
-        toolbar: {
-            items: [
-                'heading',
-                '|',
-                'fontSize',
-                'fontFamily',
-                '|',
-                'bold',
-                'italic',
-                'underline',
-                'strikethrough',
-                'highlight',
-                '|',
-                'alignment',
-                '|',
-                'numberedList',
-                'bulletedList',
-                '|',
-                'indent',
-                'outdent',
-                '|',
-                'todoList',
-                'link',
-                'blockQuote',
-                'insertTable',
-                'mediaEmbed',
-                '|',
-                'undo',
-                'redo',
-                'CKFinder',
-                'code',
-                'fontColor',
-                'fontBackgroundColor',
-                'exportPdf',
-                'imageUpload'
-            ]
-        },
-        language: 'vi',
-        image: {
-            toolbar: [
-                'imageTextAlternative',
-                'imageStyle:full',
-                'imageStyle:side'
-            ]
-        },
-        table: {
-            contentToolbar: [
-                'tableColumn',
-                'tableRow',
-                'mergeTableCells'
-            ]
-        },
-        licenseKey: '',
-
-    })
-    .then(editor => {
-        window.editor = editor;
-        // Set a custom container for the toolbar.
-        //  document.querySelector('.#toolbar-container').appendChild(editor.ui.view.toolbar.element);
-        const toolbarContainer = document.querySelector('#toolbar-containerContent');
-        toolbarContainer.appendChild(editor.ui.view.toolbar.element);
-        // document.querySelector('.ck-toolbar').classList.add('ck-reset_all');
-        editor.editing.view.change(writer => { writer.setStyle('height', '300px', editor.editing.view.document.getRoot()); });
-
-        editor.model.document.on('change:data', () => {
-            $("#Content").val(editor.getData());
-        });
-        if (j != null)
-            editor.setData(j);
-    })
-    .catch(error => {
-        // console.error(error);
-    });
-
-//
-DecoupledDocumentEditor
-    .create(document.querySelector('#editorGift'), {
-
-        toolbar: {
-            items: [
-                'heading',
-                '|',
-                'fontSize',
-                'fontFamily',
-                '|',
-                'bold',
-                'italic',
-                'underline',
-                'strikethrough',
-                'highlight',
-                '|',
-                'alignment',
-                '|',
-                'numberedList',
-                'bulletedList',
-                '|',
-                'indent',
-                'outdent',
-                '|',
-                'todoList',
-                'link',
-                'blockQuote',
-                'insertTable',
-                'mediaEmbed',
-                '|',
-                'undo',
-                'redo',
-                'CKFinder',
-                'code',
-                'fontColor',
-                'fontBackgroundColor',
-                'exportPdf',
-                'imageUpload'
-            ]
-        },
-        language: 'vi',
-        image: {
-            toolbar: [
-                'imageTextAlternative',
-                'imageStyle:full',
-                'imageStyle:side'
-            ]
-        },
-        table: {
-            contentToolbar: [
-                'tableColumn',
-                'tableRow',
-                'mergeTableCells'
-            ]
-        },
-        licenseKey: '',
-
-    })
-    .then(editor => {
-        window.editor = editor;
-        // Set a custom container for the toolbar.
-        //  document.querySelector('.#toolbar-container').appendChild(editor.ui.view.toolbar.element);
-        const toolbarContainer = document.querySelector('#toolbar-containerGift');
-        toolbarContainer.appendChild(editor.ui.view.toolbar.element);
-        document.querySelector('.ck-toolbar').classList.add('ck-reset_all');
-        editor.editing.view.change(writer => { writer.setStyle('height', '300px', editor.editing.view.document.getRoot()); });
-
-        editor.model.document.on('change:data', () => {
-            $("#GiftInfo").val(editor.getData());
-        });
-        if (t != null)
-            editor.setData(t);
-    })
-    .catch(error => {
-        //   console.error(error);
-    });
-
-//
-
-//DecoupledDocumentEditor.create(document.querySelector('#editorDescriptionMeta'), {
-
-//    toolbar: {
-//        items: [
-//            'heading',
-//            '|',
-//            'fontSize',
-//            'fontFamily',
-//            '|',
-//            'bold',
-//            'italic',
-//            'underline',
-//            'strikethrough',
-//            'highlight',
-//            '|',
-//            'alignment',
-//            '|',
-//            'numberedList',
-//            'bulletedList',
-//            '|',
-//            'indent',
-//            'outdent',
-//            '|',
-//            'todoList',
-//            'link',
-//            'blockQuote',
-//            'insertTable',
-//            'mediaEmbed',
-//            '|',
-//            'undo',
-//            'redo',
-//            'CKFinder',
-//            'code',
-//            'fontColor',
-//            'fontBackgroundColor',
-//            'exportPdf',
-//            'imageUpload'
-//        ]
-//    },
-//    language: 'vi',
-//    image: {
-//        toolbar: [
-//            'imageTextAlternative',
-//            'imageStyle:full',
-//            'imageStyle:side'
-//        ]
-//    },
-//    table: {
-//        contentToolbar: [
-//            'tableColumn',
-//            'tableRow',
-//            'mergeTableCells'
-//        ]
-//    },
-//    licenseKey: '',
-
-//}).then(editor => {
-//    window.editor = editor;
-//    // Set a custom container for the toolbar.
-//    //  document.querySelector('.#toolbar-container').appendChild(editor.ui.view.toolbar.element);
-//    const toolbarContainer = document.querySelector('#toolbar-containerDescriptionMeta');
-//    toolbarContainer.appendChild(editor.ui.view.toolbar.element);
-//    // document.querySelector('.ck-toolbar').classList.add('ck-reset_all');
-//    editor.editing.view.change(writer => { writer.setStyle('height', '300px', editor.editing.view.document.getRoot()); });
-
-//    editor.model.document.on('change:data', () => {
-//        $("#DescriptionMeta").val(editor.getData());
-//    });
-//    if (d != null)
-//        editor.setData(d);
-//}).catch(error => {
-
-//    //  console.error(error);
-//});
-
-//
-DecoupledDocumentEditor
-    .create(document.querySelector('#editor2'), {
-
-        toolbar: {
-            items: [
-                'heading',
-                '|',
-                'fontSize',
-                'fontFamily',
-                '|',
-                'bold',
-                'italic',
-                'underline',
-                'strikethrough',
-                'highlight',
-                '|',
-                'alignment',
-                '|',
-                'numberedList',
-                'bulletedList',
-                '|',
-                'indent',
-                'outdent',
-                '|',
-                'todoList',
-                'link',
-                'blockQuote',
-                'insertTable',
-                'mediaEmbed',
-                '|',
-                'undo',
-                'redo',
-                'CKFinder',
-                'code',
-                'fontColor',
-                'fontBackgroundColor',
-                'exportPdf',
-                'imageUpload'
-            ]
-        },
-        language: 'vi',
-        image: {
-            toolbar: [
-                'imageTextAlternative',
-                'imageStyle:full',
-                'imageStyle:side'
-            ]
-        },
-        table: {
-            contentToolbar: [
-                'tableColumn',
-                'tableRow',
-                'mergeTableCells'
-            ]
-        },
-        licenseKey: '',
-
-
-    })
-    .then(editor => {
-        window.editor = editor;
-        // Set a custom container for the toolbar.
-        //  document.querySelector('.#toolbar-container').appendChild(editor.ui.view.toolbar.element);
-        const toolbarContainer = document.querySelector('#toolbar-container2');
-        toolbarContainer.appendChild(editor.ui.view.toolbar.element);
-        // document.querySelector('.ck-toolbar').classList.add('ck-reset_all');
-        editor.editing.view.change(writer => { writer.setStyle('height', '300px', editor.editing.view.document.getRoot()); });
-        editor.model.document.on('change:data', () => {
-            $("#ContactInfo").val(editor.getData());
-        });
-        if (c != null)
-            editor.setData(h);
-    })
-    .catch(error => {
-
-        //   console.error(error);
-    });
-//
-DecoupledDocumentEditor
-    .create(document.querySelector('#editor3'), {
-
-        toolbar: {
-            items: [
-                'heading',
-                '|',
-                'fontSize',
-                'fontFamily',
-                '|',
-                'bold',
-                'italic',
-                'underline',
-                'strikethrough',
-                'highlight',
-                '|',
-                'alignment',
-                '|',
-                'numberedList',
-                'bulletedList',
-                '|',
-                'indent',
-                'outdent',
-                '|',
-                'todoList',
-                'link',
-                'blockQuote',
-                'insertTable',
-                'mediaEmbed',
-                '|',
-                'undo',
-                'redo',
-                'CKFinder',
-                'code',
-                'fontColor',
-                'fontBackgroundColor',
-                'exportPdf',
-                'imageUpload'
-            ]
-        },
-        language: 'vi',
-        image: {
-            toolbar: [
-                'imageTextAlternative',
-                'imageStyle:full',
-                'imageStyle:side'
-            ]
-        },
-        table: {
-            contentToolbar: [
-                'tableColumn',
-                'tableRow',
-                'mergeTableCells'
-            ]
-        },
-        licenseKey: '',
-
-
-    })
-    .then(editor => {
-        window.editor = editor;
-        // Set a custom container for the toolbar.
-        //  document.querySelector('.#toolbar-container').appendChild(editor.ui.view.toolbar.element);
-        const toolbarContainer = document.querySelector('#toolbar-container3');
-        toolbarContainer.appendChild(editor.ui.view.toolbar.element);
-        // document.querySelector('.ck-toolbar').classList.add('ck-reset_all');
-        editor.editing.view.change(writer => { writer.setStyle('height', '300px', editor.editing.view.document.getRoot()); });
-        editor.model.document.on('change:data', () => {
-            $("#FooterInfo").val(editor.getData());
-        });
-        if (f != null)
-            editor.setData(h);
-    })
-    .catch(error => {
-
-        //  console.error(error);
-    });
-
-//
-DecoupledDocumentEditor
-    .create(document.querySelector('#editor4'), {
-
-        toolbar: {
-            items: [
-                'heading',
-                '|',
-                'fontSize',
-                'fontFamily',
-                '|',
-                'bold',
-                'italic',
-                'underline',
-                'strikethrough',
-                'highlight',
-                '|',
-                'alignment',
-                '|',
-                'numberedList',
-                'bulletedList',
-                '|',
-                'indent',
-                'outdent',
-                '|',
-                'todoList',
-                'link',
-                'blockQuote',
-                'insertTable',
-                'mediaEmbed',
-                '|',
-                'undo',
-                'redo',
-                'CKFinder',
-                'code',
-                'fontColor',
-                'fontBackgroundColor',
-                'exportPdf',
-                'imageUpload'
-            ]
-        },
-        language: 'vi',
-        image: {
-            toolbar: [
-                'imageTextAlternative',
-                'imageStyle:full',
-                'imageStyle:side'
-            ]
-        },
-        table: {
-            contentToolbar: [
-                'tableColumn',
-                'tableRow',
-                'mergeTableCells'
-            ]
-        },
-        licenseKey: '',
-
-
-    })
-    .then(editor => {
-        window.editor = editor;
-        // Set a custom container for the toolbar.
-        //  document.querySelector('.#toolbar-container').appendChild(editor.ui.view.toolbar.element);
-        const toolbarContainer = document.querySelector('#toolbar-container4');
-        toolbarContainer.appendChild(editor.ui.view.toolbar.element);
-        // document.querySelector('.ck-toolbar').classList.add('ck-reset_all');
-        editor.editing.view.change(writer => { writer.setStyle('height', '300px', editor.editing.view.document.getRoot()); });
-        editor.model.document.on('change:data', () => {
-            $("#SaleOffProgram").val(editor.getData());
-        });
-        if (s != null)
-            editor.setData(h);
-    })
-    .catch(error => {
-
-        // console.error(error);
-    });
 $("#GroupId").change(function () {
     var id = parseInt($("#GroupId").val());
     switch (id) {
@@ -998,23 +455,89 @@ $('#GiftInfo').on('summernote.change', function (we, contents, $editable) {
     var markupStr = $('#GiftInfo').summernote('code');
     $("input#GiftInfo").val(markupStr);
 });
+//
+
+$('#ContactInfo').summernote({
+    placeholder: 'Mời bạn soạn thảo',
+    tabsize: 2,
+    height: 500,              // set editor height
+    minHeight: null,             // set minimum height of editor
+    maxHeight: null,             // set maximum height of editor
+    focus: true,
+    toolbar: [
+        ['style', ['style']],
+        ['font', ['bold', 'underline', 'clear']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['table', ['table']],
+        ['insert', ['link', 'picture', 'video']],
+        ['view', ['fullscreen', 'codeview', 'help']]
+    ]
+});
+
+$('#ContactInfo').on('summernote.change', function (we, contents, $editable) {
+    var markupStr = $('#ContactInfo').summernote('code');
+    $("input#ContactInfo").val(markupStr);
+});
+//
+
+$('#FooterInfo').summernote({
+    placeholder: 'Mời bạn soạn thảo',
+    tabsize: 2,
+    height: 500,              // set editor height
+    minHeight: null,             // set minimum height of editor
+    maxHeight: null,             // set maximum height of editor
+    focus: true,
+    toolbar: [
+        ['style', ['style']],
+        ['font', ['bold', 'underline', 'clear']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['table', ['table']],
+        ['insert', ['link', 'picture', 'video']],
+        ['view', ['fullscreen', 'codeview', 'help']]
+    ]
+});
+
+$('#FooterInfo').on('summernote.change', function (we, contents, $editable) {
+    var markupStr = $('#FooterInfo').summernote('code');
+    $("input#FooterInfo").val(markupStr);
+});
 
 //
-$("#btntest").click(function () {
-    var markupStr = $('#summernote').summernote('code');
-    console.log(markupStr);
-});
-$("#btntest2").click(function () {
-    var markupStr = $('#summernote').summernote('code');
-    $('#summernote1').summernote('code', markupStr);
-    console.log(markupStr);
+
+$('#SaleOffProgram').summernote({
+    placeholder: 'Mời bạn soạn thảo',
+    tabsize: 2,
+    height: 500,              // set editor height
+    minHeight: null,             // set minimum height of editor
+    maxHeight: null,             // set maximum height of editor
+    focus: true,
+    toolbar: [
+        ['style', ['style']],
+        ['font', ['bold', 'underline', 'clear']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['table', ['table']],
+        ['insert', ['link', 'picture', 'video']],
+        ['view', ['fullscreen', 'codeview', 'help']]
+    ]
 });
 
+$('#SaleOffProgram').on('summernote.change', function (we, contents, $editable) {
+    var markupStr = $('#SaleOffProgram').summernote('code');
+    $("input#SaleOffProgram").val(markupStr);
+});
+
+//
 $(document).ready(function () {
     $('#Body').summernote('code', $("input#Body").val());
     $('#DescriptionMeta').summernote('code', $("input#DescriptionMeta").val());
     $('#Content').summernote('code', $("input#Content").val());
     $('#GiftInfo').summernote('code', $("input#GiftInfo").val());
+    $('#ContactInfo').summernote('code', $("input#ContactInfo").val());
+    $('#FooterInfo').summernote('code', $("input#FooterInfo").val());
+    $('#SaleOffProgram').summernote('code', $("input#SaleOffProgram").val());
 })
 
 

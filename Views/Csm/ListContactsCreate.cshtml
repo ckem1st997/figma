@@ -37,14 +37,8 @@
         </div>
         <div class="form-group bg-white">
             <label asp-for="Body" class="control-label"></label>
-            <div id="toolbar-container"></div>
-            <div id="editor" class="bg-white"></div>
-
+            <div id="Body"></div>
             <input type="hidden" asp-for="Body" class="form-control" />
-            <script>
-            var h = '' + $("#Body").val() + '';
-
-            </script>
             <span asp-validation-for="Body" class="text-danger"></span>
         </div>
         <div class="form-group">
