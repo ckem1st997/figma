@@ -64,16 +64,10 @@
             <input asp-for="Description" class="form-control" style="height:150px" />
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
-        <div class="form-group bg-white " style="max-width:760px">
+        <div class="form-group bg-white ">
             <label asp-for="Body" class="control-label"></label>
-            <div id="toolbar-container"></div>
-            <div id="editor" class="bg-white"></div>
-
+            <div id="Body"></div>
             <input type="hidden" asp-for="Body" class="form-control" />
-            <script>
-                var h = '' + $("#Body").val() + '';
-
-            </script>
             <span asp-validation-for="Body" class="text-danger"></span>
         </div>
 
@@ -94,9 +88,9 @@
             <span asp-validation-for="TitleMeta" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="DescriptionMeta" class="control-label"></label>
-            <input asp-for="DescriptionMeta" class="form-control" style="height:200px" />
-            <span asp-validation-for="DescriptionMeta" class="text-danger"></span>
+            <label asp-for="DescriptionMetaTitle" class="control-label"></label>
+            <input asp-for="DescriptionMetaTitle" class="form-control" style="height:200px" />
+            <span asp-validation-for="DescriptionMetaTitle" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="KeyWord" class="control-label"></label>

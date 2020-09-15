@@ -1,0 +1,32 @@
+﻿@model IEnumerable<figma.Models.Article>
+
+
+@{
+    SlugCovert slugCovert = new SlugCovert();
+    if (Model.Count() > 0)
+    {
+        <div class="welcome tintuc">
+            <p class="title-long title-we mb-5 mt-5 wow animate__fadeInLeftBig" data-wow-duration="1s" data-wow-delay="0.5s">
+                Tin tức
+            </p>
+            <div class="list-trend d-flex justify-content-center container">
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-@(12 / Model.Count()) wow animate__fadeInLeft info-update" data-wow-duration="1s" data-wow-delay="0.5s">
+                            <div class="box-shadow">
+                                <img src="~/@item.Image" />
+                                <div class="info">
+                                    <p class="info-date"> @item.CreateDate</p>
+                                    <h5 class="info-title">@item.Subject</h5>
+                                    <spn class="info-text"> @item.Description...</spn>
+                                </div>
+                                <a class="info-continue" asp-route-blogId=@item.Id asp-route-namearicle="tin-tuc" asp-route-name=@slugCovert.UrlFriendly(item.TitleMeta) asp-action="Review">Xem thêm</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+}

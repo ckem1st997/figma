@@ -877,7 +877,7 @@ namespace figma.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AticleCreate([Bind("Subject,Description,Body,Image,CreateDate,View,ArticleCategoryId,Active,Hot,Home,Url,TitleMeta,DescriptionMeta,KeyWord")] Article articles)
+        public async Task<IActionResult> AticleCreate([Bind("Subject,Description,Body,Image,CreateDate,View,ArticleCategoryId,Active,Hot,Home,Url,TitleMeta,DescriptionMetaTitle,KeyWord")] Article articles)
         {
             if (ModelState.IsValid)
             {
@@ -914,7 +914,7 @@ namespace figma.Controllers
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public async Task<IActionResult> ArticleEdit(int id, [Bind("Id,Subject,Description,Body,Image,CreateDate,View,ArticleCategoryId,Active,Hot,Home,Url,TitleMeta,DescriptionMeta,KeyWord")] Article articles)
+        public async Task<IActionResult> ArticleEdit(int id, [Bind("Id,Subject,Description,Body,Image,CreateDate,View,ArticleCategoryId,Active,Hot,Home,Url,TitleMeta,DescriptionMetaTitle,KeyWord")] Article articles)
         {
             if (id != articles.Id)
             {

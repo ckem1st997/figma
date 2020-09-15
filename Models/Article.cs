@@ -36,7 +36,7 @@ namespace figma.Models
         [Display(Name = "Thẻ tiêu đề"), StringLength(100, ErrorMessage = "Tối đa 100 ký tự"), UIHint("TextBox")]
         public string TitleMeta { get; set; }
         [Display(Name = "Thẻ mô tả"), StringLength(500, ErrorMessage = "Tối đa 500 ký tự"), UIHint("TextArea")]
-        public string DescriptionMeta { get; set; }
+        public string DescriptionMetaTitle { get; set; }
 
 
         [Display(Name = "Từ khóa"), StringLength(500, ErrorMessage = "Tối đa 500 ký tự"), UIHint("TextArea")]

@@ -4,7 +4,7 @@
     if (Model.Article != null)
     {
         ViewData["Title"] = Model.Article.TitleMeta ?? "Review";
-        ViewData["Description"] = Model.Article.DescriptionMeta ?? "Sản phẩm";
+        ViewData["Description"] = Model.Article.DescriptionMetaTitle ?? "Sản phẩm";
 
         if (Model.Article.Image != null)
         {
@@ -77,39 +77,14 @@
                                             <div class="d-flex justify-content-between">
                                                 <img class="" src="~/@item.Image" />
                                                 <div class="">
-                                                    <div class="title-main test2 mb-3 ml-2">@item.TitleMeta</div>
+                                                    <div class="title-main test2 mb-3 ml-2">@item.Subject</div>
                                                     <span class="date-info">@item.CreateDate.Date</span>
                                                 </div>
                                             </div>
                                         </a>
                                     </div>
                                 }
-                        }
-
-                        @*<div class="review-detail-latest-content wow animate__fadeInUpBig" data-wow-duration="1.5s" data-wow-delay="0.5s">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <img class="" src="~/image/Rectangle 82 (1).png" />
-                                        <div class="col-7">
-                                            <span class=" col-7 title-main">"Nín thở" trước bộ sưu tập lộng... </span>
-                                            <br />
-                                            <span class="date-info">07/01/2019</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="review-detail-latest-content border-0 wow animate__fadeInUpBig" data-wow-duration="2s" data-wow-delay="0.5s">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <img class="" src="~/image/Rectangle 82 (2).png" />
-                                        <div class="col-7">
-                                            <span class="col-7 title-main">BST thời trang từ các thương hiệu...</span>
-                                            <br />
-                                            <span class="date-info">03/01/2019</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>*@
+                        }                    
                         <div class="post-title w-100 mb-3 text-left">
                             Từ khóa
                         </div>
@@ -142,47 +117,6 @@
     </div>
 </div>
 
-
-<div class="welcome tintuc">
-    <p class="title-long title-we mb-5 mt-5 wow animate__fadeInLeftBig" data-wow-duration="1s" data-wow-delay="0.5s">
-        Tin tức
-    </p>
-    <div class="list-trend d-flex justify-content-center container">
-        <div class="row">
-            <div class="col-4 wow animate__fadeInLeft info-update" data-wow-duration="1s" data-wow-delay="0.5s">
-                <div class="box-shadow">
-                    <img src="~/image/Rectangle 63 (1).png" />
-                    <div class="info">
-                        <p class="info-date"> 30 tháng 8, 2020</p>
-                        <h5 class="info-title"> LUCAS VIP MEMBER</h5>
-                        <spn class="info-text"> ĐIỀU KIỆN THAM GIA CHƯƠNG TRÌNH : 1.TÍCH LUỸ SỐ ĐIỂM TƯƠNG ĐƯƠNG SỐ TIỀN MUA HÀNG TRÊN 3.000.000VND QUÝ KHÁCH SẼ SỞ HỮU...</spn>
-                    </div>
-                    <a class="info-continue">Xem thêm</a>
-                </div>
-            </div>
-            <div class="col-4 wow animate__fadeInLeft info-update" data-wow-duration="1.5s" data-wow-delay="0.5s">
-                <div class="box-shadow">
-                    <img src="~/image/Rectangle 63.png" />
-                    <div class="info">
-                        <p class="info-date"> 30 tháng 8, 2020</p>
-                        <h5 class="info-title"> SALE upto 70% TẤT CẢ SẢN PHẨM</h5>
-                        <spn class="info-text"> Rộn ràng đón mừng năm mới 2019 với chương trình SALE lớn nhất trong năm tại LUCAS - ưu đãi lên đến 70% cho tất cả các sản phẩm</spn>
-                    </div>
-                    <a class="info-continue">Xem thêm</a>
-                </div>
-            </div>
-            <div class="col-4 wow animate__fadeInLeft info-update" data-wow-duration="2s" data-wow-delay="0.5s">
-                <div class="box-shadow">
-                    <img src="~/image/Rectangle 63 (2).png" />
-                    <div class="info">
-                        <p class="info-date"> 30 tháng 8, 2020</p>
-                        <h5 class="info-title">SALE upto 70% TẤT CẢ SẢN PHẨM</h5>
-                        <spn class="info-text">Mùa giáng sinh - mùa của những " MÓN QUÀ" đã chính thức tới rồi .🎅🏻🎅🏻🎅🏻 Như một lời cảm ơn đến các LUCAS girls, Noel này...</spn>
-                    </div>
-                    <a class="info-continue">Xem thêm</a>
-                </div>
-            </div>
-        </div>
-    </div>
+<div>
+    @await Component.InvokeAsync("TinTucList")
 </div>
-

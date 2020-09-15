@@ -181,7 +181,7 @@
                                                 <a asp-action="Product" asp-route-proId="@item.ProductID" asp-route-name="@Html.Raw(name)">
                                                     <div class="card-product">
                                                         <div class="product-hover ">
-                                                            <img src="/@arrListStr[0]" alt=@item.Name asp-append-version="true"/>
+                                                            <img src="/@arrListStr[0]" alt=@item.Name asp-append-version="true" />
                                                             <div class="card-tool w-100">
                                                                 <a class="card-tool-btn btn-1">
                                                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -273,7 +273,7 @@
                                                 <a asp-action="Product" asp-route-proId="@item.ProductID" asp-route-name="@Html.Raw(name)">
                                                     <div class="card-product">
                                                         <div class="product-hover ">
-                                                            <img src="/@arrListStr[0]"  alt=@item.Name asp-append-version="true" />
+                                                            <img src="/@arrListStr[0]" alt=@item.Name asp-append-version="true" />
                                                             <div class="card-tool w-100">
                                                                 <a class="card-tool-btn btn-1">
                                                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -365,7 +365,7 @@
                                                 <a asp-action="Product" asp-route-proId="@item.ProductID" asp-route-name="@Html.Raw(name)">
                                                     <div class="card-product">
                                                         <div class="product-hover ">
-                                                            <img src="/@arrListStr[0]"  alt=@item.Name asp-append-version="true" />
+                                                            <img src="/@arrListStr[0]" alt=@item.Name asp-append-version="true" />
                                                             <div class="card-tool w-100">
                                                                 <a class="card-tool-btn btn-1">
                                                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -457,7 +457,7 @@
                                                 <a asp-action="Product" asp-route-proId="@item.ProductID" asp-route-name="@Html.Raw(name)">
                                                     <div class="card-product">
                                                         <div class="product-hover ">
-                                                            <img src="/@arrListStr[0]"  alt=@item.Name asp-append-version="true" />
+                                                            <img src="/@arrListStr[0]" alt=@item.Name asp-append-version="true" />
                                                             <div class="card-tool w-100">
                                                                 <a class="card-tool-btn btn-1">
                                                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -548,7 +548,7 @@
                     @foreach (var item in Model.Banners.Where(a => a.GroupId == 3))
                     {
                         <div class="col-6 image-ava4 wow animate__zoomIn dichlen">
-                            <img src="~/@item.CoverImage"  alt=@item.BannerName asp-append-version="true" />
+                            <img src="~/@item.CoverImage" alt=@item.BannerName asp-append-version="true" />
                         </div>
                         break;
                     }
@@ -578,48 +578,11 @@
 
 </div>
 
-<div class="welcome tintuc">
-    <p class="title-long title-we mb-5 mt-5 wow animate__fadeInLeftBig" data-wow-duration="1s" data-wow-delay="0.5s">
-        Tin tức
-    </p>
-    <div class="list-trend d-flex justify-content-center container">
-        <div class="row">
-            <div class="col-4 wow animate__fadeInLeft info-update" data-wow-duration="1s" data-wow-delay="0.5s">
-                <div class="box-shadow">
-                    <img src="~/image/Rectangle 63 (1).png" />
-                    <div class="info">
-                        <p class="info-date"> 30 tháng 8, 2020</p>
-                        <h5 class="info-title"> LUCAS VIP MEMBER</h5>
-                        <spn class="info-text"> ĐIỀU KIỆN THAM GIA CHƯƠNG TRÌNH : 1.TÍCH LUỸ SỐ ĐIỂM TƯƠNG ĐƯƠNG SỐ TIỀN MUA HÀNG TRÊN 3.000.000VND QUÝ KHÁCH SẼ SỞ HỮU...</spn>
-                    </div>
-                    <a class="info-continue">Xem thêm</a>
-                </div>
-            </div>
-            <div class="col-4 wow animate__fadeInLeft info-update" data-wow-duration="1.5s" data-wow-delay="0.5s">
-                <div class="box-shadow">
-                    <img src="~/image/Rectangle 63.png" />
-                    <div class="info">
-                        <p class="info-date"> 30 tháng 8, 2020</p>
-                        <h5 class="info-title"> SALE upto 70% TẤT CẢ SẢN PHẨM</h5>
-                        <spn class="info-text"> Rộn ràng đón mừng năm mới 2019 với chương trình SALE lớn nhất trong năm tại LUCAS - ưu đãi lên đến 70% cho tất cả các sản phẩm</spn>
-                    </div>
-                    <a class="info-continue">Xem thêm</a>
-                </div>
-            </div>
-            <div class="col-4 wow animate__fadeInLeft info-update" data-wow-duration="2s" data-wow-delay="0.5s">
-                <div class="box-shadow">
-                    <img src="~/image/Rectangle 63 (2).png" />
-                    <div class="info">
-                        <p class="info-date"> 30 tháng 8, 2020</p>
-                        <h5 class="info-title">SALE upto 70% TẤT CẢ SẢN PHẨM</h5>
-                        <spn class="info-text">Mùa giáng sinh - mùa của những " MÓN QUÀ" đã chính thức tới rồi .🎅🏻🎅🏻🎅🏻 Như một lời cảm ơn đến các LUCAS girls, Noel này...</spn>
-                    </div>
-                    <a class="info-continue">Xem thêm</a>
-                </div>
-            </div>
-        </div>
-    </div>
+<div>
+    @await Component.InvokeAsync("TinTucList")
 </div>
+
+
 <div class="modal fade" id="exampleModal5" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered mw-100" role="document">
         <div class="modal-content container">

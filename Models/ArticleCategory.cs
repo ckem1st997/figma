@@ -30,7 +30,7 @@ namespace figma.Models
         public bool Hot { get; set; }
         [Display(Name = "Thẻ tiêu đề"), StringLength(100, ErrorMessage = "Tối đa 100 ký tự"), UIHint("TextBox")]
         public string TitleMeta { get; set; }
-        [Display(Name = "Thẻ mô tả"), StringLength(500, ErrorMessage = "Tối đa 500 ký tự"), UIHint("TextArea")]
+        [Display(Name = "Thẻ mô tả"), UIHint("TextArea")]
         public string DescriptionMeta { get; set; }
 
         public virtual ICollection<Article> Articles { get; set; }
