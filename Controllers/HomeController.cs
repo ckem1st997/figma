@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Mvc;
 using figma.DAL;
 using Microsoft.Extensions.Caching.Memory;
 using figma.ViewModel;
+using figma.OutFile;
 
 namespace figma.Controllers
 {
@@ -167,6 +168,60 @@ namespace figma.Controllers
 
             return View(model);
         }
+
+
+
+        [Route("Sale")]
+        // name, price, date
+        public async Task<IActionResult> Sale(string sortOrder, string currentFilter, string searchString, int? pageNumber)
+        {
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewData["CurrentFilter"] = searchString;
+
+            var Products = await _unitOfWork.ProductRepository.GetAync(a => a.Active, orderBy: q => q.OrderBy(a => a.Name));
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                //var Products = await _unitOfWork.ProductRepository.GetAync(a => a.Active, orderBy: q => q.OrderBy(a => a.Name));
+                Products = Products.Where(s => s.Name.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    Products = Products.OrderByDescending(a => a.Name);
+                    break;
+                case "Date":
+                    Products = Products.OrderBy(a => a.CreateDate);
+                    break;
+                case "date_desc":
+                    Products = Products.OrderByDescending(a => a.CreateDate);
+                    break;
+                case "Price":
+                    Products = Products.OrderBy(a => a.Price);
+                    break;
+                case "price_desc":
+                    Products = Products.OrderByDescending(a => a.Price);
+                    break;
+                default:
+                    Products = Products.OrderBy(a => a.Name);
+                    break;
+            }
+            int pageSize = 3;
+            return View(PaginatedList<Products>.CreateAsync(Products, pageNumber ?? 1, pageSize));
+        }
+
+
+
 
         public IActionResult Login1()
         {
