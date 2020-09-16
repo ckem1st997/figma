@@ -14,7 +14,7 @@ namespace figma.Models
         [Index]
         public int ConfigSiteID { get; set; }
 
-        [Display(Name ="Tên Facebook")]
+        [Display(Name = "Tên Facebook")]
         public string Facebook { get; set; }
 
         [StringLength(500, ErrorMessage = "Tối đa 500 ký tự"), Display(Name = "Đường dẫn Facebook"), Url(ErrorMessage = "Đường dẫn không chính xác"), UIHint("TextBox")]
@@ -32,7 +32,7 @@ namespace figma.Models
 
         [StringLength(4000, ErrorMessage = "Tối đa 4000 ký tự"), Display(Name = "Đường dẫn Shopee"), UIHint("TextArea")]
         public string LiveChat { get; set; }
-        
+
 
         [StringLength(100, ErrorMessage = "Tối đa 4000 ký tự"), Display(Name = "Tên Shopee"), UIHint("TextArea")]
         public string nameShopee { get; set; }
@@ -83,6 +83,9 @@ namespace figma.Models
 
         [Display(Name = "Chương trình khuyến mãi"), UIHint("EditorBox")]
         public string SaleOffProgram { get; set; }
+
+        [Display(Name = "Message Facebook"), UIHint("EditorBox")]
+        public string FbMessage { get; set; }
 
 
 
