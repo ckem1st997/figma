@@ -10,12 +10,12 @@
 <h4>ProductCategories</h4>
 <hr />
 
-
 <form asp-controller="Products" asp-action="createImage" enctype="multipart/form-data" onchange="AJAXSubmitCreateOne(this,100,100);return false;" method="post">
     <div class="form-group bg-white font-weight-bold">
-
         <div class="section-image-title d-flex justify-content-between">
             <p class="text-danger mt-3 mb-1">Biểu tượng</p>
+            <span asp-validation-for="CoverImage" class="text-danger"></span>
+
             <div class="m-3 ml-1">
                 <a class="">
                     <input id="filesadd" accept="image/*" name="filesadd" type="file" />
@@ -24,23 +24,20 @@
                 </script>
             </div>
         </div>
-        <div class="section-image-list add-image-0 container">
+        <div class="section-image-list insert-two container">
             <div class="row">
                 @{
-                    if (Model.Image != null)
+                    if (Model.CoverImage != null)
                     {
-                        string[] arrListStr = Model.Image.Split(',');
-                        for (int i = 0; i < arrListStr.Length; i++)
-                        {
-                            <div class="col-3 mb-3 position-relative">
-                                <a data-image="@arrListStr[i]" data-fancybox="gallery" class="@arrListStr[i]" href="/@arrListStr[i]">
-                                    <img style="max-width:100%" class="" src="/@arrListStr[i]" />
-                                    <span class="show--image-edit">Xem ảnh</span>
-                                    <i class="far fa-eye show--image-edit i--one"></i>
-                                </a>
-                                <i class="fas fa-trash"></i>
-                            </div>
-                        }
+                        <div class="col-3 mb-3 position-relative">
+                            <a data-image="@Model.CoverImage" data-fancybox="gallery" class="@Model.CoverImage" href="/@Model.CoverImage">
+                                <img style="max-width:100%" class="" src="/@Model.CoverImage" />
+                                <span class="show--image-edit">Xem ảnh</span>
+                                <i class="far fa-eye show--image-edit i--one"></i>
+                            </a>
+                            <i class="fas fa-trash"></i>
+                        </div>
+
                     }
                 }
             </div>
@@ -48,26 +45,24 @@
     </div>
 </form>
 
-
-<form asp-controller="Products" asp-action="createImage" enctype="multipart/form-data" onchange="AJAXSubmitCreate(this,720,1280);return false;" method="post">
+<form asp-controller="Products" asp-action="createImage" enctype="multipart/form-data" onchange="AJAXSubmitCreate(this,632,1440);return false;" method="post">
     <div class="form-group bg-white font-weight-bold">
         <div class="section-image-title d-flex justify-content-between">
             <p class="text-danger mt-3 mb-1">Ảnh Banner</p>
             <div class="m-3 ml-1">
                 <a class="">
                     <input id="filesadd" accept="image/*" name="filesadd" type="file" multiple />
-
                 </a>
                 <script>
                 </script>
             </div>
         </div>
-        <div class="section-image-list add-image-1 container">
+        <div class="section-image-list insert-one container">
             <div class="row">
                 @{
-                    if (Model.CoverImage != null)
+                    if (Model.Image != null)
                     {
-                        string[] arrListStr = Model.CoverImage.Split(',');
+                        string[] arrListStr = Model.Image.Split(',');
                         for (int i = 0; i < arrListStr.Length; i++)
                         {
                             <div class="col-3 mb-3 position-relative">

@@ -223,10 +223,7 @@ namespace figma.Controllers
             return View(PaginatedList<Products>.CreateAsync(Products, pageNumber ?? 1, pageSize));
         }
 
-
-        [Route("Sale")]
-        // name, price, date
-        public async Task<IActionResult> Sale(string sortOrder, string currentFilter, string searchString, int? pageNumber)
+        public async Task<IActionResult> Search(string sortOrder, string currentFilter, string searchString, int? pageNumber)
         {
             ViewData["CurrentSort"] = sortOrder;
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
@@ -269,60 +266,8 @@ namespace figma.Controllers
                     Products = Products.OrderBy(a => a.Name);
                     break;
             }
-            int pageSize = 3;
+            int pageSize = 8;
             return View(PaginatedList<Products>.CreateAsync(Products, pageNumber ?? 1, pageSize));
-
-
-
-            //var category = _unitOfWork.ProductCategoryRepository.GetById(catId);
-            //if (category == null)
-            //{
-            //    return RedirectToActionPermanent("Index");
-            //}
-
-            //var products = _unitOfWork.ProductRepository.GetQuery(a => a.Active && (a.ProductCategoryId == catId || a.ProductCategory.ParentId == catId)).AsNoTracking();
-
-            //if (min.HasValue && min > 0)
-            //{
-            //    products = products.Where(a => a.Price >= min);
-            //}
-            //if (max.HasValue && max > 0)
-            //{
-            //    products = products.Where(a => a.Price <= max);
-            //}
-            //switch (sort)
-            //{
-            //    case "name":
-            //        products = products.OrderBy(a => a.Name);
-            //        break;
-            //    case "price":
-            //        products = products.OrderBy(a => a.Price);
-            //        break;
-            //    case "price-desc":
-            //        products = products.OrderByDescending(a => a.Price);
-            //        break;
-            //    case "sort-desc":
-            //        products = products.OrderByDescending(a => a.Sort);
-            //        break;
-            //    default:
-            //        products = products.OrderByDescending(a => a.Id);
-            //        break;
-            //}
-
-            //var pageNumber = page ?? 1;
-
-            //var model = new ProductCategoryDetailViewModel
-            //{
-            //    ProductCategory = category,
-            //    Products = products.ToPagedList(pageNumber, 24),
-            //    ProductCategories = ProductCategories,
-            //    Sort = sort,
-            //    Min = min,
-            //    Max = max,
-            //    Banners = Banners.Where(a => a.GroupId == 3)
-            //};
-
-
         }
 
 

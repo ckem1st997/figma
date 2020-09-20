@@ -1,48 +1,26 @@
-﻿@model PaginatedList<figma.Models.Products>
+﻿
+@model PaginatedList<figma.Models.Products>
 @{
-    ViewData["Title"] = ViewBag.category.Name;
+    ViewData["Title"] = "Sale";
     Layout = "~/Views/Shared/_Layout.cshtml";
     SlugCovert slugCovert = new SlugCovert();
 }
 
-
-<div class="breadcrumb-shop ">
-    <div class="cpd5">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a asp-action="Index">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Danh mục</a></li>
-                <li class="breadcrumb-item">@ViewBag.category.Name</li>
-                <li class="breadcrumb-item active id_check_idsp d-none" value="@ViewBag.category.ProductCategorieID" aria-current="page"></li>
-            </ol>
-        </nav>
+<form asp-action="Search" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Tìm kiếm theo tên sản phẩm:
+            <br />
+            <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-success" /> |
+        </p>
     </div>
-</div>
-<div class="text-center">
-    <img src="/@ViewBag.category.Image" />
-</div>
-<hr />
-<h2>@ViewBag.category.Name</h2>
-<div class="clearfix filter-box">
-    <div class="browse-tags pull-left">
-        @*<span class="text-white">Sắp xếp theo:</span>
-            <br />*@
-        <span class="custom-dropdown custom-dropdown--white">
-            <select onchange="window.location.href='/collections/@slugCovert.UrlFriendly(ViewBag.category.Name)-@ViewBag.category.ProductCategorieID?sortOrder=' + this.value" class="sort-by custom-dropdown__select custom-dropdown__select--white">
-                <option value="Date">Sản phẩm nổi bật</option>
-                <option value="Price">Giá: Tăng dần</option>
-                <option value="price_desc">Giá: Giảm dần</option>
-                <option value="name">Tên: A-Z</option>
-                <option value="name_desc">Tên: Z-A</option>
-                <option value="Date">Cũ nhất</option>
-                <option value="date_desc">Mới nhất</option>
-                @*<option value="best-selling">Bán chạy nhất</option>*@
-            </select>
-        </span>
+</form>
+<a asp-action="Search" asp-route-sortOrder="@ViewData["NameSortParm"]">Name</a>
+<a asp-action="Search" asp-route-sortOrder="@ViewData["DateSortParm"]">Date</a>
+<a asp-action="Search" asp-route-sortOrder="@ViewData["PriceSortParm"]">Price</a>
 
-    </div>
-</div>
-<hr />
+
 <div class="container">
     <div class="row mt-3" data-wow-duration="2s">
         @{
@@ -131,14 +109,14 @@
         var nextDisabled = !Model.HasNextPage ? "disabled" : "";
     }
     <div class="text-center">
-        <a asp-action="Info"
+        <a asp-action="Search"
            asp-route-sortOrder="@ViewData["CurrentSort"]"
            asp-route-pageNumber="@(Model.PageIndex - 1)"
            asp-route-currentFilter="@ViewData["CurrentFilter"]"
            class="btn btn-success @prevDisabled">
             Previous
         </a>
-        <a asp-action="Info"
+        <a asp-action="Search"
            asp-route-sortOrder="@ViewData["CurrentSort"]"
            asp-route-pageNumber="@(Model.PageIndex + 1)"
            asp-route-currentFilter="@ViewData["CurrentFilter"]"
@@ -147,9 +125,5 @@
         </a>
     </div>
 </div>
-
-
-
-
 
 
