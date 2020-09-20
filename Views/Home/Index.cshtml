@@ -200,7 +200,7 @@
                                                         @{
                                                             if (item.SaleOff > 0)
                                                             {
-                                                                <span class="card-top card-sale">Sale @Math.Ceiling((item.Price / item.SaleOff) * 100 - 100)%</span>
+                                                                <span class="card-top card-sale">Sale @Math.Ceiling(100 - (item.SaleOff / item.Price) * 100)%</span>
                                                             }
                                                             else if (item.Hot)
                                                             {
@@ -384,7 +384,7 @@
                                                         @{
                                                             if (item.SaleOff > 0)
                                                             {
-                                                                <span class="card-top card-sale">Sale @Math.Ceiling((item.Price / item.SaleOff) * 100 - 100)%</span>
+                                                                <span class="card-top card-sale">Sale @Math.Ceiling(100 - (item.SaleOff / item.Price) * 100)%</span>
                                                             }
                                                             else if (item.Hot)
                                                             {
@@ -476,7 +476,7 @@
                                                         @{
                                                             if (item.SaleOff > 0)
                                                             {
-                                                                <span class="card-top card-sale">Sale @Math.Ceiling((item.Price / item.SaleOff) * 100 - 100)%</span>
+                                                                <span class="card-top card-sale">Sale @Math.Ceiling(100 - (item.SaleOff / item.Price) * 100)%</span>
                                                             }
                                                             else if (item.Hot)
                                                             {

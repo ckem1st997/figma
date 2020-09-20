@@ -129,7 +129,7 @@ $(document).ready(function () {
             var id_SP = $(".id_check_idsp").val();
             console.log(id_SP);
             var Price_SP = $(".giaban").html();
-            console.log(Price_SP.slice(0, Price_SP.length-1));
+            console.log(Price_SP.slice(0, Price_SP.length - 1));
             var Count_SP = $("#quantity").val();
             console.log(Count_SP);
             var Color_SP = $("#variant-swatch-0 .select-swap .swatch-element.checked ").attr("data-value");
