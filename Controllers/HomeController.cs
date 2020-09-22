@@ -238,13 +238,12 @@ namespace figma.Controllers
                 searchString = currentFilter;
             }
             ViewData["CurrentFilter"] = searchString;
-
-            var Products = await _unitOfWork.ProductRepository.GetAync(a => a.Active, orderBy: q => q.OrderBy(a => a.Name));
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                //var Products = await _unitOfWork.ProductRepository.GetAync(a => a.Active, orderBy: q => q.OrderBy(a => a.Name));
-                Products = Products.Where(s => s.Name.Contains(searchString));
-            }
+            var Products = await _unitOfWork.ProductRepository.GetAync(a => a.Active && a.Name.Contains(searchString), orderBy: q => q.OrderBy(a => a.Name));
+            //if (!String.IsNullOrEmpty(searchString))
+            //{
+            //    //var Products = await _unitOfWork.ProductRepository.GetAync(a => a.Active, orderBy: q => q.OrderBy(a => a.Name));
+            //    Products = Products);
+            //}
             switch (sortOrder)
             {
                 case "name_desc":

@@ -31,22 +31,14 @@
 <body>
     <!-- Load Facebook SDK for JavaScript -->
 
-    <div>
-        @await Component.InvokeAsync("HeaderList")
-    </div>
-
-    <div>
-        @await Component.InvokeAsync("Phone")
-    </div>
+    @await Component.InvokeAsync("HeaderList")
+    @await Component.InvokeAsync("Phone")
     <div class="container-fluid">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-
-    <div>
-        @await Component.InvokeAsync("FooterList")
-    </div>
+    @await Component.InvokeAsync("FooterList")
 
     <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

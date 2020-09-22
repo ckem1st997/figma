@@ -1,129 +1,142 @@
 ﻿
 @model PaginatedList<figma.Models.Products>
 @{
-    ViewData["Title"] = "Sale";
+    ViewData["Title"] = "Kết quả tìm kiếm '" + ViewData["CurrentFilter"] + "'";
     Layout = "~/Views/Shared/_Layout.cshtml";
     SlugCovert slugCovert = new SlugCovert();
 }
+<h2 class="text-center font-weight-bold">Tìm kiếm</h2>
+@{
+    if (Model.Count > 0)
+    {
+        <div class="text-center">
+            Có @Model.Count sản phẩm cho tìm kiếm
+        </div>
+        <p>Kết quả tìm kiếm cho <strong>"@ViewData["CurrentFilter"]"</strong>.</p>
+        <hr />
+        @*<a asp-action="Search" asp-route-sortOrder="@ViewData["NameSortParm"]">Name</a>
+            <a asp-action="Search" asp-route-sortOrder="@ViewData["DateSortParm"]">Date</a>
+            <a asp-action="Search" asp-route-sortOrder="@ViewData["PriceSortParm"]">Price</a>*@
+        <div class="container">
+            <div class="row mt-3" data-wow-duration="2s">
+                @{
+                    if (Model.Count() > 0)
+                    {
+                        @foreach (var item in Model)
+                        {
+                            string[] arrListStr = item.Image.Split(',');
+                            var name = slugCovert.UrlFriendly(item.Name);
+                            <div class="col-lg-3 col-md-4 col-sm-6 col-6">
+                                <a asp-action="Product" asp-route-proId="@item.ProductID" asp-route-name="@Html.Raw(name)">
+                                    <div class="card-product">
+                                        <div class="product-hover ">
+                                            <img src="/@arrListStr[0]" alt=@item.Name asp-append-version="true" />
+                                            <div class="card-tool w-100">
+                                                <a class="card-tool-btn btn-1">
+                                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                                                    </svg>
+                                                </a>
+                                                <a class="card-tool-btn btn-2">
+                                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bag-dash bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" d="M14 5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5zM1 4v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4H1z" />
+                                                        <path d="M8 1.5A2.5 2.5 0 0 0 5.5 4h-1a3.5 3.5 0 1 1 7 0h-1A2.5 2.5 0 0 0 8 1.5z" />
+                                                        <path fill-rule="evenodd" d="M5.5 10a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z" />
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        @{
+                                            if (item.SaleOff > 0)
+                                            {
+                                                <span class="card-top card-sale">Sale @Math.Ceiling(100 - (item.SaleOff / item.Price) * 100)%</span>
+                                            }
+                                            else if (item.Hot)
+                                            {
+                                                <span class="card-top card-new">NEW</span>
+                                            }
+                                            else if (item.Sort < 5)
+                                            {
+                                                <span class="card-top card-top">TOP</span>
 
-<form asp-action="Search" method="get">
-    <div class="form-actions no-color">
-        <p>
-            Tìm kiếm theo tên sản phẩm:
-            <br />
-            <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
-            <input type="submit" value="Search" class="btn btn-success" /> |
-        </p>
-    </div>
-</form>
-<a asp-action="Search" asp-route-sortOrder="@ViewData["NameSortParm"]">Name</a>
-<a asp-action="Search" asp-route-sortOrder="@ViewData["DateSortParm"]">Date</a>
-<a asp-action="Search" asp-route-sortOrder="@ViewData["PriceSortParm"]">Price</a>
+                                            }
+                                        }
 
-
-<div class="container">
-    <div class="row mt-3" data-wow-duration="2s">
-        @{
-            if (Model.Count() > 0)
-            {
-                @foreach (var item in Model)
-                {
-
-                    string[] arrListStr = item.Image.Split(',');
-                    var name = slugCovert.UrlFriendly(item.Name);
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-6">
-                        <a asp-action="Product" asp-route-proId="@item.ProductID" asp-route-name="@Html.Raw(name)">
-                            <div class="card-product">
-                                <div class="product-hover ">
-                                    <img src="/@arrListStr[0]" alt=@item.Name asp-append-version="true" />
-                                    <div class="card-tool w-100">
-                                        <a class="card-tool-btn btn-1">
-                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                                        <div class="review">
+                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
                                             </svg>
-                                        </a>
-                                        <a class="card-tool-btn btn-2">
-                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bag-dash bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" d="M14 5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5zM1 4v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4H1z" />
-                                                <path d="M8 1.5A2.5 2.5 0 0 0 5.5 4h-1a3.5 3.5 0 1 1 7 0h-1A2.5 2.5 0 0 0 8 1.5z" />
-                                                <path fill-rule="evenodd" d="M5.5 10a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z" />
+                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
                                             </svg>
-                                        </a>
+                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                            </svg>
+                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                            </svg>
+                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                            </svg>
+                                        </div>
+                                        <p class="title-namesp">@item.Name</p>
+                                        @{
+                                            if (item.SaleOff > 0)
+                                            {
+                                                <p class="pricesp">@(item.SaleOff)đ  <del class="text-black-50">@(item.Price)đ</del></p>
+                                            }
+                                            else
+                                            {
+                                                <p class="pricesp">@(item.Price)đ</p>
+
+                                            }
+                                        }
+
                                     </div>
-                                </div>
-                                @{
-                                    if (item.SaleOff > 0)
-                                    {
-                                        <span class="card-top card-sale">Sale @Math.Ceiling(100 - (item.SaleOff / item.Price) * 100)%</span>
-                                    }
-                                    else if (item.Hot)
-                                    {
-                                        <span class="card-top card-new">NEW</span>
-                                    }
-                                    else if (item.Sort < 5)
-                                    {
-                                        <span class="card-top card-top">TOP</span>
-
-                                    }
-                                }
-
-                                <div class="review">
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                    </svg>
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                    </svg>
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                    </svg>
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                    </svg>
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                    </svg>
-                                </div>
-                                <p class="title-namesp">@item.Name</p>
-                                @{
-                                    if (item.SaleOff > 0)
-                                    {
-                                        <p class="pricesp">@(item.SaleOff)đ  <del class="text-black-50">@(item.Price)đ</del></p>
-                                    }
-                                    else
-                                    {
-                                        <p class="pricesp">@(item.Price)đ</p>
-
-                                    }
-                                }
-
+                                </a>
                             </div>
-                        </a>
-                    </div>
+                        }
+                    }
                 }
+            </div>
+            @{
+                var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                var nextDisabled = !Model.HasNextPage ? "disabled" : "";
             }
-        }
-    </div>
-    @{
-        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+            <div class="text-center">
+                <a asp-action="Search"
+                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                   asp-route-pageNumber="@(Model.PageIndex - 1)"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   class="btn btn-success @prevDisabled">
+                    Trước
+                </a>
+                <a asp-action="Search"
+                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                   asp-route-pageNumber="@(Model.PageIndex + 1)"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   class="btn btn-success @nextDisabled">
+                    Sau
+                </a>
+            </div>
+        </div>
     }
-    <div class="text-center">
-        <a asp-action="Search"
-           asp-route-sortOrder="@ViewData["CurrentSort"]"
-           asp-route-pageNumber="@(Model.PageIndex - 1)"
-           asp-route-currentFilter="@ViewData["CurrentFilter"]"
-           class="btn btn-success @prevDisabled">
-            Previous
-        </a>
-        <a asp-action="Search"
-           asp-route-sortOrder="@ViewData["CurrentSort"]"
-           asp-route-pageNumber="@(Model.PageIndex + 1)"
-           asp-route-currentFilter="@ViewData["CurrentFilter"]"
-           class="btn btn-success @nextDisabled">
-            Next
-        </a>
-    </div>
-</div>
-
-
+    else
+    {
+        if (ViewData["CurrentFilter"] != null)
+        {
+            <h2 class="font-weight-bold text-center"> Không tìm thấy nội dung bạn yêu cầu</h2>
+            <p class="text-center"> Không tìm thấy "@ViewData["CurrentFilter"]".Vui lòng kiểm tra chính tả, sử dụng các từ tổng quát hơn và thử lại!</p>
+        }
+        <form asp-action="Search" class="text-center" method="get">
+            <div class="form-actions no-color">
+                <p>
+                    Tìm kiếm theo tên sản phẩm:
+                    <br />
+                    <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" style="height:38px;width:50%" />
+                    <input type="submit" value="Search" class="btn btn-success mb-1" />
+                </p>
+            </div>
+        </form>
+    }
+}

@@ -576,7 +576,7 @@ header #menu-hide .navbar-nav li:hover ul {
   padding: 4px;
 }
 .card-product .card-sale {
-  width: 72px !important;
+  width: 79px !important;
   background-color: #F2122F !important;
   height: 21px;
 }
@@ -1552,6 +1552,7 @@ p span {
   }
   .slick-slide img {
     width: 100%;
+    max-width: 75% !important;
   }
   /*--------------------- Menu Desktop ---------------------*/
   .menu-desktop {
