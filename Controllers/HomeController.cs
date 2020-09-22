@@ -92,7 +92,7 @@ namespace figma.Controllers
 
             var model = new HomeViewModel
             {
-                Products = _unitOfWork.ProductRepository.Get(a => a.Active, q => q.OrderByDescending(a => a.Sort), 12),
+                Products = _unitOfWork.ProductRepository.Get(a => a.Active, q => q.OrderBy(a => a.Sort), 12),
                 //   ItemBoxProductHomes = items,
                 Banners = Banners,
                 //  Articles = _unitOfWork.ArticleRepository.Get(a => a.Active && a.Home, q => q.OrderByDescending(a => a.CreateDate), 3),

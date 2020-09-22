@@ -150,16 +150,27 @@
             <div>
                 <ul class="nav nav-pills mb-3 d-flex justify-content-center" id="pills-tab" role="tablist">
                     <li class="nav-item">
-                        <a class=" active text-header1 text-header wow animate__fadeInUpBig" data-wow-duration="1s" data-wow-delay="0.5s" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Hàng mới về</a>
+                        <a class=" active text-header1 text-header wow animate__fadeInUpBig"
+                           data-wow-duration="1s" data-wow-delay="0.5s" id="pills-home-tab"
+                           data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home"
+                           aria-selected="true">Hàng mới về</a>
                     </li>
                     <li class="nav-item">
-                        <a class="text-header1 text-header wow animate__fadeInUpBig" data-wow-duration="1.3s" data-wow-delay="0.5s" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Xu hướng</a>
+                        <a class="text-header1 text-header wow animate__fadeInUpBig"
+                           data-wow-duration="1.3s" data-wow-delay="0.5s" id="pills-profile-tab"
+                           data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile"
+                           aria-selected="false">Xu hướng</a>
                     </li>
                     <li class="nav-item">
-                        <a class="text-header1 text-header wow animate__fadeInUpBig" data-wow-duration="1.6s" data-wow-delay="0.5s" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Nổi bật</a>
+                        <a class="text-header1 text-header wow animate__fadeInUpBig"
+                           data-wow-duration="1.6s" data-wow-delay="0.5s" id="pills-contact-tab"
+                           data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact"
+                           aria-selected="false">Nổi bật</a>
                     </li>
                     <li class="nav-item">
-                        <a class="text-header1 text-header wow animate__fadeInUpBig" data-wow-duration="1.9s" data-wow-delay="0.5s" id="pills-new-tab" data-toggle="pill" href="#pills-new" role="tab" aria-controls="pills-new" aria-selected="false">Đặc điểm</a>
+                        <a class="text-header1 text-header wow animate__fadeInUpBig"
+                           data-wow-duration="1.9s" data-wow-delay="0.5s" id="pills-new-tab" data-toggle="pill"
+                           href="#pills-new" role="tab" aria-controls="pills-new" aria-selected="false">Đặc điểm</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="pills-tabContent">
@@ -171,7 +182,7 @@
                                     {
                                         double delay = 1;
                                         string delayS = "" + delay + "s";
-                                        @foreach (var item in Model.Products)
+                                        @foreach (var item in Model.Products.OrderByDescending(a => a.CreateDate))
                                         {
                                             string[] arrListStr = item.Image.Split(',');
                                             SlugCovert slugCovert = new SlugCovert();
@@ -260,16 +271,13 @@
                             <div class="row " data-wow-duration="2s">
                                 @{
                                     if (Model.Products.Count() > 0)
-                                    {
-                                        double delay = 1;
-                                        string delayS = "" + delay + "s";
-                                        @foreach (var item in Model.Products)
+                                    {                                      
+                                        @foreach (var item in Model.Products.OrderBy(a=>a.Hot))
                                         {
                                             string[] arrListStr = item.Image.Split(',');
                                             SlugCovert slugCovert = new SlugCovert();
                                             var name = slugCovert.UrlFriendly(item.Name);
-                                            <div class="col-lg-3 col-md-4 col-sm-6 col-6 wow animate__slideInUp"
-                                                 data-wow-duration="@delayS" data-wow-delay="0.5s">
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-6">
                                                 <a asp-action="Product" asp-route-proId="@item.ProductID" asp-route-name="@Html.Raw(name)">
                                                     <div class="card-product">
                                                         <div class="product-hover ">
@@ -338,8 +346,6 @@
                                                     </div>
                                                 </a>
                                             </div>
-                                            delay = delay + 0.3;
-                                            delayS = "" + delay + "s";
                                         }
                                     }
                                 }
@@ -353,15 +359,13 @@
                                 @{
                                     if (Model.Products.Count() > 0)
                                     {
-                                        double delay = 1;
-                                        string delayS = "" + delay + "s";
-                                        @foreach (var item in Model.Products)
+                                        
+                                        @foreach (var item in Model.Products.OrderBy(a=>a.Quantity))
                                         {
                                             string[] arrListStr = item.Image.Split(',');
                                             SlugCovert slugCovert = new SlugCovert();
                                             var name = slugCovert.UrlFriendly(item.Name);
-                                            <div class="col-lg-3 col-md-4 col-sm-6 col-6 wow animate__slideInUp"
-                                                 data-wow-duration="@delayS" data-wow-delay="0.5s">
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-6 ">
                                                 <a asp-action="Product" asp-route-proId="@item.ProductID" asp-route-name="@Html.Raw(name)">
                                                     <div class="card-product">
                                                         <div class="product-hover ">
@@ -430,8 +434,6 @@
                                                     </div>
                                                 </a>
                                             </div>
-                                            delay = delay + 0.3;
-                                            delayS = "" + delay + "s";
                                         }
                                     }
                                 }
@@ -445,15 +447,12 @@
                                 @{
                                     if (Model.Products.Count() > 0)
                                     {
-                                        double delay = 1;
-                                        string delayS = "" + delay + "s";
-                                        @foreach (var item in Model.Products)
+                                        @foreach (var item in Model.Products.OrderBy(a=>a.Price))
                                         {
                                             string[] arrListStr = item.Image.Split(',');
                                             SlugCovert slugCovert = new SlugCovert();
                                             var name = slugCovert.UrlFriendly(item.Name);
-                                            <div class="col-lg-3 col-md-4 col-sm-6 col-6 wow animate__slideInUp"
-                                                 data-wow-duration="@delayS" data-wow-delay="0.5s">
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-6">
                                                 <a asp-action="Product" asp-route-proId="@item.ProductID" asp-route-name="@Html.Raw(name)">
                                                     <div class="card-product">
                                                         <div class="product-hover ">
@@ -522,8 +521,6 @@
                                                     </div>
                                                 </a>
                                             </div>
-                                            delay = delay + 0.3;
-                                            delayS = "" + delay + "s";
                                         }
                                     }
                                 }
