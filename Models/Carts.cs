@@ -30,6 +30,9 @@ namespace figma.Models
         public int Count { get; set; }
 
 
+        public string Size { get; set; }
+        public string Color { get; set; }
+
         [Display(Name = "Ngày tạo")]
         [DataType(DataType.DateTime)]
         public DateTime DateCreated { get; set; }

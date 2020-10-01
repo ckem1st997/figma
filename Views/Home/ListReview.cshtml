@@ -6,12 +6,21 @@
     SlugCovert slugCovert = new SlugCovert();
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<div class="breadcrumb-shop ">
+    <div class="cpd5">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-action="Index">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Blog</a></li>
+            </ol>
+        </nav>
+    </div>
+</div>
 @{
     if (Model != null)
         foreach (var item in Model.ListArticles)
         {
-            <div class="container">
+            <div class="container-fluid">
                 <h3 class="mb-5 text-center">@item.CategoryName</h3>
                 <div class="row">
                     @foreach (var itemlist in Model.Articles)

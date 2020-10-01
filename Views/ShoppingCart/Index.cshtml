@@ -1,0 +1,125 @@
+﻿@model figma.ViewModel.ShoppingCartViewModel
+@{
+    ViewData["Title"] = "Giỏ hàng của bạn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    decimal sumprice = 0;
+}
+
+@if (Model.CartItems != null)
+{
+    <div class="container-fluid">
+        <div class="row">
+            <table class="col-12 col-xl-9">
+                <tr>
+                    <th>
+                        <input class="cb-pay" type="checkbox" />
+                        CHỌN TẤT CẢ (3 SẢN PHẨM)
+
+                    </th>
+                    <th class="price-table">GIÁ</th>
+                    <th class="count-table">SỐ LƯỢNG</th>
+                </tr>
+                @foreach (var item in Model.CartItems)
+                {
+                    if (item.Products.SaleOff > 0)
+                        sumprice = sumprice + item.Products.SaleOff * item.Count;
+                    else
+                        sumprice = sumprice + item.Products.Price * item.Count;
+                    <tr>
+                        <td class="cart-pay-money position-relative">
+                            <input class="cb-pay" type="checkbox" />
+                            <img src="~/image/Rectangle 206.png" />
+                            <div class="d-inline-block list-product">
+                                <div class="cart-name-product">
+                                    @item.Products.Name
+                                </div>
+                                <br />
+                                <div class="cart-code-product">
+                                    @if (item.Color == null && item.Size != null)
+                                    {
+                                        <div> Mã sản phẩm / Nhóm màu / Size: @item.ProductID/ @item.Size</div>
+                                    }
+                                    else if (item.Size == null && item.Color != null)
+                                    {
+                                        <div> Mã sản phẩm / Nhóm màu / Size: @item.ProductID/ @item.Color</div>
+                                    }
+                                    else if (item.Size == null && item.Color == null)
+                                    {
+                                        <div> Mã sản phẩm / Nhóm màu / Size: @item.ProductID</div>
+                                    }
+                                    else
+                                    {
+                                        <div> Mã sản phẩm / Nhóm màu / Size: @item.ProductID/@item.Color/@item.Size</div>
+                                    }
+
+                                </div>
+                            </div>
+                        </td>
+                        <td class="price-pay">
+                            <div class="price-product">
+                                @item.Products.SaleOff đ
+                            </div>
+                            <del class="price-sale-product">
+                                @item.Products.Price đ
+                            </del>
+                            <div class="sale-product">
+                                -@Math.Ceiling(100 - (item.Products.SaleOff / item.Products.Price) * 100)%
+                            </div>
+                        </td>
+                        <td>
+                            <div class="count-text">
+                                <input type="button" value="-" class="qty-btn minus border-0">
+                                <input style="width:12%" class="quantity-selector text-center border-0" type="text" id="quantity" name="quantity" value="@item.Count" min="1">
+                                <input type="button" value="+" class="qty-btn plus border-0">
+                            </div>
+                        </td>
+                    </tr>
+
+                }
+            </table>
+            <div class="col-12 col-xl-3">
+                <div class="adress-menu">
+                    <span>Địa điểm</span>
+                    <br />
+                    <br />
+                    <i class="fas fa-map-marker-alt"></i> &nbsp; Nội, Quận Hà Đông, Phường Vạn Phúc
+                </div>
+                <div class="price-menu mb-3 mt-3">
+                    Thông tin đơn hàng
+                    <div class="mb-2 mt-2 dich">
+                        <div class="text-left">Tạm tính (@Model.CartItems.Count() sản phẩm)</div>
+                        <div class="text-right goctrenphai">@sumprice đ</div>
+                    </div>
+                    <div class="dich">
+                        Phí giao hàng
+                        <div class="text-right goctrenphai mb-3">96.200 đ</div>
+                    </div>
+                </div>
+                <form class="deal-btn-code position-relative">
+                    <div class="">
+                        <label for="inputPassword2" class="sr-only">Mã giảm giá</label>
+                        <input type="password" class="form-control " id="inputPassword2" placeholder="Mã giảm giá">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-pay-product">ÁP DỤNG</button>
+                </form>
+                <div class="price-menu">
+                    <div class="dich mt-3">
+                        Tổng cộng
+                        <div class="price-product text-right goctrenphai">@(sumprice+96200) đ</div>
+
+                    </div>
+                    <div class="mt-3 mb-3 text-right">Đã bao gồm VAT (nếu có)</div>
+                    <button class="btn text-white bg-danger w-100">THANH TOÁN</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <h2>Giỏ hàng của bạn hiện tại đang trống !</h2>
+}
+
+<h3 class="text-center mb-4 mt-4">Sản phẩm vừa xem</h3>
+

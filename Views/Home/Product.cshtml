@@ -396,7 +396,6 @@
                         IEnumerable<string> abc = arrListview.GroupBy(a => a).Select(b => b.Key);
                         foreach (var lt in abc)
                         {
-                            Console.WriteLine(lt);
                             @foreach (var item in Model.ViewProducts.Where(a => a.ProductID.ToString().Equals(lt)))
                             {
                                 string[] arrListStr = item.Image.Split(',');

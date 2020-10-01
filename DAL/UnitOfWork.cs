@@ -14,6 +14,7 @@ namespace figma.DAL
         {
             _context = shopProduct;
         }
+
         private GenericRepository<Admins> _adminRepository;
         private GenericRepository<ArticleCategory> _artcategoryRepository;
         private GenericRepository<Article> _articleRepository;
@@ -61,6 +62,11 @@ namespace figma.DAL
         public async Task Save()
         {
             await _context.SaveChangesAsync();
+        }
+
+        public void SaveNotAync()
+        {
+            _context.SaveChanges();
         }
         private bool _disposed = false;
 

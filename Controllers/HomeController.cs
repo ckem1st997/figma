@@ -107,6 +107,7 @@ namespace figma.Controllers
         [Route("{name}-{proId}.html")]
         public IActionResult Product(int proId = 0)
         {
+            // thêm vào
             HttpContext.Response.Cookies.Append(
                      "viewProducts", "" + HttpContext.Request.Cookies.FirstOrDefault(a => a.Key.Contains("viewProducts")).Value + "," + proId + "",
                      new CookieOptions()
@@ -116,6 +117,7 @@ namespace figma.Controllers
                          // hết hạn sau 1 day
                          Expires = new DateTimeOffset(DateTime.Now.AddDays(1))
                      });
+            //lấy ra
             ViewBag.view = HttpContext.Request.Cookies.FirstOrDefault(a => a.Key.Contains("viewProducts")).Value;
             var product = _unitOfWork.ProductRepository.GetByID(proId);
             if (product == null)
@@ -159,7 +161,7 @@ namespace figma.Controllers
         public async Task<IActionResult> ListReview()
         {
             var ar = await _unitOfWork.ArticleRepository.GetAync();
-            var listAr = await _unitOfWork.ArticleCategoryRepository.GetAync(a => a.CategoryActive && a.ShowHome && a.ShowHome);
+            var listAr = await _unitOfWork.ArticleCategoryRepository.GetAync(a => a.CategoryActive && a.ShowHome && a.ShowHome, records: 30);
             var model = new ReviewViewModel()
             {
                 Articles = ar,
@@ -304,7 +306,8 @@ namespace figma.Controllers
         {
             return View();
         }
-        [Authorize]
+
+
         public IActionResult Privacy()
         {
             return View();
@@ -407,6 +410,13 @@ namespace figma.Controllers
             TempData["tq"] = "Thất bại";
 
             return View(model);
+        }
+
+
+
+        public IActionResult Cart()
+        {
+            return View();
         }
 
         #region Account

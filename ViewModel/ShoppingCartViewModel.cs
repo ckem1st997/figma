@@ -10,7 +10,7 @@ namespace figma.ViewModel
 {
     public class ShoppingCartViewModel
     {
-        public List<Carts> CartItems { get; set; }
+        public IEnumerable<Carts> CartItems { get; set; }
         public decimal CartTotal { get; set; }
     }
 

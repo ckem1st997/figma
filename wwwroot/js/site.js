@@ -123,8 +123,25 @@ $(document).ready(function () {
 
 
     $("#add-to-cart").off("click").click(function () {
-        if ($("#variant-swatch-0 .select-swap .swatch-element.checked").hasClass("checked") != true || $("#variant-swatch-1 .select-swap .swatch-element.checked").hasClass("checked") != true)
-            alert("Xin bạn vui lòng chọn sản phẩm và size yêu thích nha !");
+        if ($("#variant-swatch-0 .select-swap .swatch-element").length || $("#variant-swatch-1 .select-swap .swatch-element").length > 0) {
+            if ($("#variant-swatch-0 .select-swap .swatch-element.checked").hasClass("checked") != true && $("#variant-swatch-1 .select-swap .swatch-element.checked").hasClass("checked") != true)
+                alert("Xin bạn vui lòng chọn sản phẩm và size yêu thích nha !");
+            else {
+                var id_SP = $(".id_check_idsp").val();
+                console.log(id_SP);
+                var Price_SP = $(".giaban").html();
+                console.log(Price_SP.slice(0, Price_SP.length - 1));
+                var Count_SP = $("#quantity").val();
+                console.log(Count_SP);
+                var Color_SP = $("#variant-swatch-0 .select-swap .swatch-element.checked ").attr("data-value");
+                console.log(Color_SP);
+                var Size_SP = $("#variant-swatch-1 .select-swap .swatch-element.checked").attr("data-value");
+                console.log(Size_SP);
+                AddToCartAjax(Count_SP, id_SP, Color_SP, Size_SP);
+
+
+            }
+        }
         else {
             var id_SP = $(".id_check_idsp").val();
             console.log(id_SP);
@@ -133,22 +150,51 @@ $(document).ready(function () {
             var Count_SP = $("#quantity").val();
             console.log(Count_SP);
             var Color_SP = $("#variant-swatch-0 .select-swap .swatch-element.checked ").attr("data-value");
+            if (Color_SP == undefined)
+                Color_SP = ""
             console.log(Color_SP);
             var Size_SP = $("#variant-swatch-1 .select-swap .swatch-element.checked").attr("data-value");
+            if (Size_SP == undefined)
+                Size_SP = ""
             console.log(Size_SP);
-            //var name_SP1 = $("div.product-title h1").html();
-            //var price_SP1 = $("div#price-preview .pro-price").html().replace(',', '').replace('₫', '');
-            //var sl1 = $("#quantity").val();
-            //var image_sp1 = $("#variant-swatch-0 .select-swap .swatch-element.checked .lbSwatch").css("background-image").replace('url("', '').replace('")', '');
-            //var size1 = $("#variant-swatch-1 .select-swap .swatch-element.checked").attr("data-value");
-            //var loai_SP1 = $("#variant-swatch-0 .select-swap .swatch-element.checked").attr("data-value");
-            //Test_Cart(id_SP1, name_SP1, price_SP1, sl1, image_sp1, size1, loai_SP1);
-            //$('#site-overlay').addClass("active");
-            //$('#site-nav--mobile').addClass("active");
+            AddToCartAjax(Count_SP, id_SP, Color_SP, Size_SP);
         }
+
     });
 
 });
+function AddToCart(quantity, productId, color, size) {
+    if (confirm("Bạn có muốn thêm sản phẩm vào giỏ hàng ?")) {
+        $.post("/ShoppingCart/AddToCartAjax", { quantity: quantity, productId: productId, color: color, size: size }, function (data) {
+            if (data.result == 1) {
+                alert("Thêm thành công !")
+            } else {
+                alert("Quá trình thực hiện không thành công. Hãy thử lại");
+            }
+        });
+    }
+}
+
+function AddToCartAjax(sl, id, cl, se) {
+    var params = {
+        type: 'POST',
+        url: '/ShoppingCart/AddToCartAjax',
+        data: { quantity: sl, productId: id, color: cl, size: se },
+        dataType: "json",
+        success: function (res) {
+            console.log(res);
+        },
+
+        error: function (errormessage) {
+            console.log(errormessage)
+        }
+
+
+    };
+    jQuery.ajax(params);
+}
+
+
 
 $(document).ready(function () {
     //$(".regular").slick({
