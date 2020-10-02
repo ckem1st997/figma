@@ -26,7 +26,8 @@ namespace figma.ViewComponents
                 ConfigSites = await _unitOfWork.ConfigSiteRepository.GetAync(),
                 Abouts = await _unitOfWork.AboutRepository.GetAync(),
                 ArticleCategories = await _unitOfWork.ArticleCategoryRepository.GetAync(),
-                ProductCategories = await _unitOfWork.ProductCategoryRepository.GetAync(a => a.Active && a.Home, q => q.OrderBy(a => a.Soft))
+                ProductCategories = await _unitOfWork.ProductCategoryRepository.GetAync(a => a.Active && a.Home, q => q.OrderBy(a => a.Soft)),
+                Carts = await _unitOfWork.CartRepository.GetAync(a => a.CartID != null)
             };
             return View(items);
         }

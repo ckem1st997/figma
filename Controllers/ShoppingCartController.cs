@@ -55,9 +55,8 @@ namespace figma.Controllers
             Console.WriteLine(quantity);
             if (addedProduct == null)
             {
-                return Json(new { result = 0, count = 0, productId, quantity, color, size });
+                return Json(new { result = 0, count = 0 });
             }
-
             if (addedProduct.SaleOff > 0)
             {
                 price = addedProduct.SaleOff;
@@ -66,8 +65,6 @@ namespace figma.Controllers
             {
                 price = addedProduct.Price;
             }
-            //Products product, decimal price, int quantity = 1, string color = null, string size = null)
-
             var cartItem = _unitOfWork.CartRepository.Get(c => c.CartID == GetCartId() && c.ProductID == addedProduct.ProductID && c.Color == color && c.Size == size).SingleOrDefault();
 
             if (cartItem == null)
@@ -83,7 +80,6 @@ namespace figma.Controllers
                     DateCreated = DateTime.Now
                 };
                 _unitOfWork.CartRepository.Insert(cartItem);
-
             }
             else
             {
@@ -110,14 +106,15 @@ namespace figma.Controllers
         //}
         // }
         [HttpPost]
-        public void AddProduct(int sid = 0, int pid = 0, int quantity = 0)
+        [IgnoreAntiforgeryToken]
+        public JsonResult UpdateCart(int RecordID, int quantity)
         {
-            var product = _unitOfWork.ProductRepository.GetByID(pid);
-            if (product == null) return;
-            var cart = _unitOfWork.CartRepository.GetByID(sid);
-            if (cart == null) return;
-            cart.Count = quantity;
+            var CartItem = _unitOfWork.CartRepository.GetByID(RecordID);
+            if (CartItem == null)
+                return Json(new { result = 0 });
+            CartItem.Count = quantity;
             _unitOfWork.SaveNotAync();
+            return Json(new { result = 1 }); ;
         }
         //[HttpPost]
         //public JsonResult RemoveFromCart(int id)
@@ -267,22 +264,4 @@ namespace figma.Controllers
     }
 }
 
-//var claims = HttpContext.User.Claims;
-//if (claims.Any())
-//{
-//    var userName = claims.FirstOrDefault(c => c.Type == "UserName").Value;
-//    if (userName != null)
-//    {
-//        HttpContext.Response.Cookies.Append(CartCookieKey, userName,
-//          new CookieOptions()
-//          {
-//              SameSite = SameSiteMode.Lax,
-//              Secure = true,
-//              // hết hạn sau 1 day
-//              Expires = new DateTimeOffset(DateTime.Now.AddDays(10))
-//          });
-//    }
-//}
-//else
-//{
 

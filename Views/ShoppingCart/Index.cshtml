@@ -28,7 +28,18 @@
                     <tr>
                         <td class="cart-pay-money position-relative">
                             <input class="cb-pay" type="checkbox" />
-                            <img src="~/image/Rectangle 206.png" />
+                            @if (item.Products.Image != null)
+                            {
+                                string[] arrListStr = item.Products.Image.Split(',');
+                                <img alt=@item.Products.Name
+                                     src="~/@arrListStr[0]"
+                                     data-image="@arrListStr[0]"
+                                     asp-append-version="true" width="108" height="107">
+                            }
+                            else
+                            {
+                                <img src="~/image/Rectangle 206.png" />
+                            }
                             <div class="d-inline-block list-product">
                                 <div class="cart-name-product">
                                     @item.Products.Name
@@ -57,10 +68,11 @@
                         </td>
                         <td class="price-pay">
                             <div class="price-product">
-                                @item.Products.SaleOff đ
+                                @* @item.Products.SaleOff.ToString("0,0", CultureInfo.InvariantCulture) đ*@
+                                @item.Products.SaleOff.ToString("0,0", CultureInfo.CreateSpecificCulture("el-GR")) đ
                             </div>
                             <del class="price-sale-product">
-                                @item.Products.Price đ
+                                @item.Products.Price.ToString("0,0", CultureInfo.CreateSpecificCulture("el-GR")) đ
                             </del>
                             <div class="sale-product">
                                 -@Math.Ceiling(100 - (item.Products.SaleOff / item.Products.Price) * 100)%
@@ -68,9 +80,9 @@
                         </td>
                         <td>
                             <div class="count-text">
-                                <input type="button" value="-" class="qty-btn minus border-0">
-                                <input style="width:12%" class="quantity-selector text-center border-0" type="text" id="quantity" name="quantity" value="@item.Count" min="1">
-                                <input type="button" value="+" class="qty-btn plus border-0">
+                                <input type="button" value="-" id="countcart" class="qty-btn minus border-0" data-id=@item.RecordID>
+                                <input style="width:20%" data-id=@item.RecordID class="quantity-selector text-center border-0" type="text" id="quantity" name="quantity" value="@item.Count" min="1">
+                                <input type="button" value="+" id="countcart" class="qty-btn plus border-0" data-id=@item.RecordID>
                             </div>
                         </td>
                     </tr>
@@ -88,7 +100,7 @@
                     Thông tin đơn hàng
                     <div class="mb-2 mt-2 dich">
                         <div class="text-left">Tạm tính (@Model.CartItems.Count() sản phẩm)</div>
-                        <div class="text-right goctrenphai">@sumprice đ</div>
+                        <div class="text-right goctrenphai">@sumprice.ToString("0,0", CultureInfo.CreateSpecificCulture("el-GR")) đ</div>
                     </div>
                     <div class="dich">
                         Phí giao hàng
@@ -106,7 +118,7 @@
                 <div class="price-menu">
                     <div class="dich mt-3">
                         Tổng cộng
-                        <div class="price-product text-right goctrenphai">@(sumprice+96200) đ</div>
+                        <div class="price-product text-right goctrenphai">@((sumprice+96200).ToString("0,0", CultureInfo.CreateSpecificCulture("el-GR"))) đ</div>
 
                     </div>
                     <div class="mt-3 mb-3 text-right">Đã bao gồm VAT (nếu có)</div>
@@ -121,5 +133,7 @@ else
     <h2>Giỏ hàng của bạn hiện tại đang trống !</h2>
 }
 
-<h3 class="text-center mb-4 mt-4">Sản phẩm vừa xem</h3>
+
+@await Component.InvokeAsync("ProductsCookie")
+
 
