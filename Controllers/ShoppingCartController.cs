@@ -93,18 +93,6 @@ namespace figma.Controllers
             };
             return Json(new { data });
         }
-        //catch (Exception)
-        //{
-        //    var data = new
-        //    {
-        //        result = quantity,
-        //        count = productId,
-        //        color = color,
-        //        size = size
-        //    };
-        //    return Json(data);
-        //}
-        // }
         [HttpPost]
         [IgnoreAntiforgeryToken]
         public JsonResult UpdateCart(int RecordID, int quantity)
@@ -116,6 +104,7 @@ namespace figma.Controllers
             _unitOfWork.SaveNotAync();
             return Json(new { result = 1 }); ;
         }
+
         //[HttpPost]
         //public JsonResult RemoveFromCart(int id)
         //{
@@ -155,30 +144,23 @@ namespace figma.Controllers
 
 
         //
-        public int RemoveFromCart(int id, string ShoppingCartId = "")
+        [HttpPost]
+        [IgnoreAntiforgeryToken]
+        public JsonResult RemoveFromCart(int RecordID)
         {
             var cartItem = _unitOfWork.CartRepository.Get(
-                cart => cart.CartID == ShoppingCartId
-                && cart.RecordID == id).SingleOrDefault();
+                cart => cart.CartID == GetCartId()
+                && cart.RecordID == RecordID).SingleOrDefault();
 
             //var itemCount = 0;
 
-            if (cartItem != null)
+            if (cartItem == null)
             {
-                //if (cartItem.Count > 1)
-                //{
-                //    cartItem.Count--;
-                //    itemCount = cartItem.Count;
-                //}
-                //else
-                //{
-                _unitOfWork.CartRepository.Delete(cartItem);
-                //}
-                _unitOfWork.SaveNotAync();
-                return 1;
+                return Json(new { result = 0 }); ;
             }
-            //return itemCount;
-            return 0;
+            _unitOfWork.CartRepository.Delete(cartItem);
+            _unitOfWork.SaveNotAync();
+            return Json(new { result = 1 });
         }
         public void EmptyCart(string ShoppingCartId = "")
         {

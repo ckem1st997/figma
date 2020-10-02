@@ -1,15 +1,10 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
+﻿
 $(".product-gallery__thumb a").click(function (e) {
     e.preventDefault();
     $(".product-thumb").removeClass('checked');
     $(this).parent().addClass('checked');
     $(".product-image-feature").attr("src", $(this).attr("data-image"));
-
     $("div.vegas-slide-inner").attr("style", "background-image:url('" + $(this).attr('data-image') + "'");
-    // alert("url('"+$(this).attr('data-image')+"'");
 
 });
 $(".info .row .col-4").hover(
@@ -162,14 +157,30 @@ $(document).ready(function () {
 
     });
 
-    $("input#quantity").change(function () {
+    $("button#BtnUpdate").click(function () {
+        //  console.log($(this).parent().parent().find(".count-text-class").find("input#quantity").val());
         // alert($(this).attr("data-id"));
-        UpdateToCartAjax($(this).attr("data-id"), $(this).val())
+        if (confirm("Bạn có muốn cập nhật sản phẩm này ?"))
+            UpdateToCart($(this).attr("data-id"), $(this).parent().parent().find(".count-text-class").find("input#quantity").val())
+    });
+    //
+    $("button#BtnDelete").click(function () {
+        if (confirm("Bạn có muốn xóa sản phẩm này ?"))
+            RemoveFromCart($(this).attr("data-id"))
     });
     $("input#countcart").click(function () {
-        //  console.log($(this).attr("data-id"));
-        // console.log($(this).parent().find("input#quantity").val());
         UpdateToCartAjax($(this).attr("data-id"), $(this).parent().find("input#quantity").val())
+    });
+    //
+    $("input#CbPay").click(function () {
+        if (!$(this).hasClass("checked")) {
+            $("input.cb-pay").attr('checked', true);
+            $(this).addClass("checked");
+        }
+        else {
+            $("input.cb-pay").attr('checked', false);
+            $(this).removeClass("checked");
+        }
     });
 });
 function AddToCart(quantity, productId, color, size) {
@@ -218,6 +229,62 @@ function UpdateToCartAjax(id, sl) {
             // console.log(res);
             if (res.result != 1)
                 alert("Chỉnh sửa thất bại, xin bạn vui lòng thử lại nha !");
+        },
+
+        error: function (errormessage) {
+            console.log(errormessage)
+        }
+
+
+    };
+    jQuery.ajax(params);
+}
+
+//RemoveFromCart
+
+function RemoveFromCart(id) {
+    var params = {
+        type: 'POST',
+        url: '/ShoppingCart/RemoveFromCart',
+        data: { RecordID: id },
+        dataType: "json",
+        success: function (res) {
+            console.log(res);
+            if (res.result != 1)
+                alert("Xóa thất bại, xin bạn vui lòng thử lại nha !");
+            else {
+                if (confirm("Xóa thành công"))
+                    window.location.assign('/gio-hang/thong-tin')
+            }
+
+        },
+
+        error: function (errormessage) {
+            console.log(errormessage)
+        }
+
+
+    };
+    jQuery.ajax(params);
+}
+
+
+//
+function UpdateToCart(id, sl) {
+    var params = {
+        type: 'POST',
+        url: '/ShoppingCart/UpdateCart',
+        data: { RecordID: id, quantity: sl },
+        dataType: "json",
+        success: function (res) {
+            console.log(res);
+            if (res.result != 1)
+                alert("Chỉnh sửa thất bại, xin bạn vui lòng thử lại nha !");
+            else {
+                if (confirm("Cập nhật thành công"))
+                    window.location.assign('/gio-hang/thong-tin')
+            }
+
         },
 
         error: function (errormessage) {
