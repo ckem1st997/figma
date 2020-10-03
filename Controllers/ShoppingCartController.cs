@@ -162,15 +162,32 @@ namespace figma.Controllers
             _unitOfWork.SaveNotAync();
             return Json(new { result = 1 });
         }
-        public void EmptyCart(string ShoppingCartId = "")
+
+        [HttpPost]
+        [IgnoreAntiforgeryToken]
+        public JsonResult EmptyCart(string ListRecordID)
         {
-            var cartItems = _unitOfWork.CartRepository.Get(cart => cart.CartID == ShoppingCartId);
+            string[] list = ListRecordID.Split(',');
+            var cartItems = _unitOfWork.CartRepository.Get(cart => cart.CartID == GetCartId());
 
             foreach (var cartItem in cartItems)
             {
-                _unitOfWork.CartRepository.Delete(cartItem);
+                for (int i = 0; i < list.Length; i++)
+                {
+                    try
+                    {
+                        if (cartItem.RecordID == int.Parse(list[i]))
+                            _unitOfWork.CartRepository.Delete(cartItem);
+                    }
+                    catch (Exception)
+                    {
+                        continue;
+                    }
+                }
+
             }
             _unitOfWork.SaveNotAync();
+            return Json(new { result = 1 });
         }
         public IEnumerable<Carts> GetCartItems()
         {

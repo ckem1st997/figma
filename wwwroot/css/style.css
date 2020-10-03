@@ -9,6 +9,10 @@ table {
   border-collapse: collapse;
   width: 100%;
 }
+.can2ben {
+  display: flex;
+  justify-content: space-between;
+}
 th,
 td {
   padding: 8px;
@@ -717,20 +721,9 @@ header #menu-hide .navbar-nav li:hover ul {
 }
 .deal-btn-code .btn-pay-product {
   width: 37%;
-  position: absolute;
-  top: 0;
-  right: 0;
 }
 .deal-btn-code input {
   width: 60%;
-}
-.dich {
-  position: relative;
-}
-.goctrenphai {
-  position: absolute;
-  top: 0;
-  right: 0;
 }
 .price-menu {
   font-family: Roboto;

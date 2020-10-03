@@ -5,16 +5,15 @@
     decimal sumprice = 0;
 }
 
-@if (Model.CartItems != null)
+@if (Model.CartItems.Count() > 0)
 {
-    <div class="container-fluid">
+    <div class="container-fluid mt-5">
         <div class="row">
             <table class="col-12 col-xl-9">
                 <tr>
                     <th>
                         <input class="cb-pay" id="CbPay" type="checkbox" />
                         CHỌN TẤT CẢ (3 SẢN PHẨM)
-
                     </th>
                     <th class="">GIÁ</th>
                     <th class="" style="width:15%">SỐ LƯỢNG</th>
@@ -28,7 +27,7 @@
                         sumprice = sumprice + item.Products.Price * item.Count;
                     <tr>
                         <td class="cart-pay-money d-flex">
-                            <input class="cb-pay mr-2" type="checkbox" />
+                            <input class="cb-pay mr-2" type="checkbox" data-id=@item.RecordID />
                             @if (item.Products.Image != null)
                             {
                                 string[] arrListStr = item.Products.Image.Split(',');
@@ -68,16 +67,25 @@
                             </div>
                         </td>
                         <td class="price-pay">
-                            <div class="price-product">
-                                @* @item.Products.SaleOff.ToString("0,0", CultureInfo.InvariantCulture) đ*@
-                                @item.Products.SaleOff.ToString("0,0", CultureInfo.CreateSpecificCulture("el-GR")) đ
-                            </div>
-                            <del class="price-sale-product">
-                                @item.Products.Price.ToString("0,0", CultureInfo.CreateSpecificCulture("el-GR")) đ
-                            </del>
-                            <div class="sale-product">
-                                -@Math.Ceiling(100 - (item.Products.SaleOff / item.Products.Price) * 100)%
-                            </div>
+                            @if (item.Products.SaleOff > 0)
+                            {
+                                <div class="price-product">
+                                    @item.Products.SaleOff.ToString("0,0", CultureInfo.CreateSpecificCulture("el-GR")) đ
+                                </div>
+                                <del class="price-sale-product">
+                                    @item.Products.Price.ToString("0,0", CultureInfo.CreateSpecificCulture("el-GR")) đ
+                                </del>
+                                <div class="sale-product">
+                                    -@Math.Ceiling(100 - (item.Products.SaleOff / item.Products.Price) * 100)%
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="price-product">
+                                    @item.Products.Price.ToString("0,0", CultureInfo.CreateSpecificCulture("el-GR")) đ
+                                </div>
+                            }
+
                         </td>
                         <td class="count-text-class">
                             <div class="count-text">
@@ -91,7 +99,6 @@
                             <button id="BtnDelete" data-id=@item.RecordID class="btn btn-danger">Xóa</button>
                         </td>
                     </tr>
-
                 }
             </table>
             <div class="col-12 col-xl-3">
@@ -101,33 +108,29 @@
                     <br />
                     <i class="fas fa-map-marker-alt"></i> &nbsp; Nội, Quận Hà Đông, Phường Vạn Phúc
                 </div>
-                <div class="price-menu mb-3 mt-3">
+                <div class="price-menu mb-1 mt-3">
                     Thông tin đơn hàng
-                    <div class="mb-2 mt-2 dich">
-                        <div class="text-left">Tạm tính (@Model.CartItems.Count() sản phẩm)</div>
-                        <div class="text-right goctrenphai">@sumprice.ToString("0,0", CultureInfo.CreateSpecificCulture("el-GR")) đ</div>
+                    <div class="mb-2 mt-2 can2ben">
+                        <div class="">Tạm tính (@Model.CartItems.Count() sản phẩm)</div>
+                        <div class="">@sumprice.ToString("0,0", CultureInfo.CreateSpecificCulture("el-GR")) đ</div>
                     </div>
-                    <div class="dich">
-                        Phí giao hàng
-                        <div class="text-right goctrenphai mb-3">96.200 đ</div>
+                    <div class="can2ben">
+                        <div> Phí giao hàng</div>
+                        <div class="mb-3">96.200 đ</div>
                     </div>
                 </div>
-                <form class="deal-btn-code position-relative">
-                    <div class="">
-                        <label for="inputPassword2" class="sr-only">Mã giảm giá</label>
-                        <input type="password" class="form-control " id="inputPassword2" placeholder="Mã giảm giá">
-                    </div>
-
+                <form class="deal-btn-code can2ben mb-2">
+                    <input type="password" class="form-control " id="inputPassword2" placeholder="Mã giảm giá">
                     <button type="submit" class="btn btn-primary btn-pay-product">ÁP DỤNG</button>
                 </form>
-                <div class="price-menu">
-                    <div class="dich mt-3">
-                        Tổng cộng
-                        <div class="price-product text-right goctrenphai">@((sumprice+96200).ToString("0,0", CultureInfo.CreateSpecificCulture("el-GR"))) đ</div>
-
+                <div class="price-menu mt-1">
+                    <div class="can2ben">
+                        <div>Tổng cộng</div>
+                        <div class="price-product">@((sumprice+96200).ToString("0,0", CultureInfo.CreateSpecificCulture("el-GR"))) đ</div>
                     </div>
-                    <div class="mt-3 mb-3 text-right">Đã bao gồm VAT (nếu có)</div>
+                    <div class="mt-2 mb-3 text-right">Đã bao gồm VAT (nếu có)</div>
                     <button class="btn text-white bg-danger w-100">THANH TOÁN</button>
+                    <button id="BtnEmptyCart" class="btn text-white bg-success w-100 mt-2">Làm trống giỏ hàng</button>
                 </div>
             </div>
         </div>
@@ -135,10 +138,9 @@
 }
 else
 {
-    <h2>Giỏ hàng của bạn hiện tại đang trống !</h2>
+    <h2 class="text-center">Giỏ hàng của bạn hiện tại đang trống !</h2>
+    <hr />
 }
-
-
 @await Component.InvokeAsync("ProductsCookie")
 
 
