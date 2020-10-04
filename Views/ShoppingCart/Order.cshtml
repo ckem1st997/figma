@@ -44,15 +44,15 @@
             </div>
             <div class="form-group">
                 <label asp-for="Order.Body" class="control-label"></label>
-                <select class="form-control" asp-for="Order.Gender">
-                    <option value=1>Nam</option>
-                    <option value=2>Nữ</option>
-                </select>
+                <input type="text" asp-for="Order.Body" class="form-control" />
                 <span asp-validation-for="Order.Body" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Order.Gender" class="control-label"></label>
-                <input asp-for="Order.Gender" class="form-control" />
+                <select class="form-control" asp-for="Order.Gender">
+                    <option value=1>Nam</option>
+                    <option value=2>Nữ</option>
+                </select>
                 <span asp-validation-for="Order.Gender" class="text-danger"></span>
             </div>
 
@@ -64,11 +64,11 @@
                     <label asp-for="Order.Transport" class="control-label"></label>
                 </div>
                 <div class="col-sm-9">
-                    <select class="form-control" asp-for="Transport">
-                        <option value=1>Qua bưu điện</option>
-                        <option value=2>Đến địa chỉ người nhận</option>
-                        <option value=3>Khách đến nhận hàng</option>
-                        <option value=4>Hình thức khác</option>
+                    <select class="form-control" asp-for="Order.Transport">
+                        <option value="1">Qua bưu điện</option>
+                        <option value="2">Đến địa chỉ người nhận</option>
+                        <option value="3">Khách đến nhận hàng</option>
+                        <option value="4">Hình thức khác</option>
                     </select>
                 </div>
             </div>
@@ -82,13 +82,13 @@
             </div>
             <div class="form-group form-row">
                 <div class="col-sm-3">
-                    <label asp-for="TypePay" class="control-label"></label>
+                    <label asp-for="Order.TypePay" class="control-label"></label>
                 </div>
                 <div class="col-sm-9">
-                    <select class="form-control" asp-for="Transport">
-                        <option value=1>Tiền mặt</option>
-                        <option value=2>Chuyển khoản</option>
-                        <option value=3>Hình thức khác</option>
+                    <select class="form-control" asp-for="Order.TypePay">
+                        <option value="1">Tiền mặt</option>
+                        <option value="2">Chuyển khoản</option>
+                        <option value="3">Hình thức khác</option>
                     </select>
                 </div>
             </div>
@@ -103,7 +103,6 @@
         <table class="table">
             @foreach (var item in Model.Carts)
             {
-                //   var price = cart.Count * cart.Price;
                 <tr>
                     <td style="width: 100px;">
                         @if (item.Products.Image != null)

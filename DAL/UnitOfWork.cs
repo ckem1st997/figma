@@ -29,16 +29,16 @@ namespace figma.DAL
         private GenericRepository<ProductCategories> _productcategoryRepository;
         private GenericRepository<Products> _productRepository;
         private GenericRepository<Members> _memberRepository;
-        //  private GenericRepository<Orders> _orderRepository;
-        //  private GenericRepository<OrderDetails> _orderdetailRepository;
+        private GenericRepository<Order> _orderRepository;
+        private GenericRepository<OrderDetail> _orderdetailRepository;
         private GenericRepository<Carts> _cartRepository;
         private GenericRepository<Collection> _collectionRepository;
         private GenericRepository<ProductSizeColor> _productSCRepository;
         private GenericRepository<Size> _sizeRepository;
         private GenericRepository<Color> _colorRepository;
 
-        //  public GenericRepository<Orders> OrderRepository => _orderRepository ?? (_orderRepository = new GenericRepository<Orders>(_context));
-        //  public GenericRepository<OrderDetails> OrderDetailRepository => _orderdetailRepository ?? (_orderdetailRepository = new GenericRepository<OrderDetails>(_context));
+        public GenericRepository<Order> OrderRepository => _orderRepository ?? (_orderRepository = new GenericRepository<Order>(_context));
+        public GenericRepository<OrderDetail> OrderDetailRepository => _orderdetailRepository ?? (_orderdetailRepository = new GenericRepository<OrderDetail>(_context));
         public GenericRepository<Carts> CartRepository => _cartRepository ?? (_cartRepository = new GenericRepository<Carts>(_context));
         public GenericRepository<Members> MemberRepository => _memberRepository ?? (_memberRepository = new GenericRepository<Members>(_context));
         public GenericRepository<Products> ProductRepository => _productRepository ?? (_productRepository = new GenericRepository<Products>(_context));

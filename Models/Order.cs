@@ -13,7 +13,7 @@ namespace figma.Models
         [StringLength(50)]
         public string MaDonHang { get; set; }
         public DateTime CreateDate { get; set; }
-        [Display(Name = "Tình trang thanh toán")]
+        [Display(Name = "Tình trạng thanh toán")]
         public bool Payment { get; set; }
         [Display(Name = "Thanh toán"), UIHint("DisplayTypePay")]
         public int TypePay { get; set; }

@@ -1,0 +1,32 @@
+﻿@using figma.Models
+@{
+    ViewData["Title"] = "Đặt đơn hàng thành công";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="body-wrapper">
+        <div class="header-top-box mb-3">
+            <h1>Đặt hàng thành công</h1>
+            <ol class="breadcrumb bg-white">
+                <li class="breadcrumb-item"><a href="/"><i class="fa fa-home"></i></a></li>
+                <li class="breadcrumb-item active">Giỏ hàng</li>
+            </ol>
+        </div>
+        <div class="alert alert-success" style="max-width: 800px; margin: auto">
+            <p>Cảm ơn quý khách đã mua hàng tại Shop NKH</p>
+            <p>
+                Mã đơn hàng : <strong>@ViewBag.OrderId</strong>
+            </p>
+            <p>Chúng tôi đã gửi email xác nhận đơn hàng tới địa chỉ email của bạn.</p>
+            <p>
+                Nhân viên chăm sóc khách hàng của <strong>Shop NKH</strong> sẽ gọi điện xác minh lại đơn hàng của bạn sau khi nhận được đơn đặt hàng.
+            </p>
+            <p>Có nhiều phương thức thanh toán để bạn lựa chọn (trả tiền khi giao hàng, thanh toán bẳng thẻ tín dụng hoặc ATM, chuyển khoản qua ngân hàng)</p>
+            <p>
+                @*Để được hỗ trợ thêm vui lòng liên hệ Hotline <strong>configsite.Hotline</strong> hoặc Email <a href="mailto:@configsite.Email">configsite.Email</a>*@
+            </p>
+        </div>
+    </div>
+</div>
+

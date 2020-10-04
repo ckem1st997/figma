@@ -71,7 +71,6 @@ namespace figma.Data
             modelBuilder.Entity<TagProducts>().HasOne(pt => pt.Products).WithMany(p => p.TagProducts).HasForeignKey(pt => pt.ProductID).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<Products>().HasKey(h => h.ProductID);
             modelBuilder.Entity<Order>().HasKey(h => h.Id);
-
             modelBuilder.Entity<OrderDetail>().HasKey(t => new { t.OrderId, t.ProductId });
             modelBuilder.Entity<OrderDetail>().HasOne(pt => pt.Order).WithMany(p => p.OrderDetails).HasForeignKey(pt => pt.OrderId).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<OrderDetail>().HasOne(pt => pt.Product).WithMany(p => p.OrderDetails).HasForeignKey(pt => pt.ProductId).IsRequired(true).OnDelete(DeleteBehavior.Cascade);

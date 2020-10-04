@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using figma.DAL;
@@ -59,7 +60,7 @@ namespace figma.Controllers
             }
             return View(viewModel);
         }
-
+        [Route("thanh-toan")]
         public IActionResult Order()
         {
             if (!GetCartItems().Any())
@@ -74,6 +75,140 @@ namespace figma.Controllers
             };
             return View(model);
         }
+        [Route("thanh-toan")]
+        [HttpPost, ValidateAntiForgeryToken]
+        public IActionResult Order(CheckOutViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                //lấy ra danh sách đơn hàng
+                var item = GetCartItems();
+                // ngày giao hàng
+                model.Order.TransportDate = DateTime.TryParse(model.Order.TransportDate.ToString(), new CultureInfo("Vi"), DateTimeStyles.None, out var tDate) ? tDate : DateTime.Now;
+                _unitOfWork.OrderRepository.Insert(model.Order);
+                _unitOfWork.SaveNotAync();
+
+                model.Order.MaDonHang = DateTime.Now.ToString("yyyyMMddHHmm") + "C" + model.Order.Id;
+                foreach (var odetails in from cart1 in item
+                                         let product = _unitOfWork.ProductRepository.GetByID(cart1.ProductID)
+                                         select new OrderDetail
+                                         {
+                                             OrderId = model.Order.Id,
+                                             ProductId = product.ProductID,
+                                             Quantity = cart1.Count,
+                                             Price = cart1.Price
+                                         })
+                {
+                    _unitOfWork.OrderDetailRepository.Insert(odetails);
+                }
+                _unitOfWork.SaveNotAync();
+
+                //var typepay = "Thanh toán khi nhận hàng";
+                //switch (model.TypePay)
+                //{
+                //    case 1:
+                //        typepay = "Tiền mặt";
+                //        break;
+                //    case 2:
+                //        typepay = "Chuyển khoản";
+                //        break;
+                //    case 3:
+                //        typepay = "Hình thức khác";
+                //        break;
+                //}
+
+                //var giaohang = "Đến địa chỉ người nhận";
+                //switch (model.Transport)
+                //{
+                //    case 3:
+                //        giaohang = "Khách đến nhận hàng";
+                //        break;
+                //    case 1:
+                //        giaohang = "Qua bưu điện";
+                //        break;
+                //    case 4:
+                //        giaohang = "Hình thức khác";
+                //        break;
+                //}
+                //var tongtien = 0m;
+                //var sb = "<p style='font-size:16px'>Thông tin đơn hàng gửi từ website " + Request.Host.Value + "</p>";
+                //sb += "<p>Mã đơn hàng: <strong>" + model.Order.MaDonHang + "</strong></p>";
+                //sb += "<p>Họ và tên: <strong>" + model.Order.Fullname + "</strong></p>";
+                //sb += "<p>Địa chỉ: <strong>" + model.Order.Address + "</strong></p>";
+                //sb += "<p>Email: <strong>" + model.Order.Email + "</strong></p>";
+                //sb += "<p>Điện thoại: <strong>" + model.Order.Mobile + "</strong></p>";
+                //sb += "<p>Yêu cầu thêm: <strong>" + model.Order.Body + "</strong></p>";
+                //sb += "<p>Ngày đặt hàng: <strong>" + model.Order.CreateDate.ToString("dd-MM-yyyy HH:ss") + "</strong></p>";
+                //sb += "<p>Ngày giao hàng: <strong>" + model.Order.TransportDate.ToString("dd-MM-yyyy") + "</strong></p>";
+                //sb += "<p>Hình thức giao hàng: <strong>" + giaohang + "</strong></p>";
+                //sb += "<p>Hình thức thanh toán: <strong>" + typepay + "</strong></p>";
+                //sb += "<p>Thông tin đơn hàng</p>";
+                //sb += "<table border='1' cellpadding='10' style='border:1px #ccc solid;border-collapse: collapse'>" +
+                //      "<tr>" +
+                //      "<th>Ảnh sản phẩm</th>" +
+                //      "<th>Tên sản phẩm</th>" +
+                //      "<th>Số lượng</th>" +
+                //      "<th>Giá tiền</th>" +
+                //      "<th>Thành tiền</th>" +
+                //      "</tr>";
+                //foreach (var odetails in model.Order.OrderDetails)
+                //{
+                //    var thanhtien = Convert.ToDecimal(odetails.Price * odetails.Quantity);
+                //    tongtien += thanhtien;
+
+                //    var img = "NO PICTURE";
+                //    if (odetails.Product.Image != null)
+                //    {
+                //        img = "<img src='https://" + Request.Host.Value + "/images/products/" + odetails.Product.Image.Split(',')[0] + "?w=100' />";
+                //    }
+                //    sb += "<tr>" +
+                //          "<td>" + img + "</td>" +
+                //          "<td>" + odetails.Product.Name;
+
+                //    sb += "</td>" +
+                //          "<td style='text-align:center'>" + odetails.Quantity + "</td>" +
+                //          "<td style='text-align:center'>" + Convert.ToDecimal(odetails.Price).ToString("N0") + "</td>" +
+                //          "<td style='text-align:center'>" + thanhtien.ToString("N0") + " đ</td>" +
+                //          "</tr>";
+                //}
+
+                //sb += "<tr><td colspan='5' style='text-align:right'><strong>Tổng tiền: " + tongtien.ToString("N0") + " đ</strong></td></tr>";
+                //sb += "</table>";
+                //sb += "<p>Cảm ơn bạn đã tin tưởng và mua hàng của chúng tôi.</p>";
+
+                //Task.Run(() => HtmlHelpers.SendEmail("gmail", "[" + model.Order.MaDonHang + "] Đơn đặt hàng từ website RÈM NAM AN", sb, "sales.noithatnaman@gmail.com", Email, Email, Password, "Đặt Hàng Online", model.Order.CustomerInfo.Email, "sales.noithatnaman@gmail.com"));
+                //   Console.WriteLine(sb);
+                return RedirectToAction("CheckOutComplete", new { orderId = model.Order.MaDonHang });
+            }
+            return View(model);
+        }
+
+
+        [Route("thanh-toan-thanh-cong")]
+        public ActionResult CheckOutComplete(string orderId)
+        {
+            EmptyCart();
+            ViewBag.OrderId = orderId;
+            return View();
+        }
+
+
+        public void EmptyCart()
+        {
+            var cartItems = _unitOfWork.CartRepository.Get(cart => cart.CartID == GetCartId());
+
+            foreach (var cartItem in cartItems)
+            {
+                _unitOfWork.CartRepository.Delete(cartItem);
+            }
+            _unitOfWork.SaveNotAync();
+        }
+
+
+
+
+
+
 
 
         #region CartRes
@@ -83,7 +218,6 @@ namespace figma.Controllers
         {
             decimal price = 0;
             var addedProduct = _unitOfWork.ProductRepository.Get(a => a.ProductID == productId).SingleOrDefault();
-            Console.WriteLine(quantity);
             if (addedProduct == null)
             {
                 return Json(new { result = 0, count = 0 });

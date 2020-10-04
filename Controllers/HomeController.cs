@@ -17,6 +17,8 @@ using figma.DAL;
 using Microsoft.Extensions.Caching.Memory;
 using figma.ViewModel;
 using figma.OutFile;
+using Microsoft.Extensions.Caching.Distributed;
+using System.Text;
 
 namespace figma.Controllers
 {
@@ -31,9 +33,11 @@ namespace figma.Controllers
         private readonly UnitOfWork _unitOfWork;
 
         private IMemoryCache _iMemoryCache;
-        public HomeController(UnitOfWork unitOfWork, IMemoryCache inMemoryCache)
+        private readonly IDistributedCache _cache;
+        public HomeController(UnitOfWork unitOfWork, IDistributedCache inMemoryCache, IMemoryCache memoryCache)
         {
-            _iMemoryCache = inMemoryCache;
+            _iMemoryCache = memoryCache;
+            _cache = inMemoryCache;
             _unitOfWork = unitOfWork;
         }
         private IEnumerable<Banners> Banners => _unitOfWork.BannerRepository.Get(a => a.Active, q => q.OrderBy(a => a.Soft));
@@ -70,6 +74,13 @@ namespace figma.Controllers
         //
         public IActionResult Index()
         {
+            var currentTimeUTC = DateTime.UtcNow.ToString();
+            byte[] encodedCurrentTimeUTC = Encoding.UTF8.GetBytes(currentTimeUTC);
+            var options = new DistributedCacheEntryOptions()
+                .SetSlidingExpiration(TimeSpan.FromSeconds(20));
+            _cache.Set("cachedTimeUTC", encodedCurrentTimeUTC, options);
+            Console.WriteLine(_cache.Get("cachedTimeUTC").ToString());
+
             var model = new HomeViewModel
             {
                 Products = _unitOfWork.ProductRepository.Get(a => a.Active, q => q.OrderBy(a => a.Sort), 12),
