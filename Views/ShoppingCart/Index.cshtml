@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Giỏ hàng của bạn";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    decimal sumprice = 0;
+    //  decimal sumprice = 0;
 }
 
 @if (Model.CartItems.Count() > 0)
@@ -21,10 +21,10 @@
                 </tr>
                 @foreach (var item in Model.CartItems)
                 {
-                    if (item.Products.SaleOff > 0)
-                        sumprice = sumprice + item.Products.SaleOff * item.Count;
-                    else
-                        sumprice = sumprice + item.Products.Price * item.Count;
+                    //if (item.Products.SaleOff > 0)
+                    //    sumprice = sumprice + item.Products.SaleOff * item.Count;
+                    //else
+                    //    sumprice = sumprice + item.Products.Price * item.Count;
                     <tr>
                         <td class="cart-pay-money d-flex">
                             <input class="cb-pay mr-2" type="checkbox" data-id=@item.RecordID />
@@ -112,11 +112,18 @@
                     Thông tin đơn hàng
                     <div class="mb-2 mt-2 can2ben">
                         <div class="">Tạm tính (@Model.CartItems.Count() sản phẩm)</div>
-                        <div class="">@sumprice.ToString("0,0", CultureInfo.CreateSpecificCulture("el-GR")) đ</div>
+                        <div class="">@Model.CartTotal.ToString("0,0", CultureInfo.CreateSpecificCulture("el-GR")) đ</div>
                     </div>
                     <div class="can2ben">
                         <div> Phí giao hàng</div>
-                        <div class="mb-3">96.200 đ</div>
+                        @if (Model.CartTotal < 1000000)
+                        {
+                            <div class="mb-3">30.000 đ</div>
+                        }
+                        else
+                        {
+                            <div class="mb-3">0 đ</div>
+                        }
                     </div>
                 </div>
                 <form class="deal-btn-code can2ben mb-2">
@@ -126,7 +133,7 @@
                 <div class="price-menu mt-1">
                     <div class="can2ben">
                         <div>Tổng cộng</div>
-                        <div class="price-product">@((sumprice+96200).ToString("0,0", CultureInfo.CreateSpecificCulture("el-GR"))) đ</div>
+                        <div class="price-product">@(Model.CartTotal.ToString("0,0", CultureInfo.CreateSpecificCulture("el-GR"))) đ</div>
                     </div>
                     <div class="mt-2 mb-3 text-right">Đã bao gồm VAT (nếu có)</div>
                     <button class="btn text-white bg-danger w-100">THANH TOÁN</button>

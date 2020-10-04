@@ -40,7 +40,7 @@ namespace figma.Controllers
             var viewModel = new ShoppingCartViewModel
             {
                 CartItems = GetCartItems(),
-                CartTotal = GetTotal()
+                CartTotal = GetTotal() < 1000000 ? (GetTotal() + 30000) : GetTotal()
             };
             ViewBag.ReturnUrl = returnUrl;
             return View(viewModel);
@@ -105,44 +105,6 @@ namespace figma.Controllers
             return Json(new { result = 1 }); ;
         }
 
-        //[HttpPost]
-        //public JsonResult RemoveFromCart(int id)
-        //{
-        //    // Remove the item from the cart
-        //    var cart = ShoppingCart.GetCart(HttpContext);
-
-        //    // Get the name of the album to display confirmation
-        //    var productName = _unitOfWork.CartRepository.GetById(id).Product.Name;
-
-        //    // Remove from cart
-        //    var itemCount = cart.RemoveFromCart(id);
-
-        //    // Display the confirmation message
-        //    var results = new ShoppingCartRemoveViewModel
-        //    {
-        //        Message = productName + " đã được xóa khỏi giỏ hàng của bạn.",
-        //        CartTotal = cart.GetTotal(),
-        //        CartCount = cart.GetCount(),
-        //        Status = itemCount,
-        //        DeleteId = id
-        //    };
-        //    return Json(results);
-        //}
-        //public PartialViewResult CartSummary()
-        //{
-        //    var cart = ShoppingCart.GetCart(HttpContext);
-        //    var model = new CartSummaryViewModel
-        //    {
-        //        Carts = cart.GetCartItems(),
-        //        Count = cart.GetCount(),
-        //        TotalMoney = cart.GetTotal()
-        //    };
-        //    return PartialView("CartSummary", model);
-        //}
-
-
-
-
         //
         [HttpPost]
         [IgnoreAntiforgeryToken]
@@ -151,8 +113,6 @@ namespace figma.Controllers
             var cartItem = _unitOfWork.CartRepository.Get(
                 cart => cart.CartID == GetCartId()
                 && cart.RecordID == RecordID).SingleOrDefault();
-
-            //var itemCount = 0;
 
             if (cartItem == null)
             {
