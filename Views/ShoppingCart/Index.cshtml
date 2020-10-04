@@ -106,7 +106,15 @@
                     <span>Địa điểm</span>
                     <br />
                     <br />
-                    <i class="fas fa-map-marker-alt"></i> &nbsp; Nội, Quận Hà Đông, Phường Vạn Phúc
+                    <i class="fas fa-map-marker-alt"></i> &nbsp;
+                    @if (ViewBag.address != null)
+                    {
+                        <label>@ViewBag.address.Address</label>
+                    }
+                    else
+                    {
+                        <label>Mời bạn vào mục thanh toán để nhập địa chỉ nha, xin cảm ơn !</label>
+                    }
                 </div>
                 <div class="price-menu mb-1 mt-3">
                     Thông tin đơn hàng
@@ -136,7 +144,7 @@
                         <div class="price-product">@(Model.CartTotal.ToString("0,0", CultureInfo.CreateSpecificCulture("el-GR"))) đ</div>
                     </div>
                     <div class="mt-2 mb-3 text-right">Đã bao gồm VAT (nếu có)</div>
-                    <button class="btn text-white bg-danger w-100">THANH TOÁN</button>
+                    <a asp-action="Order" class="btn text-white bg-danger w-100">THANH TOÁN</a>
                     <button id="BtnEmptyCart" class="btn text-white bg-success w-100 mt-2">Làm trống giỏ hàng</button>
                 </div>
             </div>
@@ -148,6 +156,7 @@ else
     <h2 class="text-center">Giỏ hàng của bạn hiện tại đang trống !</h2>
     <hr />
 }
+<hr />
 @await Component.InvokeAsync("ProductsCookie")
 
 

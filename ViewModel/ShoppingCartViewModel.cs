@@ -35,7 +35,7 @@ namespace figma.ViewModel
         public SelectList SelectTransport { get; set; }
         public SelectList SelectTypePay { get; set; }
         public SelectList SelectGender { get; set; }
-        public List<Carts> Carts { get; set; }
+        public IEnumerable<Carts> Carts { get; set; }
 
         public CheckOutViewModel()
         {

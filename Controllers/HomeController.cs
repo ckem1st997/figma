@@ -70,33 +70,10 @@ namespace figma.Controllers
         //
         public IActionResult Index()
         {
-            //HttpContext.Response.Cookies.Append(
-            //         "cardId",Guid.NewGuid().ToString(),
-            //         new CookieOptions() { SameSite = SameSiteMode.Lax });
-            //  HttpContext.Response.Cookies.Delete("name");
-            //foreach (var item in HttpContext.Request.Cookies.Where(a => a.Key == "name"))
-            //{
-            //    Console.WriteLine(item);
-            //}
-
-
-            //  GetAttribute(typeof(HomeController));
-            //var proCategories = _unitOfWork.ProductCategoryRepository.Get(a => a.Active && a.Home && a.ParentId == null, q => q.OrderByDescending(a => a.Soft));
-
-            //  ViewBag.tt = _unitOfWork.ConfigSiteRepository.Get(null, null, 1);
-            //var items = proCategories.Select(category => new HomeViewModel.ItemBoxProductHome
-            //{
-            //    ProductCategory = category,
-            //    Products = _unitOfWork.ProductRepository.Get(a => a.Active && a.Home && (a.ProductCategorieID == category.ProductCategorieID || a.ProductCategories.ParentId == category.ProductCategorieID), q => q.OrderByDescending(a => a.Sort), 8)
-            //}).ToList();
-
             var model = new HomeViewModel
             {
                 Products = _unitOfWork.ProductRepository.Get(a => a.Active, q => q.OrderBy(a => a.Sort), 12),
-                //   ItemBoxProductHomes = items,
                 Banners = Banners,
-                //  Articles = _unitOfWork.ArticleRepository.Get(a => a.Active && a.Home, q => q.OrderByDescending(a => a.CreateDate), 3),
-                //  Albums = _unitOfWork.AlbumRepository.Get(a => a.Active, q => q.OrderByDescending(a => a.AlbumID), 4),
                 ConfigSites = ConfigSites
             };
             return View(model);
@@ -107,17 +84,14 @@ namespace figma.Controllers
         [Route("{name}-{proId}.html")]
         public IActionResult Product(int proId = 0)
         {
-            // thêm vào
             HttpContext.Response.Cookies.Append(
                      "viewProducts", "" + HttpContext.Request.Cookies.FirstOrDefault(a => a.Key.Contains("viewProducts")).Value + "," + proId + "",
                      new CookieOptions()
                      {
                          SameSite = SameSiteMode.Lax,
                          Secure = true,
-                         // hết hạn sau 1 day
                          Expires = new DateTimeOffset(DateTime.Now.AddDays(1))
                      });
-            //lấy ra
             ViewBag.view = HttpContext.Request.Cookies.FirstOrDefault(a => a.Key.Contains("viewProducts")).Value;
             var product = _unitOfWork.ProductRepository.GetByID(proId);
             if (product == null)
@@ -153,7 +127,6 @@ namespace figma.Controllers
                 Article = ar,
                 Articles = listAr
             };
-
             return View(model);
         }
 
@@ -279,11 +252,10 @@ namespace figma.Controllers
             return View();
         }
 
-
+        #region Account
         [Authorize]
         public IActionResult Account()
         {
-
             var claims = HttpContext.User.Claims;
             var userName = claims.FirstOrDefault(c => c.Type == "UserName").Value;
             var userId = claims.FirstOrDefault(c => c.Type == "UserId").Value;
@@ -306,13 +278,6 @@ namespace figma.Controllers
         {
             return View();
         }
-
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-        //
 
 
         [AllowAnonymous]
@@ -412,14 +377,6 @@ namespace figma.Controllers
             return View(model);
         }
 
-
-
-        public IActionResult Cart()
-        {
-            return View();
-        }
-
-        #region Account
         public class RegisterViewModel
         {
             [Required(ErrorMessage = "Bạn chưa nhập thông tin"), Display(Name = "Họ và tên"), MaxLength(50, ErrorMessage = "Họ và tên phải ít hơn 20 kí tự"), MinLength(5, ErrorMessage = "Họ và tên phải nhiều hơn 4 kí tự")]
@@ -451,7 +408,6 @@ namespace figma.Controllers
             public bool Remember { get; set; }
         }
         #endregion
-
 
         protected override void Dispose(bool disposing)
         {

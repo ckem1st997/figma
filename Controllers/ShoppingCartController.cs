@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using figma.DAL;
 using figma.Models;
 using figma.ViewModel;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,7 +14,6 @@ namespace figma.Controllers
     public class ShoppingCartController : Controller
     {
         private readonly UnitOfWork _unitOfWork;
-
         private readonly IHttpContextAccessor _httpContextAccessor;
         private const string CartCookieKey = "CartID";
 
@@ -28,24 +28,55 @@ namespace figma.Controllers
                  {
                      SameSite = SameSiteMode.Lax,
                      Secure = true,
-                     // hết hạn sau 1 day
                      Expires = new DateTimeOffset(DateTime.Now.AddDays(1))
                  });
             }
         }
 
         [Route("gio-hang/thong-tin")]
-        public IActionResult Index(string returnUrl)
+        public IActionResult Index()
         {
             var viewModel = new ShoppingCartViewModel
             {
                 CartItems = GetCartItems(),
                 CartTotal = GetTotal() < 1000000 ? (GetTotal() + 30000) : GetTotal()
             };
-            ViewBag.ReturnUrl = returnUrl;
+
+            if (HttpContext.Request.Cookies[".AspNetCore.Cookies"] != null)
+            {
+                var userId = HttpContext.User.Claims.FirstOrDefault(c => c.Type == "UserId").Value;
+                if (userId != null)
+                {
+                    try
+                    {
+                        ViewBag.address = _unitOfWork.MemberRepository.GetByID(int.Parse(userId));
+                    }
+                    catch (Exception)
+                    {
+                        ViewBag.address = null;
+                    }
+                }
+            }
             return View(viewModel);
         }
 
+        public IActionResult Order()
+        {
+            if (!GetCartItems().Any())
+            {
+                return RedirectToAction("Index");
+            }
+            var model = new CheckOutViewModel
+            {
+                Order = new Order(),
+                Carts = GetCartItems(),
+                CartTotal = GetTotal() < 1000000 ? (GetTotal() + 30000) : GetTotal()
+            };
+            return View(model);
+        }
+
+
+        #region CartRes
         [HttpPost]
         [IgnoreAntiforgeryToken]
         public JsonResult AddToCartAjax(int quantity, int productId, string color, string size)
@@ -144,7 +175,6 @@ namespace figma.Controllers
                         continue;
                     }
                 }
-
             }
             _unitOfWork.SaveNotAync();
             return Json(new { result = 1 });
@@ -196,7 +226,6 @@ namespace figma.Controllers
                  {
                      SameSite = SameSiteMode.Lax,
                      Secure = true,
-                     // hết hạn sau 1 day
                      Expires = new DateTimeOffset(DateTime.Now.AddDays(1))
                  });
             }
@@ -213,7 +242,7 @@ namespace figma.Controllers
             }
             _unitOfWork.SaveNotAync();
         }
-
+        #endregion
 
         protected override void Dispose(bool disposing)
         {

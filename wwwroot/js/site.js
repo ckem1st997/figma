@@ -33,6 +33,7 @@ document.addEventListener(
     }
 );
 $(document).ready(function () {
+    $(".datepicker").datepicker();
     $("#exampleModal5").modal('show');
     if (!$("div.carousel-inner div").hasClass("carousel-item")) {
         $("#carouselExampleIndicators").hide();
@@ -148,12 +149,12 @@ $(document).ready(function () {
 
     });
 
-    $("button#BtnUpdate").click(function () {
+    $("#BtnUpdate").click(function () {
         if (confirm("Bạn có muốn cập nhật sản phẩm này ?"))
             UpdateToCart($(this).attr("data-id"), $(this).parent().parent().find(".count-text-class").find("input#quantity").val())
     });
     //
-    $("button#BtnDelete").click(function () {
+    $("#BtnDelete").click(function () {
         if (confirm("Bạn có muốn xóa sản phẩm này ?"))
             RemoveFromCart($(this).attr("data-id"))
     });
@@ -161,16 +162,16 @@ $(document).ready(function () {
         UpdateToCartAjax($(this).attr("data-id"), $(this).parent().find("input#quantity").val())
     });
     //
-    $("button#BtnEmptyCart").hide();
+    $("#BtnEmptyCart").hide();
     //
     $("input#CbPay").click(function () {
         if (!$(this).hasClass("checked")) {
             $("input.cb-pay").attr('checked', true);
-            $("button#BtnEmptyCart").show("slow");
+            $("#BtnEmptyCart").show("slow");
         }
         else {
             $("input.cb-pay").attr('checked', false);
-            $("button#BtnEmptyCart").hide();
+            $("#BtnEmptyCart").hide();
         }
         $(this).toggleClass("checked");
         $("input.cb-pay").toggleClass("tbchecked");
@@ -178,17 +179,17 @@ $(document).ready(function () {
     });
     //
 
-    $("button#BtnEmptyCart").click(function () {
-        EmptyCart($("button#BtnEmptyCart").attr("data-id"))
+    $("#BtnEmptyCart").click(function () {
+        EmptyCart($("#BtnEmptyCart").attr("data-id"))
     });
     //
     var countChecked = function () {
         $(this).toggleClass("tbchecked");
         var n = $("input.cb-pay.mr-2:checked").length;
         if (n == 0)
-            $("button#BtnEmptyCart").hide();
+            $("#BtnEmptyCart").hide();
         else if (n > 0)
-            $("button#BtnEmptyCart").show("slow");
+            $("#BtnEmptyCart").show("slow");
         GetAllCheckBox();
     };
     countChecked();
@@ -203,7 +204,7 @@ function GetAllCheckBox() {
             listcb = listcb + "," + $(this).attr("data-id");
         }
     });
-    $("button#BtnEmptyCart").attr("data-id", listcb);
+    $("#BtnEmptyCart").attr("data-id", listcb);
 }
 
 //
@@ -218,7 +219,6 @@ function AddToCart(quantity, productId, color, size) {
         });
     }
 }
-//
 
 function EmptyCart(id) {
     var params = {

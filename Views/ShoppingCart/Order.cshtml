@@ -1,0 +1,162 @@
+﻿@model figma.ViewModel.CheckOutViewModel
+
+@{
+    ViewData["Title"] = "Thanh toán giỏ hàng của bạn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="header-top-box can2ben">
+    <h1>Thông tin thanh toán</h1>
+    <ol class="breadcrumb" style="background-color:white">
+        <li class="breadcrumb-item"><a href="/"><i class="fa fa-home"></i></a></li>
+        <li class="breadcrumb-item active">Giỏ hàng</li>
+    </ol>
+</div>
+<hr />
+<div class="row">
+    <div class="col-12 col-md-6">
+        <p class="alert alert-info">
+            <i class="fa fa-info-circle"></i> Quý khách vui lòng điền đày đủ thông tin và chính xác ( số nhà , ngõ phố , thôn , xóm...) để bưu tá phát hàng sớm nhất có thể.
+        </p>
+        <p style="border-bottom: 1px #eee solid; padding-bottom: 8px; font-weight: 700; font-size: 15px">Địa chỉ nhận hàng</p>
+        <form asp-action="Order">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Order.Fullname" class="control-label"></label>
+                <input asp-for="Order.Fullname" class="form-control" />
+                <span asp-validation-for="Order.Fullname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order.Address" class="control-label"></label>
+                <input asp-for="Order.Address" class="form-control" />
+                <span asp-validation-for="Order.Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order.Mobile" class="control-label"></label>
+                <input asp-for="Order.Mobile" class="form-control" />
+                <span asp-validation-for="Order.Mobile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order.Email" class="control-label"></label>
+                <input asp-for="Order.Email" class="form-control" />
+                <span asp-validation-for="Order.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order.Body" class="control-label"></label>
+                <select class="form-control" asp-for="Order.Gender">
+                    <option value=1>Nam</option>
+                    <option value=2>Nữ</option>
+                </select>
+                <span asp-validation-for="Order.Body" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order.Gender" class="control-label"></label>
+                <input asp-for="Order.Gender" class="form-control" />
+                <span asp-validation-for="Order.Gender" class="text-danger"></span>
+            </div>
+
+            <p style="border-bottom: 1px #eee solid; padding-bottom: 8px; font-weight: 700; font-size: 15px">
+                Vận chuyển và thanh toán
+            </p>
+            <div class="form-group  form-row mt-4">
+                <div class="col-sm-3">
+                    <label asp-for="Order.Transport" class="control-label"></label>
+                </div>
+                <div class="col-sm-9">
+                    <select class="form-control" asp-for="Transport">
+                        <option value=1>Qua bưu điện</option>
+                        <option value=2>Đến địa chỉ người nhận</option>
+                        <option value=3>Khách đến nhận hàng</option>
+                        <option value=4>Hình thức khác</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group form-row">
+                <div class="col-sm-3">
+                    <label asp-for="Order.TransportDate" class="control-label"></label>
+                </div>
+                <div class="col-sm-9">
+                    <input asp-for="Order.TransportDate" type="datetime" class="datepicker form-control" readonly="readonly" value="@DateTime.Now.ToString("dd/MM/yyyy")" />
+                </div>
+            </div>
+            <div class="form-group form-row">
+                <div class="col-sm-3">
+                    <label asp-for="TypePay" class="control-label"></label>
+                </div>
+                <div class="col-sm-9">
+                    <select class="form-control" asp-for="Transport">
+                        <option value=1>Tiền mặt</option>
+                        <option value=2>Chuyển khoản</option>
+                        <option value=3>Hình thức khác</option>
+                    </select>
+                </div>
+            </div>
+            <hr />
+            <div class="form-group text-center">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    <div class="col-12 col-md-6">
+        <p style="padding-bottom: 8px; font-weight: 700; font-size: 15px">ĐƠN HÀNG</p>
+        <table class="table">
+            @foreach (var item in Model.Carts)
+            {
+                //   var price = cart.Count * cart.Price;
+                <tr>
+                    <td style="width: 100px;">
+                        @if (item.Products.Image != null)
+                        {
+                            string[] arrListStr = item.Products.Image.Split(',');
+                            <img alt=@item.Products.Name
+                                 src="~/@arrListStr[0]"
+                                 data-image="@arrListStr[0]"
+                                 asp-append-version="true" width="100" height="100">
+                        }
+                        else
+                        {
+                            <img src="~/image/Rectangle 206.png" />
+                        }
+                    </td>
+                    <td>
+                        <p>
+                            <strong class="text-danger">@item.Products.Name x <strong>@item.Count</strong></strong>
+                        </p>
+                    </td>
+                    <td style="width: 100px;"> @item.Price.ToString("0,0", CultureInfo.CreateSpecificCulture("el-GR")) đ</td>
+                </tr>
+            }
+            @{
+                var total = Model.Carts.Sum(a => a.Price * a.Count);
+            }
+            <tr>
+                <td class="text-right" colspan="2">
+                    Giao hàng:
+                </td>
+                <td>
+                    @if (Model.CartTotal < 1000000)
+                    {
+                        <strong>30.000 đ</strong>
+                    }
+                    else
+                    {
+                        <strong>0 đ</strong>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td class="text-right" colspan="2">
+                    Tổng tiền:
+                </td>
+                <td>
+                    <strong>@(Model.CartTotal.ToString("0,0", CultureInfo.CreateSpecificCulture("el-GR"))) đ</strong>
+                </td>
+            </tr>
+        </table>
+        <p class="alert alert-info">
+            Bạn sẽ trả tiền mặt trực tiếp cho người giao hàng (thường là nhân viên bưu điện) khi nhận hàng, bạn được quyền kiểm tra gói hàng trước khi nhận hàng và trả tiền.
+        </p>
+    </div>
+</div>
+
