@@ -1,0 +1,342 @@
+﻿body {
+    font: normal 12px Arial, Tahoma;
+    color: #000;
+    margin: 0;
+    padding: 10px;
+    background: url(../image/bgsite.gif) repeat;
+}
+
+a {
+    color: darkblue;
+    text-decoration: none;
+}
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+img {
+    border: 0;
+}
+
+.process-order {
+    background: yellow;
+    padding: 5px 10px;
+}
+
+.payment-order {
+    background: green;
+    padding: 5px 10px;
+    color: #fff;
+}
+
+.input-number {
+    text-align: right;
+}
+
+.field-validation-error {
+    color: #f00;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #f00 !important;
+    background-color: #fee;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #f00;
+    border: 1px #f00 solid;
+    background: #ccc;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+.multi-line {
+    width: 500px;
+    height: 100px;
+}
+
+.hidden {
+    display: none;
+}
+
+input, select, h1, h2, h3, ul {
+    margin: 0;
+}
+
+.w300 {
+    width: 300px;
+}
+
+.w100 {
+    width: 100px;
+}
+
+.form_table {
+    margin: auto;
+}
+
+    .form_table tr td {
+        padding: 4px 5px;
+    }
+
+.form_name {
+    text-align: right;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.form_text {
+    text-align: left;
+}
+
+.form_control {
+    background: url(../image/form_control_bg.gif) repeat-x top left white;
+    border: 1px #CCC solid;
+    font-size: 13px;
+    font-weight: normal;
+    outline: none;
+    padding: 3px;
+}
+
+h2 {
+    color: #000;
+    font-size: 22px;
+    text-align: center;
+    font-weight: normal;
+    text-transform: uppercase;
+    line-height: 40px;
+    background: #f5f5f5;
+    padding-top: 4px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    text-shadow: 0 1px #FFF;
+}
+
+.box_content {
+    border: 1px #ddd solid;
+    background: #fafafa;
+    height: 100%;
+    padding: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+#left_menu_profile, #content_center_right {
+    width: 100%;
+    float: left;
+    margin-bottom: 50px;
+}
+
+#left_menu_profile {
+    width: 200px;
+    float: left;
+}
+
+#left_menu_profile, .left_menu_profile {
+    width: 200px;
+    position: absolute;
+}
+
+#content_center_right .content_center_right {
+    margin-left: 210px;
+}
+
+.left_menu_profile {
+    background: #fff;
+    border: 1px #ddd solid;
+}
+
+    .left_menu_profile ul {
+        list-style: none;
+        padding: 0;
+    }
+
+        .left_menu_profile ul li {
+            border-bottom: 1px dotted #ddd;
+        }
+
+            .left_menu_profile ul li:last-child {
+                border-bottom: 0;
+            }
+
+            .left_menu_profile ul li a.root {
+                background: url(../image/icon_arrow_down_4.gif) no-repeat right center;
+                cursor: pointer;
+                display: block;
+                font-weight: bold;
+                padding: 0px 20px 0px 14px;
+                margin-right: 10px;
+                line-height: 44px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-transform: uppercase;
+            }
+
+                .left_menu_profile ul li a.root:hover {
+                    text-decoration: none;
+                }
+
+            .left_menu_profile ul li a.expand {
+                background: url(../image/icon_arrow_up_4.gif) no-repeat right center;
+            }
+
+
+
+            .left_menu_profile ul li .sub div {
+                display: block;
+                padding: 3px 10px 5px 25px;
+            }
+
+                .left_menu_profile ul li .sub div.first {
+                    padding-top: 0px;
+                }
+/* End Left Menu */
+
+.text_link {
+    color: #888;
+    font-weight: bold;
+    line-height: 22px;
+}
+
+.left {
+    text-align: left !important;
+}
+
+
+#list_ask_cate {
+    width: 100%;
+}
+
+    #list_ask_cate li {
+        line-height: 20px;
+    }
+
+        #list_ask_cate li a {
+            color: #f00;
+            font-weight: 700;
+        }
+
+        #list_ask_cate li ol {
+            overflow: hidden;
+        }
+
+        #list_ask_cate li ul li {
+            width: 100%;
+            float: left;
+        }
+
+            #list_ask_cate li ul li a {
+                color: navy;
+            }
+
+    #list_ask_cate ul ul a {
+        color: #888 !important;
+    }
+
+.list_table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .list_table tr {
+        height: 30px;
+    }
+
+        .list_table tr th {
+            background: #888;
+            color: #fff;
+        }
+
+        .list_table tr th, .list_table tr td {
+            border: 1px #ccc solid;
+            padding: 5px;
+        }
+
+        .list_table tr.checked {
+            background: lightgoldenrodyellow;
+        }
+
+.tablecenter tr td {
+    text-align: center;
+}
+
+#TagsResult {
+    padding: 5px 0;
+}
+
+ul.ui-autocomplete {
+    list-style: none;
+}
+
+.tag-elem {
+    -ms-border-radius: 3px;
+    border-radius: 3px;
+    border: 1px #ccc solid;
+    padding: 5px 15px 5px 10px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    position: relative;
+    float: left;
+}
+
+.delete-tags {
+    background: url(../image/i_close2.gif) no-repeat right top;
+    width: 12px;
+    height: 11px;
+    position: absolute;
+    -moz-background-size: 8px;
+    -ms-background-size: 8px;
+    background-size: 8px;
+    right: 2px;
+    cursor: pointer;
+    top: 2px;
+}
+
+#ListImages {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+    #ListImages li {
+        float: left;
+        text-align: center;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        cursor: move;
+    }
+
+        #ListImages li > img {
+            border: 1px #ccc solid;
+        }
+
+        #ListImages li a {
+            display: block;
+            margin-top: 5px;
+        }
+
+ul.list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+    ul.list li {
+        display: inline-block;
+        padding-right: 10px;
+    }
+
+.box-action {
+    border: 1px #ccc solid;
+    background: #eee;
+}

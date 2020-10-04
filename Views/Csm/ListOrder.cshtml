@@ -3,6 +3,7 @@
     ViewData["Title"] = "Danh sách đơn đặt hàng";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+<link href="~/css/StyleSheet.css" rel="stylesheet" />
 
 <h2>Danh sách đơn đặt hàng</h2>
 <div class="box_content">
@@ -126,19 +127,18 @@
                 </td>
             </tr>
         }
-        @*@if (Model.Orders.Count > 1)
-            {
-                <tr>
-                    <td colspan="7">@Html.PagedListPager(Model.Orders, page => Url.Action("ListOrder", new { page, status = Model.Status, name = Model.CustomerName, email = Model.CustomerEmail, mobile = Model.CustomerMobile, formdate = Model.FromDate, todate = Model.ToDate, pagesize = Model.PageSize }))</td>
-                </tr>
-            }*@
+        @if (Model.Orders.Count() > 1)
+        {
+            <tr>
+                @*<td colspan="7">@Html.PagedListPager(Model.Orders, page => Url.Action("ListOrder", new { page, status = Model.Status, name = Model.CustomerName, email = Model.CustomerEmail, mobile = Model.CustomerMobile, formdate = Model.FromDate, todate = Model.ToDate, pagesize = Model.PageSize }))</td>*@
+            </tr>
+        }
     </table>
 </div>
 <div id="contactDetails"></div>
 @section scripts
 {
-    <script src="~/Scripts/jquery.maskMoney.min.js"></script>
-    <script src="~/Scripts/jquery.fancybox.min.js"></script>
+    <script src="~/js/jquery.maskMoney.min.js"></script>
     <script>
         $(".datepicker").datepicker({
             dateFormat: 'dd/mm/yy'
