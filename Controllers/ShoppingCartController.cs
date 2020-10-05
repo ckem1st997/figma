@@ -187,8 +187,12 @@ namespace figma.Controllers
         public ActionResult CheckOutComplete(string orderId)
         {
             EmptyCart();
-            ViewBag.OrderId = orderId;
-            return View();
+            var model = new CheckOutCompleteViewModel()
+            {
+                OrderID = orderId,
+                Contact = _unitOfWork.ContactRepository.Get().FirstOrDefault()
+            };
+            return View(model);
         }
 
 

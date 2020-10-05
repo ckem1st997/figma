@@ -14,6 +14,12 @@ namespace figma.ViewModel
         public decimal CartTotal { get; set; }
     }
 
+    public class CheckOutCompleteViewModel
+    {
+        public string OrderID { get; set; }
+        public Contacts Contact { get; set; }
+    }
+
     public class ShoppingCartRemoveViewModel
     {
         public string Message { get; set; }

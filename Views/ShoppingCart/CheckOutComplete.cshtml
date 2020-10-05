@@ -1,4 +1,4 @@
-﻿@using figma.Models
+﻿@model figma.ViewModel.CheckOutCompleteViewModel
 @{
     ViewData["Title"] = "Đặt đơn hàng thành công";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -14,9 +14,9 @@
             </ol>
         </div>
         <div class="alert alert-success" style="max-width: 800px; margin: auto">
-            <p>Cảm ơn quý khách đã mua hàng tại Shop NKH</p>
+            <p>Cảm ơn quý khách đã mua hàng tại @Model.Contact.Subject</p>
             <p>
-                Mã đơn hàng : <strong>@ViewBag.OrderId</strong>
+                Mã đơn hàng : <strong>@Model.OrderID</strong>
             </p>
             <p>Chúng tôi đã gửi email xác nhận đơn hàng tới địa chỉ email của bạn.</p>
             <p>
@@ -24,7 +24,7 @@
             </p>
             <p>Có nhiều phương thức thanh toán để bạn lựa chọn (trả tiền khi giao hàng, thanh toán bẳng thẻ tín dụng hoặc ATM, chuyển khoản qua ngân hàng)</p>
             <p>
-                @*Để được hỗ trợ thêm vui lòng liên hệ Hotline <strong>configsite.Hotline</strong> hoặc Email <a href="mailto:@configsite.Email">configsite.Email</a>*@
+                Để được hỗ trợ thêm vui lòng liên hệ Hotline <strong>0@(Model.Contact.Mobile)</strong> hoặc Email <a href="mailto:@Model.Contact.Email">@Model.Contact.Email</a>
             </p>
         </div>
     </div>
