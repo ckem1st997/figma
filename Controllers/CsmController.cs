@@ -1442,15 +1442,12 @@ namespace figma.Controllers
         //    _unitOfWork.Save();
         //    return true;
         //}
-        //public PartialViewResult ViewHoaDon(int orderId)
-        //{
-        //    var order = _unitOfWork.OrderRepository.GetById(orderId);
-        //    if (order == null)
-        //    {
-        //        return null;
-        //    }
-        //    return PartialView(order);
-        //}
+        public IActionResult ViewHoaDon(int orderId)
+        {
+            // ViewBag.id = orderId;
+            // return View();
+            return ViewComponent("ViewHoaDon", new { orderId = orderId });
+        }
         //[HttpPost]
         //public bool UpdateOrderInfo(string notice, string fullname, string address, string email, string mobile, string date, int orderId = 0)
         //{

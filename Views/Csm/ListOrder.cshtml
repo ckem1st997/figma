@@ -121,7 +121,8 @@
                     <button type="button" onclick="updateNoticeOrder(@order.Id)">Cập nhật</button>
                 </td>
                 <td>
-                    <a href="javascript:;" data-fancybox data-type="iframe" data-src="@Url.Action("ViewHoaDon", new{orderId = order.Id})">[In HĐ]</a><br /><br />
+                    <a href="javascript:;" data-fancybox data-type="iframe" 
+                       data-src="@Url.Action("ViewHoaDon", new{orderId = order.Id})">[In HĐ]</a><br /><br />
                     <a href="javascript:;" onclick="loadOrder(@order.Id)">[Xem đơn]</a><br /><br />
                     <a href="javascript:;" onclick="deleteOrder(@order.Id)">[Xóa đơn]</a>
                 </td>
