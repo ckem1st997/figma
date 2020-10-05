@@ -183,7 +183,6 @@ namespace figma.Controllers
             return View(model);
         }
 
-
         [Route("thanh-toan-thanh-cong")]
         public ActionResult CheckOutComplete(string orderId)
         {
@@ -203,13 +202,6 @@ namespace figma.Controllers
             }
             _unitOfWork.SaveNotAync();
         }
-
-
-
-
-
-
-
 
         #region CartRes
         [HttpPost]

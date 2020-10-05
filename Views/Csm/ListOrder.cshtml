@@ -39,9 +39,6 @@
                         <option value="0">Đang xử lý</option>
                         <option value="1">Đang giao hàng</option>
                         <option value="3">Hủy đơn</option>
-                        @*<option value="0" @if (Model.Status= =0) { @Html.Raw("selected=selected") }>Đang xử lý</option>
-                            <option value="1" @if (Model.Status= =1) { @Html.Raw("selected=selected") }>Đang giao hàng</option>
-                            <option value="3" @if (Model.Status= =3) { @Html.Raw("selected=selected") }>Hủy đơn</option>*@
                     </select>
                 </td>
                 <td>Trạng thái thanh toán</td>
@@ -60,7 +57,11 @@
             </tr>
         </table>
     </form>
-    <p>Có tổng số <strong>@Model.Orders.Count()</strong> đơn hàng - <button type="button" onclick="window.location='/Vcms/ExportOrder'">Xuất EXCEL</button></p>
+    <p>
+        Có tổng số
+        <strong>@Model.Orders.Count()</strong> đơn hàng -
+        <button type="button" onclick="window.location='/Csm/ExportOrder'">Xuất EXCEL</button>
+    </p>
     <table class="list_table tablecenter">
         <tr>
             <th style="width: 40px">Mã ĐH</th>
@@ -97,17 +98,40 @@
                 <td>
                     <select name="Payment" class="form_control" onchange="updatePayment(@order.Id, this.value)">
                         <option value="1">Chưa thanh toán</option>
-                        <option value="2">Đã thanh toán</option>
-                        @*<option value="2" @if (order.Payment) { @Html.Raw("selected='selected' ")   }>Đã thanh toán</option>*@
+                        @if (order.Payment)
+                        {
+                            <option value="2" selected="selected">Đã thanh toán</option>
+                        }
+                        else
+                        {
+                            <option value="2">Đã thanh toán</option>
+                        }
+
                     </select>
 
                 </td>
                 <td>
                     <select name="Status" onchange="updateOrder(@order.Id, this.value)" class="form_control">
-                        <option value="0">Đang xử lý</option>
-                        <option value="1">Đang giao hàng</option>
-                        @*<option value="2" @if(order.Status == 1){@Html.Raw("selected='selected'")}>Đã thanh toán</option>*@
-                        <option value="3">Hủy đơn</option>
+                        @{
+                            if (order.Status == 0)
+                            {
+                                <option value="0" selected="selected">Đang xử lý</option>
+                                <option value="1">Đang giao hàng</option>
+                                <option value="3">Hủy đơn</option>
+                            }
+                            else if (order.Status == 1)
+                            {
+                                <option value="0">Đang xử lý</option>
+                                <option value="1" selected="selected">Đang giao hàng</option>
+                                <option value="3">Hủy đơn</option>
+                            }
+                            else if (order.Status == 3)
+                            {
+                                <option value="0">Đang xử lý</option>
+                                <option value="1">Đang giao hàng</option>
+                                <option value="3" selected="selected">Hủy đơn</option>
+                            }
+                        }
                     </select>
                 </td>
                 <td>
@@ -121,7 +145,7 @@
                     <button type="button" onclick="updateNoticeOrder(@order.Id)">Cập nhật</button>
                 </td>
                 <td>
-                    <a href="javascript:;" data-fancybox data-type="iframe" 
+                    <a href="javascript:;" data-fancybox data-type="iframe"
                        data-src="@Url.Action("ViewHoaDon", new{orderId = order.Id})">[In HĐ]</a><br /><br />
                     <a href="javascript:;" onclick="loadOrder(@order.Id)">[Xem đơn]</a><br /><br />
                     <a href="javascript:;" onclick="deleteOrder(@order.Id)">[Xóa đơn]</a>
@@ -151,7 +175,7 @@
             });
         });
         function updateOrder(id, status) {
-            $.post("/Vcms/UpdateOrder", { orderId: id, status }, function (data) {
+            $.post("/Csm/UpdateOrder", { orderId: id, status }, function (data) {
                 if (data) {
                     alert("Cập nhật đơn hàng thành công");
                 } else {
@@ -160,7 +184,7 @@
             });
         }
         function updatePayment(id, payment) {
-            $.post("/Vcms/UpdateOrder", { orderId: id, payment }, function (data) {
+            $.post("/Csm/UpdateOrder", { orderId: id, payment }, function (data) {
                 if (data) {
                     alert("Cập nhật đơn hàng thành công");
                 } else {
@@ -178,7 +202,7 @@
                 alert("Số tiền thanh toán trước phải lơn hơn bằng 0");
             }
 
-            $.post("/Vcms/UpdateOrderNotice", { orderId: id, notice, thanhtoantruoc }, function (data) {
+            $.post("/Csm/UpdateOrderNotice", { orderId: id, notice, thanhtoantruoc }, function (data) {
                 if (data) {
                     alert("Cập nhật đơn hàng thành công");
                 } else {
@@ -189,7 +213,7 @@
 
         function deleteOrder(id) {
             if (confirm("Bạn có chắc chắn hủy đơn hàng này không?")) {
-                $.post("/Vcms/DeleteOrder", { orderId: id }, function (data) {
+                $.post("/Csm/DeleteOrder", { orderId: id }, function (data) {
                     if (data) {
                         alert("Hủy đơn hàng thành công");
                         $("tr[data-id='" + id + "']").fadeOut();
@@ -200,7 +224,7 @@
             }
         }
         function loadOrder(id) {
-            $.get("/Vcms/LoadOrder", { orderId: id }, function (data) {
+            $.get("/Csm/LoadOrder", { orderId: id }, function (data) {
                 $("#contactDetails").html(data);
                 $("#contactDetails").dialog("open");
             });

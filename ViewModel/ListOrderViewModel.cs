@@ -8,6 +8,20 @@ using System.Threading.Tasks;
 
 namespace figma.ViewModel
 {
+    public class OrderViewModel
+    {
+        public Order Order { get; set; }
+      //  public IEnumerable<OrderDetailProduct> OrderDetailProduct { get; set; }
+        public IEnumerable<OrderDetail> OrderDetails { get; set; }
+    }
+
+    public class OrderDetailProduct
+    {
+        public Products Products { get; set; }
+        public int Quantity { get; set; }
+        [DisplayFormat(DataFormatString = "{0:N0}")]
+        public decimal? Price { get; set; }
+    }
     public class ListOrderViewModel
     {
        // public PaginatedList<Order> Orders { get; set; }

@@ -92,7 +92,9 @@
 
         <table>
             <tr>
-                <td style="text-align: center"><img src="~/Content/images/logo-nhu-quynh.png" alt="Logo" width="150" /></td>
+                <td style="text-align: center">
+                    <img src="~/image/Group 166.png" alt="Logo" width="150" />
+                </td>
                 <td>
                     <h1>NHƯ QUỲNH KOREA</h1>
                     <address>
@@ -115,7 +117,9 @@
                         <tr>
                             <td style="width: 110px"><strong>Tên khách hàng</strong></td>
                             <td>:<input type="text" id="Name" maxlength="50" value="@item.Fullname" /></td>
-                            <td style="width: 110px"><strong>Số điện thoại</strong></td>
+                            <td style="width: 110px">
+                                <strong>Số điện thoại</strong>
+                            </td>
                             <td>:<input type="text" id="Mobile" maxlength="11" value="@item.Mobile" /></td>
                         </tr>
                         <tr>
@@ -158,7 +162,7 @@
                             <tr>
                                 <td>
                                     <p>Mã SP: <strong>NQ-@orderDetail.ProductId</strong></p>
-                                    @*<p><strong>@i.@orderDetail.Product.Name</strong></p>*@
+                                    <p><strong>@i.@orderDetail.Product.Name</strong></p>
                                 </td>
                                 <td style="text-align: center;">@Convert.ToDecimal(orderDetail.Price).ToString("N0")</td>
                                 <td style="text-align: center;">@orderDetail.Quantity</td>
@@ -198,12 +202,14 @@
             </tr>
         </table>
     }
-    <script>
-        $(".datepicker").datepicker({
-            dateFormat: 'dd/mm/yy',
-            minDate: 0
-        });
 
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script>
+        //$(".datepicker").datepicker({
+        //    dateFormat: 'dd/mm/yy',
+        //    minDate: 0
+        //});
         function updateInfo(id) {
             var fullname = $("#Name").val();
             var mobile = $("#Mobile").val();
@@ -233,7 +239,7 @@
                 return false;
             }
 
-            $.post("/Vcms/UpdateOrderInfo", { fullname, address, mobile, email, date, notice, orderId: id }, function (data) {
+            $.post("/Csm/UpdateOrderInfo", { fullname, address, mobile, email, date, notice, orderId: id }, function (data) {
                 if (data) {
                     alert("Cập nhật thông tin thành công");
                 } else {

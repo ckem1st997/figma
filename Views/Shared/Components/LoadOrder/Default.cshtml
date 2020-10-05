@@ -1,0 +1,98 @@
+﻿@model figma.ViewModel.OrderViewModel
+
+@{
+    var i = 1;
+    var typepay = "Chuyển khoản";
+    switch (Model.Order.TypePay)
+    {
+        case 1:
+            typepay = "Tiền mặt";
+            break;
+        case 2:
+            typepay = "Thẻ ATM";
+            break;
+    }
+    var typetransport = "Đến địa chỉ người nhận";
+    switch (Model.Order.Transport)
+    {
+        case 2:
+            typetransport = "Khách đến nhận hàng";
+            break;
+        case 3:
+            typetransport = "Qua bưu điện";
+            break;
+        case 4:
+            typetransport = "Hình thức khác";
+            break;
+    }
+    var tongtien = 0m;
+}
+
+<h2>Đơn hàng: @Model.Order.MaDonHang - [@Html.DisplayFor(a => a.Order.Status)]</h2>
+<table class="list_table tablecenter">
+    <tr>
+        <th>STT</th>
+        <th>Hình ảnh</th>
+        <th>Tên sản phẩm</th>
+        <th>Số lượng</th>
+        <th>Giá</th>
+        <th>Thành tiền</th>
+    </tr>
+    @foreach (var product in Model.OrderDetails)
+    {
+        var sotien = product.Quantity * product.Price;
+        <tr>
+            <td>@i</td>
+            <td><img src="/@product.Product.Image.Split(',')[0]" width="100" /></td>
+            <td>@product.Product.Name</td>
+            <td>@product.Quantity</td>
+            <td>@Html.DisplayFor(a => product.Price) đ</td>
+            <td>@Convert.ToDecimal(sotien).ToString("N0") đ</td>
+        </tr>
+        tongtien += Convert.ToDecimal(sotien);
+        i++;
+    }
+    <tr>
+        <td colspan="5">Tổng tiền:</td>
+        <td>@tongtien.ToString("N0")đ</td>
+    </tr>
+</table>
+<h2>Thông tin khách hàng</h2>
+<div style="overflow: hidden">
+    <table class="form_table">
+        <tr>
+            <td colspan="2" style="font-weight: 700;">Thông tin người đặt hàng</td>
+        </tr>
+        <tr>
+            <td>Ngày đặt hàng</td>
+            <td>@Model.Order.CreateDate.ToString("dd/MM/yyyy HH:mm")</td>
+        </tr>
+        <tr>
+            <td>Họ và tên</td>
+            <td>@Model.Order.Fullname</td>
+        </tr>
+        <tr>
+            <td>Địa chỉ</td>
+            <td>@Model.Order.Address</td>
+        </tr>
+        <tr>
+            <td>Điện thoại</td>
+            <td>@Model.Order.Mobile</td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>@Model.Order.Email</td>
+        </tr>
+        <tr>
+            <td>Yêu cầu thêm</td>
+            <td>@Model.Order.Body</td>
+        </tr>
+    </table>
+</div>
+<h2>Vận chuyển và thanh toán</h2>
+<div class="box_content">
+    <p>Hình thức thanh toán: <strong>@typepay</strong></p>
+    <p>Hình thức giao hàng: <strong>@typetransport</strong></p>
+    <p>Ngày nhận hàng: <strong>@Model.Order.TransportDate.ToString("dd/MM/yyyy")</strong></p>
+</div>
+
