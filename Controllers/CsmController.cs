@@ -1313,37 +1313,20 @@ namespace figma.Controllers
             var orders = _unitOfWork.OrderRepository.Get(orderBy: q => q.OrderByDescending(a => a.Id), includeProperties: "OrderDetails");
 
             if (!string.IsNullOrEmpty(madonhang))
-            {
                 orders = orders.Where(a => a.MaDonHang.Contains(madonhang));
-            }
             if (!string.IsNullOrEmpty(customerName))
-            {
                 orders = orders.Where(a => a.Fullname.ToLower().Contains(customerName.ToLower()));
-            }
-
             if (!string.IsNullOrEmpty(customerEmail))
-            {
                 orders = orders.Where(a => a.Email.ToLower().Contains(customerEmail.ToLower()));
-            }
-
             if (!string.IsNullOrEmpty(customerMobile))
-            {
                 orders = orders.Where(a => a.Mobile.Contains(customerMobile));
-            }
-            //if (DateTime.TryParse(fromdate, new CultureInfo("vi-VN"), DateTimeStyles.None, out var fd))
-            //{
-            //    orders = orders.Where(a => DateTime.ParseExact(a.CreateDate.ToString(), "dd/MM/yyyy", CultureInfo.InvariantCulture) >= DateTime.ParseExact(fd.ToString(), "dd/MM/yyyy", CultureInfo.InvariantCulture));
-            //}
-            //if (DateTime.TryParse(todate, new CultureInfo("vi-VN"), DateTimeStyles.None, out var td))
-            //{
-            //    orders = orders.Where(a => DbFunctions.TruncateTime(a.CreateDate) <= DbFunctions.TruncateTime(td));
-            //}
+            if (DateTime.TryParse(fromdate, new CultureInfo("vi-VN"), DateTimeStyles.None, out var fd))
+                orders = orders.Where(a => a.CreateDate.Date >= fd.Date);
+            if (DateTime.TryParse(todate, new CultureInfo("vi-VN"), DateTimeStyles.None, out var td))
+                orders = orders.Where(a => a.CreateDate.Date <= td.Date);
             if (status >= 0)
-            {
                 orders = orders.Where(a => a.Status == status);
-            }
             if (payment > 0)
-            {
                 switch (payment)
                 {
                     case 1:
@@ -1353,11 +1336,10 @@ namespace figma.Controllers
                         orders = orders.Where(a => a.Payment);
                         break;
                 }
-            }
 
             var model = new ListOrderViewModel
             {
-                Orders = orders,
+                Orders = PaginatedList<Order>.CreateAsync(orders, pageNumber ?? 1, pageSize),
                 MaDonhang = madonhang,
                 Status = status,
                 CustomerName = customerName,

@@ -74,12 +74,12 @@ namespace figma.Controllers
         //
         public IActionResult Index()
         {
-            var currentTimeUTC = DateTime.UtcNow.ToString();
-            byte[] encodedCurrentTimeUTC = Encoding.UTF8.GetBytes(currentTimeUTC);
-            var options = new DistributedCacheEntryOptions()
-                .SetSlidingExpiration(TimeSpan.FromSeconds(20));
-            _cache.Set("cachedTimeUTC", encodedCurrentTimeUTC, options);
-            Console.WriteLine(_cache.Get("cachedTimeUTC").ToString());
+            //var currentTimeUTC = DateTime.UtcNow.ToString();
+            //byte[] encodedCurrentTimeUTC = Encoding.UTF8.GetBytes(currentTimeUTC);
+            //var options = new DistributedCacheEntryOptions()
+            //    .SetSlidingExpiration(TimeSpan.FromSeconds(20));
+            //_cache.Set("cachedTimeUTC", encodedCurrentTimeUTC, options);
+            //Console.WriteLine(_cache.Get("cachedTimeUTC").ToString());
 
             var model = new HomeViewModel
             {

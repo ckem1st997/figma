@@ -11,7 +11,7 @@ namespace figma.ViewModel
     public class OrderViewModel
     {
         public Order Order { get; set; }
-      //  public IEnumerable<OrderDetailProduct> OrderDetailProduct { get; set; }
+        //  public IEnumerable<OrderDetailProduct> OrderDetailProduct { get; set; }
         public IEnumerable<OrderDetail> OrderDetails { get; set; }
     }
 
@@ -24,8 +24,8 @@ namespace figma.ViewModel
     }
     public class ListOrderViewModel
     {
-       // public PaginatedList<Order> Orders { get; set; }
-        public IEnumerable<Order> Orders { get; set; }
+        public PaginatedList<Order> Orders { get; set; }
+        //  public IEnumerable<Order> Orders { get; set; }
         [StringLength(50, ErrorMessage = "Tối đa 50 ký tự")]
         public string MaDonhang { get; set; }
         [StringLength(50, ErrorMessage = "Tối đa 50 ký tự")]

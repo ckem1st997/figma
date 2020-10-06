@@ -17,14 +17,14 @@
             </tr>
             <tr>
                 <td>Điện thoại khách hàng</td>
-                <td><input asp-for="CustomerEmail" class="form-control" /></td>
-                <td>Email khách hàng</td>
                 <td><input asp-for="CustomerMobile" class="form-control" /></td>
+                <td>Email khách hàng</td>
+                <td><input asp-for="CustomerEmail" class="form-control" /></td>
             </tr>
             <tr>
                 <td>Ngày đặt hàng từ</td>
                 <td>
-                    <input asp-for="FromDate" type="datetime" class="datepicker form-control" readonly="readonly" />
+                    <input asp-for="FromDate" value="@Model.FromDate" type="datetime" class="datepicker form-control" readonly="readonly" />
                 </td>
                 <td>Đến ngày</td>
                 <td>
@@ -52,7 +52,7 @@
             </tr>
             <tr>
                 <td>Số đơn trên trang</td>
-                <td><input asp-for="MaDonhang" class="form-contro" style="width:100px" type="number" max="200" /></td>
+                <td><input asp-for="PageSize" class="form-control" style="width:100px" type="number" max="200" /></td>
                 <td colspan="2" style="text-align: center"><button type="submit">TÌM KIẾM</button></td>
             </tr>
         </table>
@@ -152,10 +152,39 @@
                 </td>
             </tr>
         }
-        @if (Model.Orders.Count() > 1)
+        @if (Model.Orders.Count() > 0)
         {
             <tr>
-                @*<td colspan="7">@Html.PagedListPager(Model.Orders, page => Url.Action("ListOrder", new { page, status = Model.Status, name = Model.CustomerName, email = Model.CustomerEmail, mobile = Model.CustomerMobile, formdate = Model.FromDate, todate = Model.ToDate, pagesize = Model.PageSize }))</td>*@
+                @{
+                    var prevDisabled = !Model.Orders.HasPreviousPage ? "disabled" : "";
+                    var nextDisabled = !Model.Orders.HasNextPage ? "disabled" : "";
+                }
+                <td colspan="7">
+                    <a asp-action="ListOrder"
+                       asp-route-page="@(Model.Orders.PageIndex - 1)"
+                       asp-route-status="@Model.Status"
+                       asp-route-name="@Model.CustomerName"
+                       asp-route-email="@Model.CustomerEmail"
+                       asp-route-mobile="@Model.CustomerMobile"
+                       asp-route-formdate="@Model.FromDate"
+                       asp-route-todate="@Model.ToDate"
+                       asp-route-pagesize="@Model.PageSize"
+                       class="btn btn-success @prevDisabled">
+                        Trước
+                    </a>
+                    <a asp-action="ListOrder"
+                       asp-route-page="@(Model.Orders.PageIndex + 1)"
+                       asp-route-status="@Model.Status"
+                       asp-route-name="@Model.CustomerName"
+                       asp-route-email="@Model.CustomerEmail"
+                       asp-route-mobile="@Model.CustomerMobile"
+                       asp-route-formdate="@Model.FromDate"
+                       asp-route-todate="@Model.ToDate"
+                       asp-route-pagesize="@Model.PageSize"
+                       class="btn btn-success @nextDisabled">
+                        Sau
+                    </a>
+                </td>
             </tr>
         }
     </table>
