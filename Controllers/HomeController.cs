@@ -256,13 +256,6 @@ namespace figma.Controllers
         }
 
 
-
-
-        public IActionResult Login1()
-        {
-            return View();
-        }
-
         #region Account
         [Authorize]
         public IActionResult Account()
