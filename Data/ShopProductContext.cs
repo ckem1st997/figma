@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using figma.Models;
 using Microsoft.EntityFrameworkCore;
@@ -92,6 +93,7 @@ namespace figma.Data
             modelBuilder.Entity<Products>().Property(p => p.Sort).HasDefaultValue(1);
             modelBuilder.Entity<ProductCategories>().Property(p => p.ParentId).HasDefaultValue(null);
             base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
 
     }

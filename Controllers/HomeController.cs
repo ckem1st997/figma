@@ -33,11 +33,9 @@ namespace figma.Controllers
         private readonly UnitOfWork _unitOfWork;
 
         private IMemoryCache _iMemoryCache;
-        private readonly IDistributedCache _cache;
-        public HomeController(UnitOfWork unitOfWork, IDistributedCache inMemoryCache, IMemoryCache memoryCache)
+        public HomeController(UnitOfWork unitOfWork, IMemoryCache memoryCache)
         {
             _iMemoryCache = memoryCache;
-            _cache = inMemoryCache;
             _unitOfWork = unitOfWork;
         }
         private IEnumerable<Banners> Banners => _unitOfWork.BannerRepository.Get(a => a.Active, q => q.OrderBy(a => a.Soft));
@@ -70,17 +68,23 @@ namespace figma.Controllers
         //    }
         //}
         #endregion
+        //public async Task<IActionResult> Index()
+        //{
+        //    var sessionList = await _sessionRepository.ListAsync();
 
+        //    var model = sessionList.Select(session => new StormSessionViewModel()
+        //    {
+        //        Id = session.Id,
+        //        DateCreated = session.DateCreated,
+        //        Name = session.Name,
+        //        IdeaCount = session.Ideas.Count
+        //    });
+
+        //    return View(model);
+        //}
         //
         public IActionResult Index()
         {
-            //var currentTimeUTC = DateTime.UtcNow.ToString();
-            //byte[] encodedCurrentTimeUTC = Encoding.UTF8.GetBytes(currentTimeUTC);
-            //var options = new DistributedCacheEntryOptions()
-            //    .SetSlidingExpiration(TimeSpan.FromSeconds(20));
-            //_cache.Set("cachedTimeUTC", encodedCurrentTimeUTC, options);
-            //Console.WriteLine(_cache.Get("cachedTimeUTC").ToString());
-
             var model = new HomeViewModel
             {
                 Products = _unitOfWork.ProductRepository.Get(a => a.Active, q => q.OrderBy(a => a.Sort), 12),
@@ -89,7 +93,7 @@ namespace figma.Controllers
             };
             return View(model);
         }
-
+        //
 
 
         [Route("{name}-{proId}.html")]
@@ -225,11 +229,6 @@ namespace figma.Controllers
             }
             ViewData["CurrentFilter"] = searchString;
             var Products = await _unitOfWork.ProductRepository.GetAync(a => a.Active && a.Name.Contains(searchString), orderBy: q => q.OrderBy(a => a.Name));
-            //if (!String.IsNullOrEmpty(searchString))
-            //{
-            //    //var Products = await _unitOfWork.ProductRepository.GetAync(a => a.Active, orderBy: q => q.OrderBy(a => a.Name));
-            //    Products = Products);
-            //}
             switch (sortOrder)
             {
                 case "name_desc":
@@ -383,7 +382,8 @@ namespace figma.Controllers
 
         public class RegisterViewModel
         {
-            [Required(ErrorMessage = "Bạn chưa nhập thông tin"), Display(Name = "Họ và tên"), MaxLength(50, ErrorMessage = "Họ và tên phải ít hơn 20 kí tự"), MinLength(5, ErrorMessage = "Họ và tên phải nhiều hơn 4 kí tự")]
+            [Required(ErrorMessage = "Bạn chưa nhập thông tin"), Display(Name = "Họ và tên"), MaxLength(50, ErrorMessage = "Họ và tên phải ít hơn 50 kí tự"), MinLength(5, ErrorMessage = "Họ và tên phải nhiều hơn 4 kí tự"), RegularExpression(@"^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s\W|_]+$",
+         ErrorMessage = "Tên đăng nhập chỉ chấp nhận chữ cái và kí tự !")]
             public string Fullname { get; set; }
 
             [Display(Name = "Điện thoại"), DataType(DataType.PhoneNumber, ErrorMessage = "Hãy nhập đúng số điện thoại")]
