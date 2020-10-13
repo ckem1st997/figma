@@ -27,6 +27,7 @@ using Microsoft.AspNetCore.Http.Features;
 using figma.Interface;
 using figma.OutFile;
 using figma.Models;
+using figma.Services;
 
 namespace figma
 {
@@ -41,7 +42,8 @@ namespace figma
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IMailer, Mailer>();
-            services.Configure<Smtp>(Configuration.GetSection("Smtp"));
+            //  services.Configure<Smtp>(Configuration.GetSection("Smtp"));
+            services.Configure<Smtp>(Configuration);
             services.AddControllers();
             services.AddSingleton<IFileProvider>(new PhysicalFileProvider(
         Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));

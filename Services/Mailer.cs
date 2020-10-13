@@ -10,13 +10,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace figma.OutFile
+namespace figma.Services
 {
     public class Mailer : IMailer
     {
-        private readonly Smtp _smtp;
+        // private readonly Smtp _smtp;
         private readonly IWebHostEnvironment _env;
-
+        public Smtp _smtp { get; }
         public Mailer(IOptions<Smtp> smtp, IWebHostEnvironment env)
         {
             _smtp = smtp.Value;
@@ -47,7 +47,7 @@ namespace figma.OutFile
                         await client.ConnectAsync(_smtp.Server);
                     }
 
-                    await client.AuthenticateAsync(_smtp.Username, _smtp.Password);
+                    await client.AuthenticateAsync(_smtp.SenderEmail, _smtp.Password);
                     await client.SendAsync(message);
                     await client.DisconnectAsync(true);
                 }

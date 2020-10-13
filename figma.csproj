@@ -1798,7 +1798,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
     <Folder Include="wwwroot\2020\8\4\" />
     <Folder Include="wwwroot\image\temp\" />
   </ItemGroup>

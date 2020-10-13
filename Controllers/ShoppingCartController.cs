@@ -99,7 +99,7 @@ namespace figma.Controllers
                                              ProductId = cart1.ProductID,
                                              Quantity = cart1.Count,
                                              Price = cart1.Price,
-                                             Color = cart1.Color==null?"null":cart1.Color,
+                                             Color = cart1.Color == null ? "null" : cart1.Color,
                                              Size = cart1.Size == null ? "null" : cart1.Size
                                          })
                 {
@@ -165,10 +165,10 @@ namespace figma.Controllers
                     {
                         img = "<img src='https://" + Request.Host.Value + "/" + odetails.Product.Image.Split(',')[0] + "' />";
                     }
-                 
+
                     sb += "<tr>" +
                           "<td>" + img + "</td>" +
-                          "<td>" + ""+odetails.Product.Name+"-Color:"+odetails.Color+ "-Size:" + odetails.Size+ "";
+                          "<td>" + "" + odetails.Product.Name + "-Color:" + odetails.Color + "-Size:" + odetails.Size + "";
 
                     sb += "</td>" +
                           "<td style='text-align:center'>" + odetails.Quantity + "</td>" +
@@ -180,9 +180,6 @@ namespace figma.Controllers
                 sb += "<tr><td colspan='5' style='text-align:right'><strong>Tổng tiền: " + tongtien.ToString("N0") + " đ</strong></td></tr>";
                 sb += "</table>";
                 sb += "<p>Cảm ơn bạn đã tin tưởng và mua hàng của chúng tôi.</p>";
-
-                //Task.Run(() => HtmlHelpers.SendEmail("gmail", "[" + model.Order.MaDonHang + "] Đơn đặt hàng từ website RÈM NAM AN", sb, "sales.noithatnaman@gmail.com", Email, Email, Password, "Đặt Hàng Online", model.Order.CustomerInfo.Email, "sales.noithatnaman@gmail.com"));
-                //   Console.WriteLine(sb);
                 await _mailer.SendEmailSync(model.Order.Email, "[" + model.Order.MaDonHang + "] Đơn đặt hàng từ website ShopAsp.Net", sb);
                 return RedirectToAction("CheckOutComplete", new { orderId = model.Order.MaDonHang });
             }
