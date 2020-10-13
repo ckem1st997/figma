@@ -19,19 +19,13 @@ using figma.ViewModel;
 using figma.OutFile;
 using Microsoft.Extensions.Caching.Distributed;
 using System.Text;
+using figma.Interface;
 
 namespace figma.Controllers
 {
-    // lấy dữ liệu, phân trang, sắp xếp
-
-
-    // [Developer("Joan Smith", "1", Reviewed = true)]
-    //  [Developer("Joan Smith1", "2", Reviewed = false)]
     public class HomeController : Controller
     {
-        //  private readonly ShopProductContext _context;
         private readonly UnitOfWork _unitOfWork;
-
         private IMemoryCache _iMemoryCache;
         public HomeController(UnitOfWork unitOfWork, IMemoryCache memoryCache)
         {
@@ -44,47 +38,10 @@ namespace figma.Controllers
         private IEnumerable<ProductSizeColor> ProductSizeColors => _unitOfWork.ProductSCRepository.Get(includeProperties: "Size,Color").ToList();
         private IEnumerable<Collection> Collections => _unitOfWork.CollectionRepository.Get(a => a.Active);
         private IEnumerable<ArticleCategory> ArticleCategories => _unitOfWork.ArticleCategoryRepository.Get(a => a.CategoryActive, q => q.OrderByDescending(a => a.CategorySort));
-        #region CustomAttribute
-        //public static void GetAttribute(Type t)
-        //{
-        //    DeveloperAttribute[] MyAttributes =
-        // (DeveloperAttribute[])Attribute.GetCustomAttributes(t, typeof(DeveloperAttribute));
 
-        //    if (MyAttributes.Length == 0)
-        //    {
-        //        Console.WriteLine("The attribute was not found.");
-        //    }
-        //    else
-        //    {
-        //        for (int i = 0; i < MyAttributes.Length; i++)
-        //        {
-        //            // Get the Name value.
-        //            Console.WriteLine("The Name Attribute is: {0}.", MyAttributes[i].Name);
-        //            // Get the Level value.
-        //            Console.WriteLine("The Level Attribute is: {0}.", MyAttributes[i].Level);
-        //            // Get the Reviewed value.
-        //            Console.WriteLine("The Reviewed Attribute is: {0}.", MyAttributes[i].Reviewed);
-        //        }
-        //    }
-        //}
-        #endregion
-        //public async Task<IActionResult> Index()
-        //{
-        //    var sessionList = await _sessionRepository.ListAsync();
-
-        //    var model = sessionList.Select(session => new StormSessionViewModel()
-        //    {
-        //        Id = session.Id,
-        //        DateCreated = session.DateCreated,
-        //        Name = session.Name,
-        //        IdeaCount = session.Ideas.Count
-        //    });
-
-        //    return View(model);
-        //}
-        //
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            // await _mailer.SendEmailSync("hopxc1997@gmail.com", "subject", "body");
             var model = new HomeViewModel
             {
                 Products = _unitOfWork.ProductRepository.Get(a => a.Active, q => q.OrderBy(a => a.Sort), 12),
@@ -420,3 +377,10 @@ namespace figma.Controllers
         }
     }
 }
+
+// Default client option values are shown
+//var clientOptions = new WebApplicationFactoryClientOptions();
+//clientOptions.AllowAutoRedirect = true;
+//clientOptions.BaseAddress = new Uri("http://localhost");
+//clientOptions.HandleCookies = true;
+//clientOptions.MaxAutomaticRedirections = 7;

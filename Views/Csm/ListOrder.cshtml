@@ -72,7 +72,7 @@
             <th>Ghi chú</th>
             <th style="width: 100px;"></th>
         </tr>
-        @foreach (var order in Model.Orders)
+        @foreach (var order in Model.Orders.Where(a => a.MaDonHang != null))
         {
             var colorStats = "";
             if (order.Status == 1)

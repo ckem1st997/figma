@@ -162,7 +162,7 @@
                             <tr>
                                 <td>
                                     <p>Mã SP: <strong>NQ-@orderDetail.ProductId</strong></p>
-                                    <p><strong>@i.@orderDetail.Product.Name</strong></p>
+                                    <p><strong>@i.@orderDetail.Product.Name @orderDetail.Color @orderDetail.Size</strong></p>
                                 </td>
                                 <td style="text-align: center;">@Convert.ToDecimal(orderDetail.Price).ToString("N0")</td>
                                 <td style="text-align: center;">@orderDetail.Quantity</td>

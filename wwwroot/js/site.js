@@ -149,12 +149,12 @@ $(document).ready(function () {
 
     });
 
-    $("#BtnUpdate").click(function () {
+    $("button#BtnUpdate").click(function () {
         if (confirm("Bạn có muốn cập nhật sản phẩm này ?"))
             UpdateToCart($(this).attr("data-id"), $(this).parent().parent().find(".count-text-class").find("input#quantity").val())
     });
     //
-    $("#BtnDelete").click(function () {
+    $("button#BtnDelete").click(function () {
         if (confirm("Bạn có muốn xóa sản phẩm này ?"))
             RemoveFromCart($(this).attr("data-id"))
     });

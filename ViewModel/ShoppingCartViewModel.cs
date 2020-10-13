@@ -31,6 +31,7 @@ namespace figma.ViewModel
 
     public class CheckOutViewModel
     {
+        
         public Order Order { get; set; }
         public decimal CartTotal { get; set; }
         [Display(Name = "Hình thức vận chuyển")]

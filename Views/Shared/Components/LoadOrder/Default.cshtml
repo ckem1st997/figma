@@ -44,7 +44,7 @@
         <tr>
             <td>@i</td>
             <td><img src="/@product.Product.Image.Split(',')[0]" width="100" /></td>
-            <td>@product.Product.Name</td>
+            <td>@product.Product.Name @product.Color @product.Size</td>
             <td>@product.Quantity</td>
             <td>@Html.DisplayFor(a => product.Price) đ</td>
             <td>@Convert.ToDecimal(sotien).ToString("N0") đ</td>

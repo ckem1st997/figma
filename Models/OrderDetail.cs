@@ -14,6 +14,12 @@ namespace figma.Models
         [Key, Column(Order = 1)]
         public int ProductId { get; set; }
         public int Quantity { get; set; }
+
+        [Key, Column(Order = 2)]
+        public string Size { get; set; }
+
+        [Key, Column(Order = 3)]
+        public string Color { get; set; }
         public decimal? Price { get; set; }
         public virtual Order Order { get; set; }
         public virtual Products Product { get; set; }
