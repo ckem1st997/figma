@@ -20,7 +20,7 @@ namespace figma.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync()
         {
             ViewBag.view = HttpContext.Request.Cookies.FirstOrDefault(a => a.Key.Contains("viewProducts")).Value;
-            var items = await _unitOfWork.ProductRepository.GetAync();
+            var items = await _unitOfWork.ProductRepository.GetAync(records: 6);
             return View(items);
         }
     }

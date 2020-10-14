@@ -83,10 +83,10 @@ namespace figma.Controllers
 
 
         [Route("{namearicle}/{name}-{blogId}.html")]
-        public async Task<IActionResult> Review(string namearicle, int blogId = 0)
+        public IActionResult Review(string namearicle, int blogId = 0)
         {
             var ar = _unitOfWork.ArticleRepository.GetByID(blogId);
-            var listAr = await _unitOfWork.ArticleRepository.GetAync(a => a.Active && a.Home && a.Id != ar.Id && a.ArticleCategoryId == ar.ArticleCategoryId, q => q.OrderBy(a => a.CreateDate), 4);
+            var listAr = _unitOfWork.ArticleRepository.Get(a => a.Active && a.Home && a.Id != ar.Id && a.ArticleCategoryId == ar.ArticleCategoryId, q => q.OrderBy(a => a.CreateDate), records: 4);
             ViewBag.namearicle = namearicle;
             var model = new ReviewViewModel()
             {

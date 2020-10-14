@@ -28,80 +28,82 @@ namespace figma.Data
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, int records = 0,
             string includeProperties = "")
         {
+            IQueryable<TEntity> query = dbSet;
             if (!_cache.TryGetValue(cacheKey, out IEnumerable<TEntity> cachedList))
             {
-                IQueryable<TEntity> query = dbSet;
-
-                if (filter != null)
-                {
-                    query = query.Where(filter);
-                }
-
-                foreach (var includeProperty in includeProperties.Split
-                    (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-                {
-                    query = query.Include(includeProperty);
-                }
-
-                if (records > 0 && orderBy != null)
-                {
-                    query = orderBy(query).Take(records);
-                }
-                else if (orderBy != null && records == 0)
-                {
-                    query = orderBy(query);
-                }
-                else if (orderBy == null && records > 0)
-                {
-                    query = query.Take(records);
-                }
+                if (records > 0)
+                    cachedList = query.Take(records);
                 cachedList = query;
-                var cacheEntryOptions = new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromSeconds(1));
-
+                var cacheEntryOptions = new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromMinutes(60));
                 _cache.Set(cacheKey, cachedList, cacheEntryOptions);
+                return cachedList.ToList();
             }
-            return cachedList.ToList();
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            foreach (var includeProperty in includeProperties.Split
+                (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                query = query.Include(includeProperty);
+            }
+
+            if (records > 0 && orderBy != null)
+            {
+                query = orderBy(query).Take(records);
+            }
+            else if (orderBy != null && records == 0)
+            {
+                query = orderBy(query);
+            }
+            else if (orderBy == null && records > 0)
+            {
+                query = query.Take(records);
+            }
+
+            return query.ToList();
         }
         //aync
 
-        public async Task<IEnumerable<TEntity>> GetAync(
+        public virtual async Task<IEnumerable<TEntity>> GetAync(
           Expression<Func<TEntity, bool>> filter = null,
           Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, int records = 0,
           string includeProperties = "")
         {
             IQueryable<TEntity> query = dbSet;
-            if (!_cache.TryGetValue(cacheKey, out IQueryable<TEntity> cachedList))
+            if (_cache.TryGetValue(cacheKey, out IQueryable<TEntity> cachedList))
             {
-                if (filter != null)
-                {
-                    query = query.Where(filter);
-                }
-
-                foreach (var includeProperty in includeProperties.Split
-                    (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-                {
-                    query = query.Include(includeProperty);
-                }
-
-                if (records > 0 && orderBy != null)
-                {
-                    query = orderBy(query).Take(records);
-                }
-                else if (orderBy != null && records == 0)
-                {
-                    query = orderBy(query);
-                }
-                else if (orderBy == null && records > 0)
-                {
-                    query = query.Take(records);
-                }
-                cachedList = query;
-                _cache.Set(cacheKey, cachedList, new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromSeconds(1)));
+                if (records > 0)
+                    cachedList = query.Take(records);
+                _cache.Set(cacheKey, cachedList, new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromMinutes(60)));
+                return await cachedList.ToListAsync();
             }
-            return await cachedList.ToListAsync();
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            foreach (var includeProperty in includeProperties.Split
+                (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                query = query.Include(includeProperty);
+            }
+
+            if (records > 0 && orderBy != null)
+            {
+                query = orderBy(query).Take(records);
+            }
+            else if (orderBy != null && records == 0)
+            {
+                query = orderBy(query);
+            }
+            else if (orderBy == null && records > 0)
+            {
+                query = query.Take(records);
+            }
+            return await query.ToListAsync();
         }
-
-
 
         public virtual TEntity GetByID(object id)
         {

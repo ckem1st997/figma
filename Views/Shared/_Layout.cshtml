@@ -30,15 +30,20 @@
 
 </head>
 <body>
-    @await Component.InvokeAsync("HeaderList")
-    @await Component.InvokeAsync("Phone")
+    <cache>
+        @await Component.InvokeAsync("HeaderList")
+    </cache>
+    <cache>
+        @await Component.InvokeAsync("Phone")
+    </cache>
     <div class="container-fluid">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-    @await Component.InvokeAsync("FooterList")
-
+    <cache>
+        @await Component.InvokeAsync("FooterList")
+    </cache>
     <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="~/vegas/vegas.js"></script>
