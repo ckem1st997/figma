@@ -13,14 +13,11 @@ namespace figma.Data
     {
         internal ShopProductContext _context;
         internal DbSet<TEntity> dbSet;
-        private readonly string cacheKey = $"{typeof(TEntity)}";
-        private IMemoryCache _cache;
 
-        public GenericRepository(ShopProductContext context, IMemoryCache cache)
+        public GenericRepository(ShopProductContext context)
         {
             _context = context;
             dbSet = context.Set<TEntity>();
-            _cache = cache;
         }
 
         public virtual IEnumerable<TEntity> Get(
@@ -29,15 +26,7 @@ namespace figma.Data
             string includeProperties = "")
         {
             IQueryable<TEntity> query = dbSet;
-            if (!_cache.TryGetValue(cacheKey, out IEnumerable<TEntity> cachedList))
-            {
-                if (records > 0)
-                    cachedList = query.Take(records);
-                cachedList = query;
-                var cacheEntryOptions = new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromMinutes(60));
-                _cache.Set(cacheKey, cachedList, cacheEntryOptions);
-                return cachedList.ToList();
-            }
+
             if (filter != null)
             {
                 query = query.Where(filter);
@@ -66,19 +55,12 @@ namespace figma.Data
         }
         //aync
 
-        public virtual async Task<IEnumerable<TEntity>> GetAync(
+        public async Task<IEnumerable<TEntity>> GetAync(
           Expression<Func<TEntity, bool>> filter = null,
           Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, int records = 0,
           string includeProperties = "")
         {
             IQueryable<TEntity> query = dbSet;
-            if (_cache.TryGetValue(cacheKey, out IQueryable<TEntity> cachedList))
-            {
-                if (records > 0)
-                    cachedList = query.Take(records);
-                _cache.Set(cacheKey, cachedList, new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromMinutes(60)));
-                return await cachedList.ToListAsync();
-            }
             if (filter != null)
             {
                 query = query.Where(filter);
@@ -102,6 +84,7 @@ namespace figma.Data
             {
                 query = query.Take(records);
             }
+
             return await query.ToListAsync();
         }
 
@@ -140,6 +123,28 @@ namespace figma.Data
             dbSet.Attach(entityToUpdate);
             _context.Entry(entityToUpdate).State = EntityState.Modified;
         }
+
+        //public async Task<IReadOnlyList<T>> GetAllAsync()
+        //{
+        //    if (!_cacheService(cacheTech).TryGet(cacheKey, out IReadOnlyList<T> cachedList))
+        //    {
+        //        cachedList = await _dbContext
+        //         .Set<T>()
+        //         .ToListAsync();
+        //        _cacheService(cacheTech).Set(cacheKey, cachedList);
+        //    }
+        //    return cachedList;
+        //}
+        //private readonly static Cache cacheTech = Cache.Memory;
+        //private readonly string cacheKey = $"{typeof(T)}";
+        //private readonly ApplicationContext _dbContext;
+        //private readonly Func<Cache, ICacheService> _cacheService;
+
+        //public GenericRepositoryAsync(ApplicationContext dbContext, Func<Cache, ICacheService> cacheService)
+        //{
+        //    _dbContext = dbContext;
+        //    _cacheService = cacheService;
+        //}
     }
 }
 
