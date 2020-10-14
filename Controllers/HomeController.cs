@@ -64,7 +64,6 @@ namespace figma.Controllers
             {
                 return RedirectToActionPermanent("Index");
             }
-            var tagP = _unitOfWork.TagsProductsRepository.Get(a => a.ProductID == proId, includeProperties: "Tags,Products");
             var products = _unitOfWork.ProductRepository.Get(
                 a => a.Active && a.ProductCategorieID == product.ProductCategorieID && a.ProductID != proId,
                 q => q.OrderByDescending(a => a.Sort), 8);
@@ -75,7 +74,7 @@ namespace figma.Controllers
                 ViewProducts = _unitOfWork.ProductRepository.Get().ToList(),
                 RootCategory = ProductCategories.SingleOrDefault(a => a.ProductCategorieID == product.ProductCategorieID),
                 Collection = Collections.SingleOrDefault(a => a.CollectionID == product.CollectionID),
-                TagProducts = tagP,
+                TagProducts = _unitOfWork.TagsProductsRepository.Get(a => a.ProductID == proId, includeProperties: "Tags,Products"),
                 ProductSizeColors = _unitOfWork.ProductSCRepository.Get(includeProperties: "Size,Color").ToList()
             };
             return View(model);
