@@ -20,7 +20,10 @@ namespace figma.Models
 
         [Key, Column(Order = 3)]
         public string Color { get; set; }
-        public decimal? Price { get; set; }
+
+        [DataType(DataType.Currency)]
+        [Column(TypeName = "decimal(18, 0)")]
+        public decimal Price { get; set; }
         public virtual Order Order { get; set; }
         public virtual Products Product { get; set; }
     }

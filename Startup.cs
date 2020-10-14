@@ -41,6 +41,7 @@ namespace figma
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMemoryCache();
             services.AddTransient<IMailer, Mailer>();
             //  services.Configure<Smtp>(Configuration.GetSection("Smtp"));
             services.Configure<Smtp>(Configuration);

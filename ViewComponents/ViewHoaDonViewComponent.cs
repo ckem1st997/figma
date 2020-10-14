@@ -20,7 +20,7 @@ namespace figma.ViewComponents
         }
         public async Task<IViewComponentResult> InvokeAsync(int orderId)
         {
-            var order = _unitOfWork.OrderRepository.Get(a => a.Id == orderId, includeProperties: "OrderDetails");
+            var order = await _unitOfWork.OrderRepository.GetAync(a => a.Id == orderId, includeProperties: "OrderDetails");
             ViewBag.pro = _unitOfWork.ProductRepository.Get().Select(a => a.ProductID);
             foreach (var item in ViewBag.pro)
             {

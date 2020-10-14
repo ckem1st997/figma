@@ -4,15 +4,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using figma.Models;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace figma.DAL
 {
     public class UnitOfWork : IDisposable
     {
         private readonly ShopProductContext _context;
-        public UnitOfWork(ShopProductContext shopProduct)
+        private IMemoryCache _cache;
+        public UnitOfWork(ShopProductContext shopProduct, IMemoryCache cache)
         {
             _context = shopProduct;
+            _cache = cache;
         }
 
         private GenericRepository<Admins> _adminRepository;
@@ -37,27 +40,27 @@ namespace figma.DAL
         private GenericRepository<Size> _sizeRepository;
         private GenericRepository<Color> _colorRepository;
 
-        public GenericRepository<Order> OrderRepository => _orderRepository ?? (_orderRepository = new GenericRepository<Order>(_context));
-        public GenericRepository<OrderDetail> OrderDetailRepository => _orderdetailRepository ?? (_orderdetailRepository = new GenericRepository<OrderDetail>(_context));
-        public GenericRepository<Carts> CartRepository => _cartRepository ?? (_cartRepository = new GenericRepository<Carts>(_context));
-        public GenericRepository<Members> MemberRepository => _memberRepository ?? (_memberRepository = new GenericRepository<Members>(_context));
-        public GenericRepository<Products> ProductRepository => _productRepository ?? (_productRepository = new GenericRepository<Products>(_context));
-        public GenericRepository<ProductCategories> ProductCategoryRepository => _productcategoryRepository ?? (_productcategoryRepository = new GenericRepository<ProductCategories>(_context));
-        public GenericRepository<Albums> AlbumRepository => _albumRepository ?? (_albumRepository = new GenericRepository<Albums>(_context));
-        public GenericRepository<Videos> VideoRepository => _videoRepository ?? (_videoRepository = new GenericRepository<Videos>(_context));
-        public GenericRepository<ConfigSites> ConfigSiteRepository => _configRepository ?? (_configRepository = new GenericRepository<ConfigSites>(_context));
-        public GenericRepository<Abouts> AboutRepository => _aboutRepository ?? (_aboutRepository = new GenericRepository<Abouts>(_context));
-        public GenericRepository<Tags> TagRepository => _tagRepository ?? (_tagRepository = new GenericRepository<Tags>(_context));
-        public GenericRepository<TagProducts> TagsProductsRepository => _tagProductsRepository ?? (_tagProductsRepository = new GenericRepository<TagProducts>(_context));
-        public GenericRepository<Contacts> ContactRepository => _contactRepository ?? (_contactRepository = new GenericRepository<Contacts>(_context));
-        public GenericRepository<Banners> BannerRepository => _bannerRepository ?? (_bannerRepository = new GenericRepository<Banners>(_context));
-        public GenericRepository<Article> ArticleRepository => _articleRepository ?? (_articleRepository = new GenericRepository<Article>(_context));
-        public GenericRepository<Size> SizeRepository => _sizeRepository ?? (_sizeRepository = new GenericRepository<Size>(_context));
-        public GenericRepository<Color> ColorRepository => _colorRepository ?? (_colorRepository = new GenericRepository<Color>(_context));
-        public GenericRepository<ArticleCategory> ArticleCategoryRepository => _artcategoryRepository ?? (_artcategoryRepository = new GenericRepository<ArticleCategory>(_context));
-        public GenericRepository<Admins> AdminRepository => _adminRepository ?? (_adminRepository = new GenericRepository<Admins>(_context));
-        public GenericRepository<ProductSizeColor> ProductSCRepository => _productSCRepository ?? (_productSCRepository = new GenericRepository<ProductSizeColor>(_context));
-        public GenericRepository<Collection> CollectionRepository => _collectionRepository ?? (_collectionRepository = new GenericRepository<Collection>(_context));
+        public GenericRepository<Order> OrderRepository => _orderRepository ?? (_orderRepository = new GenericRepository<Order>(_context, _cache));
+        public GenericRepository<OrderDetail> OrderDetailRepository => _orderdetailRepository ?? (_orderdetailRepository = new GenericRepository<OrderDetail>(_context, _cache));
+        public GenericRepository<Carts> CartRepository => _cartRepository ?? (_cartRepository = new GenericRepository<Carts>(_context, _cache));
+        public GenericRepository<Members> MemberRepository => _memberRepository ?? (_memberRepository = new GenericRepository<Members>(_context, _cache));
+        public GenericRepository<Products> ProductRepository => _productRepository ?? (_productRepository = new GenericRepository<Products>(_context, _cache));
+        public GenericRepository<ProductCategories> ProductCategoryRepository => _productcategoryRepository ?? (_productcategoryRepository = new GenericRepository<ProductCategories>(_context, _cache));
+        public GenericRepository<Albums> AlbumRepository => _albumRepository ?? (_albumRepository = new GenericRepository<Albums>(_context, _cache));
+        public GenericRepository<Videos> VideoRepository => _videoRepository ?? (_videoRepository = new GenericRepository<Videos>(_context, _cache));
+        public GenericRepository<ConfigSites> ConfigSiteRepository => _configRepository ?? (_configRepository = new GenericRepository<ConfigSites>(_context, _cache));
+        public GenericRepository<Abouts> AboutRepository => _aboutRepository ?? (_aboutRepository = new GenericRepository<Abouts>(_context, _cache));
+        public GenericRepository<Tags> TagRepository => _tagRepository ?? (_tagRepository = new GenericRepository<Tags>(_context, _cache));
+        public GenericRepository<TagProducts> TagsProductsRepository => _tagProductsRepository ?? (_tagProductsRepository = new GenericRepository<TagProducts>(_context, _cache));
+        public GenericRepository<Contacts> ContactRepository => _contactRepository ?? (_contactRepository = new GenericRepository<Contacts>(_context, _cache));
+        public GenericRepository<Banners> BannerRepository => _bannerRepository ?? (_bannerRepository = new GenericRepository<Banners>(_context, _cache));
+        public GenericRepository<Article> ArticleRepository => _articleRepository ?? (_articleRepository = new GenericRepository<Article>(_context, _cache));
+        public GenericRepository<Size> SizeRepository => _sizeRepository ?? (_sizeRepository = new GenericRepository<Size>(_context, _cache));
+        public GenericRepository<Color> ColorRepository => _colorRepository ?? (_colorRepository = new GenericRepository<Color>(_context, _cache));
+        public GenericRepository<ArticleCategory> ArticleCategoryRepository => _artcategoryRepository ?? (_artcategoryRepository = new GenericRepository<ArticleCategory>(_context, _cache));
+        public GenericRepository<Admins> AdminRepository => _adminRepository ?? (_adminRepository = new GenericRepository<Admins>(_context, _cache));
+        public GenericRepository<ProductSizeColor> ProductSCRepository => _productSCRepository ?? (_productSCRepository = new GenericRepository<ProductSizeColor>(_context, _cache));
+        public GenericRepository<Collection> CollectionRepository => _collectionRepository ?? (_collectionRepository = new GenericRepository<Collection>(_context, _cache));
 
         public async Task Save()
         {

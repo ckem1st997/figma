@@ -24,11 +24,9 @@ namespace figma.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-
             var items = new HeaderViewModel()
             {
-                ConfigSites = await _unitOfWork.ConfigSiteRepository.GetAync(),
-                Abouts = await _unitOfWork.AboutRepository.GetAync(),
+                ConfigSites = await _unitOfWork.ConfigSiteRepository.GetAync(),              
                 ArticleCategories = await _unitOfWork.ArticleCategoryRepository.GetAync(),
                 ProductCategories = await _unitOfWork.ProductCategoryRepository.GetAync(a => a.Active && a.Home, q => q.OrderBy(a => a.Soft)),
                 Carts = await _unitOfWork.CartRepository.GetAync(a => a.CartID == _httpContextAccessor.HttpContext.Request.Cookies["CartID"])

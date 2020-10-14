@@ -32,26 +32,20 @@ namespace figma.Controllers
             _iMemoryCache = memoryCache;
             _unitOfWork = unitOfWork;
         }
-        private IEnumerable<Banners> Banners => _unitOfWork.BannerRepository.Get(a => a.Active, q => q.OrderBy(a => a.Soft));
-        private IEnumerable<ConfigSites> ConfigSites => _unitOfWork.ConfigSiteRepository.Get().ToList();
         private IEnumerable<ProductCategories> ProductCategories => _unitOfWork.ProductCategoryRepository.Get(a => a.Active, q => q.OrderByDescending(a => a.Soft));
-        private IEnumerable<ProductSizeColor> ProductSizeColors => _unitOfWork.ProductSCRepository.Get(includeProperties: "Size,Color").ToList();
         private IEnumerable<Collection> Collections => _unitOfWork.CollectionRepository.Get(a => a.Active);
-        private IEnumerable<ArticleCategory> ArticleCategories => _unitOfWork.ArticleCategoryRepository.Get(a => a.CategoryActive, q => q.OrderByDescending(a => a.CategorySort));
+        //private IEnumerable<ArticleCategory> ArticleCategories => _unitOfWork.ArticleCategoryRepository.Get(a => a.CategoryActive, q => q.OrderByDescending(a => a.CategorySort));
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            // await _mailer.SendEmailSync("hopxc1997@gmail.com", "subject", "body");
             var model = new HomeViewModel
             {
                 Products = _unitOfWork.ProductRepository.Get(a => a.Active, q => q.OrderBy(a => a.Sort), 12),
-                Banners = Banners,
-                ConfigSites = ConfigSites
+                Banners = _unitOfWork.BannerRepository.Get(a => a.Active, q => q.OrderBy(a => a.Soft)),
+                ConfigSites = _unitOfWork.ConfigSiteRepository.Get()
             };
             return View(model);
         }
-        //
-
 
         [Route("{name}-{proId}.html")]
         public IActionResult Product(int proId = 0)
@@ -82,7 +76,7 @@ namespace figma.Controllers
                 RootCategory = ProductCategories.SingleOrDefault(a => a.ProductCategorieID == product.ProductCategorieID),
                 Collection = Collections.SingleOrDefault(a => a.CollectionID == product.CollectionID),
                 TagProducts = tagP,
-                ProductSizeColors = ProductSizeColors
+                ProductSizeColors = _unitOfWork.ProductSCRepository.Get(includeProperties: "Size,Color").ToList()
             };
             return View(model);
         }
@@ -103,14 +97,12 @@ namespace figma.Controllers
         }
 
         [Route("ListReview")]
-        public async Task<IActionResult> ListReview()
+        public IActionResult ListReview()
         {
-            var ar = await _unitOfWork.ArticleRepository.GetAync();
-            var listAr = await _unitOfWork.ArticleCategoryRepository.GetAync(a => a.CategoryActive && a.ShowHome && a.ShowHome, records: 30);
             var model = new ReviewViewModel()
             {
-                Articles = ar,
-                ListArticles = listAr
+                Articles = _unitOfWork.ArticleRepository.Get(),
+                ListArticles = _unitOfWork.ArticleCategoryRepository.Get(a => a.CategoryActive && a.ShowHome && a.ShowHome, records: 30)
             };
 
             return View(model);
