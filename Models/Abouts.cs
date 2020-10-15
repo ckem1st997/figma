@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace figma.Models
 {
-
     public partial class Abouts
     {
         [Key]
