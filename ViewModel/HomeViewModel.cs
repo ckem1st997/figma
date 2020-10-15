@@ -1,8 +1,5 @@
 ﻿using figma.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace figma.ViewModel
 {
@@ -46,10 +43,4 @@ namespace figma.ViewModel
         public IEnumerable<ArticleCategory> ListArticles { get; set; }
 
     }
-
-
-
-
-
-   
 }
