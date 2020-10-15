@@ -14,12 +14,9 @@ namespace figma.CustomHandler
     public class RolesAuthorizationHandler : AuthorizationHandler<RolesAuthorizationRequirement>, IAuthorizationHandler
     {
         public readonly ShopProductContext _context;
-
-        //     private readonly IHttpContextAccessor _httpContextAccessor;
-        public RolesAuthorizationHandler(ShopProductContext context/*, IHttpContextAccessor httpContextAccessor*/)
+        public RolesAuthorizationHandler(ShopProductContext context)
         {
             _context = context;
-            //   _httpContextAccessor = httpContextAccessor;
         }
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context,
                                                        RolesAuthorizationRequirement requirement)
@@ -30,7 +27,6 @@ namespace figma.CustomHandler
                 context.Fail();
                 return Task.CompletedTask;
             }
-            // requirement.AllowedRoles =(Roles = "Admin"
             var validRole = false;
             if (requirement.AllowedRoles == null ||
                 requirement.AllowedRoles.Any() == false)
@@ -44,9 +40,6 @@ namespace figma.CustomHandler
                 var userName = claims.FirstOrDefault(c => c.Type == "UserName").Value;
                 var userRole = claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
                 var roles = requirement.AllowedRoles;
-                // Console.WriteLine(11111);
-                // Console.WriteLine(_httpContextAccessor.HttpContext.Session.GetString(ClaimTypes.Role));
-                // validRole = context1.Users.Where(p => roles.Contains(p.Role) && p.UserName == userName).ToList().Any();
                 validRole = _context.Members.ToList().Where(p => roles.Contains(p.Role) && p.Email == userName).Any();
 
             }

@@ -6,15 +6,12 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using MimeKit;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace figma.Services
 {
     public class Mailer : IMailer
     {
-        // private readonly Smtp _smtp;
         private readonly IWebHostEnvironment _env;
         public Smtp _smtp { get; }
         public Mailer(IOptions<Smtp> smtp, IWebHostEnvironment env)

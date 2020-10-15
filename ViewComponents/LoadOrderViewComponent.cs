@@ -1,9 +1,6 @@
 ﻿using figma.DAL;
 using figma.ViewModel;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace figma.ViewComponents
@@ -20,7 +17,7 @@ namespace figma.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync(int orderId = 0)
         {
             var order = _unitOfWork.OrderRepository.GetByID(orderId);
-            var orderrderdetails = _unitOfWork.OrderDetailRepository.Get(a => a.OrderId == orderId, includeProperties: "Product,Order");
+            var orderrderdetails = await _unitOfWork.OrderDetailRepository.GetAync(a => a.OrderId == orderId, includeProperties: "Product,Order");
             var model = new OrderViewModel
             {
                 Order = order,

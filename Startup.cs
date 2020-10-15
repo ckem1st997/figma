@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,16 +14,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
 using figma.CustomHandler;
-
 using figma.DAL;
-using System.Text;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Server.IISIntegration;
-using Microsoft.AspNetCore.Http.Features;
 using figma.Interface;
-using figma.OutFile;
 using figma.Models;
 using figma.Services;
+using Microsoft.AspNetCore.Antiforgery;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 
 namespace figma
 {
@@ -98,82 +91,23 @@ namespace figma
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped(typeof(GenericRepository<>));
             services.AddScoped<UnitOfWork>();
+            services.AddSingleton<HtmlEncoder>(
+     HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.BasicLatin,
+                                               UnicodeRanges.CjkUnifiedIdeographs }));
+            services.AddAntiforgery(options =>
+            {
+                // Set Cookie properties using CookieBuilder properties†.
+                options.FormFieldName = "AntiforgeryFieldname";
+                options.HeaderName = "X-CSRF-TOKEN-HEADERNAME";
+                options.SuppressXFrameOptionsHeader = false;
+            });
             services.AddRazorPages();
         }
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IConfiguration config)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                //if (env.IsDevelopment())
-                //{
-                //    app.UseDeveloperExceptionPage();
-                //    app.Run(async (context) =>
-                //    {
-                //        var sb = new StringBuilder();
-                //        var nl = System.Environment.NewLine;
-                //        var rule = string.Concat(nl, new string('-', 40), nl);
-                //        var authSchemeProvider = app.ApplicationServices
-                //            .GetRequiredService<IAuthenticationSchemeProvider>();
-
-                //        sb.Append($"Request{rule}");
-                //        sb.Append($"{DateTimeOffset.Now}{nl}");
-                //        sb.Append($"{context.Request.Method} {context.Request.Path}{nl}");
-                //        sb.Append($"Scheme: {context.Request.Scheme}{nl}");
-                //        sb.Append($"Host: {context.Request.Headers["Host"]}{nl}");
-                //        sb.Append($"PathBase: {context.Request.PathBase.Value}{nl}");
-                //        sb.Append($"Path: {context.Request.Path.Value}{nl}");
-                //        sb.Append($"Query: {context.Request.QueryString.Value}{nl}{nl}");
-
-                //        sb.Append($"Connection{rule}");
-                //        sb.Append($"RemoteIp: {context.Connection.RemoteIpAddress}{nl}");
-                //        sb.Append($"RemotePort: {context.Connection.RemotePort}{nl}");
-                //        sb.Append($"LocalIp: {context.Connection.LocalIpAddress}{nl}");
-                //        sb.Append($"LocalPort: {context.Connection.LocalPort}{nl}");
-                //        sb.Append($"ClientCert: {context.Connection.ClientCertificate}{nl}{nl}");
-
-                //        sb.Append($"Identity{rule}");
-                //        sb.Append($"User: {context.User.Identity.Name}{nl}");
-                //        var scheme = await authSchemeProvider
-                //            .GetSchemeAsync(IISDefaults.AuthenticationScheme);
-                //        sb.Append($"DisplayName: {scheme?.DisplayName}{nl}{nl}");
-
-                //        sb.Append($"Headers{rule}");
-                //        foreach (var header in context.Request.Headers)
-                //        {
-                //            sb.Append($"{header.Key}: {header.Value}{nl}");
-                //        }
-                //        sb.Append(nl);
-
-                //        sb.Append($"Websockets{rule}");
-                //        if (context.Features.Get<IHttpUpgradeFeature>() != null)
-                //        {
-                //            sb.Append($"Status: Enabled{nl}{nl}");
-                //        }
-                //        else
-                //        {
-                //            sb.Append($"Status: Disabled{nl}{nl}");
-                //        }
-
-                //        sb.Append($"Configuration{rule}");
-                //        foreach (var pair in config.AsEnumerable())
-                //        {
-                //            sb.Append($"{pair.Key}: {pair.Value}{nl}");
-                //        }
-                //        sb.Append(nl);
-
-                //        sb.Append($"Environment Variables{rule}");
-                //        var vars = System.Environment.GetEnvironmentVariables();
-                //        foreach (var key in vars.Keys.Cast<string>().OrderBy(key => key,
-                //            StringComparer.OrdinalIgnoreCase))
-                //        {
-                //            var value = vars[key];
-                //            sb.Append($"{key}: {value}{nl}");
-                //        }
-
-                //        context.Response.ContentType = "text/plain";
-                //        await context.Response.WriteAsync(sb.ToString());
-                //    });
             }
             else
             {
@@ -183,7 +117,6 @@ namespace figma
             }
 
             app.UseStaticFiles();
-
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();

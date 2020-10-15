@@ -37,8 +37,6 @@ namespace figma.ViewModel
     {
         public IEnumerable<Products> Products { get; set; }
         public IEnumerable<ProductSizeColor> ProductSizeColors { get; set; }
-        //public IEnumerable<Color> Colors { get; set; }
-        //public IEnumerable<Size> Sizes { get; set; }
     }
 
     public class ReviewViewModel

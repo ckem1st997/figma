@@ -1,19 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
-using figma.Data;
 using figma.Models;
 using figma.OutFile;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +14,6 @@ using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
 using figma.ViewModel;
-using figma.CustomHandler;
 using figma.DAL;
 using System.Globalization;
 using OfficeOpenXml.Style;
@@ -30,21 +22,10 @@ using OfficeOpenXml;
 namespace figma.Controllers
 {
     [Authorize(Roles = "Admin")]
-    // giới hạn kích thước file
-    //  [RequestFormLimits(MultipartBodyLengthLimit = 4096000)]
-    //[Authorize(AuthenticationSchemes = AuthSchemes)]
-
     public class CsmController : Controller
     {
-        // xác thực cả 2 loại
-        // private const string AuthSchemes =
-        //CookieAuthenticationDefaults.AuthenticationScheme + "," +
-        //JwtBearerDefaults.AuthenticationScheme;
-
         private readonly UnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _hostingEnvironment;
-
-        //   private readonly ShopProductContext _context;
 
         public CsmController(IWebHostEnvironment hostEnvironment, UnitOfWork unitOfWork)
         {
@@ -281,15 +262,12 @@ namespace figma.Controllers
         #region ProductsSizeColors      
 
         private IEnumerable<ProductSizeColor> ProductSizeColors => _unitOfWork.ProductSCRepository.Get(includeProperties: "Size,Color").ToList();
+
         private IEnumerable<Products> Products => _unitOfWork.ProductRepository.Get().ToList();
+
         public IActionResult ProductsSCIndex()
         {
-            //var query =
-            //    from post in _unitOfWork.ProductSCRepository.Get()
-            //    join meta in _unitOfWork.SizeRepository.Get() on post.SizeID equals meta.SizeID
-            //    join meta1 in _unitOfWork.ColorRepository.Get() on post.ColorID equals meta1.ColorID
-            //    join meta2 in _unitOfWork.ProductRepository.Get() on post.ProductID equals meta2.ProductID
-            //    select new PSC { id = post.Id, name = meta2.Name, color = meta1.NameColor, size = meta.SizeProduct, image = meta2.Image }; 
+
             var query = new ProductSCViewModel()
             {
                 ProductSizeColors = ProductSizeColors,
@@ -307,20 +285,6 @@ namespace figma.Controllers
         }
         //
 
-        // bộ lọc chống giả mạo ajax
-        // [AutoValidateAntiforgeryToken]
-        //[HttpPost]
-        //[IgnoreAntiforgeryToken]
-        //public JsonResult AutoCompleteCity(string Prefix)
-        //{
-        //    //Searching records from list using LINQ query  
-        //    var ProductsName = (from N in _context.Products
-        //                        where N.Name.StartsWith(Prefix)
-        //                        select new { N.Name }).Take(3);
-        //    return Json(ProductsName);
-        //}
-
-        //
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ProductsSCCreate([Bind("Id,ProductID,ColorID,SizeID")] ProductSizeColor productSizeColor)
@@ -884,8 +848,6 @@ namespace figma.Controllers
         {
             if (ModelState.IsValid)
             {
-                //articles.View = 1;
-                //articles.CreateDate = DateTime.Now;
                 articles.Hot = true;
                 _unitOfWork.ArticleRepository.Insert(articles);
                 await _unitOfWork.Save();
@@ -1527,14 +1489,11 @@ namespace figma.Controllers
                     ws.Cells[i, 9].Value = order.CreateDate.ToString("dd/MM/yyyy HH:mm");
                     ws.Cells[i, 10].Value = order.TransportDate.ToString("dd/MM/yyyy");
                     ws.Cells[i, 11].Value = transport;
-                    ws.Cells[i, 12].Value = order.Payment == false ? "Chưa thanh toán" : "Đã thanh toán";
+                    ws.Cells[i, 12].Value = !order.Payment ? "Chưa thanh toán" : "Đã thanh toán";
                     ws.Cells[i, 13].Value = status;
                     ws.Cells[i, 14].Value = order.Body;
                     i++;
                 }
-
-                //Load the datatable into the sheet, starting from cell A1. Print the column names on row 1
-                //ws.Cells["A1"].LoadFromDataTable(dt, true);
 
                 //Format the header for column 1-14
                 using (var rng = ws.Cells["A1:N1"])
@@ -1552,168 +1511,6 @@ namespace figma.Controllers
             }
         }
         #endregion
-
-
-        //        #region Admin
-
-        //        public class RegisterViewModel
-        //        {
-
-        //            [Required, MaxLength(50)]
-        //            public string Username { get; set; }
-
-        //            [Required, DataType(DataType.Password), MaxLength(20, ErrorMessage = "Mật khẩu phải ít hơn 20 kí tự"), MinLength(5, ErrorMessage = "Mật khẩu phải nhiều hơn 4 kí tự")]
-        //            public string Password { get; set; }
-
-        //            [DataType(DataType.Password), Compare(nameof(Password)), MaxLength(20, ErrorMessage = "Mật khẩu phải ít hơn 20 kí tự"), MinLength(5, ErrorMessage = "Mật khẩu phải nhiều hơn 4 kí tự")]
-        //            public string ConfirmPassword { get; set; }
-        //        }
-
-        //        public class LoginViewModel
-        //        {
-
-        //            [Required, MaxLength(50)]
-        //            public string Username { get; set; }
-
-        //            [Required, DataType(DataType.Password), MaxLength(20, ErrorMessage = "Mật khẩu phải ít hơn 20 kí tự"), MinLength(5, ErrorMessage = "Mật khẩu phải nhiều hơn 4 kí tự")]
-        //            public string Password { get; set; }
-        //        }
-
-        //        [HttpGet]
-        //        [AllowAnonymous]
-        //        public ActionResult LoginCsm()
-        //        {
-        //            try
-        //            {
-        //                HttpContext.SignOutAsync(
-        //CookieAuthenticationDefaults.AuthenticationScheme);
-        //            }
-        //            catch (Exception)
-        //            {
-
-        //                return View();
-
-        //            }
-
-        //            return View();
-        //        }
-
-        //        [HttpPost]
-        //        [AllowAnonymous]
-        //        public async Task<ActionResult> LoginCsm([Bind] LoginViewModel user, string returnUrl)
-        //        {
-        //            returnUrl = returnUrl ?? Url.Content("~/");
-        //            if (ModelState.IsValid)
-        //            {
-        //                if (ValidateAdmin(user.Username, user.Password))
-        //                {
-        //                    var users = _context.Admins.SingleOrDefault(a => a.Username == user.Username);
-        //                    if (users != null)
-        //                    {
-        //                        var userClaims = new List<Claim>()
-        //                {
-        //                    new Claim("UserName", users.Username),
-        //                    new Claim(ClaimTypes.Role, users.Role==null?"notAdmin":users.Role)
-        //                 };
-        //                        // add session
-        //                        //foreach (var item in userClaims)
-        //                        //{
-        //                        //    HttpContext.Session.SetString(item.Type, item.Value);
-
-        //                        //}
-        //                        var userIdentity = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme);
-
-        //                        var authProperties = new AuthenticationProperties
-        //                        {
-        //                            AllowRefresh = true,
-        //                            IsPersistent = true
-        //                        };
-        //                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(userIdentity), authProperties);
-        //                        //    Execute("shoponline@gmail.com", "Shop1997", "hopxc1997@gmail.com", "Nguyễn Khả Hợp", "Thanh toán", "Đã mua").Wait();
-        //                        //if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
-        //                        //   && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
-        //                        //{
-        //                        //    return Redirect(returnUrl);
-        //                        //}
-        //                        TempData["tq"] = "Thành công !";
-        //                        return RedirectToAction("Index", "Csm");
-
-        //                    }
-        //                    else
-        //                    {
-        //                        ModelState.AddModelError(string.Empty, "Tên đăng nhập không tồn tại");
-        //                        return View(user);
-        //                    }
-        //                }
-        //                else
-        //                {
-        //                    ModelState.AddModelError(string.Empty, "Tên đăng nhập hoặc mật khẩu không chính xác.");
-        //                    return View();
-        //                }
-        //            }
-        //            TempData["tq"] = "Thất bại !";
-
-        //            return View(user);
-        //        }
-
-        //        [AllowAnonymous]
-        //        public bool ValidateAdmin(string username, string password)
-        //        {
-        //            var admin = _context.Admins.SingleOrDefault(a => a.Username == username);
-        //            return admin != null && new PasswordHasher<Admins>().VerifyHashedPassword(new Admins(), admin.Password, password) == PasswordVerificationResult.Success;
-        //        }
-        //        //
-        //        [AllowAnonymous]
-        //        [HttpGet]
-        //        public ActionResult UserAccessDenied()
-        //        {
-        //            return View();
-        //        }
-
-        //        public async Task<IActionResult> Logout()
-        //        {
-        //            //  returnUrl = returnUrl ?? Url.Content("~/");
-        //            await HttpContext.SignOutAsync(
-        //                CookieAuthenticationDefaults.AuthenticationScheme);
-        //            return RedirectToAction("Index");
-        //        }
-
-        //        [AllowAnonymous]
-        //        [HttpGet]
-        //        public ActionResult Register()
-        //        {
-        //            return View();
-        //        }
-
-        //        [AllowAnonymous]
-        //        [HttpPost]
-        //        [ValidateAntiForgeryToken]
-        //        public async Task<IActionResult> Register(RegisterViewModel model)
-        //        {
-        //            if (ModelState.IsValid)
-        //            {
-        //                var dk = _context.Admins.Where(a => a.Username.Equals(model.Username)).SingleOrDefault();
-        //                if (dk != null)
-        //                {
-        //                    ModelState.AddModelError("", @"Tên đăng nhập này có rồi");
-        //                }
-        //                else
-        //                {
-        //                    var hashedPassword = new PasswordHasher<Admins>().HashPassword(new Admins(), model.Password);
-        //                    await _context.Admins.AddAsync(new Admins { Username = model.Username, Password = hashedPassword, Role = "Admin", Active = true });
-        //                    await _context.SaveChangesAsync();
-        //                    TempData["tq"] = "Thành công";
-        //                    return RedirectToAction("LoginCsm", "Csm");
-        //                }
-        //                ModelState.AddModelError("", "Lỗi đăng ký, xin vui lòng thử lại nha");
-
-        //            }
-        //            TempData["tq"] = "Thất bại";
-
-        //            return View(model);
-        //        }
-
-        //        #endregion
         protected override void Dispose(bool disposing)
         {
             _unitOfWork.Dispose();

@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Claims;
-using System.Threading;
 using System.Threading.Tasks;
-using figma.Data;
 using figma.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -17,16 +15,13 @@ using figma.DAL;
 using Microsoft.Extensions.Caching.Memory;
 using figma.ViewModel;
 using figma.OutFile;
-using Microsoft.Extensions.Caching.Distributed;
-using System.Text;
-using figma.Interface;
 
 namespace figma.Controllers
 {
     public class HomeController : Controller
     {
         private readonly UnitOfWork _unitOfWork;
-        private IMemoryCache _iMemoryCache;
+        private readonly IMemoryCache _iMemoryCache;
         public HomeController(UnitOfWork unitOfWork, IMemoryCache memoryCache)
         {
             _iMemoryCache = memoryCache;
