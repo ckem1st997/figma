@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using figma.DAL;
 using figma.Interface;
 using figma.Models;
 using figma.ViewModel;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -135,26 +135,26 @@ namespace figma.Controllers
                         break;
                 }
                 var tongtien = 0m;
-                var sb = "<p style='font-size:16px'>Thông tin đơn hàng gửi từ website " + Request.Host.Value + "</p>";
-                sb += "<p>Mã đơn hàng: <strong>" + model.Order.MaDonHang + "</strong></p>";
-                sb += "<p>Họ và tên: <strong>" + model.Order.Fullname + "</strong></p>";
-                sb += "<p>Địa chỉ: <strong>" + model.Order.Address + "</strong></p>";
-                sb += "<p>Email: <strong>" + model.Order.Email + "</strong></p>";
-                sb += "<p>Điện thoại: <strong>" + model.Order.Mobile + "</strong></p>";
-                sb += "<p>Yêu cầu thêm: <strong>" + model.Order.Body + "</strong></p>";
-                sb += "<p>Ngày đặt hàng: <strong>" + model.Order.CreateDate.ToString("dd-MM-yyyy HH:ss") + "</strong></p>";
-                sb += "<p>Ngày giao hàng: <strong>" + model.Order.TransportDate.ToString("dd-MM-yyyy") + "</strong></p>";
-                sb += "<p>Hình thức giao hàng: <strong>" + giaohang + "</strong></p>";
-                sb += "<p>Hình thức thanh toán: <strong>" + typepay + "</strong></p>";
-                sb += "<p>Thông tin đơn hàng</p>";
-                sb += "<table border='1' cellpadding='10' style='border:1px #ccc solid;border-collapse: collapse'>" +
+                StringBuilder sb = new StringBuilder();
+                sb.Append("<p>Mã đơn hàng: <strong>" + model.Order.MaDonHang + "</strong></p>");
+                sb.Append("<p>Họ và tên: <strong>" + model.Order.Fullname + "</strong></p>");
+                sb.Append("<p>Địa chỉ: <strong>" + model.Order.Address + "</strong></p>");
+                sb.Append("<p>Email: <strong>" + model.Order.Email + "</strong></p>");
+                sb.Append("<p>Điện thoại: <strong>" + model.Order.Mobile + "</strong></p>");
+                sb.Append("<p>Yêu cầu thêm: <strong>" + model.Order.Body + "</strong></p>");
+                sb.Append("<p>Ngày đặt hàng: <strong>" + model.Order.CreateDate.ToString("dd-MM-yyyy HH:ss") + "</strong></p>");
+                sb.Append("<p>Ngày giao hàng: <strong>" + model.Order.TransportDate.ToString("dd-MM-yyyy") + "</strong></p>");
+                sb.Append("<p>Hình thức giao hàng: <strong>" + giaohang + "</strong></p>");
+                sb.Append("<p>Hình thức thanh toán: <strong>" + typepay + "</strong></p>");
+                sb.Append("<p>Thông tin đơn hàng</p>");
+                sb.Append("<table border='1' cellpadding='10' style='border:1px #ccc solid;border-collapse: collapse'>" +
                       "<tr>" +
                       "<th>Ảnh sản phẩm</th>" +
                       "<th>Tên sản phẩm</th>" +
                       "<th>Số lượng</th>" +
                       "<th>Giá tiền</th>" +
                       "<th>Thành tiền</th>" +
-                      "</tr>";
+                      "</tr>");
                 foreach (var odetails in model.Order.OrderDetails)
                 {
                     var thanhtien = Convert.ToDecimal(odetails.Price * odetails.Quantity);
@@ -166,21 +166,21 @@ namespace figma.Controllers
                         img = "<img src='https://" + Request.Host.Value + "/" + odetails.Product.Image.Split(',')[0] + "' />";
                     }
 
-                    sb += "<tr>" +
+                    sb.Append("<tr>" +
                           "<td>" + img + "</td>" +
-                          "<td>" + "" + odetails.Product.Name + "-Color:" + odetails.Color + "-Size:" + odetails.Size + "";
+                          "<td>" + "" + odetails.Product.Name + "-Color:" + odetails.Color + "-Size:" + odetails.Size + "");
 
-                    sb += "</td>" +
+                    sb.Append("</td>" +
                           "<td style='text-align:center'>" + odetails.Quantity + "</td>" +
                           "<td style='text-align:center'>" + Convert.ToDecimal(odetails.Price).ToString("N0") + "</td>" +
                           "<td style='text-align:center'>" + thanhtien.ToString("N0") + " đ</td>" +
-                          "</tr>";
+                          "</tr>");
                 }
 
-                sb += "<tr><td colspan='5' style='text-align:right'><strong>Tổng tiền: " + tongtien.ToString("N0") + " đ</strong></td></tr>";
-                sb += "</table>";
-                sb += "<p>Cảm ơn bạn đã tin tưởng và mua hàng của chúng tôi.</p>";
-                await _mailer.SendEmailSync(model.Order.Email, "[" + model.Order.MaDonHang + "] Đơn đặt hàng từ website ShopAsp.Net", sb);
+                sb.Append("<tr><td colspan='5' style='text-align:right'><strong>Tổng tiền: " + tongtien.ToString("N0") + " đ</strong></td></tr>");
+                sb.Append("</table>");
+                sb.Append("<p>Cảm ơn bạn đã tin tưởng và mua hàng của chúng tôi.</p>");
+                await _mailer.SendEmailSync(model.Order.Email, "[" + model.Order.MaDonHang + "] Đơn đặt hàng từ website ShopAsp.Net", sb.ToString());
                 return RedirectToAction("CheckOutComplete", new { orderId = model.Order.MaDonHang });
             }
             model.Carts = GetCartItems();
@@ -268,7 +268,7 @@ namespace figma.Controllers
                 return Json(new { result = 0 });
             CartItem.Count = quantity;
             _unitOfWork.SaveNotAync();
-            return Json(new { result = 1 }); ;
+            return Json(new { result = 1 });
         }
 
         //
@@ -282,7 +282,7 @@ namespace figma.Controllers
 
             if (cartItem == null)
             {
-                return Json(new { result = 0 }); ;
+                return Json(new { result = 0 });
             }
             _unitOfWork.CartRepository.Delete(cartItem);
             _unitOfWork.SaveNotAync();
@@ -305,9 +305,9 @@ namespace figma.Controllers
                         if (cartItem.RecordID == int.Parse(list[i]))
                             _unitOfWork.CartRepository.Delete(cartItem);
                     }
-                    catch (Exception)
+                    catch (Exception e)
                     {
-                        continue;
+                        Console.WriteLine(e.Message);
                     }
                 }
             }

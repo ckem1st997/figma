@@ -19,14 +19,14 @@ namespace figma.Services
             _smtp = smtp.Value;
             _env = env;
         }
-        public async Task SendEmailSync(string email, string title, string body)
+        public async Task SendEmailSync(string email, string subject, string body)
         {
             try
             {
                 var message = new MimeMessage();
                 message.From.Add(new MailboxAddress(_smtp.SenderName, _smtp.SenderEmail));
                 message.To.Add(new MailboxAddress(_smtp.SenderName, email));
-                message.Subject = title;
+                message.Subject = subject;
                 message.Body = new TextPart("html")
                 {
                     Text = body

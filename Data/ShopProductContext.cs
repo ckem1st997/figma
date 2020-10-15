@@ -1,10 +1,4 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
+﻿using System.Reflection;
 using figma.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -60,10 +54,6 @@ namespace figma.Data
         public virtual DbSet<ProductSizeColor> ProductSizeColors { get; set; }
         public virtual DbSet<Article> Articles { get; set; }
         public virtual DbSet<ArticleCategory> ArticleCategories { get; set; }
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    // optionsBuilder.UseLazyLoadingProxies();
-        //}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 

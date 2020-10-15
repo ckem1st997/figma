@@ -1,21 +1,16 @@
 ﻿using figma.Data;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using figma.Models;
-using Microsoft.Extensions.Caching.Memory;
 
 namespace figma.DAL
 {
     public class UnitOfWork : IDisposable
     {
         private readonly ShopProductContext _context;
-        private IMemoryCache _cache;
-        public UnitOfWork(ShopProductContext shopProduct, IMemoryCache cache)
+        public UnitOfWork(ShopProductContext shopProduct)
         {
             _context = shopProduct;
-            _cache = cache;
         }
 
         private GenericRepository<Admins> _adminRepository;

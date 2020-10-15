@@ -24,7 +24,7 @@ namespace figma.ViewComponents
             ViewBag.pro = _unitOfWork.ProductRepository.Get().Select(a => a.ProductID);
             foreach (var item in ViewBag.pro)
             {
-                //  Console.WriteLine(item);
+
             }
             if (order == null)
             {

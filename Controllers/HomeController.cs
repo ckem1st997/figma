@@ -27,9 +27,6 @@ namespace figma.Controllers
             _iMemoryCache = memoryCache;
             _unitOfWork = unitOfWork;
         }
-        private IEnumerable<ProductCategories> ProductCategories => _unitOfWork.ProductCategoryRepository.Get(a => a.Active, q => q.OrderByDescending(a => a.Soft));
-        private IEnumerable<Collection> Collections => _unitOfWork.CollectionRepository.Get(a => a.Active);
-        //private IEnumerable<ArticleCategory> ArticleCategories => _unitOfWork.ArticleCategoryRepository.Get(a => a.CategoryActive, q => q.OrderByDescending(a => a.CategorySort));
 
         public IActionResult Index()
         {
@@ -67,8 +64,8 @@ namespace figma.Controllers
                 Product = product,
                 Products = products,
                 ViewProducts = _unitOfWork.ProductRepository.Get().ToList(),
-                RootCategory = ProductCategories.SingleOrDefault(a => a.ProductCategorieID == product.ProductCategorieID),
-                Collection = Collections.SingleOrDefault(a => a.CollectionID == product.CollectionID),
+                RootCategory = _unitOfWork.ProductCategoryRepository.Get(a => a.Active, q => q.OrderByDescending(a => a.Soft)).SingleOrDefault(a => a.ProductCategorieID == product.ProductCategorieID),
+                Collection = _unitOfWork.CollectionRepository.Get(a => a.Active).SingleOrDefault(a => a.CollectionID == product.CollectionID),
                 TagProducts = _unitOfWork.TagsProductsRepository.Get(a => a.ProductID == proId, includeProperties: "Tags,Products"),
                 ProductSizeColors = _unitOfWork.ProductSCRepository.Get(includeProperties: "Size,Color").ToList()
             };
@@ -128,7 +125,6 @@ namespace figma.Controllers
             var Products = await _unitOfWork.ProductRepository.GetAync(a => a.Active && (a.ProductCategorieID == catId || a.ProductCategories.ParentId == catId), orderBy: q => q.OrderBy(a => a.Name));
             if (!String.IsNullOrEmpty(searchString))
             {
-                //var Products = await _unitOfWork.ProductRepository.GetAync(a => a.Active, orderBy: q => q.OrderBy(a => a.Name));
                 Products = Products.Where(s => s.Name.Contains(searchString));
             }
             switch (sortOrder)
@@ -355,7 +351,6 @@ namespace figma.Controllers
             public bool Remember { get; set; }
         }
         #endregion
-
         protected override void Dispose(bool disposing)
         {
             _unitOfWork.Dispose();
@@ -363,10 +358,3 @@ namespace figma.Controllers
         }
     }
 }
-
-// Default client option values are shown
-//var clientOptions = new WebApplicationFactoryClientOptions();
-//clientOptions.AllowAutoRedirect = true;
-//clientOptions.BaseAddress = new Uri("http://localhost");
-//clientOptions.HandleCookies = true;
-//clientOptions.MaxAutomaticRedirections = 7;

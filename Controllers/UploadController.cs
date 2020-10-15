@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
-using figma.Data;
 using figma.OutFile;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -81,7 +79,7 @@ namespace figma.Controllers
             if (filesadd != null)
             {
 
-                string filepath = Path.Combine(_hostingEnvironment.WebRootPath, filesadd.Replace("/","\\"));
+                string filepath = Path.Combine(_hostingEnvironment.WebRootPath, filesadd.Replace("/", "\\"));
                 Console.WriteLine(filepath);
                 if (System.IO.File.Exists(filepath))
                 {
@@ -113,13 +111,12 @@ namespace figma.Controllers
                 {
                     Console.WriteLine("Path đã tồn tại !");
                 }
-                DirectoryInfo di = Directory.CreateDirectory(path);
+                Directory.CreateDirectory(path);
             }
             catch (Exception e)
             {
                 Console.WriteLine("The process failed: {0}", e.ToString());
             }
-            finally { }
         }
     }
 }

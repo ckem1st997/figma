@@ -261,17 +261,13 @@ namespace figma.Controllers
 
         #region ProductsSizeColors      
 
-        private IEnumerable<ProductSizeColor> ProductSizeColors => _unitOfWork.ProductSCRepository.Get(includeProperties: "Size,Color").ToList();
-
-        private IEnumerable<Products> Products => _unitOfWork.ProductRepository.Get().ToList();
-
         public IActionResult ProductsSCIndex()
         {
 
             var query = new ProductSCViewModel()
             {
-                ProductSizeColors = ProductSizeColors,
-                Products = Products
+                ProductSizeColors = _unitOfWork.ProductSCRepository.Get(includeProperties: "Size,Color").ToList(),
+                Products = _unitOfWork.ProductRepository.Get().ToList()
             };
             return View(query);
         }

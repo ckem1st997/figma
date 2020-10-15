@@ -1,11 +1,8 @@
 ﻿using figma.DAL;
-using figma.Data;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace figma.Models
 {
@@ -20,19 +17,10 @@ namespace figma.Models
             _unitOfWork = unitOfWork;
             _httpContextAccessor = httpContextAccessor;
         }
-        //   string ShoppingCartId { get; set; }
 
         public const string CartCookieKey = "CartId";
-        //public static ShoppingCart GetCart()
-        //{
-        //    shoppingCart.ShoppingCartId = GetCartId();
-        //    return shoppingCart;
-        //}
-        //public static ShoppingCart GetCart(Controller controller)
-        //{
-        //    return GetCart(controller.HttpContext);
-        //}
-        public async void AddToCart(Products product, decimal price, int quantity = 1, string color = null, string size = null, string ShoppingCartId = "")
+
+        public void AddToCart(Products product, decimal price, int quantity = 1, string color = null, string size = null, string ShoppingCartId = "")
         {
             var cartItem = _unitOfWork.CartRepository.Get(c => c.CartID == ShoppingCartId && c.ProductID == product.ProductID).SingleOrDefault();
 
@@ -55,7 +43,7 @@ namespace figma.Models
             {
                 cartItem.Count += quantity;
             }
-            await _unitOfWork.Save();
+            _unitOfWork.SaveNotAync();
         }
         public int RemoveFromCart(int id, string ShoppingCartId = "")
         {
@@ -63,23 +51,14 @@ namespace figma.Models
                 cart => cart.CartID == ShoppingCartId
                 && cart.RecordID == id).SingleOrDefault();
 
-            //var itemCount = 0;
+
 
             if (cartItem != null)
             {
-                //if (cartItem.Count > 1)
-                //{
-                //    cartItem.Count--;
-                //    itemCount = cartItem.Count;
-                //}
-                //else
-                //{
                 _unitOfWork.CartRepository.Delete(cartItem);
-                //}
                 _unitOfWork.SaveNotAync();
                 return 1;
             }
-            //return itemCount;
             return 0;
         }
         public void EmptyCart(string ShoppingCartId = "")
@@ -111,25 +90,7 @@ namespace figma.Models
 
             return Convert.ToDecimal(total);
         }
-        //public int CreateOrder(Order order)
-        //{
-        //    var cartItems = GetCartItems();
-        //    foreach (var item in cartItems)
-        //    {
-        //        var orderDetail = new OrderDetail
-        //        {
-        //            ProductId = item.ProductID,
-        //            OrderId = order.Id,
-        //            Price = Convert.ToDecimal(item.Products.SaleOff ?? item.Products.Price),
-        //            Quantity = item.Count
-        //        };
 
-        //        _unitOfWork.OrderDetailRepository.Insert(orderDetail);
-        //    }
-        //    _unitOfWork.Save();
-        //    EmptyCart();
-        //    return order.Id;
-        //}
         public string GetCartId()
         {
             if (_httpContextAccessor.HttpContext.Request.Cookies != null && _httpContextAccessor.HttpContext.Request.Cookies.FirstOrDefault(a => a.Key.Contains(CartCookieKey)).Value == null)

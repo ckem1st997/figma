@@ -1,6 +1,5 @@
 ﻿using figma.Interface;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -124,27 +123,7 @@ namespace figma.Data
             _context.Entry(entityToUpdate).State = EntityState.Modified;
         }
 
-        //public async Task<IReadOnlyList<T>> GetAllAsync()
-        //{
-        //    if (!_cacheService(cacheTech).TryGet(cacheKey, out IReadOnlyList<T> cachedList))
-        //    {
-        //        cachedList = await _dbContext
-        //         .Set<T>()
-        //         .ToListAsync();
-        //        _cacheService(cacheTech).Set(cacheKey, cachedList);
-        //    }
-        //    return cachedList;
-        //}
-        //private readonly static Cache cacheTech = Cache.Memory;
-        //private readonly string cacheKey = $"{typeof(T)}";
-        //private readonly ApplicationContext _dbContext;
-        //private readonly Func<Cache, ICacheService> _cacheService;
-
-        //public GenericRepositoryAsync(ApplicationContext dbContext, Func<Cache, ICacheService> cacheService)
-        //{
-        //    _dbContext = dbContext;
-        //    _cacheService = cacheService;
-        //}
+       
     }
 }
 

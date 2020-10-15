@@ -1,17 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
-using Microsoft.AspNetCore.Http;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using figma.Data;
-using figma.Models;
 
 namespace figma.CustomHandler
 {
-    public class RolesAuthorizationHandler : AuthorizationHandler<RolesAuthorizationRequirement>, IAuthorizationHandler
+    public class RolesAuthorizationHandler : AuthorizationHandler<RolesAuthorizationRequirement>
     {
         public readonly ShopProductContext _context;
         public RolesAuthorizationHandler(ShopProductContext context)
@@ -28,8 +24,7 @@ namespace figma.CustomHandler
                 return Task.CompletedTask;
             }
             var validRole = false;
-            if (requirement.AllowedRoles == null ||
-                requirement.AllowedRoles.Any() == false)
+            if (requirement.AllowedRoles == null || !requirement.AllowedRoles.Any())
             {
 
                 validRole = true;
@@ -38,10 +33,8 @@ namespace figma.CustomHandler
             {
                 var claims = context.User.Claims;
                 var userName = claims.FirstOrDefault(c => c.Type == "UserName").Value;
-                var userRole = claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
                 var roles = requirement.AllowedRoles;
-                validRole = _context.Members.ToList().Where(p => roles.Contains(p.Role) && p.Email == userName).Any();
-
+                validRole = _context.Members.AsEnumerable().Any(p => roles.Contains(p.Role) && p.Email == userName);
             }
 
             if (validRole)

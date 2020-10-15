@@ -36,7 +36,6 @@ namespace figma
         {
             services.AddMemoryCache();
             services.AddTransient<IMailer, Mailer>();
-            //  services.Configure<Smtp>(Configuration.GetSection("Smtp"));
             services.Configure<Smtp>(Configuration);
             services.AddControllers();
             services.AddSingleton<IFileProvider>(new PhysicalFileProvider(
@@ -51,7 +50,7 @@ namespace figma
 
          //  config.Cookie.Name = "UserLoginCookie"; // Name of cookie     
          config.LoginPath = "/Home/Login"; // Path for the redirect to user login page    
-         config.AccessDeniedPath = "/Csm/UserAccessDenied";
+         config.AccessDeniedPath = "/Home/UserAccessDenied";
          // sau 10s sẽ tự out
          config.ExpireTimeSpan = TimeSpan.FromHours(1);
          config.Cookie.HttpOnly = true;
@@ -63,7 +62,6 @@ namespace figma
                 {
                     // nếu tồi tại 2 kiểu được nhập vào
                     policyBuilder.UserRequireCustomClaim("UserName");
-                    //  policyBuilder.UserRequireCustomClaim(ClaimTypes.Role);
                 });
             });
 
