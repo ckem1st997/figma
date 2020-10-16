@@ -134,3 +134,9 @@ namespace figma
 
     }
 }
+
+//docker inspect –format='{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' 8fd29e4c4919
+//172.17.93.74
+//172.17.89.1  docker run -d -p 1433:1433 -e sa_password= -e ACCEPT_EULA=Y microsoft/mssql-server-windows
+//docker run -d -p 1433:1433 -e sa_password=12345678h -eACCEPT_EULA=Y microsoft/mssql-server-windows-express
+

@@ -201,7 +201,7 @@ namespace figma.Controllers
         }
 
 
-        public void EmptyCart()
+        public void     EmptyCart()
         {
             var cartItems = _unitOfWork.CartRepository.Get(cart => cart.CartID == GetCartId());
 
