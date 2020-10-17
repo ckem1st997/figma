@@ -98,7 +98,13 @@ namespace figma.Controllers
 
             return View(model);
         }
+        //
 
+        public IActionResult OrderDetails(string code="")
+        {
+
+            return View();
+        }
         //
         [Route("collections/{name}-{catId}")]
         public async Task<IActionResult> Info(int catId, string sortOrder, string currentFilter, string searchString, int? pageNumber)

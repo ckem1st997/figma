@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewData["Title"] = "OrderDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="os-search-test row">
+    <div class="col-lg-6 col-md-6">
+        <div id="os-search-box-test">
+            <h5><b><i class="fa fa-search"></i> Kiểm tra đơn hàng của bạn</b></h5>
+            <form id="formcusphone" method="post" accept-charset="utf-8" role="form" action="https://onapp.haravan.com/orderstrackingphone/shop/hen-store?sid=Feg8D5CKKSjEpjLOKFTnr9ylIQp86Gtw">
+                <div class="check-type">
+                    <label for="checktype">Phương thức kiểm tra</label><br>
+                    <input id="checkphone" type="radio" name="checktype" value="phone" checked=""><span>Số điện thoại</span>
+                    <input id="checkemail" type="radio" name="checktype" value="email"><span>Email</span>
+                </div>
+                <div class="form-group">
+                    <label for="phonenumber">Số điện thoại:</label>
+                    <input id="phonenumber" class="form-control" name="phonenumber" placeholder="0909 xxx xxx" value="" type="text">
+                </div>
+                <div class="form-group" style="display: none;">
+                    <label for="emailaddress">Email:</label>
+                    <input id="emailaddress" class="form-control" name="emailaddress" placeholder="email@gmail.com" value="" type="email">
+                </div>
+                <div id="html_element_recaptcha" class="form-group form_recaptcha"><div style="width: 304px; height: 78px;"><div><iframe src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LcFkDkUAAAAAAxYVH_QDHxlpiG9aeO2uD9DkW-4&amp;co=aHR0cHM6Ly9vbmFwcC5oYXJhdmFuLmNvbTo0NDM.&amp;hl=vi&amp;v=T9w1ROdplctW2nVKvNJYXH8o&amp;size=normal&amp;cb=7kt735bpr4jd" width="304" height="78" role="presentation" name="a-ejk8na36673z" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"></iframe></div><textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea></div><iframe style="display: none;"></iframe></div>
+                <div style="vertical-align: middle;">
+                    <p class="pull-left">Nếu quý khách có bất kỳ thắc mắc nào, xin vui lòng gọi <b>08 698787 09</b></p>
+                    <input id="addSubmit" class="btn ghost-btn-organge pull-right" name="search" value="Xem ngay" type="submit">
+                </div>
+            </form>
+            <div class="clearfix"></div>
+        </div><!-- #os-search-box-test -->
+    </div>
+
+    <!-- Modal -->
+    <div id="os-show" class="col-lg-8 col-md-8">
+        <div class="error">
+            <p id="error" class="text-danger">Vui lòng nhập đủ và đúng các thông tin cần thiết.</p>
+
+            <!-- ko if: OrdersArray().length == 0 && LoadingFlag() == false -->
+            <p id="empty-error" class="text-danger"></p>
+            <!-- /ko -->
+
+        </div>
+        <div class="panel-group orders-list" id="accordion">
+            <div class="panel-body">
+                <ul data-bind="foreach: OrdersArray"></ul>
+            </div>
+
+        </div><!-- panel-group -->
+
+    </div>
+</div>
+

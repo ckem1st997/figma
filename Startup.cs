@@ -139,4 +139,6 @@ namespace figma
 //172.17.93.74
 //172.17.89.1  docker run -d -p 1433:1433 -e sa_password= -e ACCEPT_EULA=Y microsoft/mssql-server-windows
 //docker run -d -p 1433:1433 -e sa_password=12345678h -eACCEPT_EULA=Y microsoft/mssql-server-windows-express
+//  "ShopProductContext": "Data Source=DESKTOP-TPOA8KJ;Initial Catalog=sh3;Integrated Security=True"
+//"ShopProductContext": "Server=host.docker.internal,1433;Initial Catalog=sh3;User ID=aspnet;Password=h12345678;Integrated Security=false"
 

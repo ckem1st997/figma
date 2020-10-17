@@ -191,7 +191,7 @@ namespace figma.Controllers
         [Route("thanh-toan-thanh-cong")]
         public ActionResult CheckOutComplete(string orderId)
         {
-            EmptyCart();
+            EmptyCartRemove();
             var model = new CheckOutCompleteViewModel()
             {
                 OrderID = orderId,
@@ -201,7 +201,7 @@ namespace figma.Controllers
         }
 
 
-        public void     EmptyCart()
+        public void EmptyCartRemove()
         {
             var cartItems = _unitOfWork.CartRepository.Get(cart => cart.CartID == GetCartId());
 
