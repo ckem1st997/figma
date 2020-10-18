@@ -21,10 +21,6 @@
                 </tr>
                 @foreach (var item in Model.CartItems)
                 {
-                    //if (item.Products.SaleOff > 0)
-                    //    sumprice = sumprice + item.Products.SaleOff * item.Count;
-                    //else
-                    //    sumprice = sumprice + item.Products.Price * item.Count;
                     <tr>
                         <td class="cart-pay-money d-flex">
                             <input class="cb-pay mr-2" type="checkbox" data-id=@item.RecordID />

@@ -100,11 +100,23 @@ namespace figma.Controllers
         }
         //
 
-        public IActionResult OrderDetails(string code="")
+        [Route("tra-cuu-don-hang")]
+        public IActionResult OrderDetails(string search)
         {
-
+            if (!string.IsNullOrEmpty(search))
+            {
+                var result = _unitOfWork.OrderRepository.Get(a => a.MaDonHang.Equals(search) || a.Email.Equals(search) || a.Mobile.Equals(search), includeProperties: "OrderDetails");
+                return View(result);
+            }
             return View();
         }
+
+
+        public class OrderDetailsSearch
+        {
+            public Order Orders { get; set; }
+            public decimal Price { get; set; }
+        };
         //
         [Route("collections/{name}-{catId}")]
         public async Task<IActionResult> Info(int catId, string sortOrder, string currentFilter, string searchString, int? pageNumber)
