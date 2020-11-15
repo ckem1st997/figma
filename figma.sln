@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "figma", "figma.csproj", "{796329C0-6A0A-427B-9A80-6D6BAE579D2A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnitTestProject", "..\XUnitTestProject\XUnitTestProject.csproj", "{8C25DF57-F6B4-42C9-83FB-F5A3B1F8B076}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUnitTestProject", "..\XUnitTestProject\XUnitTestProject.csproj", "{8C25DF57-F6B4-42C9-83FB-F5A3B1F8B076}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

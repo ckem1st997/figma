@@ -21,12 +21,13 @@ namespace figma.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
+            var id = _httpContextAccessor.HttpContext.Request.Cookies["CartID"]==null?"": _httpContextAccessor.HttpContext.Request.Cookies["CartID"];
             var items = new HeaderViewModel()
             {
                 ConfigSites = await _unitOfWork.ConfigSiteRepository.GetAync(),              
                 ArticleCategories = await _unitOfWork.ArticleCategoryRepository.GetAync(),
                 ProductCategories = await _unitOfWork.ProductCategoryRepository.GetAync(a => a.Active && a.Home, q => q.OrderBy(a => a.Soft)),
-                Carts = await _unitOfWork.CartRepository.GetAync(a => a.CartID == _httpContextAccessor.HttpContext.Request.Cookies["CartID"])
+                Carts = await _unitOfWork.CartRepository.GetAync(a => a.CartID == id)
             };
             return View(items);
         }

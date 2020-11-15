@@ -178,7 +178,10 @@ $(document).ready(function () {
         GetAllCheckBox();
     });
     //
-
+    $("#addpro").click(function () {
+        addp();
+    });
+    //
     $("#BtnEmptyCart").click(function () {
         EmptyCart($("#BtnEmptyCart").attr("data-id"))
     });
@@ -219,7 +222,30 @@ function AddToCart(quantity, productId, color, size) {
         });
     }
 }
+//
+function addp() {
+    var params = {
+        type: 'GET',
+        url: '/Home/add',
+        data: {},
+        dataType: "json",
+        success: function (res) {
+            console.log(res);
+            if (res.result == 1)
+                alert("Thành công !");
+            else
+                alert("Thất bại !");
+        },
 
+        error: function (errormessage) {
+            console.log(errormessage)
+        }
+
+
+    };
+    jQuery.ajax(params);
+}
+//
 function EmptyCart(id) {
     var params = {
         type: 'POST',

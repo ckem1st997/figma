@@ -38,8 +38,8 @@ namespace figma
             services.AddTransient<IMailer, Mailer>();
             services.Configure<Smtp>(Configuration);
             services.AddControllers();
-            services.AddSingleton<IFileProvider>(new PhysicalFileProvider(
-        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
+        //    services.AddSingleton<IFileProvider>(new PhysicalFileProvider(
+        //Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
             services.AddMvc();
             services.AddDbContext<ShopProductContext>(options =>
         options.UseSqlServer(Configuration.GetConnectionString("ShopProductContext")));
@@ -56,6 +56,13 @@ namespace figma
          config.Cookie.HttpOnly = true;
          config.Cookie.IsEssential = true;
      });
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Default Lockout settings.
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1);
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.AllowedForNewUsers = true;
+            });
             services.AddAuthorization(config =>
             {
                 config.AddPolicy("UserPolicy", policyBuilder =>
