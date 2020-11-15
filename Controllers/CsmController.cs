@@ -1186,11 +1186,9 @@ namespace figma.Controllers
 
         public void Resize(string h, int w, int he)
         {
-            using (Image<Rgba32> image = (Image<Rgba32>)Image.Load(h))
-            {
-                image.Mutate(x => x.Resize(w, he));
-                image.Save(h);
-            }
+            using Image<Rgba32> image = (Image<Rgba32>)Image.Load(h);
+            image.Mutate(x => x.Resize(w, he));
+            image.Save(h);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -1313,7 +1311,7 @@ namespace figma.Controllers
         }
         public ActionResult LoadOrder(int orderId = 0)
         {
-            return ViewComponent("LoadOrder", new { orderId = orderId });
+            return ViewComponent("LoadOrder", new { orderId });
         }
         [HttpPost]
         [IgnoreAntiforgeryToken]
@@ -1373,7 +1371,7 @@ namespace figma.Controllers
         }
         public IActionResult ViewHoaDon(int orderId)
         {
-            return ViewComponent("ViewHoaDon", new { orderId = orderId });
+            return ViewComponent("ViewHoaDon", new { orderId });
         }
         [HttpPost]
         [IgnoreAntiforgeryToken]
@@ -1414,97 +1412,95 @@ namespace figma.Controllers
 
             var orders = _unitOfWork.OrderRepository.Get(includeProperties: "OrderDetails").ToList();
 
-            using (var pck = new ExcelPackage())
+            using var pck = new ExcelPackage();
+            //Create the worksheet
+            var ws = pck.Workbook.Worksheets.Add("Danh sách đơn hàng");
+            ws.DefaultColWidth = 20;
+            ws.DefaultRowHeight = 40;
+            ws.Cells.Style.WrapText = true;
+            ws.Cells.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+            ws.Cells.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+            ws.Column(4).Width = 40;
+            ws.Column(5).Width = 50;
+
+            ws.Cells[1, 1].Value = "Mã ĐH";
+            ws.Cells[1, 2].Value = "Tên";
+            ws.Cells[1, 3].Value = "Điện thoại";
+            ws.Cells[1, 4].Value = "Email";
+            ws.Cells[1, 5].Value = "Địa chỉ";
+            ws.Cells[1, 6].Value = "Tổng tiền";
+            ws.Cells[1, 7].Value = "Đã thanh toán";
+            ws.Cells[1, 8].Value = "Công nợ";
+            ws.Cells[1, 9].Value = "Ngày đặt";
+            ws.Cells[1, 10].Value = "Ngày giao";
+            ws.Cells[1, 11].Value = "Vận chuyển";
+            ws.Cells[1, 12].Value = "Tình trạng Thanh toán";
+            ws.Cells[1, 13].Value = "Tình trạng đơn hàng";
+            ws.Cells[1, 14].Value = "Ghi chú";
+            var i = 2;
+            foreach (var order in orders)
             {
-                //Create the worksheet
-                var ws = pck.Workbook.Worksheets.Add("Danh sách đơn hàng");
-                ws.DefaultColWidth = 20;
-                ws.DefaultRowHeight = 40;
-                ws.Cells.Style.WrapText = true;
-                ws.Cells.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
-                ws.Cells.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-
-                ws.Column(4).Width = 40;
-                ws.Column(5).Width = 50;
-
-                ws.Cells[1, 1].Value = "Mã ĐH";
-                ws.Cells[1, 2].Value = "Tên";
-                ws.Cells[1, 3].Value = "Điện thoại";
-                ws.Cells[1, 4].Value = "Email";
-                ws.Cells[1, 5].Value = "Địa chỉ";
-                ws.Cells[1, 6].Value = "Tổng tiền";
-                ws.Cells[1, 7].Value = "Đã thanh toán";
-                ws.Cells[1, 8].Value = "Công nợ";
-                ws.Cells[1, 9].Value = "Ngày đặt";
-                ws.Cells[1, 10].Value = "Ngày giao";
-                ws.Cells[1, 11].Value = "Vận chuyển";
-                ws.Cells[1, 12].Value = "Tình trạng Thanh toán";
-                ws.Cells[1, 13].Value = "Tình trạng đơn hàng";
-                ws.Cells[1, 14].Value = "Ghi chú";
-                var i = 2;
-                foreach (var order in orders)
+                var status = "Đang xử lý";
+                switch (order.Status)
                 {
-                    var status = "Đang xử lý";
-                    switch (order.Status)
-                    {
-                        case 1:
-                            status = "Đang giao hàng";
-                            break;
-                        case 2:
-                            status = "Đã thanh toán";
-                            break;
-                        case 3:
-                            status = "Hủy đơn";
-                            break;
-                    }
-                    var transport = "Hình thức khác";
-                    switch (order.Transport)
-                    {
-                        case 1:
-                            status = "Đến địa chỉ người nhận";
-                            break;
-                        case 2:
-                            status = "Khách đến nhận hàng";
-                            break;
-                        case 3:
-                            status = "Qua bưu điện";
-                            break;
-                    }
-
-                    var total = order.OrderDetails.Sum(a => a.Price * a.Quantity);
-                    var congno = total - order.ThanhToanTruoc;
-
-                    ws.Cells[i, 1].Value = order.MaDonHang;
-                    ws.Cells[i, 2].Value = order.Fullname;
-                    ws.Cells[i, 3].Value = order.Mobile;
-                    ws.Cells[i, 4].Value = order.Email;
-                    ws.Cells[i, 5].Value = order.Address;
-                    ws.Cells[i, 6].Value = total;
-                    ws.Cells[i, 7].Value = order.ThanhToanTruoc;
-                    ws.Cells[i, 8].Value = congno;
-                    ws.Cells[i, 9].Value = order.CreateDate.ToString("dd/MM/yyyy HH:mm");
-                    ws.Cells[i, 10].Value = order.TransportDate.ToString("dd/MM/yyyy");
-                    ws.Cells[i, 11].Value = transport;
-                    ws.Cells[i, 12].Value = !order.Payment ? "Chưa thanh toán" : "Đã thanh toán";
-                    ws.Cells[i, 13].Value = status;
-                    ws.Cells[i, 14].Value = order.Body;
-                    i++;
+                    case 1:
+                        status = "Đang giao hàng";
+                        break;
+                    case 2:
+                        status = "Đã thanh toán";
+                        break;
+                    case 3:
+                        status = "Hủy đơn";
+                        break;
+                }
+                var transport = "Hình thức khác";
+                switch (order.Transport)
+                {
+                    case 1:
+                        status = "Đến địa chỉ người nhận";
+                        break;
+                    case 2:
+                        status = "Khách đến nhận hàng";
+                        break;
+                    case 3:
+                        status = "Qua bưu điện";
+                        break;
                 }
 
-                //Format the header for column 1-14
-                using (var rng = ws.Cells["A1:N1"])
-                {
-                    rng.Style.Font.Bold = true;
-                    rng.Style.Fill.PatternType = ExcelFillStyle.Solid;
-                    rng.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.FromArgb(79, 129, 189));  //Set color to dark blue
-                    rng.Style.Font.Color.SetColor(System.Drawing.Color.White);
-                }
+                var total = order.OrderDetails.Sum(a => a.Price * a.Quantity);
+                var congno = total - order.ThanhToanTruoc;
 
-                //Write it back to the client
-                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                Response.Headers.Add("content-disposition", "attachment;  filename=" + fileName + "");
-                Response.Body.WriteAsync(pck.GetAsByteArray());
+                ws.Cells[i, 1].Value = order.MaDonHang;
+                ws.Cells[i, 2].Value = order.Fullname;
+                ws.Cells[i, 3].Value = order.Mobile;
+                ws.Cells[i, 4].Value = order.Email;
+                ws.Cells[i, 5].Value = order.Address;
+                ws.Cells[i, 6].Value = total;
+                ws.Cells[i, 7].Value = order.ThanhToanTruoc;
+                ws.Cells[i, 8].Value = congno;
+                ws.Cells[i, 9].Value = order.CreateDate.ToString("dd/MM/yyyy HH:mm");
+                ws.Cells[i, 10].Value = order.TransportDate.ToString("dd/MM/yyyy");
+                ws.Cells[i, 11].Value = transport;
+                ws.Cells[i, 12].Value = !order.Payment ? "Chưa thanh toán" : "Đã thanh toán";
+                ws.Cells[i, 13].Value = status;
+                ws.Cells[i, 14].Value = order.Body;
+                i++;
             }
+
+            //Format the header for column 1-14
+            using (var rng = ws.Cells["A1:N1"])
+            {
+                rng.Style.Font.Bold = true;
+                rng.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                rng.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.FromArgb(79, 129, 189));  //Set color to dark blue
+                rng.Style.Font.Color.SetColor(System.Drawing.Color.White);
+            }
+
+            //Write it back to the client
+            Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            Response.Headers.Add("content-disposition", "attachment;  filename=" + fileName + "");
+            Response.Body.WriteAsync(pck.GetAsByteArray());
         }
         #endregion
         protected override void Dispose(bool disposing)

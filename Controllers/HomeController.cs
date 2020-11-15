@@ -212,27 +212,15 @@ namespace figma.Controllers
             {
                 Products = Products.Where(s => s.Name.Contains(searchString));
             }
-            switch (sortOrder)
+            Products = sortOrder switch
             {
-                case "name_desc":
-                    Products = Products.OrderByDescending(a => a.Name);
-                    break;
-                case "Date":
-                    Products = Products.OrderBy(a => a.CreateDate);
-                    break;
-                case "date_desc":
-                    Products = Products.OrderByDescending(a => a.CreateDate);
-                    break;
-                case "Price":
-                    Products = Products.OrderBy(a => a.Price);
-                    break;
-                case "price_desc":
-                    Products = Products.OrderByDescending(a => a.Price);
-                    break;
-                default:
-                    Products = Products.OrderBy(a => a.Name);
-                    break;
-            }
+                "name_desc" => Products.OrderByDescending(a => a.Name),
+                "Date" => Products.OrderBy(a => a.CreateDate),
+                "date_desc" => Products.OrderByDescending(a => a.CreateDate),
+                "Price" => Products.OrderBy(a => a.Price),
+                "price_desc" => Products.OrderByDescending(a => a.Price),
+                _ => Products.OrderBy(a => a.Name),
+            };
             int pageSize = 8;
             return View(PaginatedList<Products>.CreateAsync(Products, pageNumber ?? 1, pageSize));
         }
@@ -253,27 +241,15 @@ namespace figma.Controllers
             }
             ViewData["CurrentFilter"] = searchString;
             var Products = await _unitOfWork.ProductRepository.GetAync(a => a.Active && a.Name.Contains(searchString), orderBy: q => q.OrderBy(a => a.Name));
-            switch (sortOrder)
+            Products = sortOrder switch
             {
-                case "name_desc":
-                    Products = Products.OrderByDescending(a => a.Name);
-                    break;
-                case "Date":
-                    Products = Products.OrderBy(a => a.CreateDate);
-                    break;
-                case "date_desc":
-                    Products = Products.OrderByDescending(a => a.CreateDate);
-                    break;
-                case "Price":
-                    Products = Products.OrderBy(a => a.Price);
-                    break;
-                case "price_desc":
-                    Products = Products.OrderByDescending(a => a.Price);
-                    break;
-                default:
-                    Products = Products.OrderBy(a => a.Name);
-                    break;
-            }
+                "name_desc" => Products.OrderByDescending(a => a.Name),
+                "Date" => Products.OrderBy(a => a.CreateDate),
+                "date_desc" => Products.OrderByDescending(a => a.CreateDate),
+                "Price" => Products.OrderBy(a => a.Price),
+                "price_desc" => Products.OrderByDescending(a => a.Price),
+                _ => Products.OrderBy(a => a.Name),
+            };
             int pageSize = 8;
             return View(PaginatedList<Products>.CreateAsync(Products, pageNumber ?? 1, pageSize));
         }
@@ -311,7 +287,7 @@ namespace figma.Controllers
         [HttpPost]
         public async Task<ActionResult> Login([Bind] LoginViewModel user, string returnUrl)
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
+            returnUrl ??= Url.Content("~/");
             if (ModelState.IsValid)
             {
                 if (ValidateAdmin(user.Username, user.Password))
