@@ -62,7 +62,7 @@ namespace figma.Controllers
 
         public IActionResult ListProducts()
         {
-            var shopProductContext = _unitOfWork.ProductRepository.Get(includeProperties: "Collection,ProductCategories");
+            var shopProductContext = _unitOfWork.ProductRepository.Get(includeProperties: "Collection,ProductCategories",records:10);
             return View(shopProductContext.ToList());
         }
 

@@ -19,32 +19,32 @@
 <div class="row d-flex justify-content-center">
     <div class="col-md-4">
         <form method="post" asp-action="Register">
-            @*<div asp-validation-summary="All"></div>*@
+            <div asp-validation-summary="ModelOnly"></div>
             <h2>Đăng ký</h2>
             <div class="form-group">
                 <label asp-for="Fullname" class="control-label"></label>
                 <input asp-for="Fullname" class="form-control" />
-                <span asp-validation-for="Fullname" class="text-danger"></span>
+                <span id="revalidationname" asp-validation-for="Fullname" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Sdt" class="control-label"></label>
                 <input asp-for="Sdt" class="form-control" />
-                <span asp-validation-for="Sdt" class="text-danger"></span>
+                <span id="revalidationsdt" asp-validation-for="Sdt" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Username" class="control-label"></label>
                 <input asp-for="Username" class="form-control" />
-                <span asp-validation-for="Username" class="text-danger"></span>
+                <span id="revalidationuser" asp-validation-for="Username" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Password" class="control-label"></label>
                 <input type="password" asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
+                <span id="revalidationpw" asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ConfirmPassword" class="control-label"></label>
                 <input type="password" asp-for="ConfirmPassword" class="form-control" />
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                <span id="revalidationnamepwre" asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" id="Register" value="Register" class="btn btn-default btn-primary" />
