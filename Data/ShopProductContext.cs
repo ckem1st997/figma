@@ -82,6 +82,7 @@ namespace figma.Data
             modelBuilder.Entity<Products>().Property(p => p.CreateBy).HasDefaultValue("admin");
             modelBuilder.Entity<Products>().Property(p => p.Sort).HasDefaultValue(1);
             modelBuilder.Entity<ProductCategories>().Property(p => p.ParentId).HasDefaultValue(null);
+            modelBuilder.Entity<Members>().Property(p => p.ConfirmEmail).HasDefaultValue(false);
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }

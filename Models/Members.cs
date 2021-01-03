@@ -56,6 +56,9 @@ namespace figma.Models
         [Required(ErrorMessage = "Chưa nhập thông tin")]
         public string Role { get; set; }
 
+        public bool ConfirmEmail { get; set; }
+        public string token { get; set; }
+
         public virtual List<ProductLike> ProductLikes { get; set; }
 
 

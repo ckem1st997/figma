@@ -15,6 +15,8 @@ using figma.DAL;
 using Microsoft.Extensions.Caching.Memory;
 using figma.ViewModel;
 using figma.OutFile;
+using Microsoft.AspNetCore.WebUtilities;
+using System.Text;
 
 namespace figma.Controllers
 {
@@ -27,7 +29,7 @@ namespace figma.Controllers
             _iMemoryCache = memoryCache;
             _unitOfWork = unitOfWork;
         }
-        public JsonResult add()
+        public JsonResult Add()
         {
             //ProductID,Name,Description,Image,Body,ProductCategorieID,Quantity,
             //Factory,Price,SaleOff,QuyCach,Sort,Hot,Home,Active,TitleMeta,
@@ -97,6 +99,15 @@ namespace figma.Controllers
         }
         public IActionResult Index()
         {
+            // await _mailer.SendEmailSync(model.Order.Email, "[" + model.Order.MaDonHang + "] Đơn đặt hàng từ website ShopAsp.Net", sb.ToString());
+
+            var code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes("hopxc1997@gmail.com"));
+            Guid g = Guid.NewGuid();
+            var token = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(g.ToString()));
+            var EmailConfirmationUrl = "/EmailConfirmation/token=" + token + "&code=" + code + "";
+            Console.WriteLine(EmailConfirmationUrl);
+            //  Console.WriteLine(Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code)));
+            //  Console.WriteLine(Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(token)));
             var model = new HomeViewModel
             {
                 Products = _unitOfWork.ProductRepository.Get(a => a.Active, q => q.OrderBy(a => a.Sort), 12),
@@ -104,6 +115,27 @@ namespace figma.Controllers
                 ConfigSites = _unitOfWork.ConfigSiteRepository.Get()
             };
             return View(model);
+        }
+
+        [Route("EmailConfirmation/token={token}&code={code}")]
+        public async Task<IActionResult> EmailConfirmation(string token, string code)
+        {
+            Console.WriteLine(Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(token)));
+            var email = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
+            var email1 = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(token));
+            if (email == null)
+            {
+                return RedirectToPage("/Index");
+            }
+
+            var user = await _unitOfWork.MemberRepository.GetAync(x => x.Email.Equals(email));
+            if (user.Count() == 0)
+            {
+                return NotFound($"Unable to load user with email '{email}'.");
+            }
+            ViewBag.h = email;
+            ViewBag.hh = email1;
+            return View();
         }
 
         [Route("{name}-{proId}.html")]
@@ -136,6 +168,17 @@ namespace figma.Controllers
                 TagProducts = _unitOfWork.TagsProductsRepository.Get(a => a.ProductID == proId, includeProperties: "Tags,Products"),
                 ProductSizeColors = _unitOfWork.ProductSCRepository.Get(includeProperties: "Size,Color").ToList()
             };
+
+            //var h = _unitOfWork.ProductSCRepository.Get(x => x.ProductID == 24, includeProperties: "Size").GroupBy(x=>x.Size.SizeProduct);
+            //foreach (var item in h)
+            //{
+            //    Console.WriteLine(""+item.Key+"");
+            //}
+            //var h = _unitOfWork.ProductSCRepository.Get(x => x.ProductID == 24, includeProperties: "Color").GroupBy(x =>new { x.Color.NameColor,x.Color.Code });
+            //foreach (var item in h)
+            //{
+            //    Console.WriteLine("" + item.Key + "");
+            //}
             return View(model);
         }
 
@@ -396,14 +439,14 @@ namespace figma.Controllers
             [Required(ErrorMessage = "Mật khẩu hông được để trống nha !"), DataType(DataType.Password), MaxLength(20, ErrorMessage = "Mật khẩu phải ít hơn 20 kí tự"), MinLength(5, ErrorMessage = "Mật khẩu phải nhiều hơn 4 kí tự")]
             public string Password { get; set; }
 
-            [Required(ErrorMessage = "Mật khẩu nhập lại hông được để trống nha !"),DataType(DataType.Password), Compare(nameof(Password), ErrorMessage = "Hai mật khẩu phải giống nhau"), MaxLength(20, ErrorMessage = "Mật khẩu phải ít hơn 20 kí tự"), MinLength(5, ErrorMessage = "Mật khẩu phải nhiều hơn 4 kí tự")]
+            [Required(ErrorMessage = "Mật khẩu nhập lại hông được để trống nha !"), DataType(DataType.Password), Compare(nameof(Password), ErrorMessage = "Hai mật khẩu phải giống nhau"), MaxLength(20, ErrorMessage = "Mật khẩu phải ít hơn 20 kí tự"), MinLength(5, ErrorMessage = "Mật khẩu phải nhiều hơn 4 kí tự")]
             public string ConfirmPassword { get; set; }
         }
 
         public class LoginViewModel
         {
 
-            [Required(ErrorMessage ="Xin vui lòng nhập Email !"), MaxLength(50), Display(Name = "Email"), DataType(DataType.EmailAddress)]
+            [Required(ErrorMessage = "Xin vui lòng nhập Email !"), MaxLength(50), Display(Name = "Email"), DataType(DataType.EmailAddress)]
             public string Username { get; set; }
 
             [Required(ErrorMessage = "Xin vui lòng nhập mật khẩu !"), DataType(DataType.Password), MaxLength(20, ErrorMessage = "Mật khẩu phải ít hơn 20 kí tự"), MinLength(5, ErrorMessage = "Mật khẩu phải nhiều hơn 4 kí tự")]

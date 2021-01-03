@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "figma", "figma.csproj", "{7
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUnitTestProject", "..\XUnitTestProject\XUnitTestProject.csproj", "{8C25DF57-F6B4-42C9-83FB-F5A3B1F8B076}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Angular_Asp.Net_Core", "..\Angular_Asp.Net_Core\Angular_Asp.Net_Core.csproj", "{95DF1D5C-F63F-476E-AF96-ED5E1BB58D33}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{8C25DF57-F6B4-42C9-83FB-F5A3B1F8B076}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C25DF57-F6B4-42C9-83FB-F5A3B1F8B076}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C25DF57-F6B4-42C9-83FB-F5A3B1F8B076}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95DF1D5C-F63F-476E-AF96-ED5E1BB58D33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95DF1D5C-F63F-476E-AF96-ED5E1BB58D33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95DF1D5C-F63F-476E-AF96-ED5E1BB58D33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95DF1D5C-F63F-476E-AF96-ED5E1BB58D33}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

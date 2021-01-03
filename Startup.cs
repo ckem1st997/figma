@@ -40,8 +40,8 @@ namespace figma
             services.AddTransient<IMailer, Mailer>();
             services.Configure<Smtp>(Configuration);
             services.AddControllers();
-            //    services.AddSingleton<IFileProvider>(new PhysicalFileProvider(
-            //Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
+            services.AddSingleton<IFileProvider>(new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
             services.AddMvc();
             services.AddDbContext<ShopProductContext>(options =>
         options.UseSqlServer(Configuration.GetConnectionString("ShopProductContext")));
@@ -110,23 +110,23 @@ namespace figma
             });
             services.AddRazorPages();
             //
-            //    services.AddHangfire(configuration => configuration
-            //.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
-            //.UseSimpleAssemblyNameTypeSerializer()
-            //.UseRecommendedSerializerSettings()
-            //.UseSqlServerStorage(Configuration.GetConnectionString("ShopProductContext"), new SqlServerStorageOptions
-            //{
-            //    CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
-            //    SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
-            //    QueuePollInterval = TimeSpan.Zero,
-            //    UseRecommendedIsolationLevel = true,
-            //    DisableGlobalLocks = true
-            //}));
+            services.AddHangfire(configuration => configuration
+        .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+        .UseSimpleAssemblyNameTypeSerializer()
+        .UseRecommendedSerializerSettings()
+        .UseSqlServerStorage(Configuration.GetConnectionString("ShopProductContext"), new SqlServerStorageOptions
+        {
+            CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+            SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+            QueuePollInterval = TimeSpan.Zero,
+            UseRecommendedIsolationLevel = true,
+            DisableGlobalLocks = true
+        }));
 
-            //    // Add the processing server as IHostedService
-            //    services.AddHangfireServer();
+            // Add the processing server as IHostedService
+            services.AddHangfireServer();
         }
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env/*, IBackgroundJobClient backgroundJobs*/)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IBackgroundJobClient backgroundJobs)
         {
             if (env.IsDevelopment())
             {
@@ -149,14 +149,14 @@ namespace figma
             };
             app.UseCookiePolicy(cookiePolicyOptions);
             app.UseSession();
-            //app.UseHangfireDashboard();
-            //backgroundJobs.Enqueue(() => Console.WriteLine("Hello world from Hangfire!"));
+            app.UseHangfireDashboard();
+            backgroundJobs.Enqueue(() => Console.WriteLine("Hello world from Hangfire!"));
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-                //  endpoints.MapHangfireDashboard();
+                endpoints.MapHangfireDashboard();
             });
         }
 
