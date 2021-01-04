@@ -90,7 +90,6 @@ namespace figma.Controllers
                 model.Order.TransportDate = DateTime.TryParse(model.Order.TransportDate.ToString(), new CultureInfo("Vi"), DateTimeStyles.None, out var tDate) ? tDate : DateTime.Now;
                 _unitOfWork.OrderRepository.Insert(model.Order);
                 await _unitOfWork.Save();
-
                 model.Order.MaDonHang = DateTime.Now.ToString("yyyyMMddHHmm") + "C" + model.Order.Id;
                 foreach (var odetails in from cart1 in item
                                          select new OrderDetail

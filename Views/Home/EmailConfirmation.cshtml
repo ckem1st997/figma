@@ -1,4 +1,4 @@
-﻿
+﻿@model figma.Models.Members
 @{
     ViewData["Title"] = "EmailConfirmation";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,4 +7,16 @@
 <h1>EmailConfirmation</h1>
 <h1>@ViewBag.h</h1>
 <h1>@ViewBag.hh</h1>
+<h1>
+    @{
+        if (Model.ConfirmEmail)
+        {
+            <p>Thành công !</p>
+        }
+        else
+        {
+            <p>Thất bại !</p>
+        }
+}
+</h1>
 

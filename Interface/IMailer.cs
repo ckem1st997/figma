@@ -4,6 +4,6 @@ namespace figma.Interface
 {
     public interface IMailer
     {
-        public Task SendEmailSync(string email, string subject, string body);
+        public Task<string> SendEmailSync(string email, string subject, string body);
     }
 }

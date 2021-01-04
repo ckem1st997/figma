@@ -38,7 +38,7 @@ namespace figma
         {
             services.AddMemoryCache();
             services.AddTransient<IMailer, Mailer>();
-            services.Configure<Smtp>(Configuration);
+            services.Configure<Smtp>(Configuration.GetSection("Smtp"));
             services.AddControllers();
             services.AddSingleton<IFileProvider>(new PhysicalFileProvider(
         Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));

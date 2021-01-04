@@ -17,6 +17,7 @@ using figma.ViewModel;
 using figma.OutFile;
 using Microsoft.AspNetCore.WebUtilities;
 using System.Text;
+using figma.Interface;
 
 namespace figma.Controllers
 {
@@ -24,10 +25,12 @@ namespace figma.Controllers
     {
         private readonly UnitOfWork _unitOfWork;
         private readonly IMemoryCache _iMemoryCache;
-        public HomeController(UnitOfWork unitOfWork, IMemoryCache memoryCache)
+        private readonly IMailer _mailer;
+        public HomeController(UnitOfWork unitOfWork, IMemoryCache memoryCache,IMailer mailer)
         {
             _iMemoryCache = memoryCache;
             _unitOfWork = unitOfWork;
+            _mailer = mailer;
         }
         public JsonResult Add()
         {
@@ -99,15 +102,6 @@ namespace figma.Controllers
         }
         public IActionResult Index()
         {
-            // await _mailer.SendEmailSync(model.Order.Email, "[" + model.Order.MaDonHang + "] Đơn đặt hàng từ website ShopAsp.Net", sb.ToString());
-
-            var code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes("hopxc1997@gmail.com"));
-            Guid g = Guid.NewGuid();
-            var token = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(g.ToString()));
-            var EmailConfirmationUrl = "/EmailConfirmation/token=" + token + "&code=" + code + "";
-            Console.WriteLine(EmailConfirmationUrl);
-            //  Console.WriteLine(Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code)));
-            //  Console.WriteLine(Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(token)));
             var model = new HomeViewModel
             {
                 Products = _unitOfWork.ProductRepository.Get(a => a.Active, q => q.OrderBy(a => a.Sort), 12),
@@ -117,25 +111,40 @@ namespace figma.Controllers
             return View(model);
         }
 
+        private string UrlConfirmEmail(string email)
+        {
+            if (email == null)
+                return "";
+            Guid g = Guid.NewGuid();
+            Members members = new Members();
+            members = _unitOfWork.MemberRepository.Get(x => x.Email.Equals(email), records: 1).FirstOrDefault();
+            members.token = g.ToString();
+            _unitOfWork.MemberRepository.Update(members);
+            _unitOfWork.SaveNotAync();
+            var EmailConfirmationUrl = "/EmailConfirmation/token=" + WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(g.ToString())) + "&code=" + WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(email)) + "";
+            return EmailConfirmationUrl;
+        }
+
         [Route("EmailConfirmation/token={token}&code={code}")]
         public async Task<IActionResult> EmailConfirmation(string token, string code)
         {
-            Console.WriteLine(Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(token)));
             var email = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
-            var email1 = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(token));
+            var tokencode = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(token));
             if (email == null)
             {
                 return RedirectToPage("/Index");
             }
 
-            var user = await _unitOfWork.MemberRepository.GetAync(x => x.Email.Equals(email));
-            if (user.Count() == 0)
+            var user = _unitOfWork.MemberRepository.Get(x => x.Email.Equals(email) && x.token.Equals(tokencode)).FirstOrDefault();
+            if (user == null)
             {
                 return NotFound($"Unable to load user with email '{email}'.");
             }
-            ViewBag.h = email;
-            ViewBag.hh = email1;
-            return View();
+            user.ConfirmEmail = true;
+            user.token = null;
+            _unitOfWork.MemberRepository.Update(user);
+            await _unitOfWork.Save();
+            return View(user);
         }
 
         [Route("{name}-{proId}.html")]
@@ -395,6 +404,14 @@ namespace figma.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult ConfirmEmail(string email)
+        {
+            if (email == null)
+                return NotFound($"Unable to load user with email '{email}'.");
+            ViewBag.email = email;
+            return View();
+        }
+
 
         [HttpPost]
         [AllowAnonymous]
@@ -415,7 +432,9 @@ namespace figma.Controllers
                     await _unitOfWork.Save();
                     _iMemoryCache.Remove("Members");
                     TempData["tq"] = "Đăng ký thành công";
-                    return RedirectToAction("Login");
+                   // await _mailer.SendEmailSync(model.Order.Email, "[" + model.Order.MaDonHang + "] Đơn đặt hàng từ website ShopAsp.Net", sb.ToString());
+
+                    return RedirectToAction("ConfirmEmail", new { email = model.Username });
                 }
             }
             TempData["tq"] = "Thất bại";
@@ -443,6 +462,10 @@ namespace figma.Controllers
             public string ConfirmPassword { get; set; }
         }
 
+        public class getIDMember
+        {
+            public int MemberId { get; set; }
+        }
         public class LoginViewModel
         {
 
