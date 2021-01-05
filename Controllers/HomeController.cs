@@ -113,6 +113,7 @@ namespace figma.Controllers
             return View(model);
         }
 
+        #region laylaipw
         public class PasswordEmailSend
         {
             [Required, DataType(DataType.EmailAddress)]
@@ -197,7 +198,7 @@ namespace figma.Controllers
             ViewBag.email = model.Username;
             return View(model);
         }
-
+        #endregion
         #region EmailXacNhan
         public string UrlConfirmEmail(string email)
         {
