@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using System.Text;
 using figma.Interface;
 using Hangfire;
+using System.Data.Entity.Infrastructure;
 
 namespace figma.Controllers
 {
@@ -111,6 +112,92 @@ namespace figma.Controllers
             };
             return View(model);
         }
+
+        public class PasswordEmailSend
+        {
+            [Required, DataType(DataType.EmailAddress)]
+            public string email { get; set; }
+        }
+        [HttpGet]
+        public IActionResult PasswordEmail()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult PasswordEmailXN()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult PasswordEmailTwo(string email)
+        {
+            ViewBag.email = email;
+            return View();
+        }
+
+        //   [Route("PasswordEmail/email={email}")]
+        [HttpPost]
+        public async Task<IActionResult> PasswordEmail(PasswordEmailSend send)
+        {
+            if (!ModelState.IsValid)
+                if (send.email == null)
+                    return RedirectToAction("PasswordEmail");
+            var user = _unitOfWork.MemberRepository.Get(x => x.Email.Equals(send.email)).FirstOrDefault();
+            if (user == null)
+                return RedirectToAction("PasswordEmail");
+
+            string body = "<a href='https://" + Request.Host.Value + "/Home/PasswordEmailLink/" + WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(send.email)) + "' target = '_blank' ><span style = 'color:blue'>Click xác nhận Email</span></a>";
+            await _mailer.SendEmailSync(send.email, "Email xác nhận lấy lại mật khẩu từ website ShopAsp.Net", body);
+            return RedirectToAction("PasswordEmailTwo", new { email = send.email });
+
+        }
+
+        // [Route("Home/PasswordEmailLink/email={email}")]
+        public IActionResult PasswordEmailLink(string id)
+        {
+            var code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(id));
+            var user = _unitOfWork.MemberRepository.Get(x => x.Email.Equals(code)).FirstOrDefault();
+            HttpContext.Session.Remove("repw");
+            HttpContext.Session.Set("repw", Encoding.ASCII.GetBytes(id));
+            if (user == null || code == null)
+                return NotFound($"Hông tìm thấy Email '{id}'");
+            ViewBag.email = code;
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> PasswordEmailLink(string id, [Bind("Username", "Password", "ConfirmPassword")] ConfrimViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var user = _unitOfWork.MemberRepository.Get(x => x.Email.Equals(model.Username)).FirstOrDefault();
+                    var email = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(Encoding.ASCII.GetString(HttpContext.Session.Get("repw"))));
+                    if (user != null && email.Equals(model.Username))
+                    {
+                        var hashedPassword = new PasswordHasher<Members>().HashPassword(new Members(), model.Password);
+                        Members members = new Members();
+                        members = user;
+                        members.Password = hashedPassword;
+                        _unitOfWork.MemberRepository.Update(members);
+                        await _unitOfWork.Save();
+                        return RedirectToAction(nameof(PasswordEmailXN));
+                    }
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    return NotFound();
+                }
+                return RedirectToAction(nameof(PasswordEmail));
+            }
+            ViewBag.email = model.Username;
+            return View(model);
+        }
+
         #region EmailXacNhan
         public string UrlConfirmEmail(string email)
         {
@@ -500,6 +587,18 @@ namespace figma.Controllers
             [Display(Name = "Điện thoại"), Required(ErrorMessage = "Điện thoại hông được để trống nha !"), RegularExpression(@"^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[0-9]{6}$", ErrorMessage = "Hãy nhập đúng số điện thoại chỉ bao gồm 10 kí tự số")]
             public double Sdt { get; set; }
 
+            [Required(ErrorMessage = "Tài khoản hông được để trống nha !"), MaxLength(50), Display(Name = "Email"), DataType(DataType.EmailAddress)]
+            public string Username { get; set; }
+
+            [Required(ErrorMessage = "Mật khẩu hông được để trống nha !"), DataType(DataType.Password), MaxLength(20, ErrorMessage = "Mật khẩu phải ít hơn 20 kí tự"), MinLength(5, ErrorMessage = "Mật khẩu phải nhiều hơn 4 kí tự")]
+            public string Password { get; set; }
+
+            [Required(ErrorMessage = "Mật khẩu nhập lại hông được để trống nha !"), DataType(DataType.Password), Compare(nameof(Password), ErrorMessage = "Hai mật khẩu phải giống nhau"), MaxLength(20, ErrorMessage = "Mật khẩu phải ít hơn 20 kí tự"), MinLength(5, ErrorMessage = "Mật khẩu phải nhiều hơn 4 kí tự")]
+            public string ConfirmPassword { get; set; }
+        }
+
+        public class ConfrimViewModel
+        {
             [Required(ErrorMessage = "Tài khoản hông được để trống nha !"), MaxLength(50), Display(Name = "Email"), DataType(DataType.EmailAddress)]
             public string Username { get; set; }
 
