@@ -1,0 +1,10 @@
+﻿
+@{
+    ViewData["Title"] = "SendEmailConfirmation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Email xác nhận của bạn đã hết hạn, xin vui lòng click vào đây để gửi lại email xác nhận !</h1>
+<br />
+<a asp-action="SendEmail" asp-route-email="@ViewBag.email" class="btn btn-success" >Click</a>
+

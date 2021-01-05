@@ -150,7 +150,8 @@ namespace figma
             app.UseCookiePolicy(cookiePolicyOptions);
             app.UseSession();
             app.UseHangfireDashboard();
-            backgroundJobs.Enqueue(() => Console.WriteLine("Hello world from Hangfire!"));
+            //thực hiện 1 lần và ngay lập tức
+            //  backgroundJobs.Enqueue(() => Console.WriteLine("Hello world from Hangfire!"));
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

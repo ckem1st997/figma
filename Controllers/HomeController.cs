@@ -18,6 +18,7 @@ using figma.OutFile;
 using Microsoft.AspNetCore.WebUtilities;
 using System.Text;
 using figma.Interface;
+using Hangfire;
 
 namespace figma.Controllers
 {
@@ -26,7 +27,7 @@ namespace figma.Controllers
         private readonly UnitOfWork _unitOfWork;
         private readonly IMemoryCache _iMemoryCache;
         private readonly IMailer _mailer;
-        public HomeController(UnitOfWork unitOfWork, IMemoryCache memoryCache,IMailer mailer)
+        public HomeController(UnitOfWork unitOfWork, IMemoryCache memoryCache, IMailer mailer)
         {
             _iMemoryCache = memoryCache;
             _unitOfWork = unitOfWork;
@@ -110,27 +111,35 @@ namespace figma.Controllers
             };
             return View(model);
         }
-
-        private string UrlConfirmEmail(string email)
+        #region EmailXacNhan
+        public string UrlConfirmEmail(string email)
         {
             if (email == null)
                 return "";
             Guid g = Guid.NewGuid();
-            Members members = new Members();
-            members = _unitOfWork.MemberRepository.Get(x => x.Email.Equals(email), records: 1).FirstOrDefault();
-            members.token = g.ToString();
-            _unitOfWork.MemberRepository.Update(members);
-            _unitOfWork.SaveNotAync();
-            var EmailConfirmationUrl = "/EmailConfirmation/token=" + WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(g.ToString())) + "&code=" + WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(email)) + "";
+            var EmailConfirmationUrl = "/EmailConfirmation/token=" + WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(UpdateToken(email, g.ToString()))) + "&code=" + WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(email)) + "";
+            var jobId = BackgroundJob.Schedule(() => UpdateToken(email, null), TimeSpan.FromSeconds(60));
             return EmailConfirmationUrl;
         }
 
+        public string UpdateToken(string email, string g)
+        {
+            Members members = new Members();
+            members = _unitOfWork.MemberRepository.Get(x => x.Email.Equals(email), records: 1).FirstOrDefault();
+            members.token = g;
+            //   members.ConfirmEmail = false;
+            _unitOfWork.MemberRepository.Update(members);
+            _unitOfWork.SaveNotAync();
+            return g;
+        }
+
+        //xác nhận
         [Route("EmailConfirmation/token={token}&code={code}")]
         public async Task<IActionResult> EmailConfirmation(string token, string code)
         {
             var email = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
             var tokencode = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(token));
-            if (email == null)
+            if (email == null || code == null)
             {
                 return RedirectToPage("/Index");
             }
@@ -138,7 +147,7 @@ namespace figma.Controllers
             var user = _unitOfWork.MemberRepository.Get(x => x.Email.Equals(email) && x.token.Equals(tokencode)).FirstOrDefault();
             if (user == null)
             {
-                return NotFound($"Unable to load user with email '{email}'.");
+                return RedirectToAction("SendEmailConfirmation", new { email = email });
             }
             user.ConfirmEmail = true;
             user.token = null;
@@ -147,6 +156,55 @@ namespace figma.Controllers
             return View(user);
         }
 
+
+        // send token
+        [Route("SendEmailConfirmation/email={email}")]
+        public IActionResult SendEmailConfirmation(string email)
+        {
+            if (email == null)
+            {
+                return RedirectToPage("/Index");
+            }
+
+            var user = _unitOfWork.MemberRepository.Get(x => x.Email.Equals(email)).FirstOrDefault();
+            if (user == null)
+            {
+                return NotFound($"Tài khoản '{email}': chưa được đăng ký !");
+            }
+            ViewBag.email = email;
+            return View();
+        }
+
+        [Route("SendEmail/email={email}")]
+        public async Task<IActionResult> SendEmailAsync(string email)
+        {
+            if (email == null)
+            {
+                return RedirectToPage("/Index");
+            }
+
+            var user = _unitOfWork.MemberRepository.Get(x => x.Email.Equals(email)).FirstOrDefault();
+            if (user == null)
+            {
+                return NotFound($"Tài khoản '{email}': chưa được đăng ký !");
+            }
+            await SendEmailConfrim(email);
+            return RedirectToAction("ConfirmEmail", new { email = email });
+        }
+        public IActionResult ConfirmEmail(string email)
+        {
+            if (email == null)
+                return NotFound($"Unable to load user with email '{email}'.");
+            ViewBag.email = email;
+            return View();
+        }
+        private async Task SendEmailConfrim(string email)
+        {
+            string body = "<a href='https://" + Request.Host.Value + "" + UrlConfirmEmail(email) + "' target = '_blank' ><span style = 'color:blue'>Click xác nhận Email</span></a>";
+            await _mailer.SendEmailSync(email, "Email xác nhận đăng ký tài khoản từ website ShopAsp.Net", body);
+        }
+
+        #endregion
         [Route("{name}-{proId}.html")]
         public IActionResult Product(int proId = 0)
         {
@@ -404,15 +462,6 @@ namespace figma.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult ConfirmEmail(string email)
-        {
-            if (email == null)
-                return NotFound($"Unable to load user with email '{email}'.");
-            ViewBag.email = email;
-            return View();
-        }
-
-
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -432,8 +481,7 @@ namespace figma.Controllers
                     await _unitOfWork.Save();
                     _iMemoryCache.Remove("Members");
                     TempData["tq"] = "Đăng ký thành công";
-                   // await _mailer.SendEmailSync(model.Order.Email, "[" + model.Order.MaDonHang + "] Đơn đặt hàng từ website ShopAsp.Net", sb.ToString());
-
+                    await SendEmailConfrim(model.Username);
                     return RedirectToAction("ConfirmEmail", new { email = model.Username });
                 }
             }

@@ -3,20 +3,14 @@
     ViewData["Title"] = "EmailConfirmation";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h1>EmailConfirmation</h1>
-<h1>@ViewBag.h</h1>
-<h1>@ViewBag.hh</h1>
-<h1>
-    @{
-        if (Model.ConfirmEmail)
-        {
-            <p>Thành công !</p>
-        }
-        else
-        {
-            <p>Thất bại !</p>
-        }
+@{
+    if (Model.ConfirmEmail)
+    {
+        <h1>Xác nhận email thành công, xin bạn vui lòng đăng nhập !</h1>
+    }
+    else
+    {
+        <h1>Xác nhận email thất bại, xin bạn vui lòng thử lại !</h1>
+    }
 }
-</h1>
 
