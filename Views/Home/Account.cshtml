@@ -6,31 +6,40 @@
 }
 
 <h1>Account</h1>
+<div class="g-signin2 d-none" data-onsuccess="onSignIn"></div>
 
 <p>
-    <a asp-action="Logout">Đăng xuất</a>
+    <a href="#" onclick="signOut();">Đăng xuất</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Fullname)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Address)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Mobile)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @try
-        {
+<script>
+    function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance(); auth2.signOut().then(function () {
+            console.log('User signed out.');
+            window.location.assign('/Home/Logout')
+        });
+    }
+</script>
+@if (Model != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fullname)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Mobile)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
             @foreach (var item in Model)
             {
                 <tr>
@@ -48,18 +57,18 @@
                         @Html.DisplayFor(modelItem => item.Mobile)
                     </td>
                     @*<td>
-                        <a asp-action="Edit" asp-route-id="@item.MemberId">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.MemberId">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.MemberId">Delete</a>
-                    </td>*@
+                            <a asp-action="Edit" asp-route-id="@item.MemberId">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.MemberId">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.MemberId">Delete</a>
+                        </td>*@
                 </tr>
             }
-        }
-        catch (Exception)
-        {
 
-            throw;
-        }
+        </tbody>
+    </table>
+}
+else
+{
+    <h2>Bạn đang đăng nhập bằng Google nha !</h2>
+}
 
-    </tbody>
-</table>

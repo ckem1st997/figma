@@ -52,7 +52,53 @@
                     <a asp-action="Register" class="btn btn-default btn-primary">Register</a>
                 </div>
             </div>
+            <div class="g-signin2" data-onsuccess="onSignIn"></div>
+            <a href="#" onclick="signOut();">Sign out</a>
+            <a href="/google-login">Login</a>
+            <script>
+                function signOut() {
+                    var auth2 = gapi.auth2.getAuthInstance(); auth2.signOut().then(function () {
+                        console.log('User signed out.');
+                    });
+                }
 
+                function onSignIn(googleUser) {
+                    var id_token = googleUser.getAuthResponse().id_token;
+                    var profile = googleUser.getBasicProfile();
+                    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+                    console.log('Name: ' + profile.getName());
+                    console.log('Image URL: ' + profile.getImageUrl());
+                    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+                    //var xhr = new XMLHttpRequest();
+                    //xhr.open('POST', 'https://localhost:44302/signin-google');
+                    //xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                    //xhr.onload = function () {
+                    //    console.log('Signed in as: ' + xhr.responseText);
+                    //};
+                    //xhr.send('idtoken=' + id_token);
+                    //console.log(id_token);
+                    SendToken(id_token);
+                }
+                function SendToken(token) {
+                    console.log(token);
+                    var params = {
+                        type: 'GET',
+                        url: '/Home/GoogleLogin',
+                        data: { Token: token },
+                        dataType: "json",
+                        success: function (res) {
+                            console.log(res);
+                        },
+
+                        error: function (errormessage) {
+                            console.log(errormessage)
+                        }
+
+
+                    };
+                    jQuery.ajax(params);
+                }
+            </script>
         </form>
     </div>
 </div>

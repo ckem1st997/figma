@@ -49,7 +49,7 @@ namespace figma
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
      .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, config =>
      {
-
+  
          //  config.Cookie.Name = "UserLoginCookie"; // Name of cookie     
          config.LoginPath = "/Home/Login"; // Path for the redirect to user login page    
          config.AccessDeniedPath = "/Home/UserAccessDenied";
@@ -125,6 +125,16 @@ namespace figma
 
             // Add the processing server as IHostedService
             services.AddHangfireServer();
+            // Google Login
+
+            services.AddAuthentication(
+                options=> { options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme; })
+                .AddGoogle(options =>
+            {
+                IConfigurationSection googleAuthNSection = Configuration.GetSection("Authentication:Google");
+                options.ClientId = googleAuthNSection["ClientId"];
+                options.ClientSecret = googleAuthNSection["ClientSecret"];
+            });
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IBackgroundJobClient backgroundJobs)
         {

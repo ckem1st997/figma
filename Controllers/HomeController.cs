@@ -20,11 +20,16 @@ using System.Text;
 using figma.Interface;
 using Hangfire;
 using System.Data.Entity.Infrastructure;
+using Google.Apis.Auth;
+using Google.Apis.Auth.OAuth2;
+using Microsoft.AspNetCore.Authentication.Google;
 
 namespace figma.Controllers
 {
     public class HomeController : Controller
     {
+
+
         private readonly UnitOfWork _unitOfWork;
         private readonly IMemoryCache _iMemoryCache;
         private readonly IMailer _mailer;
@@ -102,8 +107,13 @@ namespace figma.Controllers
                 return Json(new { result = 2 });
             }
         }
+
+
         public IActionResult Index()
         {
+            GoogleJsonWebSignature google = new GoogleJsonWebSignature();
+            Console.WriteLine(google);
+            // Console.WriteLine(GoogleWebAuthorizationBroker);
             var model = new HomeViewModel
             {
                 Products = _unitOfWork.ProductRepository.Get(a => a.Active, q => q.OrderBy(a => a.Sort), 12),
@@ -113,6 +123,37 @@ namespace figma.Controllers
             return View(model);
         }
 
+        //[AllowAnonymous]
+        //[Route("google-login")]
+        //public IActionResult GoogleLogin()
+        //{
+        //    var properties = new AuthenticationProperties { RedirectUri = Url.Action("GoogleResponse") };
+        //    return Challenge(properties, GoogleDefaults.AuthenticationScheme);
+        //}
+
+
+        [AllowAnonymous]
+        [AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> GoogleLogin(string Token)
+        {
+            GoogleJsonWebSignature.Payload payload = await GoogleJsonWebSignature.ValidateAsync(Token);
+            var userClaims = new List<Claim>()
+                {
+                    new Claim("UserName", payload.Name),
+                    new Claim("UserId", payload.Subject),
+                    new Claim(ClaimTypes.Actor, "true"),
+                    new Claim(ClaimTypes.Role,"Users"),
+                    };
+            var userIdentity = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var authProperties = new AuthenticationProperties
+            {
+                AllowRefresh = true,
+                IsPersistent = true
+            };
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(userIdentity), authProperties);
+
+            return RedirectToAction("Index");
+        }
         #region laylaipw
         public class PasswordEmailSend
         {
@@ -462,9 +503,17 @@ namespace figma.Controllers
             var userId = claims.FirstOrDefault(c => c.Type == "UserId").Value;
             if (userId != null && userName != null)
             {
-                var result = _unitOfWork.MemberRepository.Get(a => a.MemberId == int.Parse(userId) && a.Email == userName);
-                if (result != null)
-                    return View(result);
+                try
+                {
+                    var result = _unitOfWork.MemberRepository.Get(a => a.MemberId == int.Parse(userId) && a.Email == userName);
+                    if (result != null)
+                        return View(result);
+                }
+                catch (Exception)
+                {
+                    return View();
+                }
+
             }
             return RedirectToAction(nameof(Login));
         }
@@ -626,6 +675,7 @@ namespace figma.Controllers
             [Display(Name = "Nhớ mật khẩu")]
             public bool Remember { get; set; }
         }
+
         #endregion
         protected override void Dispose(bool disposing)
         {

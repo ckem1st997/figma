@@ -13,7 +13,6 @@ $(".info .row .col-4").hover(
     }
 );
 
-
 document.addEventListener(
     "DOMContentLoaded", () => {
         const menu = new MmenuLight(
