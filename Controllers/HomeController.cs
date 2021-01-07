@@ -23,6 +23,9 @@ using System.Data.Entity.Infrastructure;
 using Google.Apis.Auth;
 using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Authentication.Google;
+using System.Net.Http;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace figma.Controllers
 {
@@ -33,11 +36,13 @@ namespace figma.Controllers
         private readonly UnitOfWork _unitOfWork;
         private readonly IMemoryCache _iMemoryCache;
         private readonly IMailer _mailer;
-        public HomeController(UnitOfWork unitOfWork, IMemoryCache memoryCache, IMailer mailer)
+        private readonly IHttpClientFactory _clientFactory;
+        public HomeController(UnitOfWork unitOfWork, IMemoryCache memoryCache, IMailer mailer, IHttpClientFactory clientFactory)
         {
             _iMemoryCache = memoryCache;
             _unitOfWork = unitOfWork;
             _mailer = mailer;
+            _clientFactory = clientFactory;
         }
         public JsonResult Add()
         {
@@ -111,9 +116,6 @@ namespace figma.Controllers
 
         public IActionResult Index()
         {
-            GoogleJsonWebSignature google = new GoogleJsonWebSignature();
-            Console.WriteLine(google);
-            // Console.WriteLine(GoogleWebAuthorizationBroker);
             var model = new HomeViewModel
             {
                 Products = _unitOfWork.ProductRepository.Get(a => a.Active, q => q.OrderBy(a => a.Sort), 12),
@@ -152,8 +154,48 @@ namespace figma.Controllers
             };
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(userIdentity), authProperties);
 
-            return RedirectToAction("Index");
+            return Ok(true);
         }
+
+        //fb
+        [AllowAnonymous]
+        [AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> FaceBookLogin(string accessToken, string userID, string graphDomain)
+        {
+
+            var request = new HttpRequestMessage(HttpMethod.Get,
+                "https://graph.facebook.com/" + userID + "?fields=name,email&access_token=" + accessToken + "");
+            var requestName = new HttpRequestMessage(HttpMethod.Get,
+                "https://graph.facebook.com/me");
+            var client = _clientFactory.CreateClient();
+            var response = await client.SendAsync(request);
+            var responsename = await client.SendAsync(requestName);
+            string idss = "";
+            if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadAsStringAsync();
+                JObject json = JObject.Parse(result);
+                foreach (var item in json)
+                {
+                    if (item.Key.Equals("id"))
+                    {
+                        idss = item.Value.ToString();
+                        // break;
+                    }
+                    Console.WriteLine(item);
+                }
+                var resultname = await responsename.Content.ReadAsStringAsync();
+                JObject json1 = JObject.Parse(resultname);
+                foreach (var item in json)
+                {
+                    Console.WriteLine(item);
+                }
+                if (idss.Equals(userID) && graphDomain.Equals("facebook"))
+                    return Ok(true);
+            }
+            return Ok(false);
+        }
+
         #region laylaipw
         public class PasswordEmailSend
         {

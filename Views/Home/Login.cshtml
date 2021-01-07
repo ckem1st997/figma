@@ -53,8 +53,11 @@
                 </div>
             </div>
             <div class="g-signin2" data-onsuccess="onSignIn"></div>
-            <a href="#" onclick="signOut();">Sign out</a>
-            <a href="/google-login">Login</a>
+            <a href="#" class="d-none" onclick="signOut();">Sign out</a>
+
+            <fb:login-button scope="public_profile,email"
+                             onlogin="checkLoginState();">
+            </fb:login-button>
             <script>
                 function signOut() {
                     var auth2 = gapi.auth2.getAuthInstance(); auth2.signOut().then(function () {
@@ -65,39 +68,88 @@
                 function onSignIn(googleUser) {
                     var id_token = googleUser.getAuthResponse().id_token;
                     var profile = googleUser.getBasicProfile();
-                    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-                    console.log('Name: ' + profile.getName());
-                    console.log('Image URL: ' + profile.getImageUrl());
-                    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-                    //var xhr = new XMLHttpRequest();
-                    //xhr.open('POST', 'https://localhost:44302/signin-google');
-                    //xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                    //xhr.onload = function () {
-                    //    console.log('Signed in as: ' + xhr.responseText);
-                    //};
-                    //xhr.send('idtoken=' + id_token);
-                    //console.log(id_token);
                     SendToken(id_token);
                 }
                 function SendToken(token) {
-                    console.log(token);
+                    //   console.log(token);
                     var params = {
                         type: 'GET',
                         url: '/Home/GoogleLogin',
                         data: { Token: token },
                         dataType: "json",
                         success: function (res) {
+                            window.location.assign('/Home/Account')
                             console.log(res);
                         },
-
                         error: function (errormessage) {
                             console.log(errormessage)
                         }
-
-
                     };
                     jQuery.ajax(params);
                 }
+                function SendFb(token) {
+                    //console.log(token.authResponse.accessToken);
+                    var params = {
+                        type: 'GET',
+                        url: '/Home/FaceBookLogin',
+                        data: { accessToken: token.authResponse.accessToken, userID: token.authResponse.userID, graphDomain: token.authResponse.graphDomain },
+                        dataType: "json",
+                        success: function (res) {
+                            //  window.location.assign('/Home/Account')
+                            console.log(res);
+                        },
+                        error: function (errormessage) {
+                            console.log(errormessage)
+                        }
+                    };
+                    jQuery.ajax(params);
+                }
+                // fb
+
+                function checkLoginState() {
+                    FB.getLoginStatus(function (response) {
+                        statusChangeCallback(response);
+                    });
+                }
+                function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
+                    console.log('statusChangeCallback');
+                    console.log(response);                   // The current login status of the person.
+                    if (response.status === 'connected') {
+                        SendFb(response, getName());// Logged into your webpage and Facebook.
+                        //  testAPI();
+                    } else {                                 // Not logged into your webpage or we are unable to tell.
+                        document.getElementById('status').innerHTML = 'Please log ' +
+                            'into this webpage.';
+                    }
+                }
+                //FB.getLoginStatus(function (response) {   // Called after the JS SDK has been initialized.
+                //    statusChangeCallback(response);        // Returns the login status.
+                //});
+                function getName() {
+                    // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+                    FB.api('/me', function (response) {
+                        return response.name;
+                    });
+                }
+                window.fbAsyncInit = function () {
+                    FB.init({
+                        appId: '826080674623621',
+                        cookie: true,
+                        xfbml: true,
+                        version: 'afc462708091d6188c903e76f6b45771'
+                    });
+
+                    FB.AppEvents.logPageView();
+
+                };
+
+                (function (d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) { return; }
+                    js = d.createElement(s); js.id = id;
+                    js.src = "https://connect.facebook.net/en_US/sdk.js";
+                    fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));
             </script>
         </form>
     </div>

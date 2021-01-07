@@ -36,6 +36,7 @@ namespace figma
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpClient();
             services.AddMemoryCache();
             services.AddTransient<IMailer, Mailer>();
             services.Configure<Smtp>(Configuration.GetSection("Smtp"));
@@ -49,7 +50,7 @@ namespace figma
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
      .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, config =>
      {
-  
+
          //  config.Cookie.Name = "UserLoginCookie"; // Name of cookie     
          config.LoginPath = "/Home/Login"; // Path for the redirect to user login page    
          config.AccessDeniedPath = "/Home/UserAccessDenied";
@@ -128,13 +129,18 @@ namespace figma
             // Google Login
 
             services.AddAuthentication(
-                options=> { options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme; })
+                options => { options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme; })
+                        .AddFacebook(facebookOptions =>
+                        {
+                            facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
+                            facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+                        })
                 .AddGoogle(options =>
-            {
-                IConfigurationSection googleAuthNSection = Configuration.GetSection("Authentication:Google");
-                options.ClientId = googleAuthNSection["ClientId"];
-                options.ClientSecret = googleAuthNSection["ClientSecret"];
-            });
+                {
+                    IConfigurationSection googleAuthNSection = Configuration.GetSection("Authentication:Google");
+                    options.ClientId = googleAuthNSection["ClientId"];
+                    options.ClientSecret = googleAuthNSection["ClientSecret"];
+                });
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IBackgroundJobClient backgroundJobs)
         {
