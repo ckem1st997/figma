@@ -139,12 +139,20 @@ namespace figma.Controllers
         public async Task<IActionResult> GoogleLogin(string Token)
         {
             GoogleJsonWebSignature.Payload payload = await GoogleJsonWebSignature.ValidateAsync(Token);
+            await AddCookieAuthor(payload.Name, payload.Subject, "Google");
+
+            return Ok(true);
+        }
+
+        private async Task AddCookieAuthor(string name, string id, string social)
+        {
             var userClaims = new List<Claim>()
                 {
-                    new Claim("UserName", payload.Name),
-                    new Claim("UserId", payload.Subject),
+                    new Claim("UserName", name),
+                    new Claim("UserId",id),
                     new Claim(ClaimTypes.Actor, "true"),
                     new Claim(ClaimTypes.Role,"Users"),
+                    new Claim("Social",social),
                     };
             var userIdentity = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme);
             var authProperties = new AuthenticationProperties
@@ -153,10 +161,13 @@ namespace figma.Controllers
                 IsPersistent = true
             };
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(userIdentity), authProperties);
-
-            return Ok(true);
         }
 
+        public class JsonFB
+        {
+            public string Name { get; set; }
+            public string Id { get; set; }
+        }
         //fb
         [AllowAnonymous]
         [AutoValidateAntiforgeryToken]
@@ -166,7 +177,7 @@ namespace figma.Controllers
             var request = new HttpRequestMessage(HttpMethod.Get,
                 "https://graph.facebook.com/" + userID + "?fields=name,email&access_token=" + accessToken + "");
             var requestName = new HttpRequestMessage(HttpMethod.Get,
-                "https://graph.facebook.com/me");
+                "https://graph.facebook.com/v9.0/me?access_token=" + accessToken + "&method=get&pretty=0&sdk=joey&suppress_http_code=1");
             var client = _clientFactory.CreateClient();
             var response = await client.SendAsync(request);
             var responsename = await client.SendAsync(requestName);
@@ -180,20 +191,35 @@ namespace figma.Controllers
                     if (item.Key.Equals("id"))
                     {
                         idss = item.Value.ToString();
-                        // break;
+                        break;
                     }
-                    Console.WriteLine(item);
                 }
                 var resultname = await responsename.Content.ReadAsStringAsync();
                 JObject json1 = JObject.Parse(resultname);
-                foreach (var item in json)
+                JsonFB j1 = new JsonFB();
+                JsonFB j2 = new JsonFB();
+                GetValueJson(json, j1);
+                GetValueJson(json1, j2);
+                if (idss.Equals(userID) && graphDomain.Equals("facebook") && j1.Id.Equals(j2.Id) && j1.Name.Equals(j2.Name))
                 {
-                    Console.WriteLine(item);
-                }
-                if (idss.Equals(userID) && graphDomain.Equals("facebook"))
+                    await AddCookieAuthor(j1.Name, j1.Id, "Facebook");
                     return Ok(true);
+                }
             }
             return Ok(false);
+        }
+
+        private static JsonFB GetValueJson(JObject json, JsonFB j1)
+        {
+            foreach (var item in json)
+            {
+                if (item.Key.Equals("id"))
+                    j1.Id = item.Value.ToString();
+                if (item.Key.Equals("name"))
+                    j1.Name = item.Value.ToString();
+            }
+
+            return j1;
         }
 
         #region laylaipw
@@ -536,6 +562,13 @@ namespace figma.Controllers
         }
 
 
+        public class SocialInfomation
+        {
+            public string Name { get; set; }
+            public string Id { get; set; }
+            public string Social { get; set; }
+        }
+
         #region Account
         [Authorize]
         public IActionResult Account()
@@ -547,12 +580,16 @@ namespace figma.Controllers
             {
                 try
                 {
+                    ViewBag.name = userName;
+                    ViewBag.id = userId;
+                    ViewBag.social = claims.FirstOrDefault(c => c.Type == "Social").Value;
                     var result = _unitOfWork.MemberRepository.Get(a => a.MemberId == int.Parse(userId) && a.Email == userName);
                     if (result != null)
                         return View(result);
                 }
                 catch (Exception)
                 {
+
                     return View();
                 }
 

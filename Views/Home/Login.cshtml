@@ -95,8 +95,9 @@
                         data: { accessToken: token.authResponse.accessToken, userID: token.authResponse.userID, graphDomain: token.authResponse.graphDomain },
                         dataType: "json",
                         success: function (res) {
-                            //  window.location.assign('/Home/Account')
                             console.log(res);
+                            if (res)
+                                window.location.assign('/Home/Account')
                         },
                         error: function (errormessage) {
                             console.log(errormessage)
@@ -115,7 +116,7 @@
                     console.log('statusChangeCallback');
                     console.log(response);                   // The current login status of the person.
                     if (response.status === 'connected') {
-                        SendFb(response, getName());// Logged into your webpage and Facebook.
+                        SendFb(response);// Logged into your webpage and Facebook.
                         //  testAPI();
                     } else {                                 // Not logged into your webpage or we are unable to tell.
                         document.getElementById('status').innerHTML = 'Please log ' +
@@ -125,12 +126,12 @@
                 //FB.getLoginStatus(function (response) {   // Called after the JS SDK has been initialized.
                 //    statusChangeCallback(response);        // Returns the login status.
                 //});
-                function getName() {
-                    // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
-                    FB.api('/me', function (response) {
-                        return response.name;
-                    });
-                }
+                //function getName() {
+                //    // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+                //    FB.api('/me', function (response) {
+                //        console.log(response.name)
+                //    });
+                //}
                 window.fbAsyncInit = function () {
                     FB.init({
                         appId: '826080674623621',

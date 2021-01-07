@@ -69,6 +69,30 @@
 }
 else
 {
-    <h2>Bạn đang đăng nhập bằng Google nha !</h2>
+    <h2>Bạn đang đăng nhập bằng @ViewBag.social nha !</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    ID
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    @ViewBag.name
+                </td>
+
+                <td>
+                    @ViewBag.id
+                </td>
+            </tr>
+        </tbody>
+    </table>
 }
 
