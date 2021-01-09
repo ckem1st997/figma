@@ -118,21 +118,23 @@ namespace figma.Controllers
         {
             var model = new HomeViewModel
             {
-                Products = _unitOfWork.ProductRepository.Get(a => a.Active, q => q.OrderBy(a => a.Sort), 12),
+                Products = _unitOfWork.ProductRepository.Get(a => a.Active, q => q.OrderBy(a => a.Sort), 12).Select(y => new ViewProducts
+                {
+                    Name = y.Name,
+                    CreateDate = y.CreateDate,
+                    Hot = y.Hot,
+                    Image = y.Image,
+                    Price = y.Price,
+                    ProductID = y.ProductID,
+                    SaleOff = y.SaleOff,
+                    Sort = y.Sort,
+                    Quantity = y.Quantity
+                }),
                 Banners = _unitOfWork.BannerRepository.Get(a => a.Active, q => q.OrderBy(a => a.Soft)),
                 ConfigSites = _unitOfWork.ConfigSiteRepository.Get()
             };
             return View(model);
         }
-
-        //[AllowAnonymous]
-        //[Route("google-login")]
-        //public IActionResult GoogleLogin()
-        //{
-        //    var properties = new AuthenticationProperties { RedirectUri = Url.Action("GoogleResponse") };
-        //    return Challenge(properties, GoogleDefaults.AuthenticationScheme);
-        //}
-
 
         [AllowAnonymous]
         [AutoValidateAntiforgeryToken]
@@ -426,15 +428,13 @@ namespace figma.Controllers
             {
                 Product = product,
                 Products = products,
-                ViewProducts = _unitOfWork.ProductRepository.Get().ToList(),
+                //   ViewProducts = _unitOfWork.ProductRepository.Get().ToList(),
                 RootCategory = _unitOfWork.ProductCategoryRepository.Get(a => a.Active, q => q.OrderByDescending(a => a.Soft)).SingleOrDefault(a => a.ProductCategorieID == product.ProductCategorieID),
                 Collection = _unitOfWork.CollectionRepository.Get(a => a.Active).SingleOrDefault(a => a.CollectionID == product.CollectionID),
                 TagProducts = _unitOfWork.TagsProductsRepository.Get(a => a.ProductID == proId, includeProperties: "Tags,Products"),
-                ProductSizeColors = _unitOfWork.ProductSCRepository.Get(includeProperties: "Size,Color").ToList(),
+                //  ProductSizeColors = _unitOfWork.ProductSCRepository.Get(includeProperties: "Size,Color").ToList(),
                 GetColors = _unitOfWork.ProductSCRepository.Get(x => x.ProductID == proId && !x.Color.NameColor.Equals("Không màu"), includeProperties: "Color").GroupBy(x => new { x.Color.NameColor, x.Color.Code }).Select(y => new GetColorId { NameColor = y.Key.NameColor, Code = y.Key.Code }),
                 GetSizes = _unitOfWork.ProductSCRepository.Get(x => x.ProductID == proId && !x.Size.SizeProduct.Equals("Không Size"), includeProperties: "Size").GroupBy(x => x.Size.SizeProduct).Select(y => new GetSizeId { SizeProduc = y.Key.Trim() })
-
-
             };
 
             return View(model);
@@ -522,8 +522,20 @@ namespace figma.Controllers
                 "price_desc" => Products.OrderByDescending(a => a.Price),
                 _ => Products.OrderBy(a => a.Name),
             };
-            int pageSize = 8;
-            return View(PaginatedList<Products>.CreateAsync(Products, pageNumber ?? 1, pageSize));
+            IEnumerable<ViewProducts> view = Products.Select(y => new ViewProducts
+            {
+                Name = y.Name,
+                CreateDate = y.CreateDate,
+                Hot = y.Hot,
+                Image = y.Image,
+                Price = y.Price,
+                ProductID = y.ProductID,
+                SaleOff = y.SaleOff,
+                Sort = y.Sort,
+                Quantity = y.Quantity
+            });
+            int pageSize = 20;
+            return View(PaginatedList<ViewProducts>.CreateAsync(view, pageNumber ?? 1, pageSize));
         }
 
         public async Task<IActionResult> Search(string sortOrder, string currentFilter, string searchString, int? pageNumber)
