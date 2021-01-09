@@ -23,6 +23,8 @@ using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using Hangfire;
 using Hangfire.SqlServer;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace figma
 {
@@ -40,6 +42,7 @@ namespace figma
             services.AddMemoryCache();
             services.AddTransient<IMailer, Mailer>();
             services.Configure<Smtp>(Configuration.GetSection("Smtp"));
+            services.Configure<VNPAY>(Configuration.GetSection("VNPAY"));
             services.AddControllers();
             services.AddSingleton<IFileProvider>(new PhysicalFileProvider(
         Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
@@ -142,7 +145,7 @@ namespace figma
                     options.ClientSecret = googleAuthNSection["ClientSecret"];
                 });
         }
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IBackgroundJobClient backgroundJobs)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IBackgroundJobClient backgroundJobs, ILoggerFactory loggerFactor)
         {
             if (env.IsDevelopment())
             {
@@ -154,7 +157,14 @@ namespace figma
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
+            var loggingOptions = this.Configuration.GetSection("Log4NetCore")
+                                              .Get<Log4NetProviderOptions>();
+            loggerFactor.AddLog4Net(loggingOptions);
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor |
+            ForwardedHeaders.XForwardedProto
+            });
             app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthentication();

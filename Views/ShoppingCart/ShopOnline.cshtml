@@ -1,0 +1,124 @@
+﻿@model figma.Models.OrderInfo
+@{
+    ViewData["Title"] = "ShopOnline";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>ShopOnline</h1>
+<div class="container">
+    <div class="header clearfix">
+        <h3 class="text-muted">VNPAY DEMO</h3>
+    </div>
+    <div class="table-responsive">
+        <form name="form1" id="form1" asp-action="ShopOnline">
+            <div>
+                <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTE4NzIxMjM5NDNkZORhIP1ZuWNT3ma/jYdoKI4uxMcvEgAufFTHjWeBjoui">
+            </div>
+            <div>
+                <input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="CA0B0334">
+                <input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAB8BMXrzGIRlpbNYGoF5dbEU+BydFP/ftBKdaYFEf3N67LSIxhcfUeeTcG4uSJNQQt8GDdED13Nkc73TBN8w/4vEWjzw1+L8gT4TanDjM+LYsDa8D4hTXWaYdcirrpHQFC8hp/mdhB/8bqu/pBGMApEvh00uA0pb//QHHWUGHECSwRrLYPEU2sMbaYAc3hCN7EQZDU9ztKQeSybhu0umG1+MVd8coza1B3uEZNAKLIoTZ+k8JvtvsT7ygByKapKbLTZ82YBwlkrvzdp0mTs3U/rwtpWLKLEe6JkjRBZ4J/zp/aqC1S0Xts15w9ete5da2F63pU9RCygbgdj4l+RSy+HDxCLeufUL2xIP+/S2iMWcrRbrgc0anVy2+3pcy4TXSW+wFk2CKrrKZjQ6qHYLPoxP0CpJapz+Ft9zfKuTq50kZQnLDvAo+00INRpXlgOy6gVvJluOvmY5s2O4zJdxfhALwNwpSmN30nvIM7PQewSE8vhcX/e5SOFkTo0ctgM5IkpYqzYhTgON0lEtY5VPe77wC4u6EzM6T9VXSC9unykOGhqSOpbNTZedhZ27d9K+fEXVR75KGJfNypcCvuZPcoDuky/swLNW44HbuSvfbiycKDZUD2K2T7oQjzZ6s+/1cKM1T6VbBUnqZnmEeZq16az7YuIpoc8nv4lnHM+pOgAkTJOu8xRxrEIh3PAZkb4KrRI=">
+            </div>
+            <h3>Tạo yêu cầu thanh toán </h3>
+            <div class="form-group">
+                <label class="control-label">Loại hàng hóa (*)</label>
+                <select asp-for="OrderCatory" class="form-control">
+                    <option value="topup">Nạp tiền điện thoại</option>
+                    <option value="billpayment">Thanh toán hóa đơn</option>
+                    <option value="fashion">Thời trang</option>
+                    <option value="other">Thanh toán trực tuyến</option>
+                </select>
+                <span asp-validation-for="OrderCatory" class="text-danger"></span>
+
+            </div>
+            @*<div class="form-group">
+                    <label>Loại hàng hóa (*) </label>
+                    <select name="orderCategory" id="orderCategory" class="form-control">
+                        <option value="topup">Nạp tiền điện thoại</option>
+                        <option value="billpayment">Thanh toán hóa đơn</option>
+                        <option value="fashion">Thời trang</option>
+                        <option value="other">Thanh toán trực tuyến</option>
+
+                    </select>
+                </div>*@
+
+            <div class="form-group">
+                <label>Số tiền (*)</label>
+                <input asp-for="Amount" class="form-control" />
+                <span asp-validation-for="Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Nội dung thanh toán (*)</label>
+                <input asp-for="OrderDescription" class="form-control" />
+                <span asp-validation-for="OrderDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Ngân hàng</label>
+                <select asp-for="bank" class="form-control">
+                    <option value="">Không chọn</option>
+                    <option value="NCB">Ngan hang NCB</option>
+                    <option value="SACOMBANK">Ngan hang SacomBank</option>
+                    <option value="EXIMBANK">Ngan hang EximBank</option>
+                    <option value="MSBANK">Ngan hang MSBANK</option>
+                    <option value="NAMABANK">Ngan hang NamABank </option>
+                    <option value="VISA">The quoc te VISA/MASTER</option>
+                    <option value="VNMART">Vi dien tu VnMart</option>
+                    <option value="VIETINBANK">Ngan hang Vietinbank</option>
+                    <option value="VIETCOMBANK">Ngan hang VCB</option>
+                    <option value="HDBANK">Ngan hang HDBank</option>
+                    <option value="DONGABANK">Ngan hang Dong A</option>
+                    <option value="TPBANK">Ngân hàng TPBank</option>
+                    <option value="OJB">Ngân hàng OceanBank</option>
+                    <option value="BIDV">Ngân hàng BIDV</option>
+                    <option value="TECHCOMBANK">Ngân hàng Techcombank</option>
+                    <option value="VPBANK">Ngan hang VPBank</option>
+                    <option value="AGRIBANK">Ngan hang Agribank</option>
+                    <option value="ACB">Ngan hang ACB</option>
+                    <option value="OCB">Ngan hang Phuong Dong</option>
+                    <option value="SCB">Ngan hang SCB</option>
+                </select>
+
+            </div>
+            <div class="form-group">
+                <label>Ngôn ngữ  (*)</label>
+                <select asp-for="language" class="form-control">
+                    <option value="vn">Tiếng Việt</option>
+                    <option value="en">English</option>
+                </select>
+
+            </div>
+            <input type="submit" name="btnPay" value="Thanh toán" id="btnPay" class="btn btn-danger">
+            &nbsp;&nbsp;
+            <button id="btnPayPopup" type="submit" class="btn btn-success">Thanh toán (Popup)</button>
+        </form>
+    </div>
+</div>
+<link href="https://pay.vnpay.vn/lib/vnpay/vnpay.css" rel="stylesheet" />
+<script type="text/javascript" src="https://pay.vnpay.vn/lib/vnpay/vnpay.min.js"></script>
+<script type="text/javascript">
+
+    @*$("#btnPayPopup").click(function () {
+        var postData = $("#form1").serialize();
+        var submitUrl = "@{= ResolveUrl("/GetUrl.aspx")}";
+        $.ajax({
+                type: "GET",
+            url: submitUrl,
+            data: postData,
+            dataType: 'JSON',
+            success: function (x) {
+                    if (x.code === '00') {
+                        if (window.vnpay) {
+                            vnpay.open({ width: 480, height: 600, url: x.data });
+                        } else {
+                            location.href = x.data;
+                        }
+                        return false;
+                    } else {
+                        alert(x.Message);
+                    }
+                }
+            });
+        return false;
+    });*@
+
+</script>
+

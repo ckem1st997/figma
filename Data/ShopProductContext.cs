@@ -86,6 +86,7 @@ namespace figma.Data
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
+        public DbSet<figma.Models.OrderInfo> OrderInfo { get; set; }
 
     }
 }

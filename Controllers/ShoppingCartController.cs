@@ -8,8 +8,10 @@ using figma.DAL;
 using figma.Interface;
 using figma.Models;
 using figma.ViewModel;
+using log4net;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace figma.Controllers
 {
@@ -19,9 +21,13 @@ namespace figma.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IMailer _mailer;
         private const string CartCookieKey = "CartID";
+        private static readonly ILog log =
+          LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        public VNPAY _vnpay { get; }
 
-        public ShoppingCartController(UnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor, IMailer mailer)
+        public ShoppingCartController(UnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor, IMailer mailer, IOptions<VNPAY> vnpay)
         {
+            _vnpay = vnpay.Value;
             _unitOfWork = unitOfWork;
             _httpContextAccessor = httpContextAccessor;
             _mailer = mailer;
@@ -36,6 +42,150 @@ namespace figma.Controllers
                  });
             }
         }
+
+
+        [Route("thanhtoan/nganhang")]
+        public IActionResult ShopOnline()
+        {
+            return View();
+        }
+
+        [Route("thanhtoan/nganhang")]
+        [HttpPost]
+        public IActionResult ShopOnline(OrderInfo orderInfo)
+        {
+            Console.WriteLine(orderInfo.bank);
+            //Get Config Info
+            string vnp_Returnurl = _vnpay.vnp_Returnurl; //URL nhan ket qua tra ve 
+            string vnp_Url = _vnpay.vnp_Url; //URL thanh toan cua VNPAY 
+            string vnp_TmnCode = _vnpay.vnp_TmnCode; //Ma website
+            string vnp_HashSecret = _vnpay.vnp_HashSecret; //Chuoi bi mat
+
+            //Get payment input
+            OrderInfo order = new OrderInfo();
+            //Save order to db
+            order.OrderId = DateTime.Now.Ticks;
+            order.Amount = Convert.ToDecimal(orderInfo.Amount);
+            order.OrderDescription = orderInfo.OrderDescription;
+            order.CreatedDate = DateTime.Now;
+
+            //Build URL for VNPAY
+            VnPayLibrary vnpay = new VnPayLibrary();
+
+            vnpay.AddRequestData("vnp_Version", "2.0.0");
+            vnpay.AddRequestData("vnp_Command", "pay");
+            vnpay.AddRequestData("vnp_TmnCode", vnp_TmnCode);
+
+            string locale = orderInfo.language;
+            if (!string.IsNullOrEmpty(locale))
+            {
+                vnpay.AddRequestData("vnp_Locale", locale);
+            }
+            else
+            {
+                vnpay.AddRequestData("vnp_Locale", "vn");
+            }
+            Utils utils = new Utils(_httpContextAccessor);
+            vnpay.AddRequestData("vnp_CurrCode", "VND");
+            vnpay.AddRequestData("vnp_TxnRef", order.OrderId.ToString());
+            vnpay.AddRequestData("vnp_OrderInfo", order.OrderDescription);
+            vnpay.AddRequestData("vnp_OrderType", orderInfo.OrderCatory); //default value: other
+            vnpay.AddRequestData("vnp_Amount", (order.Amount * 100).ToString());
+            vnpay.AddRequestData("vnp_ReturnUrl", vnp_Returnurl);
+            vnpay.AddRequestData("vnp_IpAddr", utils.GetIpAddress());
+            vnpay.AddRequestData("vnp_CreateDate", order.CreatedDate.ToString("yyyyMMddHHmmss"));
+
+            if (orderInfo.bank != null && !string.IsNullOrEmpty(orderInfo.bank))
+            {
+                vnpay.AddRequestData("vnp_BankCode", orderInfo.bank);
+            }
+
+            string paymentUrl = vnpay.CreateRequestUrl(vnp_Url, vnp_HashSecret);
+            log.InfoFormat("VNPAY URL: {0}", paymentUrl);
+            Response.Redirect(paymentUrl);
+            return View();
+        }
+
+        [BindProperties]
+        public class GetRequest
+        {
+            public string vnp_Amount { get; set; }
+            public string vnp_BankCode { get; set; }
+            public string vnp_BankTranNo { get; set; }
+            public string vnp_CardType { get; set; }
+            public string vnp_OrderInfo { get; set; }
+            public string vnp_PayDate { get; set; }
+            public string vnp_ResponseCode { get; set; }
+            public string vnp_TmnCode { get; set; }
+            public string vnp_TransactionNo { get; set; }
+            public string vnp_TxnRef { get; set; }
+            public string vnp_SecureHashType { get; set; }
+            public string vnp_SecureHash { get; set; }
+        }
+
+
+        [Route("result")]
+        public IActionResult tets(GetRequest getRequest)
+        {
+            log.InfoFormat("Begin VNPAY Return, URL={0}", Request.QueryString);
+            if (Request.QueryString.Value.Length > 0 && getRequest.vnp_BankTranNo != null && getRequest.vnp_Amount.Length > 0 && getRequest.vnp_BankCode.Length > 0 && getRequest.vnp_CardType.Length > 0 && getRequest.vnp_OrderInfo.Length > 0 && getRequest.vnp_PayDate.Length > 0 && getRequest.vnp_ResponseCode.Length > 0 && getRequest.vnp_SecureHash.Length > 0 && getRequest.vnp_SecureHashType.Length > 0 && getRequest.vnp_TmnCode.Length > 0 && getRequest.vnp_TransactionNo.Length > 0 && getRequest.vnp_TxnRef.Length > 0)
+            {
+                string vnp_HashSecret = _vnpay.vnp_HashSecret; //Chuoi bi mat
+                string vnpayData = Request.QueryString.ToString();
+                VnPayLibrary vnpay = new VnPayLibrary();
+                vnpay.AddResponseData("vnp_Amount", getRequest.vnp_Amount);
+                vnpay.AddResponseData("vnp_BankCode", getRequest.vnp_BankCode);
+                vnpay.AddResponseData("vnp_BankTranNo", getRequest.vnp_BankTranNo);
+                vnpay.AddResponseData("vnp_CardType", getRequest.vnp_CardType);
+                vnpay.AddResponseData("vnp_OrderInfo", getRequest.vnp_OrderInfo);
+                vnpay.AddResponseData("vnp_PayDate", getRequest.vnp_PayDate);
+                vnpay.AddResponseData("vnp_ResponseCode", getRequest.vnp_ResponseCode);
+                vnpay.AddResponseData("vnp_SecureHash", getRequest.vnp_SecureHash);
+                vnpay.AddResponseData("vnp_SecureHashType", getRequest.vnp_SecureHashType);
+                vnpay.AddResponseData("vnp_TmnCode", getRequest.vnp_TmnCode);
+                vnpay.AddResponseData("vnp_TransactionNo", getRequest.vnp_TransactionNo);
+                vnpay.AddResponseData("vnp_TxnRef", getRequest.vnp_TxnRef);
+                //vnp_TxnRef: Ma don hang merchant gui VNPAY tai command=pay    
+                long orderId = Convert.ToInt64(vnpay.GetResponseData("vnp_TxnRef"));
+                //vnp_TransactionNo: Ma GD tai he thong VNPAY
+                long vnpayTranId = Convert.ToInt64(vnpay.GetResponseData("vnp_TransactionNo"));
+                //vnp_ResponseCode:Response code from VNPAY: 00: Thanh cong, Khac 00: Xem tai lieu
+                string vnp_ResponseCode = vnpay.GetResponseData("vnp_ResponseCode");
+                //vnp_SecureHash: MD5 cua du lieu tra ve
+                String vnp_SecureHash = getRequest.vnp_SecureHash;
+                bool checkSignature = vnpay.ValidateSignature(vnp_SecureHash, vnp_HashSecret);
+                if (checkSignature)
+                {
+                    if (vnp_ResponseCode == "00")
+                    {
+                        //Thanh toan thanh cong
+                        ViewBag.thongbao = "Thanh toán thành công";
+                        log.InfoFormat("Thanh toan thanh cong, OrderId={0}, VNPAY TranId={1}", orderId, vnpayTranId);
+                    }
+                    else
+                    {
+                        //Thanh toan khong thanh cong. Ma loi: vnp_ResponseCode
+                        ViewBag.thongbao = "Có lỗi xảy ra trong quá trình xử lý.Mã lỗi: " + vnp_ResponseCode;
+                        log.InfoFormat("Thanh toan loi, OrderId={0}, VNPAY TranId={1},ResponseCode={2}", orderId, vnpayTranId, vnp_ResponseCode);
+                    }
+                }
+                else
+                {
+                    log.InfoFormat("Invalid signature, InputData={0}", Request.QueryString);
+                    ViewBag.thongbao = "Có lỗi xảy ra trong quá trình xử lý";
+                }
+            }
+            else
+            {
+                //Thanh toan khong thanh cong. Ma loi: vnp_ResponseCode
+                ViewBag.thongbao = "Lỗi, xin bạn vui lòng thử lại nha ";
+                log.InfoFormat("Thanh toan loi");
+            }
+
+            return View();
+        }
+
+
 
         [Route("gio-hang/thong-tin")]
         public IActionResult Index()

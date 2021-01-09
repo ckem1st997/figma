@@ -37,12 +37,25 @@ namespace figma.Controllers
         private readonly IMemoryCache _iMemoryCache;
         private readonly IMailer _mailer;
         private readonly IHttpClientFactory _clientFactory;
-        public HomeController(UnitOfWork unitOfWork, IMemoryCache memoryCache, IMailer mailer, IHttpClientFactory clientFactory)
+        private const string CartCookieKey = "CartID";
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public HomeController(UnitOfWork unitOfWork, IMemoryCache memoryCache, IMailer mailer, IHttpClientFactory clientFactory, IHttpContextAccessor httpContextAccesso)
         {
             _iMemoryCache = memoryCache;
+            _httpContextAccessor = httpContextAccesso;
             _unitOfWork = unitOfWork;
             _mailer = mailer;
             _clientFactory = clientFactory;
+            if (!_httpContextAccessor.HttpContext.Request.Cookies.ContainsKey(CartCookieKey))
+            {
+                _httpContextAccessor.HttpContext.Response.Cookies.Append(CartCookieKey, Guid.NewGuid().ToString(),
+                 new CookieOptions()
+                 {
+                     SameSite = SameSiteMode.Lax,
+                     Secure = true,
+                     Expires = new DateTimeOffset(DateTime.Now.AddDays(1))
+                 });
+            }
         }
         public JsonResult Add()
         {
