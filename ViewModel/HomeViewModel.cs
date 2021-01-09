@@ -18,6 +18,15 @@ namespace figma.ViewModel
             public IEnumerable<Products> Products { get; set; }
         }
     }
+    public class GetSizeId
+    {
+        public string SizeProduc { get; set; }
+    }
+    public class GetColorId
+    {
+        public string NameColor { get; set; }
+        public string Code { get; set; }
+    }
     public class ProductDetailViewModel
     {
         public Products Product { get; set; }
@@ -28,6 +37,8 @@ namespace figma.ViewModel
         public IEnumerable<TagProducts> TagProducts { get; set; }
         public IEnumerable<ProductSizeColor> ProductSizeColors { get; set; }
         public IEnumerable<Banners> Banners { get; set; }
+        public IEnumerable<GetColorId> GetColors { get; set; }
+        public IEnumerable<GetSizeId> GetSizes { get; set; }
     }
 
     public class ProductSCViewModel

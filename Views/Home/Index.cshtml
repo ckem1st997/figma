@@ -41,7 +41,7 @@
                                     {
                                         <div class="col-@(12 / count) carousel-item-info wow animate__fadeInUpBig"
                                              data-wow-duration=@delayS data-wow-delay="0.5s">
-                                            <img src="~/@item.CoverImage" class="d-block w-100" alt=@item.BannerName asp-append-version="true">
+                                            <img src="@item.CoverImage" class="d-block w-100" alt=@item.BannerName asp-append-version="true">
                                             <div class="title-caro">
                                                 <p class="title-small">@item.Title</p>
                                                 <p class="title-long text--1">@item.Content</p>
@@ -69,7 +69,7 @@
                                     {
                                         <div class="col-@(12 / count) carousel-item-info" @*wow animate__fadeInUpBig"
                                          data-wow-duration=@delayS data-wow-delay="0.5s"*@>
-                                            <img src="~/@item.CoverImage" class="d-block w-100" alt=@item.BannerName asp-append-version="true">
+                                            <img src="@item.CoverImage" class="d-block w-100" alt=@item.BannerName asp-append-version="true">
                                             <div class="title-caro">
                                                 <p class="title-small">@item.Title</p>
                                                 <p class="title-long text--1">@item.Content</p>
@@ -192,7 +192,7 @@
                                                     <a asp-action="Product" asp-route-proId="@item.ProductID" asp-route-name="@Html.Raw(name)">
                                                         <div class="card-product">
                                                             <div class="product-hover ">
-                                                                <img src="/@arrListStr[0]" alt=@item.Name asp-append-version="true" />
+                                                                <img src="@arrListStr[0]" alt=@item.Name asp-append-version="true" />
                                                                 <div class="card-tool w-100">
                                                                     <a class="card-tool-btn btn-1">
                                                                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -281,7 +281,7 @@
                                                     <a asp-action="Product" asp-route-proId="@item.ProductID" asp-route-name="@Html.Raw(name)">
                                                         <div class="card-product">
                                                             <div class="product-hover ">
-                                                                <img src="/@arrListStr[0]" alt=@item.Name asp-append-version="true" />
+                                                                <img src="@arrListStr[0]" alt=@item.Name asp-append-version="true" />
                                                                 <div class="card-tool w-100">
                                                                     <a class="card-tool-btn btn-1">
                                                                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -369,7 +369,7 @@
                                                     <a asp-action="Product" asp-route-proId="@item.ProductID" asp-route-name="@Html.Raw(name)">
                                                         <div class="card-product">
                                                             <div class="product-hover ">
-                                                                <img src="/@arrListStr[0]" alt=@item.Name asp-append-version="true" />
+                                                                <img src="@arrListStr[0]" alt=@item.Name asp-append-version="true" />
                                                                 <div class="card-tool w-100">
                                                                     <a class="card-tool-btn btn-1">
                                                                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -456,7 +456,7 @@
                                                     <a asp-action="Product" asp-route-proId="@item.ProductID" asp-route-name="@Html.Raw(name)">
                                                         <div class="card-product">
                                                             <div class="product-hover ">
-                                                                <img src="/@arrListStr[0]" alt=@item.Name asp-append-version="true" />
+                                                                <img src="@arrListStr[0]" alt=@item.Name asp-append-version="true" />
                                                                 <div class="card-tool w-100">
                                                                     <a class="card-tool-btn btn-1">
                                                                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart bi1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -556,13 +556,13 @@
                                     if (item.Width < 699)
                                     {
                                         <div class="col-6 h-50  wow animate__zoomInDown dichlen">
-                                            <img src="~/@item.CoverImage" />
+                                            <img src="@item.CoverImage" />
                                         </div>
                                     }
                                     else
                                     {
                                         <div class="col-12  wow animate__zoomInDown dichlen">
-                                            <img src="~/@item.CoverImage" />
+                                            <img src="@item.CoverImage" />
                                         </div>
                                     }
                                 }

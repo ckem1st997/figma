@@ -135,53 +135,45 @@
                     </span>
                 </p>
             </div>
-
-            <div id="variant-swatch-0" class="swatch clearfix optionSwatch" data-option="option2" data-option-index="1">
-                <div class="header">Màu sắc</div>
-                <div class="select-swap">
-                    @{
-                        if (Model.ProductSizeColors.Where(a => a.ProductID == Model.Product.ProductID) != null)
-                            @foreach (var item in Model.ProductSizeColors)
-                            {
-                                if (item.ProductID == Model.Product.ProductID && item.Color.Code.Length > 1)
-                                {
-                                    <div data-value="@item.Color.NameColor" class="swatch-element @item.Color.NameColor ">
-                                        <input class="variant-1" id="swatch-1-red" type="radio" name="option2" value="S">
-                                        <label class="lbSwatch" for="swatch-1-@item.Color.NameColor"
-                                               style="background-color:@item.Color.Code">
-                                            <img alt="sold-out" class="crossed-out" src="/image/soldout.png" asp-append-version="true">
-                                            <img alt="select-pro" class="img-check" src="/image/select-pro.png" asp-append-version="true">
-                                        </label>
-                                    </div>
-                                }
-                            }
-                    }
+            @if (Model.GetColors.Count() > 0)
+            {
+                <div id="variant-swatch-0" class="swatch clearfix optionSwatch" data-option="option2" data-option-index="1">
+                    <div class="header">Màu sắc</div>
+                    <div class="select-swap">
+                        @foreach (var item in Model.GetColors)
+                        {
+                            <div data-value="@item.NameColor" class="swatch-element @item.NameColor">
+                                <input class="variant-1" id="swatch-1-red" type="radio" name="option2" value="S">
+                                <label class="lbSwatch" for="swatch-1-@item.NameColor"
+                                       style="background-color:@item.Code">
+                                    <img alt="sold-out" class="crossed-out" src="/image/soldout.png" asp-append-version="true">
+                                    <img alt="select-pro" class="img-check" src="/image/select-pro.png" asp-append-version="true">
+                                </label>
+                            </div>
+                        }
+                    </div>
                 </div>
-            </div>
+            }
             @*//////////*@
-            <div id="variant-swatch-1" class="swatch clearfix optionSwatch " data-option="option2" data-option-index="1">
-                <div class="header">SIZE</div>
-                <div class="select-swap">
-                    @{
-                        if (Model.ProductSizeColors.Where(a => a.ProductID == Model.Product.ProductID) != null)
-                            @foreach (var item in Model.ProductSizeColors.Where(a => a.ProductID == Model.Product.ProductID).GroupBy(a => a.Size.SizeProduct))
-                            {
-                                if (!item.Key.Contains("Size") && item.Key.Length > 0)
-                                {
-                                    <div data-value="@item.Key" class="swatch-element @item.Key">
-                                        <input class="variant-1" id="swatch-1-@item.Key" type="radio" name="option2" value="@item.Key">
-                                        <label class="lbSwatch" for="swatch-1-@item.Key">
-                                            @item.Key
-                                            <img alt="sold-out" class="crossed-out" src="/image/soldout.png" asp-append-version="true">
-                                            <img alt="select-pro" class="img-check" src="/image/select-pro.png" asp-append-version="true">
-                                        </label>
-                                    </div>
-                                }
-                            }
-                    }
+            @if (Model.GetSizes.Count() > 0)
+            {
+                <div id="variant-swatch-1" class="swatch clearfix optionSwatch " data-option="option2" data-option-index="1">
+                    <div class="header">SIZE</div>
+                    <div class="select-swap">
+                        @foreach (var item in Model.GetSizes)
+                        {
+                            <div data-value="@item.SizeProduc" class="swatch-element @item.SizeProduc">
+                                <input class="variant-1" id="swatch-1-@item.SizeProduc" type="radio" name="option2" value="@item.SizeProduc">
+                                <label class="lbSwatch" for="swatch-1-@item.SizeProduc">
+                                    @item.SizeProduc
+                                    <img alt="sold-out" class="crossed-out" src="/image/soldout.png" asp-append-version="true">
+                                    <img alt="select-pro" class="img-check" src="/image/select-pro.png" asp-append-version="true">
+                                </label>
+                            </div>
+                        }
+                    </div>
                 </div>
-            </div>
-
+            }
 
             <div class="product-detail-info">
                 <i class="fas fa-tshirt mr-3" data-toggle="modal" data-target="#exampleModal"> Bảng size</i>

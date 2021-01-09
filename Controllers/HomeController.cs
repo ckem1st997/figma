@@ -430,19 +430,13 @@ namespace figma.Controllers
                 RootCategory = _unitOfWork.ProductCategoryRepository.Get(a => a.Active, q => q.OrderByDescending(a => a.Soft)).SingleOrDefault(a => a.ProductCategorieID == product.ProductCategorieID),
                 Collection = _unitOfWork.CollectionRepository.Get(a => a.Active).SingleOrDefault(a => a.CollectionID == product.CollectionID),
                 TagProducts = _unitOfWork.TagsProductsRepository.Get(a => a.ProductID == proId, includeProperties: "Tags,Products"),
-                ProductSizeColors = _unitOfWork.ProductSCRepository.Get(includeProperties: "Size,Color").ToList()
+                ProductSizeColors = _unitOfWork.ProductSCRepository.Get(includeProperties: "Size,Color").ToList(),
+                GetColors = _unitOfWork.ProductSCRepository.Get(x => x.ProductID == proId && !x.Color.NameColor.Equals("Không màu"), includeProperties: "Color").GroupBy(x => new { x.Color.NameColor, x.Color.Code }).Select(y => new GetColorId { NameColor = y.Key.NameColor, Code = y.Key.Code }),
+                GetSizes = _unitOfWork.ProductSCRepository.Get(x => x.ProductID == proId && !x.Size.SizeProduct.Equals("Không Size"), includeProperties: "Size").GroupBy(x => x.Size.SizeProduct).Select(y => new GetSizeId { SizeProduc = y.Key.Trim() })
+
+
             };
 
-            //var h = _unitOfWork.ProductSCRepository.Get(x => x.ProductID == 24, includeProperties: "Size").GroupBy(x=>x.Size.SizeProduct);
-            //foreach (var item in h)
-            //{
-            //    Console.WriteLine(""+item.Key+"");
-            //}
-            //var h = _unitOfWork.ProductSCRepository.Get(x => x.ProductID == 24, includeProperties: "Color").GroupBy(x =>new { x.Color.NameColor,x.Color.Code });
-            //foreach (var item in h)
-            //{
-            //    Console.WriteLine("" + item.Key + "");
-            //}
             return View(model);
         }
 
