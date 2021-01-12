@@ -46,9 +46,9 @@
                 <input asp-for="Amount" class="form-control" />
                 <span asp-validation-for="Amount" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group d-none">
                 <label>Nội dung thanh toán (*)</label>
-                <input asp-for="OrderDescription" class="form-control" />
+                <input asp-for="OrderDescription" value="@ViewBag.id" class="form-control" />
                 <span asp-validation-for="OrderDescription" class="text-danger"></span>
             </div>
             <div class="form-group">

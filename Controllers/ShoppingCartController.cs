@@ -45,8 +45,11 @@ namespace figma.Controllers
 
 
         [Route("thanhtoan/nganhang")]
-        public IActionResult ShopOnline()
+        public IActionResult ShopOnline(string orderID)
         {
+            if (!(_unitOfWork.OrderRepository.Get(x => x.MaDonHang.Equals(orderID)).Count() == 1) || orderID == null)
+                RedirectToAction("Index");
+            ViewBag.id = orderID;
             return View();
         }
 
@@ -54,7 +57,7 @@ namespace figma.Controllers
         [HttpPost]
         public IActionResult ShopOnline(OrderInfo orderInfo)
         {
-            Console.WriteLine(orderInfo.bank);
+            // Console.WriteLine(orderInfo.bank);
             //Get Config Info
             string vnp_Returnurl = _vnpay.vnp_Returnurl; //URL nhan ket qua tra ve 
             string vnp_Url = _vnpay.vnp_Url; //URL thanh toan cua VNPAY 
@@ -124,8 +127,7 @@ namespace figma.Controllers
         }
 
 
-        [Route("result")]
-        public IActionResult tets(GetRequest getRequest)
+        public async Task<IActionResult> ResultATMPay(GetRequest getRequest)
         {
             log.InfoFormat("Begin VNPAY Return, URL={0}", Request.QueryString);
             if (Request.QueryString.Value.Length > 0 && getRequest.vnp_BankTranNo != null && getRequest.vnp_Amount.Length > 0 && getRequest.vnp_BankCode.Length > 0 && getRequest.vnp_CardType.Length > 0 && getRequest.vnp_OrderInfo.Length > 0 && getRequest.vnp_PayDate.Length > 0 && getRequest.vnp_ResponseCode.Length > 0 && getRequest.vnp_SecureHash.Length > 0 && getRequest.vnp_SecureHashType.Length > 0 && getRequest.vnp_TmnCode.Length > 0 && getRequest.vnp_TransactionNo.Length > 0 && getRequest.vnp_TxnRef.Length > 0)
@@ -154,13 +156,38 @@ namespace figma.Controllers
                 //vnp_SecureHash: MD5 cua du lieu tra ve
                 String vnp_SecureHash = getRequest.vnp_SecureHash;
                 bool checkSignature = vnpay.ValidateSignature(vnp_SecureHash, vnp_HashSecret);
+                EmptyCartRemove();
                 if (checkSignature)
                 {
                     if (vnp_ResponseCode == "00")
                     {
-                        //Thanh toan thanh cong
-                        ViewBag.thongbao = "Thanh toán thành công";
-                        log.InfoFormat("Thanh toan thanh cong, OrderId={0}, VNPAY TranId={1}", orderId, vnpayTranId);
+                        try
+                        {
+                            //Thanh toan thanh cong
+                            ViewBag.thongbao = "Thanh toán thành công";
+                            var ma = vnpay.GetResponseData("vnp_OrderInfo");
+                            var order = _unitOfWork.OrderRepository.Get(x => x.MaDonHang.Equals(ma)).FirstOrDefault();
+                            Console.WriteLine(1);
+                            Console.WriteLine(ma);
+                            order.Payment = true;
+                            _unitOfWork.OrderRepository.Update(order);
+                            _unitOfWork.SaveNotAync();
+                            log.InfoFormat("Thanh toan thanh cong, OrderId={0}, VNPAY TranId={1}", orderId, vnpayTranId);
+                            await _mailer.SendEmailSync(order.Email, "[" + order.MaDonHang + "] Đơn đặt hàng từ website ShopAsp.Net", "<p>Thanh toán đơn hàng thành công, số hoá đơn:" + orderId + ". Cảm ơn quý khách đã mua hàng !</p>");
+
+                            var model = new CheckOutCompleteViewModel()
+                            {
+                                OrderID = ma,
+                                Contact = _unitOfWork.ContactRepository.Get().FirstOrDefault()
+                            };
+                            return View(model);
+                        }
+                        catch (Exception)
+                        {
+                            ViewBag.thongbao = "Có lỗi xảy ra trong quá trình xử lý.Mã lỗi: " + vnp_ResponseCode;
+                            log.InfoFormat("Thanh toan loi, OrderId={0}, VNPAY TranId={1},ResponseCode={2}", orderId, vnpayTranId, vnp_ResponseCode);
+                        }
+
                     }
                     else
                     {
@@ -257,7 +284,7 @@ namespace figma.Controllers
                 await _unitOfWork.Save();
 
                 var typepay = "Thanh toán khi nhận hàng";
-                switch (model.TypePay)
+                switch (model.Order.TypePay)
                 {
                     case 1:
                         typepay = "Tiền mặt";
@@ -271,7 +298,7 @@ namespace figma.Controllers
                 }
 
                 var giaohang = "Đến địa chỉ người nhận";
-                switch (model.Transport)
+                switch (model.Order.Transport)
                 {
                     case 3:
                         giaohang = "Khách đến nhận hàng";
@@ -330,6 +357,8 @@ namespace figma.Controllers
                 sb.Append("</table>");
                 sb.Append("<p>Cảm ơn bạn đã tin tưởng và mua hàng của chúng tôi.</p>");
                 await _mailer.SendEmailSync(model.Order.Email, "[" + model.Order.MaDonHang + "] Đơn đặt hàng từ website ShopAsp.Net", sb.ToString());
+                if (model.Order.TypePay == 2)
+                    return RedirectToAction("ShopOnline", new { orderID = model.Order.MaDonHang });
                 return RedirectToAction("CheckOutComplete", new { orderId = model.Order.MaDonHang });
             }
             model.Carts = GetCartItems();
