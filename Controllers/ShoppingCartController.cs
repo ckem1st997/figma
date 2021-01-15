@@ -45,11 +45,12 @@ namespace figma.Controllers
 
 
         [Route("thanhtoan/nganhang")]
-        public IActionResult ShopOnline(string orderID)
+        public IActionResult ShopOnline(string orderID, decimal Price)
         {
             if (!(_unitOfWork.OrderRepository.Get(x => x.MaDonHang.Equals(orderID)).Count() == 1) || orderID == null)
                 RedirectToAction("Index");
             ViewBag.id = orderID;
+            ViewBag.price = Price;
             return View();
         }
 
@@ -167,9 +168,8 @@ namespace figma.Controllers
                             ViewBag.thongbao = "Thanh toán thành công";
                             var ma = vnpay.GetResponseData("vnp_OrderInfo");
                             var order = _unitOfWork.OrderRepository.Get(x => x.MaDonHang.Equals(ma)).FirstOrDefault();
-                            Console.WriteLine(1);
-                            Console.WriteLine(ma);
                             order.Payment = true;
+                            order.ThanhToanTruoc = int.TryParse(vnpay.GetResponseData("vnp_Amount"), out int number) ? int.Parse(vnpay.GetResponseData("vnp_Amount")) / 100 : 0;
                             _unitOfWork.OrderRepository.Update(order);
                             _unitOfWork.SaveNotAync();
                             log.InfoFormat("Thanh toan thanh cong, OrderId={0}, VNPAY TranId={1}", orderId, vnpayTranId);
@@ -353,12 +353,12 @@ namespace figma.Controllers
                           "</tr>");
                 }
 
-                sb.Append("<tr><td colspan='5' style='text-align:right'><strong>Tổng tiền: " + tongtien.ToString("N0") + " đ</strong></td></tr>");
+                sb.Append("<tr><td colspan='5' style='text-align:right'><strong>Tổng tiền (đã bao gồm cả phí ship): " + (tongtien < 500000 ? tongtien + 30000 : tongtien).ToString("N0") + " đ</strong></td></tr>");
                 sb.Append("</table>");
                 sb.Append("<p>Cảm ơn bạn đã tin tưởng và mua hàng của chúng tôi.</p>");
                 await _mailer.SendEmailSync(model.Order.Email, "[" + model.Order.MaDonHang + "] Đơn đặt hàng từ website ShopAsp.Net", sb.ToString());
                 if (model.Order.TypePay == 2)
-                    return RedirectToAction("ShopOnline", new { orderID = model.Order.MaDonHang });
+                    return RedirectToAction("ShopOnline", new { orderID = model.Order.MaDonHang, Price = tongtien < 500000 ? tongtien + 30000 : tongtien });
                 return RedirectToAction("CheckOutComplete", new { orderId = model.Order.MaDonHang });
             }
             model.Carts = GetCartItems();

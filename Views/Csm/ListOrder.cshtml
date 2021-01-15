@@ -83,7 +83,7 @@
             {
                 colorStats = "payment-order";
             }
-            var total = order.OrderDetails.Sum(a => a.Price * a.Quantity);
+            var total = order.OrderDetails.Sum(a => a.Price * a.Quantity) < 500000 ? order.OrderDetails.Sum(a => a.Price * a.Quantity) + 30000 : order.OrderDetails.Sum(a => a.Price * a.Quantity);
             var congno = total - order.ThanhToanTruoc;
             <tr data-id="@order.Id">
                 <td><a href="javascript:;" onclick="loadOrder(@order.Id)" class="@colorStats">@order.MaDonHang</a></td>

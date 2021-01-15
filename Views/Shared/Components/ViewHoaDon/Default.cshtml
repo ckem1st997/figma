@@ -170,6 +170,9 @@
                             </tr>
                             i++;
                         }
+                        @{
+                            total = total < 500000 ? total + 30000 : total;
+                        }
                         <tr style="height: 30px; font-size: 16px;">
                             <td colspan="3" style="text-align: right; padding-right: 20px;"><strong>Tổng cộng (VNĐ)</strong></td>
                             <td style="text-align: right"><strong>@total.ToString("N0")</strong></td>

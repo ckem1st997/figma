@@ -323,9 +323,24 @@ footer {
 }
 
 img {
-    max-width: 100% !important;
+    max-width: 100%;
     object-fit: cover !important;
     background-size: cover !important;
+}
+
+.cart-count {
+    position: relative;
+    color: black;
+
+    div {
+        position: absolute;
+        top: -50%;
+        right: 10%;
+        height: 20px;
+        width: 20px;
+        //  background: red;
+        border-radius: 50px;
+    }
 }
 
 header {
@@ -336,20 +351,6 @@ header {
         font-size: 25px;
     }
 
-    .cart-count {
-        position: relative;
-        color: black;
-
-        div {
-            position: absolute;
-            top: -50%;
-            right: 10%;
-            height: 20px;
-            width: 20px;
-            //  background: red;
-            border-radius: 50px;
-        }
-    }
 
     .btn-show-mobile {
         color: rgba(0,0,0,.5);
@@ -1366,6 +1367,8 @@ label[for="product-select-option-2"] {
             padding: 6%;
 
             @media (max-width: 992px) {
+
+
                 & {
                     padding: 3%;
                 }
@@ -2764,8 +2767,23 @@ p {
 }
 
 @media(min-width:992px) {
+
     .main-body.sidebar-move .box__slideshow-split:not(.back-to-normal) .site-box-background-container {
         transform: translateX(-480px);
+    }
+}
+
+@media(max-width:992px) {
+    #menudesktop {
+        display: none !important
+    }
+
+    .mm-listitem {
+        .mm-listitem__text {
+            i {
+                display: none !important;
+            }
+        }
     }
 }
 
@@ -3119,4 +3137,83 @@ body.order-status-test {
 .panel-default > .panel-heading {
     background-color: #fff;
     border: 1px solid #ddd;
+}
+
+// menu mobile
+#page {
+    border-top: 1px solid #F1F1F1;
+    border-bottom: 1px solid #F1F1F1;
+
+    .icon-header {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 11px;
+        margin: 2px;
+    }
+}
+
+.mm-menu_offcanvas {
+    width: 43% !important;
+}
+
+.mm-listitem__btn:not(.mm-listitem__text) {
+    border-left-style: none !important;
+}
+
+.mm-menu_offcanvas {
+}
+
+nav#menu:not(.mm-menu) {
+    display: none;
+}
+
+#menu {
+    margin-top: 5% !important;
+}
+
+.header {
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 44px;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    height: 44px;
+    padding: 0 50px;
+    text-align: center;
+}
+
+.header.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.header a {
+    display: block;
+    width: 50px;
+    height: 44px;
+    padding: 11px;
+    margin: 2px;
+    position: absolute;
+    color: black;
+    top: 0;
+    left: 0;
+    margin-left: 18px;
+}
+
+.header a:before,
+.header a:after {
+    content: '';
+    display: block;
+    background: #000000;
+    height: 2px;
+}
+
+.header a span {
+    background: #000000;
+    display: block;
+    height: 2px;
+    margin: 6px 0;
 }

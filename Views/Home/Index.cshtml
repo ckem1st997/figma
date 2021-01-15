@@ -25,13 +25,13 @@
                 }
             }
         </div>
-        <div id="carouselExampleIndicators" class="carousel slide wow animate__fadeInUp" data-wow-duration="1s" data-wow-delay="0.5s" data-ride="carousel" style="margin:10px">
+        <div id="carouselExampleIndicators" class="carousel slide wow animate__fadeInUp" data-wow-duration="1s" data-wow-delay="0.5s" data-ride="carousel" style="margin-top:10px">
             <div class="carousel-inner">
                 @{
                     if (Model.Banners.Where(a => a.GroupId == 2).Take(3).Count() <= 3 && Model.Banners.Where(a => a.GroupId == 2).Take(3).Count() > 0)
                     {
                         int count = Model.Banners.Where(a => a.GroupId == 2).Take(3).Count();
-                        <div class="carousel-item active container-fluid">
+                        <div class="carousel-item active container-fluid p-0">
                             <div class="row">
                                 @{
 
@@ -59,7 +59,7 @@
                     if (Model.Banners.Where(a => a.GroupId == 2).Skip(3).Take(3).Count() <= 3 && Model.Banners.Where(a => a.GroupId == 2).Skip(3).Take(3).Count() > 0)
                     {
                         int count = Model.Banners.Where(a => a.GroupId == 2).Skip(3).Take(3).Count();
-                        <div class="carousel-item container-fluid">
+                        <div class="carousel-item container-fluid p-0">
                             <div class="row">
                                 @{
 
@@ -86,7 +86,7 @@
                     if (Model.Banners.Where(a => a.GroupId == 2).Skip(6).Take(3).Count() <= 3 && Model.Banners.Where(a => a.GroupId == 2).Skip(6).Take(3).Count() > 0)
                     {
                         int count = Model.Banners.Where(a => a.GroupId == 2).Skip(6).Take(3).Count();
-                        <div class="carousel-item container-fluid">
+                        <div class="carousel-item container-fluid p-0">
                             <div class="row">
                                 @{
                                     double delay = 1;

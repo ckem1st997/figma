@@ -259,9 +259,21 @@ footer .info-lucas .icon-phone-number span {
   color: #FFFFFF;
 }
 img {
-  max-width: 100% !important;
+  max-width: 100%;
   object-fit: cover !important;
   background-size: cover !important;
+}
+.cart-count {
+  position: relative;
+  color: black;
+}
+.cart-count div {
+  position: absolute;
+  top: -50%;
+  right: 10%;
+  height: 20px;
+  width: 20px;
+  border-radius: 50px;
 }
 header {
   position: relative;
@@ -269,18 +281,6 @@ header {
 header i {
   margin-right: 10px;
   font-size: 25px;
-}
-header .cart-count {
-  position: relative;
-  color: black;
-}
-header .cart-count div {
-  position: absolute;
-  top: -50%;
-  right: 10%;
-  height: 20px;
-  width: 20px;
-  border-radius: 50px;
 }
 header .btn-show-mobile {
   color: rgba(0, 0, 0, 0.5);
@@ -2143,6 +2143,14 @@ p span {
     transform: translateX(-480px);
   }
 }
+@media (max-width: 992px) {
+  #menudesktop {
+    display: none !important;
+  }
+  .mm-listitem .mm-listitem__text i {
+    display: none !important;
+  }
+}
 @media (max-width: 767px) {
   /* Header */
   .header-wrap-icon > span {
@@ -2447,4 +2455,68 @@ body.order-status-test {
 .panel-default > .panel-heading {
   background-color: #fff;
   border: 1px solid #ddd;
+}
+#page {
+  border-top: 1px solid #F1F1F1;
+  border-bottom: 1px solid #F1F1F1;
+}
+#page .icon-header {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 11px;
+  margin: 2px;
+}
+.mm-menu_offcanvas {
+  width: 43% !important;
+}
+.mm-listitem__btn:not(.mm-listitem__text) {
+  border-left-style: none !important;
+}
+nav#menu:not(.mm-menu) {
+  display: none;
+}
+#menu {
+  margin-top: 5% !important;
+}
+.header {
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 44px;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  height: 44px;
+  padding: 0 50px;
+  text-align: center;
+}
+.header.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.header a {
+  display: block;
+  width: 50px;
+  height: 44px;
+  padding: 11px;
+  margin: 2px;
+  position: absolute;
+  color: black;
+  top: 0;
+  left: 0;
+  margin-left: 18px;
+}
+.header a:before,
+.header a:after {
+  content: '';
+  display: block;
+  background: #000000;
+  height: 2px;
+}
+.header a span {
+  background: #000000;
+  display: block;
+  height: 2px;
+  margin: 6px 0;
 }

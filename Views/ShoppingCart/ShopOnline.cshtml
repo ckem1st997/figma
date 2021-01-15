@@ -22,8 +22,8 @@
             <div class="form-group">
                 <label class="control-label">Loại hàng hóa (*)</label>
                 <select asp-for="OrderCatory" class="form-control">
-                    <option value="topup">Nạp tiền điện thoại</option>
                     <option value="billpayment">Thanh toán hóa đơn</option>
+                    <option value="topup">Nạp tiền điện thoại</option>
                     <option value="fashion">Thời trang</option>
                     <option value="other">Thanh toán trực tuyến</option>
                 </select>
@@ -43,7 +43,7 @@
 
             <div class="form-group">
                 <label>Số tiền (*)</label>
-                <input asp-for="Amount" class="form-control" />
+                <input asp-for="Amount" value="@ViewBag.price" class="form-control" />
                 <span asp-validation-for="Amount" class="text-danger"></span>
             </div>
             <div class="form-group d-none">
