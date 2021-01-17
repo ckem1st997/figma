@@ -75,6 +75,27 @@ $(document).ready(function () {
             $(this).next("#quantity").val(1);
         }
     });
+    $(".qtyplus").click(function (event) {
+        // console.log($(this).parent().find("input#quantity"));
+        var value = parseInt($(this).parent().find("input#quantity1").val());
+        if ($(this).parent().find("input#quantity1").val() > 0) {
+            $(this).parent().find("input#quantity1").val(value + 1);
+        }
+        else {
+            $(this).next("#quantity1").val(1);
+        }
+    });
+    $(".qtyminus").click(function (event) {
+
+        //  console.log($(this).parent().find("input#quantity"));
+        var value = parseInt($(this).parent().find("input#quantity1").val());
+        if ($(this).parent().find("input#quantity1").val() > 1) {
+            $(this).parent().find("input#quantity1").val(value - 1);
+        }
+        else {
+            $(this).next("#quantity1").val(1);
+        }
+    });
 
     $("#example,.home-index div.banner").vegas({
         delay: 9000,
@@ -152,8 +173,15 @@ $(document).ready(function () {
         if (confirm("Bạn có muốn xóa sản phẩm này ?"))
             RemoveFromCart($(this).attr("data-id"))
     });
+    $("a#BtnDelete1").click(function () {
+        if (confirm("Bạn có muốn xóa sản phẩm này ?"))
+            RemoveFromCart($(this).attr("data-id"))
+    });
     $("input#countcart").click(function () {
         UpdateToCartAjax($(this).attr("data-id"), $(this).parent().find("input#quantity").val())
+    });
+    $("button#countcart1").click(function () {
+        UpdateToCartAjax($(this).attr("data-id"), $(this).parent().find("input#quantity1").val())
     });
     //
     $("#BtnEmptyCart").hide();

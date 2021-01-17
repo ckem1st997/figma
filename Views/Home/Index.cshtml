@@ -17,11 +17,11 @@
 <cache expires-after="@TimeSpan.FromMinutes(5)">
     <div class="home-index wrapper-collection-2">
         <div class="banner">
-            <img class="" src="~/image/Rectangle 2.png" style="opacity:0;" />
+            <img class="" src="~/image/Rectangle 2.png?width=1440&height=632&quality=90" style="opacity:0;" />
             @{
                 foreach (var item in Model.Banners.Where(a => a.GroupId == 1).Take(3))
                 {
-                    <input type="hidden" class="srcBanners" value="@item.CoverImage" />
+                    <input type="hidden" class="srcBanners" value="@item.CoverImage?width=1440&height=632&quality=95&format=jpg" />
                 }
             }
         </div>
@@ -41,7 +41,7 @@
                                     {
                                         <div class="col-@(12 / count) carousel-item-info wow animate__fadeInUpBig"
                                              data-wow-duration=@delayS data-wow-delay="0.5s">
-                                            <img src="@item.CoverImage" class="d-block w-100" alt=@item.BannerName asp-append-version="true">
+                                            <img src="@item.CoverImage?width=460&height=340&quality=95&format=jpg" class="d-block w-100" alt=@item.BannerName>
                                             <div class="title-caro">
                                                 <div class="title-small">@item.Title</div>
                                                 <p class="title-long text--1">@item.Content</p>
@@ -69,7 +69,8 @@
                                     {
                                         <div class="col-@(12 / count) carousel-item-info" @*wow animate__fadeInUpBig"
                                          data-wow-duration=@delayS data-wow-delay="0.5s"*@>
-                                            <img src="@item.CoverImage" class="d-block w-100" alt=@item.BannerName asp-append-version="true">
+                                            <img src="@item.CoverImage?width=460&height=340&quality=95&format=jpg" class="d-block w-100" alt=@item.BannerName>
+
                                             <div class="title-caro">
                                                 <p class="title-small">@item.Title</p>
                                                 <p class="title-long text--1">@item.Content</p>
@@ -95,7 +96,8 @@
                                     {
                                         <div class="col-@(12 / count) carousel-item-info" @*wow animate__fadeInUpBig"
                                          data-wow-duration=@delayS data-wow-delay="0.5s"*@>
-                                            <img src="~/@item.CoverImage" class="d-block w-100" alt=@item.BannerName asp-append-version="true">
+                                            <img src="@item.CoverImage?width=460&height=340&quality=95&format=jpg" class="d-block w-100" alt=@item.BannerName>
+
                                             <div class="title-caro">
                                                 <p class="title-small">@item.Title</p>
                                                 <p class="title-long text--1">@item.Content</p>
@@ -195,15 +197,15 @@
                                                         <div class="product-img">
                                                             <a asp-action="Product" asp-route-proId="@item.ProductID" asp-route-name="@Html.Raw(name)" title="@item.Name" class="image-resize" style="height: auto;">
                                                                 <picture>
-                                                                    <source media="(max-width: 767px)" srcset="@img1">
-                                                                    <source media="(min-width: 768px)" srcset="@img1">
-                                                                    <img class="img-loop" alt="@item.Name" src="@img1" asp-append-version="true" />
+                                                                    <source media="(max-width: 767px)" srcset="@img1?width=480&height=479&quality=80&format=jpg">
+                                                                    <source media="(min-width: 768px)" srcset="@img1?width=480&height=480&quality=80&format=jpg">
+                                                                    <img class="img-loop" alt="@item.Name" src="@img1?width=480&height=480&quality=80&format=jpg" />
                                                                 </picture>
 
                                                                 <picture>
-                                                                    <source media="(max-width: 767px)" srcset="@img2">
-                                                                    <source media="(min-width: 768px)" srcset="@img2">
-                                                                    <img class="img-loop img-hover" alt="@item.Name" src="@img2" asp-append-version="true" />
+                                                                    <source media="(max-width: 767px)" srcset="@img2?width=480&height=480&quality=80&format=jpg">
+                                                                    <source media="(min-width: 768px)" srcset="@img2?width=480&height=480&quality=80&format=jpg">
+                                                                    <img class="img-loop img-hover" alt="@item.Name" src="@img2?width=480&height=480&quality=80&format=jpg" />
                                                                 </picture>
                                                             </a>
                                                         </div>
@@ -295,15 +297,15 @@
                                                         <div class="product-img">
                                                             <a asp-action="Product" asp-route-proId="@item.ProductID" asp-route-name="@Html.Raw(name)" title="@item.Name" class="image-resize" style="height: auto;">
                                                                 <picture>
-                                                                    <source media="(max-width: 767px)" srcset="@img1">
-                                                                    <source media="(min-width: 768px)" srcset="@img1">
-                                                                    <img class="img-loop" alt="@item.Name" src="@img1" asp-append-version="true" />
+                                                                    <source media="(max-width: 767px)" srcset="@img1?width=480&height=479&quality=80&format=jpg">
+                                                                    <source media="(min-width: 768px)" srcset="@img1?width=480&height=479&quality=80&format=jpg">
+                                                                    <img class="img-loop" alt="@item.Name" src="@img1?width=480&height=479&quality=80&format=jpg" />
                                                                 </picture>
 
                                                                 <picture>
-                                                                    <source media="(max-width: 767px)" srcset="@img2">
-                                                                    <source media="(min-width: 768px)" srcset="@img2">
-                                                                    <img class="img-loop img-hover" alt="@item.Name" src="@img2" asp-append-version="true" />
+                                                                    <source media="(max-width: 767px)" srcset="@img2?width=480&height=479&quality=80&format=jpg">
+                                                                    <source media="(min-width: 768px)" srcset="@img2?width=480&height=479&quality=80&format=jpg">
+                                                                    <img class="img-loop img-hover" alt="@item.Name" src="@img2?width=480&height=479&quality=80&format=jpg" />
                                                                 </picture>
                                                             </a>
                                                         </div>
@@ -393,15 +395,15 @@
                                                         <div class="product-img">
                                                             <a asp-action="Product" asp-route-proId="@item.ProductID" asp-route-name="@Html.Raw(name)" title="@item.Name" class="image-resize" style="height: auto;">
                                                                 <picture>
-                                                                    <source media="(max-width: 767px)" srcset="@img1">
-                                                                    <source media="(min-width: 768px)" srcset="@img1">
-                                                                    <img class="img-loop" alt="@item.Name" src="@img1" asp-append-version="true" />
+                                                                    <source media="(max-width: 767px)" srcset="@img1?width=480&height=479&quality=80&format=jpg">
+                                                                    <source media="(min-width: 768px)" srcset="@img1?width=480&height=479&quality=80&format=jpg">
+                                                                    <img class="img-loop" alt="@item.Name" src="@img1?width=480&height=479&quality=80&format=jpg" />
                                                                 </picture>
 
                                                                 <picture>
-                                                                    <source media="(max-width: 767px)" srcset="@img2">
-                                                                    <source media="(min-width: 768px)" srcset="@img2">
-                                                                    <img class="img-loop img-hover" alt="@item.Name" src="@img2" asp-append-version="true" />
+                                                                    <source media="(max-width: 767px)" srcset="@img2?width=480&height=479&quality=80&format=jpg">
+                                                                    <source media="(min-width: 768px)" srcset="@img2?width=480&height=479&quality=80&format=jpg">
+                                                                    <img class="img-loop img-hover" alt="@item.Name" src="@img2?width=480&height=479&quality=80&format=jpg" />
                                                                 </picture>
                                                             </a>
                                                         </div>
@@ -491,15 +493,15 @@
                                                         <div class="product-img">
                                                             <a asp-action="Product" asp-route-proId="@item.ProductID" asp-route-name="@Html.Raw(name)" title="@item.Name" class="image-resize" style="height: auto;">
                                                                 <picture>
-                                                                    <source media="(max-width: 767px)" srcset="@img1">
-                                                                    <source media="(min-width: 768px)" srcset="@img1">
-                                                                    <img class="img-loop" alt="@item.Name" src="@img1" asp-append-version="true" />
+                                                                    <source media="(max-width: 767px)" srcset="@img1?width=480&height=479&quality=80&format=jpg">
+                                                                    <source media="(min-width: 768px)" srcset="@img1?width=480&height=479&quality=80&format=jpg">
+                                                                    <img class="img-loop" alt="@item.Name" src="@img1?width=480&height=479&quality=80&format=jpg" />
                                                                 </picture>
 
                                                                 <picture>
-                                                                    <source media="(max-width: 767px)" srcset="@img2">
-                                                                    <source media="(min-width: 768px)" srcset="@img2">
-                                                                    <img class="img-loop img-hover" alt="@item.Name" src="@img2" asp-append-version="true" />
+                                                                    <source media="(max-width: 767px)" srcset="@img2?width=480&height=479&quality=80&format=jpg">
+                                                                    <source media="(min-width: 768px)" srcset="@img2?width=480&height=479&quality=80&format=jpg">
+                                                                    <img class="img-loop img-hover" alt="@item.Name" src="@img2?width=480&height=479&quality=80&format=jpg" />
                                                                 </picture>
                                                             </a>
                                                         </div>
@@ -588,7 +590,7 @@
                         @foreach (var item in Model.Banners.Where(a => a.GroupId == 3))
                         {
                             <div class="col-12 col-sm-6 col-md-6 col-lg-6 image-ava4 wow animate__zoomIn dichlen">
-                                <img src="~/@item.CoverImage" alt=@item.BannerName asp-append-version="true" />
+                                <img src="~/@item.CoverImage" alt=@item.BannerName  />
                             </div>
                             break;
                         }
@@ -599,13 +601,13 @@
                                     if (item.Width < 699)
                                     {
                                         <div class="col-6 h-50  wow animate__zoomInDown dichlen">
-                                            <img src="@item.CoverImage" />
+                                            <img src="@item.CoverImage?quality=80&format=jpg" />
                                         </div>
                                     }
                                     else
                                     {
                                         <div class="col-12  wow animate__zoomInDown dichlen">
-                                            <img src="@item.CoverImage" />
+                                            <img src="@item.CoverImage?quality=80&format=jpg" />
                                         </div>
                                     }
                                 }

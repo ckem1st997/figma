@@ -40,9 +40,8 @@
                             {
                                 <div class="product-gallery__thumb ">
                                     <img alt=@Model.Product.Name
-                                         src="@arrListStr[i]"
-                                         data-image="@arrListStr[i]"
-                                         asp-append-version="true">
+                                         src="@arrListStr[i]?quality=90&format=jpg"
+                                         data-image="@arrListStr[i]?quality=90&format=jpg">
                                 </div>
                             }
                         }
@@ -57,9 +56,8 @@
                             {
                                 <div class="product-gallery__thumb ">
                                     <img alt=@Model.Product.Name
-                                         src="@arrListStr[i]"
-                                         data-image="@arrListStr[i]"
-                                         asp-append-version="true">
+                                         src="@arrListStr[i]?quality=90&format=jpg"
+                                         data-image="@arrListStr[i]?quality=90&format=jpg">
                                 </div>
                             }
                         }
@@ -305,15 +303,15 @@
                                 <div class="product-img">
                                     <a asp-action="Product" asp-route-proId="@item.ProductID" asp-route-name="@Html.Raw(name)" title="@item.Name" class="image-resize" style="height: auto;">
                                         <picture>
-                                            <source media="(max-width: 767px)" srcset="@img1">
-                                            <source media="(min-width: 768px)" srcset="@img1">
-                                            <img class="img-loop" alt="@item.Name" src="@img1" asp-append-version="true" />
+                                            <source media="(max-width: 767px)" srcset="@img1?width=480&height=479&quality=80&format=jpg">
+                                            <source media="(min-width: 768px)" srcset="@img1?width=480&height=479&quality=80&format=jpg">
+                                            <img class="img-loop" alt="@item.Name" src="@img1?width=480&height=479&quality=80&format=jpg" />
                                         </picture>
 
                                         <picture>
-                                            <source media="(max-width: 767px)" srcset="@img2">
-                                            <source media="(min-width: 768px)" srcset="@img2">
-                                            <img class="img-loop img-hover" alt="@item.Name" src="@img2" asp-append-version="true" />
+                                            <source media="(max-width: 767px)" srcset="@img2?width=480&height=479&quality=80&format=jpg">
+                                            <source media="(min-width: 768px)" srcset="@img2?width=480&height=479&quality=80&format=jpg">
+                                            <img class="img-loop img-hover" alt="@item.Name" src="@img2?width=480&height=479&quality=80&format=jpg" />
                                         </picture>
                                     </a>
                                 </div>

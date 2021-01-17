@@ -7,9 +7,9 @@
 
 @if (Model.CartItems.Count() > 0)
 {
-    <div class="container-fluid mt-5">
+    <div class="container-fluid mt-5 ">
         <div class="row">
-            <table class="col-12 col-xl-9">
+            <table class="col-12 col-xl-9 d-none d-lg-block">
                 <tr>
                     <th>
                         <input class="cb-pay" id="CbPay" type="checkbox" />
@@ -17,7 +17,7 @@
                     </th>
                     <th class="">GIÁ</th>
                     <th class="" style="width:15%">SỐ LƯỢNG</th>
-                    <th class="">Xóa</th>
+                    <th class="">Thao tác</th>
                 </tr>
                 @foreach (var item in Model.CartItems)
                 {
@@ -97,6 +97,64 @@
                     </tr>
                 }
             </table>
+            <div class="col-md-12 col-sm-12 col-xs-12 d-block d-lg-none">
+                <table class="table-cart">
+                    <thead>
+                        <tr>
+                            <th class="image">&nbsp;</th>
+                            <th class="item">Tên sản phẩm</th>
+                            <th class="remove">&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.CartItems)
+                        {
+                            <tr class="line-item-container itemCart d-flex" data-price-cart="280000" data-variant-id="1066877798" data-url="/products/ao-thun-bouton-l-tunes-printed" data-id="1030554859">
+                                <td class="image">
+                                    <div class="product_image">
+                                        @if (item.Products.Image != null)
+                                        {
+                                            string[] arrListStr = item.Products.Image.Split(',');
+                                            SlugCovert slugCovert = new SlugCovert();
+                                            var name = slugCovert.UrlFriendly(item.Products.Name);
+                                            <a asp-action="Product" asp-route-proId="@item.ProductID" asp-route-name="@Html.Raw(name)">
+                                                <img src="~/@arrListStr[0]" asp-append-version="true" data-image="@arrListStr[0]" alt="@item.Products.Name">
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <img src="~/image/Rectangle 206.png" />
+                                        }
+
+                                    </div>
+                                </td>
+                                <td class="item">
+                                    <a>
+                                        <h3>@item.Products.Name</h3>
+                                    </a>
+                                    <p>
+                                        <span>@(item.Products.SaleOff>0?item.Products.SaleOff:item.Products.Price) đ</span>
+                                    </p>
+                                    <p class="variant">
+                                        <span class="variant_title">@item.Color / @item.Size</span>
+                                    </p>
+
+                                    <div class="qty quantity-partent qty-click clearfix ">
+                                        <button type="button" id="countcart1" class="qtyminus qty-btn" data-id=@item.RecordID>-</button>
+                                        <input type="text" id="quantity1" name="quantity" size="4" min="1" data-id=@item.RecordID value="@item.Count" class="tc line-item-qty item-quantity">
+                                        <button type="button" id="countcart1" class="qtyplus qty-btn" data-id=@item.RecordID>+</button>
+                                    </div>
+                                </td>
+                                <td class="remove">
+                                    <a id="BtnDelete1" data-id=@item.RecordID class="cart">
+                                        <img data-id=@item.RecordID src="//theme.hstatic.net/1000253775/1000662899/14/ic_close.png?v=409">
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
             <div class="col-12 col-xl-3">
                 <div class="adress-menu">
                     <span>Địa điểm</span>

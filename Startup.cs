@@ -26,6 +26,10 @@ using Hangfire.SqlServer;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.HttpOverrides;
 using figma.Hubs;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Web.DependencyInjection;
+using System.Threading.Tasks;
+using Microsoft.IO;
 
 namespace figma
 {
@@ -39,6 +43,20 @@ namespace figma
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddImageSharp(options =>
+            {
+                // You only need to set the options you want to change here
+                // All properties have been listed for demonstration purposes
+                // only.
+                options.MemoryStreamManager = new RecyclableMemoryStreamManager();
+                options.BrowserMaxAge = TimeSpan.FromDays(7);
+                options.CacheMaxAge = TimeSpan.FromDays(365);
+                options.CachedNameLength = 8;
+                options.OnParseCommandsAsync = _ => Task.CompletedTask;
+                options.OnBeforeSaveAsync = _ => Task.CompletedTask;
+                options.OnProcessedAsync = _ => Task.CompletedTask;
+                options.OnPrepareResponseAsync = _ => Task.CompletedTask;
+            });
             services.AddSignalR();
             services.AddHttpClient();
             services.AddMemoryCache();
@@ -159,6 +177,7 @@ namespace figma
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseImageSharp();
             var loggingOptions = this.Configuration.GetSection("Log4NetCore")
                                               .Get<Log4NetProviderOptions>();
             loggerFactor.AddLog4Net(loggingOptions);
