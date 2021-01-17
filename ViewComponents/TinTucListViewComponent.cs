@@ -19,7 +19,6 @@ namespace figma.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var items = await _unitOfWork.ArticleRepository.GetAync(a => a.Active && a.Home && a.ArticleCategory.CategoryName.Contains("Tin tức"), q => q.OrderBy(a => a.CreateDate), records: 3);
-            Console.WriteLine(items.Count());
             return View(items);
         }
     }

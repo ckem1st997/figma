@@ -755,7 +755,7 @@ namespace figma.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ArticleCategories([Bind("ArticleCategoryId,CategoryName,Url,CategorySort,CategoryActive,ParentId,ShowHome,ShowMenu,Slug,Hot,TitleMeta,DescriptionMeta")] ArticleCategory articleCategories)
+        public async Task<IActionResult> ArticleCategories([Bind("ArticleCategoryId,CategoryName,Url,CategorySort,CategoryActive,ParentId,ShowHome,ShowMenu,Slug,Hot,TitleMeta,DescriptionMeta")] ArticleCategorys articleCategories)
         {
             if (ModelState.IsValid)
             {
@@ -785,7 +785,7 @@ namespace figma.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ArticleCategoriesEdit(int id, [Bind("ArticleCategoryId,CategoryName,Url,CategorySort,CategoryActive,ParentId,ShowHome,ShowMenu,Slug,Hot,TitleMeta,DescriptionMeta")] ArticleCategory articleCategories)
+        public async Task<IActionResult> ArticleCategoriesEdit(int id, [Bind("ArticleCategoryId,CategoryName,Url,CategorySort,CategoryActive,ParentId,ShowHome,ShowMenu,Slug,Hot,TitleMeta,DescriptionMeta")] ArticleCategorys articleCategories)
         {
             if (id != articleCategories.ArticleCategoryId)
             {
@@ -840,7 +840,7 @@ namespace figma.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AticleCreate([Bind("Subject,Description,Body,Image,CreateDate,View,ArticleCategoryId,Active,Hot,Home,Url,TitleMeta,DescriptionMetaTitle,KeyWord")] Article articles)
+        public async Task<IActionResult> AticleCreate([Bind("Subject,Description,Body,Image,CreateDate,View,ArticleCategoryId,Active,Hot,Home,Url,TitleMeta,DescriptionMetaTitle,KeyWord")] Articles articles)
         {
             if (ModelState.IsValid)
             {
@@ -875,7 +875,7 @@ namespace figma.Controllers
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public async Task<IActionResult> ArticleEdit(int id, [Bind("Id,Subject,Description,Body,Image,CreateDate,View,ArticleCategoryId,Active,Hot,Home,Url,TitleMeta,DescriptionMetaTitle,KeyWord")] Article articles)
+        public async Task<IActionResult> ArticleEdit(int id, [Bind("Id,Subject,Description,Body,Image,CreateDate,View,ArticleCategoryId,Active,Hot,Home,Url,TitleMeta,DescriptionMetaTitle,KeyWord")] Articles articles)
         {
             if (id != articles.Id)
             {

@@ -126,6 +126,11 @@ namespace figma.Controllers
             }
         }
 
+        public IActionResult Chat()
+        {
+            return View();
+        }
+
 
         public IActionResult Index()
         {
@@ -153,6 +158,7 @@ namespace figma.Controllers
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> GoogleLogin(string Token)
         {
+            Console.WriteLine(Token);
             GoogleJsonWebSignature.Payload payload = await GoogleJsonWebSignature.ValidateAsync(Token);
             await AddCookieAuthor(payload.Name, payload.Subject, "Google");
 
@@ -679,7 +685,7 @@ namespace figma.Controllers
         [AllowAnonymous]
         public bool ValidateAdmin(string username, string password)
         {
-            var admin = _unitOfWork.MemberRepository.Get(a => a.Email == username).SingleOrDefault();
+            var admin = _unitOfWork.MemberRepository.Get(a => a.Email.Equals(username)).SingleOrDefault();
             return admin != null && new PasswordHasher<Members>().VerifyHashedPassword(new Members(), admin.Password, password) == PasswordVerificationResult.Success;
         }
         //

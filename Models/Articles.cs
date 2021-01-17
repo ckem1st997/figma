@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace figma.Models
 {
-    public class Article
+    public class Articles
     {
+
         [ScaffoldColumn(false)]
         [Key]
         public int Id { get; set; }
@@ -39,8 +43,8 @@ namespace figma.Models
         [Display(Name = "Từ khóa"), StringLength(500, ErrorMessage = "Tối đa 500 ký tự"), UIHint("TextArea")]
         public string KeyWord { get; set; }
 
-        public virtual ArticleCategory ArticleCategory { get; set; }
-        public Article()
+        public virtual ArticleCategorys ArticleCategory { get; set; }
+        public Articles()
         {
             CreateDate = DateTime.Now;
             View = 1;

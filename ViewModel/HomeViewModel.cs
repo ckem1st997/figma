@@ -9,7 +9,7 @@ namespace figma.ViewModel
     public class HomeViewModel
     {
         public IEnumerable<Banners> Banners { get; set; }
-        public IEnumerable<Article> Articles { get; set; }
+        public IEnumerable<Articles> Articles { get; set; }
         public IEnumerable<ViewProducts> Products { get; set; }
         public IEnumerable<Albums> Albums { get; set; }
         public IEnumerable<ConfigSites> ConfigSites { get; set; }
@@ -68,9 +68,9 @@ namespace figma.ViewModel
 
     public class ReviewViewModel
     {
-        public Article Article { get; set; }
-        public IEnumerable<Article> Articles { get; set; }
-        public IEnumerable<ArticleCategory> ListArticles { get; set; }
+        public Articles Article { get; set; }
+        public IEnumerable<Articles> Articles { get; set; }
+        public IEnumerable<ArticleCategorys> ListArticles { get; set; }
 
     }
 }

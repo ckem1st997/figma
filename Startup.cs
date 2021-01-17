@@ -25,6 +25,7 @@ using Hangfire;
 using Hangfire.SqlServer;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.HttpOverrides;
+using figma.Hubs;
 
 namespace figma
 {
@@ -38,6 +39,7 @@ namespace figma
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSignalR();
             services.AddHttpClient();
             services.AddMemoryCache();
             services.AddTransient<IMailer, Mailer>();
@@ -184,6 +186,7 @@ namespace figma
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapHangfireDashboard();
+                endpoints.MapHub<ChatHub>("/chathub");
             });
         }
 

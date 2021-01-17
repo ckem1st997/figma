@@ -52,8 +52,8 @@ namespace figma.Data
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
 
         public virtual DbSet<ProductSizeColor> ProductSizeColors { get; set; }
-        public virtual DbSet<Article> Articles { get; set; }
-        public virtual DbSet<ArticleCategory> ArticleCategories { get; set; }
+        public virtual DbSet<Articles> Articles { get; set; }
+        public virtual DbSet<ArticleCategorys> ArticleCategories { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -67,7 +67,7 @@ namespace figma.Data
             modelBuilder.Entity<OrderDetail>().HasOne(pt => pt.Product).WithMany(p => p.OrderDetails).HasForeignKey(pt => pt.ProductId).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<ProductSizeColor>().HasOne(p => p.Color).WithMany(b => b.ProductSizeColors).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<ProductSizeColor>().HasOne(p => p.Size).WithMany(b => b.ProductSizeColors).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
-            modelBuilder.Entity<Article>().HasOne(p => p.ArticleCategory).WithMany(b => b.Articles).HasForeignKey(py => py.ArticleCategoryId).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Articles>().HasOne(p => p.ArticleCategory).WithMany(b => b.Articles).HasForeignKey(py => py.ArticleCategoryId).OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<Carts>().HasKey(h => h.RecordID);
             modelBuilder.Entity<Carts>().HasOne(p => p.Products).WithMany(b => b.Carts).HasForeignKey(p => p.ProductID).IsRequired(true).OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<Collection>().HasKey(h => h.CollectionID);

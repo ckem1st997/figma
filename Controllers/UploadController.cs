@@ -45,7 +45,7 @@ namespace figma.Controllers
                         {
                             await formFile.CopyToAsync(stream);
                         }
-                        Resize(fileNameWithPath, width > 0 ? width : 720, height > 0 ? height : 822);
+                        Resize(fileNameWithPath, 1200, 900);
                         if (sql.Length > 1)
                             sql = "" + sql + ",uploads/" + createFolderDate + "/" + randomname + "";
                         else

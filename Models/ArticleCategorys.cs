@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace figma.Models
 {
-    public class ArticleCategory
+    public class ArticleCategorys
     {
         [Key]
         public int ArticleCategoryId { get; set; }
@@ -30,9 +33,9 @@ namespace figma.Models
         [Display(Name = "Thẻ mô tả"), UIHint("TextArea")]
         public string DescriptionMeta { get; set; }
 
-        public virtual ICollection<Article> Articles { get; set; }
+        public virtual ICollection<Articles> Articles { get; set; }
 
-        public ArticleCategory()
+        public ArticleCategorys()
         {
             ShowMenu = false;
             ShowHome = false;
