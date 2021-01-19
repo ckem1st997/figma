@@ -129,58 +129,60 @@
     <div class="header">
         <a class="pl-0" href="#menu"><span></span></a>
     </div>
-    <nav id="menu">
-        <ul>
-            <li>
-                <a asp-area="" asp-controller="Home" asp-action="Index">Trang chủ</a>
-            </li>
-            <li>
-                <a asp-area="" asp-controller="Home" asp-action="Search">Sale</a>
-            </li>
-            <li>
-                <a asp-area="" asp-controller="Home" asp-action="Privacy">Sản phẩm <i class="fa fa-chevron-down" aria-hidden="true"></i></a>
+    <cache>
+        <nav id="menu">
+            <ul>
+                <li>
+                    <a asp-area="" asp-controller="Home" asp-action="Index">Trang chủ</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Home" asp-action="Search">Sale</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Home" asp-action="Privacy">Sản phẩm <i class="fa fa-chevron-down" aria-hidden="true"></i></a>
 
-                <ul class="sub_menu">
+                    <ul class="sub_menu">
 
-                    @foreach (var item in Model.ProductCategories.Where(a => a.ParentId == null))
-                    {
-                        <li>
-                            <a class="" asp-controller="Home" asp-action="Info" asp-route-name="@slugCovert.UrlFriendly(item.Name)" asp-route-catId="@item.ProductCategorieID" title="@item.Name">
-                                @item.Name
+                        @foreach (var item in Model.ProductCategories.Where(a => a.ParentId == null))
+                        {
+                            <li>
+                                <a class="" asp-controller="Home" asp-action="Info" asp-route-name="@slugCovert.UrlFriendly(item.Name)" asp-route-catId="@item.ProductCategorieID" title="@item.Name">
+                                    @item.Name
+                                    @if (Model.ProductCategories.Any(a => a.ParentId == item.ProductCategorieID))
+                                    {
+                                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                    }
+                                </a>
                                 @if (Model.ProductCategories.Any(a => a.ParentId == item.ProductCategorieID))
                                 {
-                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                    <ul class="sub_menu">
+                                        @foreach (var children in Model.ProductCategories.Where(a => a.ParentId == item.ProductCategorieID))
+                                        {
+                                            <li>
+                                                <a class="" asp-controller="Home" asp-action="Info" asp-route-name="@slugCovert.UrlFriendly(children.Name)" asp-route-catId="@children.ProductCategorieID">@children.Name</a>
+                                            </li>
+                                        }
+                                    </ul>
                                 }
-                            </a>
-                            @if (Model.ProductCategories.Any(a => a.ParentId == item.ProductCategorieID))
-                            {
-                                <ul class="sub_menu">
-                                    @foreach (var children in Model.ProductCategories.Where(a => a.ParentId == item.ProductCategorieID))
-                                    {
-                                        <li>
-                                            <a class="" asp-controller="Home" asp-action="Info" asp-route-name="@slugCovert.UrlFriendly(children.Name)" asp-route-catId="@children.ProductCategorieID">@children.Name</a>
-                                        </li>
-                                    }
-                                </ul>
-                            }
-                        </li>
-                    }
-                </ul>
-            </li>
-            <li>
-                <a class="" asp-action="ListReview">Blog</a>
-            </li>
-            <li>
-                <a class="" asp-area="" asp-controller="Home" asp-action="Privacy">Liên hệ</a>
-            </li>
-            <li>
-                <a class=" " asp-area="" asp-controller="Home" asp-action="OrderDetails">Tra cứu đơn hàng</a>
-            </li>
-            <li>
-                <a class="" asp-area="" asp-controller="Home" asp-action="Privacy">Bộ sưu tập</a>
-            </li>
-        </ul>
-    </nav>
+                            </li>
+                        }
+                    </ul>
+                </li>
+                <li>
+                    <a class="" asp-action="ListReview">Blog</a>
+                </li>
+                <li>
+                    <a class="" asp-area="" asp-controller="Home" asp-action="Privacy">Liên hệ</a>
+                </li>
+                <li>
+                    <a class=" " asp-area="" asp-controller="Home" asp-action="OrderDetails">Tra cứu đơn hàng</a>
+                </li>
+                <li>
+                    <a class="" asp-area="" asp-controller="Home" asp-action="Privacy">Bộ sưu tập</a>
+                </li>
+            </ul>
+        </nav>
+    </cache>
     <div class="icon-header">
         <div class="d-flex">
             <a style="color:black !important" asp-controller="Home" asp-route-searchString="" asp-action="Search">
