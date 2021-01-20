@@ -57,6 +57,14 @@ namespace figma
                 options.OnProcessedAsync = _ => Task.CompletedTask;
                 options.OnPrepareResponseAsync = _ => Task.CompletedTask;
             });
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential 
+                // cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                // requires using Microsoft.AspNetCore.Http;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
             services.AddSignalR();
             services.AddHttpClient();
             services.AddMemoryCache();
@@ -187,6 +195,7 @@ namespace figma
             ForwardedHeaders.XForwardedProto
             });
             app.UseStaticFiles();
+            app.UseCookiePolicy();
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
