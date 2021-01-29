@@ -71,6 +71,7 @@ namespace figma
             services.AddTransient<IMailer, Mailer>();
             services.Configure<Smtp>(Configuration.GetSection("Smtp"));
             services.Configure<VNPAY>(Configuration.GetSection("VNPAY"));
+            services.Configure<Firebasekey>(Configuration.GetSection("Firebase"));
             services.AddControllers();
             services.AddSingleton<IFileProvider>(new PhysicalFileProvider(
         Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));

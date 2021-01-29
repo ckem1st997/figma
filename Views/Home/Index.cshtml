@@ -191,7 +191,7 @@
                                                 var name = slugCovert.UrlFriendly(item.Name);
                                                 var img1 = arrListStr[0].Contains("https:") ? arrListStr[0] : "/" + arrListStr[0] + "";
                                                 var img2 = arrListStr[1].Contains("https:") ? arrListStr[1] : "/" + arrListStr[1] + "";
-                                                <div class="col-md-3 col-sm-6 col-6 wow animate__slideInUp pro-loop"
+                                                <div class="col-md-3 col-sm-6 col-6 animate__slideInUp pro-loop"
                                                      data-wow-duration="@delayS" data-wow-delay="0.5s">
                                                     <div class="card-product">
                                                         <div class="product-img">
@@ -280,7 +280,7 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                            <div class="container animate__zoomIn">
+                            <div class="container-fluid animate__zoomIn">
                                 <div class="row " data-wow-duration="2s">
                                     @{
                                         if (Model.Products.Count() > 0)
@@ -378,7 +378,7 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-                            <div class="container animate__zoomIn">
+                            <div class="container-fluid animate__zoomIn">
                                 <div class="row " data-wow-duration="2s">
                                     @{
                                         if (Model.Products.Count() > 0)
@@ -476,7 +476,7 @@
                             </div>
                         </div>
                         <div class="tab-pane fade show" id="pills-new" role="tabpanel" aria-labelledby="pills-new-tab">
-                            <div class="container animate__zoomIn">
+                            <div class="container-fluid animate__zoomIn">
                                 <div class="row " data-wow-duration="2s">
                                     @{
                                         if (Model.Products.Count() > 0)
@@ -590,7 +590,7 @@
                         @foreach (var item in Model.Banners.Where(a => a.GroupId == 3))
                         {
                             <div class="col-12 col-sm-6 col-md-6 col-lg-6 image-ava4 wow animate__zoomIn dichlen">
-                                <img src="~/@item.CoverImage" alt=@item.BannerName  />
+                                <img src="~/@item.CoverImage" alt=@item.BannerName />
                             </div>
                             break;
                         }

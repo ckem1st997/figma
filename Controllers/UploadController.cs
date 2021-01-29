@@ -1,26 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using figma.OutFile;
+using Firebase.Auth;
+using Firebase.Storage;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
+using figma.Models;
 
 namespace figma.Controllers
 {
     public class UploadController : Controller
     {
         private readonly IWebHostEnvironment _hostingEnvironment;
-        public UploadController(IWebHostEnvironment hostEnvironment)
+        public Firebasekey _firebase { get; }
+        public UploadController(IOptions<Firebasekey> firebase, IWebHostEnvironment hostEnvironment)
         {
+            _firebase = firebase.Value;
             _hostingEnvironment = hostEnvironment;
         }
         [HttpPost]
-        public async Task<IActionResult> CreateImage(List<IFormFile> filesadd, int width, int height)
+        public async Task<IActionResult> CreateImage(List<IFormFile> filesadd, int width, int height, int? fire)
         {
             string createFolderDate = DateTime.Now.ToString("yyyy/MM/dd");
             string path = _hostingEnvironment.WebRootPath + @"\uploads\" + createFolderDate + "";
@@ -30,7 +37,7 @@ namespace figma.Controllers
             if (filesadd == null || filesadd.Count == 0)
                 return Ok(new { imgNode = "Không có hình ảnh được chọn", result = false });
             var filePaths = new List<string>();
-            string sql = "";
+            string sql = "", notica = "";
             foreach (var formFile in filesadd)
             {
                 if (FormFileExtensions.IsImage(formFile))
@@ -45,11 +52,29 @@ namespace figma.Controllers
                         {
                             await formFile.CopyToAsync(stream);
                         }
-                        Resize(fileNameWithPath, 1200, 900);
+                        Resize(fileNameWithPath, width > 0 ? width : 1200, height > 0 ? height : 900);
+                        FileStream ms;
+                        ms = new FileStream(fileNameWithPath, FileMode.Open);
+                        var auth = new FirebaseAuthProvider(new FirebaseConfig(_firebase.ApiKey));
+                        var a = await auth.SignInWithEmailAndPasswordAsync(_firebase.AuthEmail, _firebase.AuthPassword);
+                        var cancellation = new CancellationTokenSource();
+                        var task = new FirebaseStorage(
+                            _firebase.Bucket,
+                            new FirebaseStorageOptions
+                            {
+                                AuthTokenAsyncFactory = () => Task.FromResult(a.FirebaseToken),
+                                ThrowOnCancel = true
+                            })
+                            .Child($"uploads/" + createFolderDate + "/" + randomname + "")
+                            .PutAsync(ms, cancellation.Token);
+
+                        task.Progress.ProgressChanged += (s, e) => Console.WriteLine($"Progress: {e.Percentage} %");
+                        // ms.Close();
                         if (sql.Length > 1)
                             sql = "" + sql + ",uploads/" + createFolderDate + "/" + randomname + "";
                         else
                             sql = "uploads/" + createFolderDate + "/" + randomname + "";
+
                     }
                     else
                     {
@@ -63,9 +88,7 @@ namespace figma.Controllers
             {
                 imgNode = sql,
                 result = true,
-                width,
-                height
-
+                notica
             });
         }
 

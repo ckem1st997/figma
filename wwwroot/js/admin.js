@@ -98,10 +98,13 @@ function AJAXSubmit(file) {
 
 
 async function AJAXSubmitCreate(oFormElement, h, w) {
+    var checked = $("#flexCheckChecked").prop("checked");
+    var fire;
+    checked == true ? fire = 1 : fire = 0;
     const formData = new FormData(oFormElement);
     $.ajax({
         type: 'POST',
-        url: '/Upload/CreateImage?width=' + w + '&height=' + h + '',
+        url: '/Upload/CreateImage?width=' + w + '&height=' + h + '&fire=' + fire + '',
         data: formData,
         cache: false,
         contentType: false,
@@ -111,6 +114,7 @@ async function AJAXSubmitCreate(oFormElement, h, w) {
                 var listimage = data.imgNode.split(",");
                 if (listimage.length > 1 || listimage != null)
                     for (var i = 0; i < listimage.length; i++) {
+                        var src = listimage[i].indexOf('htpps:') != -1 ? "/" + listimage[i] + "" : listimage[i];
                         $(".section-image-list.insert-one div.row").append("<div class='col-3 mb-3 position-relative'><a data-image='" + listimage[i] + "' data-fancybox='gallery' class= '/" + listimage[i] + "' href = '/" + listimage[i] + "' ><img style='max-width:100%' src='/" + listimage[i] + "' /><span class='show--image-edit'>Xem ảnh</span><i class='far fa-eye show--image-edit i--one'></i></a ><i class='fas fa-trash'></i></div>");
                     }
             }
