@@ -19,13 +19,13 @@ using Microsoft.AspNetCore.WebUtilities;
 using System.Text;
 using figma.Interface;
 using Hangfire;
-using System.Data.Entity.Infrastructure;
 using Google.Apis.Auth;
 using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Authentication.Google;
 using System.Net.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace figma.Controllers
 {

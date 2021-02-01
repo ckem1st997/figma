@@ -45,9 +45,6 @@ namespace figma
         {
             services.AddImageSharp(options =>
             {
-                // You only need to set the options you want to change here
-                // All properties have been listed for demonstration purposes
-                // only.
                 options.MemoryStreamManager = new RecyclableMemoryStreamManager();
                 options.BrowserMaxAge = TimeSpan.FromDays(7);
                 options.CacheMaxAge = TimeSpan.FromDays(365);
@@ -57,14 +54,13 @@ namespace figma
                 options.OnProcessedAsync = _ => Task.CompletedTask;
                 options.OnPrepareResponseAsync = _ => Task.CompletedTask;
             });
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential 
-                // cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                // requires using Microsoft.AspNetCore.Http;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
+            // hỏi người dùng có đồng ý dùng cookie
+            //services.Configure<CookiePolicyOptions>(options =>
+            //{
+            //    options.CheckConsentNeeded = context => true;
+            //    // requires using Microsoft.AspNetCore.Http;
+            //    options.MinimumSameSitePolicy = SameSiteMode.Unspecified;
+            //});
             services.AddSignalR();
             services.AddHttpClient();
             services.AddMemoryCache();
@@ -82,18 +78,14 @@ namespace figma
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
      .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, config =>
      {
-
-         //  config.Cookie.Name = "UserLoginCookie"; // Name of cookie     
-         config.LoginPath = "/Home/Login"; // Path for the redirect to user login page    
+         config.LoginPath = "/Home/Login";
          config.AccessDeniedPath = "/Home/UserAccessDenied";
-         // sau 10s sẽ tự out
          config.ExpireTimeSpan = TimeSpan.FromHours(1);
          config.Cookie.HttpOnly = true;
          config.Cookie.IsEssential = true;
      });
             services.Configure<IdentityOptions>(options =>
             {
-                // Default Lockout settings.
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1);
                 options.Lockout.MaxFailedAccessAttempts = 5;
                 options.Lockout.AllowedForNewUsers = true;
@@ -110,18 +102,16 @@ namespace figma
             services.AddScoped<IAuthorizationHandler, PoliciesAuthorizationHandler>();
             services.AddScoped<IAuthorizationHandler, RolesAuthorizationHandler>();
             services.AddHttpContextAccessor();
-            services.AddDistributedMemoryCache();
+            //  services.AddDistributedMemoryCache();
 
             services.AddSession(options =>
             {
                 options.Cookie.Name = ".AdventureWorks.Session";
-                //out sau ? s
                 options.IdleTimeout = TimeSpan.FromHours(1);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
-            services.AddControllersWithViews(options =>
-    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()));
+            services.AddControllersWithViews(options => options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()));
             services.AddHttpContextAccessor();
             services.Configure<PasswordHasherOptions>(option =>
             {
@@ -131,9 +121,7 @@ namespace figma
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped(typeof(GenericRepository<>));
             services.AddScoped<UnitOfWork>();
-            services.AddSingleton<HtmlEncoder>(
-     HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.BasicLatin,
-                                               UnicodeRanges.CjkUnifiedIdeographs }));
+            services.AddSingleton<HtmlEncoder>(HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.BasicLatin, UnicodeRanges.CjkUnifiedIdeographs }));
             services.AddAntiforgery(options =>
             {
                 // Set Cookie properties using CookieBuilder properties†.
@@ -200,11 +188,12 @@ namespace figma
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-            var cookiePolicyOptions = new CookiePolicyOptions
-            {
-                MinimumSameSitePolicy = SameSiteMode.Strict,
-            };
-            app.UseCookiePolicy(cookiePolicyOptions);
+            // hỏi người dùng có đồng ý dùng cookie
+            //var cookiePolicyOptions = new CookiePolicyOptions
+            //{
+            //    MinimumSameSitePolicy = SameSiteMode.Strict,
+            //};
+            //  app.UseCookiePolicy(cookiePolicyOptions);
             app.UseSession();
             app.UseHangfireDashboard();
             //thực hiện 1 lần và ngay lập tức

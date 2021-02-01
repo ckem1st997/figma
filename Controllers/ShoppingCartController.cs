@@ -31,16 +31,7 @@ namespace figma.Controllers
             _unitOfWork = unitOfWork;
             _httpContextAccessor = httpContextAccessor;
             _mailer = mailer;
-            if (!_httpContextAccessor.HttpContext.Request.Cookies.ContainsKey(CartCookieKey))
-            {
-                _httpContextAccessor.HttpContext.Response.Cookies.Append(CartCookieKey, Guid.NewGuid().ToString(),
-                 new CookieOptions()
-                 {
-                     SameSite = SameSiteMode.Lax,
-                     Secure = true,
-                     Expires = new DateTimeOffset(DateTime.Now.AddDays(1))
-                 });
-            }
+            CheckCookies();
         }
 
 
@@ -395,6 +386,7 @@ namespace figma.Controllers
         [IgnoreAntiforgeryToken]
         public JsonResult AddToCartAjax(int quantity, int productId, string color, string size)
         {
+            CheckCookies();
             decimal price = 0;
             var addedProduct = _unitOfWork.ProductRepository.Get(a => a.ProductID == productId).SingleOrDefault();
             if (addedProduct == null)
@@ -423,6 +415,8 @@ namespace figma.Controllers
                     Size = size,
                     DateCreated = DateTime.Now
                 };
+                Console.WriteLine(1);
+                Console.WriteLine(cartItem.CartID);
                 _unitOfWork.CartRepository.Insert(cartItem);
             }
             else
@@ -494,7 +488,10 @@ namespace figma.Controllers
         }
         public IEnumerable<Carts> GetCartItems()
         {
-            return _unitOfWork.CartRepository.Get(cart => cart.CartID == _httpContextAccessor.HttpContext.Request.Cookies[CartCookieKey], includeProperties: "Products").ToList();
+            var carCookie = _httpContextAccessor.HttpContext.Request.Cookies[CartCookieKey];
+            if (carCookie != null)
+                return _unitOfWork.CartRepository.Get(cart => cart.CartID == carCookie, includeProperties: "Products").ToList();
+            return null;
         }
         public int GetCount(string ShoppingCartId = "")
         {
@@ -513,18 +510,25 @@ namespace figma.Controllers
         }
         public string GetCartId()
         {
-            if (HttpContext.Request.Cookies != null && HttpContext.Request.Cookies[CartCookieKey] == null)
+            CheckCookies();
+            return _httpContextAccessor.HttpContext.Request.Cookies[CartCookieKey];
+        }
+
+        private void CheckCookies()
+        {
+            if (_httpContextAccessor.HttpContext.Request.Cookies[CartCookieKey] == null)
             {
-                HttpContext.Response.Cookies.Append(CartCookieKey, Guid.NewGuid().ToString(),
+                _httpContextAccessor.HttpContext.Response.Cookies.Append(CartCookieKey, Guid.NewGuid().ToString(),
                  new CookieOptions()
                  {
                      SameSite = SameSiteMode.Lax,
                      Secure = true,
+                     HttpOnly = true,
                      Expires = new DateTimeOffset(DateTime.Now.AddDays(1))
                  });
             }
-            return HttpContext.Request.Cookies[CartCookieKey];
         }
+
         public void MigrateCart(string userName, string ShoppingCartId = "")
         {
             var shoppingCart = _unitOfWork.CartRepository.Get(

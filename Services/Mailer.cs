@@ -1,10 +1,8 @@
 ﻿using figma.Interface;
 using figma.Models;
-using MailKit.Net.Smtp;
+
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
-using MimeKit;
 using System;
 using System.Net;
 using System.Net.Mail;

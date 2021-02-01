@@ -9,7 +9,7 @@ namespace figma.Models
         [Index]
         public int RecordID { get; set; }
 
-
+        [Required]
         public string CartID { get; set; }
 
 

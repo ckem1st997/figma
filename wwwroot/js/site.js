@@ -146,19 +146,19 @@ $(document).ready(function () {
         }
         else {
             var id_SP = $(".id_check_idsp").val();
-            console.log(id_SP);
+            // console.log(id_SP);
             var Price_SP = $(".giaban").html();
-            console.log(Price_SP.slice(0, Price_SP.length - 1));
+            // console.log(Price_SP.slice(0, Price_SP.length - 1));
             var Count_SP = $("#quantity").val();
-            console.log(Count_SP);
+            // console.log(Count_SP);
             var Color_SP = $("#variant-swatch-0 .select-swap .swatch-element.checked ").attr("data-value");
             if (Color_SP == undefined)
                 Color_SP = ""
-            console.log(Color_SP);
+            //console.log(Color_SP);
             var Size_SP = $("#variant-swatch-1 .select-swap .swatch-element.checked").attr("data-value");
             if (Size_SP == undefined)
                 Size_SP = ""
-            console.log(Size_SP);
+            // console.log(Size_SP);
             AddToCartAjax(Count_SP, id_SP, Color_SP, Size_SP);
         }
 

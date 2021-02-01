@@ -1,0 +1,238 @@
+2021-01-29 10:31:56,433  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:9176:f265a6c3 successfully announced in 233.1244 ms
+ 2021-01-29 10:31:56,449  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:9176:f265a6c3 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-01-29 10:31:56,459  INFO Hangfire.Server.ServerWatchdog.? [?] - MESSAGE: 1 servers were removed due to timeout
+ 2021-01-29 10:31:56,464  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:9176:f265a6c3 all the dispatchers started
+ 2021-01-29 10:31:56,657  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:12784
+ 2021-01-29 10:31:56,663  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-01-29 10:31:56,663  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-01-29 10:31:56,663  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 2021-01-29 10:31:58,576  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435743935625358.png?width=460&height=340&quality=95&format=jpg'. Cached Key: 'aa8e6713'
+ 2021-01-29 10:31:58,576  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435744642995742.png?width=460&height=340&quality=95&format=jpg'. Cached Key: 'e8c7882f'
+ 2021-01-29 10:31:58,576  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435745094336439.png?width=460&height=340&quality=95&format=jpg'. Cached Key: 'cc4cd5d3'
+ 2021-01-29 10:31:58,576  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437459952111105.png?width=460&height=340&quality=95&format=jpg'. Cached Key: 'a9f919c7'
+ 2021-01-29 10:31:58,576  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/image/Rectangle 2.png?width=1440&height=632&quality=90'. Cached Key: 'c8c11a47'
+ 2021-01-29 10:31:58,576  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437465496769226.png?width=460&height=340&quality=95&format=jpg'. Cached Key: '17975c6e'
+ 2021-01-29 10:31:58,576  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437460233626947.png?width=460&height=340&quality=95&format=jpg'. Cached Key: '88d9873e'
+ 2021-01-29 10:31:58,576  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437464695985839.png?width=460&height=340&quality=95&format=jpg'. Cached Key: '8950f080'
+ 2021-01-29 10:31:58,600  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514272276492.jpg?width=480&height=480&quality=80&format=jpg'. Cached Key: '4ca25537'
+ 2021-01-29 10:31:58,600  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509925989910.jpg?width=480&height=480&quality=80&format=jpg'. Cached Key: 'b0e9fe9f'
+ 2021-01-29 10:31:58,600  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450508503182823.jpg?width=480&height=480&quality=80&format=jpg'. Cached Key: '3421d015'
+ 2021-01-29 10:31:58,602  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735951790896.png?width=480&height=480&quality=80&format=jpg'. Cached Key: '450b7ca4'
+ 2021-01-29 10:31:58,602  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437465243101790.png?width=460&height=340&quality=95&format=jpg'. Cached Key: 'aca181e7'
+ 2021-01-29 10:31:58,602  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435736708922105.png?width=480&height=480&quality=80&format=jpg'. Cached Key: 'b2a56cfd'
+ 2021-01-29 10:31:58,603  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435736366333089.png?width=480&height=480&quality=80&format=jpg'. Cached Key: 'c99005e2'
+ 2021-01-29 10:31:58,603  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509926969849.jpg?width=480&height=480&quality=80&format=jpg'. Cached Key: '3881fbeb'
+ 2021-01-29 10:31:58,603  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514273065693.jpg?width=480&height=480&quality=80&format=jpg'. Cached Key: '2e6e32e0'
+ 2021-01-29 10:31:58,603  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509185535127.jpg?width=480&height=480&quality=80&format=jpg'. Cached Key: '130fd003'
+ 2021-01-29 10:31:58,604  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735954234595.png?width=480&height=480&quality=80&format=jpg'. Cached Key: 'c9f60168'
+ 2021-01-29 10:31:58,604  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435736705873514.png?width=480&height=480&quality=80&format=jpg'. Cached Key: '2386a3f1'
+ 2021-01-29 10:31:58,605  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435736369311489.png?width=480&height=480&quality=80&format=jpg'. Cached Key: '361892bc'
+ 2021-01-29 10:31:58,612  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509184786404.jpg?width=480&height=480&quality=80&format=jpg'. Cached Key: '6de35cf1'
+ 2021-01-29 10:31:58,614  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450508499578916.jpg?width=480&height=480&quality=80&format=jpg'. Cached Key: 'bf42452b'
+ 2021-01-29 10:31:58,614  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735253593281.png?width=480&height=480&quality=80&format=jpg'. Cached Key: 'c3fdb737'
+ 2021-01-29 10:31:58,624  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735566364804.png?width=480&height=480&quality=80&format=jpg'. Cached Key: '55063bac'
+ 2021-01-29 10:31:58,624  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734932870348.png?width=480&height=480&quality=80&format=jpg'. Cached Key: '49a70c6c'
+ 2021-01-29 10:31:58,624  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734935739906.png?width=480&height=480&quality=80&format=jpg'. Cached Key: 'b2dda151'
+ 2021-01-29 10:31:58,625  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735256435652.png?width=480&height=480&quality=80&format=jpg'. Cached Key: 'c219944e'
+ 2021-01-29 10:31:58,625  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735563298472.png?width=480&height=480&quality=80&format=jpg'. Cached Key: '19b94540'
+ 2021-01-29 10:31:58,629  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734556263309.png?width=480&height=480&quality=80&format=jpg'. Cached Key: '5e9ac48e'
+ 2021-01-29 10:31:58,633  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734559207086.png?width=480&height=480&quality=80&format=jpg'. Cached Key: '4b5c3b89'
+ 2021-01-29 10:31:58,636  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/06/132438363534870618.png?width=480&height=480&quality=80&format=jpg'. Cached Key: 'b380d3cc'
+ 2021-01-29 10:31:58,638  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/06/132438363539334740.png?width=480&height=480&quality=80&format=jpg'. Cached Key: '9fba2c55'
+ 2021-01-29 10:31:58,653  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/06/132438363539334740.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '3c4c616a'
+ 2021-01-29 10:31:58,654  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/06/132438363534870618.png?width=480&height=479&quality=80&format=jpg'. Cached Key: 'c646e58b'
+ 2021-01-29 10:31:58,663  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435736705873514.png?width=480&height=479&quality=80&format=jpg'. Cached Key: 'c41dff9f'
+ 2021-01-29 10:31:58,664  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435736708922105.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '9b899e84'
+ 2021-01-29 10:31:58,665  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734556263309.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '8ba522cf'
+ 2021-01-29 10:31:58,666  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734559207086.png?width=480&height=479&quality=80&format=jpg'. Cached Key: 'e9c69c3d'
+ 2021-01-29 10:31:58,668  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735951790896.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '77da9df3'
+ 2021-01-29 10:31:58,671  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734935739906.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '7a50ef7b'
+ 2021-01-29 10:31:58,674  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734932870348.png?width=480&height=479&quality=80&format=jpg'. Cached Key: 'd4559645'
+ 2021-01-29 10:31:58,674  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735954234595.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '558baef1'
+ 2021-01-29 10:31:58,675  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735256435652.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '474896c9'
+ 2021-01-29 10:31:58,675  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735253593281.png?width=480&height=479&quality=80&format=jpg'. Cached Key: 'aa0c52fd'
+ 2021-01-29 10:31:58,676  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735566364804.png?width=480&height=479&quality=80&format=jpg'. Cached Key: 'fd9fc45d'
+ 2021-01-29 10:31:58,677  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435736366333089.png?width=480&height=479&quality=80&format=jpg'. Cached Key: 'df9846a0'
+ 2021-01-29 10:31:58,677  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735563298472.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '8f3fc582'
+ 2021-01-29 10:31:58,682  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435736369311489.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '557ab497'
+ 2021-01-29 10:31:58,695  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/15/132446353225621988.png?width=480&height=320&quality=80&format=jpg'. Cached Key: '23dfee34'
+ 2021-01-29 10:31:58,695  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509184786404.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: '92aaf958'
+ 2021-01-29 10:31:58,695  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509185535127.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: '70f3fc4d'
+ 2021-01-29 10:31:58,695  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514272276492.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: '2ac04546'
+ 2021-01-29 10:31:58,696  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450508499578916.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: 'cae0d032'
+ 2021-01-29 10:31:58,695  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435747379058863.png?quality=80&format=jpg'. Cached Key: 'dcf109ad'
+ 2021-01-29 10:31:58,695  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509925989910.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: 'e245a89b'
+ 2021-01-29 10:31:58,696  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437488550744852.png?quality=80&format=jpg'. Cached Key: 'f2b78bab'
+ 2021-01-29 10:31:58,697  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/15/132446353902878113.png?width=480&height=320&quality=80&format=jpg'. Cached Key: '0bf76851'
+ 2021-01-29 10:31:58,697  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/10/132441852020443783.jpg?width=480&height=320&quality=80&format=jpg'. Cached Key: '01dd6385'
+ 2021-01-29 10:31:58,697  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450508503182823.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: 'de5bab7d'
+ 2021-01-29 10:31:58,697  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435757857854843.png?quality=80&format=jpg'. Cached Key: '75765823'
+ 2021-01-29 10:31:58,698  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514273065693.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: 'f69c3bce'
+ 2021-01-29 10:31:58,701  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509926969849.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: 'ae77b301'
+ 2021-01-29 10:31:59,599  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435742633171449.png?width=1440&height=632&quality=95&format=jpg'. Cached Key: '71ed2641'
+ 2021-01-29 10:32:08,948  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435743418820065.png?width=1440&height=632&quality=95&format=jpg'. Cached Key: '0d403a00'
+ 2021-01-29 10:32:17,467  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734556263309.png?width=100&height=100&quality=90'. Cached Key: 'ef94c553'
+ 2021-01-29 10:32:17,467  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/06/132438363534870618.png?width=100&height=100&quality=90'. Cached Key: '3d824124'
+ 2021-01-29 10:32:17,467  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734932870348.png?width=100&height=100&quality=90'. Cached Key: 'a8295cec'
+ 2021-01-29 10:32:17,470  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735563298472.png?width=100&height=100&quality=90'. Cached Key: '1e31ce60'
+ 2021-01-29 10:32:17,470  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735253593281.png?width=100&height=100&quality=90'. Cached Key: '929c2f3c'
+ 2021-01-29 10:32:17,471  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735951790896.png?width=100&height=100&quality=90'. Cached Key: '419f5f21'
+ 2021-01-29 10:32:17,475  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435736705873514.png?width=100&height=100&quality=90'. Cached Key: '94b4c79b'
+ 2021-01-29 10:32:17,475  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435736366333089.png?width=100&height=100&quality=90'. Cached Key: '9b262e9f'
+ 2021-01-29 10:32:17,478  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509184786404.jpg?width=100&height=100&quality=90'. Cached Key: '4701fd0f'
+ 2021-01-29 10:32:17,489  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450508499578916.jpg?width=100&height=100&quality=90'. Cached Key: 'e12bd5de'
+ 2021-01-29 10:39:06,114  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:3680:06945c5f successfully announced in 149.8243 ms
+ 2021-01-29 10:39:06,127  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:3680:06945c5f is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-01-29 10:39:06,135  INFO Hangfire.Server.ServerWatchdog.? [?] - MESSAGE: 1 servers were removed due to timeout
+ 2021-01-29 10:39:06,141  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:3680:06945c5f all the dispatchers started
+ 2021-01-29 10:39:06,308  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:34786
+ 2021-01-29 10:39:06,309  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-01-29 10:39:06,309  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-01-29 10:39:06,309  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 2021-01-29 10:40:00,406  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:3452:883038e6 successfully announced in 161.134 ms
+ 2021-01-29 10:40:00,421  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:3452:883038e6 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-01-29 10:40:00,433  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:3452:883038e6 all the dispatchers started
+ 2021-01-29 10:40:00,641  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:19044
+ 2021-01-29 10:40:00,648  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-01-29 10:40:00,648  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-01-29 10:40:00,648  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 2021-01-29 10:45:00,445  INFO Hangfire.Server.ServerWatchdog.? [?] - MESSAGE: 1 servers were removed due to timeout
+ 2021-01-29 11:00:36,499  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:15256
+ 2021-01-29 11:00:36,585  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-01-29 11:00:36,628  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-01-29 11:00:36,710  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 2021-01-29 11:02:39,035  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:15708:b8a686d2 successfully announced in 197.3341 ms
+ 2021-01-29 11:02:39,066  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:15708:b8a686d2 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-01-29 11:02:39,180  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:15708:b8a686d2 all the dispatchers started
+ 2021-01-29 11:02:39,351  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:25312
+ 2021-01-29 11:02:39,355  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-01-29 11:02:39,355  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-01-29 11:02:39,355  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 2021-01-29 11:05:06,111 ERROR Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.? [?] - MESSAGE: An unhandled exception has occurred while executing the request.
+ Firebase.Storage.FirebaseStorageException: Exception occured while processing the request.
+Url: https://firebasestorage.googleapis.com/v0/b/uploadimage-292509.appspot.com/o?name=uploads%2F2021%2F01%2F29%2F132563666838903341.PNG
+Response: N/A
+ ---> System.Net.Http.HttpRequestException: Error while copying content to a stream.
+ ---> System.ObjectDisposedException: Cannot access a closed Stream.
+   at System.IO.StreamHelpers.ValidateCopyToArgs(Stream source, Stream destination, Int32 bufferSize)
+   at System.IO.FileStream.CopyToAsync(Stream destination, Int32 bufferSize, CancellationToken cancellationToken)
+   at System.IO.Stream.CopyToAsync(Stream destination, CancellationToken cancellationToken)
+   at System.Net.Http.StreamToStreamCopy.CopyAsync(Stream source, Stream destination, Int32 bufferSize, Boolean disposeSource, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Net.Http.HttpContent.CopyToAsyncCore(ValueTask copyTask)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpContent.CopyToAsyncCore(ValueTask copyTask)
+   at System.Net.Http.HttpConnection.SendRequestContentAsync(HttpRequestMessage request, HttpContentWriteStream stream, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnection.SendAsyncCore(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithNtConnectionAuthAsync(HttpConnection connection, HttpRequestMessage request, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithRetryAsync(HttpRequestMessage request, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.FinishSendAsyncBuffered(Task`1 sendTask, HttpRequestMessage request, CancellationTokenSource cts, Boolean disposeCts)
+   at Firebase.Storage.FirebaseStorageTask.UploadFile(FirebaseStorageOptions options, String url, String downloadUrl, Stream stream, CancellationToken cancellationToken, String mimeType)
+   --- End of inner exception stack trace ---
+   at Firebase.Storage.FirebaseStorageTask.UploadFile(FirebaseStorageOptions options, String url, String downloadUrl, Stream stream, CancellationToken cancellationToken, String mimeType)
+   at figma.Controllers.UploadController.CreateImage(List`1 filesadd, Int32 width, Int32 height, Nullable`1 fire) in C:\Users\16879\source\repos\figma\Controllers\UploadController.cs:line 77
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Builder.Extensions.MapMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2021-01-29 11:06:56,293  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:20776:3adb365f successfully announced in 142.0213 ms
+ 2021-01-29 11:06:56,305  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:20776:3adb365f is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-01-29 11:06:56,311  INFO Hangfire.Server.ServerWatchdog.? [?] - MESSAGE: 2 servers were removed due to timeout
+ 2021-01-29 11:06:56,314  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:20776:3adb365f all the dispatchers started
+ 2021-01-29 11:06:56,415  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:7469
+ 2021-01-29 11:06:56,418  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-01-29 11:06:56,418  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-01-29 11:06:56,418  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 2021-01-29 11:07:25,219 ERROR Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.? [?] - MESSAGE: An unhandled exception has occurred while executing the request.
+ Firebase.Storage.FirebaseStorageException: Exception occured while processing the request.
+Url: https://firebasestorage.googleapis.com/v0/b/uploadimage-292509.appspot.com/o?name=receipts%2F2021%2F01%2F29%2F132563668224982444.PNG
+Response: N/A
+ ---> System.Net.Http.HttpRequestException: Error while copying content to a stream.
+ ---> System.ObjectDisposedException: Cannot access a closed Stream.
+   at System.IO.StreamHelpers.ValidateCopyToArgs(Stream source, Stream destination, Int32 bufferSize)
+   at System.IO.FileStream.CopyToAsync(Stream destination, Int32 bufferSize, CancellationToken cancellationToken)
+   at System.IO.Stream.CopyToAsync(Stream destination, CancellationToken cancellationToken)
+   at System.Net.Http.StreamToStreamCopy.CopyAsync(Stream source, Stream destination, Int32 bufferSize, Boolean disposeSource, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Net.Http.HttpContent.CopyToAsyncCore(ValueTask copyTask)
+   --- End of inner exception stack trace ---
+   at System.Net.Http.HttpContent.CopyToAsyncCore(ValueTask copyTask)
+   at System.Net.Http.HttpConnection.SendRequestContentAsync(HttpRequestMessage request, HttpContentWriteStream stream, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnection.SendAsyncCore(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithNtConnectionAuthAsync(HttpConnection connection, HttpRequestMessage request, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithRetryAsync(HttpRequestMessage request, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.DiagnosticsHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.FinishSendAsyncBuffered(Task`1 sendTask, HttpRequestMessage request, CancellationTokenSource cts, Boolean disposeCts)
+   at Firebase.Storage.FirebaseStorageTask.UploadFile(FirebaseStorageOptions options, String url, String downloadUrl, Stream stream, CancellationToken cancellationToken, String mimeType)
+   --- End of inner exception stack trace ---
+   at Firebase.Storage.FirebaseStorageTask.UploadFile(FirebaseStorageOptions options, String url, String downloadUrl, Stream stream, CancellationToken cancellationToken, String mimeType)
+   at figma.Controllers.UploadController.CreateImage(List`1 filesadd, Int32 width, Int32 height, Nullable`1 fire) in C:\Users\16879\source\repos\figma\Controllers\UploadController.cs:line 77
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Builder.Extensions.MapMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2021-01-29 11:08:23,740  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:13484:5680d33e successfully announced in 142.438 ms
+ 2021-01-29 11:08:23,752  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:13484:5680d33e is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-01-29 11:08:23,760  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:13484:5680d33e all the dispatchers started
+ 2021-01-29 11:08:23,869  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:23317
+ 2021-01-29 11:08:23,872  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-01-29 11:08:23,872  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-01-29 11:08:23,872  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 2021-01-29 11:13:23,769  INFO Hangfire.Server.ServerWatchdog.? [?] - MESSAGE: 2 servers were removed due to timeout
+ 2021-01-29 11:15:15,176  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:21816:1df87ac6 successfully announced in 182.6041 ms
+ 2021-01-29 11:15:15,193  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:21816:1df87ac6 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-01-29 11:15:15,203  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:21816:1df87ac6 all the dispatchers started
+ 2021-01-29 11:15:15,415  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:40630
+ 2021-01-29 11:15:15,417  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-01-29 11:15:15,417  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-01-29 11:15:15,417  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 2021-01-29 11:19:40,952  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:26404:8bad60ba successfully announced in 159.1795 ms
+ 2021-01-29 11:19:40,964  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:26404:8bad60ba is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-01-29 11:19:40,971  INFO Hangfire.Server.ServerWatchdog.? [?] - MESSAGE: 1 servers were removed due to timeout
+ 2021-01-29 11:19:40,972  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:26404:8bad60ba all the dispatchers started
+ 2021-01-29 11:19:41,116  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:36247
+ 2021-01-29 11:19:41,118  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-01-29 11:19:41,119  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-01-29 11:19:41,119  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 2021-01-29 11:24:40,982  INFO Hangfire.Server.ServerWatchdog.? [?] - MESSAGE: 1 servers were removed due to timeout
+ 2021-01-29 11:28:42,103  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:28284:49a064b1 successfully announced in 158.3474 ms
+ 2021-01-29 11:28:42,117  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:28284:49a064b1 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-01-29 11:28:42,125  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:28284:49a064b1 all the dispatchers started
+ 2021-01-29 11:28:42,323  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:46291
+ 2021-01-29 11:28:42,326  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-01-29 11:28:42,326  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-01-29 11:28:42,326  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 
