@@ -1,0 +1,1090 @@
+2021-02-01 11:47:50,953 ERROR Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.? [?] - MESSAGE: An unhandled exception has occurred while executing the request.
+ Microsoft.Data.SqlClient.SqlException (0x80131904): Execution Timeout Expired.  The timeout period elapsed prior to completion of the operation or the server is not responding.
+ ---> System.ComponentModel.Win32Exception (258): The wait operation timed out.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.InitializeReader(DbContext _, Boolean result)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at figma.Data.GenericRepository`1.Get(Expression`1 filter, Func`2 orderBy, Int32 records, String includeProperties) in C:\Users\16879\source\repos\figma\DAL\GenericRepository.cs:line 53
+   at figma.Controllers.HomeController.Index() in C:\Users\16879\source\repos\figma\Controllers\HomeController.cs:line 137
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Builder.Extensions.MapMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+ClientConnectionId:bab0ed37-bcd9-4046-a24b-3d2fb144d8c0
+Error Number:-2,State:0,Class:11
+2021-02-01 12:17:09,060  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:2432:c7b9706e successfully announced in 240.4253 ms
+ 2021-02-01 12:17:09,076  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:2432:c7b9706e is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-02-01 12:17:09,084  INFO Hangfire.Server.ServerWatchdog.? [?] - MESSAGE: 1 servers were removed due to timeout
+ 2021-02-01 12:17:09,090  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:2432:c7b9706e all the dispatchers started
+ 2021-02-01 12:17:09,334  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:47349
+ 2021-02-01 12:17:09,339  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-02-01 12:17:09,340  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-02-01 12:17:09,340  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 2021-02-01 12:23:15,023  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:18128:0e80a130 successfully announced in 184.4806 ms
+ 2021-02-01 12:23:15,044  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:18128:0e80a130 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-02-01 12:23:15,090  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:18128:0e80a130 all the dispatchers started
+ 2021-02-01 12:23:15,348  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:8843
+ 2021-02-01 12:23:15,350  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-02-01 12:23:15,351  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-02-01 12:23:15,351  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 2021-02-01 12:25:17,622  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:14456:4e098c05 successfully announced in 323.1329 ms
+ 2021-02-01 12:25:17,644  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:14456:4e098c05 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-02-01 12:25:17,656  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:14456:4e098c05 all the dispatchers started
+ 2021-02-01 12:25:17,827  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:30183
+ 2021-02-01 12:25:17,830  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-02-01 12:25:17,830  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-02-01 12:25:17,830  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 2021-02-01 12:27:06,471  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:8292:30cba176 successfully announced in 207.4365 ms
+ 2021-02-01 12:27:06,484  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:8292:30cba176 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-02-01 12:27:06,493  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:8292:30cba176 all the dispatchers started
+ 2021-02-01 12:27:06,684  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:43844
+ 2021-02-01 12:27:06,686  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-02-01 12:27:06,687  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-02-01 12:27:06,687  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 2021-02-01 12:30:11,726  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:15008:8f791dd5 successfully announced in 177.3226 ms
+ 2021-02-01 12:30:11,752  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:15008:8f791dd5 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-02-01 12:30:11,768  INFO Hangfire.Server.ServerWatchdog.? [?] - MESSAGE: 2 servers were removed due to timeout
+ 2021-02-01 12:30:11,812  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:15008:8f791dd5 all the dispatchers started
+ 2021-02-01 12:30:11,973  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:46482
+ 2021-02-01 12:30:11,976  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-02-01 12:30:11,976  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-02-01 12:30:11,977  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 2021-02-01 12:31:28,775  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:10212:43d3db21 successfully announced in 204.4168 ms
+ 2021-02-01 12:31:28,809  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:10212:43d3db21 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-02-01 12:31:28,836  INFO Hangfire.Server.ServerWatchdog.? [?] - MESSAGE: 1 servers were removed due to timeout
+ 2021-02-01 12:31:28,864  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:10212:43d3db21 all the dispatchers started
+ 2021-02-01 12:31:29,106  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:15770
+ 2021-02-01 12:31:29,108  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-02-01 12:31:29,108  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-02-01 12:31:29,108  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 2021-02-01 12:34:39,792  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/image/Rectangle 2.png?width=1440&height=632&quality=90'. Cached Key: 'c8c11a47'
+ 2021-02-01 12:34:40,021  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435743935625358.png?width=460&height=340&quality=95&format=jpg'. Cached Key: 'aa8e6713'
+ 2021-02-01 12:34:40,613  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435744642995742.png?width=460&height=340&quality=95&format=jpg'. Cached Key: 'e8c7882f'
+ 2021-02-01 12:34:47,522  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435745094336439.png?width=460&height=340&quality=95&format=jpg'. Cached Key: 'cc4cd5d3'
+ 2021-02-01 12:34:48,690  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437459952111105.png?width=460&height=340&quality=95&format=jpg'. Cached Key: 'a9f919c7'
+ 2021-02-01 12:34:48,693  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437460233626947.png?width=460&height=340&quality=95&format=jpg'. Cached Key: '88d9873e'
+ 2021-02-01 12:34:48,775  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514272276492.jpg?width=480&height=480&quality=80&format=jpg'. Cached Key: '4ca25537'
+ 2021-02-01 12:34:48,775  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435736705873514.png?width=480&height=480&quality=80&format=jpg'. Cached Key: '2386a3f1'
+ 2021-02-01 12:34:48,789  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509925989910.jpg?width=480&height=480&quality=80&format=jpg'. Cached Key: 'b0e9fe9f'
+ 2021-02-01 12:34:48,789  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450508499578916.jpg?width=480&height=480&quality=80&format=jpg'. Cached Key: 'bf42452b'
+ 2021-02-01 12:34:48,790  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435736366333089.png?width=480&height=480&quality=80&format=jpg'. Cached Key: 'c99005e2'
+ 2021-02-01 12:34:48,802  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437465243101790.png?width=460&height=340&quality=95&format=jpg'. Cached Key: 'aca181e7'
+ 2021-02-01 12:34:48,802  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450508503182823.jpg?width=480&height=480&quality=80&format=jpg'. Cached Key: '3421d015'
+ 2021-02-01 12:34:48,802  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437465496769226.png?width=460&height=340&quality=95&format=jpg'. Cached Key: '17975c6e'
+ 2021-02-01 12:34:48,802  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435736708922105.png?width=480&height=480&quality=80&format=jpg'. Cached Key: 'b2a56cfd'
+ 2021-02-01 12:34:48,809  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514273065693.jpg?width=480&height=480&quality=80&format=jpg'. Cached Key: '2e6e32e0'
+ 2021-02-01 12:34:48,812  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437464695985839.png?width=460&height=340&quality=95&format=jpg'. Cached Key: '8950f080'
+ 2021-02-01 12:34:48,813  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435736369311489.png?width=480&height=480&quality=80&format=jpg'. Cached Key: '361892bc'
+ 2021-02-01 12:34:48,817  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509926969849.jpg?width=480&height=480&quality=80&format=jpg'. Cached Key: '3881fbeb'
+ 2021-02-01 12:34:48,817  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509185535127.jpg?width=480&height=480&quality=80&format=jpg'. Cached Key: '130fd003'
+ 2021-02-01 12:34:48,820  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509184786404.jpg?width=480&height=480&quality=80&format=jpg'. Cached Key: '6de35cf1'
+ 2021-02-01 12:34:48,956  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735951790896.png?width=480&height=480&quality=80&format=jpg'. Cached Key: '450b7ca4'
+ 2021-02-01 12:34:49,039  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/06/132438363539334740.png?width=480&height=480&quality=80&format=jpg'. Cached Key: '9fba2c55'
+ 2021-02-01 12:34:49,039  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735563298472.png?width=480&height=480&quality=80&format=jpg'. Cached Key: '19b94540'
+ 2021-02-01 12:34:49,067  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/06/132438363534870618.png?width=480&height=479&quality=80&format=jpg'. Cached Key: 'c646e58b'
+ 2021-02-01 12:34:49,077  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734559207086.png?width=480&height=479&quality=80&format=jpg'. Cached Key: 'e9c69c3d'
+ 2021-02-01 12:34:49,088  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435736705873514.png?width=480&height=479&quality=80&format=jpg'. Cached Key: 'c41dff9f'
+ 2021-02-01 12:34:49,098  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509185535127.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: '70f3fc4d'
+ 2021-02-01 12:34:49,100  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735256435652.png?width=480&height=480&quality=80&format=jpg'. Cached Key: 'c219944e'
+ 2021-02-01 12:34:49,110  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735954234595.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '558baef1'
+ 2021-02-01 12:34:49,110  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/06/132438363539334740.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '3c4c616a'
+ 2021-02-01 12:34:49,110  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450508499578916.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: 'cae0d032'
+ 2021-02-01 12:34:49,112  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735253593281.png?width=480&height=479&quality=80&format=jpg'. Cached Key: 'aa0c52fd'
+ 2021-02-01 12:34:49,116  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734556263309.png?width=480&height=480&quality=80&format=jpg'. Cached Key: '5e9ac48e'
+ 2021-02-01 12:34:49,121  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/06/132438363534870618.png?width=480&height=480&quality=80&format=jpg'. Cached Key: 'b380d3cc'
+ 2021-02-01 12:34:49,131  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735954234595.png?width=480&height=480&quality=80&format=jpg'. Cached Key: 'c9f60168'
+ 2021-02-01 12:34:49,136  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734556263309.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '8ba522cf'
+ 2021-02-01 12:34:49,136  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734559207086.png?width=480&height=480&quality=80&format=jpg'. Cached Key: '4b5c3b89'
+ 2021-02-01 12:34:49,136  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735253593281.png?width=480&height=480&quality=80&format=jpg'. Cached Key: 'c3fdb737'
+ 2021-02-01 12:34:49,149  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735566364804.png?width=480&height=479&quality=80&format=jpg'. Cached Key: 'fd9fc45d'
+ 2021-02-01 12:34:49,149  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734935739906.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '7a50ef7b'
+ 2021-02-01 12:34:49,149  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735566364804.png?width=480&height=480&quality=80&format=jpg'. Cached Key: '55063bac'
+ 2021-02-01 12:34:49,151  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734932870348.png?width=480&height=479&quality=80&format=jpg'. Cached Key: 'd4559645'
+ 2021-02-01 12:34:49,151  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735563298472.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '8f3fc582'
+ 2021-02-01 12:34:49,158  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435736366333089.png?width=480&height=479&quality=80&format=jpg'. Cached Key: 'df9846a0'
+ 2021-02-01 12:34:49,158  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735951790896.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '77da9df3'
+ 2021-02-01 12:34:49,158  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435736369311489.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '557ab497'
+ 2021-02-01 12:34:49,163  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435736708922105.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '9b899e84'
+ 2021-02-01 12:34:49,167  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734932870348.png?width=480&height=480&quality=80&format=jpg'. Cached Key: '49a70c6c'
+ 2021-02-01 12:34:49,167  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509184786404.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: '92aaf958'
+ 2021-02-01 12:34:49,170  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734935739906.png?width=480&height=480&quality=80&format=jpg'. Cached Key: 'b2dda151'
+ 2021-02-01 12:34:49,170  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735256435652.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '474896c9'
+ 2021-02-01 12:34:49,172  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450508503182823.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: 'de5bab7d'
+ 2021-02-01 12:34:52,565  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509925989910.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: 'e245a89b'
+ 2021-02-01 12:34:52,565  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509926969849.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: 'ae77b301'
+ 2021-02-01 12:34:52,581  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514273065693.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: 'f69c3bce'
+ 2021-02-01 12:34:52,647  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514272276492.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: '2ac04546'
+ 2021-02-01 12:34:52,769  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/15/132446353902878113.png?width=480&height=320&quality=80&format=jpg'. Cached Key: '0bf76851'
+ 2021-02-01 12:34:52,769  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/10/132441852020443783.jpg?width=480&height=320&quality=80&format=jpg'. Cached Key: '01dd6385'
+ 2021-02-01 12:34:52,772  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/15/132446353225621988.png?width=480&height=320&quality=80&format=jpg'. Cached Key: '23dfee34'
+ 2021-02-01 12:34:52,773  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437488550744852.png?quality=80&format=jpg'. Cached Key: 'f2b78bab'
+ 2021-02-01 12:34:52,773  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435747379058863.png?quality=80&format=jpg'. Cached Key: 'dcf109ad'
+ 2021-02-01 12:34:52,787  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435757857854843.png?quality=80&format=jpg'. Cached Key: '75765823'
+ 2021-02-01 12:35:08,811  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/image/Rectangle 2.png?width=1440&height=632&quality=90'. Cached Key: 'c8c11a47'
+ 2021-02-01 12:35:08,811  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450508503182823.jpg?width=480&height=480&quality=80&format=jpg'. Cached Key: '3421d015'
+ 2021-02-01 12:35:08,815  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514273065693.jpg?width=480&height=480&quality=80&format=jpg'. Cached Key: '2e6e32e0'
+ 2021-02-01 12:35:08,826  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509185535127.jpg?width=480&height=480&quality=80&format=jpg'. Cached Key: '130fd003'
+ 2021-02-01 12:35:08,826  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435744642995742.png?width=460&height=340&quality=95&format=jpg'. Cached Key: 'e8c7882f'
+ 2021-02-01 12:35:08,826  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435745094336439.png?width=460&height=340&quality=95&format=jpg'. Cached Key: 'cc4cd5d3'
+ 2021-02-01 12:35:08,829  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514272276492.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: '2ac04546'
+ 2021-02-01 12:35:08,830  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509926969849.jpg?width=480&height=480&quality=80&format=jpg'. Cached Key: '3881fbeb'
+ 2021-02-01 12:35:08,832  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509925989910.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: 'e245a89b'
+ 2021-02-01 12:35:08,832  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435743935625358.png?width=460&height=340&quality=95&format=jpg'. Cached Key: 'aa8e6713'
+ 2021-02-01 12:35:08,981  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509184786404.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: '92aaf958'
+ 2021-02-01 12:35:08,981  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450508499578916.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: 'cae0d032'
+ 2021-02-01 12:35:12,697  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435742633171449.png?width=1440&height=632&quality=95&format=jpg'. Cached Key: '71ed2641'
+ 2021-02-01 12:35:19,842  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437459952111105.png?width=460&height=340&quality=95&format=jpg'. Cached Key: 'a9f919c7'
+ 2021-02-01 12:35:19,843  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437460233626947.png?width=460&height=340&quality=95&format=jpg'. Cached Key: '88d9873e'
+ 2021-02-01 12:35:19,958  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437464695985839.png?width=460&height=340&quality=95&format=jpg'. Cached Key: '8950f080'
+ 2021-02-01 12:35:19,982  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437465243101790.png?width=460&height=340&quality=95&format=jpg'. Cached Key: 'aca181e7'
+ 2021-02-01 12:35:19,983  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437465496769226.png?width=460&height=340&quality=95&format=jpg'. Cached Key: '17975c6e'
+ 2021-02-01 12:35:21,161  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514274730681.jpg?quality=90&format=jpg'. Cached Key: '20416e68'
+ 2021-02-01 12:35:21,189  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514274222742.jpg?quality=90&format=jpg'. Cached Key: 'bb38c9d7'
+ 2021-02-01 12:35:21,190  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514275583807.jpg?quality=90&format=jpg'. Cached Key: '9ea718a9'
+ 2021-02-01 12:35:21,190  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514273065693.jpg?quality=90&format=jpg'. Cached Key: 'af64b791'
+ 2021-02-01 12:35:21,190  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514275112524.jpg?quality=90&format=jpg'. Cached Key: '88a3e09a'
+ 2021-02-01 12:35:21,193  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514272276492.jpg?quality=90&format=jpg'. Cached Key: '09b0f7ea'
+ 2021-02-01 12:35:21,193  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514273700364.jpg?quality=90&format=jpg'. Cached Key: 'd2871483'
+ 2021-02-01 12:35:24,041  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509926969849.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: 'ae77b301'
+ 2021-02-01 12:35:24,085  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735563298472.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '8f3fc582'
+ 2021-02-01 12:35:24,588  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735566364804.png?width=480&height=479&quality=80&format=jpg'. Cached Key: 'fd9fc45d'
+ 2021-02-01 12:35:24,603  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450510235331261.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: 'ed4e55cf'
+ 2021-02-01 12:35:24,619  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509185535127.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: '70f3fc4d'
+ 2021-02-01 12:35:24,621  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450510236311537.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: 'e1cd6778'
+ 2021-02-01 12:35:24,621  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450510570666055.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: '714650aa'
+ 2021-02-01 12:35:24,621  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450510569896054.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: '37131b1a'
+ 2021-02-01 12:35:24,847  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435736366333089.png?width=480&height=479&quality=80&format=jpg'. Cached Key: 'df9846a0'
+ 2021-02-01 12:35:25,175  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435736369311489.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '557ab497'
+ 2021-02-01 12:35:25,196  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450513943699541.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: '0a45657e'
+ 2021-02-01 12:35:25,213  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450510941022590.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: 'a6d5148b'
+ 2021-02-01 12:35:25,213  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450510942112914.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: '6f2dc6d8'
+ 2021-02-01 12:35:25,216  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450513942758055.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: '7747dd76'
+ 2021-02-01 12:35:34,948 ERROR Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Failed executing DbCommand (8ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime2), @p4='?' (DbType = Decimal), @p5='?' (DbType = Int32), @p6='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Carts] ([CartID], [Color], [Count], [DateCreated], [Price], [ProductID], [Size])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+SELECT [RecordID]
+FROM [Carts]
+WHERE @@ROWCOUNT = 1 AND [RecordID] = scope_identity();
+ 2021-02-01 12:35:34,996 ERROR Microsoft.EntityFrameworkCore.Update.? [?] - MESSAGE: An exception occurred in the database while saving changes for context type 'figma.Data.ShopProductContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'CartID', table 'sh3.dbo.Carts'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+ClientConnectionId:158d2a5d-fc1f-41e7-9041-b256aaceb119
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(DbContext _, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+ Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'CartID', table 'sh3.dbo.Carts'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+ClientConnectionId:158d2a5d-fc1f-41e7-9041-b256aaceb119
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(DbContext _, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+2021-02-01 12:35:35,033 ERROR Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.? [?] - MESSAGE: An unhandled exception has occurred while executing the request.
+ Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'CartID', table 'sh3.dbo.Carts'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+ClientConnectionId:158d2a5d-fc1f-41e7-9041-b256aaceb119
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(DbContext _, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges()
+   at figma.DAL.UnitOfWork.SaveNotAync() in C:\Users\16879\source\repos\figma\DAL\UnitOfWork.cs:line 68
+   at figma.Controllers.ShoppingCartController.AddToCartAjax(Int32 quantity, Int32 productId, String color, String size) in C:\Users\16879\source\repos\figma\Controllers\ShoppingCartController.cs:line 426
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Builder.Extensions.MapMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2021-02-01 12:36:10,174  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:10604:41b0a54b successfully announced in 221.1814 ms
+ 2021-02-01 12:36:10,189  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:10604:41b0a54b is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-02-01 12:36:10,198  INFO Hangfire.Server.ServerWatchdog.? [?] - MESSAGE: 1 servers were removed due to timeout
+ 2021-02-01 12:36:10,199  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:10604:41b0a54b all the dispatchers started
+ 2021-02-01 12:36:10,426  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:19897
+ 2021-02-01 12:36:10,428  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-02-01 12:36:10,428  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-02-01 12:36:10,428  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 2021-02-01 12:36:12,864  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/image/Rectangle 2.png?width=1440&height=632&quality=90'. Cached Key: 'c8c11a47'
+ 2021-02-01 12:36:12,912  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437464695985839.png?width=460&height=340&quality=95&format=jpg'. Cached Key: '8950f080'
+ 2021-02-01 12:36:12,912  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437465496769226.png?width=460&height=340&quality=95&format=jpg'. Cached Key: '17975c6e'
+ 2021-02-01 12:36:12,912  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437460233626947.png?width=460&height=340&quality=95&format=jpg'. Cached Key: '88d9873e'
+ 2021-02-01 12:36:12,912  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437465243101790.png?width=460&height=340&quality=95&format=jpg'. Cached Key: 'aca181e7'
+ 2021-02-01 12:36:12,912  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437459952111105.png?width=460&height=340&quality=95&format=jpg'. Cached Key: 'a9f919c7'
+ 2021-02-01 12:36:13,165  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735954234595.png?width=480&height=480&quality=80&format=jpg'. Cached Key: 'c9f60168'
+ 2021-02-01 12:36:13,165  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734932870348.png?width=480&height=479&quality=80&format=jpg'. Cached Key: 'd4559645'
+ 2021-02-01 12:36:13,165  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735951790896.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '77da9df3'
+ 2021-02-01 12:36:13,169  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435736369311489.png?width=480&height=480&quality=80&format=jpg'. Cached Key: '361892bc'
+ 2021-02-01 12:36:13,174  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435736705873514.png?width=480&height=479&quality=80&format=jpg'. Cached Key: 'c41dff9f'
+ 2021-02-01 12:36:13,174  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735566364804.png?width=480&height=480&quality=80&format=jpg'. Cached Key: '55063bac'
+ 2021-02-01 12:36:13,176  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735256435652.png?width=480&height=480&quality=80&format=jpg'. Cached Key: 'c219944e'
+ 2021-02-01 12:36:13,193  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435736708922105.png?width=480&height=480&quality=80&format=jpg'. Cached Key: 'b2a56cfd'
+ 2021-02-01 12:36:13,194  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734559207086.png?width=480&height=480&quality=80&format=jpg'. Cached Key: '4b5c3b89'
+ 2021-02-01 12:36:13,199  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734935739906.png?width=480&height=480&quality=80&format=jpg'. Cached Key: 'b2dda151'
+ 2021-02-01 12:36:13,199  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734556263309.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '8ba522cf'
+ 2021-02-01 12:36:13,208  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735253593281.png?width=480&height=479&quality=80&format=jpg'. Cached Key: 'aa0c52fd'
+ 2021-02-01 12:36:13,444  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/06/132438363539334740.png?width=480&height=480&quality=80&format=jpg'. Cached Key: '9fba2c55'
+ 2021-02-01 12:36:13,480  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435736708922105.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '9b899e84'
+ 2021-02-01 12:36:13,491  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450508503182823.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: 'de5bab7d'
+ 2021-02-01 12:36:13,496  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437488550744852.png?quality=80&format=jpg'. Cached Key: 'f2b78bab'
+ 2021-02-01 12:36:13,496  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435747379058863.png?quality=80&format=jpg'. Cached Key: 'dcf109ad'
+ 2021-02-01 12:36:13,501  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734935739906.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '7a50ef7b'
+ 2021-02-01 12:36:13,504  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/06/132438363534870618.png?width=480&height=479&quality=80&format=jpg'. Cached Key: 'c646e58b'
+ 2021-02-01 12:36:13,506  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/15/132446353902878113.png?width=480&height=320&quality=80&format=jpg'. Cached Key: '0bf76851'
+ 2021-02-01 12:36:13,511  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/10/132441852020443783.jpg?width=480&height=320&quality=80&format=jpg'. Cached Key: '01dd6385'
+ 2021-02-01 12:36:13,514  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735256435652.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '474896c9'
+ 2021-02-01 12:36:13,520  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/06/132438363539334740.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '3c4c616a'
+ 2021-02-01 12:36:13,520  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735954234595.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '558baef1'
+ 2021-02-01 12:36:13,521  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/15/132446353225621988.png?width=480&height=320&quality=80&format=jpg'. Cached Key: '23dfee34'
+ 2021-02-01 12:36:13,522  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734559207086.png?width=480&height=479&quality=80&format=jpg'. Cached Key: 'e9c69c3d'
+ 2021-02-01 12:36:13,526  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514273065693.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: 'f69c3bce'
+ 2021-02-01 12:36:13,526  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435757857854843.png?quality=80&format=jpg'. Cached Key: '75765823'
+ 2021-02-01 12:36:23,171  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435743418820065.png?width=1440&height=632&quality=95&format=jpg'. Cached Key: '0d403a00'
+ 2021-02-01 12:36:24,375  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509184786404.jpg?quality=90&format=jpg'. Cached Key: '514014b0'
+ 2021-02-01 12:36:24,390  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509185535127.jpg?quality=90&format=jpg'. Cached Key: '1a8b6f68'
+ 2021-02-01 12:36:24,470  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509188318371.jpg?quality=90&format=jpg'. Cached Key: '9f8ddc1e'
+ 2021-02-01 12:36:24,482  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509187311790.jpg?quality=90&format=jpg'. Cached Key: '5c012601'
+ 2021-02-01 12:36:24,487  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509187834360.jpg?quality=90&format=jpg'. Cached Key: '8c70af54'
+ 2021-02-01 12:36:24,487  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509186245184.jpg?quality=90&format=jpg'. Cached Key: 'c95abe77'
+ 2021-02-01 12:36:24,487  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509186811881.jpg?quality=90&format=jpg'. Cached Key: '31fb56b7'
+ 2021-02-01 12:36:28,803 ERROR Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Failed executing DbCommand (11ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime2), @p4='?' (DbType = Decimal), @p5='?' (DbType = Int32), @p6='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Carts] ([CartID], [Color], [Count], [DateCreated], [Price], [ProductID], [Size])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+SELECT [RecordID]
+FROM [Carts]
+WHERE @@ROWCOUNT = 1 AND [RecordID] = scope_identity();
+ 2021-02-01 12:36:28,839 ERROR Microsoft.EntityFrameworkCore.Update.? [?] - MESSAGE: An exception occurred in the database while saving changes for context type 'figma.Data.ShopProductContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'CartID', table 'sh3.dbo.Carts'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+ClientConnectionId:d058c1b2-489e-47e7-8cd6-ac6319743109
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(DbContext _, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+ Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'CartID', table 'sh3.dbo.Carts'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+ClientConnectionId:d058c1b2-489e-47e7-8cd6-ac6319743109
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(DbContext _, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+2021-02-01 12:36:28,875 ERROR Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.? [?] - MESSAGE: An unhandled exception has occurred while executing the request.
+ Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'CartID', table 'sh3.dbo.Carts'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+ClientConnectionId:d058c1b2-489e-47e7-8cd6-ac6319743109
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(DbContext _, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges()
+   at figma.DAL.UnitOfWork.SaveNotAync() in C:\Users\16879\source\repos\figma\DAL\UnitOfWork.cs:line 68
+   at figma.Controllers.ShoppingCartController.AddToCartAjax(Int32 quantity, Int32 productId, String color, String size) in C:\Users\16879\source\repos\figma\Controllers\ShoppingCartController.cs:line 426
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Builder.Extensions.MapMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2021-02-01 12:37:13,120  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:664:988f00e0 successfully announced in 179.2294 ms
+ 2021-02-01 12:37:13,138  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:664:988f00e0 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-02-01 12:37:13,150  INFO Hangfire.Server.ServerWatchdog.? [?] - MESSAGE: 1 servers were removed due to timeout
+ 2021-02-01 12:37:13,156  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:664:988f00e0 all the dispatchers started
+ 2021-02-01 12:37:13,355  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:34419
+ 2021-02-01 12:37:13,357  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-02-01 12:37:13,357  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-02-01 12:37:13,357  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 2021-02-01 12:37:15,749  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/image/Rectangle 2.png?width=1440&height=632&quality=90'. Cached Key: 'c8c11a47'
+ 2021-02-01 12:37:15,777  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437459952111105.png?width=460&height=340&quality=95&format=jpg'. Cached Key: 'a9f919c7'
+ 2021-02-01 12:37:15,805  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437465496769226.png?width=460&height=340&quality=95&format=jpg'. Cached Key: '17975c6e'
+ 2021-02-01 12:37:16,068  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450508503182823.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: 'de5bab7d'
+ 2021-02-01 12:37:27,448 ERROR Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Failed executing DbCommand (5ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime2), @p4='?' (DbType = Decimal), @p5='?' (DbType = Int32), @p6='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Carts] ([CartID], [Color], [Count], [DateCreated], [Price], [ProductID], [Size])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+SELECT [RecordID]
+FROM [Carts]
+WHERE @@ROWCOUNT = 1 AND [RecordID] = scope_identity();
+ 2021-02-01 12:37:27,476 ERROR Microsoft.EntityFrameworkCore.Update.? [?] - MESSAGE: An exception occurred in the database while saving changes for context type 'figma.Data.ShopProductContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'CartID', table 'sh3.dbo.Carts'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+ClientConnectionId:6287e472-04cf-4a83-acb3-ad6539224512
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(DbContext _, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+ Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'CartID', table 'sh3.dbo.Carts'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+ClientConnectionId:6287e472-04cf-4a83-acb3-ad6539224512
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(DbContext _, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+2021-02-01 12:37:27,501 ERROR Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.? [?] - MESSAGE: An unhandled exception has occurred while executing the request.
+ Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'CartID', table 'sh3.dbo.Carts'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+ClientConnectionId:6287e472-04cf-4a83-acb3-ad6539224512
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(DbContext _, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges()
+   at figma.DAL.UnitOfWork.SaveNotAync() in C:\Users\16879\source\repos\figma\DAL\UnitOfWork.cs:line 68
+   at figma.Controllers.ShoppingCartController.AddToCartAjax(Int32 quantity, Int32 productId, String color, String size) in C:\Users\16879\source\repos\figma\Controllers\ShoppingCartController.cs:line 426
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Builder.Extensions.MapMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2021-02-01 12:37:31,691 ERROR Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Failed executing DbCommand (1ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime2), @p4='?' (DbType = Decimal), @p5='?' (DbType = Int32), @p6='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Carts] ([CartID], [Color], [Count], [DateCreated], [Price], [ProductID], [Size])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+SELECT [RecordID]
+FROM [Carts]
+WHERE @@ROWCOUNT = 1 AND [RecordID] = scope_identity();
+ 2021-02-01 12:37:31,696 ERROR Microsoft.EntityFrameworkCore.Update.? [?] - MESSAGE: An exception occurred in the database while saving changes for context type 'figma.Data.ShopProductContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'CartID', table 'sh3.dbo.Carts'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+ClientConnectionId:6287e472-04cf-4a83-acb3-ad6539224512
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(DbContext _, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+ Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'CartID', table 'sh3.dbo.Carts'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+ClientConnectionId:6287e472-04cf-4a83-acb3-ad6539224512
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(DbContext _, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+2021-02-01 12:37:31,699 ERROR Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.? [?] - MESSAGE: An unhandled exception has occurred while executing the request.
+ Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'CartID', table 'sh3.dbo.Carts'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+ClientConnectionId:6287e472-04cf-4a83-acb3-ad6539224512
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(DbContext _, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges()
+   at figma.DAL.UnitOfWork.SaveNotAync() in C:\Users\16879\source\repos\figma\DAL\UnitOfWork.cs:line 68
+   at figma.Controllers.ShoppingCartController.AddToCartAjax(Int32 quantity, Int32 productId, String color, String size) in C:\Users\16879\source\repos\figma\Controllers\ShoppingCartController.cs:line 426
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Builder.Extensions.MapMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2021-02-01 12:37:36,162  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/image/Rectangle 2.png?width=1440&height=632&quality=90'. Cached Key: 'c8c11a47'
+ 2021-02-01 12:38:30,780  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509925989910.jpg?quality=90&format=jpg'. Cached Key: '42e00b3c'
+ 2021-02-01 12:38:30,781  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509926969849.jpg?quality=90&format=jpg'. Cached Key: 'bd4ca6a4'
+ 2021-02-01 12:38:30,828  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509928094111.jpg?quality=90&format=jpg'. Cached Key: '13ef4fea'
+ 2021-02-01 12:38:30,923  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509930267158.jpg?quality=90&format=jpg'. Cached Key: 'de8d48a5'
+ 2021-02-01 12:38:30,923  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509929254189.jpg?quality=90&format=jpg'. Cached Key: 'f8d87343'
+ 2021-02-01 12:38:30,925  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509929777010.jpg?quality=90&format=jpg'. Cached Key: '983ce305'
+ 2021-02-01 12:38:30,925  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509928744734.jpg?quality=90&format=jpg'. Cached Key: '3514f183'
+ 2021-02-01 12:42:07,985  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:14628:9108b02f successfully announced in 265.0368 ms
+ 2021-02-01 12:42:08,004  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:14628:9108b02f is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-02-01 12:42:08,020  INFO Hangfire.Server.ServerWatchdog.? [?] - MESSAGE: 2 servers were removed due to timeout
+ 2021-02-01 12:42:08,022  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:14628:9108b02f all the dispatchers started
+ 2021-02-01 12:42:08,231  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:38828
+ 2021-02-01 12:42:08,234  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-02-01 12:42:08,234  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-02-01 12:42:08,234  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 2021-02-01 12:42:55,210  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:13172:66a44707 successfully announced in 238.9402 ms
+ 2021-02-01 12:42:55,225  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:13172:66a44707 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-02-01 12:42:55,238  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:13172:66a44707 all the dispatchers started
+ 2021-02-01 12:42:55,428  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:10016
+ 2021-02-01 12:42:55,432  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-02-01 12:42:55,432  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-02-01 12:42:55,432  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 2021-02-01 12:44:40,498  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735563298472.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '8f3fc582'
+ 2021-02-01 12:44:40,498  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735566364804.png?width=480&height=480&quality=80&format=jpg'. Cached Key: '55063bac'
+ 2021-02-01 12:44:40,498  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/06/132438363534870618.png?width=480&height=479&quality=80&format=jpg'. Cached Key: 'c646e58b'
+ 2021-02-01 12:44:40,642  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734556263309.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '8ba522cf'
+ 2021-02-01 12:44:40,736  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435736705873514.png?width=480&height=479&quality=80&format=jpg'. Cached Key: 'c41dff9f'
+ 2021-02-01 12:44:40,740  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450508503182823.jpg?width=480&height=480&quality=80&format=jpg'. Cached Key: '3421d015'
+ 2021-02-01 12:44:40,740  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435736366333089.png?width=480&height=479&quality=80&format=jpg'. Cached Key: 'df9846a0'
+ 2021-02-01 12:44:40,754  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735256435652.png?width=480&height=480&quality=80&format=jpg'. Cached Key: 'c219944e'
+ 2021-02-01 12:44:40,756  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735954234595.png?width=480&height=480&quality=80&format=jpg'. Cached Key: 'c9f60168'
+ 2021-02-01 12:44:40,756  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509185535127.jpg?width=480&height=480&quality=80&format=jpg'. Cached Key: '130fd003'
+ 2021-02-01 12:44:40,767  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450510570666055.jpg?width=480&height=480&quality=80&format=jpg'. Cached Key: '37a7ff60'
+ 2021-02-01 12:44:40,767  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450513718933077.jpg?width=480&height=480&quality=80&format=jpg'. Cached Key: '6eea8bb3'
+ 2021-02-01 12:44:40,770  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450508499578916.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: 'cae0d032'
+ 2021-02-01 12:44:40,773  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735253593281.png?width=480&height=479&quality=80&format=jpg'. Cached Key: 'aa0c52fd'
+ 2021-02-01 12:44:40,779  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450513942758055.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: '7747dd76'
+ 2021-02-01 12:44:40,789  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/06/132438363539334740.png?width=480&height=480&quality=80&format=jpg'. Cached Key: '9fba2c55'
+ 2021-02-01 12:44:40,790  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450513718160233.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: 'df165b9a'
+ 2021-02-01 12:44:40,796  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435736369311489.png?width=480&height=480&quality=80&format=jpg'. Cached Key: '361892bc'
+ 2021-02-01 12:44:40,803  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450510235331261.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: 'ed4e55cf'
+ 2021-02-01 12:44:40,805  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509926969849.jpg?width=480&height=480&quality=80&format=jpg'. Cached Key: '3881fbeb'
+ 2021-02-01 12:44:40,808  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435736708922105.png?width=480&height=480&quality=80&format=jpg'. Cached Key: 'b2a56cfd'
+ 2021-02-01 12:44:40,809  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450510236311537.jpg?width=480&height=480&quality=80&format=jpg'. Cached Key: '5a030b99'
+ 2021-02-01 12:44:40,812  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450510569896054.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: '37131b1a'
+ 2021-02-01 12:44:40,904  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509184786404.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: '92aaf958'
+ 2021-02-01 12:44:40,905  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450513943699541.jpg?width=480&height=480&quality=80&format=jpg'. Cached Key: '4decbb35'
+ 2021-02-01 12:44:40,905  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734932870348.png?width=480&height=479&quality=80&format=jpg'. Cached Key: 'd4559645'
+ 2021-02-01 12:44:40,905  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734935739906.png?width=480&height=480&quality=80&format=jpg'. Cached Key: 'b2dda151'
+ 2021-02-01 12:44:40,908  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509925989910.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: 'e245a89b'
+ 2021-02-01 12:44:40,911  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734559207086.png?width=480&height=480&quality=80&format=jpg'. Cached Key: '4b5c3b89'
+ 2021-02-01 12:44:40,916  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735951790896.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '77da9df3'
+ 2021-02-01 12:44:50,234  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735563298472.png?quality=90&format=jpg'. Cached Key: '1e132b62'
+ 2021-02-01 12:44:50,330  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735572904220.png?quality=90&format=jpg'. Cached Key: '3cdf7300'
+ 2021-02-01 12:44:50,330  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450513943699541.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: '0a45657e'
+ 2021-02-01 12:44:50,333  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450510570666055.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: '714650aa'
+ 2021-02-01 12:44:50,333  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450510236311537.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: 'e1cd6778'
+ 2021-02-01 12:44:50,345  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509185535127.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: '70f3fc4d'
+ 2021-02-01 12:44:50,345  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509926969849.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: 'ae77b301'
+ 2021-02-01 12:44:50,352  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450510942112914.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: '6f2dc6d8'
+ 2021-02-01 12:44:50,353  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735568691340.png?quality=90&format=jpg'. Cached Key: 'fb9aa081'
+ 2021-02-01 12:44:50,353  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735566364804.png?quality=90&format=jpg'. Cached Key: 'e08e9883'
+ 2021-02-01 12:44:50,355  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735570584196.png?quality=90&format=jpg'. Cached Key: '7ad2f13e'
+ 2021-02-01 12:44:50,363  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435736369311489.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '557ab497'
+ 2021-02-01 12:44:50,363  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735575345447.png?quality=90&format=jpg'. Cached Key: '92702d7c'
+ 2021-02-01 12:44:50,364  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735577225153.png?quality=90&format=jpg'. Cached Key: '2db2c743'
+ 2021-02-01 12:44:50,368  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735566364804.png?width=480&height=479&quality=80&format=jpg'. Cached Key: 'fd9fc45d'
+ 2021-02-01 12:44:55,103 ERROR Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Failed executing DbCommand (6ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime2), @p4='?' (DbType = Decimal), @p5='?' (DbType = Int32), @p6='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Carts] ([CartID], [Color], [Count], [DateCreated], [Price], [ProductID], [Size])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+SELECT [RecordID]
+FROM [Carts]
+WHERE @@ROWCOUNT = 1 AND [RecordID] = scope_identity();
+ 2021-02-01 12:44:55,127 ERROR Microsoft.EntityFrameworkCore.Update.? [?] - MESSAGE: An exception occurred in the database while saving changes for context type 'figma.Data.ShopProductContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'CartID', table 'sh3.dbo.Carts'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+ClientConnectionId:5fb8a982-6165-44e2-86c8-df26570bb346
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(DbContext _, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+ Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'CartID', table 'sh3.dbo.Carts'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+ClientConnectionId:5fb8a982-6165-44e2-86c8-df26570bb346
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(DbContext _, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+2021-02-01 12:44:55,147 ERROR Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.? [?] - MESSAGE: An unhandled exception has occurred while executing the request.
+ Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while updating the entries. See the inner exception for details.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot insert the value NULL into column 'CartID', table 'sh3.dbo.Carts'; column does not allow nulls. INSERT fails.
+The statement has been terminated.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+ClientConnectionId:5fb8a982-6165-44e2-86c8-df26570bb346
+Error Number:515,State:2,Class:16
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.Execute(IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.Execute(IEnumerable`1 commandBatches, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChanges(IList`1 entries)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(IList`1 entriesToSave)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(DbContext _, Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges()
+   at figma.DAL.UnitOfWork.SaveNotAync() in C:\Users\16879\source\repos\figma\DAL\UnitOfWork.cs:line 68
+   at figma.Controllers.ShoppingCartController.AddToCartAjax(Int32 quantity, Int32 productId, String color, String size) in C:\Users\16879\source\repos\figma\Controllers\ShoppingCartController.cs:line 426
+   at lambda_method(Closure , Object , Object[] )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Builder.Extensions.MapMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2021-02-01 12:46:15,893  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:15036:30495fff successfully announced in 266.132 ms
+ 2021-02-01 12:46:15,910  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:15036:30495fff is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-02-01 12:46:15,921  INFO Hangfire.Server.ServerWatchdog.? [?] - MESSAGE: 1 servers were removed due to timeout
+ 2021-02-01 12:46:15,926  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:15036:30495fff all the dispatchers started
+ 2021-02-01 12:46:16,169  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:23476
+ 2021-02-01 12:46:16,171  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-02-01 12:46:16,172  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-02-01 12:46:16,172  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 2021-02-01 12:46:25,579  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435744642995742.png?width=460&height=340&quality=95&format=jpg'. Cached Key: 'e8c7882f'
+ 2021-02-01 12:46:25,579  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435745094336439.png?width=460&height=340&quality=95&format=jpg'. Cached Key: 'cc4cd5d3'
+ 2021-02-01 12:46:25,579  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435743935625358.png?width=460&height=340&quality=95&format=jpg'. Cached Key: 'aa8e6713'
+ 2021-02-01 12:46:25,579  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437460233626947.png?width=460&height=340&quality=95&format=jpg'. Cached Key: '88d9873e'
+ 2021-02-01 12:46:25,579  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437464695985839.png?width=460&height=340&quality=95&format=jpg'. Cached Key: '8950f080'
+ 2021-02-01 12:46:25,579  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437459952111105.png?width=460&height=340&quality=95&format=jpg'. Cached Key: 'a9f919c7'
+ 2021-02-01 12:46:25,579  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/image/Rectangle 2.png?width=1440&height=632&quality=90'. Cached Key: 'c8c11a47'
+ 2021-02-01 12:46:25,739  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514273065693.jpg?width=480&height=480&quality=80&format=jpg'. Cached Key: '2e6e32e0'
+ 2021-02-01 12:46:25,739  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437465243101790.png?width=460&height=340&quality=95&format=jpg'. Cached Key: 'aca181e7'
+ 2021-02-01 12:46:25,740  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437465496769226.png?width=460&height=340&quality=95&format=jpg'. Cached Key: '17975c6e'
+ 2021-02-01 12:46:25,746  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514272276492.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: '2ac04546'
+ 2021-02-01 12:46:25,820  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/06/132438363539334740.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '3c4c616a'
+ 2021-02-01 12:46:25,822  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734559207086.png?width=480&height=479&quality=80&format=jpg'. Cached Key: 'e9c69c3d'
+ 2021-02-01 12:46:25,826  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450508503182823.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: 'de5bab7d'
+ 2021-02-01 12:46:25,830  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735256435652.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '474896c9'
+ 2021-02-01 12:46:25,832  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734935739906.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '7a50ef7b'
+ 2021-02-01 12:46:25,835  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435736708922105.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '9b899e84'
+ 2021-02-01 12:46:25,907  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514273065693.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: 'f69c3bce'
+ 2021-02-01 12:46:25,916  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735954234595.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '558baef1'
+ 2021-02-01 12:46:25,999  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435742633171449.png?width=1440&height=632&quality=95&format=jpg'. Cached Key: '71ed2641'
+ 2021-02-01 12:46:27,799  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435747379058863.png?quality=80&format=jpg'. Cached Key: 'dcf109ad'
+ 2021-02-01 12:46:27,799  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437488550744852.png?quality=80&format=jpg'. Cached Key: 'f2b78bab'
+ 2021-02-01 12:46:36,053  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509925989910.jpg?quality=90&format=jpg'. Cached Key: '42e00b3c'
+ 2021-02-01 12:46:36,065  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509926969849.jpg?quality=90&format=jpg'. Cached Key: 'bd4ca6a4'
+ 2021-02-01 12:46:36,101  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509930267158.jpg?quality=90&format=jpg'. Cached Key: 'de8d48a5'
+ 2021-02-01 12:46:36,101  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509929254189.jpg?quality=90&format=jpg'. Cached Key: 'f8d87343'
+ 2021-02-01 12:46:36,101  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509928744734.jpg?quality=90&format=jpg'. Cached Key: '3514f183'
+ 2021-02-01 12:46:36,106  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509928094111.jpg?quality=90&format=jpg'. Cached Key: '13ef4fea'
+ 2021-02-01 12:46:36,111  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509929777010.jpg?quality=90&format=jpg'. Cached Key: '983ce305'
+ 2021-02-01 12:47:09,042  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435742633171449.png?width=1440&height=632&quality=95&format=jpg'. Cached Key: '71ed2641'
+ 2021-02-01 12:47:24,030  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734556263309.png?quality=90&format=jpg'. Cached Key: 'b968a21e'
+ 2021-02-01 12:47:24,042  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734559207086.png?quality=90&format=jpg'. Cached Key: '7747e692'
+ 2021-02-01 12:47:24,113  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734561526431.png?quality=90&format=jpg'. Cached Key: 'ccc06f67'
+ 2021-02-01 12:47:24,114  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734565776953.png?quality=90&format=jpg'. Cached Key: '2b95d1c1'
+ 2021-02-01 12:47:24,120  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734570197372.png?quality=90&format=jpg'. Cached Key: 'd081dad5'
+ 2021-02-01 12:47:24,127  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734568138937.png?quality=90&format=jpg'. Cached Key: 'b2061e86'
+ 2021-02-01 12:47:24,129  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734572503314.png?quality=90&format=jpg'. Cached Key: '739b2ba0'
+ 2021-02-01 12:49:00,109  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:12672:46809f1d successfully announced in 260.9966 ms
+ 2021-02-01 12:49:00,130  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:12672:46809f1d is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-02-01 12:49:00,141  INFO Hangfire.Server.ServerWatchdog.? [?] - MESSAGE: 1 servers were removed due to timeout
+ 2021-02-01 12:49:00,147  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:12672:46809f1d all the dispatchers started
+ 2021-02-01 12:49:00,431  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:15713
+ 2021-02-01 12:49:00,436  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-02-01 12:49:00,436  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-02-01 12:49:00,436  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 2021-02-01 12:49:13,664  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435743418820065.png?width=1440&height=632&quality=95&format=jpg'. Cached Key: '0d403a00'
+ 2021-02-01 12:51:27,657  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/image/Rectangle 2.png?width=1440&height=632&quality=90'. Cached Key: 'c8c11a47'
+ 2021-02-01 12:51:27,672  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435743935625358.png?width=460&height=340&quality=95&format=jpg'. Cached Key: 'aa8e6713'
+ 2021-02-01 12:51:27,672  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435745094336439.png?width=460&height=340&quality=95&format=jpg'. Cached Key: 'cc4cd5d3'
+ 2021-02-01 12:51:27,675  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435744642995742.png?width=460&height=340&quality=95&format=jpg'. Cached Key: 'e8c7882f'
+ 2021-02-01 12:51:27,682  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437459952111105.png?width=460&height=340&quality=95&format=jpg'. Cached Key: 'a9f919c7'
+ 2021-02-01 12:51:27,686  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437464695985839.png?width=460&height=340&quality=95&format=jpg'. Cached Key: '8950f080'
+ 2021-02-01 12:51:27,689  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437460233626947.png?width=460&height=340&quality=95&format=jpg'. Cached Key: '88d9873e'
+ 2021-02-01 12:51:27,689  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437465243101790.png?width=460&height=340&quality=95&format=jpg'. Cached Key: 'aca181e7'
+ 2021-02-01 12:51:27,769  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435736708922105.png?width=480&height=480&quality=80&format=jpg'. Cached Key: 'b2a56cfd'
+ 2021-02-01 12:51:27,773  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514273065693.jpg?width=480&height=480&quality=80&format=jpg'. Cached Key: '2e6e32e0'
+ 2021-02-01 12:51:28,171  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509185535127.jpg?width=480&height=480&quality=80&format=jpg'. Cached Key: '130fd003'
+ 2021-02-01 12:51:28,173  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437465496769226.png?width=460&height=340&quality=95&format=jpg'. Cached Key: '17975c6e'
+ 2021-02-01 12:51:28,174  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509926969849.jpg?width=480&height=480&quality=80&format=jpg'. Cached Key: '3881fbeb'
+ 2021-02-01 12:51:28,174  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514272276492.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: '2ac04546'
+ 2021-02-01 12:51:28,179  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735253593281.png?width=480&height=479&quality=80&format=jpg'. Cached Key: 'aa0c52fd'
+ 2021-02-01 12:51:28,182  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435736369311489.png?width=480&height=480&quality=80&format=jpg'. Cached Key: '361892bc'
+ 2021-02-01 12:51:28,182  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735256435652.png?width=480&height=480&quality=80&format=jpg'. Cached Key: 'c219944e'
+ 2021-02-01 12:51:28,183  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734556263309.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '8ba522cf'
+ 2021-02-01 12:51:28,186  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/06/132438363539334740.png?width=480&height=480&quality=80&format=jpg'. Cached Key: '9fba2c55'
+ 2021-02-01 12:51:28,214  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435736366333089.png?width=480&height=479&quality=80&format=jpg'. Cached Key: 'df9846a0'
+ 2021-02-01 12:51:28,218  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734935739906.png?width=480&height=480&quality=80&format=jpg'. Cached Key: 'b2dda151'
+ 2021-02-01 12:51:28,218  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/06/132438363534870618.png?width=480&height=479&quality=80&format=jpg'. Cached Key: 'c646e58b'
+ 2021-02-01 12:51:28,219  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735563298472.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '8f3fc582'
+ 2021-02-01 12:51:28,220  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450508503182823.jpg?width=480&height=480&quality=80&format=jpg'. Cached Key: '3421d015'
+ 2021-02-01 12:51:28,220  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450508499578916.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: 'cae0d032'
+ 2021-02-01 12:51:28,220  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734932870348.png?width=480&height=479&quality=80&format=jpg'. Cached Key: 'd4559645'
+ 2021-02-01 12:51:28,220  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734559207086.png?width=480&height=480&quality=80&format=jpg'. Cached Key: '4b5c3b89'
+ 2021-02-01 12:51:28,224  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735954234595.png?width=480&height=480&quality=80&format=jpg'. Cached Key: 'c9f60168'
+ 2021-02-01 12:51:28,226  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435736705873514.png?width=480&height=479&quality=80&format=jpg'. Cached Key: 'c41dff9f'
+ 2021-02-01 12:51:28,226  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509184786404.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: '92aaf958'
+ 2021-02-01 12:51:28,226  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735566364804.png?width=480&height=480&quality=80&format=jpg'. Cached Key: '55063bac'
+ 2021-02-01 12:51:28,229  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509925989910.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: 'e245a89b'
+ 2021-02-01 12:51:28,400  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735951790896.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '77da9df3'
+ 2021-02-01 12:51:28,652  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/06/132438363539334740.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '3c4c616a'
+ 2021-02-01 12:51:28,671  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734935739906.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '7a50ef7b'
+ 2021-02-01 12:51:28,671  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735954234595.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '558baef1'
+ 2021-02-01 12:51:28,671  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435734559207086.png?width=480&height=479&quality=80&format=jpg'. Cached Key: 'e9c69c3d'
+ 2021-02-01 12:51:28,673  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435736708922105.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '9b899e84'
+ 2021-02-01 12:51:28,936  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735256435652.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '474896c9'
+ 2021-02-01 12:51:28,986  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450508503182823.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: 'de5bab7d'
+ 2021-02-01 12:51:28,989  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/15/132446353902878113.png?width=480&height=320&quality=80&format=jpg'. Cached Key: '0bf76851'
+ 2021-02-01 12:51:28,996  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509926969849.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: 'ae77b301'
+ 2021-02-01 12:51:29,012  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/15/132446353225621988.png?width=480&height=320&quality=80&format=jpg'. Cached Key: '23dfee34'
+ 2021-02-01 12:51:29,013  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437488550744852.png?quality=80&format=jpg'. Cached Key: 'f2b78bab'
+ 2021-02-01 12:51:29,015  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509185535127.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: '70f3fc4d'
+ 2021-02-01 12:51:29,021  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435757857854843.png?quality=80&format=jpg'. Cached Key: '75765823'
+ 2021-02-01 12:51:29,025  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514273065693.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: 'f69c3bce'
+ 2021-02-01 12:51:29,029  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435735566364804.png?width=480&height=479&quality=80&format=jpg'. Cached Key: 'fd9fc45d'
+ 2021-02-01 12:51:29,031  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435747379058863.png?quality=80&format=jpg'. Cached Key: 'dcf109ad'
+ 2021-02-01 12:51:29,031  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435736369311489.png?width=480&height=479&quality=80&format=jpg'. Cached Key: '557ab497'
+ 2021-02-01 12:51:29,039  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/10/132441852020443783.jpg?width=480&height=320&quality=80&format=jpg'. Cached Key: '01dd6385'
+ 2021-02-01 12:51:40,619  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435742633171449.png?width=1440&height=632&quality=95&format=jpg'. Cached Key: '71ed2641'
+ 2021-02-01 12:51:51,000  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435743418820065.png?width=1440&height=632&quality=95&format=jpg'. Cached Key: '0d403a00'
+ 2021-02-01 12:52:15,080  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514272276492.jpg?quality=90&format=jpg'. Cached Key: '09b0f7ea'
+ 2021-02-01 12:52:15,084  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514273065693.jpg?quality=90&format=jpg'. Cached Key: 'af64b791'
+ 2021-02-01 12:52:15,132  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514274222742.jpg?quality=90&format=jpg'. Cached Key: 'bb38c9d7'
+ 2021-02-01 12:52:15,135  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514273700364.jpg?quality=90&format=jpg'. Cached Key: 'd2871483'
+ 2021-02-01 12:52:15,136  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514274730681.jpg?quality=90&format=jpg'. Cached Key: '20416e68'
+ 2021-02-01 12:52:15,366  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450510235331261.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: 'ed4e55cf'
+ 2021-02-01 12:52:15,366  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514275112524.jpg?quality=90&format=jpg'. Cached Key: '88a3e09a'
+ 2021-02-01 12:52:15,367  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514275583807.jpg?quality=90&format=jpg'. Cached Key: '9ea718a9'
+ 2021-02-01 12:52:15,418  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450510236311537.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: 'e1cd6778'
+ 2021-02-01 12:52:15,419  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450513942758055.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: '7747dd76'
+ 2021-02-01 12:52:15,419  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450510569896054.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: '37131b1a'
+ 2021-02-01 12:52:15,422  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450510570666055.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: '714650aa'
+ 2021-02-01 12:52:15,426  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450510941022590.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: 'a6d5148b'
+ 2021-02-01 12:52:15,428  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450513943699541.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: '0a45657e'
+ 2021-02-01 12:52:15,430  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450510942112914.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: '6f2dc6d8'
+ 2021-02-01 12:52:52,752  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514272276492.jpg?quality=90&format=jpg'. Cached Key: '09b0f7ea'
+ 2021-02-01 12:52:52,757  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514273065693.jpg?quality=90&format=jpg'. Cached Key: 'af64b791'
+ 2021-02-01 12:52:52,901  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514274222742.jpg?quality=90&format=jpg'. Cached Key: 'bb38c9d7'
+ 2021-02-01 12:52:52,903  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514273700364.jpg?quality=90&format=jpg'. Cached Key: 'd2871483'
+ 2021-02-01 12:52:53,017  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514274730681.jpg?quality=90&format=jpg'. Cached Key: '20416e68'
+ 2021-02-01 12:52:53,123  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450510236311537.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: 'e1cd6778'
+ 2021-02-01 12:52:53,133  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450510569896054.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: '37131b1a'
+ 2021-02-01 12:52:53,133  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514275112524.jpg?quality=90&format=jpg'. Cached Key: '88a3e09a'
+ 2021-02-01 12:52:53,142  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450510235331261.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: 'ed4e55cf'
+ 2021-02-01 12:52:53,147  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514275583807.jpg?quality=90&format=jpg'. Cached Key: '9ea718a9'
+ 2021-02-01 12:52:53,165  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450510942112914.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: '6f2dc6d8'
+ 2021-02-01 12:52:53,168  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450513942758055.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: '7747dd76'
+ 2021-02-01 12:52:53,172  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450513943699541.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: '0a45657e'
+ 2021-02-01 12:52:53,175  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450510941022590.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: 'a6d5148b'
+ 2021-02-01 12:52:53,178  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450510570666055.jpg?width=480&height=479&quality=80&format=jpg'. Cached Key: '714650aa'
+ 2021-02-01 12:53:40,773  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509925989910.jpg?quality=90&format=jpg'. Cached Key: '42e00b3c'
+ 2021-02-01 12:53:40,773  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509926969849.jpg?quality=90&format=jpg'. Cached Key: 'bd4ca6a4'
+ 2021-02-01 12:53:40,812  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509928094111.jpg?quality=90&format=jpg'. Cached Key: '13ef4fea'
+ 2021-02-01 12:53:40,817  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509928744734.jpg?quality=90&format=jpg'. Cached Key: '3514f183'
+ 2021-02-01 12:53:40,819  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509929254189.jpg?quality=90&format=jpg'. Cached Key: 'f8d87343'
+ 2021-02-01 12:53:40,825  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509929777010.jpg?quality=90&format=jpg'. Cached Key: '983ce305'
+ 2021-02-01 12:53:40,829  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509930267158.jpg?quality=90&format=jpg'. Cached Key: 'de8d48a5'
+ 2021-02-01 12:54:00,152  INFO Hangfire.Server.ServerWatchdog.? [?] - MESSAGE: 2 servers were removed due to timeout
+ 

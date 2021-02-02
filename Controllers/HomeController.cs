@@ -426,15 +426,32 @@ namespace figma.Controllers
         [Route("{name}-{proId}.html")]
         public IActionResult Product(int proId = 0)
         {
-            HttpContext.Response.Cookies.Append(
-                     "viewProducts", "" + HttpContext.Request.Cookies.FirstOrDefault(a => a.Key.Contains("viewProducts")).Value + "," + proId + "",
-                     new CookieOptions()
-                     {
-                         SameSite = SameSiteMode.Lax,
-                         Secure = true,
-                         Expires = new DateTimeOffset(DateTime.Now.AddDays(1))
-                     });
-            ViewBag.view = HttpContext.Request.Cookies.FirstOrDefault(a => a.Key.Contains("viewProducts")).Value;
+            try
+            {
+                var list = HttpContext.Request.Cookies.FirstOrDefault(a => a.Key.Contains("viewProducts")).Value;
+                if (list.IndexOf(proId.ToString()) == -1)
+                    HttpContext.Response.Cookies.Append(
+                             "viewProducts", "" + HttpContext.Request.Cookies.FirstOrDefault(a => a.Key.Contains("viewProducts")).Value + "," + proId + "",
+                             new CookieOptions()
+                             {
+                                 SameSite = SameSiteMode.Lax,
+                                 Secure = true,
+                                 Expires = new DateTimeOffset(DateTime.Now.AddDays(1))
+                             });
+                ViewBag.view = HttpContext.Request.Cookies.FirstOrDefault(a => a.Key.Contains("viewProducts")).Value;
+            }
+            catch (Exception)
+            {
+                HttpContext.Response.Cookies.Append(
+                             "viewProducts", "" + proId + "",
+                             new CookieOptions()
+                             {
+                                 SameSite = SameSiteMode.Lax,
+                                 Secure = true,
+                                 Expires = new DateTimeOffset(DateTime.Now.AddDays(1))
+                             });
+            }
+
             var product = _unitOfWork.ProductRepository.GetByID(proId);
             if (product == null)
             {

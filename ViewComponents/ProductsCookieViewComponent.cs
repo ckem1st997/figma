@@ -1,4 +1,5 @@
 ﻿using figma.DAL;
+using figma.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -19,9 +20,20 @@ namespace figma.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            ViewBag.view = HttpContext.Request.Cookies.FirstOrDefault(a => a.Key.Contains("viewProducts")).Value;
-            var items = await _unitOfWork.ProductRepository.GetAync(records: 6);
-            return View(items);
+            List<Products> viewProductsCookieView = new List<Products>();
+            try
+            {
+                var listId = HttpContext.Request.Cookies.FirstOrDefault(a => a.Key.Contains("viewProducts")).Value.Split(',');
+                for (int i = 0; i < listId.Length; i++)
+                {
+                    if (listId[i].Length > 0)
+                        viewProductsCookieView.Add(_unitOfWork.ProductRepository.GetByID(int.Parse(listId[i])));
+                }
+            }
+            catch (Exception)
+            {
+            }
+            return View(viewProductsCookieView);
         }
     }
 }
