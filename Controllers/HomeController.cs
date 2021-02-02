@@ -31,17 +31,13 @@ namespace figma.Controllers
 {
     public class HomeController : Controller
     {
-
-
         private readonly UnitOfWork _unitOfWork;
-        private readonly IMemoryCache _iMemoryCache;
         private readonly IMailer _mailer;
         private readonly IHttpClientFactory _clientFactory;
         private const string CartCookieKey = "CartID";
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public HomeController(UnitOfWork unitOfWork, IMemoryCache memoryCache, IMailer mailer, IHttpClientFactory clientFactory, IHttpContextAccessor httpContextAccesso)
+        public HomeController(UnitOfWork unitOfWork, IMailer mailer, IHttpClientFactory clientFactory, IHttpContextAccessor httpContextAccesso)
         {
-            _iMemoryCache = memoryCache;
             _httpContextAccessor = httpContextAccesso;
             _unitOfWork = unitOfWork;
             _mailer = mailer;
@@ -737,7 +733,6 @@ namespace figma.Controllers
                     var hashedPassword = new PasswordHasher<Members>().HashPassword(new Members(), model.Password);
                     _unitOfWork.MemberRepository.Insert(new Members { Email = model.Username, Password = hashedPassword, Active = true, CreateDate = DateTime.Now, Fullname = model.Fullname, Mobile = model.Sdt.ToString(), Role = "User" });
                     await _unitOfWork.Save();
-                    _iMemoryCache.Remove("Members");
                     TempData["tq"] = "Đăng ký thành công";
                     await SendEmailConfrim(model.Username);
                     return RedirectToAction("ConfirmEmail", new { email = model.Username });

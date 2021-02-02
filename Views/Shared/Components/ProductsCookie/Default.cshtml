@@ -28,15 +28,15 @@
                                         <div class="product-img">
                                             <a asp-action="Product" asp-route-proId="@item.ProductID" asp-route-name="@Html.Raw(name)" title="@item.Name" class="image-resize" style="height: auto;">
                                                 <picture>
-                                                    <source media="(max-width: 767px)" srcset="@img1">
-                                                    <source media="(min-width: 768px)" srcset="@img1">
-                                                    <img class="img-loop" alt="@item.Name" src="@img1" asp-append-version="true" />
+                                                    <source media="(max-width: 767px)" srcset="@img1?width=460&height=340&quality=95&format=jpg">
+                                                    <source media="(min-width: 768px)" srcset="@img1?width=460&height=340&quality=95&format=jpg">
+                                                    <img class="img-loop" alt="@item.Name" src="@img1?width=460&height=340&quality=95&format=jpg" />
                                                 </picture>
 
                                                 <picture>
-                                                    <source media="(max-width: 767px)" srcset="@img2">
-                                                    <source media="(min-width: 768px)" srcset="@img2">
-                                                    <img class="img-loop img-hover" alt="@item.Name" src="@img2" asp-append-version="true" />
+                                                    <source media="(max-width: 767px)" srcset="@img2?width=460&height=340&quality=95&format=jpg">
+                                                    <source media="(min-width: 768px)" srcset="@img2?width=460&height=340&quality=95&format=jpg">
+                                                    <img class="img-loop img-hover" alt="@item.Name" src="@img2?width=460&height=340&quality=95&format=jpg" />
                                                 </picture>
                                             </a>
                                         </div>

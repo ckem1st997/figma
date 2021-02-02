@@ -21,13 +21,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="~/fontawesome-pro-5.0.13/css/all.css">
-    <link rel="stylesheet" href="~/vegas/vegas.css">
-    <link rel="stylesheet" href="~/slick-1.8.1/slick/slick.css">
-    <link rel="stylesheet" href="~/WOW-master/css/libs/animate.css" asp-append-version="true">
-    <link href="~/css/style.css" rel="stylesheet" asp-append-version="true" />
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.js"></script>
+    @*<link rel="stylesheet" type="text/css" href="~/fontawesome-pro-5.0.13/css/all.css">*@
+    <link href="~/fontawesome-pro-5.0.13/css/all.min.css" rel="stylesheet" />
+    @*<link rel="stylesheet" href="~/vegas/vegas.css">*@
+    <link href="~/vegas/vegas.min.css" rel="stylesheet" />
+    @*<link rel="stylesheet" href="~/slick-1.8.1/slick/slick.css">*@
+    <link href="~/slick-1.8.1/slick/slick.min.css" rel="stylesheet" />
+    @*<link rel="stylesheet" href="~/WOW-master/css/libs/animate.css" asp-append-version="true">*@
+    <link href="~/WOW-master/css/libs/animate.min.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/css/style.min.css" rel="stylesheet" asp-append-version="true" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.min.css">
 </head>
 <body>
     @await Component.InvokeAsync("HeaderList")
@@ -35,43 +38,11 @@
         @await Component.InvokeAsync("Phone")
     </cache>
     <div class="container-fluid">
-        <partial name="_CookieConsentPartial" />
+        @*<partial name="_CookieConsentPartial" />*@
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-    @*<script src="https://apps.elfsight.com/p/platform.js" defer></script>
-        <div class="elfsight-app-55a8c0b8-abe7-43ce-897b-7600951cc18f"></div>*@
-    @*<div class="elfsight-app-0dc6a770-4696-48bb-ac0e-a12b7170eb0a"></div>*@
-    @*226451679029063
-        8c31db80cf0219e719b94784529e5726
-            ce157bae3b80f16dfad81f6c26ac141b*@
-    <!-- Load Facebook SDK for JavaScript -->
-    <!--<div id="fb-root"></div>
-    <script>
-        window.fbAsyncInit = function () {
-            FB.init({
-                xfbml: true,
-                version: 'v9.0'
-            });
-        };
-
-        (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>-->
-
-    <!-- Your Chat Plugin code -->
-    <!--<div class="fb-customerchat"
-         attribution=setup_tool
-         page_id="102071551282329"
-         theme_color="#0084ff"
-         logged_in_greeting="Demo chat fb"
-         logged_out_greeting="Demo chat fb">
-    </div>-->
     <cache>
         @await Component.InvokeAsync("FooterList")
     </cache>
@@ -80,12 +51,16 @@
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="~/vegas/vegas.js"></script>
-    <script type="text/javascript" src="~/slick-1.8.1/slick/slick.js" charset="utf-8"></script>
+    @*<script type="text/javascript" src="~/vegas/vegas.js"></script>*@
+    <script src="~/vegas/vegas.min.js"></script>
+    @*<script type="text/javascript" src="~/slick-1.8.1/slick/slick.js" charset="utf-8"></script>*@
+    <script src="~/slick-1.8.1/slick/slick.min.js"></script>
     <script type="text/javascript" src="~/WOW-master/dist/wow.min.js" charset="utf-8"></script>
     @*<script src="~/less.js-master/dist/less.js" data-poll="1000" data-relative-urls="false"></script>*@
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script type="text/javascript" src="~/js/site.js" asp-append-version="true"></script>
+    @*<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>*@
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    @*<script type="text/javascript" src="~/js/site.js" asp-append-version="true"></script>*@
+    <script type="text/javascript" src="~/js/site.min.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

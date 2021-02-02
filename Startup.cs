@@ -102,7 +102,7 @@ namespace figma
             services.AddScoped<IAuthorizationHandler, PoliciesAuthorizationHandler>();
             services.AddScoped<IAuthorizationHandler, RolesAuthorizationHandler>();
             services.AddHttpContextAccessor();
-            //  services.AddDistributedMemoryCache();
+            services.AddDistributedMemoryCache();
 
             services.AddSession(options =>
             {
