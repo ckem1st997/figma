@@ -26,7 +26,7 @@
     @*<link rel="stylesheet" href="~/vegas/vegas.css">*@
     <link href="~/vegas/vegas.min.css" rel="stylesheet" />
     @*<link rel="stylesheet" href="~/slick-1.8.1/slick/slick.css">*@
-    <link href="~/slick-1.8.1/slick/slick.min.css" rel="stylesheet" />
+    @*<link href="~/slick-1.8.1/slick/slick.min.css" rel="stylesheet" />*@
     @*<link rel="stylesheet" href="~/WOW-master/css/libs/animate.css" asp-append-version="true">*@
     <link href="~/WOW-master/css/libs/animate.min.css" rel="stylesheet" asp-append-version="true" />
     <link href="~/css/style.min.css" rel="stylesheet" asp-append-version="true" />
@@ -46,21 +46,22 @@
     <cache>
         @await Component.InvokeAsync("FooterList")
     </cache>
-    <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v9.0&appId=826080674623621&autoLogAppEvents=1" nonce="ZvnuBMGx"></script>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    @*<script type="text/javascript" src="~/vegas/vegas.js"></script>*@
-    <script src="~/vegas/vegas.min.js"></script>
-    @*<script type="text/javascript" src="~/slick-1.8.1/slick/slick.js" charset="utf-8"></script>*@
-    <script src="~/slick-1.8.1/slick/slick.min.js"></script>
-    <script type="text/javascript" src="~/WOW-master/dist/wow.min.js" charset="utf-8"></script>
-    @*<script src="~/less.js-master/dist/less.js" data-poll="1000" data-relative-urls="false"></script>*@
-    @*<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>*@
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
-    @*<script type="text/javascript" src="~/js/site.js" asp-append-version="true"></script>*@
-    <script type="text/javascript" src="~/js/site.min.js" asp-append-version="true"></script>
+    <cache>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v9.0&appId=826080674623621&autoLogAppEvents=1" nonce="ZvnuBMGx"></script>
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        @*<script type="text/javascript" src="~/vegas/vegas.js"></script>*@
+        <script src="~/vegas/vegas.min.js"></script>
+        @*<script type="text/javascript" src="~/slick-1.8.1/slick/slick.js" charset="utf-8"></script>*@
+        @*<script src="~/slick-1.8.1/slick/slick.min.js"></script>*@
+        <script type="text/javascript" src="~/WOW-master/dist/wow.min.js" charset="utf-8"></script>
+        @*<script src="~/less.js-master/dist/less.js" data-poll="1000" data-relative-urls="false"></script>*@
+        @*<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>*@
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+        @*<script type="text/javascript" src="~/js/site.js" asp-append-version="true"></script>*@
+        <script type="text/javascript" src="~/js/site.min.js" asp-append-version="true"></script>
+    </cache>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
