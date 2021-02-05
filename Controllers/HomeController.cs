@@ -42,13 +42,13 @@ namespace figma.Controllers
             _unitOfWork = unitOfWork;
             _mailer = mailer;
             _clientFactory = clientFactory;
-            if (!_httpContextAccessor.HttpContext.Request.Cookies.ContainsKey(CartCookieKey))
+            if (_httpContextAccessor.HttpContext.Request.Cookies[CartCookieKey] == null)
             {
                 _httpContextAccessor.HttpContext.Response.Cookies.Append(CartCookieKey, Guid.NewGuid().ToString(),
                  new CookieOptions()
                  {
-                     SameSite = SameSiteMode.Lax,
-                     Secure = true,
+                     //  SameSite = SameSiteMode.Lax,
+                     // Secure = true,
                      Expires = new DateTimeOffset(DateTime.Now.AddDays(1))
                  });
             }
@@ -430,11 +430,11 @@ namespace figma.Controllers
                              "viewProducts", "" + HttpContext.Request.Cookies.FirstOrDefault(a => a.Key.Contains("viewProducts")).Value + "," + proId + "",
                              new CookieOptions()
                              {
-                                 SameSite = SameSiteMode.Lax,
-                                 Secure = true,
+                                 //SameSite = SameSiteMode.Lax,
+                                 //Secure = true,
                                  Expires = new DateTimeOffset(DateTime.Now.AddDays(1))
                              });
-                ViewBag.view = HttpContext.Request.Cookies.FirstOrDefault(a => a.Key.Contains("viewProducts")).Value;
+                //  ViewBag.view = HttpContext.Request.Cookies.FirstOrDefault(a => a.Key.Contains("viewProducts")).Value;
             }
             catch (Exception)
             {
@@ -442,8 +442,6 @@ namespace figma.Controllers
                              "viewProducts", "" + proId + "",
                              new CookieOptions()
                              {
-                                 SameSite = SameSiteMode.Lax,
-                                 Secure = true,
                                  Expires = new DateTimeOffset(DateTime.Now.AddDays(1))
                              });
             }
@@ -800,3 +798,29 @@ namespace figma.Controllers
         }
     }
 }
+//{
+//  "VNPAY:vnp_Url": "http://sandbox.vnpayment.vn/paymentv2/vpcpay.html",
+//  "VNPAY:vnp_TmnCode": "JAQ4YLZE",
+//  "VNPAY:vnp_Returnurl": "https://localhost:44302/ShoppingCart/ResultATMPay",
+//  "VNPAY:vnp_HashSecret": "AMNIWKSEYHVVGGVAVTAASDVCLVQCBUNU",
+//  "VNPAY:vnpay_api_url": "https://merchant.vnpay.vn/merchant_webapi/merchant.html",
+//  "Smtp:Username": "nguyenkhahop1997@gmail.com",
+//  "Smtp:Server": "smtp.gmail.com",
+//  "Smtp:SenderName": "Nhân viên",
+//  "Smtp:SenderEmail": "shoponline@gmail.com",
+//  "Smtp:Port": "25",
+//  "Smtp:Password": "0977751021",
+//  "Firebase:Bucket": "uploadimage-292509.appspot.com",
+//  "Firebase:AuthPassword": "0977751021",
+//  "Firebase:AuthEmail": "nguyenkhahop1997@gmail.com",
+//  "Firebase:ApiKey": "AIzaSyCeW-W94Wl_tFOaWzjIGOCj-tPPkAhcKtQ",
+//  "ConnectionStrings:ShopProductContext": "Data Source=DESKTOP-ITLR9T6;Initial Catalog=sh3;Integrated Security=True",
+//  "ConnectionStrings:ShopProductContext": "Data Source=localhost;Initial Catalog=sh3;Integrated Security=True",
+//  "ConnectionStrings:ShopProductContext": "Data Source=SQL5102.site4now.net,1433;Initial Catalog=DB_A6EF04_meoh0ang97;User Id=DB_A6EF04_meoh0ang97_admin;Password=Aa0977751021",
+//  "Authentication:Google:ClientSecret": "0dPst1kGqeZauftTQ-va7HrS",
+//  "Authentication:Google:ClientId": "936508163061-721m10k2fer4grtfpp1bkun7greim7fu.apps.googleusercontent.com",
+//  "Authentication:Facebook:AppSecret": "afc462708091d6188c903e76f6b45771",
+//  "Authentication:Facebook:AppId": "826080674623621",
+//  "Kestrel:Certificates:Development:Password": "bbed3394-bd97-4649-81d0-9c672cebbb6e"
+//}
+//Password_01

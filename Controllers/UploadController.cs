@@ -27,6 +27,7 @@ namespace figma.Controllers
             _hostingEnvironment = hostEnvironment;
         }
         [HttpPost]
+        [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> CreateImage(List<IFormFile> filesadd, int width, int height, int? fire)
         {
             string createFolderDate = DateTime.Now.ToString("yyyy/MM/dd");
@@ -53,22 +54,22 @@ namespace figma.Controllers
                             await formFile.CopyToAsync(stream);
                         }
                         Resize(fileNameWithPath, width > 0 ? width : 1200, height > 0 ? height : 900);
-                        FileStream ms;
-                        ms = new FileStream(fileNameWithPath, FileMode.Open);
-                        var auth = new FirebaseAuthProvider(new FirebaseConfig(_firebase.ApiKey));
-                        var a = await auth.SignInWithEmailAndPasswordAsync(_firebase.AuthEmail, _firebase.AuthPassword);
-                        var cancellation = new CancellationTokenSource();
-                        var task = new FirebaseStorage(
-                            _firebase.Bucket,
-                            new FirebaseStorageOptions
-                            {
-                                AuthTokenAsyncFactory = () => Task.FromResult(a.FirebaseToken),
-                                ThrowOnCancel = true
-                            })
-                            .Child($"uploads/" + createFolderDate + "/" + randomname + "")
-                            .PutAsync(ms, cancellation.Token);
+                        //FileStream ms;
+                        //ms = new FileStream(fileNameWithPath, FileMode.Open);
+                        //var auth = new FirebaseAuthProvider(new FirebaseConfig(_firebase.ApiKey));
+                        //var a = await auth.SignInWithEmailAndPasswordAsync(_firebase.AuthEmail, _firebase.AuthPassword);
+                        //var cancellation = new CancellationTokenSource();
+                        //var task = new FirebaseStorage(
+                        //    _firebase.Bucket,
+                        //    new FirebaseStorageOptions
+                        //    {
+                        //        AuthTokenAsyncFactory = () => Task.FromResult(a.FirebaseToken),
+                        //        ThrowOnCancel = true
+                        //    })
+                        //    .Child($"uploads/" + createFolderDate + "/" + randomname + "")
+                        //    .PutAsync(ms, cancellation.Token);
 
-                        task.Progress.ProgressChanged += (s, e) => Console.WriteLine($"Progress: {e.Percentage} %");
+                        //task.Progress.ProgressChanged += (s, e) => Console.WriteLine($"Progress: {e.Percentage} %");
                         // ms.Close();
                         if (sql.Length > 1)
                             sql = "" + sql + ",uploads/" + createFolderDate + "/" + randomname + "";

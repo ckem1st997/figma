@@ -131,18 +131,14 @@ namespace figma
             });
             services.AddRazorPages();
             //
-            services.AddHangfire(configuration => configuration
-        .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
-        .UseSimpleAssemblyNameTypeSerializer()
-        .UseRecommendedSerializerSettings()
-        .UseSqlServerStorage(Configuration.GetConnectionString("ShopProductContext"), new SqlServerStorageOptions
-        {
-            CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
-            SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
-            QueuePollInterval = TimeSpan.Zero,
-            UseRecommendedIsolationLevel = true,
-            DisableGlobalLocks = true
-        }));
+            services.AddHangfire(configuration => configuration.SetDataCompatibilityLevel(CompatibilityLevel.Version_170).UseSimpleAssemblyNameTypeSerializer().UseRecommendedSerializerSettings().UseSqlServerStorage(Configuration.GetConnectionString("ShopProductContext"), new SqlServerStorageOptions
+            {
+                CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+                SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+                QueuePollInterval = TimeSpan.Zero,
+                UseRecommendedIsolationLevel = true,
+                DisableGlobalLocks = true
+            }));
 
             // Add the processing server as IHostedService
             services.AddHangfireServer();
@@ -152,14 +148,19 @@ namespace figma
                 options => { options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme; })
                         .AddFacebook(facebookOptions =>
                         {
-                            facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
-                            facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+                            // facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
+                            // facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+                            facebookOptions.AppId = "826080674623621";
+                            facebookOptions.AppSecret = "afc462708091d6188c903e76f6b45771";
                         })
                 .AddGoogle(options =>
                 {
-                    IConfigurationSection googleAuthNSection = Configuration.GetSection("Authentication:Google");
-                    options.ClientId = googleAuthNSection["ClientId"];
-                    options.ClientSecret = googleAuthNSection["ClientSecret"];
+                    //IConfigurationSection googleAuthNSection = Configuration.GetSection("Authentication:Google");
+                    //options.ClientId = googleAuthNSection["ClientId"];
+                    //options.ClientSecret = googleAuthNSection["ClientSecret"];
+                    //  IConfigurationSection googleAuthNSection = Configuration.GetSection("Authentication:Google");
+                    options.ClientId = "936508163061-721m10k2fer4grtfpp1bkun7greim7fu.apps.googleusercontent.com";
+                    options.ClientSecret = "0dPst1kGqeZauftTQ-va7HrS";
                 });
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IBackgroundJobClient backgroundJobs, ILoggerFactory loggerFactor)
@@ -184,7 +185,7 @@ namespace figma
             ForwardedHeaders.XForwardedProto
             });
             app.UseStaticFiles();
-            app.UseCookiePolicy();
+            //app.UseCookiePolicy();
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();

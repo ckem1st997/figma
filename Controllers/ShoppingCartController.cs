@@ -521,9 +521,6 @@ namespace figma.Controllers
                 _httpContextAccessor.HttpContext.Response.Cookies.Append(CartCookieKey, Guid.NewGuid().ToString(),
                  new CookieOptions()
                  {
-                     SameSite = SameSiteMode.Lax,
-                     Secure = true,
-                     HttpOnly = true,
                      Expires = new DateTimeOffset(DateTime.Now.AddDays(1))
                  });
             }
