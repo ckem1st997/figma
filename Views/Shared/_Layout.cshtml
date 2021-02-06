@@ -36,7 +36,9 @@
 </head>
 <body>
     @await Component.InvokeAsync("HeaderList")
-    @await Component.InvokeAsync("Phone")
+    <cache>
+        @await Component.InvokeAsync("Phone")
+    </cache>
     <div class="container-fluid">
         @*<partial name="_CookieConsentPartial" />*@
         <main role="main" class="pb-3">
@@ -67,7 +69,9 @@
          theme_color="#0084ff"
          logged_in_greeting="Xin chào, chúng tôi có thể giúp gì cho Bạn?" logged_out_greeting="Xin chào, chúng tôi có thể giúp gì cho Bạn?">
     </div>
-    @await Component.InvokeAsync("FooterList")
+    <cache>
+        @await Component.InvokeAsync("FooterList")
+    </cache>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v9.0&appId=826080674623621&autoLogAppEvents=1" nonce="ZvnuBMGx"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
