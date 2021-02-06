@@ -159,8 +159,8 @@ namespace figma
                     //options.ClientId = googleAuthNSection["ClientId"];
                     //options.ClientSecret = googleAuthNSection["ClientSecret"];
                     //  IConfigurationSection googleAuthNSection = Configuration.GetSection("Authentication:Google");
-                    options.ClientId = "936508163061-721m10k2fer4grtfpp1bkun7greim7fu.apps.googleusercontent.com";
-                    options.ClientSecret = "0dPst1kGqeZauftTQ-va7HrS";
+                    options.ClientId = "821325953694-6mvn9mpq71nabcco9qic7g238icd43cm.apps.googleusercontent.com";
+                    options.ClientSecret = "ksRiOpoaf6AR-6fPIah2CTGd";
                 });
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IBackgroundJobClient backgroundJobs, ILoggerFactory loggerFactor)

@@ -3,6 +3,7 @@
 <head xmlns="http://www.w3.org/1999/xhtml" prefix="og:http://ogp.me/ns# fb:http://www.facebook.com/2008/fbml">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-site-verification" content="mw25ISZe98g4UVotHlDB7oTTAN5PYpJP9_HxE3Drlpk" />
     <title>@Html.Raw(ViewData["Title"])</title>
     <meta name="description" content="@Html.Raw(ViewData["Description"])" />
     <meta name="keywords" content="@ViewBag.Keywords" />
@@ -14,7 +15,7 @@
     <meta property="og:description" content="@Html.Raw(ViewData["Description"])">
     <meta property="og:site_name" content="@ViewData["Title"]">
     <meta property="og:image" content="@ViewBag.ImagShare" />
-    <meta name="google-signin-client_id" content="936508163061-721m10k2fer4grtfpp1bkun7greim7fu.apps.googleusercontent.com">
+    <meta name="google-signin-client_id" content="821325953694-6mvn9mpq71nabcco9qic7g238icd43cm.apps.googleusercontent.com">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
@@ -35,36 +36,54 @@
 </head>
 <body>
     @await Component.InvokeAsync("HeaderList")
-    <cache>
-        @await Component.InvokeAsync("Phone")
-    </cache>
+    @await Component.InvokeAsync("Phone")
     <div class="container-fluid">
         @*<partial name="_CookieConsentPartial" />*@
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-    <cache>
-        @await Component.InvokeAsync("FooterList")
-    </cache>
-    <cache>
-        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v9.0&appId=826080674623621&autoLogAppEvents=1" nonce="ZvnuBMGx"></script>
-        <script src="https://apis.google.com/js/platform.js" async defer></script>
-        <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        @*<script type="text/javascript" src="~/vegas/vegas.js"></script>*@
-        @*<script src="~/vegas/vegas.min.js"></script>*@
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/vegas/2.5.1/vegas.min.js"></script>
-        @*<script type="text/javascript" src="~/slick-1.8.1/slick/slick.js" charset="utf-8"></script>*@
-        @*<script src="~/slick-1.8.1/slick/slick.min.js"></script>*@
-        @*<script type="text/javascript" src="~/WOW-master/dist/wow.min.js" charset="utf-8"></script>*@
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" charset="utf-8"></script>
-        @*<script src="~/less.js-master/dist/less.js" data-poll="1000" data-relative-urls="false"></script>*@
-        @*<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>*@
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
-        @*<script type="text/javascript" src="~/js/site.js" asp-append-version="true"></script>*@
-        <script type="text/javascript" src="~/js/site.min.js" asp-append-version="true"></script>
-    </cache>
+    <!-- Load Facebook SDK for JavaScript -->
+    <div id="fb-root"></div>
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                xfbml: true,
+                version: 'v9.0'
+            });
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+
+    <div class="fb-customerchat"
+         attribution="setup_tool"
+         page_id="102071551282329"
+         theme_color="#0084ff"
+         logged_in_greeting="Xin chào, chúng tôi có thể giúp gì cho Bạn?" logged_out_greeting="Xin chào, chúng tôi có thể giúp gì cho Bạn?">
+    </div>
+    @await Component.InvokeAsync("FooterList")
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v9.0&appId=826080674623621&autoLogAppEvents=1" nonce="ZvnuBMGx"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @*<script type="text/javascript" src="~/vegas/vegas.js"></script>*@
+    @*<script src="~/vegas/vegas.min.js"></script>*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vegas/2.5.1/vegas.min.js"></script>
+    @*<script type="text/javascript" src="~/slick-1.8.1/slick/slick.js" charset="utf-8"></script>*@
+    @*<script src="~/slick-1.8.1/slick/slick.min.js"></script>*@
+    @*<script type="text/javascript" src="~/WOW-master/dist/wow.min.js" charset="utf-8"></script>*@
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" charset="utf-8"></script>
+    @*<script src="~/less.js-master/dist/less.js" data-poll="1000" data-relative-urls="false"></script>*@
+    @*<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>*@
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    @*<script type="text/javascript" src="~/js/site.js" asp-append-version="true"></script>*@
+    <script type="text/javascript" src="~/js/site.min.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

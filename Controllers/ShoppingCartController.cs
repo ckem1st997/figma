@@ -255,7 +255,7 @@ namespace figma.Controllers
                 //lấy ra danh sách đơn hàng
                 var item = GetCartItems();
                 // ngày giao hàng
-                model.Order.TransportDate = DateTime.TryParse(model.Order.TransportDate.ToString(), new CultureInfo("Vi"), DateTimeStyles.None, out var tDate) ? tDate : DateTime.Now;
+                model.Order.TransportDate = DateTime.TryParse(model.Order.TransportDate.ToString(), new CultureInfo("vi-VN"), DateTimeStyles.None, out var tDate) ? tDate : DateTime.Now;
                 _unitOfWork.OrderRepository.Insert(model.Order);
                 await _unitOfWork.Save();
                 model.Order.MaDonHang = DateTime.Now.ToString("yyyyMMddHHmm") + "C" + model.Order.Id;
@@ -309,7 +309,7 @@ namespace figma.Controllers
                 sb.Append("<p>Email: <strong>" + model.Order.Email + "</strong></p>");
                 sb.Append("<p>Điện thoại: <strong>" + model.Order.Mobile + "</strong></p>");
                 sb.Append("<p>Yêu cầu thêm: <strong>" + model.Order.Body + "</strong></p>");
-                sb.Append("<p>Ngày đặt hàng: <strong>" + model.Order.CreateDate.ToString("dd-MM-yyyy HH:ss") + "</strong></p>");
+                sb.Append("<p>Ngày đặt hàng: <strong>" + model.Order.CreateDate.ToString("dd-MM-yyyy HH:mm") + "</strong></p>");
                 sb.Append("<p>Ngày giao hàng: <strong>" + model.Order.TransportDate.ToString("dd-MM-yyyy") + "</strong></p>");
                 sb.Append("<p>Hình thức giao hàng: <strong>" + giaohang + "</strong></p>");
                 sb.Append("<p>Hình thức thanh toán: <strong>" + typepay + "</strong></p>");
@@ -330,7 +330,7 @@ namespace figma.Controllers
                     var img = "NO PICTURE";
                     if (odetails.Product.Image != null)
                     {
-                        img = "<img src='https://" + Request.Host.Value + "/" + odetails.Product.Image.Split(',')[0] + "' />";
+                        img = "<img src='http://" + Request.Host.Value + "/" + odetails.Product.Image.Split(',')[0] + "' width='100' height='100' />";
                     }
 
                     sb.Append("<tr>" +

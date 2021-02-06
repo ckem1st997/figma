@@ -7,6 +7,13 @@ $(".product-gallery__thumb a").click(function (e) {
     $("div.vegas-slide-inner").attr("style", "background-image:url('" + $(this).attr('data-image') + "'");
 
 });
+$(".product-gallery__thumb.imagesmallslide").click(function (e) {
+   // console.log(1);
+    $(".product-gallery__thumb.imagesmallslide").removeClass("active");
+    // console.log($(this))
+    $(this).addClass("active")
+
+});
 $(".info .row .col-4").hover(
     function () {
         $(this).toggleClass("animate__animated animate__bounce");

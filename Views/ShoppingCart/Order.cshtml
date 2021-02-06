@@ -80,7 +80,7 @@
                     <label asp-for="Order.TransportDate" class="control-label"></label>
                 </div>
                 <div class="col-sm-9">
-                    <input asp-for="Order.TransportDate" type="datetime" class="datepicker form-control" readonly="readonly" value="@DateTime.Now.ToString("MM/dd/yyyy")" />
+                    <input asp-for="Order.TransportDate" type="datetime" class="datepicker form-control" readonly="readonly" value="@DateTime.Now.ToString("dd/MM/yyyy")" />
                 </div>
             </div>
             <div class="form-group form-row">
