@@ -15,8 +15,11 @@ $(".product-gallery__thumb.imagesmallslide").click(function (e) {
 
 });
 $("a").click(function (e) {
-    $(".spinner").addClass("active");
-
+    // console.log($(this).attr('href'));
+    var href = $(this).attr('href');
+    if (href != undefined)
+        if (href.length > 0 && href.indexOf("/") != -1)
+            $(".spinner").addClass("active");
 });
 $(".info .row .col-4").hover(
     function () {
@@ -151,8 +154,6 @@ $(document).ready(function () {
                 var Color_SP = $("#variant-swatch-0 .select-swap .swatch-element.checked ").attr("data-value");
                 var Size_SP = $("#variant-swatch-1 .select-swap .swatch-element.checked").attr("data-value");
                 AddToCartAjax(Count_SP, id_SP, Color_SP, Size_SP);
-
-
             }
         }
         else {
@@ -172,7 +173,39 @@ $(document).ready(function () {
             // console.log(Size_SP);
             AddToCartAjax(Count_SP, id_SP, Color_SP, Size_SP);
         }
+    });
 
+    //
+    $("#pay-product-late").off("click").click(function () {
+        if ($("#variant-swatch-0 .select-swap .swatch-element").length || $("#variant-swatch-1 .select-swap .swatch-element").length > 0) {
+            if ($("#variant-swatch-0 .select-swap .swatch-element.checked").hasClass("checked") != true && $("#variant-swatch-1 .select-swap .swatch-element.checked").hasClass("checked") != true)
+                alert("Xin bạn vui lòng chọn sản phẩm và size yêu thích nha !");
+            else {
+                var id_SP = $(".id_check_idsp").val();
+                var Price_SP = $(".giaban").html();
+                var Count_SP = $("#quantity").val();
+                var Color_SP = $("#variant-swatch-0 .select-swap .swatch-element.checked ").attr("data-value");
+                var Size_SP = $("#variant-swatch-1 .select-swap .swatch-element.checked").attr("data-value");
+                AddToCartAjax1(Count_SP, id_SP, Color_SP, Size_SP);
+            }
+        }
+        else {
+            var id_SP = $(".id_check_idsp").val();
+            // console.log(id_SP);
+            var Price_SP = $(".giaban").html();
+            // console.log(Price_SP.slice(0, Price_SP.length - 1));
+            var Count_SP = $("#quantity").val();
+            // console.log(Count_SP);
+            var Color_SP = $("#variant-swatch-0 .select-swap .swatch-element.checked ").attr("data-value");
+            if (Color_SP == undefined)
+                Color_SP = ""
+            //console.log(Color_SP);
+            var Size_SP = $("#variant-swatch-1 .select-swap .swatch-element.checked").attr("data-value");
+            if (Size_SP == undefined)
+                Size_SP = ""
+            // console.log(Size_SP);
+            AddToCartAjax1(Count_SP, id_SP, Color_SP, Size_SP);
+        }
     });
 
     $("button#BtnUpdate").click(function () {
@@ -312,6 +345,31 @@ function AddToCartAjax(sl, id, cl, se) {
             //  console.log(res);
             if (res.data.result == 1)
                 alert("Thêm sản phẩm thành công !");
+            else
+                alert("Thêm sản phẩm thất bại, xin bạn vui lòng thử lại nha !");
+        },
+
+        error: function (errormessage) {
+            console.log(errormessage)
+        }
+
+
+    };
+    jQuery.ajax(params);
+}
+//
+function AddToCartAjax1(sl, id, cl, se) {
+    var params = {
+        type: 'POST',
+        url: '/ShoppingCart/AddToCartAjax',
+        data: { quantity: sl, productId: id, color: cl, size: se },
+        dataType: "json",
+        success: function (res) {
+            //  console.log(res);
+            if (res.data.result == 1) {
+                $(".spinner").addClass("active");
+                window.location.assign('/gio-hang/thong-tin')
+            }
             else
                 alert("Thêm sản phẩm thất bại, xin bạn vui lòng thử lại nha !");
         },

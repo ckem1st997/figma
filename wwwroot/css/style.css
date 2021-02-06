@@ -1853,7 +1853,7 @@ p.pro-price span.pro-price-del {
 }
 @media (min-width: 992px) {
   #add-to-cart {
-    width: 71%;
+    width: 57%;
   }
   .list-product {
     position: absolute;
@@ -3118,7 +3118,7 @@ p.order-infor {
   visibility: visible;
 }
 .loader {
-  top: 50%;
+  top: 39%;
   width: 24px;
   height: 80px;
   display: block;
