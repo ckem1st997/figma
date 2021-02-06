@@ -8,10 +8,14 @@ $(".product-gallery__thumb a").click(function (e) {
 
 });
 $(".product-gallery__thumb.imagesmallslide").click(function (e) {
-   // console.log(1);
+    // console.log(1);
     $(".product-gallery__thumb.imagesmallslide").removeClass("active");
     // console.log($(this))
     $(this).addClass("active")
+
+});
+$("a").click(function (e) {
+    $(".spinner").addClass("active");
 
 });
 $(".info .row .col-4").hover(

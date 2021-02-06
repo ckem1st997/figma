@@ -28,15 +28,15 @@ namespace figma.Controllers
         }
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public async Task<IActionResult> CreateImage(List<IFormFile> filesadd, int width, int height, int? fire)
+        public async Task<IActionResult> CreateImage(List<IFormFile> filesadd, int width, int height)
         {
+            if (filesadd == null || filesadd.Count == 0)
+                return Ok(new { imgNode = "Không có hình ảnh được chọn", result = false });
             string createFolderDate = DateTime.Now.ToString("yyyy/MM/dd");
             string path = _hostingEnvironment.WebRootPath + @"\uploads\" + createFolderDate + "";
             CreateFolder(path);
             if (path == null)
                 path = "image";
-            if (filesadd == null || filesadd.Count == 0)
-                return Ok(new { imgNode = "Không có hình ảnh được chọn", result = false });
             var filePaths = new List<string>();
             string sql = "";
             foreach (var formFile in filesadd)
