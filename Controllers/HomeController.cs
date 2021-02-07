@@ -414,7 +414,7 @@ namespace figma.Controllers
         }
         private async Task SendEmailConfrim(string email)
         {
-            string body = "<a href='https://" + Request.Host.Value + "" + UrlConfirmEmail(email) + "' target = '_blank' ><span style = 'color:blue'>Click xác nhận Email</span></a>";
+            string body = "<a href='http://" + Request.Host.Value + "" + UrlConfirmEmail(email) + "' target = '_blank' ><span style = 'color:blue'>Click xác nhận Email</span></a>";
             await _mailer.SendEmailSync(email, "Email xác nhận đăng ký tài khoản từ website ShopAsp.Net", body);
         }
 
@@ -657,26 +657,33 @@ namespace figma.Controllers
                     var users = _unitOfWork.MemberRepository.Get(a => a.Email == user.Username).SingleOrDefault();
                     if (users != null)
                     {
-                        var userClaims = new List<Claim>()
-                {
-                    new Claim("UserName", users.Email),
-                    new Claim("UserId", users.MemberId.ToString()),
-                    new Claim(ClaimTypes.Actor, users.Active.ToString()),
-                    new Claim(ClaimTypes.Role,users.Active?"Users":"Active"),
-                    };
-                        var userIdentity = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme);
-                        var authProperties = new AuthenticationProperties
+                        if (users.ConfirmEmail && users.Active)
                         {
-                            AllowRefresh = true,
-                            IsPersistent = true
+                            var userClaims = new List<Claim>()
+                        {
+                                new Claim("UserName", users.Email),
+                                new Claim("UserId", users.MemberId.ToString()),
+                                new Claim(ClaimTypes.Actor, users.Active.ToString()),
+                                new Claim(ClaimTypes.Role,users.Active?"Users":"Active"),
                         };
-                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(userIdentity), authProperties);
-                        if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
-                           && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
-                        {
-                            return Redirect(returnUrl);
+                            var userIdentity = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme);
+                            var authProperties = new AuthenticationProperties
+                            {
+                                AllowRefresh = true,
+                                IsPersistent = true
+                            };
+                            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(userIdentity), authProperties);
+                            if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
+                               && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
+                            {
+                                return Redirect(returnUrl);
+                            }
+                            return RedirectToAction(nameof(Index));
                         }
-                        return RedirectToAction(nameof(Index));
+                        else if(!users.ConfirmEmail)
+                        {
+                            return RedirectToAction(nameof(SendEmailConfirmation), new { email = users.Email });
+                        }    
                     }
                     else
                     {

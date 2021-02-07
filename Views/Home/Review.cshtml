@@ -75,7 +75,7 @@
                                     <div class="review-detail-latest-content wow animate__fadeInUpBig" data-wow-duration="1s" data-wow-delay="0.5s">
                                         <a style="text-decoration:none" asp-route-blogId=@item.Id asp-route-namearicle=@ViewBag.namearicle asp-route-name=@slugCovert.UrlFriendly(item.Subject) asp-action="Review">
                                             <div class="d-flex justify-content-between">
-                                                <img class="" src="~/@item.Image" />
+                                                <img class="" src="~/@item.Image?quality=80&format=jpg" />
                                                 <div class="">
                                                     <div class="title-main test2 mb-3 ml-2">@item.Subject</div>
                                                     <span class="date-info">@item.CreateDate.Date</span>

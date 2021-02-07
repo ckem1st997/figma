@@ -19,7 +19,7 @@
     </div>
 </div>
 <div class="text-center">
-    <img src="/@ViewBag.category.Image" />
+    <img src="/@ViewBag.category.Image?quality=70&format=jpg" />
 </div>
 <hr />
 <h2>@ViewBag.category.Name</h2>
@@ -60,15 +60,15 @@
                             <div class="product-img">
                                 <a asp-action="Product" asp-route-proId="@item.ProductID" asp-route-name="@Html.Raw(name)" title="@item.Name" class="image-resize" style="height: auto;">
                                     <picture>
-                                        <source media="(max-width: 767px)" srcset="@img1?width=480&height=479&quality=80&format=jpg">
-                                        <source media="(min-width: 768px)" srcset="@img1?width=480&height=480&quality=80&format=jpg">
-                                        <img class="img-loop" alt="@item.Name" src="@img1?width=480&height=480&quality=80&format=jpg" />
+                                        <source media="(max-width: 767px)" srcset="@img1?width=480&height=479&quality=70&format=jpg">
+                                        <source media="(min-width: 768px)" srcset="@img1?width=480&height=479&quality=70&format=jpg">
+                                        <img class="img-loop" alt="@item.Name" src="@img1?width=480&height=479&quality=70&format=jpg" />
                                     </picture>
 
                                     <picture>
-                                        <source media="(max-width: 767px)" srcset="@img2?width=480&height=480&quality=80&format=jpg">
-                                        <source media="(min-width: 768px)" srcset="@img2?width=480&height=480&quality=80&format=jpg">
-                                        <img class="img-loop img-hover" alt="@item.Name" src="@img2?width=480&height=480&quality=80&format=jpg" />
+                                        <source media="(max-width: 767px)" srcset="@img2?width=480&height=479&quality=70&format=jpg">
+                                        <source media="(min-width: 768px)" srcset="@img2?width=480&height=479&quality=70&format=jpg">
+                                        <img class="img-loop img-hover" alt="@item.Name" src="@img2?width=480&height=479&quality=70&format=jpg" />
                                     </picture>
                                 </a>
                             </div>
