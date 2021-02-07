@@ -30,7 +30,7 @@
                             <div class="col-lg-4 col-md-4 col-sm-12 col-12 wow animate__fadeInUpBig mb-5" data-wow-duration="1s" data-wow-delay="0.5s">
                                 <a style="text-decoration:none" asp-route-blogId=@itemlist.Id asp-route-namearicle=@item.Slug asp-route-name=@slugCovert.UrlFriendly(itemlist.Subject) asp-action="Review">
                                     <div class="">
-                                        <img class="mb-3" src="~/@itemlist.Image" />
+                                        <img loading="lazy" class="mb-3" src="~/@itemlist.Image" />
                                         <div class="title-main test2 mb-3 ml-2">@itemlist.Subject</div>
                                         <span class="date-info mt-2">@itemlist.CreateDate.Date</span>
                                     </div>

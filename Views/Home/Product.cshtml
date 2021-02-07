@@ -58,7 +58,7 @@
                             for (int i = 0; i < arrListStr.Length; i++)
                             {
                                 <div class="product-gallery__thumb ">
-                                    <img alt=@Model.Product.Name
+                                    <img loading="lazy" alt=@Model.Product.Name
                                          src="@arrListStr[i]?quality=90&format=jpg"
                                          data-image="@arrListStr[i]?quality=90&format=jpg">
                                 </div>
@@ -74,7 +74,7 @@
                             for (int i = 0; i < arrListStr.Length; i++)
                             {
                                 <div class="product-gallery__thumb ">
-                                    <img alt=@Model.Product.Name
+                                    <img loading="lazy" alt=@Model.Product.Name
                                          src="@arrListStr[i]?quality=90&format=jpg"
                                          data-image="@arrListStr[i]?quality=90&format=jpg">
                                 </div>
@@ -96,7 +96,7 @@
                                     {
                                         <div class="product-gallery__thumb active imagesmallslide">
                                             <a class="product-gallery__thumb-placeholder" href="javascript:void(0);"data-image="@arrListStr[i]?quality=80&format=jpg">
-                                                <img alt=" Áo thun G. fw19 " src="@arrListStr[i]?width=83&height=95&format=jpg" data-image="@arrListStr[i]?quality=80&format=jpg">
+                                                <img loading="lazy" alt=" Áo thun G. fw19 " src="@arrListStr[i]?width=83&height=95&format=jpg" data-image="@arrListStr[i]?quality=80&format=jpg">
                                             </a>
                                         </div>
                                     }
@@ -104,7 +104,7 @@
                                     {
                                         <div class="product-gallery__thumb imagesmallslide">
                                             <a class="product-gallery__thumb-placeholder" href="javascript:void(0);"data-image="@arrListStr[i]?quality=80&format=jpg">
-                                                <img alt=" Áo thun G. fw19 " src="@arrListStr[i]?width=83&height=95&format=jpg" data-image="@arrListStr[i]?quality=80&format=jpg">
+                                                <img loading="lazy" alt=" Áo thun G. fw19 " src="@arrListStr[i]?width=83&height=95&format=jpg" data-image="@arrListStr[i]?quality=80&format=jpg">
                                             </a>
                                         </div>
                                     }
@@ -121,7 +121,7 @@
                                 if (Model.Product.Image != null)
                                 {
                                     string[] arrListStr = Model.Product.Image.Split(',');
-                                    <img class="product-image-feature" src="@arrListStr[0]?quality=90&format=jpg" alt=" Áo thun G. fw19 ">
+                                    <img loading="lazy" class="product-image-feature" src="@arrListStr[0]?quality=90&format=jpg" alt=" Áo thun G. fw19 ">
                                 }
                             }
                         </li>
@@ -216,8 +216,8 @@
                                 <input class="variant-1" id="swatch-1-red" type="radio" name="option2" value="S">
                                 <label class="lbSwatch" for="swatch-1-@item.NameColor"
                                        style="background-color:@item.Code">
-                                    <img alt="sold-out" class="crossed-out" src="/image/soldout.png" asp-append-version="true">
-                                    <img alt="select-pro" class="img-check" src="/image/select-pro.png" asp-append-version="true">
+                                    <img loading="lazy" alt="sold-out" class="crossed-out" src="/image/soldout.png" asp-append-version="true">
+                                    <img loading="lazy" alt="select-pro" class="img-check" src="/image/select-pro.png" asp-append-version="true">
                                 </label>
                             </div>
                         }
@@ -236,8 +236,8 @@
                                 <input class="variant-1" id="swatch-1-@item.SizeProduc" type="radio" name="option2" value="@item.SizeProduc">
                                 <label class="lbSwatch" for="swatch-1-@item.SizeProduc">
                                     @item.SizeProduc
-                                    <img alt="sold-out" class="crossed-out" src="/image/soldout.png" asp-append-version="true">
-                                    <img alt="select-pro" class="img-check" src="/image/select-pro.png" asp-append-version="true">
+                                    <img loading="lazy" alt="sold-out" class="crossed-out" src="/image/soldout.png" asp-append-version="true">
+                                    <img loading="lazy" alt="select-pro" class="img-check" src="/image/select-pro.png" asp-append-version="true">
                                 </label>
                             </div>
                         }
@@ -301,7 +301,7 @@
     <div class="w-100 review-client">
         <div class="review-client-main mt-5">
             <div class="review-client-main-header d-flex">
-                <img src="https://product.hstatic.net/1000253775/product/5f47b66b-adc5-4ead-a1c2-d8241e7e9457_690f190e3e554f6c9f918e9d473ec9e8_master.jpeg" />
+                <img loading="lazy" src="https://product.hstatic.net/1000253775/product/5f47b66b-adc5-4ead-a1c2-d8241e7e9457_690f190e3e554f6c9f918e9d473ec9e8_master.jpeg" />
                 <div class="header-info ml-3">
                     <div class="p-0 mt-2">Nguyễn Minh Trang </div>
                     <div class="review">
@@ -330,7 +330,7 @@
 
         <div class="review-client-main mt-5">
             <div class="review-client-main-header d-flex">
-                <img src="https://product.hstatic.net/1000253775/product/5f47b66b-adc5-4ead-a1c2-d8241e7e9457_690f190e3e554f6c9f918e9d473ec9e8_master.jpeg" />
+                <img loading="lazy" src="https://product.hstatic.net/1000253775/product/5f47b66b-adc5-4ead-a1c2-d8241e7e9457_690f190e3e554f6c9f918e9d473ec9e8_master.jpeg" />
                 <div class="header-info ml-3">
                     <div class="p-0 mt-2">Nguyễn Minh Trang </div>
                     <div class="review">
@@ -377,13 +377,13 @@
                                         <picture>
                                             <source media="(max-width: 767px)" srcset="@img1?width=480&height=479&quality=80&format=jpg">
                                             <source media="(min-width: 768px)" srcset="@img1?width=480&height=479&quality=80&format=jpg">
-                                            <img class="img-loop" alt="@item.Name" src="@img1?width=480&height=479&quality=80&format=jpg" />
+                                            <img loading="lazy" class="img-loop" alt="@item.Name" src="@img1?width=480&height=479&quality=80&format=jpg" />
                                         </picture>
 
                                         <picture>
                                             <source media="(max-width: 767px)" srcset="@img2?width=480&height=479&quality=80&format=jpg">
                                             <source media="(min-width: 768px)" srcset="@img2?width=480&height=479&quality=80&format=jpg">
-                                            <img class="img-loop img-hover" alt="@item.Name" src="@img2?width=480&height=479&quality=80&format=jpg" />
+                                            <img loading="lazy" class="img-loop img-hover" alt="@item.Name" src="@img2?width=480&height=479&quality=80&format=jpg" />
                                         </picture>
                                     </a>
                                 </div>
@@ -469,7 +469,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <img asp-append-version="true" src="https://storage.googleapis.com/cdn.nhanh.vn/store/3676/bn/sb_1597827289_122.jpg" alt="Hướng dẫn chọn size">
+                <img loading="lazy" asp-append-version="true" src="https://storage.googleapis.com/cdn.nhanh.vn/store/3676/bn/sb_1597827289_122.jpg" alt="Hướng dẫn chọn size">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

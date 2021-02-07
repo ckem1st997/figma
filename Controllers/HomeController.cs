@@ -275,7 +275,7 @@ namespace figma.Controllers
             if (user == null)
                 return RedirectToAction("PasswordEmail");
 
-            string body = "<a href='https://" + Request.Host.Value + "/Home/PasswordEmailLink/" + WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(send.email)) + "' target = '_blank' ><span style = 'color:blue'>Click xác nhận Email</span></a>";
+            string body = "<a href='http://" + Request.Host.Value + "/Home/PasswordEmailLink/" + WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(send.email)) + "' target = '_blank' ><span style = 'color:blue'>Click xác nhận Email</span></a>";
             await _mailer.SendEmailSync(send.email, "Email xác nhận lấy lại mật khẩu từ website ShopAsp.Net", body);
             return RedirectToAction("PasswordEmailTwo", new { email = send.email });
 

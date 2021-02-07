@@ -19,7 +19,7 @@
     </div>
 </div>
 <div class="text-center">
-    <img src="/@ViewBag.category.Image?quality=70&format=jpg" />
+    <img loading="lazy" src="/@ViewBag.category.Image?quality=70&format=jpg" />
 </div>
 <hr />
 <h2>@ViewBag.category.Name</h2>
@@ -62,13 +62,13 @@
                                     <picture>
                                         <source media="(max-width: 767px)" srcset="@img1?width=480&height=479&quality=70&format=jpg">
                                         <source media="(min-width: 768px)" srcset="@img1?width=480&height=479&quality=70&format=jpg">
-                                        <img class="img-loop" alt="@item.Name" src="@img1?width=480&height=479&quality=70&format=jpg" />
+                                        <img loading="lazy" class="img-loop" alt="@item.Name" src="@img1?width=480&height=479&quality=70&format=jpg" />
                                     </picture>
 
                                     <picture>
                                         <source media="(max-width: 767px)" srcset="@img2?width=480&height=479&quality=70&format=jpg">
                                         <source media="(min-width: 768px)" srcset="@img2?width=480&height=479&quality=70&format=jpg">
-                                        <img class="img-loop img-hover" alt="@item.Name" src="@img2?width=480&height=479&quality=70&format=jpg" />
+                                        <img loading="lazy" class="img-loop img-hover" alt="@item.Name" src="@img2?width=480&height=479&quality=70&format=jpg" />
                                     </picture>
                                 </a>
                             </div>
