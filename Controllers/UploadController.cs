@@ -51,7 +51,7 @@ namespace figma.Controllers
                     {
                         await formFile.CopyToAsync(stream);
                     }
-                    Resize(fileNameWithPath, width > 0 ? width : 1200, height > 0 ? height : 900);
+                    Resize(fileNameWithPath, width, height);
                     //FileStream ms;
                     //ms = new FileStream(fileNameWithPath, FileMode.Open);
                     //var auth = new FirebaseAuthProvider(new FirebaseConfig(_firebase.ApiKey));
@@ -113,8 +113,11 @@ namespace figma.Controllers
         {
             using (Image<Rgba32> image = (Image<Rgba32>)Image.Load(h))
             {
-                image.Mutate(x => x.Resize(w, he));
-                image.Save(h);
+                if (image.Width > w)
+                {
+                    image.Mutate(x => x.Resize(w, he));
+                    image.Save(h);
+                }
             }
         }
 

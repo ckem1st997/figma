@@ -1030,7 +1030,7 @@ label[for="product-select-option-2"] {
   left: 19px;
   width: 92%;
   height: 92%;
-  background-image: url('../image/Rectangle 214.png');
+  background-image: url('../image/Rectangle 214.png?quality=70&format=jpg');
   background-size: cover;
   z-index: 99;
   display: inline-block;
@@ -2024,7 +2024,7 @@ p.pro-price span.pro-price-del {
 }
 @media (min-width: 1200px) {
   #add-to-cart {
-    width: 76%;
+    width: 72%;
   }
   .review-detail {
     font-size: 18px !important;
