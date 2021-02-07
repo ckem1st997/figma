@@ -115,7 +115,7 @@ namespace figma.Controllers
             {
                 if (image.Width > w)
                 {
-                    image.Mutate(x => x.Resize(w, he));
+                    image.Mutate(x => x.Resize(w, (image.Height/image.Width)*w));
                     image.Save(h);
                 }
             }

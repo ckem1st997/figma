@@ -11,98 +11,98 @@
             @{
                 if (Model.Count() > 0)
                 {
-                    if (ViewBag.view != null)
+                    //if (ViewBag.view != null)
+                    //{
+                    //string[] arrListview = ViewBag.view.Split(',');
+                    //IEnumerable<string> abc = arrListview.GroupBy(a => a).Select(b => b.Key);
+                    //foreach (var lt in abc)
+                    //{
+                    @foreach (var item in Model)
                     {
-                        string[] arrListview = ViewBag.view.Split(',');
-                        IEnumerable<string> abc = arrListview.GroupBy(a => a).Select(b => b.Key);
-                        foreach (var lt in abc)
-                        {
-                            @foreach (var item in Model.Where(a => a.ProductID.ToString().Equals(lt)))
-                            {
-                                string[] arrListStr = item.Image.Split(',');
-                                var name = slugCovert.UrlFriendly(item.Name);
-                                var img1 = arrListStr[0].Contains("https:") ? arrListStr[0] : "/" + arrListStr[0] + "";
-                                var img2 = arrListStr[1].Contains("https:") ? arrListStr[1] : "/" + arrListStr[1] + "";
-                                <div class="col-md-3 col-sm-6 col-6 pro-loop">
-                                    <div class="card-product">
-                                        <div class="product-img">
-                                            <a asp-action="Product" asp-route-proId="@item.ProductID" asp-route-name="@Html.Raw(name)" title="@item.Name" class="image-resize" style="height: auto;">
-                                                <picture>
-                                                    <source media="(max-width: 767px)" srcset="@img1?width=460&height=340&quality=95&format=jpg">
-                                                    <source media="(min-width: 768px)" srcset="@img1?width=460&height=340&quality=95&format=jpg">
-                                                    <img class="img-loop" alt="@item.Name" src="@img1?width=460&height=340&quality=95&format=jpg" />
-                                                </picture>
+                        string[] arrListStr = item.Image.Split(',');
+                        var name = slugCovert.UrlFriendly(item.Name);
+                        var img1 = arrListStr[0].Contains("https:") ? arrListStr[0] : "/" + arrListStr[0] + "";
+                        var img2 = arrListStr[1].Contains("https:") ? arrListStr[1] : "/" + arrListStr[1] + "";
+                        <div class="col-md-3 col-sm-6 col-6 pro-loop">
+                            <div class="card-product">
+                                <div class="product-img">
+                                    <a asp-action="Product" asp-route-proId="@item.ProductID" asp-route-name="@Html.Raw(name)" title="@item.Name" class="image-resize" style="height: auto;">
+                                        <picture>
+                                            <source media="(max-width: 767px)" srcset="@img1?width=460&height=340&quality=95&format=jpg">
+                                            <source media="(min-width: 768px)" srcset="@img1?width=460&height=340&quality=95&format=jpg">
+                                            <img class="img-loop" alt="@item.Name" src="@img1?width=460&height=340&quality=95&format=jpg" />
+                                        </picture>
 
-                                                <picture>
-                                                    <source media="(max-width: 767px)" srcset="@img2?width=460&height=340&quality=95&format=jpg">
-                                                    <source media="(min-width: 768px)" srcset="@img2?width=460&height=340&quality=95&format=jpg">
-                                                    <img class="img-loop img-hover" alt="@item.Name" src="@img2?width=460&height=340&quality=95&format=jpg" />
-                                                </picture>
+                                        <picture>
+                                            <source media="(max-width: 767px)" srcset="@img2?width=460&height=340&quality=95&format=jpg">
+                                            <source media="(min-width: 768px)" srcset="@img2?width=460&height=340&quality=95&format=jpg">
+                                            <img class="img-loop img-hover" alt="@item.Name" src="@img2?width=460&height=340&quality=95&format=jpg" />
+                                        </picture>
+                                    </a>
+                                </div>
+                                @{
+                                    if (item.SaleOff > 0)
+                                    {
+                                        <span class="card-top card-sale">Sale @Math.Ceiling(100 - (item.SaleOff / item.Price) * 100)%</span>
+                                    }
+                                    else if (item.Hot)
+                                    {
+                                        <span class="card-top card-new">NEW</span>
+                                    }
+                                    else if (item.Sort < 5)
+                                    {
+                                        <span class="card-top card-top">TOP</span>
+
+                                    }
+                                }
+
+                                <div class="review">
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                    </svg>
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                    </svg>
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                    </svg>
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                    </svg>
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                    </svg>
+                                </div>
+                                <div class="product-detail clearfix">
+                                    <div class="box-pro-detail">
+                                        <h3 class="pro-name">
+                                            <a href="" title="@item.Name">
+                                                @item.Name
                                             </a>
-                                        </div>
-                                        @{
-                                            if (item.SaleOff > 0)
-                                            {
-                                                <span class="card-top card-sale">Sale @Math.Ceiling(100 - (item.SaleOff / item.Price) * 100)%</span>
-                                            }
-                                            else if (item.Hot)
-                                            {
-                                                <span class="card-top card-new">NEW</span>
-                                            }
-                                            else if (item.Sort < 5)
-                                            {
-                                                <span class="card-top card-top">TOP</span>
+                                        </h3>
+                                        <div class="box-pro-prices">
+                                            <p class="pro-price highlight">
 
-                                            }
-                                        }
+                                                @{
+                                                    if (item.SaleOff > 0)
+                                                    {
+                                                        <span class="giaban">@(item.SaleOff)đ</span>
+                                                        <span class="pro-price-del"><del class="compare-price">@(item.Price)đ</del></span>
 
-                                        <div class="review">
-                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                            </svg>
-                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                            </svg>
-                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                            </svg>
-                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                            </svg>
-                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-star-fill start-review-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                                            </svg>
-                                        </div>
-                                        <div class="product-detail clearfix">
-                                            <div class="box-pro-detail">
-                                                <h3 class="pro-name">
-                                                    <a href="" title="@item.Name">
-                                                        @item.Name
-                                                    </a>
-                                                </h3>
-                                                <div class="box-pro-prices">
-                                                    <p class="pro-price highlight">
-
-                                                        @{
-                                                            if (item.SaleOff > 0)
-                                                            {
-                                                                <span class="giaban">@(item.SaleOff)đ</span>
-                                                                <span class="pro-price-del"><del class="compare-price">@(item.Price)đ</del></span>
-
-                                                            }
-                                                            else
-                                                            {
-                                                                <span class="giaban">@(item.Price)đ</span>
-                                                            }
-                                                        }
-                                                    </p>
-                                                </div>
-                                            </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="giaban">@(item.Price)đ</span>
+                                                    }
+                                                }
+                                            </p>
                                         </div>
                                     </div>
-                                </div>;
-                            }
-                        }
+                                </div>
+                            </div>
+                        </div>
+                        //   }
+                        //  }
                     }
                 }
             }

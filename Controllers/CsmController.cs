@@ -1186,9 +1186,14 @@ namespace figma.Controllers
 
         public void Resize(string h, int w, int he)
         {
-            using Image<Rgba32> image = (Image<Rgba32>)Image.Load(h);
-            image.Mutate(x => x.Resize(w, he));
-            image.Save(h);
+            using (Image<Rgba32> image = (Image<Rgba32>)Image.Load(h))
+            {
+                if (image.Width > w)
+                {
+                    image.Mutate(x => x.Resize(w, (image.Height / image.Width) * w));
+                    image.Save(h);
+                }
+            }
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
