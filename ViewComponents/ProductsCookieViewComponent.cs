@@ -24,7 +24,7 @@ namespace figma.ViewComponents
             try
             {
                 var listId = HttpContext.Request.Cookies.FirstOrDefault(a => a.Key.Contains("viewProducts")).Value.Split(',');
-                for (int i = 0; i < listId.Length; i++)
+                for (int i = listId.Length - 1; i >= (listId.Length - 10 >= 0 ? listId.Length - 10 : 0); i--)
                 {
                     if (listId[i].Length > 0)
                         viewProductsCookieView.Add(_unitOfWork.ProductRepository.GetByID(int.Parse(listId[i])));
