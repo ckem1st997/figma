@@ -22,5 +22,11 @@
     "inputFiles": [
       "wwwroot/WOW-master/css/libs/animate.css"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/css/style-account.min.css",
+    "inputFiles": [
+      "wwwroot/css/style-account.css"
+    ]
   }
 ]

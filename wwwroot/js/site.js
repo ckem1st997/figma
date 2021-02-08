@@ -1,4 +1,17 @@
 ﻿
+$(".slect_city").change(function (e) {
+    postData('/api/gethuyen/' + $(".slect_city").val() + '')
+        .then(data => {
+            console.log(data); // JSON data parsed by `data.json()` call
+            // console.log(data.LtsItem); // JSON data parsed by `data.json()` call
+            $(".slect_district option").remove();
+            for (var i = 0; i < data.length; i++) {
+                $(".slect_district").append("<option value=" + data[i].ID + ">" + data[i].Title + "</option>");
+            }
+        });
+});
+
+
 $(".product-gallery__thumb a").click(function (e) {
     e.preventDefault();
     $(".product-thumb").removeClass('checked');
