@@ -618,7 +618,7 @@ namespace figma.Controllers
                 {
                     ViewBag.name = userName;
                     ViewBag.id = userId;
-                    ViewBag.social = claims.FirstOrDefault(c => c.Type == "Social").Value;
+                    // ViewBag.social = claims.FirstOrDefault(c => c.Type == "Social").Value;
                     var result = _unitOfWork.MemberRepository.Get(a => a.MemberId == int.Parse(userId) && a.Email == userName);
                     if (result != null)
                         return View(result);
@@ -680,10 +680,10 @@ namespace figma.Controllers
                             }
                             return RedirectToAction(nameof(Index));
                         }
-                        else if(!users.ConfirmEmail)
+                        else if (!users.ConfirmEmail)
                         {
                             return RedirectToAction(nameof(SendEmailConfirmation), new { email = users.Email });
-                        }    
+                        }
                     }
                     else
                     {

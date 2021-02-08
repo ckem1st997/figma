@@ -1,9 +1,14 @@
-﻿
+﻿$(".list-unstyled li a").click(function (e) {
+    $(".list-unstyled li a").removeClass("active");
+    $(".list-unstyled li a").attr('aria-selected', false);
+    $(".list-unstyled li ").removeClass("current");
+    // console.log($(this).parent());
+    $(this).parent().addClass("current");
+    //$(this).attr('aria-selected', true);
+});
 $(".slect_city").change(function (e) {
     postData('/api/gethuyen/' + $(".slect_city").val() + '')
         .then(data => {
-            console.log(data); // JSON data parsed by `data.json()` call
-            // console.log(data.LtsItem); // JSON data parsed by `data.json()` call
             $(".slect_district option").remove();
             for (var i = 0; i < data.length; i++) {
                 $(".slect_district").append("<option value=" + data[i].ID + ">" + data[i].Title + "</option>");

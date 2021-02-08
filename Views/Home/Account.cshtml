@@ -117,7 +117,7 @@ else
                         <div class="content_account">
                             <h2 class="name_account">Một Hai Ba</h2>
                             <p>
-                                hopxc1997@gmail.com
+                             email
                             </p>
                         </div>
 
@@ -125,9 +125,10 @@ else
 
                     <div class="AccountContent">
                         <div class="AccountList">
-                            <ul class="list-unstyled">
+                            <ul class="list-unstyled nav-pills" id="pills-tab" role="tablist">
                                 <li class="current">
-                                    <a href="/account?view=account_info.smb">
+                                    <a class="active" id="pills-home-tab" data-toggle="pill"
+                                       href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">
                                         <span>
                                             <i class="fas fa-user"></i>
                                         </span>
@@ -135,11 +136,12 @@ else
                                             Hồ sơ của tôi
                                         </span>
                                     </a>
-
                                 </li>
 
                                 <li>
-                                    <a href="/account/?view=order.smb">
+                                    <a id="pills-profile-dh"
+                                       data-toggle="pill" href="#pills-dh" role="tab" aria-controls="pills-dh"
+                                       aria-selected="false">
                                         <span>
                                             <i class="fas fa-file-invoice"></i>
                                         </span>
@@ -147,65 +149,64 @@ else
                                             Đơn hàng của tôi
                                         </span>
                                     </a>
-                                </li>
-
+                                </li>                            
                                 <li>
-                                    <a href="/account?view=addresses.smb">
-                                        <span> <i class="fas fa-map-marker-alt"></i></span>
-                                        <span> Sổ địa chỉ</span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="/account/?view=membership.smb">
+                                    <a id="pills-profile-tab"
+                                       data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile"
+                                       aria-selected="false">
                                         <span> <i class="fas fa-crown"></i></span>
                                         <span>  Hạng thành viên</span>
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a href="/account/?view=quests.smb">
-                                        <span>  <i class="fas fa-bars"></i></span>
-                                        <span>  Nhiệm vụ của tôi</span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="/account/?view=vouchers.smb">
+                                    <a id="pills-profile-vc"
+                                       data-toggle="pill" href="#pills-vc" role="tab" aria-controls="pills-vc"
+                                       aria-selected="false">
                                         <span> <i class="fas fa-tags"></i></span>
                                         <span> Vouchers</span>
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a href="/account/?view=reviews.smb">
+                                    <a id="pills-profile-nc"
+                                       data-toggle="pill" href="#pills-nc" role="tab" aria-controls="pills-nx"
+                                       aria-selected="false">
                                         <span><i class="fas fa-lock"></i></span>
                                         <span> Nhận xét của tôi</span>
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a href="/account/?view=wishlist.smb">
+                                    <a id="pills-profile-like"
+                                       data-toggle="pill" href="#pills-like" role="tab" aria-controls="pills-like"
+                                       aria-selected="false">
                                         <span><i class="fas fa-heart"></i></span>
                                         <span>Sản phẩm yêu thích</span>
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a href="/account/?view=notification.smb">
+                                    <a id="pills-profile-tb"
+                                       data-toggle="pill" href="#pills-tb" role="tab" aria-controls="pills-tb"
+                                       aria-selected="false">
                                         <span><i class="fas fa-bell"></i></span>
                                         <span> Thông báo của tôi</span>
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a href="/account/?view=reset_password.smb">
+                                    <a id="pills-profile-mk"
+                                       data-toggle="pill" href="#pills-mk" role="tab" aria-controls="pills-mk"
+                                       aria-selected="false">
                                         <span><i class="fas fa-lock"></i></span>
                                         <span>Đổi mật khẩu</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/account/?view=kiem_tra_don_hang.smb">
+                                    <a id="pills-profile-kt"
+                                       data-toggle="pill" href="#pills-kt" role="tab" aria-controls="pills-kt"
+                                       aria-selected="false">
                                         <span><i class="fas fa-file-invoice"></i></span>
                                         <span>Kiểm tra đơn hàng</span>
                                     </a>
@@ -216,16 +217,12 @@ else
                     </div>
                 </div>
             </div>
-            <div class="grid__item_smb grid__item_smb_75">
-                <div class="accounts">
+            <div class="grid__item_smb grid__item_smb_75 tab-content" id="pills-tabContent">
+                <div class="accounts tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                     <div class="accounts_title">
                         <h2>
                             Hồ sơ của tôi
                         </h2>
-                        <p class="update_info_err">
-                            *	Cập nhật thông tin lỗi, vui lòng thử lại
-                        </p>
-                        <p class="data_error">* Có lỗi vui lòng thử lại, hoặc đăng nhập lại</p>
                     </div>
                     <div class="accounts_main">
                         <div class="account">
@@ -348,6 +345,175 @@ else
                                 </div>
                             </div>
                         </div>
+
+                    </div>
+                </div>
+                <div class="row style_add tab-pane fade" id="pills-dh" role="tabpanel" aria-labelledby="pills-profile-dh">
+                    <div class="title_address">
+                        <h3>
+                            Đơn hàng của tôi
+                        </h3>
+                    </div>
+                    <div class="col-xs-12 customer-table-wrap" id="customer_orders">
+                        <div class="customer_order customer-table-bg">
+
+                            <p>Bạn chưa đặt mua sản phẩm</p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row style_add tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" style="overflow: auto;">
+                    <div class="title_address">
+                        <h3>
+                            Hạng thành viên
+                        </h3>
+                    </div>
+                    <div id="customer_membership">
+                        <div class="customer_membership grid" style="border-bottom: 1px solid #ccc;margin-left: 0;">
+                            <div class="grid__item large--two-fifths medium--two-fifths text-center left_cus pd-left0">
+                                <div class="customer_member_rank_img">
+
+                                </div>
+                            </div>
+                            <div class="grid__item large--three-fifths medium--three-fifths right_cus">
+                                <div class="title_member">
+                                    <h3>
+                                        Tích lũy chi tiêu hiện tại
+                                    </h3>
+                                    <div class="totalSpent">
+
+                                    </div>
+
+                                    <div class="member_rank_title">
+
+                                        <p>Bạn chưa có hạng thành viên</p>
+                                    </div>
+                                    <div id="title_upRank">
+
+                                    </div>
+                                    <div id="progress-bar">
+                                        <div id="progress"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table_member" style="margin-top: 30px;overflow: auto;">
+                        <div class="table_member1">
+                            <table id="member_ship">
+                                <tbody>
+                                    <tr id="tr_title1" style="text-transform: uppercase;">
+                                        <th style="width: 270px;height: 100px;">Quyền Lợi</th>
+
+                                        <th><img src="https://file.hstatic.net/1000253775/file/member_210773cf30a84de1b0eeffe5895a173c.png" alt="MEMBER"><br>MEMBER</th>
+                                        <th><img src="https://file.hstatic.net/1000253775/file/silver_78ae351a93804671b87a21c6fae2a695.png" alt="SILVER"><br>SILVER</th>
+                                        <th><img src="https://file.hstatic.net/1000253775/file/gold_c2ca9ca998dc474cbd520bb3720eb96a.png" alt="GOLD"><br>GOLD</th>
+                                        <th><img src="https://file.hstatic.net/1000253775/file/diamond_0f1184b3b01648a3982b349be356b17c.png" alt="DIAMOND"><br>DIAMOND</th>
+                                    </tr>
+                                    <tr id="tr_title2">
+                                        <td style="height: 90px;">Tích lũy chi tiêu</td>
+                                        <td style="white-space: nowrap;">0₫ - 4,000,000₫</td>
+                                        <td style="white-space: nowrap;">4,000,001₫ - 12,000,000₫</td>
+                                        <td style="white-space: nowrap;">12,000,001₫ - 30,000,000₫</td>
+                                        <td style="white-space: nowrap;">30,000,001₫ - 999,999,999₫</td>
+                                    </tr>
+                                    <tr id="tr_title3">
+                                        <td style="height: 90px;">Ưu đãi thành viên</td>
+
+                                        <td>là thành viên</td>
+                                        <td>GIảm 5% tổng đơn</td>
+                                        <td>Giảm 10% tổng đơn</td>
+                                        <td>GIảm tổng đơn 15%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="accounts VOUCHERS tab-pane fade" id="pills-vc" role="tabpanel" aria-labelledby="pills-profile-vc">
+                    <div class="accounts_title">
+                        <h2>
+                            Vouchers của tôi
+                        </h2>
+                    </div>
+                    <p class="data_error">* Có lỗi vui lòng thử lại, hoặc đăng nhập lại</p>
+                    <div class="vouchers_main">
+                        <div class="image_loading" style="display: none;">
+                            <img src="https://file.hstatic.net/1000187248/file/spinner_6dbec68bd28a42718f17704bf42d58e7.gif" alt="image loading">
+                        </div>
+                        <div class="voucher">
+                            <p class="data_empty" style="display: block;">Hiện tại bạn chưa có Mã Voucher nào</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accounts fa-comment tab-pane fade" id="pills-nx" role="tabpanel" aria-labelledby="pills-profile-nx">
+                    <div class="accounts_title">
+                        <h2>
+                            Nhận xét của tôi
+                        </h2>
+                    </div>
+                    <div class="accounts_main">
+                        <div class="image_loading" style="display: none;">
+                            <img src="https://file.hstatic.net/1000187248/file/spinner_6dbec68bd28a42718f17704bf42d58e7.gif" alt="image loading">
+                        </div>
+                        <div class="account">
+                            <p class="data_empty" style="display: block;">Hiện tại bạn chưa có nhận xét nào</p>
+                            <div class="account_append">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="accounts account_wishlist tab-pane fade" id="pills-like" role="tabpanel" aria-labelledby="pills-profile-like">
+                    <div class="accounts_title">
+                        <h2>
+                            Sản phẩm yêu thích
+                        </h2>
+                    </div>
+                    <div class="accounts_main ">
+                        <p class="data_error">* Có lỗi vui lòng thử lại, hoặc đăng nhập lại</p>
+                        <div class="image_loading" style="display: none;">
+                            <img src="https://file.hstatic.net/1000187248/file/spinner_6dbec68bd28a42718f17704bf42d58e7.gif" alt="image loading">
+                        </div>
+                        <div class="wishlist">
+                            <p class="data_empty" style="display: block;">Hiện tại bạn chưa có sản phẩm yêu thích nào</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accounts tab-pane fade" id="pills-mk" role="tabpanel" aria-labelledby="pills-profile-mk">
+                    <div class="accounts_title">
+                        <h2>
+                            Đổi mật khẩu
+                        </h2>
+                        <p class="update_info_err">
+                            *	Gửi Email lỗi, vui lòng thử lại
+                        </p>
+                        <p class="data_error" style="color: rgb(0, 0, 255); display: none;">Hướng dẫn đổi mật khẩu đã được gửi đến Email của bạn vui lòng kiểm tra</p>
+                    </div>
+
+                    <div class="reset_pass_main">
+                        <div class="reset_pas">
+
+                            <div class="reset_pas_col">
+                                <div class="reset_pas_col_main">
+                                    <label>Nhập email của bạn</label>
+                                    <span class="reset_pas_new" style="display: none;"></span>
+                                    <input id="email" type="email" name="pass" placeholder="Nhập email của bạn">
+                                </div>
+                            </div>
+
+                            <div class="reset_pas_col">
+                                <div class="reset_pas_col_main">
+                                    <button id="reset_pass" type="submit" class="">
+                                        <img src="https://file.hstatic.net/1000187248/file/spinner_6dbec68bd28a42718f17704bf42d58e7.gif" alt="image loading">
+                                        <span>Gửi</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -356,6 +522,7 @@ else
 </section>
 
 <script>
+
     // Example POST method implementation:
     async function postData(url = '') {
         // Default options are marked with *
@@ -377,16 +544,12 @@ else
 
     postData('/api')
         .then(data => {
-            //  console.log(data); // JSON data parsed by `data.json()` call
-            //  console.log(data.LtsItem); // JSON data parsed by `data.json()` call
             for (var i = 0; i < data.LtsItem.length; i++) {
                 $(".slect_city").append("<option value=" + data.LtsItem[i].ID + ">" + data.LtsItem[i].Title + "</option>");
             }
         });
     postData('/api/gethuyen/1')
         .then(data => {
-            console.log(data); // JSON data parsed by `data.json()` call
-            // console.log(data.LtsItem); // JSON data parsed by `data.json()` call
             for (var i = 0; i < data.length; i++) {
                 $(".slect_district").append("<option value=" + data[i].ID + ">" + data[i].Title + "</option>");
             }
