@@ -1,0 +1,512 @@
+2021-02-08 16:15:54,568 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735256435652.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:15:54,588 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734932870348.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:15:54,597 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734935739906.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:15:54,601 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/06/132438363539334740.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:15:54,602 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734556263309.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:15:54,604 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/06/132438363534870618.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:15:54,605 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734559207086.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:15:57,237  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:15:57,237  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:15:57,238  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:15:57,238  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:15:57,338  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 100.3722ms - OK
+ 2021-02-08 16:15:57,339  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 100.9578ms - OK
+ 2021-02-08 16:15:57,359  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 121.6994ms - OK
+ 2021-02-08 16:15:57,359  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 122.2009ms - OK
+ 2021-02-08 16:16:30,793  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:9068:60f7629f successfully announced in 220.0202 ms
+ 2021-02-08 16:16:30,812  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:9068:60f7629f is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-02-08 16:16:30,825  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:9068:60f7629f all the dispatchers started
+ 2021-02-08 16:16:30,999  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:21199
+ 2021-02-08 16:16:31,004  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-02-08 16:16:31,004  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-02-08 16:16:31,004  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 2021-02-08 16:16:32,372  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:16:32,373  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:16:32,391  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:16:32,391  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:16:32,798  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 400.1862ms - OK
+ 2021-02-08 16:16:32,800  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 409.414ms - OK
+ 2021-02-08 16:16:32,829  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 455.9759ms - OK
+ 2021-02-08 16:16:32,829  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 463.2813ms - OK
+ 2021-02-08 16:17:59,738  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:13000:2dd9020b successfully announced in 221.9047 ms
+ 2021-02-08 16:17:59,763  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:13000:2dd9020b is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-02-08 16:17:59,853  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:13000:2dd9020b all the dispatchers started
+ 2021-02-08 16:17:59,971  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:46366
+ 2021-02-08 16:17:59,974  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-02-08 16:17:59,975  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-02-08 16:17:59,975  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 2021-02-08 16:18:03,792 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736708922105.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:18:03,808 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736705873514.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:18:03,853 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736366333089.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:18:03,855 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736369311489.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:18:03,878 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735954234595.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:18:03,879 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735951790896.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:18:03,889 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734559207086.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:18:03,891 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734932870348.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:18:03,891 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/06/132438363534870618.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:18:03,896 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735253593281.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:18:03,901 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735563298472.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:18:03,937 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734556263309.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:18:03,941 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735256435652.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:18:03,942 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734935739906.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:18:03,957 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735566364804.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:18:04,155 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/06/132438363539334740.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:18:09,727  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:18:09,728  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:18:09,745  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:18:09,745  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:18:10,204  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 470.2269ms - OK
+ 2021-02-08 16:18:10,206  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 485.5849ms - OK
+ 2021-02-08 16:18:10,239  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 493.4425ms - OK
+ 2021-02-08 16:18:10,239  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 494.3023ms - OK
+ 2021-02-08 16:19:30,012  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:19:30,012  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:19:30,015  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:19:30,015  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:19:30,133  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 120.6828ms - OK
+ 2021-02-08 16:19:30,134  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 122.1516ms - OK
+ 2021-02-08 16:19:30,150  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 135.409ms - OK
+ 2021-02-08 16:19:30,152  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 136.651ms - OK
+ 2021-02-08 16:21:06,016  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:24258
+ 2021-02-08 16:21:06,139  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-02-08 16:21:06,203  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-02-08 16:21:06,296  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 2021-02-08 16:21:10,331 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736705873514.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:21:10,331 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736708922105.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:21:10,380 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736366333089.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:21:10,794 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735951790896.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:21:10,888 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736369311489.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:21:10,967 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735954234595.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:21:11,092 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735563298472.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:21:11,107 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735253593281.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:21:11,300 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735566364804.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:21:11,300 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735256435652.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:21:11,428 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734932870348.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:21:11,608 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734935739906.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:21:11,656 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734559207086.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:21:11,608 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734556263309.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:21:11,840 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/06/132438363534870618.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:21:11,872 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/06/132438363539334740.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:21:12,014 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/06/132438363534870618.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:21:12,059 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/06/132438363539334740.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:21:12,202 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736705873514.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:21:12,247 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736708922105.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:21:12,369 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734556263309.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:21:12,463 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734559207086.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:21:12,555 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735954234595.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:21:12,557 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735951790896.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:21:12,729 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734932870348.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:21:12,777 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734935739906.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:21:12,871 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735253593281.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:21:12,935 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735256435652.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:21:13,061 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735566364804.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:21:13,093 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735563298472.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:21:13,201 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736366333089.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:21:13,296 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736369311489.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:22:44,519  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:2420:26c1c90c successfully announced in 193.3124 ms
+ 2021-02-08 16:22:44,536  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:2420:26c1c90c is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-02-08 16:22:44,544  INFO Hangfire.Server.ServerWatchdog.? [?] - MESSAGE: 2 servers were removed due to timeout
+ 2021-02-08 16:22:44,549  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:2420:26c1c90c all the dispatchers started
+ 2021-02-08 16:22:44,714 FATAL Microsoft.AspNetCore.Server.Kestrel.? [?] - MESSAGE: Unable to start Kestrel.
+ System.Net.Sockets.SocketException (10013): An attempt was made to access a socket in a way forbidden by its access permissions.
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServer.<>c__DisplayClass21_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions.BindAsync(AddressBindContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindAsync(IServerAddressesFeature addresses, KestrelServerOptions serverOptions, ILogger logger, Func`2 createBinding)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServer.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+2021-02-08 16:22:44,721  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:2420:26c1c90c caught stopping signal...
+ 2021-02-08 16:22:44,725  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:2420:26c1c90c caught stopped signal...
+ 2021-02-08 16:22:45,783  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:2420:26c1c90c All dispatchers stopped
+ 2021-02-08 16:22:45,791  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:2420:26c1c90c successfully reported itself as stopped in 5.2626 ms
+ 2021-02-08 16:22:45,791  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:2420:26c1c90c has been stopped in total 1066.5286 ms
+ 2021-02-08 16:23:01,372  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:256:f5dffcfd successfully announced in 151.1601 ms
+ 2021-02-08 16:23:01,385  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:256:f5dffcfd is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-02-08 16:23:01,394  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:256:f5dffcfd all the dispatchers started
+ 2021-02-08 16:23:01,517  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:12401
+ 2021-02-08 16:23:01,520  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-02-08 16:23:01,520  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-02-08 16:23:01,520  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 2021-02-08 16:23:03,331 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736366333089.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:23:03,331 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736369311489.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:23:03,331 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735563298472.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:23:03,333 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736708922105.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:23:03,335 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735954234595.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:23:03,336 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735951790896.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:23:03,342 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736705873514.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:23:03,345 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734556263309.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:23:03,346 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735253593281.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:23:03,355 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734559207086.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:23:03,355 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/06/132438363534870618.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:23:03,369 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735566364804.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:23:03,372 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/06/132438363539334740.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:23:03,373 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734935739906.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:23:03,381 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735256435652.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:23:03,383 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734932870348.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:23:16,172  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:23:16,173  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:23:16,188  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:23:16,188  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:23:16,705  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 525.4697ms - OK
+ 2021-02-08 16:23:16,705  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 510.1881ms - OK
+ 2021-02-08 16:23:16,706  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 518.1628ms - OK
+ 2021-02-08 16:23:16,706  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 538.3421ms - OK
+ 2021-02-08 16:23:47,923  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:23:47,926  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:23:47,934  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:23:47,936  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:23:48,100  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 164.3687ms - OK
+ 2021-02-08 16:23:48,101  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 166.6855ms - OK
+ 2021-02-08 16:23:48,239  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 313.1177ms - OK
+ 2021-02-08 16:23:48,239  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 316.5467ms - OK
+ 2021-02-08 16:23:55,810 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736705873514.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:23:55,816 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736708922105.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:23:55,822 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736366333089.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:23:55,825 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735951790896.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:23:55,827 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736369311489.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:23:55,838 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735563298472.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:23:55,850 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735954234595.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:23:55,858 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735566364804.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:23:55,858 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735253593281.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:23:55,868 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735256435652.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:23:55,870 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734932870348.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:23:55,875 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734559207086.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:23:55,881 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734556263309.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:23:55,885 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/06/132438363539334740.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:23:55,886 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734935739906.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:23:55,891 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/06/132438363534870618.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:24:06,984 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/06/132438363534870618.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:24:06,985 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/06/132438363539334740.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:24:06,985 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736705873514.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:24:07,000 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736708922105.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:24:07,001 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734556263309.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:24:07,001 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735951790896.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:24:07,003 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734559207086.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:24:07,005 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735954234595.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:24:07,006 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734932870348.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:24:07,017 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735256435652.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:24:07,017 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735253593281.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:24:07,017 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734935739906.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:24:07,018 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735563298472.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:24:07,023 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736366333089.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:24:07,024 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735566364804.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:24:07,030 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736369311489.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:24:21,812  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:24:21,812  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:24:21,819  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:24:21,821  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:24:21,949  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 136.1138ms - OK
+ 2021-02-08 16:24:21,949  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 137.4238ms - OK
+ 2021-02-08 16:24:21,962  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 141.3822ms - OK
+ 2021-02-08 16:24:21,962  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 144.0587ms - OK
+ 2021-02-08 16:27:16,036  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:13812:433ad3b4 successfully announced in 197.5962 ms
+ 2021-02-08 16:27:16,056  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:13812:433ad3b4 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-02-08 16:27:16,065  INFO Hangfire.Server.ServerWatchdog.? [?] - MESSAGE: 2 servers were removed due to timeout
+ 2021-02-08 16:27:16,086  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:13812:433ad3b4 all the dispatchers started
+ 2021-02-08 16:27:16,193  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:25942
+ 2021-02-08 16:27:16,197  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-02-08 16:27:16,198  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-02-08 16:27:16,198  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 2021-02-08 16:27:17,723  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:27:17,724  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:27:17,749  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:27:17,749  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:27:18,171  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 440.7152ms - OK
+ 2021-02-08 16:27:18,172  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 459.9401ms - OK
+ 2021-02-08 16:27:18,190  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 440.7992ms - OK
+ 2021-02-08 16:27:18,190  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 441.5607ms - OK
+ 2021-02-08 16:28:55,167 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735566364804.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:28:55,167 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736366333089.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:28:55,169 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735951790896.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:28:55,170 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735563298472.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:28:55,171 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735253593281.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:28:55,171 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736369311489.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:28:55,171 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735256435652.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:28:55,172 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734556263309.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:28:55,172 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734559207086.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:28:55,174 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735954234595.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:28:55,174 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734932870348.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:28:55,174 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/06/132438363534870618.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:28:55,175 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736708922105.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:28:55,175 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734935739906.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:28:55,176 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736705873514.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:28:55,176 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/06/132438363539334740.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:29:04,380 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734556263309.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:29:04,381 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734559207086.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:29:04,385 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735951790896.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:29:04,393 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735954234595.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:29:04,394 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734932870348.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:29:04,399 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734935739906.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:29:04,400 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735253593281.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:29:04,404 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735256435652.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:29:04,405 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735563298472.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:29:04,407 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735566364804.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:29:04,420 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736366333089.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:29:04,420 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736369311489.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:29:04,420 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/06/132438363534870618.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:29:04,421 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736705873514.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:29:04,428 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736708922105.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:29:04,431 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/06/132438363539334740.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:29:08,561  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:29:08,564  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:29:08,564  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:29:08,564  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:29:08,756  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 191.2091ms - OK
+ 2021-02-08 16:29:08,758  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 193.2919ms - OK
+ 2021-02-08 16:29:08,758  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 194.5284ms - OK
+ 2021-02-08 16:29:08,759  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 199.8143ms - OK
+ 2021-02-08 16:32:22,332  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:336:802dfe2a successfully announced in 168.8247 ms
+ 2021-02-08 16:32:22,346  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:336:802dfe2a is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-02-08 16:32:22,354  INFO Hangfire.Server.ServerWatchdog.? [?] - MESSAGE: 1 servers were removed due to timeout
+ 2021-02-08 16:32:22,360  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:336:802dfe2a all the dispatchers started
+ 2021-02-08 16:32:22,485  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:39266
+ 2021-02-08 16:32:22,487  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-02-08 16:32:22,487  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-02-08 16:32:22,487  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 2021-02-08 16:32:23,659  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:32:23,660  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:32:23,679  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:32:23,680  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:32:25,185  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 1522.4635ms - OK
+ 2021-02-08 16:32:25,186  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 1534.2791ms - OK
+ 2021-02-08 16:32:25,198  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 1517.7286ms - OK
+ 2021-02-08 16:32:25,198  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 1519.3112ms - OK
+ 2021-02-08 16:34:02,610  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:7848:8605f913 successfully announced in 226.1379 ms
+ 2021-02-08 16:34:02,634  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:7848:8605f913 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-02-08 16:34:02,669  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:7848:8605f913 all the dispatchers started
+ 2021-02-08 16:34:02,798  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:23723
+ 2021-02-08 16:34:02,799  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-02-08 16:34:02,800  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-02-08 16:34:02,800  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 2021-02-08 16:34:04,170  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:34:04,171  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:34:04,199  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:34:04,199  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:34:04,762  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 556.8867ms - OK
+ 2021-02-08 16:34:04,764  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 565.3458ms - OK
+ 2021-02-08 16:34:04,799  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 628.5651ms - OK
+ 2021-02-08 16:34:04,800  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 634.9277ms - OK
+ 2021-02-08 16:37:35,808  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:37:35,808  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:37:35,815  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:37:35,815  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:37:36,120  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 304.5105ms - OK
+ 2021-02-08 16:37:36,120  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 305.5269ms - OK
+ 2021-02-08 16:37:36,150  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 341.3488ms - OK
+ 2021-02-08 16:37:36,150  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 342.9066ms - OK
+ 2021-02-08 16:39:02,659  INFO Hangfire.Server.ServerWatchdog.? [?] - MESSAGE: 2 servers were removed due to timeout
+ 2021-02-08 16:39:06,625  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:39:06,626  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:39:06,627  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:39:06,628  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:39:06,754  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 128.1089ms - OK
+ 2021-02-08 16:39:06,755  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 130.1792ms - OK
+ 2021-02-08 16:39:06,794  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 166.0472ms - OK
+ 2021-02-08 16:39:06,794  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 166.8876ms - OK
+ 2021-02-08 16:41:21,057  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:11504:d047a433 successfully announced in 170.0959 ms
+ 2021-02-08 16:41:21,073  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:11504:d047a433 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-02-08 16:41:21,084  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:11504:d047a433 all the dispatchers started
+ 2021-02-08 16:41:21,220  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:31435
+ 2021-02-08 16:41:21,223  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-02-08 16:41:21,223  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-02-08 16:41:21,223  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 2021-02-08 16:41:23,286 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735253593281.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:23,287 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736708922105.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:23,287 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736369311489.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:23,287 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735951790896.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:23,287 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736366333089.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:23,292 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735954234595.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:23,292 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735566364804.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:23,292 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736705873514.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:23,293 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735563298472.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:23,296 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734935739906.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:23,297 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/06/132438363539334740.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:23,298 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734932870348.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:23,299 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/06/132438363534870618.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:23,299 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734559207086.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:23,301 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735256435652.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:23,307 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734556263309.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:54,159 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736705873514.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:54,160 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735951790896.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:54,171 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736366333089.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:54,177 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735253593281.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:54,178 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735563298472.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:54,184 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734932870348.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:54,187 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/06/132438363534870618.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:54,187 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734556263309.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:54,201 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736708922105.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:54,210 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735566364804.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:54,211 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736369311489.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:54,216 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734559207086.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:54,219 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735256435652.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:54,219 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734935739906.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:54,226 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735954234595.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:54,229 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/06/132438363539334740.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:56,108 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736705873514.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:56,108 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736708922105.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:56,144 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736366333089.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:56,166 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734559207086.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:56,167 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734935739906.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:56,168 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734556263309.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:56,170 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735253593281.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:56,175 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736369311489.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:56,175 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735954234595.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:56,176 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735566364804.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:56,176 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735563298472.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:56,176 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735256435652.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:56,177 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/06/132438363534870618.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:56,185 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735951790896.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:56,186 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/06/132438363539334740.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:56,186 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735563298472.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:56,187 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735951790896.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:56,187 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734932870348.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:56,182 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736705873514.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:56,188 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736366333089.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:56,189 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/06/132438363534870618.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:56,189 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735253593281.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:56,190 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734556263309.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:56,190 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734932870348.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:41:59,274  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:41:59,276  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:41:59,288  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:41:59,289  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:41:59,805  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 513.0109ms - OK
+ 2021-02-08 16:41:59,806  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 517.7445ms - OK
+ 2021-02-08 16:41:59,839  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 563.4397ms - OK
+ 2021-02-08 16:41:59,839  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 569.9959ms - OK
+ 2021-02-08 16:42:20,974  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:42:20,975  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:42:20,977  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:42:20,978  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:42:21,093  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 117.6391ms - OK
+ 2021-02-08 16:42:21,093  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 118.7631ms - OK
+ 2021-02-08 16:42:21,096  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 118.9486ms - OK
+ 2021-02-08 16:42:21,097  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 119.8971ms - OK
+ 2021-02-08 16:43:25,199  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:43:25,199  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:43:25,200  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:43:25,200  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:43:25,317  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 116.9534ms - OK
+ 2021-02-08 16:43:25,317  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 119.593ms - OK
+ 2021-02-08 16:43:25,339  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 139.6976ms - OK
+ 2021-02-08 16:43:25,340  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 142.1212ms - OK
+ 2021-02-08 16:47:44,490  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:2248:1ef34118 successfully announced in 226.073 ms
+ 2021-02-08 16:47:44,508  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:2248:1ef34118 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-02-08 16:47:44,520  INFO Hangfire.Server.ServerWatchdog.? [?] - MESSAGE: 1 servers were removed due to timeout
+ 2021-02-08 16:47:44,565  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:2248:1ef34118 all the dispatchers started
+ 2021-02-08 16:47:44,666  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:38351
+ 2021-02-08 16:47:44,668  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-02-08 16:47:44,668  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-02-08 16:47:44,668  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 2021-02-08 16:47:45,761  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:47:45,762  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:47:45,778  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:47:45,778  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:47:46,295  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 526.837ms - OK
+ 2021-02-08 16:47:46,296  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 541.5468ms - OK
+ 2021-02-08 16:47:46,300  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 521.9704ms - OK
+ 2021-02-08 16:47:46,301  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 522.8285ms - OK
+ 2021-02-08 16:49:29,615  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:18756:64179a91 successfully announced in 159.0976 ms
+ 2021-02-08 16:49:29,630  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:18756:64179a91 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-02-08 16:49:29,637  INFO Hangfire.Server.ServerWatchdog.? [?] - MESSAGE: 1 servers were removed due to timeout
+ 2021-02-08 16:49:29,639  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:18756:64179a91 all the dispatchers started
+ 2021-02-08 16:49:29,753  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:41511
+ 2021-02-08 16:49:29,755  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-02-08 16:49:29,755  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-02-08 16:49:29,755  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 2021-02-08 16:49:30,965  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:49:30,966  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:49:30,973  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:49:30,973  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:49:31,429  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 448.4963ms - OK
+ 2021-02-08 16:49:31,431  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 458.3915ms - OK
+ 2021-02-08 16:49:31,452  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 485.8028ms - OK
+ 2021-02-08 16:49:31,452  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 497.9536ms - OK
+ 2021-02-08 16:51:03,684  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:51:03,685  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:51:03,695  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:51:03,696  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:51:03,806  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 120.8381ms - OK
+ 2021-02-08 16:51:03,806  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 122.4936ms - OK
+ 2021-02-08 16:51:03,859  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 163.5961ms - OK
+ 2021-02-08 16:51:03,860  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 164.5957ms - OK
+ 2021-02-08 16:52:12,135  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:52:12,137  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:52:12,148  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:52:12,149  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:52:12,397  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 260.0009ms - OK
+ 2021-02-08 16:52:12,398  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 262.4015ms - OK
+ 2021-02-08 16:52:12,437  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 287.613ms - OK
+ 2021-02-08 16:52:12,437  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 289.1264ms - OK
+ 2021-02-08 16:52:52,127  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:52:52,127  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:52:52,134  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:52:52,134  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:52:52,275  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 140.4954ms - OK
+ 2021-02-08 16:52:52,275  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 141.7865ms - OK
+ 2021-02-08 16:52:52,301  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 173.9302ms - OK
+ 2021-02-08 16:52:52,302  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 175.4679ms - OK
+ 2021-02-08 16:52:59,362  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:52:59,363  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:52:59,363  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:52:59,363  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:52:59,481  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 116.2871ms - OK
+ 2021-02-08 16:52:59,481  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 118.8115ms - OK
+ 2021-02-08 16:53:01,313  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 1949.764ms - OK
+ 2021-02-08 16:53:01,313  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 1950.8899ms - OK
+ 2021-02-08 16:53:05,494  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:53:05,494  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:53:05,495  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:53:05,495  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:53:05,625  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 130.3544ms - OK
+ 2021-02-08 16:53:05,626  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 131.7198ms - OK
+ 2021-02-08 16:53:05,643  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 148.55ms - OK
+ 2021-02-08 16:53:05,644  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 149.1763ms - OK
+ 2021-02-08 16:53:39,316 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736705873514.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:53:39,316 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736708922105.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:53:39,316 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736366333089.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:53:39,351 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736369311489.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:53:39,355 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735951790896.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:53:39,355 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735954234595.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:53:39,364 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735563298472.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:53:39,368 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735566364804.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:53:39,368 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735253593281.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:53:39,379 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735256435652.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:53:39,382 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734932870348.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:53:39,382 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734935739906.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:53:39,393 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734556263309.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:53:39,394 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734559207086.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:53:39,394 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/06/132438363534870618.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:53:39,404 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/06/132438363539334740.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:53:39,428 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/06/132438363534870618.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:53:39,434 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/06/132438363539334740.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:53:39,437 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736705873514.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:53:39,450 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736708922105.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:53:39,450 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734556263309.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:53:39,454 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734559207086.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:53:39,466 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735951790896.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:53:39,470 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735954234595.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:53:39,470 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734932870348.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:53:39,487 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734935739906.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:53:39,490 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735253593281.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:53:39,494 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735256435652.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:53:39,508 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735563298472.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:53:39,508 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735566364804.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:53:39,510 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736366333089.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:53:39,524 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736369311489.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-08 16:53:44,900  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:53:44,901  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: Start processing HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:53:44,901  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city
+ 2021-02-08 16:53:44,902  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Sending HTTP request GET https://thongtindoanhnghiep.co/api/city/1/district
+ 2021-02-08 16:53:45,027  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 125.0039ms - OK
+ 2021-02-08 16:53:45,027  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 126.2607ms - OK
+ 2021-02-08 16:53:45,061  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 160.1851ms - OK
+ 2021-02-08 16:53:45,062  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 162.6565ms - OK
+ 2021-02-08 16:54:29,650  INFO Hangfire.Server.ServerWatchdog.? [?] - MESSAGE: 1 servers were removed due to timeout
+ 
