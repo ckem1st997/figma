@@ -607,8 +607,9 @@ namespace figma.Controllers
 
         #region Account
         [Authorize]
-        public IActionResult Account()
+        public async Task<IActionResult> Account()
         {
+            AccountViewModel model = new AccountViewModel();
             var claims = HttpContext.User.Claims;
             var userName = claims.FirstOrDefault(c => c.Type == "UserName").Value;
             var userId = claims.FirstOrDefault(c => c.Type == "UserId").Value;
@@ -618,10 +619,11 @@ namespace figma.Controllers
                 {
                     ViewBag.name = userName;
                     ViewBag.id = userId;
-                    // ViewBag.social = claims.FirstOrDefault(c => c.Type == "Social").Value;
-                    var result = _unitOfWork.MemberRepository.Get(a => a.MemberId == int.Parse(userId) && a.Email == userName);
+                    ViewBag.social = claims.FirstOrDefault(c => c.Type == "Social").Value;
+                    var result = _unitOfWork.MemberRepository.GetByID(int.Parse(userId));
+                    model.Members = result;
                     if (result != null)
-                        return View(result);
+                        return View(model);
                 }
                 catch (Exception)
                 {
@@ -665,6 +667,7 @@ namespace figma.Controllers
                                 new Claim("UserId", users.MemberId.ToString()),
                                 new Claim(ClaimTypes.Actor, users.Active.ToString()),
                                 new Claim(ClaimTypes.Role,users.Active?"Users":"Active"),
+                               new Claim("Social","none")
                         };
                             var userIdentity = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme);
                             var authProperties = new AuthenticationProperties

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<figma.Models.Members>
+﻿@model figma.ViewModel.AccountViewModel;
 
 @{
     ViewData["Title"] = "Account";
@@ -6,6 +6,8 @@
 }
 @section Scripts {
     <link href="~/css/style-account.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
 }
 <h1>Account</h1>
 <div class="g-signin2 d-none" data-onsuccess="onSignIn"></div>
@@ -28,492 +30,434 @@
 </script>
 @if (Model != null)
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Email)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Fullname)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Address)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Mobile)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </td>
+    <section class="smb_section">
+        <div class="wrapper_smb">
+            <div class="gird_smb">
+                <div class="grid__item_smb grid__item_smb_25">
+                    <link href="//theme.hstatic.net/1000253775/1000662899/14/styles.css?v=815" rel="stylesheet" type="text/css" media="all">
+                    <div class="AccountSidebar">
+                        <div class="title_account">
+                            <div class="title_account_img">
+                                <span id="logo_user" style="background-image: url(&quot;https://static.smb.foolab.tech/images/c93396df92884cf49d1c605d4256b0ac.jpg&quot;);"></span>
+                            </div>
+                            <div class="content_account">
+                                <h2 class="name_account">@Model.Members.Fullname</h2>
+                                <p>
+                                    @Model.Members.Email
+                                </p>
+                            </div>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Fullname)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Address)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Mobile)
-                    </td>
-                    @*<td>
-                            <a asp-action="Edit" asp-route-id="@item.MemberId">Edit</a> |
-                            <a asp-action="Details" asp-route-id="@item.MemberId">Details</a> |
-                            <a asp-action="Delete" asp-route-id="@item.MemberId">Delete</a>
-                        </td>*@
-                </tr>
-            }
-
-        </tbody>
-    </table>
-}
-else
-{
-    <h2>Bạn đang đăng nhập bằng @ViewBag.social nha !</h2>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    Name
-                </th>
-                <th>
-                    ID
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    @ViewBag.name
-                </td>
-
-                <td>
-                    @ViewBag.id
-                </td>
-            </tr>
-        </tbody>
-    </table>
-}
-
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-<section class="smb_section">
-    <div class="wrapper_smb">
-        <div class="gird_smb">
-            <div class="grid__item_smb grid__item_smb_25">
-                <link href="//theme.hstatic.net/1000253775/1000662899/14/styles.css?v=815" rel="stylesheet" type="text/css" media="all">
-                <div class="AccountSidebar">
-                    <div class="title_account">
-                        <div class="title_account_img">
-                            <span id="logo_user" style="background-image: url(&quot;https://static.smb.foolab.tech/images/c93396df92884cf49d1c605d4256b0ac.jpg&quot;);"></span>
                         </div>
-                        <div class="content_account">
-                            <h2 class="name_account">Một Hai Ba</h2>
-                            <p>
-                                email
-                            </p>
-                        </div>
+                        <div class="AccountContent">
+                            <div class="AccountList">
+                                <ul class="list-unstyled nav-pills" id="pills-tab" role="tablist">
+                                    <li class="current">
+                                        <a class="active" id="pills-home-tab" data-toggle="pill"
+                                           href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">
+                                            <span>
+                                                <i class="fas fa-user"></i>
+                                            </span>
+                                            <span>
+                                                Hồ sơ của tôi
+                                            </span>
+                                        </a>
+                                    </li>
 
-                    </div>
+                                    <li>
+                                        <a id="pills-profile-dh"
+                                           data-toggle="pill" href="#pills-dh" role="tab" aria-controls="pills-dh"
+                                           aria-selected="false">
+                                            <span>
+                                                <i class="fas fa-file-invoice"></i>
+                                            </span>
+                                            <span>
+                                                Đơn hàng của tôi
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a id="pills-profile-tab"
+                                           data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile"
+                                           aria-selected="false">
+                                            <span> <i class="fas fa-crown"></i></span>
+                                            <span>  Hạng thành viên</span>
+                                        </a>
+                                    </li>
 
-                    <div class="AccountContent">
-                        <div class="AccountList">
-                            <ul class="list-unstyled nav-pills" id="pills-tab" role="tablist">
-                                <li class="current">
-                                    <a class="active" id="pills-home-tab" data-toggle="pill"
-                                       href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">
-                                        <span>
-                                            <i class="fas fa-user"></i>
-                                        </span>
-                                        <span>
-                                            Hồ sơ của tôi
-                                        </span>
-                                    </a>
-                                </li>
+                                    <li>
+                                        <a id="pills-profile-vc"
+                                           data-toggle="pill" href="#pills-vc" role="tab" aria-controls="pills-vc"
+                                           aria-selected="false">
+                                            <span> <i class="fas fa-tags"></i></span>
+                                            <span> Vouchers</span>
+                                        </a>
+                                    </li>
 
-                                <li>
-                                    <a id="pills-profile-dh"
-                                       data-toggle="pill" href="#pills-dh" role="tab" aria-controls="pills-dh"
-                                       aria-selected="false">
-                                        <span>
-                                            <i class="fas fa-file-invoice"></i>
-                                        </span>
-                                        <span>
-                                            Đơn hàng của tôi
-                                        </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a id="pills-profile-tab"
-                                       data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile"
-                                       aria-selected="false">
-                                        <span> <i class="fas fa-crown"></i></span>
-                                        <span>  Hạng thành viên</span>
-                                    </a>
-                                </li>
+                                    <li>
+                                        <a id="pills-profile-nc"
+                                           data-toggle="pill" href="#pills-nc" role="tab" aria-controls="pills-nx"
+                                           aria-selected="false">
+                                            <span><i class="fas fa-lock"></i></span>
+                                            <span> Nhận xét của tôi</span>
+                                        </a>
+                                    </li>
 
-                                <li>
-                                    <a id="pills-profile-vc"
-                                       data-toggle="pill" href="#pills-vc" role="tab" aria-controls="pills-vc"
-                                       aria-selected="false">
-                                        <span> <i class="fas fa-tags"></i></span>
-                                        <span> Vouchers</span>
-                                    </a>
-                                </li>
+                                    <li>
+                                        <a id="pills-profile-like"
+                                           data-toggle="pill" href="#pills-like" role="tab" aria-controls="pills-like"
+                                           aria-selected="false">
+                                            <span><i class="fas fa-heart"></i></span>
+                                            <span>Sản phẩm yêu thích</span>
+                                        </a>
+                                    </li>
 
-                                <li>
-                                    <a id="pills-profile-nc"
-                                       data-toggle="pill" href="#pills-nc" role="tab" aria-controls="pills-nx"
-                                       aria-selected="false">
-                                        <span><i class="fas fa-lock"></i></span>
-                                        <span> Nhận xét của tôi</span>
-                                    </a>
-                                </li>
+                                    <li>
+                                        <a id="pills-profile-tb"
+                                           data-toggle="pill" href="#pills-tb" role="tab" aria-controls="pills-tb"
+                                           aria-selected="false">
+                                            <span><i class="fas fa-bell"></i></span>
+                                            <span> Thông báo của tôi</span>
+                                        </a>
+                                    </li>
 
-                                <li>
-                                    <a id="pills-profile-like"
-                                       data-toggle="pill" href="#pills-like" role="tab" aria-controls="pills-like"
-                                       aria-selected="false">
-                                        <span><i class="fas fa-heart"></i></span>
-                                        <span>Sản phẩm yêu thích</span>
-                                    </a>
-                                </li>
+                                    <li>
+                                        <a id="pills-profile-mk"
+                                           data-toggle="pill" href="#pills-mk" role="tab" aria-controls="pills-mk"
+                                           aria-selected="false">
+                                            <span><i class="fas fa-lock"></i></span>
+                                            <span>Đổi mật khẩu</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a id="pills-profile-kt"
+                                           data-toggle="pill" href="#pills-kt" role="tab" aria-controls="pills-kt"
+                                           aria-selected="false">
+                                            <span><i class="fas fa-file-invoice"></i></span>
+                                            <span>Kiểm tra đơn hàng</span>
+                                        </a>
+                                    </li>
 
-                                <li>
-                                    <a id="pills-profile-tb"
-                                       data-toggle="pill" href="#pills-tb" role="tab" aria-controls="pills-tb"
-                                       aria-selected="false">
-                                        <span><i class="fas fa-bell"></i></span>
-                                        <span> Thông báo của tôi</span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a id="pills-profile-mk"
-                                       data-toggle="pill" href="#pills-mk" role="tab" aria-controls="pills-mk"
-                                       aria-selected="false">
-                                        <span><i class="fas fa-lock"></i></span>
-                                        <span>Đổi mật khẩu</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a id="pills-profile-kt"
-                                       data-toggle="pill" href="#pills-kt" role="tab" aria-controls="pills-kt"
-                                       aria-selected="false">
-                                        <span><i class="fas fa-file-invoice"></i></span>
-                                        <span>Kiểm tra đơn hàng</span>
-                                    </a>
-                                </li>
-
-                            </ul>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="grid__item_smb grid__item_smb_75 tab-content" id="pills-tabContent">
-                <div class="accounts tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                    <div class="accounts_title">
-                        <h2>
-                            Hồ sơ của tôi
-                        </h2>
+                <div class="grid__item_smb grid__item_smb_75 tab-content" id="pills-tabContent">
+                    <div class="accounts tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                        <div class="accounts_title">
+                            <h2>
+                                Hồ sơ của tôi
+                            </h2>
+                        </div>
+                        <div class="accounts_main">
+                            <form asp-action="EditAccount">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                @*<div class="form-group">
+                                        <label asp-for="Code" class="control-label"></label>
+                                        <input asp-for="Code" class="form-control" />
+                                        <span asp-validation-for="Code" class="text-danger"></span>
+                                    </div>*@
+
+                                <div class="account">
+                                    <div class="image_loading" style="display: none;">
+                                        <img src="https://file.hstatic.net/1000187248/file/spinner_6dbec68bd28a42718f17704bf42d58e7.gif" alt="image loading">
+                                    </div>
+                                    <div class="account_col">
+                                        <div class="account_main">
+                                            <label asp-for="Members.Fullname">Họ và tên</label>
+                                            <span asp-validation-for="Members.Fullname" class="error_input"></span>
+                                            <input type="text" asp-for="Members.Fullname" placeholder="Nhập tên đầy đủ của bạn" />
+                                        </div>
+                                    </div>
+
+                                    <div class="account_col">
+                                        <div class="account_main">
+                                            <label asp-for="Members.Email"></label>
+                                            <span asp-validation-for="Members.Fullname" class="error_input"></span>
+                                            <input asp-for="Members.Email" type="text" placeholder="Nhập Email của bạn" />
+                                        </div>
+                                    </div>
+
+                                    <div class="account_col">
+                                        <div class="account_main">
+                                            <label asp-for="Members.Mobile">Số điện thoại</label>
+                                            <span asp-validation-for="Members.Fullname" class="error_input"></span>
+                                            <input asp-for="Members.Mobile" type="text" placeholder="Nhập số điện thoại của bạn" />
+                                        </div>
+                                    </div>
+
+                                    @*<div class="account_col">
+                                            <div class="account_main">
+                                                <label>Ngày sinh</label>
+                                                <span class="error_input">* Ngày sinh không hợp lệ</span>
+                                                <input id="dob" type="text" name="edit" placeholder="Nhập ngày sinh của bạn">
+                                            </div>
+                                        </div>*@
+                                    @*<div class="account_col account_col_seeq">
+                                            <div class="account_main w-100">
+                                                <label>Giới tính</label>
+                                                <div class="genders">
+                                                    <div class="gender">
+                                                        <input id="gender_m" type="radio" name="gender" value="m">
+                                                        <label for="gender_m">
+                                                            <span class="sp_input"></span>
+                                                            <span class="sp_lable">Nam</span>
+                                                        </label>
+                                                    </div>
+
+                                                    <div class="gender">
+                                                        <input id="gender_f" type="radio" name="gender" value="f">
+                                                        <label for="gender_f">
+                                                            <span class="sp_input"></span>
+                                                            <span class="sp_lable">Nữ</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>*@
+                                    <div class="account_col">
+                                        <div class="account_main">
+                                            <label asp-for="Members.Address">Địa chỉ</label>
+                                            <span asp-validation-for="Members.Address" class="alert_err"></span>
+                                            <input type="text" asp-for="Members.Address" placeholder="Nhập địa chỉ đầy đủ">
+                                        </div>
+                                    </div>
+                                    <script>
+                                        var huyen = $("#Members_Address").val().split(',')[2].replace("huyện", "Huyện");
+                                        //for (var i = 0; i < $(".slect_district option").length; i++) {
+                                        //    if ($(".slect_district option")[i].val().indexOf(huyen))
+                                        //        console($(".slect_district option")[i].val());
+
+                                        //}
+                                        $(".slect_district option").each(function (index) {
+                                            if ($(this).text().indexOf(huyen))
+                                                console.log(index + ": " + $(this).text());
+                                        });
+                                    </script>
+                                    <div class="account_col">
+                                        <div class="account_main">
+                                            <label>Tỉnh/Thành phố</label>
+                                            <span class="alert_err"></span>
+                                            <select class="slect_city" value="">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="account_col">
+                                        <div class="account_main">
+                                            <label>Quận huyện</label>
+                                            <span class="alert_err"></span>
+                                            <select class="slect_district" value="">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="account_col">
+                                        <div class="account_main">
+                                            <label>Ảnh đại diện</label>
+                                            <span class="error_input"></span>
+
+                                            <div class="account_avatar">
+                                                <div class="avatar_img">
+                                                    <lable for="avatar">Chọn ảnh</lable>
+
+                                                    <input id="avatar" type="file">
+
+                                                </div>
+
+                                                <div id="imgTest" style="display: none;"></div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="account_col ">
+                                        <div class="account_main col_main_submit">
+
+
+                                            <button id="cancel_info">
+                                                <span>
+                                                    Huỷ bỏ
+                                                </span>
+                                                <img src="https://file.hstatic.net/1000187248/file/spinner_6dbec68bd28a42718f17704bf42d58e7.gif" alt="image loading">
+                                            </button>
+
+                                            <button id="submit_info">
+                                                <span>
+                                                    Xác nhận
+                                                </span>
+                                                <img src="https://file.hstatic.net/1000187248/file/spinner_6dbec68bd28a42718f17704bf42d58e7.gif" alt="image loading">
+                                            </button>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    <div class="accounts_main">
-                        <div class="account">
+                    <div class="row style_add tab-pane fade" id="pills-dh" role="tabpanel" aria-labelledby="pills-profile-dh">
+                        <div class="title_address">
+                            <h3>
+                                Đơn hàng của tôi
+                            </h3>
+                        </div>
+                        <div class="col-xs-12 customer-table-wrap" id="customer_orders">
+                            <div class="customer_order customer-table-bg">
+
+                                <p>Bạn chưa đặt mua sản phẩm</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row style_add tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" style="overflow: auto;">
+                        <div class="title_address">
+                            <h3>
+                                Hạng thành viên
+                            </h3>
+                        </div>
+                        <div id="customer_membership">
+                            <div class="customer_membership grid" style="border-bottom: 1px solid #ccc;margin-left: 0;">
+                                <div class="grid__item large--two-fifths medium--two-fifths text-center left_cus pd-left0">
+                                    <div class="customer_member_rank_img">
+
+                                    </div>
+                                </div>
+                                <div class="grid__item large--three-fifths medium--three-fifths right_cus">
+                                    <div class="title_member">
+                                        <h3>
+                                            Tích lũy chi tiêu hiện tại
+                                        </h3>
+                                        <div class="totalSpent">
+
+                                        </div>
+
+                                        <div class="member_rank_title">
+
+                                            <p>Bạn chưa có hạng thành viên</p>
+                                        </div>
+                                        <div id="title_upRank">
+
+                                        </div>
+                                        <div id="progress-bar">
+                                            <div id="progress"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table_member" style="margin-top: 30px;overflow: auto;">
+                            <div class="table_member1">
+                                <table id="member_ship">
+                                    <tbody>
+                                        <tr id="tr_title1" style="text-transform: uppercase;">
+                                            <th style="width: 270px;height: 100px;">Quyền Lợi</th>
+
+                                            <th><img src="https://file.hstatic.net/1000253775/file/member_210773cf30a84de1b0eeffe5895a173c.png" alt="MEMBER"><br>MEMBER</th>
+                                            <th><img src="https://file.hstatic.net/1000253775/file/silver_78ae351a93804671b87a21c6fae2a695.png" alt="SILVER"><br>SILVER</th>
+                                            <th><img src="https://file.hstatic.net/1000253775/file/gold_c2ca9ca998dc474cbd520bb3720eb96a.png" alt="GOLD"><br>GOLD</th>
+                                            <th><img src="https://file.hstatic.net/1000253775/file/diamond_0f1184b3b01648a3982b349be356b17c.png" alt="DIAMOND"><br>DIAMOND</th>
+                                        </tr>
+                                        <tr id="tr_title2">
+                                            <td style="height: 90px;">Tích lũy chi tiêu</td>
+                                            <td style="white-space: nowrap;">0₫ - 4,000,000₫</td>
+                                            <td style="white-space: nowrap;">4,000,001₫ - 12,000,000₫</td>
+                                            <td style="white-space: nowrap;">12,000,001₫ - 30,000,000₫</td>
+                                            <td style="white-space: nowrap;">30,000,001₫ - 999,999,999₫</td>
+                                        </tr>
+                                        <tr id="tr_title3">
+                                            <td style="height: 90px;">Ưu đãi thành viên</td>
+
+                                            <td>là thành viên</td>
+                                            <td>GIảm 5% tổng đơn</td>
+                                            <td>Giảm 10% tổng đơn</td>
+                                            <td>GIảm tổng đơn 15%</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accounts VOUCHERS tab-pane fade" id="pills-vc" role="tabpanel" aria-labelledby="pills-profile-vc">
+                        <div class="accounts_title">
+                            <h2>
+                                Vouchers của tôi
+                            </h2>
+                        </div>
+                        <p class="data_error">* Có lỗi vui lòng thử lại, hoặc đăng nhập lại</p>
+                        <div class="vouchers_main">
                             <div class="image_loading" style="display: none;">
                                 <img src="https://file.hstatic.net/1000187248/file/spinner_6dbec68bd28a42718f17704bf42d58e7.gif" alt="image loading">
                             </div>
-                            <div class="account_col">
-                                <div class="account_main">
-                                    <label>Họ và tên</label>
-                                    <span class="error_input">* Họ và tên quá dài</span>
-                                    <input id="fullName" type="text" name="edit" placeholder="Nhập tên đầy đủ của bạn">
-                                </div>
+                            <div class="voucher">
+                                <p class="data_empty" style="display: block;">Hiện tại bạn chưa có Mã Voucher nào</p>
                             </div>
-
-                            <div class="account_col">
-                                <div class="account_main">
-                                    <label>Email</label>
-                                    <span class="error_input">* Email không hợp lệ</span>
-                                    <input id="email" type="text" placeholder="Nhập Email của bạn">
-                                </div>
+                        </div>
+                    </div>
+                    <div class="accounts fa-comment tab-pane fade" id="pills-nx" role="tabpanel" aria-labelledby="pills-profile-nx">
+                        <div class="accounts_title">
+                            <h2>
+                                Nhận xét của tôi
+                            </h2>
+                        </div>
+                        <div class="accounts_main">
+                            <div class="image_loading" style="display: none;">
+                                <img src="https://file.hstatic.net/1000187248/file/spinner_6dbec68bd28a42718f17704bf42d58e7.gif" alt="image loading">
                             </div>
-
-                            <div class="account_col">
-                                <div class="account_main">
-                                    <label>Số điện thoại</label>
-                                    <span class="error_input"></span>
-                                    <input id="phoneNumber" name="edit" type="text" placeholder="Nhập số điện thoại của bạn">
-                                </div>
-                            </div>
-
-                            <div class="account_col account_col_seeq">
-                                <div class="account_main">
-                                    <label>Ngày sinh</label>
-                                    <span class="error_input">* Ngày sinh không hợp lệ</span>
-                                    <input id="dob" type="text" name="edit" placeholder="Nhập ngày sinh của bạn">
+                            <div class="account">
+                                <p class="data_empty" style="display: block;">Hiện tại bạn chưa có nhận xét nào</p>
+                                <div class="account_append">
 
                                 </div>
-                              
-                            </div>
-                            <div class="account_col account_col_seeq">
-                                <div class="account_main">
-                                    <label>Giới tính</label>
-                                    <div class="genders">
-                                        <div class="gender">
-                                            <input id="gender_m" type="radio" name="gender" value="m">
-                                            <label for="gender_m">
-                                                <span class="sp_input"></span>
-                                                <span class="sp_lable">Nam</span>
-                                            </label>
-                                        </div>
 
-                                        <div class="gender">
-                                            <input id="gender_f" type="radio" name="gender" value="f">
-                                            <label for="gender_f">
-                                                <span class="sp_input"></span>
-                                                <span class="sp_lable">Nữ</span>
-                                            </label>
-                                        </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="accounts account_wishlist tab-pane fade" id="pills-like" role="tabpanel" aria-labelledby="pills-profile-like">
+                        <div class="accounts_title">
+                            <h2>
+                                Sản phẩm yêu thích
+                            </h2>
+                        </div>
+                        <div class="accounts_main ">
+                            <p class="data_error">* Có lỗi vui lòng thử lại, hoặc đăng nhập lại</p>
+                            <div class="image_loading" style="display: none;">
+                                <img src="https://file.hstatic.net/1000187248/file/spinner_6dbec68bd28a42718f17704bf42d58e7.gif" alt="image loading">
+                            </div>
+                            <div class="wishlist">
+                                <p class="data_empty" style="display: block;">Hiện tại bạn chưa có sản phẩm yêu thích nào</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accounts tab-pane fade" id="pills-mk" role="tabpanel" aria-labelledby="pills-profile-mk">
+                        <div class="accounts_title">
+                            <h2>
+                                Đổi mật khẩu
+                            </h2>
+                            <p class="update_info_err">
+                                *	Gửi Email lỗi, vui lòng thử lại
+                            </p>
+                            <p class="data_error" style="color: rgb(0, 0, 255); display: none;">Hướng dẫn đổi mật khẩu đã được gửi đến Email của bạn vui lòng kiểm tra</p>
+                        </div>
+
+                        <div class="reset_pass_main">
+                            <div class="reset_pas">
+
+                                <div class="reset_pas_col">
+                                    <div class="reset_pas_col_main">
+                                        <label>Nhập email của bạn</label>
+                                        <span class="reset_pas_new" style="display: none;"></span>
+                                        <input id="email" type="email" name="pass" placeholder="Nhập email của bạn">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="account_col">
-                                <div class="account_main">
-                                    <label>Địa chỉ</label>
-                                    <span class="alert_err"></span>
-                                    <input type="text" value="" name="addr_full_address" placeholder="Nhập địa chỉ đầy đủ">
-                                </div>
-                            </div>
-                            <div class="account_col">
-                                <div class="account_main">
-                                    <label>Tỉnh/Thành phố</label>
-                                    <span class="alert_err"></span>
-                                    <select class="slect_city" value="">
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="account_col">
-                                <div class="account_main">
-                                    <label>Quận huyện</label>
-                                    <span class="alert_err"></span>
-                                    <select class="slect_district" value="">
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="account_col">
-                                <div class="account_main">
-                                    <label>Ảnh đại diện</label>
-                                    <span class="error_input"></span>
 
-                                    <div class="account_avatar">
-                                        <div class="avatar_img">
-                                            <lable for="avatar">Chọn ảnh</lable>
-
-                                            <input id="avatar" type="file">
-
-                                        </div>
-
-                                        <div id="imgTest" style="display: none;"></div>
-
+                                <div class="reset_pas_col">
+                                    <div class="reset_pas_col_main">
+                                        <button id="reset_pass" type="submit" class="">
+                                            <img src="https://file.hstatic.net/1000187248/file/spinner_6dbec68bd28a42718f17704bf42d58e7.gif" alt="image loading">
+                                            <span>Gửi</span>
+                                        </button>
                                     </div>
-
-                                </div>
-                            </div>
-                            <div class="account_col ">
-                                <div class="account_main col_main_submit">
-
-
-                                    <button id="cancel_info">
-                                        <span>
-                                            Huỷ bỏ
-                                        </span>
-                                        <img src="https://file.hstatic.net/1000187248/file/spinner_6dbec68bd28a42718f17704bf42d58e7.gif" alt="image loading">
-                                    </button>
-
-                                    <button id="submit_info">
-                                        <span>
-                                            Xác nhận
-                                        </span>
-                                        <img src="https://file.hstatic.net/1000187248/file/spinner_6dbec68bd28a42718f17704bf42d58e7.gif" alt="image loading">
-                                    </button>
-
-
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="row style_add tab-pane fade" id="pills-dh" role="tabpanel" aria-labelledby="pills-profile-dh">
-                    <div class="title_address">
-                        <h3>
-                            Đơn hàng của tôi
-                        </h3>
-                    </div>
-                    <div class="col-xs-12 customer-table-wrap" id="customer_orders">
-                        <div class="customer_order customer-table-bg">
-
-                            <p>Bạn chưa đặt mua sản phẩm</p>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="row style_add tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" style="overflow: auto;">
-                    <div class="title_address">
-                        <h3>
-                            Hạng thành viên
-                        </h3>
-                    </div>
-                    <div id="customer_membership">
-                        <div class="customer_membership grid" style="border-bottom: 1px solid #ccc;margin-left: 0;">
-                            <div class="grid__item large--two-fifths medium--two-fifths text-center left_cus pd-left0">
-                                <div class="customer_member_rank_img">
-
-                                </div>
-                            </div>
-                            <div class="grid__item large--three-fifths medium--three-fifths right_cus">
-                                <div class="title_member">
-                                    <h3>
-                                        Tích lũy chi tiêu hiện tại
-                                    </h3>
-                                    <div class="totalSpent">
-
-                                    </div>
-
-                                    <div class="member_rank_title">
-
-                                        <p>Bạn chưa có hạng thành viên</p>
-                                    </div>
-                                    <div id="title_upRank">
-
-                                    </div>
-                                    <div id="progress-bar">
-                                        <div id="progress"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="table_member" style="margin-top: 30px;overflow: auto;">
-                        <div class="table_member1">
-                            <table id="member_ship">
-                                <tbody>
-                                    <tr id="tr_title1" style="text-transform: uppercase;">
-                                        <th style="width: 270px;height: 100px;">Quyền Lợi</th>
-
-                                        <th><img src="https://file.hstatic.net/1000253775/file/member_210773cf30a84de1b0eeffe5895a173c.png" alt="MEMBER"><br>MEMBER</th>
-                                        <th><img src="https://file.hstatic.net/1000253775/file/silver_78ae351a93804671b87a21c6fae2a695.png" alt="SILVER"><br>SILVER</th>
-                                        <th><img src="https://file.hstatic.net/1000253775/file/gold_c2ca9ca998dc474cbd520bb3720eb96a.png" alt="GOLD"><br>GOLD</th>
-                                        <th><img src="https://file.hstatic.net/1000253775/file/diamond_0f1184b3b01648a3982b349be356b17c.png" alt="DIAMOND"><br>DIAMOND</th>
-                                    </tr>
-                                    <tr id="tr_title2">
-                                        <td style="height: 90px;">Tích lũy chi tiêu</td>
-                                        <td style="white-space: nowrap;">0₫ - 4,000,000₫</td>
-                                        <td style="white-space: nowrap;">4,000,001₫ - 12,000,000₫</td>
-                                        <td style="white-space: nowrap;">12,000,001₫ - 30,000,000₫</td>
-                                        <td style="white-space: nowrap;">30,000,001₫ - 999,999,999₫</td>
-                                    </tr>
-                                    <tr id="tr_title3">
-                                        <td style="height: 90px;">Ưu đãi thành viên</td>
-
-                                        <td>là thành viên</td>
-                                        <td>GIảm 5% tổng đơn</td>
-                                        <td>Giảm 10% tổng đơn</td>
-                                        <td>GIảm tổng đơn 15%</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="accounts VOUCHERS tab-pane fade" id="pills-vc" role="tabpanel" aria-labelledby="pills-profile-vc">
-                    <div class="accounts_title">
-                        <h2>
-                            Vouchers của tôi
-                        </h2>
-                    </div>
-                    <p class="data_error">* Có lỗi vui lòng thử lại, hoặc đăng nhập lại</p>
-                    <div class="vouchers_main">
-                        <div class="image_loading" style="display: none;">
-                            <img src="https://file.hstatic.net/1000187248/file/spinner_6dbec68bd28a42718f17704bf42d58e7.gif" alt="image loading">
-                        </div>
-                        <div class="voucher">
-                            <p class="data_empty" style="display: block;">Hiện tại bạn chưa có Mã Voucher nào</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="accounts fa-comment tab-pane fade" id="pills-nx" role="tabpanel" aria-labelledby="pills-profile-nx">
-                    <div class="accounts_title">
-                        <h2>
-                            Nhận xét của tôi
-                        </h2>
-                    </div>
-                    <div class="accounts_main">
-                        <div class="image_loading" style="display: none;">
-                            <img src="https://file.hstatic.net/1000187248/file/spinner_6dbec68bd28a42718f17704bf42d58e7.gif" alt="image loading">
-                        </div>
-                        <div class="account">
-                            <p class="data_empty" style="display: block;">Hiện tại bạn chưa có nhận xét nào</p>
-                            <div class="account_append">
-
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
-                <div class="accounts account_wishlist tab-pane fade" id="pills-like" role="tabpanel" aria-labelledby="pills-profile-like">
-                    <div class="accounts_title">
-                        <h2>
-                            Sản phẩm yêu thích
-                        </h2>
-                    </div>
-                    <div class="accounts_main ">
-                        <p class="data_error">* Có lỗi vui lòng thử lại, hoặc đăng nhập lại</p>
-                        <div class="image_loading" style="display: none;">
-                            <img src="https://file.hstatic.net/1000187248/file/spinner_6dbec68bd28a42718f17704bf42d58e7.gif" alt="image loading">
-                        </div>
-                        <div class="wishlist">
-                            <p class="data_empty" style="display: block;">Hiện tại bạn chưa có sản phẩm yêu thích nào</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="accounts tab-pane fade" id="pills-mk" role="tabpanel" aria-labelledby="pills-profile-mk">
-                    <div class="accounts_title">
-                        <h2>
-                            Đổi mật khẩu
-                        </h2>
-                        <p class="update_info_err">
-                            *	Gửi Email lỗi, vui lòng thử lại
-                        </p>
-                        <p class="data_error" style="color: rgb(0, 0, 255); display: none;">Hướng dẫn đổi mật khẩu đã được gửi đến Email của bạn vui lòng kiểm tra</p>
-                    </div>
-
-                    <div class="reset_pass_main">
-                        <div class="reset_pas">
-
-                            <div class="reset_pas_col">
-                                <div class="reset_pas_col_main">
-                                    <label>Nhập email của bạn</label>
-                                    <span class="reset_pas_new" style="display: none;"></span>
-                                    <input id="email" type="email" name="pass" placeholder="Nhập email của bạn">
-                                </div>
-                            </div>
-
-                            <div class="reset_pas_col">
-                                <div class="reset_pas_col_main">
-                                    <button id="reset_pass" type="submit" class="">
-                                        <img src="https://file.hstatic.net/1000187248/file/spinner_6dbec68bd28a42718f17704bf42d58e7.gif" alt="image loading">
-                                        <span>Gửi</span>
-                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -521,44 +465,46 @@ else
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<script>
+    <script>
 
-    // Example POST method implementation:
-    async function postData(url = '') {
-        // Default options are marked with *
-        const response = await fetch(url, {
-            method: 'GET', // *GET, POST, PUT, DELETE, etc.
-            mode: 'cors', // no-cors, *cors, same-origin
-            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: 'same-origin', // include, *same-origin, omit
-            headers: {
-                'Content-Type': 'application/json'
-                // 'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            redirect: 'follow', // manual, *follow, error
-            referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-            // body: JSON.stringify(data) // body data type must match "Content-Type" header
-        });
-        return response.json(); // parses JSON response into native JavaScript objects
-    }
+        // Example POST method implementation:
+        async function postData(url = '') {
+            // Default options are marked with *
+            const response = await fetch(url, {
+                method: 'GET', // *GET, POST, PUT, DELETE, etc.
+                mode: 'cors', // no-cors, *cors, same-origin
+                cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                credentials: 'same-origin', // include, *same-origin, omit
+                headers: {
+                    'Content-Type': 'application/json'
+                    // 'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                redirect: 'follow', // manual, *follow, error
+                referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+                // body: JSON.stringify(data) // body data type must match "Content-Type" header
+            });
+            return response.json(); // parses JSON response into native JavaScript objects
+        }
 
-    postData('/api')
-        .then(data => {
-            for (var i = 0; i < data.LtsItem.length; i++) {
-                $(".slect_city").append("<option value=" + data.LtsItem[i].ID + ">" + data.LtsItem[i].Title + "</option>");
-            }
-        });
-    postData('/api/gethuyen/1')
-        .then(data => {
-            for (var i = 0; i < data.length; i++) {
-                $(".slect_district").append("<option value=" + data[i].ID + ">" + data[i].Title + "</option>");
-            }
-        });
+        postData('/api')
+            .then(data => {
+                for (var i = 0; i < data.LtsItem.length; i++) {
+                    $(".slect_city").append("<option value=" + data.LtsItem[i].ID + ">" + data.LtsItem[i].Title + "</option>");
+                }
+            });
+        postData('/api/gethuyen/1')
+            .then(data => {
+                for (var i = 0; i < data.length; i++) {
+                    $(".slect_district").append("<option value=" + data[i].ID + ">" + data[i].Title + "</option>");
+                }
+            });
 
-</script>
+    </script>
+}
+
+
 
 
 

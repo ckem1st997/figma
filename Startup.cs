@@ -46,13 +46,14 @@ namespace figma
             services.AddImageSharp(options =>
             {
                 options.MemoryStreamManager = new RecyclableMemoryStreamManager();
-                options.BrowserMaxAge = TimeSpan.FromDays(7);
-                options.CacheMaxAge = TimeSpan.FromDays(365);
-                options.CachedNameLength = 8;
+                //  options.BrowserMaxAge = TimeSpan.FromDays(7);
+                //  options.CacheMaxAge = TimeSpan.FromDays(365);
+                //options.CachedNameLength = 8;
                 options.OnParseCommandsAsync = _ => Task.CompletedTask;
                 options.OnBeforeSaveAsync = _ => Task.CompletedTask;
                 options.OnProcessedAsync = _ => Task.CompletedTask;
                 options.OnPrepareResponseAsync = _ => Task.CompletedTask;
+               
             });
             // hỏi người dùng có đồng ý dùng cookie
             //services.Configure<CookiePolicyOptions>(options =>
