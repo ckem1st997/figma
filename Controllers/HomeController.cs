@@ -785,7 +785,16 @@ namespace figma.Controllers
                         await _unitOfWork.Save();
                         return Ok(true);
                     }
-                    return Ok(false);
+                    else
+                    {
+                        foreach (var item in search)
+                        {
+                            _unitOfWork.ProductLikeRepository.Delete(item);
+                            await _unitOfWork.Save();
+                            return Ok(true);
+                        }
+
+                    }
                 }
                 catch
                 {

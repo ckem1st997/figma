@@ -359,7 +359,10 @@ function likep(id) {
         success: function (res) {
             // console.log(res);
             if (res)
-                $("#textlike").text("Yêu thích");
+                if ($("#textlike").text().indexOf("Thêm vào yêu thích") != -1)
+                    $("#textlike").text("Yêu thích");
+                else
+                    $("#textlike").text("Thêm vào yêu thích");
         },
 
         error: function (errormessage) {
