@@ -445,8 +445,17 @@ namespace figma.Controllers
                                  Expires = new DateTimeOffset(DateTime.Now.AddDays(1))
                              });
             }
-            var claims = HttpContext.User.Claims;
-            var userId = claims.FirstOrDefault(c => c.Type == "UserId").Value;
+            string userId;
+            try
+            {
+                var claims = HttpContext.User.Claims;
+                userId = claims.FirstOrDefault(c => c.Type == "UserId").Value;
+            }
+            catch (Exception)
+            {
+                userId = "0";
+            }
+
 
             var product = _unitOfWork.ProductRepository.GetByID(proId);
             if (product == null)
