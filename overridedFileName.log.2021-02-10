@@ -1,0 +1,12 @@
+2021-02-10 15:58:05,768  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 683.8221ms - OK
+ 2021-02-10 15:58:05,782  INFO System.Net.Http.HttpClient.Default.ClientHandler.? [?] - MESSAGE: Received HTTP response after 701.5836ms - OK
+ 2021-02-10 15:58:05,783  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 708.3909ms - OK
+ 2021-02-10 15:58:05,783  INFO System.Net.Http.HttpClient.Default.LogicalHandler.? [?] - MESSAGE: End processing HTTP request after 708.3909ms - OK
+ 2021-02-10 16:00:20,237  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:40036
+ 2021-02-10 16:00:20,252  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-02-10 16:00:20,252  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-02-10 16:00:20,252  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 2021-02-10 16:00:20,334  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:11660:090c7470 successfully announced in 448.4277 ms
+ 2021-02-10 16:00:20,342  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:11660:090c7470 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-02-10 16:00:20,372  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:11660:090c7470 all the dispatchers started
+ 

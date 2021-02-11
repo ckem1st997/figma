@@ -12,6 +12,15 @@
     }
     SlugCovert slugCovert = new SlugCovert();
 }
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@functions{
+    public string GetAntiXsrfRequestToken()
+    {
+        return Xsrf.GetAndStoreTokens(Context).RequestToken;
+    }
+}
+<input type="hidden" id="RequestVerificationToken"
+       name="RequestVerificationToken" value="@GetAntiXsrfRequestToken()">
 @section Scripts {
     <style>
         .product-gallery__thumb.active, .product-gallery__thumb.active:hover {
@@ -38,7 +47,7 @@
                 <li class="breadcrumb-item"><a asp-action="Index">Home</a></li>
                 <li class="breadcrumb-item"><a href="#">Danh mục</a></li>
                 <li class="breadcrumb-item"><a asp-action="" asp-route-data="@Model.RootCategory.ProductCategorieID">@Model.RootCategory.Name</a></li>
-                <li class="breadcrumb-item active id_check_idsp d-none" value="@Model.Product.ProductID" aria-current="page">@Model.Product.ProductID</li>
+                <li class="breadcrumb-item active id_check_idsp d-none" id="idproducts" value="@Model.Product.ProductID" aria-current="page">@Model.Product.ProductID</li>
             </ol>
         </nav>
     </div>
@@ -93,7 +102,7 @@
                                     if (i == 0)
                                     {
                                         <div class="product-gallery__thumb active imagesmallslide">
-                                            <a class="product-gallery__thumb-placeholder" href="javascript:void(0);"data-image="@arrListStr[i]?quality=80&format=jpg">
+                                            <a class="product-gallery__thumb-placeholder" href="javascript:void(0);" data-image="@arrListStr[i]?quality=80&format=jpg">
                                                 <img loading="lazy" alt=" Áo thun G. fw19 " src="@arrListStr[i]?width=83&height=95&format=jpg" data-image="@arrListStr[i]?quality=80&format=jpg">
                                             </a>
                                         </div>
@@ -101,7 +110,7 @@
                                     else
                                     {
                                         <div class="product-gallery__thumb imagesmallslide">
-                                            <a class="product-gallery__thumb-placeholder" href="javascript:void(0);"data-image="@arrListStr[i]?quality=80&format=jpg">
+                                            <a class="product-gallery__thumb-placeholder" href="javascript:void(0);" data-image="@arrListStr[i]?quality=80&format=jpg">
                                                 <img loading="lazy" alt=" Áo thun G. fw19 " src="@arrListStr[i]?width=83&height=95&format=jpg" data-image="@arrListStr[i]?quality=80&format=jpg">
                                             </a>
                                         </div>
@@ -262,13 +271,36 @@
                     </button>
                 </div>
                 <div class="btn-like-select">
-                    <button type="button" class="btn btn-outline-primary btn-like-add">
+                    <button type="button" class="btn btn-outline-primary btn-like-add" id="btnlink">
                         <i class="far fa-heart"></i>
                         <span> Thêm vào yêu thích</span>
                     </button>
                     <button type="button" class="btn btn-outline-danger float-right bg-danger text-white" id="pay-product-late">Mua ngay</button>
                 </div>
+                @*<script>
+                    var xhttp = new XMLHttpRequest();
+                    var id_SP = document.getElementById('idproducts').value;
+                    console.log(id_SP)
+        xhttp.onreadystatechange = function() {
+            if (xhttp.readyState == XMLHttpRequest.DONE) {
+                if (xhttp.status == 200) {
+                    alert(xhttp.responseText);
+                } else {
+                    alert('There was an error processing the AJAX request.');
+                }
+            }
+        };
 
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById("btnlink").onclick = function () {
+                xhttp.open('POST', '@Url.Action("LikeProducts", "Home")', true);
+                xhttp.setRequestHeader("RequestVerificationToken",
+                    document.getElementById('RequestVerificationToken').value);
+
+                xhttp.send();
+            }
+        });
+                </script>*@
             </div>
             <hr />
             <div class="icon detail-icon">

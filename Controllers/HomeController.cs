@@ -750,6 +750,14 @@ namespace figma.Controllers
 
             return View(model);
         }
+        // like Products
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public IActionResult LikeProducts(int productid)
+        {
+            return Ok(productid);
+        }
 
         public class RegisterViewModel
         {

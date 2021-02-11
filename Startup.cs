@@ -123,13 +123,13 @@ namespace figma
             services.AddScoped(typeof(GenericRepository<>));
             services.AddScoped<UnitOfWork>();
             services.AddSingleton<HtmlEncoder>(HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.BasicLatin, UnicodeRanges.CjkUnifiedIdeographs }));
-            services.AddAntiforgery(options =>
-            {
-                // Set Cookie properties using CookieBuilder properties†.
-                options.FormFieldName = "AntiforgeryFieldname";
-                options.HeaderName = "X-CSRF-TOKEN-HEADERNAME";
-                options.SuppressXFrameOptionsHeader = false;
-            });
+            //services.AddAntiforgery(options =>
+            //{
+            //    // Set Cookie properties using CookieBuilder properties†.
+            //    options.FormFieldName = "AntiforgeryFieldname";
+            //    options.HeaderName = "X-CSRF-TOKEN-HEADERNAME";
+            //    options.SuppressXFrameOptionsHeader = false;
+            //});
             services.AddRazorPages();
             //
             services.AddHangfire(configuration => configuration.SetDataCompatibilityLevel(CompatibilityLevel.Version_170).UseSimpleAssemblyNameTypeSerializer().UseRecommendedSerializerSettings().UseSqlServerStorage(Configuration.GetConnectionString("ShopProductContext"), new SqlServerStorageOptions

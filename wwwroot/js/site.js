@@ -1,4 +1,15 @@
-﻿$(".list-unstyled li a").click(function (e) {
+﻿$(".btn-like-add").click(function (e) {
+    var id_SP = $(".id_check_idsp").val();
+    //  console.log(id_SP);
+    likep(id_SP)
+});
+
+
+
+
+
+
+$(".list-unstyled li a").click(function (e) {
     $(".list-unstyled li a").removeClass("active");
     $(".list-unstyled li a").attr('aria-selected', false);
     $(".list-unstyled li ").removeClass("current");
@@ -331,6 +342,31 @@ function addp() {
     };
     jQuery.ajax(params);
 }
+//
+
+function likep(id) {
+    var params = {
+        type: 'POST',
+        url: '/Home/LikeProducts',
+        headers: {
+            "RequestVerificationToken": document.getElementById('RequestVerificationToken').value
+        },
+        data: { productid: id },
+        dataType: "json",
+        success: function (res) {
+            console.log(res);
+        },
+
+        error: function (errormessage) {
+            console.log(errormessage.status)
+        }
+
+
+    };
+    jQuery.ajax(params);
+}
+
+
 //
 function EmptyCart(id) {
     var params = {
