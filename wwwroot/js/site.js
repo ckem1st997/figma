@@ -324,6 +324,9 @@ function addp() {
     var params = {
         type: 'GET',
         url: '/Home/add',
+        headers: {
+            "RequestVerificationToken": document.getElementById('RequestVerificationToken').value
+        },
         data: {},
         dataType: "json",
         success: function (res) {
@@ -354,11 +357,14 @@ function likep(id) {
         data: { productid: id },
         dataType: "json",
         success: function (res) {
-            console.log(res);
+            // console.log(res);
+            if (res)
+                $("#textlike").text("Yêu thích");
         },
 
         error: function (errormessage) {
             console.log(errormessage.status)
+            alert("Bạn cần phải đăng nhập thể thực hiện chức năng này nha, xin cảm ơn.. !")
         }
 
 
@@ -373,6 +379,9 @@ function EmptyCart(id) {
         type: 'POST',
         url: '/ShoppingCart/EmptyCart',
         data: { ListRecordID: id },
+        headers: {
+            "RequestVerificationToken": document.getElementById('RequestVerificationToken').value
+        },
         dataType: "json",
         success: function (res) {
             console.log(res);
@@ -396,6 +405,9 @@ function AddToCartAjax(sl, id, cl, se) {
         type: 'POST',
         url: '/ShoppingCart/AddToCartAjax',
         data: { quantity: sl, productId: id, color: cl, size: se },
+        headers: {
+            "RequestVerificationToken": document.getElementById('RequestVerificationToken').value
+        },
         dataType: "json",
         success: function (res) {
             //  console.log(res);
@@ -419,6 +431,9 @@ function AddToCartAjax1(sl, id, cl, se) {
         type: 'POST',
         url: '/ShoppingCart/AddToCartAjax',
         data: { quantity: sl, productId: id, color: cl, size: se },
+        headers: {
+            "RequestVerificationToken": document.getElementById('RequestVerificationToken').value
+        },
         dataType: "json",
         success: function (res) {
             //  console.log(res);
@@ -445,6 +460,9 @@ function UpdateToCartAjax(id, sl) {
         type: 'POST',
         url: '/ShoppingCart/UpdateCart',
         data: { RecordID: id, quantity: sl },
+        headers: {
+            "RequestVerificationToken": document.getElementById('RequestVerificationToken').value
+        },
         dataType: "json",
         success: function (res) {
             // console.log(res);
@@ -469,6 +487,9 @@ function RemoveFromCart(id) {
         url: '/ShoppingCart/RemoveFromCart',
         data: { RecordID: id },
         dataType: "json",
+        headers: {
+            "RequestVerificationToken": document.getElementById('RequestVerificationToken').value
+        },
         success: function (res) {
             console.log(res);
             if (res.result != 1)
@@ -497,6 +518,9 @@ function UpdateToCart(id, sl) {
         url: '/ShoppingCart/UpdateCart',
         data: { RecordID: id, quantity: sl },
         dataType: "json",
+        headers: {
+            "RequestVerificationToken": document.getElementById('RequestVerificationToken').value
+        },
         success: function (res) {
             console.log(res);
             if (res.result != 1)

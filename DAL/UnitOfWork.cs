@@ -35,8 +35,10 @@ namespace figma.DAL
         private GenericRepository<ProductSizeColor> _productSCRepository;
         private GenericRepository<Size> _sizeRepository;
         private GenericRepository<Color> _colorRepository;
+        private GenericRepository<ProductLike> _productlike;
 
         public GenericRepository<Order> OrderRepository => _orderRepository ?? (_orderRepository = new GenericRepository<Order>(_context));
+        public GenericRepository<ProductLike> ProductLikeRepository => _productlike ?? (_productlike = new GenericRepository<ProductLike>(_context));
         public GenericRepository<OrderDetail> OrderDetailRepository => _orderdetailRepository ?? (_orderdetailRepository = new GenericRepository<OrderDetail>(_context));
         public GenericRepository<Carts> CartRepository => _cartRepository ?? (_cartRepository = new GenericRepository<Carts>(_context));
         public GenericRepository<Members> MemberRepository => _memberRepository ?? (_memberRepository = new GenericRepository<Members>(_context));

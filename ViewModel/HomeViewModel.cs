@@ -49,6 +49,7 @@ namespace figma.ViewModel
     public class ProductDetailViewModel
     {
         public Products Product { get; set; }
+        public IEnumerable<ProductLike> ProductLike { get; set; }
         public IEnumerable<Products> Products { get; set; }
         public IEnumerable<Products> ViewProducts { get; set; }
         public ProductCategories RootCategory { get; set; }

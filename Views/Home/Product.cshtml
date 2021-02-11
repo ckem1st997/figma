@@ -12,15 +12,7 @@
     }
     SlugCovert slugCovert = new SlugCovert();
 }
-@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
-@functions{
-    public string GetAntiXsrfRequestToken()
-    {
-        return Xsrf.GetAndStoreTokens(Context).RequestToken;
-    }
-}
-<input type="hidden" id="RequestVerificationToken"
-       name="RequestVerificationToken" value="@GetAntiXsrfRequestToken()">
+
 @section Scripts {
     <style>
         .product-gallery__thumb.active, .product-gallery__thumb.active:hover {
@@ -273,34 +265,17 @@
                 <div class="btn-like-select">
                     <button type="button" class="btn btn-outline-primary btn-like-add" id="btnlink">
                         <i class="far fa-heart"></i>
-                        <span> Thêm vào yêu thích</span>
+                        @if (Model.ProductLike.Count() > 0)
+                        {
+                            <span id="textlike">Yêu thích</span>
+                        }
+                        else
+                        {
+                            <span id="textlike">Thêm vào yêu thích</span>
+                        }
                     </button>
                     <button type="button" class="btn btn-outline-danger float-right bg-danger text-white" id="pay-product-late">Mua ngay</button>
                 </div>
-                @*<script>
-                    var xhttp = new XMLHttpRequest();
-                    var id_SP = document.getElementById('idproducts').value;
-                    console.log(id_SP)
-        xhttp.onreadystatechange = function() {
-            if (xhttp.readyState == XMLHttpRequest.DONE) {
-                if (xhttp.status == 200) {
-                    alert(xhttp.responseText);
-                } else {
-                    alert('There was an error processing the AJAX request.');
-                }
-            }
-        };
-
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById("btnlink").onclick = function () {
-                xhttp.open('POST', '@Url.Action("LikeProducts", "Home")', true);
-                xhttp.setRequestHeader("RequestVerificationToken",
-                    document.getElementById('RequestVerificationToken').value);
-
-                xhttp.send();
-            }
-        });
-                </script>*@
             </div>
             <hr />
             <div class="icon detail-icon">

@@ -383,7 +383,7 @@ namespace figma.Controllers
 
         #region CartRes
         [HttpPost]
-        [IgnoreAntiforgeryToken]
+        [ValidateAntiForgeryToken]
         public JsonResult AddToCartAjax(int quantity, int productId, string color, string size)
         {
             CheckCookies();
@@ -432,7 +432,7 @@ namespace figma.Controllers
             return Json(new { data });
         }
         [HttpPost]
-        [IgnoreAntiforgeryToken]
+        [ValidateAntiForgeryToken]
         public JsonResult UpdateCart(int RecordID, int quantity)
         {
             var CartItem = _unitOfWork.CartRepository.GetByID(RecordID);
@@ -445,7 +445,7 @@ namespace figma.Controllers
 
         //
         [HttpPost]
-        [IgnoreAntiforgeryToken]
+        [ValidateAntiForgeryToken]
         public JsonResult RemoveFromCart(int RecordID)
         {
             var cartItem = _unitOfWork.CartRepository.Get(
@@ -462,7 +462,7 @@ namespace figma.Controllers
         }
 
         [HttpPost]
-        [IgnoreAntiforgeryToken]
+        [ValidateAntiForgeryToken]
         public JsonResult EmptyCart(string ListRecordID)
         {
             string[] list = ListRecordID.Split(',');

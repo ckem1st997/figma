@@ -445,6 +445,8 @@ namespace figma.Controllers
                                  Expires = new DateTimeOffset(DateTime.Now.AddDays(1))
                              });
             }
+            var claims = HttpContext.User.Claims;
+            var userId = claims.FirstOrDefault(c => c.Type == "UserId").Value;
 
             var product = _unitOfWork.ProductRepository.GetByID(proId);
             if (product == null)
@@ -458,6 +460,7 @@ namespace figma.Controllers
             {
                 Product = product,
                 Products = products,
+                ProductLike = _unitOfWork.ProductLikeRepository.Get(x => x.MemberId == int.Parse(userId) && x.ProductID == proId),
                 //   ViewProducts = _unitOfWork.ProductRepository.Get().ToList(),
                 RootCategory = _unitOfWork.ProductCategoryRepository.Get(a => a.Active, q => q.OrderByDescending(a => a.Soft)).SingleOrDefault(a => a.ProductCategorieID == product.ProductCategorieID),
                 Collection = _unitOfWork.CollectionRepository.Get(a => a.Active).SingleOrDefault(a => a.CollectionID == product.CollectionID),
@@ -754,9 +757,33 @@ namespace figma.Controllers
         [Authorize]
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public IActionResult LikeProducts(int productid)
+        public async Task<IActionResult> LikeProducts(int productid)
         {
-            return Ok(productid);
+
+            if (productid > 0)
+            {
+                try
+                {
+                    var claims = HttpContext.User.Claims;
+                    var userId = claims.FirstOrDefault(c => c.Type == "UserId").Value;
+                    var search = await _unitOfWork.ProductLikeRepository.GetAync(x => x.MemberId == int.Parse(userId) && x.ProductID == productid);
+                    if (!(search.Count() > 0))
+                    {
+                        ProductLike productLike = new ProductLike();
+                        productLike.MemberId = int.Parse(userId);
+                        productLike.ProductID = productid;
+                        _unitOfWork.ProductLikeRepository.Insert(productLike);
+                        await _unitOfWork.Save();
+                        return Ok(true);
+                    }
+                    return Ok(false);
+                }
+                catch
+                {
+                    return Ok(false);
+                }
+            }
+            return Ok(false);
         }
 
         public class RegisterViewModel
