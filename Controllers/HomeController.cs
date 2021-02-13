@@ -649,6 +649,29 @@ namespace figma.Controllers
             return RedirectToAction(nameof(Login));
         }
 
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditAccount(string ht, string sdt, string dc)
+        {
+            var userId = HttpContext.User.Claims.FirstOrDefault(c => c.Type == "UserId").Value;
+            var user = _unitOfWork.MemberRepository.GetByID(int.Parse(userId));
+            try
+            {
+                user.Fullname = ht;
+                user.Address = dc;
+                user.Mobile = sdt;
+                _unitOfWork.MemberRepository.Update(user);
+                await _unitOfWork.Save();
+                return Ok(true);
+            }
+            catch (Exception)
+            {
+                return Ok(false);
+            }
+        }
+
+
         [AllowAnonymous]
         public IActionResult Register()
         {

@@ -1,7 +1,18 @@
-﻿$(".btn-like-add").click(function (e) {
+﻿
+
+$(".btn-like-add").click(function (e) {
     var id_SP = $(".id_check_idsp").val();
     //  console.log(id_SP);
     likep(id_SP)
+});
+$("#submit_info").click(function (e) {
+    var ht = $("#Members_Fullname").val();
+    var sdt = $("#Members_Mobile").val();
+    var dc = $("#Members_Address").val();
+    $("#submit_info > img").show();
+    $("#submit_info > span").hide();
+    editaccount(ht, sdt, dc);
+
 });
 
 
@@ -177,7 +188,10 @@ $(document).ready(function () {
     $("#add-to-cart").off("click").click(function () {
         if ($("#variant-swatch-0 .select-swap .swatch-element").length || $("#variant-swatch-1 .select-swap .swatch-element").length > 0) {
             if ($("#variant-swatch-0 .select-swap .swatch-element.checked").hasClass("checked") != true && $("#variant-swatch-1 .select-swap .swatch-element.checked").hasClass("checked") != true)
-                alert("Xin bạn vui lòng chọn sản phẩm và size yêu thích nha !");
+                $.alert({
+                    title: 'Thông báo!',
+                    content: 'Xin bạn vui lòng chọn sản phẩm và size yêu thích nha !!',
+                });
             else {
                 var id_SP = $(".id_check_idsp").val();
                 var Price_SP = $(".giaban").html();
@@ -210,7 +224,10 @@ $(document).ready(function () {
     $("#pay-product-late").off("click").click(function () {
         if ($("#variant-swatch-0 .select-swap .swatch-element").length || $("#variant-swatch-1 .select-swap .swatch-element").length > 0) {
             if ($("#variant-swatch-0 .select-swap .swatch-element.checked").hasClass("checked") != true && $("#variant-swatch-1 .select-swap .swatch-element.checked").hasClass("checked") != true)
-                alert("Xin bạn vui lòng chọn sản phẩm và size yêu thích nha !");
+                $.alert({
+                    title: 'Thông báo!',
+                    content: 'Xin bạn vui lòng chọn sản phẩm và size yêu thích nha !!',
+                });
             else {
                 var id_SP = $(".id_check_idsp").val();
                 var Price_SP = $(".giaban").html();
@@ -312,9 +329,15 @@ function AddToCart(quantity, productId, color, size) {
     if (confirm("Bạn có muốn thêm sản phẩm vào giỏ hàng ?")) {
         $.post("/ShoppingCart/AddToCartAjax", { quantity: quantity, productId: productId, color: color, size: size }, function (data) {
             if (data.result == 1) {
-                alert("Thêm thành công !")
+                $.alert({
+                    title: 'Thông báo!',
+                    content: 'Thêm thành công !',
+                });
             } else {
-                alert("Quá trình thực hiện không thành công. Hãy thử lại");
+                $.alert({
+                    title: 'Thông báo!',
+                    content: 'Quá trình thực hiện không thành công. Hãy thử lại!',
+                });
             }
         });
     }
@@ -332,9 +355,16 @@ function addp() {
         success: function (res) {
             console.log(res);
             if (res.result == 1)
-                alert("Thành công !");
+                $.alert({
+                    title: 'Thông báo!',
+                    content: 'Thành công !',
+                });
+
             else
-                alert("Thất bại !");
+                $.alert({
+                    title: 'Thông báo!',
+                    content: 'Thất bại!',
+                });
         },
 
         error: function (errormessage) {
@@ -346,6 +376,35 @@ function addp() {
     jQuery.ajax(params);
 }
 //
+function editaccount(ht, sdt, dc) {
+    var params = {
+        type: 'POST',
+        url: '/Home/EditAccount',
+        headers: {
+            "RequestVerificationToken": document.getElementById('RequestVerificationToken').value
+        },
+        data: { ht: ht, sdt, sdt, dc: dc },
+        dataType: "json",
+        success: function (res) {
+            console.log(res);
+            if (!res)
+                $.alert({
+                    title: 'Thông báo!',
+                    content: 'Quá trình thực hiện không thành công. Hãy thử lại!',
+                });
+            window.location.assign('/Home/Account?idview=infoaccount')
+        },
+
+        error: function (errormessage) {
+            console.log(errormessage)
+        }
+
+
+    };
+    jQuery.ajax(params);
+}
+
+///
 
 function likep(id) {
     var params = {
@@ -367,7 +426,10 @@ function likep(id) {
 
         error: function (errormessage) {
             console.log(errormessage.status)
-            alert("Bạn cần phải đăng nhập thể thực hiện chức năng này nha, xin cảm ơn.. !")
+            $.alert({
+                title: 'Thông báo!',
+                content: 'Bạn cần phải đăng nhập thể thực hiện chức năng này nha, xin cảm ơn..  !',
+            });
         }
 
 
@@ -415,9 +477,15 @@ function AddToCartAjax(sl, id, cl, se) {
         success: function (res) {
             //  console.log(res);
             if (res.data.result == 1)
-                alert("Thêm sản phẩm thành công !");
+                $.alert({
+                    title: 'Thông báo!',
+                    content: 'Thêm sản phẩm thành công !',
+                });
             else
-                alert("Thêm sản phẩm thất bại, xin bạn vui lòng thử lại nha !");
+                $.alert({
+                    title: 'Thông báo!',
+                    content: 'Thêm sản phẩm thất bại, xin bạn vui lòng thử lại nha !',
+                });
         },
 
         error: function (errormessage) {
@@ -445,7 +513,10 @@ function AddToCartAjax1(sl, id, cl, se) {
                 window.location.assign('/gio-hang/thong-tin')
             }
             else
-                alert("Thêm sản phẩm thất bại, xin bạn vui lòng thử lại nha !");
+                $.alert({
+                    title: 'Thông báo!',
+                    content: 'Thêm sản phẩm thất bại, xin bạn vui lòng thử lại nha !',
+                });
         },
 
         error: function (errormessage) {
@@ -470,7 +541,10 @@ function UpdateToCartAjax(id, sl) {
         success: function (res) {
             // console.log(res);
             if (res.result != 1)
-                alert("Chỉnh sửa thất bại, xin bạn vui lòng thử lại nha !");
+                $.alert({
+                    title: 'Thông báo!',
+                    content: 'Chỉnh sửa thất bại, xin bạn vui lòng thử lại nha !',
+                });
         },
 
         error: function (errormessage) {
@@ -496,7 +570,10 @@ function RemoveFromCart(id) {
         success: function (res) {
             console.log(res);
             if (res.result != 1)
-                alert("Xóa thất bại, xin bạn vui lòng thử lại nha !");
+                $.alert({
+                    title: 'Thông báo!',
+                    content: 'Xóa thất bại, xin bạn vui lòng thử lại nha !',
+                });
             else {
                 if (confirm("Xóa thành công"))
                     window.location.assign('/gio-hang/thong-tin')
@@ -527,7 +604,10 @@ function UpdateToCart(id, sl) {
         success: function (res) {
             console.log(res);
             if (res.result != 1)
-                alert("Chỉnh sửa thất bại, xin bạn vui lòng thử lại nha !");
+                $.alert({
+                    title: 'Thông báo!',
+                    content: 'Chỉnh sửa thất bại, xin bạn vui lòng thử lại nha !',
+                });
             else {
                 if (confirm("Cập nhật thành công"))
                     window.location.assign('/gio-hang/thong-tin')
