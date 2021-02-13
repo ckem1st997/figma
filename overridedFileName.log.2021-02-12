@@ -1,0 +1,320 @@
+2021-02-12 16:50:18,291  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:14016:04b7f87e is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-02-12 16:50:18,311  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:14016:04b7f87e all the dispatchers started
+ 2021-02-12 16:50:18,522  INFO Hangfire.Server.ServerWatchdog.? [?] - MESSAGE: 1 servers were removed due to timeout
+ 2021-02-12 16:50:23,828 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/07/132571629827187252.jpg?quality=90&format=jpg' could not be resolved
+ 2021-02-12 16:50:23,828 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/05/132570684183124056.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:50:23,857 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571368794292425.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:50:23,858 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571367587120691.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:50:23,861 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571368247490897.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:50:23,865 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571367592822108.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:50:23,869 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571370100234944.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:50:23,870 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571368251186149.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:50:23,871 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571366773619492.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:50:23,871 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571361651377047.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:50:23,872 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571366774112195.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:50:23,873 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571368791415078.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:50:23,873 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571369332622966.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:50:23,873 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571369324600144.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:50:23,874 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571370100836792.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:50:23,877 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571361643498977.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:50:23,877 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571370785935681.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:50:23,889 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571370799783431.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:50:26,872 ERROR Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.? [?] - MESSAGE: An unhandled exception has occurred while executing the request.
+ System.NullReferenceException: Object reference not set to an instance of an object.
+   at AspNetCore.Views_Home_Account.ExecuteAsync() in C:\Users\16879\source\repos\figma\Views\Home\Account.cshtml:line 44
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ActionContext actionContext, IView view, ViewDataDictionary viewData, ITempDataDictionary tempData, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor.ExecuteAsync(ActionContext context, ViewResult result)
+   at Microsoft.AspNetCore.Mvc.ViewResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|29_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Builder.Extensions.MapMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2021-02-12 16:51:13,760  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:13756:f625b165 successfully announced in 1989.2904 ms
+ 2021-02-12 16:51:14,039  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:13756:f625b165 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-02-12 16:51:14,385  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:13756:f625b165 all the dispatchers started
+ 2021-02-12 16:51:15,273  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:7509
+ 2021-02-12 16:51:15,365  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-02-12 16:51:15,442  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-02-12 16:51:15,505  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 2021-02-12 16:51:22,666 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/07/132571629827187252.jpg?quality=90&format=jpg' could not be resolved
+ 2021-02-12 16:51:22,913 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/05/132570684183124056.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:51:22,920 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571367587120691.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:51:22,975 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571367592822108.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:51:23,114 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571368251186149.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:51:23,136 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571368247490897.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:51:23,225 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571368791415078.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:51:23,439 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571368794292425.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:51:23,532 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571361643498977.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:51:23,565 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571369324600144.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:51:23,533 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571361651377047.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:51:23,782 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571366774112195.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:51:23,782 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571366773619492.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:51:23,814 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571369332622966.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:51:24,000 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571370100836792.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:51:24,033 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571370100234944.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:51:24,142 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571370785935681.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:51:24,189 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571370799783431.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:51:24,327 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/07/132571630099062347.jpg?quality=90&format=jpg' could not be resolved
+ 2021-02-12 16:51:24,422 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/07/132571630312801848.jpg?quality=90&format=jpg' could not be resolved
+ 2021-02-12 16:51:24,530 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571370799783431.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:51:24,468 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571370785935681.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:51:24,670 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/05/132570684183124056.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:51:24,703 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571370100234944.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:51:24,842 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571370100836792.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:51:24,920 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571366773619492.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:51:25,013 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571366774112195.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:51:25,155 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571369332622966.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:51:25,156 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571369324600144.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:51:25,283 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571361643498977.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:51:25,314 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571361651377047.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:51:25,438 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571368791415078.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:51:25,516 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571368794292425.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:51:25,611 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571368247490897.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:51:25,736 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571368251186149.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:51:25,784 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571367592822108.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:51:25,737 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571367587120691.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:53:09,094  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:13678
+ 2021-02-12 16:53:09,105  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-02-12 16:53:09,105  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-02-12 16:53:09,106  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 2021-02-12 16:53:09,201  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:9104:d2029806 successfully announced in 464.4712 ms
+ 2021-02-12 16:53:09,205  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:9104:d2029806 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-02-12 16:53:09,215  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:9104:d2029806 all the dispatchers started
+ 2021-02-12 16:53:09,431  INFO Hangfire.Server.ServerWatchdog.? [?] - MESSAGE: 1 servers were removed due to timeout
+ 2021-02-12 16:53:14,766 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/07/132571629827187252.jpg?quality=90&format=jpg' could not be resolved
+ 2021-02-12 16:53:14,772 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/05/132570684183124056.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:53:14,791 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571367587120691.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:53:14,795 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571367592822108.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:53:14,809 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571368247490897.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:53:14,809 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571368251186149.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:53:14,817 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571368791415078.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:53:14,820 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571368794292425.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:53:14,842 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571361643498977.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:53:14,842 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571361651377047.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:53:14,851 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571369324600144.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:53:14,851 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571369332622966.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:53:14,861 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571366774112195.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:53:14,861 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571366773619492.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:53:14,870 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571370100234944.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:53:14,872 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571370100836792.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:53:14,879 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571370785935681.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:53:14,881 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571370799783431.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:53:14,891 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/07/132571630099062347.jpg?quality=90&format=jpg' could not be resolved
+ 2021-02-12 16:53:14,894 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/07/132571630312801848.jpg?quality=90&format=jpg' could not be resolved
+ 2021-02-12 16:53:15,107 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571370785935681.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:53:15,110 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571370799783431.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:53:15,126 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/05/132570684183124056.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:53:15,130 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571370100234944.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:53:15,137 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571370100836792.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:53:15,141 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571366773619492.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:53:15,148 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571366774112195.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:53:15,159 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571369324600144.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:53:15,159 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571369332622966.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:53:15,200 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571361643498977.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:53:15,214 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571361651377047.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:53:15,224 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571368791415078.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:53:15,225 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571368794292425.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:53:15,236 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571368247490897.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:53:15,238 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571368251186149.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:53:15,253 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571367587120691.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:53:15,254 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571367592822108.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:53:19,967 ERROR Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.? [?] - MESSAGE: An unhandled exception has occurred while executing the request.
+ System.NullReferenceException: Object reference not set to an instance of an object.
+   at AspNetCore.Views_Home_Account.ExecuteAsync() in C:\Users\16879\source\repos\figma\Views\Home\Account.cshtml:line 44
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ActionContext actionContext, IView view, ViewDataDictionary viewData, ITempDataDictionary tempData, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor.ExecuteAsync(ActionContext context, ViewResult result)
+   at Microsoft.AspNetCore.Mvc.ViewResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|29_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Builder.Extensions.MapMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2021-02-12 16:54:46,811  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:31334
+ 2021-02-12 16:54:46,822  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-02-12 16:54:46,822  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-02-12 16:54:46,822  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 2021-02-12 16:54:46,942  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:6952:06a81571 successfully announced in 385.1888 ms
+ 2021-02-12 16:54:46,946  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:6952:06a81571 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-02-12 16:54:46,954  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:6952:06a81571 all the dispatchers started
+ 2021-02-12 16:54:47,181  INFO Hangfire.Server.ServerWatchdog.? [?] - MESSAGE: 1 servers were removed due to timeout
+ 2021-02-12 16:54:48,027 ERROR Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.? [?] - MESSAGE: An unhandled exception has occurred while executing the request.
+ System.NullReferenceException: Object reference not set to an instance of an object.
+   at AspNetCore.Views_Home_Account.ExecuteAsync() in C:\Users\16879\source\repos\figma\Views\Home\Account.cshtml:line 44
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ActionContext actionContext, IView view, ViewDataDictionary viewData, ITempDataDictionary tempData, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor.ExecuteAsync(ActionContext context, ViewResult result)
+   at Microsoft.AspNetCore.Mvc.ViewResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|29_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Builder.Extensions.MapMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2021-02-12 16:55:21,733  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:31876
+ 2021-02-12 16:55:21,744  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-02-12 16:55:21,744  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-02-12 16:55:21,744  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 2021-02-12 16:55:21,866  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:7812:598d14b5 successfully announced in 404.9821 ms
+ 2021-02-12 16:55:21,869  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:7812:598d14b5 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-02-12 16:55:21,879  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:7812:598d14b5 all the dispatchers started
+ 2021-02-12 16:55:22,107  INFO Hangfire.Server.ServerWatchdog.? [?] - MESSAGE: 2 servers were removed due to timeout
+ 2021-02-12 16:55:23,191 ERROR Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.? [?] - MESSAGE: An unhandled exception has occurred while executing the request.
+ System.NullReferenceException: Object reference not set to an instance of an object.
+   at AspNetCore.Views_Home_Account.ExecuteAsync() in C:\Users\16879\source\repos\figma\Views\Home\Account.cshtml:line 44
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ActionContext actionContext, IView view, ViewDataDictionary viewData, ITempDataDictionary tempData, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor.ExecuteAsync(ActionContext context, ViewResult result)
+   at Microsoft.AspNetCore.Mvc.ViewResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|29_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Builder.Extensions.MapMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2021-02-12 16:57:07,314  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:29513
+ 2021-02-12 16:57:07,328  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-02-12 16:57:07,328  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-02-12 16:57:07,328  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 2021-02-12 16:57:07,449  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:12840:a82513bd successfully announced in 414.3015 ms
+ 2021-02-12 16:57:07,452  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:12840:a82513bd is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-02-12 16:57:07,459  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:12840:a82513bd all the dispatchers started
+ 2021-02-12 16:57:12,717 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/07/132571629827187252.jpg?quality=90&format=jpg' could not be resolved
+ 2021-02-12 16:57:13,098 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/05/132570684183124056.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:57:13,108 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571367587120691.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:57:13,119 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571367592822108.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:57:13,128 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571368247490897.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:57:13,128 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571368251186149.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:57:13,138 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571368794292425.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:57:13,138 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571368791415078.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:57:13,152 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571361643498977.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:57:13,152 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571361651377047.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:57:13,165 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571369332622966.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:57:13,166 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571369324600144.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:57:13,178 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571366773619492.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:57:13,178 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571366774112195.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:57:13,189 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571370100234944.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:57:13,189 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571370100836792.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:57:13,198 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571370799783431.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:57:13,198 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571370785935681.jpg?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:57:13,206 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/07/132571630099062347.jpg?quality=90&format=jpg' could not be resolved
+ 2021-02-12 16:57:13,206 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/07/132571630312801848.jpg?quality=90&format=jpg' could not be resolved
+ 2021-02-12 16:57:13,226 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571370785935681.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:57:13,232 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571370799783431.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:57:13,242 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/05/132570684183124056.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:57:13,243 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571370100234944.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:57:13,250 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571370100836792.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:57:13,251 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571366773619492.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:57:13,382 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571366774112195.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:57:13,384 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571369324600144.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:57:13,385 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571369332622966.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:57:13,400 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571361643498977.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:57:13,401 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571361651377047.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:57:13,424 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571368791415078.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:57:13,428 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571368794292425.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:57:13,429 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571368251186149.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:57:13,429 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571368247490897.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:57:13,434 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571367592822108.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:57:13,436 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2021/02/06/132571367587120691.jpg?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-02-12 16:57:15,610 ERROR Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.? [?] - MESSAGE: An unhandled exception has occurred while executing the request.
+ System.NullReferenceException: Object reference not set to an instance of an object.
+   at AspNetCore.Views_Home_Account.ExecuteAsync() in C:\Users\16879\source\repos\figma\Views\Home\Account.cshtml:line 44
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ActionContext actionContext, IView view, ViewDataDictionary viewData, ITempDataDictionary tempData, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor.ExecuteAsync(ActionContext context, ViewResult result)
+   at Microsoft.AspNetCore.Mvc.ViewResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|29_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Builder.Extensions.MapMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)

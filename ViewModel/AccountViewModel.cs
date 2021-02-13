@@ -9,5 +9,6 @@ namespace figma.ViewModel
     public class AccountViewModel
     {
         public Members Members { get; set; }
+        public List<ViewProducts> Products { get; set; }
     }
 }

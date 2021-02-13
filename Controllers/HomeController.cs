@@ -619,27 +619,29 @@ namespace figma.Controllers
 
         #region Account
         [Authorize]
-        public async Task<IActionResult> Account()
+        public async Task<IActionResult> Account(string idview)
         {
+            if (idview == null)
+                ViewBag.view = "infoaccount";
+            else
+                ViewBag.view = idview;
             AccountViewModel model = new AccountViewModel();
             var claims = HttpContext.User.Claims;
             var userName = claims.FirstOrDefault(c => c.Type == "UserName").Value;
             var userId = claims.FirstOrDefault(c => c.Type == "UserId").Value;
             if (userId != null && userName != null)
             {
+                ViewBag.social = claims.FirstOrDefault(c => c.Type == "Social").Value;
                 try
                 {
                     ViewBag.name = userName;
                     ViewBag.id = userId;
-                    ViewBag.social = claims.FirstOrDefault(c => c.Type == "Social").Value;
                     var result = _unitOfWork.MemberRepository.GetByID(int.Parse(userId));
                     model.Members = result;
-                    if (result != null)
-                        return View(model);
+                    return View(model);
                 }
                 catch (Exception)
                 {
-
                     return View();
                 }
 
@@ -776,7 +778,7 @@ namespace figma.Controllers
                     var claims = HttpContext.User.Claims;
                     var userId = claims.FirstOrDefault(c => c.Type == "UserId").Value;
                     var search = await _unitOfWork.ProductLikeRepository.GetAync(x => x.MemberId == int.Parse(userId) && x.ProductID == productid);
-                    if (!(search.Count() > 0))
+                    if (search.Any())
                     {
                         ProductLike productLike = new ProductLike();
                         productLike.MemberId = int.Parse(userId);
