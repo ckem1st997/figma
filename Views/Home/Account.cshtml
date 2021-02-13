@@ -13,7 +13,7 @@
 <div class="g-signin2 d-none" data-onsuccess="onSignIn"></div>
 
 <p>
-    <a href="#" onclick="signOut();">Đăng xuất</a>
+    <a class="btn btn-danger" href="#" onclick="signOut();">Đăng xuất</a>
 </p>
 <script>
     function signOut() {
@@ -79,12 +79,12 @@
                                         </a>
                                     </li>
 
-                                    <li>
+                                    @*<li>
                                         <a asp-action="Account" asp-controller="Home" asp-route-idview="infoaccount">
                                             <span> <i class="fas fa-tags"></i></span>
                                             <span> Vouchers</span>
                                         </a>
-                                    </li>
+                                    </li>*@
 
                                     <li>
                                         <a asp-action="Account" asp-controller="Home" asp-route-idview="infoaccount">
@@ -100,7 +100,7 @@
                                         </a>
                                     </li>
 
-                                    <li>
+                                    @*<li>
                                         <a>
                                             <span><i class="fas fa-bell"></i></span>
                                             <span> Thông báo của tôi</span>
@@ -118,7 +118,7 @@
                                             <span><i class="fas fa-file-invoice"></i></span>
                                             <span>Kiểm tra đơn hàng</span>
                                         </a>
-                                    </li>
+                                    </li>*@
 
                                 </ul>
                             </div>

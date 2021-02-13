@@ -778,7 +778,7 @@ namespace figma.Controllers
                     var claims = HttpContext.User.Claims;
                     var userId = claims.FirstOrDefault(c => c.Type == "UserId").Value;
                     var search = await _unitOfWork.ProductLikeRepository.GetAync(x => x.MemberId == int.Parse(userId) && x.ProductID == productid);
-                    if (search.Any())
+                    if (!search.Any())
                     {
                         ProductLike productLike = new ProductLike();
                         productLike.MemberId = int.Parse(userId);
