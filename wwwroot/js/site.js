@@ -67,24 +67,6 @@ $(".info .row .col-4").hover(
     }
 );
 
-//document.addEventListener(
-//    "DOMContentLoaded", () => {
-//        const menu = new MmenuLight(
-//            document.querySelector("#nav"),
-//            "(max-width: 992px)"
-//        );
-//        const navigator = menu.navigation({
-
-//        });
-//        const drawer = menu.offcanvas();
-
-//        document.querySelector("button[href='#nav']")
-//            .addEventListener("click", (evnt) => {
-//                evnt.preventDefault();
-//                drawer.open();
-//            });
-//    }
-//);
 $(document).ready(function () {
     $(".datepicker").datepicker();
     $("#exampleModal5").modal('show');
