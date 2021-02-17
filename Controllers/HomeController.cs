@@ -42,84 +42,16 @@ namespace figma.Controllers
             _unitOfWork = unitOfWork;
             _mailer = mailer;
             _clientFactory = clientFactory;
-            if (_httpContextAccessor.HttpContext.Request.Cookies[CartCookieKey] == null)
-            {
-                _httpContextAccessor.HttpContext.Response.Cookies.Append(CartCookieKey, Guid.NewGuid().ToString(),
-                 new CookieOptions()
-                 {
-                     //  SameSite = SameSiteMode.Lax,
-                     // Secure = true,
-                     Expires = new DateTimeOffset(DateTime.Now.AddDays(1))
-                 });
-            }
-        }
-        public JsonResult Add()
-        {
-            //ProductID,Name,Description,Image,Body,ProductCategorieID,Quantity,
-            //Factory,Price,SaleOff,QuyCach,Sort,Hot,Home,Active,TitleMeta,
-            //DescriptionMeta,GiftInfo,Content,StatusProduct,CollectionID,BarCode,CreateDate,CreateBy
-            //string name = "Váy STELLA BE cổ vuông chun vai";
-            //string[] img = { "uploads/2020/09/06/132438363534870618.png,uploads/2020/09/06/132438363539334740.png,uploads/2020/09/06/132438363541560735.png,uploads/2020/09/06/132438363544079376.png,uploads/2020/09/06/132438363547063270.png,uploads/2020/09/06/132438363549254747.png", "uploads/2020/09/03/132435734556263309.png,uploads/2020/09/03/132435734559207086.png,uploads/2020/09/03/132435734561526431.png,uploads/2020/09/03/132435734565776953.png,uploads/2020/09/03/132435734568138937.png,uploads/2020/09/03/132435734570197372.png,uploads/2020/09/03/132435734572503314.png", "uploads/2020/09/03/132435734932870348.png,uploads/2020/09/03/132435734935739906.png,uploads/2020/09/03/132435734938064048.png,uploads/2020/09/03/132435734939979281.png,uploads/2020/09/03/132435734942204032.png,uploads/2020/09/03/132435734944396254.png,uploads/2020/09/03/132435734946580826.png,uploads/2020/09/03/132435734948894694.png", "uploads/2020/09/03/132435735253593281.png,uploads/2020/09/03/132435735256435652.png,uploads/2020/09/03/132435735258660281.png,uploads/2020/09/03/132435735260562887.png,uploads/2020/09/03/132435735262847997.png,uploads/2020/09/03/132435735265158821.png,uploads/2020/09/03/132435735267492917.png", "uploads/2020/09/03/132435735563298472.png,uploads/2020/09/03/132435735566364804.png,uploads/2020/09/03/132435735568691340.png,uploads/2020/09/03/132435735570584196.png,uploads/2020/09/03/132435735572904220.png,uploads/2020/09/03/132435735575345447.png,uploads/2020/09/03/132435735577225153.png", "uploads/2020/09/03/132435735951790896.png,uploads/2020/09/03/132435735954234595.png,uploads/2020/09/03/132435735956085355.png,uploads/2020/09/03/132435735958246157.png,uploads/2020/09/03/132435735960310306.png,uploads/2020/09/03/132435735962146364.png", "uploads/2020/09/03/132435736366333089.png,uploads/2020/09/03/132435736369311489.png,uploads/2020/09/03/132435736371620431.png,uploads/2020/09/03/132435736373535857.png,uploads/2020/09/03/132435736375898195.png,uploads/2020/09/03/132435736378024042.png,uploads/2020/09/03/132435736380043009.png", "uploads/2020/09/03/132435736705873514.png,uploads/2020/09/03/132435736708922105.png,uploads/2020/09/03/132435736711443768.png,uploads/2020/09/03/132435736713435462.png,uploads/2020/09/03/132435736715715778.png,uploads/2020/09/03/132435736717949521.png,uploads/2020/09/03/132435736719937440.png", "uploads/2020/09/20/132450508499578916.jpg,uploads/2020/09/20/132450508503182823.jpg,uploads/2020/09/20/132450508504649804.jpg,uploads/2020/09/20/132450508506052883.jpg,uploads/2020/09/20/132450508507255832.jpg,uploads/2020/09/20/132450508507905622.jpg,uploads/2020/09/20/132450508508454478.jpg", "uploads/2020/09/20/132450509184786404.jpg,uploads/2020/09/20/132450509185535127.jpg,uploads/2020/09/20/132450509186245184.jpg,uploads/2020/09/20/132450509186811881.jpg,uploads/2020/09/20/132450509187311790.jpg,uploads/2020/09/20/132450509187834360.jpg,uploads/2020/09/20/132450509188318371.jpg", "uploads/2020/09/20/132450509925989910.jpg,uploads/2020/09/20/132450509926969849.jpg,uploads/2020/09/20/132450509928094111.jpg,uploads/2020/09/20/132450509928744734.jpg,uploads/2020/09/20/132450509929254189.jpg,uploads/2020/09/20/132450509929777010.jpg,uploads/2020/09/20/132450509930267158.jpg", "uploads/2020/09/20/132450510235331261.jpg,uploads/2020/09/20/132450510236311537.jpg,uploads/2020/09/20/132450510237067016.jpg,uploads/2020/09/20/132450510237643353.jpg,uploads/2020/09/20/132450510238144788.jpg,uploads/2020/09/20/132450510238660206.jpg,uploads/2020/09/20/132450510239167509.jpg", "uploads/2020/09/20/132450510569896054.jpg,uploads/2020/09/20/132450510570666055.jpg,uploads/2020/09/20/132450510571453837.jpg,uploads/2020/09/20/132450510572185988.jpg,uploads/2020/09/20/132450510572686764.jpg,uploads/2020/09/20/132450510573330928.jpg,uploads/2020/09/20/132450510573854815.jpg", "uploads/2020/09/20/132450510941022590.jpg,uploads/2020/09/20/132450510942112914.jpg,uploads/2020/09/20/132450510942855545.jpg,uploads/2020/09/20/132450510943481997.jpg,uploads/2020/09/20/132450510944116804.jpg,uploads/2020/09/20/132450510944732560.jpg,uploads/2020/09/20/132450510945248503.jpg", "uploads/2020/09/20/132450513718160233.jpg,uploads/2020/09/20/132450513718933077.jpg,uploads/2020/09/20/132450513719401577.jpg,uploads/2020/09/20/132450513719919186.jpg", "uploads/2020/09/20/132450513942758055.jpg,uploads/2020/09/20/132450513943699541.jpg,uploads/2020/09/20/132450513944219267.jpg,uploads/2020/09/20/132450513944597805.jpg,uploads/2020/09/20/132450513944973670.jpg,uploads/2020/09/20/132450513945533886.jpg" };
-            //string Description = "Váy STELLA BE cổ vuông chun vai";
-            //int ProductCategorieID = 6;
-            //int Quantity = 1;
-            //string[] Factory = { "Việt Nam", "Mỹ", "Hàn Quốc" };
-            //decimal Price = 600000;
-            //decimal SaleOff = 100000;
-            //string[] CreateBy = { "Admin", "NV1", "NV2" };
-            //int Home = 1;
-            //int Sort = 1;
-            //int active = 1;
-            //string TitleMeta = "váy cao cấp 2018, rèm vải đẹp hà nội";
-            //int CollectionID = 2;
-            //double BarCode = 1;
-            //bool[] Hot = { true, false };
-            //int StatusProduct = 1;
-            //string[] Body = { "", "" };
-            //string DescriptionMeta = "Rèm vải đẹp, mẫu mã đa dạng, Rèm Nam An –đơn vị cung cấp rèm uy tin chất lượng, bảo hành trọn đời sản phẩm. Giảm giá ngay 10% khi đặt hàng online. Miễn phí phụ kiện và công lắp đặt.";
-            try
-            {
-                for (int i = 1; i < 12224; i++)
-                {
-                    // Random random = new Random();
-                    //  Products products = new Products();
-                    //products.Name = name + "" + i + "";
-                    //products.Image = img[random.Next(0, img.Length)];
-                    //products.Description = Description + "" + i + "";
-                    //products.ProductCategorieID = 6;
-                    //products.Quantity = random.Next(1, 1000);
-                    //products.Factory = Factory[random.Next(0, Factory.Length)];
-                    //products.Price = random.Next(100000, 1000000);
-                    //products.SaleOff = random.Next(0, 100000);
-                    //products.CreateBy = CreateBy[random.Next(0, CreateBy.Length)];
-                    //products.Home = true;
-                    //products.Sort = _unitOfWork.ProductRepository.Get().Count() + i;
-                    //products.Active = true;
-                    //products.TitleMeta = TitleMeta;
-                    //products.CollectionID = 2;
-                    //products.BarCode = random.Next(100000000, 999999999).ToString();
-                    //products.Hot = Hot[random.Next(0, Hot.Length)];
-                    //products.StatusProduct = true;
-                    //   products.Description = DescriptionMeta;
-                    var products = _unitOfWork.ProductRepository.GetByID(i);
-                    if (products != null)
-                    {
-                        products.Description = "SP-ASP.NET" + i + "";
-                        _unitOfWork.ProductRepository.Update(products);
-                        _unitOfWork.SaveNotAync();
-                        Console.WriteLine(i);
-                    }
-                    else
-                        continue;
-                }
-
-                return Json(new { result = 1 });
-            }
-            catch (Exception)
-            {
-
-                return Json(new { result = 2 });
-            }
+            //if (_httpContextAccessor.HttpContext.Request.Cookies[CartCookieKey] == null)
+            //{
+            //    _httpContextAccessor.HttpContext.Response.Cookies.Append(CartCookieKey, Guid.NewGuid().ToString(),
+            //     new CookieOptions()
+            //     {
+            //         //  SameSite = SameSiteMode.Lax,
+            //         // Secure = true,
+            //         Expires = new DateTimeOffset(DateTime.Now.AddDays(1))
+            //     });
+            //}
         }
 
         public IActionResult Chat()
@@ -688,6 +620,11 @@ namespace figma.Controllers
         [HttpPost]
         public async Task<ActionResult> Login([Bind] LoginViewModel user, string returnUrl)
         {
+            var check = _unitOfWork.MemberRepository.Get(x => x.Email.Equals(user.Username)).FirstOrDefault().LockAccount;
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("CountLogin")))
+                HttpContext.Session.SetInt32("CountLogin", 1);
+            if (HttpContext.Session.GetInt32("CountLogin") >= 5 || check)
+                return RedirectToAction(nameof(LockOut));
             returnUrl ??= Url.Content("~/");
             if (ModelState.IsValid)
             {
@@ -733,11 +670,33 @@ namespace figma.Controllers
                 }
                 else
                 {
+                    var count = HttpContext.Session.GetInt32("CountLogin");
+                    HttpContext.Session.SetInt32("CountLogin", (int)(count + 1));
+                    if (count >= 4)
+                    {
+                        var lockout = _unitOfWork.MemberRepository.Get(x => x.Email.Equals(user.Username)).FirstOrDefault();
+                        lockout.LockAccount = true;
+                        _unitOfWork.MemberRepository.Update(lockout);
+                        await _unitOfWork.Save();
+                        BackgroundJob.Schedule(() => UpdateLockAccount(user.Username), TimeSpan.FromSeconds(60));
+                        return RedirectToAction(nameof(LockOut));
+                    }
                     ModelState.AddModelError(string.Empty, "Tên đăng nhập hoặc mật khẩu không chính xác.");
                     return View(user);
                 }
             }
             return View(user);
+        }
+        public async Task UpdateLockAccount(string email)
+        {
+            var lockout = _unitOfWork.MemberRepository.Get(x => x.Email.Equals(email)).FirstOrDefault();
+            lockout.LockAccount = false;
+            _unitOfWork.MemberRepository.Update(lockout);
+            await _unitOfWork.Save();
+        }
+        public IActionResult LockOut()
+        {
+            return View();
         }
 
         [AllowAnonymous]
@@ -884,6 +843,22 @@ namespace figma.Controllers
             _unitOfWork.Dispose();
             base.Dispose(disposing);
         }
+        //
+
+        //public virtual bool IsSignedIn(ClaimsPrincipal principal)
+        //{
+        //    if (principal == null)
+        //    {
+        //        throw new ArgumentNullException(nameof(principal));
+        //    }
+        //    return principal?.Identities != null &&
+        //        principal.Identities.Any(i => i.AuthenticationType == IdentityConstants.ApplicationScheme);
+        //}
+        //public virtual Task SignInAsync(TUser user, bool isPersistent, string authenticationMethod = null)
+        //{
+        //    return SignInAsync(user, new AuthenticationProperties { IsPersistent = isPersistent }, authenticationMethod);
+        //}
+
     }
 }
 //{
@@ -912,3 +887,72 @@ namespace figma.Controllers
 //  "Kestrel:Certificates:Development:Password": "bbed3394-bd97-4649-81d0-9c672cebbb6e"
 //}
 //Password_01
+//public JsonResult Add()
+//{
+//    //ProductID,Name,Description,Image,Body,ProductCategorieID,Quantity,
+//    //Factory,Price,SaleOff,QuyCach,Sort,Hot,Home,Active,TitleMeta,
+//    //DescriptionMeta,GiftInfo,Content,StatusProduct,CollectionID,BarCode,CreateDate,CreateBy
+//    //string name = "Váy STELLA BE cổ vuông chun vai";
+//    //string[] img = { "uploads/2020/09/06/132438363534870618.png,uploads/2020/09/06/132438363539334740.png,uploads/2020/09/06/132438363541560735.png,uploads/2020/09/06/132438363544079376.png,uploads/2020/09/06/132438363547063270.png,uploads/2020/09/06/132438363549254747.png", "uploads/2020/09/03/132435734556263309.png,uploads/2020/09/03/132435734559207086.png,uploads/2020/09/03/132435734561526431.png,uploads/2020/09/03/132435734565776953.png,uploads/2020/09/03/132435734568138937.png,uploads/2020/09/03/132435734570197372.png,uploads/2020/09/03/132435734572503314.png", "uploads/2020/09/03/132435734932870348.png,uploads/2020/09/03/132435734935739906.png,uploads/2020/09/03/132435734938064048.png,uploads/2020/09/03/132435734939979281.png,uploads/2020/09/03/132435734942204032.png,uploads/2020/09/03/132435734944396254.png,uploads/2020/09/03/132435734946580826.png,uploads/2020/09/03/132435734948894694.png", "uploads/2020/09/03/132435735253593281.png,uploads/2020/09/03/132435735256435652.png,uploads/2020/09/03/132435735258660281.png,uploads/2020/09/03/132435735260562887.png,uploads/2020/09/03/132435735262847997.png,uploads/2020/09/03/132435735265158821.png,uploads/2020/09/03/132435735267492917.png", "uploads/2020/09/03/132435735563298472.png,uploads/2020/09/03/132435735566364804.png,uploads/2020/09/03/132435735568691340.png,uploads/2020/09/03/132435735570584196.png,uploads/2020/09/03/132435735572904220.png,uploads/2020/09/03/132435735575345447.png,uploads/2020/09/03/132435735577225153.png", "uploads/2020/09/03/132435735951790896.png,uploads/2020/09/03/132435735954234595.png,uploads/2020/09/03/132435735956085355.png,uploads/2020/09/03/132435735958246157.png,uploads/2020/09/03/132435735960310306.png,uploads/2020/09/03/132435735962146364.png", "uploads/2020/09/03/132435736366333089.png,uploads/2020/09/03/132435736369311489.png,uploads/2020/09/03/132435736371620431.png,uploads/2020/09/03/132435736373535857.png,uploads/2020/09/03/132435736375898195.png,uploads/2020/09/03/132435736378024042.png,uploads/2020/09/03/132435736380043009.png", "uploads/2020/09/03/132435736705873514.png,uploads/2020/09/03/132435736708922105.png,uploads/2020/09/03/132435736711443768.png,uploads/2020/09/03/132435736713435462.png,uploads/2020/09/03/132435736715715778.png,uploads/2020/09/03/132435736717949521.png,uploads/2020/09/03/132435736719937440.png", "uploads/2020/09/20/132450508499578916.jpg,uploads/2020/09/20/132450508503182823.jpg,uploads/2020/09/20/132450508504649804.jpg,uploads/2020/09/20/132450508506052883.jpg,uploads/2020/09/20/132450508507255832.jpg,uploads/2020/09/20/132450508507905622.jpg,uploads/2020/09/20/132450508508454478.jpg", "uploads/2020/09/20/132450509184786404.jpg,uploads/2020/09/20/132450509185535127.jpg,uploads/2020/09/20/132450509186245184.jpg,uploads/2020/09/20/132450509186811881.jpg,uploads/2020/09/20/132450509187311790.jpg,uploads/2020/09/20/132450509187834360.jpg,uploads/2020/09/20/132450509188318371.jpg", "uploads/2020/09/20/132450509925989910.jpg,uploads/2020/09/20/132450509926969849.jpg,uploads/2020/09/20/132450509928094111.jpg,uploads/2020/09/20/132450509928744734.jpg,uploads/2020/09/20/132450509929254189.jpg,uploads/2020/09/20/132450509929777010.jpg,uploads/2020/09/20/132450509930267158.jpg", "uploads/2020/09/20/132450510235331261.jpg,uploads/2020/09/20/132450510236311537.jpg,uploads/2020/09/20/132450510237067016.jpg,uploads/2020/09/20/132450510237643353.jpg,uploads/2020/09/20/132450510238144788.jpg,uploads/2020/09/20/132450510238660206.jpg,uploads/2020/09/20/132450510239167509.jpg", "uploads/2020/09/20/132450510569896054.jpg,uploads/2020/09/20/132450510570666055.jpg,uploads/2020/09/20/132450510571453837.jpg,uploads/2020/09/20/132450510572185988.jpg,uploads/2020/09/20/132450510572686764.jpg,uploads/2020/09/20/132450510573330928.jpg,uploads/2020/09/20/132450510573854815.jpg", "uploads/2020/09/20/132450510941022590.jpg,uploads/2020/09/20/132450510942112914.jpg,uploads/2020/09/20/132450510942855545.jpg,uploads/2020/09/20/132450510943481997.jpg,uploads/2020/09/20/132450510944116804.jpg,uploads/2020/09/20/132450510944732560.jpg,uploads/2020/09/20/132450510945248503.jpg", "uploads/2020/09/20/132450513718160233.jpg,uploads/2020/09/20/132450513718933077.jpg,uploads/2020/09/20/132450513719401577.jpg,uploads/2020/09/20/132450513719919186.jpg", "uploads/2020/09/20/132450513942758055.jpg,uploads/2020/09/20/132450513943699541.jpg,uploads/2020/09/20/132450513944219267.jpg,uploads/2020/09/20/132450513944597805.jpg,uploads/2020/09/20/132450513944973670.jpg,uploads/2020/09/20/132450513945533886.jpg" };
+//    //string Description = "Váy STELLA BE cổ vuông chun vai";
+//    //int ProductCategorieID = 6;
+//    //int Quantity = 1;
+//    //string[] Factory = { "Việt Nam", "Mỹ", "Hàn Quốc" };
+//    //decimal Price = 600000;
+//    //decimal SaleOff = 100000;
+//    //string[] CreateBy = { "Admin", "NV1", "NV2" };
+//    //int Home = 1;
+//    //int Sort = 1;
+//    //int active = 1;
+//    //string TitleMeta = "váy cao cấp 2018, rèm vải đẹp hà nội";
+//    //int CollectionID = 2;
+//    //double BarCode = 1;
+//    //bool[] Hot = { true, false };
+//    //int StatusProduct = 1;
+//    //string[] Body = { "", "" };
+//    //string DescriptionMeta = "Rèm vải đẹp, mẫu mã đa dạng, Rèm Nam An –đơn vị cung cấp rèm uy tin chất lượng, bảo hành trọn đời sản phẩm. Giảm giá ngay 10% khi đặt hàng online. Miễn phí phụ kiện và công lắp đặt.";
+//    try
+//    {
+//        for (int i = 1; i < 12224; i++)
+//        {
+//            // Random random = new Random();
+//            //  Products products = new Products();
+//            //products.Name = name + "" + i + "";
+//            //products.Image = img[random.Next(0, img.Length)];
+//            //products.Description = Description + "" + i + "";
+//            //products.ProductCategorieID = 6;
+//            //products.Quantity = random.Next(1, 1000);
+//            //products.Factory = Factory[random.Next(0, Factory.Length)];
+//            //products.Price = random.Next(100000, 1000000);
+//            //products.SaleOff = random.Next(0, 100000);
+//            //products.CreateBy = CreateBy[random.Next(0, CreateBy.Length)];
+//            //products.Home = true;
+//            //products.Sort = _unitOfWork.ProductRepository.Get().Count() + i;
+//            //products.Active = true;
+//            //products.TitleMeta = TitleMeta;
+//            //products.CollectionID = 2;
+//            //products.BarCode = random.Next(100000000, 999999999).ToString();
+//            //products.Hot = Hot[random.Next(0, Hot.Length)];
+//            //products.StatusProduct = true;
+//            //   products.Description = DescriptionMeta;
+//            var products = _unitOfWork.ProductRepository.GetByID(i);
+//            if (products != null)
+//            {
+//                products.Description = "SP-ASP.NET" + i + "";
+//                _unitOfWork.ProductRepository.Update(products);
+//                _unitOfWork.SaveNotAync();
+//                Console.WriteLine(i);
+//            }
+//            else
+//                continue;
+//        }
+
+//        return Json(new { result = 1 });
+//    }
+//    catch (Exception)
+//    {
+
+//        return Json(new { result = 2 });
+//    }
+//}
+

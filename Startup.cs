@@ -30,6 +30,7 @@ using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Web.DependencyInjection;
 using System.Threading.Tasks;
 using Microsoft.IO;
+using Hangfire.Dashboard;
 
 namespace figma
 {
@@ -53,7 +54,7 @@ namespace figma
                 options.OnBeforeSaveAsync = _ => Task.CompletedTask;
                 options.OnProcessedAsync = _ => Task.CompletedTask;
                 options.OnPrepareResponseAsync = _ => Task.CompletedTask;
-               
+
             });
             // hỏi người dùng có đồng ý dùng cookie
             //services.Configure<CookiePolicyOptions>(options =>
@@ -85,20 +86,20 @@ namespace figma
          config.Cookie.HttpOnly = true;
          config.Cookie.IsEssential = true;
      });
-            services.Configure<IdentityOptions>(options =>
-            {
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1);
-                options.Lockout.MaxFailedAccessAttempts = 5;
-                options.Lockout.AllowedForNewUsers = true;
-            });
-            services.AddAuthorization(config =>
-            {
-                config.AddPolicy("UserPolicy", policyBuilder =>
-                {
-                    // nếu tồi tại 2 kiểu được nhập vào
-                    policyBuilder.UserRequireCustomClaim("UserName");
-                });
-            });
+            //services.Configure<IdentityOptions>(options =>
+            //{
+            //    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1);
+            //    options.Lockout.MaxFailedAccessAttempts = 5;
+            //    options.Lockout.AllowedForNewUsers = true;
+            //});
+            //services.AddAuthorization(config =>
+            //{
+            //    config.AddPolicy("UserPolicy", policyBuilder =>
+            //    {
+            //        // nếu tồi tại 2 kiểu được nhập vào
+            //        policyBuilder.UserRequireCustomClaim("UserName");
+            //    });
+            //});
 
             services.AddScoped<IAuthorizationHandler, PoliciesAuthorizationHandler>();
             services.AddScoped<IAuthorizationHandler, RolesAuthorizationHandler>();
@@ -197,7 +198,10 @@ namespace figma
             //};
             //  app.UseCookiePolicy(cookiePolicyOptions);
             app.UseSession();
-            app.UseHangfireDashboard();
+            app.UseHangfireDashboard("/hangfire", new DashboardOptions
+            {
+                Authorization = new[] { new MyAuthorizationFilter() }
+            });
             //thực hiện 1 lần và ngay lập tức
             //  backgroundJobs.Enqueue(() => Console.WriteLine("Hello world from Hangfire!"));
             app.UseEndpoints(endpoints =>

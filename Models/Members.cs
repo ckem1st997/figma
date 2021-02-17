@@ -59,6 +59,8 @@ namespace figma.Models
         public bool ConfirmEmail { get; set; }
         public string token { get; set; }
 
+        public bool LockAccount { get; set; }
+
         public virtual List<ProductLike> ProductLikes { get; set; }
 
 
