@@ -35,7 +35,7 @@
     <link href="~/css/style.min.css" rel="stylesheet" asp-append-version="true" />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-  
+
 </head>
 <body>
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
@@ -57,9 +57,21 @@
             @RenderBody()
         </main>
     </div>
-    <partial name="_FaceBookChat" />
+    @*<partial name="_FaceBookChat" />*@
+    <partial name="_FaceBookChatIcon" />
+
     <div class="spinner">
         <span class="loader"></span>
+        <div class="btn btn-success boqua">Bỏ Qua</div>
+        <style>
+            .boqua {
+                position: relative;
+                top: 43%;
+                display: block;
+                width: 80px;
+                margin: 0 auto;
+            }
+        </style>
         @*<div class="cm-spinner"></div>*@
         @*<img src="/index.svg" style="opacity: 1; visibility: visible;">*@
     </div>

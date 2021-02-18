@@ -1,4 +1,7 @@
-﻿
+﻿$(".boqua").click(function (e) {
+    $(".spinner").removeClass("active");
+    window.stop();
+});
 
 $(".btn-like-add").click(function (e) {
     var id_SP = $(".id_check_idsp").val();

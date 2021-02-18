@@ -42,16 +42,6 @@ namespace figma.Controllers
             _unitOfWork = unitOfWork;
             _mailer = mailer;
             _clientFactory = clientFactory;
-            //if (_httpContextAccessor.HttpContext.Request.Cookies[CartCookieKey] == null)
-            //{
-            //    _httpContextAccessor.HttpContext.Response.Cookies.Append(CartCookieKey, Guid.NewGuid().ToString(),
-            //     new CookieOptions()
-            //     {
-            //         //  SameSite = SameSiteMode.Lax,
-            //         // Secure = true,
-            //         Expires = new DateTimeOffset(DateTime.Now.AddDays(1))
-            //     });
-            //}
         }
 
         public IActionResult Chat()
@@ -354,6 +344,16 @@ namespace figma.Controllers
         [Route("{name}-{proId}.html")]
         public IActionResult Product(int proId = 0)
         {
+            if (_httpContextAccessor.HttpContext.Request.Cookies[CartCookieKey] == null)
+            {
+                _httpContextAccessor.HttpContext.Response.Cookies.Append(CartCookieKey, Guid.NewGuid().ToString(),
+                 new CookieOptions()
+                 {
+                     //  SameSite = SameSiteMode.Lax,
+                     // Secure = true,
+                     Expires = new DateTimeOffset(DateTime.Now.AddDays(1))
+                 });
+            }
             try
             {
                 var list = HttpContext.Request.Cookies.FirstOrDefault(a => a.Key.Contains("viewProducts")).Value;
