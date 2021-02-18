@@ -357,7 +357,7 @@ namespace figma.Controllers
             try
             {
                 var list = HttpContext.Request.Cookies.FirstOrDefault(a => a.Key.Contains("viewProducts")).Value;
-                if (list.IndexOf(proId.ToString()) == -1)
+                if (!list.Contains(proId.ToString(), StringComparison.CurrentCulture))
                     HttpContext.Response.Cookies.Append(
                              "viewProducts", "" + HttpContext.Request.Cookies.FirstOrDefault(a => a.Key.Contains("viewProducts")).Value + "," + proId + "",
                              new CookieOptions()
@@ -762,9 +762,11 @@ namespace figma.Controllers
                     var search = await _unitOfWork.ProductLikeRepository.GetAync(x => x.MemberId == int.Parse(userId) && x.ProductID == productid);
                     if (!search.Any())
                     {
-                        ProductLike productLike = new ProductLike();
-                        productLike.MemberId = int.Parse(userId);
-                        productLike.ProductID = productid;
+                        ProductLike productLike = new ProductLike
+                        {
+                            MemberId = int.Parse(userId),
+                            ProductID = productid
+                        };
                         _unitOfWork.ProductLikeRepository.Insert(productLike);
                         await _unitOfWork.Save();
                         return Ok(true);
@@ -820,10 +822,6 @@ namespace figma.Controllers
             public string ConfirmPassword { get; set; }
         }
 
-        public class getIDMember
-        {
-            public int MemberId { get; set; }
-        }
         public class LoginViewModel
         {
 
