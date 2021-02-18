@@ -31,6 +31,9 @@ using SixLabors.ImageSharp.Web.DependencyInjection;
 using System.Threading.Tasks;
 using Microsoft.IO;
 using Hangfire.Dashboard;
+using Microsoft.AspNetCore.ResponseCompression;
+using System.IO.Compression;
+using System.Linq;
 
 namespace figma
 {
@@ -164,6 +167,19 @@ namespace figma
                     options.ClientId = "821325953694-6mvn9mpq71nabcco9qic7g238icd43cm.apps.googleusercontent.com";
                     options.ClientSecret = "ksRiOpoaf6AR-6fPIah2CTGd";
                 });
+            services.AddResponseCompression(options =>
+            {
+                options.Providers.Add<BrotliCompressionProvider>();
+                options.Providers.Add<GzipCompressionProvider>();
+                options.Providers.Add<CustomCompressionProvider>();
+                options.MimeTypes =
+                    ResponseCompressionDefaults.MimeTypes.Concat(
+                        new[] { "image/svg+xml" });
+            });
+            services.Configure<GzipCompressionProviderOptions>(options =>
+            {
+                options.Level = CompressionLevel.Fastest;
+            });
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IBackgroundJobClient backgroundJobs, ILoggerFactory loggerFactor)
         {
@@ -177,6 +193,7 @@ namespace figma
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseResponseCompression();
             app.UseImageSharp();
             var loggingOptions = this.Configuration.GetSection("Log4NetCore")
                                               .Get<Log4NetProviderOptions>();
