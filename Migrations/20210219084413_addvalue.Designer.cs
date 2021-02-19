@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using figma.Data;
 
 namespace figma.Migrations
 {
     [DbContext(typeof(ShopProductContext))]
-    partial class ShopProductContextModelSnapshot : ModelSnapshot
+    [Migration("20210219084413_addvalue")]
+    partial class addvalue
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1072,8 +1074,7 @@ namespace figma.Migrations
 
                     b.Property<string>("Code")
                         .IsRequired()
-                        .HasColumnType("nvarchar(6)")
-                        .HasMaxLength(6);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Condition")
                         .HasColumnType("bit");
@@ -1097,8 +1098,9 @@ namespace figma.Migrations
                     b.Property<bool>("Type")
                         .HasColumnType("bit");
 
-                    b.Property<decimal>("Value")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

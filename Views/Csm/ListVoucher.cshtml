@@ -19,13 +19,15 @@
 
 <h4>Voucher</h4>
 <hr />
+<a class="btn btn-success" asp-action="CreateVoucher">Tạo mã giảm giá</a>
+<hr />
 <p>Danh sách Voucher</p>
 
 <table class="table">
     <thead>
         <tr>
             <th>
-               Id
+                Id
             </th>
             <th>
                 Tên Voucher
@@ -61,24 +63,24 @@
                         }
                     </td>
 
-                    @*<td>
-                        <a class="btn btn-success" asp-action="ArticleCategoriesEdit" asp-route-id="@item.ArticleCategoryId">Edit</a> |
-                        <a class="btn btn-success" onclick="deleteLC(@item.ArticleCategoryId)">Delete</a>
-                        <script>
-                            function deleteLC(id) {
-                                if (confirm("Bạn có chắc chắn xóa không?")) {
-                                    $.post("/Csm/ArticleCategoriesDelete", { id: id }, function (data) {
-                                        if (data) {
-                                            if (confirm("Xóa thành công"))
-                                                window.location.assign('/Csm/ArticleCategories')
-                                        } else {
-                                            alert("Quá trình thực hiện không thành công. Hãy thử lại");
-                                        }
-                                    });
+                    <td>
+                            <a class="btn btn-success" asp-action="VoucherEdit" asp-route-id="@item.Id">Edit</a> |
+                            <a class="btn btn-success" onclick="deleteLC(@item.Id)">Delete</a>
+                            <script>
+                                function deleteLC(id) {
+                                    if (confirm("Bạn có chắc chắn xóa không?")) {
+                                        $.post("/Csm/VoucherDelete", { id: id }, function (data) {
+                                            if (data) {
+                                                if (confirm("Xóa thành công"))
+                                                    window.location.assign('/Csm/ListVoucher')
+                                            } else {
+                                                alert("Quá trình thực hiện không thành công. Hãy thử lại");
+                                            }
+                                        });
+                                    }
                                 }
-                            }
-                        </script>
-                    </td>*@
+                            </script>
+                        </td>
                 </tr>
             }
         }

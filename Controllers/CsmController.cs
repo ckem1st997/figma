@@ -1517,6 +1517,139 @@ namespace figma.Controllers
             return View(await _unitOfWork.VoucherRepository.GetAync());
         }
 
+        public IActionResult CreateVoucher()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateVoucher([Bind("Id,Name,Code ,Value,Type,Condition,PriceUp,PriceDown,SumUse,ReductionMax,Active")] Voucher voucher)
+        {
+            if (ModelState.IsValid)
+            {
+                if (voucher.Type)
+                {
+                    if (voucher.Value > 100 || voucher.Value < 0)
+                    {
+                        ModelState.AddModelError(string.Empty, "Giá trị giảm theo phần trăm phải nhỏ hơn 100 và lớn hơn 0 nha !");
+                        return View(voucher);
+                    }
+                }
+                else
+                    if (voucher.Value < 0)
+                {
+                    ModelState.AddModelError(string.Empty, "Giá trị giảm theo giá phải lớn hơn 0 nha !");
+                    return View(voucher);
+                }
+
+                if (voucher.PriceUp < 0 || voucher.PriceDown < 0 || voucher.SumUse < 0 || voucher.ReductionMax < 0)
+                {
+                    ModelState.AddModelError(string.Empty, "Giá trị phải lớn hoặc bằng 0 nha!");
+                    return View(voucher);
+                }
+                if (voucher.PriceUp >= voucher.PriceDown && voucher.PriceUp > 0)
+                {
+                    ModelState.AddModelError(string.Empty, "Giá trị giảm trên phải nhỏ hơn giá trị giảm dưới !");
+                    return View(voucher);
+                }
+                if (voucher.Code.Length != 6)
+                {
+                    ModelState.AddModelError(string.Empty, "Mã giảm giá phải gồm 6 kí tự !");
+                    return View(voucher);
+                }
+                _unitOfWork.VoucherRepository.Insert(voucher);
+                await _unitOfWork.Save();
+                TempData["result"] = "Thành công ";
+                return RedirectToAction(nameof(ListVoucher));
+            }
+            return View(voucher);
+        }
+
+        public IActionResult VoucherEdit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var voucher = _unitOfWork.VoucherRepository.GetByID(id);
+            if (voucher == null)
+            {
+                return NotFound();
+            }
+            return View(voucher);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> VoucherEdit(int id, [Bind("Id,Name,Code ,Value,Type,Condition,PriceUp,PriceDown,SumUse,ReductionMax,Active")] Voucher voucher)
+        {
+            if (id != voucher.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (voucher.Type)
+                    {
+                        if (voucher.Value > 100 || voucher.Value < 0)
+                        {
+                            ModelState.AddModelError(string.Empty, "Giá trị giảm theo phần trăm phải nhỏ hơn 100 và lớn hơn 0 nha !");
+                            return View(voucher);
+                        }
+                    }
+                    else
+                        if (voucher.Value < 0)
+                    {
+                        ModelState.AddModelError(string.Empty, "Giá trị giảm theo giá phải lớn hơn 0 nha !");
+                        return View(voucher);
+                    }
+                    if (voucher.PriceUp < 0 || voucher.PriceDown < 0 || voucher.SumUse < 0 || voucher.ReductionMax < 0)
+                    {
+                        ModelState.AddModelError(string.Empty, "Giá trị phải lớn hoặc bằng 0 nha!");
+                        return View(voucher);
+                    }
+                    if (voucher.PriceUp >= voucher.PriceDown && voucher.PriceUp > 0)
+                    {
+                        ModelState.AddModelError(string.Empty, "Giá trị giảm trên phải nhỏ hơn giá trị giảm dưới !");
+                        return View(voucher);
+                    }
+                    if (voucher.Code.Length != 6)
+                    {
+                        ModelState.AddModelError(string.Empty, "Mã giảm giá phải gồm 6 kí tự !");
+                        return View(voucher);
+                    }
+                    _unitOfWork.VoucherRepository.Update(voucher);
+                    await _unitOfWork.Save();
+                    TempData["result"] = "Thành công ";
+                    return RedirectToAction(nameof(ListVoucher));
+
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    return NotFound();
+                    //  return RedirectToAction(nameof(ListVoucher));
+                }
+
+            }
+            return View(voucher);
+        }
+
+        [HttpPost]
+        [IgnoreAntiforgeryToken]
+        public async Task<bool> VoucherDelete(int id)
+        {
+            if (id < 1)
+                return false;
+            var voucher = _unitOfWork.VoucherRepository.GetByID(id);
+            _unitOfWork.VoucherRepository.Delete(voucher);
+            await _unitOfWork.Save();
+            return true;
+        }
+
 
         #endregion
         protected override void Dispose(bool disposing)

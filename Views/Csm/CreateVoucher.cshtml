@@ -1,0 +1,67 @@
+﻿@model figma.Models.Voucher
+@{
+    ViewData["Title"] = "Tạo Voucher";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<p>Tạo mã giảm giá</p>
+<hr />
+<div class="">
+    <form asp-action="CreateVoucher">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group w-50">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group w-50">
+            <label asp-for="Code" class="control-label"></label>
+            <input asp-for="Code" class="form-control" />
+            <span asp-validation-for="Code" class="text-danger"></span>
+        </div>
+        <p class="btn btn-success" id="rdcode">Tạo mã ngẫu nhiên</p>
+        <div class="form-group form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="Type" /> @Html.DisplayNameFor(model => model.Type)
+            </label>
+        </div>
+        <div class="form-group w-50">
+            <label asp-for="Value" class="control-label"></label>
+            <input asp-for="Value" class="form-control" />
+            <span asp-validation-for="Value" class="text-danger"></span>
+        </div>
+
+        <div class="form-group form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="Condition" /> @Html.DisplayNameFor(model => model.Condition)
+            </label>
+        </div>
+        <div class="form-group w-50">
+            <label asp-for="PriceDown" class="control-label"></label>
+            <input asp-for="PriceDown" class="form-control" />
+            <span asp-validation-for="PriceDown" class="text-danger"></span>
+        </div>
+        <div class="form-group w-50">
+            <label asp-for="PriceUp" class="control-label"></label>
+            <input asp-for="PriceUp" class="form-control" />
+            <span asp-validation-for="PriceUp" class="text-danger"></span>
+        </div>
+        <div class="form-group w-50">
+            <label asp-for="SumUse" class="control-label"></label>
+            <input asp-for="SumUse" class="form-control" />
+            <span asp-validation-for="SumUse" class="text-danger"></span>
+        </div>
+        <div class="form-group w-50">
+            <label asp-for="ReductionMax" class="control-label"></label>
+            <input asp-for="ReductionMax" class="form-control" />
+            <span asp-validation-for="ReductionMax" class="text-danger"></span>
+        </div>
+        <div class="form-group form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
+            </label>
+        </div>
+        <div class="form-group text-center">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </form>
+</div>

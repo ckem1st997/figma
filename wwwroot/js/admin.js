@@ -1,4 +1,18 @@
-﻿$(document).on('click', '.section-image-list div.row .col-3 i.fa-trash', function (e) {
+﻿function makeid(length) {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
+$("#rdcode").on('click', function (e) {
+    $("#Code").val(makeid(6));
+});
+
+
+$(document).on('click', '.section-image-list div.row .col-3 i.fa-trash', function (e) {
 
     if (confirm("Bạn muốn muốn xóa sản phẩm này !")) {
         AJAXSubmitDelete($(this).parent().children().attr('data-image'));
