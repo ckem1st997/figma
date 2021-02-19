@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿
+using System.Reflection;
 using figma.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -54,6 +55,7 @@ namespace figma.Data
         public virtual DbSet<ProductSizeColor> ProductSizeColors { get; set; }
         public virtual DbSet<Articles> Articles { get; set; }
         public virtual DbSet<ArticleCategorys> ArticleCategories { get; set; }
+        public virtual DbSet<Voucher> Vouchers { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -86,7 +88,7 @@ namespace figma.Data
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
-        public DbSet<figma.Models.OrderInfo> OrderInfo { get; set; }
+        public DbSet<OrderInfo> OrderInfo { get; set; }
 
     }
 }

@@ -62,7 +62,7 @@ namespace figma.Controllers
 
         public IActionResult ListProducts()
         {
-            var shopProductContext = _unitOfWork.ProductRepository.Get(includeProperties: "Collection,ProductCategories",records:10);
+            var shopProductContext = _unitOfWork.ProductRepository.Get(includeProperties: "Collection,ProductCategories", records: 10);
             return View(shopProductContext.ToList());
         }
 
@@ -1507,6 +1507,17 @@ namespace figma.Controllers
             Response.Headers.Add("content-disposition", "attachment;  filename=" + fileName + "");
             Response.Body.WriteAsync(pck.GetAsByteArray());
         }
+        #endregion
+
+
+
+        #region Voucher
+        public async Task<IActionResult> ListVoucher()
+        {
+            return View(await _unitOfWork.VoucherRepository.GetAync());
+        }
+
+
         #endregion
         protected override void Dispose(bool disposing)
         {

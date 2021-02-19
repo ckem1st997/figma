@@ -1,0 +1,95 @@
+﻿@model IEnumerable<figma.Models.Voucher>
+
+@{
+    ViewData["Title"] = "Voucher";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@{
+    if (TempData["result"] != null)
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            Message: @TempData["result"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+}
+
+<h4>Voucher</h4>
+<hr />
+<p>Danh sách Voucher</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               Id
+            </th>
+            <th>
+                Tên Voucher
+            </th>
+
+            <th>
+                Hoạt động
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @try
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Id
+                    </td>
+                    <td>
+                        @item.Name
+                    </td>
+
+                    <td>
+                        @if (item.Active)
+                        {
+                            <span class="btn btn-danger">Hoạt động</span>
+                        }
+                        else
+                        {
+                            <span class="btn btn-danger">Chưa Active</span>
+
+                        }
+                    </td>
+
+                    @*<td>
+                        <a class="btn btn-success" asp-action="ArticleCategoriesEdit" asp-route-id="@item.ArticleCategoryId">Edit</a> |
+                        <a class="btn btn-success" onclick="deleteLC(@item.ArticleCategoryId)">Delete</a>
+                        <script>
+                            function deleteLC(id) {
+                                if (confirm("Bạn có chắc chắn xóa không?")) {
+                                    $.post("/Csm/ArticleCategoriesDelete", { id: id }, function (data) {
+                                        if (data) {
+                                            if (confirm("Xóa thành công"))
+                                                window.location.assign('/Csm/ArticleCategories')
+                                        } else {
+                                            alert("Quá trình thực hiện không thành công. Hãy thử lại");
+                                        }
+                                    });
+                                }
+                            }
+                        </script>
+                    </td>*@
+                </tr>
+            }
+        }
+        catch (Exception)
+        {
+
+
+        }
+
+    </tbody>
+</table>
+
+
+

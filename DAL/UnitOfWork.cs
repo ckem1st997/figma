@@ -36,7 +36,9 @@ namespace figma.DAL
         private GenericRepository<Size> _sizeRepository;
         private GenericRepository<Color> _colorRepository;
         private GenericRepository<ProductLike> _productlike;
+        private GenericRepository<Voucher> _voucher;
 
+        public GenericRepository<Voucher> VoucherRepository => _voucher ?? (_voucher = new GenericRepository<Voucher>(_context));
         public GenericRepository<Order> OrderRepository => _orderRepository ?? (_orderRepository = new GenericRepository<Order>(_context));
         public GenericRepository<ProductLike> ProductLikeRepository => _productlike ?? (_productlike = new GenericRepository<ProductLike>(_context));
         public GenericRepository<OrderDetail> OrderDetailRepository => _orderdetailRepository ?? (_orderdetailRepository = new GenericRepository<OrderDetail>(_context));
