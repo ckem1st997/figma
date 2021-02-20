@@ -56,6 +56,7 @@ namespace figma.Data
         public virtual DbSet<Articles> Articles { get; set; }
         public virtual DbSet<ArticleCategorys> ArticleCategories { get; set; }
         public virtual DbSet<Voucher> Vouchers { get; set; }
+        public virtual DbSet<UserVoucher> UserVouchers{ get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -85,6 +86,7 @@ namespace figma.Data
             modelBuilder.Entity<Products>().Property(p => p.Sort).HasDefaultValue(1);
             modelBuilder.Entity<ProductCategories>().Property(p => p.ParentId).HasDefaultValue(null);
             modelBuilder.Entity<Members>().Property(p => p.ConfirmEmail).HasDefaultValue(false);
+
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
