@@ -117,7 +117,7 @@
                                             string[] arrListStr = item.Products.Image.Split(',');
                                             SlugCovert slugCovert = new SlugCovert();
                                             var name = slugCovert.UrlFriendly(item.Products.Name);
-                                            <a asp-action="Product" asp-route-proId="@item.ProductID" asp-route-name="@Html.Raw(name)">
+                                            <a asp-action="Product" asp-controller="Home" asp-route-proId="@item.ProductID" asp-route-name="@Html.Raw(name)">
                                                 <img src="~/@arrListStr[0]" asp-append-version="true" data-image="@arrListStr[0]" alt="@item.Products.Name">
                                             </a>
                                         }
@@ -189,13 +189,13 @@
                     </div>
                 </div>
                 <form class="deal-btn-code can2ben mb-2">
-                    <input type="password" class="form-control " id="inputPassword2" placeholder="Mã giảm giá">
-                    <button type="submit" class="btn btn-primary btn-pay-product">ÁP DỤNG</button>
+                    <input type="text" class="form-control " id="inputPassword2" placeholder="Mã giảm giá">
+                    <button type="button" class="btn btn-primary btn-pay-product">ÁP DỤNG</button>
                 </form>
                 <div class="price-menu mt-1">
                     <div class="can2ben">
                         <div>Tổng cộng</div>
-                        <div class="price-product">@(Model.CartTotal.ToString("0,0", CultureInfo.CreateSpecificCulture("el-GR"))) đ</div>
+                        <div class="price-product" id="sumpricett">@(Model.CartTotal.ToString("0,0", CultureInfo.CreateSpecificCulture("el-GR"))) đ</div>
                     </div>
                     <div class="mt-2 mb-3 text-right">Đã bao gồm VAT (nếu có)</div>
                     <a asp-action="Order" class="btn text-white bg-danger w-100">THANH TOÁN</a>

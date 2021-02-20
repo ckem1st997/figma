@@ -44,7 +44,7 @@ namespace figma.Models
         [Column(TypeName = "decimal(18, 0)")]
         public decimal PriceDown { get; set; }
 
-        [Display(Name = "Số lần dùng tối đa-Nhập 0: là hông giới hạn")]
+        [Display(Name = "Số lần dùng tối đa")]
         public int SumUse { get; set; }
 
         [Display(Name = "Giảm tối đa-Nhập 0: là hông giới hạn")]

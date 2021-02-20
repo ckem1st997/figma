@@ -1825,6 +1825,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Pages\ArticleCategorys\DisplayTemplates\" />
     <Folder Include="wwwroot\image\temp\" />
   </ItemGroup>
 

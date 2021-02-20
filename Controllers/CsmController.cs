@@ -1527,6 +1527,11 @@ namespace figma.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (_unitOfWork.VoucherRepository.Get(x => x.Code.Equals(voucher.Code)).Any())
+                {
+                    ModelState.AddModelError(string.Empty, "Mã Voucher này đã tồn tại, xin bạn vui lòng thử lại nha !");
+                    return View(voucher);
+                }
                 if (voucher.Type)
                 {
                     if (voucher.Value > 100 || voucher.Value < 0)
@@ -1593,6 +1598,11 @@ namespace figma.Controllers
             {
                 try
                 {
+                    if (_unitOfWork.VoucherRepository.Get(x => x.Code.Equals(voucher.Code)).Any())
+                    {
+                        ModelState.AddModelError(string.Empty, "Mã Voucher này đã tồn tại, xin bạn vui lòng thử lại nha !");
+                        return View(voucher);
+                    }
                     if (voucher.Type)
                     {
                         if (voucher.Value > 100 || voucher.Value < 0)

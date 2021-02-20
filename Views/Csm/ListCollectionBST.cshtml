@@ -55,6 +55,7 @@
                 </td>
                 <td>
                     @if (item.Image != null)
+                    {
                         if (item.Image.Contains("https"))
                         {
                             <img src="@item.Image" asp-append-version="true" width="80" height="80" />
@@ -64,6 +65,7 @@
                             <img src="/@item.Image" asp-append-version="true" width="80" height="80" />
 
                         }
+                    }
                 </td>
 
                 <td>

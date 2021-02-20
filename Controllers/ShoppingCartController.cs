@@ -537,8 +537,50 @@ namespace figma.Controllers
             }
             _unitOfWork.SaveNotAync();
         }
-        #endregion
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult GetVoucher(string code)
+        {
+            if (code.Length != 6)
+                return Ok(false);
+            var sumprice = GetTotal() < 1000000 ? (GetTotal() + 30000) : GetTotal();
+            decimal mucgiam = 0;
+            var voucher = _unitOfWork.VoucherRepository.Get(x => x.Code.Equals(code) && x.Active).FirstOrDefault();
+            if (voucher != null)
+            {
+                if (voucher.SumUse < 1)
+                    return Ok(new { result = false, tt = "Voucher đã hết số lượt sử dụng nha !" });
+                else
+                {
+                    if (voucher.Condition)
+                    {
+                        if (voucher.PriceDown != 0)
+                        {
+                            if (sumprice >= voucher.PriceDown)
+                                return Ok(new { result = false, tt = "Hoá đơn của bạn lớn hơn " + voucher.PriceDown + " !" });
+                        }
+                        if (voucher.PriceUp != 0)
+                            if (sumprice <= voucher.PriceUp)
+                                return Ok(new { result = false, tt = "Hoá đơn của bạn nhỏ hơn " + voucher.PriceUp+ " !" });
+                    }
+                    if (voucher.Type)
+                    {
+                        if (voucher.ReductionMax != 0)
+                            mucgiam = (voucher.Value * sumprice)/100 > voucher.ReductionMax ? voucher.ReductionMax : (voucher.Value * sumprice)/100;
+                        else
+                            mucgiam = (voucher.Value * sumprice)/100;
+                        mucgiam = sumprice - mucgiam;
+                    }
+                    else
+                        mucgiam = sumprice - voucher.Value > 0 ? sumprice - voucher.Value : 0;
+                }
+
+                return Ok(new { result = true, t = mucgiam });
+            }
+            return Ok(false);
+        }
+        #endregion
         protected override void Dispose(bool disposing)
         {
             _unitOfWork.Dispose();

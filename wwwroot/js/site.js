@@ -1,4 +1,16 @@
-﻿$(".boqua").click(function (e) {
+﻿$(".btn-pay-product").click(function (e) {
+    var v = $("#inputPassword2").val();
+    var p = parseInt($("#sumpricett").text().replace(' ', '').replace('đ', '').replace('.', ''));
+    if (v.length != 6)
+        $.alert({
+            title: 'Thông báo !',
+            content: 'Xin bạn vui lòng nhập Voucher nha !',
+        });
+    else
+        getVoucher(v);
+});
+
+$(".boqua").click(function (e) {
     $(".spinner").removeClass("active");
     window.stop();
 });
@@ -382,6 +394,48 @@ function editaccount(ht, sdt, dc) {
 
         error: function (errormessage) {
             console.log(errormessage)
+        }
+
+
+    };
+    jQuery.ajax(params);
+}
+//
+
+
+
+function getVoucher(code) {
+    var params = {
+        type: 'POST',
+        url: '/ShoppingCart/GetVoucher',
+        headers: {
+            "RequestVerificationToken": document.getElementById('RequestVerificationToken').value
+        },
+        data: { code: code },
+        dataType: "json",
+        success: function (res) {
+            console.log(res);
+            var formatter = new Intl.NumberFormat('vn-VN', {
+                style: 'currency',
+                currency: 'VND',
+            });
+            if (!res.result)
+                $.alert({
+                    title: 'Thông báo !',
+                    content: '' + res.tt + '!',
+                });
+            else {
+                $("#sumpricett").text(formatter.format(res.t));
+
+            }
+        },
+
+        error: function (errormessage) {
+            console.log(errormessage.status)
+            $.alert({
+                title: 'Thông báo !',
+                content: 'Xin bạn vui lòng thử lại nha !',
+            });
         }
 
 

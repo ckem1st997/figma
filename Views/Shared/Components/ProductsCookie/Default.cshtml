@@ -26,7 +26,7 @@
                         <div class="col-md-3 col-sm-6 col-6 pro-loop">
                             <div class="card-product">
                                 <div class="product-img">
-                                    <a asp-action="Product" asp-route-proId="@item.ProductID" asp-route-name="@Html.Raw(name)" title="@item.Name" class="image-resize" style="height: auto;">
+                                    <a asp-action="Product" asp-controller="Home" asp-route-proId="@item.ProductID" asp-route-name="@Html.Raw(name)" title="@item.Name" class="image-resize" style="height: auto;">
                                         <picture>
                                             <source media="(max-width: 767px)" srcset="@img1?width=460&height=340&quality=95&format=jpg">
                                             <source media="(min-width: 768px)" srcset="@img1?width=460&height=340&quality=95&format=jpg">
