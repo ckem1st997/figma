@@ -208,6 +208,7 @@ namespace figma.Controllers
         [Route("gio-hang/thong-tin")]
         public IActionResult Index()
         {
+            _httpContextAccessor.HttpContext.Session.SetString("Voucher", "");
             var viewModel = new ShoppingCartViewModel
             {
                 CartItems = GetCartItems(),
@@ -238,11 +239,27 @@ namespace figma.Controllers
             {
                 return RedirectToAction("Index");
             }
+            decimal SumPriceCart = 0;
+            try
+            {
+                if (_httpContextAccessor.HttpContext.Session.GetString("Voucher") != null)
+                {
+                    SumPriceCart = decimal.Parse(_httpContextAccessor.HttpContext.Session.GetString("Voucher"));
+                    ViewBag.session = "ha";
+                }
+                else
+                    SumPriceCart = GetTotal() < 1000000 ? (GetTotal() + 30000) : GetTotal();
+            }
+            catch (Exception)
+            {
+                SumPriceCart = GetTotal() < 1000000 ? (GetTotal() + 30000) : GetTotal();
+            }
+
             var model = new CheckOutViewModel
             {
                 Order = new Order(),
                 Carts = GetCartItems(),
-                CartTotal = GetTotal() < 1000000 ? (GetTotal() + 30000) : GetTotal()
+                CartTotal = SumPriceCart
             };
             return View(model);
         }
@@ -252,6 +269,8 @@ namespace figma.Controllers
         {
             if (ModelState.IsValid)
             {
+                decimal SumPriceCart = 0;
+
                 //lấy ra danh sách đơn hàng
                 var item = GetCartItems();
                 // ngày giao hàng
@@ -310,7 +329,7 @@ namespace figma.Controllers
                 sb.Append("<p>Điện thoại: <strong>" + model.Order.Mobile + "</strong></p>");
                 sb.Append("<p>Yêu cầu thêm: <strong>" + model.Order.Body + "</strong></p>");
                 sb.Append("<p>Ngày đặt hàng: <strong>" + model.Order.CreateDate.ToString("dd-MM-yyyy HH:mm") + "</strong></p>");
-                sb.Append("<p>Ngày giao hàng: <strong>" + model.Order.TransportDate.ToString("dd-MM-yyyy") + "</strong></p>");
+                //sb.Append("<p>Ngày giao hàng: <strong>" + model.Order.TransportDate.ToString("dd-MM-yyyy") + "</strong></p>");
                 sb.Append("<p>Hình thức giao hàng: <strong>" + giaohang + "</strong></p>");
                 sb.Append("<p>Hình thức thanh toán: <strong>" + typepay + "</strong></p>");
                 sb.Append("<p>Thông tin đơn hàng</p>");
@@ -343,8 +362,20 @@ namespace figma.Controllers
                           "<td style='text-align:center'>" + thanhtien.ToString("N0") + " đ</td>" +
                           "</tr>");
                 }
-
-                sb.Append("<tr><td colspan='5' style='text-align:right'><strong>Tổng tiền (đã bao gồm cả phí ship): " + (tongtien < 500000 ? tongtien + 30000 : tongtien).ToString("N0") + " đ</strong></td></tr>");
+                try
+                {
+                    if (_httpContextAccessor.HttpContext.Session.GetString("Voucher") != null)
+                    {
+                        SumPriceCart = decimal.Parse(_httpContextAccessor.HttpContext.Session.GetString("Voucher"));
+                    }
+                    else
+                        SumPriceCart = tongtien < 500000 ? tongtien + 30000 : tongtien;
+                }
+                catch (Exception)
+                {
+                    SumPriceCart = tongtien < 500000 ? tongtien + 30000 : tongtien;
+                }
+                sb.Append("<tr><td colspan='5' style='text-align:right'><strong>Tổng tiền (đã bao gồm cả phí ship hoặc Voucher): " + SumPriceCart.ToString("N0") + " đ</strong></td></tr>");
                 sb.Append("</table>");
                 sb.Append("<p>Cảm ơn bạn đã tin tưởng và mua hàng của chúng tôi.</p>");
                 await _mailer.SendEmailSync(model.Order.Email, "[" + model.Order.MaDonHang + "] Đơn đặt hàng từ website ShopAsp.Net", sb.ToString());
@@ -562,20 +593,20 @@ namespace figma.Controllers
                         }
                         if (voucher.PriceUp != 0)
                             if (sumprice <= voucher.PriceUp)
-                                return Ok(new { result = false, tt = "Hoá đơn của bạn nhỏ hơn " + voucher.PriceUp+ " !" });
+                                return Ok(new { result = false, tt = "Hoá đơn của bạn nhỏ hơn " + voucher.PriceUp + " !" });
                     }
                     if (voucher.Type)
                     {
                         if (voucher.ReductionMax != 0)
-                            mucgiam = (voucher.Value * sumprice)/100 > voucher.ReductionMax ? voucher.ReductionMax : (voucher.Value * sumprice)/100;
+                            mucgiam = (voucher.Value * sumprice) / 100 > voucher.ReductionMax ? voucher.ReductionMax : (voucher.Value * sumprice) / 100;
                         else
-                            mucgiam = (voucher.Value * sumprice)/100;
+                            mucgiam = (voucher.Value * sumprice) / 100;
                         mucgiam = sumprice - mucgiam;
                     }
                     else
                         mucgiam = sumprice - voucher.Value > 0 ? sumprice - voucher.Value : 0;
                 }
-
+                _httpContextAccessor.HttpContext.Session.SetString("Voucher", mucgiam.ToString());
                 return Ok(new { result = true, t = mucgiam });
             }
             return Ok(false);

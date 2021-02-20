@@ -5,9 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @*@section Scripts {
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.min.css">
-}*@
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.min.css">
+    }*@
 <div class="header-top-box can2ben">
     <h1>Thông tin thanh toán</h1>
     <ol class="breadcrumb" style="background-color:white">
@@ -75,14 +75,15 @@
                     </select>
                 </div>
             </div>
-            <div class="form-group form-row">
+            <!--<div class="form-group form-row">
                 <div class="col-sm-3">
                     <label asp-for="Order.TransportDate" class="control-label"></label>
                 </div>
-                <div class="col-sm-9">
-                    <input asp-for="Order.TransportDate" type="datetime" class="datepicker form-control" readonly="readonly" value="@DateTime.Now.ToString("dd/MM/yyyy")" />
+                <div class="col-sm-9">-->
+                    @*<input asp-for="Order.TransportDate" type="datetime" class="datepicker form-control" readonly="readonly" value="@DateTime.Now.ToString("dd/MM/yyyy")" />*@
+                    <!--<input asp-for="Order.TransportDate" class="form-control" />
                 </div>
-            </div>
+            </div>-->
             <div class="form-group form-row">
                 <div class="col-sm-3">
                     <label asp-for="Order.TypePay" class="control-label"></label>
@@ -164,7 +165,12 @@
             </tr>
             <tr>
                 <td class="text-right" colspan="2">
-                    Tổng tiền:
+                    Tổng tiền:@{
+                        if (ViewBag.session == "ha")
+                        {
+                            <p>(Đã dùng Voucher)</p>
+                        }
+                    }
                 </td>
                 <td>
                     <strong>@(Model.CartTotal.ToString("0,0", CultureInfo.CreateSpecificCulture("el-GR"))) đ</strong>

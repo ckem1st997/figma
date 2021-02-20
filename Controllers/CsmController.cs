@@ -1587,7 +1587,7 @@ namespace figma.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> VoucherEdit(int id, [Bind("Id,Name,Code ,Value,Type,Condition,PriceUp,PriceDown,SumUse,ReductionMax,Active")] Voucher voucher)
+        public async Task<IActionResult> VoucherEdit(int id, string code, [Bind("Id,Name,Code ,Value,Type,Condition,PriceUp,PriceDown,SumUse,ReductionMax,Active")] Voucher voucher)
         {
             if (id != voucher.Id)
             {
@@ -1598,11 +1598,6 @@ namespace figma.Controllers
             {
                 try
                 {
-                    if (_unitOfWork.VoucherRepository.Get(x => x.Code.Equals(voucher.Code)).Any())
-                    {
-                        ModelState.AddModelError(string.Empty, "Mã Voucher này đã tồn tại, xin bạn vui lòng thử lại nha !");
-                        return View(voucher);
-                    }
                     if (voucher.Type)
                     {
                         if (voucher.Value > 100 || voucher.Value < 0)
@@ -1659,7 +1654,17 @@ namespace figma.Controllers
             await _unitOfWork.Save();
             return true;
         }
-
+        [HttpPost]
+        [IgnoreAntiforgeryToken]
+        public IActionResult VoucherRandom(string code)
+        {
+            if (code == null)
+                return Ok(false);
+            var voucher = _unitOfWork.VoucherRepository.Get(x => x.Code.Equals(code)).FirstOrDefault();
+            if (voucher != null)
+                return Ok(false);
+            return Ok(new { c = code, t = true });
+        }
 
         #endregion
         protected override void Dispose(bool disposing)

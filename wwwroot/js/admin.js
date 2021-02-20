@@ -8,7 +8,7 @@
     return result;
 }
 $("#rdcode").on('click', function (e) {
-    $("#Code").val(makeid(6));
+    RadomVoucher(makeid(6));
 });
 
 
@@ -251,6 +251,29 @@ async function AJAXSubmitCreateOneT(oFormElement, h, w) {
             alert(data.responseText);
         }
     });
+}
+//
+
+function RadomVoucher(code) {
+    $.ajax({
+        type: 'POST',
+        url: '/Csm/VoucherRandom',
+        data: { code: code },
+        success: function (res) {
+            //  console.log(res);
+            if (!res) {
+                RadomVoucher(makeid(6));
+                // $("#Code").val(code)
+            }
+            if (res.t)
+                $("#Code").val(res.c);
+        },
+        error: function (res) {
+            console.log(res);
+        }
+    });
+
+
 }
 
 //

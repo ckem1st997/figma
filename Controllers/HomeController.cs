@@ -357,7 +357,7 @@ namespace figma.Controllers
             try
             {
                 var list = HttpContext.Request.Cookies.FirstOrDefault(a => a.Key.Contains("viewProducts")).Value;
-                if (!list.Contains(proId.ToString(), StringComparison.CurrentCulture))
+                if (list.IndexOf(proId.ToString()) == -1)
                     HttpContext.Response.Cookies.Append(
                              "viewProducts", "" + HttpContext.Request.Cookies.FirstOrDefault(a => a.Key.Contains("viewProducts")).Value + "," + proId + "",
                              new CookieOptions()
