@@ -10,6 +10,7 @@ namespace figma.ViewModel
         public Order Order { get; set; }
 
         public IEnumerable<OrderDetail> OrderDetails { get; set; }
+        public IEnumerable<UserVoucher> UserVoucher { get; set; }
     }
 
     public class OrderDetailProduct
@@ -37,5 +38,7 @@ namespace figma.ViewModel
         public string ToDate { get; set; }
         [Required]
         public int PageSize { get; set; }
+
+        public IEnumerable<UserVoucher> UserVoucher { get; set; }
     }
 }

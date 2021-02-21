@@ -44,17 +44,32 @@
         <tr>
             <td>@i</td>
             <td><img src="/@product.Product.Image.Split(',')[0]" width="100" /></td>
-            <td>@product.Product.Name @product.Color @product.Size</td>
+            <td>@product.Product.Name @(!product.Color.Equals("null")?product.Color:" ") @(!product.Size.Equals("null") ? product.Size:" ")</td>
             <td>@product.Quantity</td>
-            <td>@Html.DisplayFor(a => product.Price) đ</td>
+            @*<td>@Html.DisplayFor(a => product.Price) đ</td>*@
+            <td>@Convert.ToDecimal(product.Price).ToString("N0") đ</td>
             <td>@Convert.ToDecimal(sotien).ToString("N0") đ</td>
         </tr>
         tongtien += Convert.ToDecimal(sotien);
         i++;
     }
     <tr>
-        <td colspan="5">Tổng tiền:</td>
-        <td>@tongtien.ToString("N0")đ</td>
+        @{
+            if (Model.UserVoucher.Any())
+            {
+                foreach (var item in Model.UserVoucher)
+                {
+                    <td colspan="5">Tổng tiền:(Sau khi đã dùng Voucher)</td>
+                    <td>@item.SumHD.ToString("N0")đ</td>
+                }
+            }
+            else
+            {
+                <td colspan="5">Tổng tiền:</td>
+                <td>@tongtien.ToString("N0")đ</td>
+            }
+        }
+
     </tr>
 </table>
 <h2>Thông tin khách hàng</h2>
@@ -93,6 +108,6 @@
 <div class="box_content">
     <p>Hình thức thanh toán: <strong>@typepay</strong></p>
     <p>Hình thức giao hàng: <strong>@typetransport</strong></p>
-    <p>Ngày nhận hàng: <strong>@Model.Order.TransportDate.ToString("dd/MM/yyyy")</strong></p>
+    @*<p>Ngày nhận hàng: <strong>@Model.Order.TransportDate.ToString("dd/MM/yyyy")</strong></p>*@
 </div>
 

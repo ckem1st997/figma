@@ -1309,7 +1309,8 @@ namespace figma.Controllers
                 FromDate = fromdate,
                 ToDate = todate,
                 PageSize = pageSize,
-                Payment = payment
+                Payment = payment,
+                UserVoucher = _unitOfWork.UserVoucherRepository.Get()
             };
 
             return View(model);

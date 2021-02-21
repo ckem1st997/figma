@@ -19,6 +19,14 @@ namespace figma.ViewComponents
         {
             var order = await _unitOfWork.OrderRepository.GetAync(a => a.Id == orderId, includeProperties: "OrderDetails");
             ViewBag.pro = _unitOfWork.ProductRepository.Get().Select(a => a.ProductID);
+            try
+            {
+                ViewBag.use = _unitOfWork.UserVoucherRepository.Get(x => x.MaDonHang.Equals(_unitOfWork.OrderRepository.GetByID(orderId).MaDonHang)).FirstOrDefault().SumHD;
+            }
+            catch (System.Exception)
+            {
+                ViewBag.use = null;
+            }
             if (order == null)
             {
                 return null;

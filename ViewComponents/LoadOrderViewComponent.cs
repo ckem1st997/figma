@@ -21,7 +21,8 @@ namespace figma.ViewComponents
             var model = new OrderViewModel
             {
                 Order = order,
-                OrderDetails = orderrderdetails
+                OrderDetails = orderrderdetails,
+                UserVoucher = _unitOfWork.UserVoucherRepository.Get(x => x.MaDonHang.Equals(order.MaDonHang))
             };
             return View(model);
         }

@@ -131,8 +131,8 @@
                         <tr>
                             <td><strong>Ngày đặt hàng</strong></td>
                             <td><input type="text" value="@item.CreateDate.ToString("dd/MM/yyyy")" readonly="" /></td>
-                            <td><strong>Ngày giao hàng</strong></td>
-                            <td><input type="text" id="TransportDate" value="@item.TransportDate.ToString("dd/MM/yyyy")" class="datepicker" /></td>
+                            @*<td><strong>Ngày giao hàng</strong></td>
+                                <td><input type="text" id="TransportDate" value="@item.TransportDate.ToString("dd/MM/yyyy")" class="datepicker" /></td>*@
                         </tr>
                         <tr>
                             <td><strong>Ghi chú</strong></td>
@@ -162,7 +162,7 @@
                             <tr>
                                 <td>
                                     <p>Mã SP: <strong>NQ-@orderDetail.ProductId</strong></p>
-                                    <p><strong>@i.@orderDetail.Product.Name @orderDetail.Color @orderDetail.Size</strong></p>
+                                    <p><strong>@i.@orderDetail.Product.Name @(!orderDetail.Color.Equals("null")?orderDetail.Color:" ") @(!orderDetail.Size.Equals("null") ? orderDetail.Size:" ")</strong></p>
                                 </td>
                                 <td style="text-align: center;">@Convert.ToDecimal(orderDetail.Price).ToString("N0")</td>
                                 <td style="text-align: center;">@orderDetail.Quantity</td>
@@ -171,10 +171,21 @@
                             i++;
                         }
                         @{
-                            total = total < 500000 ? total + 30000 : total;
+                            if (ViewBag.use != null)
+                                total = ViewBag.use;
+                            else
+                                total = total < 500000 ? total + 30000 : total;
                         }
                         <tr style="height: 30px; font-size: 16px;">
-                            <td colspan="3" style="text-align: right; padding-right: 20px;"><strong>Tổng cộng (VNĐ)</strong></td>
+                            <td colspan="3" style="text-align: right; padding-right: 20px;">
+                                @{
+                                    if (ViewBag.use != null)
+                                    { <strong>  Tổng cộng, đã bao gồm cả Voucher (VNĐ)</strong>}
+                                    else
+                                    { <strong>Tổng cộng (VNĐ)</strong>}
+                                }
+
+                            </td>
                             <td style="text-align: right"><strong>@total.ToString("N0")</strong></td>
                         </tr>
                         <tr style="height: 30px; font-size: 16px;">

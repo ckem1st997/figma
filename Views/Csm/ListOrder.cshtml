@@ -94,7 +94,23 @@
                     <p><strong>Email</strong> @order.Email</p>
                     <p><strong>Ngày đặt:</strong> @order.CreateDate.ToString("dd/MM/yyyy HH:mm")</p>
                 </td>
-                <td><strong style="font-size: 16px;">@Convert.ToDecimal(total).ToString("N0")</strong></td>
+                <td>
+                    <strong style="font-size: 16px;">@Convert.ToDecimal(total).ToString("N0")</strong>
+                    @{
+                        foreach (var item in Model.UserVoucher.Where(x => x.MaDonHang.Equals(order.MaDonHang)))
+                        {
+                            <br />
+                            <strong style="font-size: 16px;">Voucher</strong>
+                            <br />
+                            <strong style="font-size: 16px;">@item.Code</strong>
+                            <br />
+                            <strong style="font-size: 16px;">@Convert.ToDecimal(item.SumHD).ToString("N0")</strong>
+                            break;
+                        }
+
+                    }
+
+                </td>
                 <td>
                     <select name="Payment" class="form_control" onchange="updatePayment(@order.Id, this.value)">
                         <option value="1">Chưa thanh toán</option>

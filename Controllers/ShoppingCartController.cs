@@ -209,6 +209,7 @@ namespace figma.Controllers
         public IActionResult Index()
         {
             _httpContextAccessor.HttpContext.Session.SetString("Voucher", "");
+            _httpContextAccessor.HttpContext.Session.SetString("VoucherCode", "");
             var viewModel = new ShoppingCartViewModel
             {
                 CartItems = GetCartItems(),
@@ -242,7 +243,7 @@ namespace figma.Controllers
             decimal SumPriceCart = 0;
             try
             {
-                if (_httpContextAccessor.HttpContext.Session.GetString("Voucher") != null)
+                if (_httpContextAccessor.HttpContext.Session.GetString("Voucher").Length > 0)
                 {
                     SumPriceCart = decimal.Parse(_httpContextAccessor.HttpContext.Session.GetString("Voucher"));
                     ViewBag.session = "ha";
@@ -267,6 +268,7 @@ namespace figma.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Order(CheckOutViewModel model)
         {
+
             if (ModelState.IsValid)
             {
                 decimal SumPriceCart = 0;
@@ -351,10 +353,12 @@ namespace figma.Controllers
                     {
                         img = "<img src='http://" + Request.Host.Value + "/" + odetails.Product.Image.Split(',')[0] + "' width='100' height='100' />";
                     }
-
+                    string size, color = "";
+                    color = odetails.Color.Equals("null") ? "" : "-Color:" + odetails.Color + "";
+                    size = odetails.Size.Equals("null") ? "" : "-Size:" + odetails.Size + "";
                     sb.Append("<tr>" +
                           "<td>" + img + "</td>" +
-                          "<td>" + "" + odetails.Product.Name + "-Color:" + odetails.Color + "-Size:" + odetails.Size + "");
+                          "<td>" + "" + odetails.Product.Name + "" + color + "" + size + "");
 
                     sb.Append("</td>" +
                           "<td style='text-align:center'>" + odetails.Quantity + "</td>" +
@@ -362,29 +366,49 @@ namespace figma.Controllers
                           "<td style='text-align:center'>" + thanhtien.ToString("N0") + " đ</td>" +
                           "</tr>");
                 }
-                try
+                string VoucherCode = "";
+                if (_httpContextAccessor.HttpContext.Session.GetString("Voucher").Length > 0)
                 {
-                    if (_httpContextAccessor.HttpContext.Session.GetString("Voucher") != null)
+                    SumPriceCart = decimal.Parse(_httpContextAccessor.HttpContext.Session.GetString("Voucher"));
+                }
+                else
+                    SumPriceCart = tongtien < 1000000 ? tongtien + 30000 : tongtien;
+                if (_httpContextAccessor.HttpContext.Session.GetString("VoucherCode").Length > 0)
+                {
+                    VoucherCode = _httpContextAccessor.HttpContext.Session.GetString("VoucherCode");
+                    var user = new UserVoucher
                     {
-                        SumPriceCart = decimal.Parse(_httpContextAccessor.HttpContext.Session.GetString("Voucher"));
+                        MaDonHang = model.Order.MaDonHang,
+                        SumHD = SumPriceCart,
+                        Code = VoucherCode
+                    };
+                    _unitOfWork.UserVoucherRepository.Insert(user);
+                    await _unitOfWork.Save();
+                    _httpContextAccessor.HttpContext.Session.SetString("VoucherCode", "");
+                    var voucher = _unitOfWork.VoucherRepository.Get(x => x.Code.Equals(VoucherCode)).FirstOrDefault();
+                    if (voucher != null)
+                    {
+                        voucher.SumUse = voucher.SumUse - 1;
+                        _unitOfWork.VoucherRepository.Update(voucher);
+                        await _unitOfWork.Save();
                     }
-                    else
-                        SumPriceCart = tongtien < 500000 ? tongtien + 30000 : tongtien;
                 }
-                catch (Exception)
-                {
-                    SumPriceCart = tongtien < 500000 ? tongtien + 30000 : tongtien;
-                }
-                sb.Append("<tr><td colspan='5' style='text-align:right'><strong>Tổng tiền (đã bao gồm cả phí ship hoặc Voucher): " + SumPriceCart.ToString("N0") + " đ</strong></td></tr>");
+                sb.Append("<tr><td colspan='5' style='text-align:right'><strong>Tổng tiền (đã bao gồm cả phí ship và Voucher (Nếu có)): " + SumPriceCart.ToString("N0") + " đ</strong></td></tr>");
                 sb.Append("</table>");
                 sb.Append("<p>Cảm ơn bạn đã tin tưởng và mua hàng của chúng tôi.</p>");
                 await _mailer.SendEmailSync(model.Order.Email, "[" + model.Order.MaDonHang + "] Đơn đặt hàng từ website ShopAsp.Net", sb.ToString());
                 if (model.Order.TypePay == 2)
-                    return RedirectToAction("ShopOnline", new { orderID = model.Order.MaDonHang, Price = tongtien < 500000 ? tongtien + 30000 : tongtien });
+                    return RedirectToAction("ShopOnline", new { orderID = model.Order.MaDonHang, Price = SumPriceCart });
                 return RedirectToAction("CheckOutComplete", new { orderId = model.Order.MaDonHang });
             }
             model.Carts = GetCartItems();
-            model.CartTotal = GetTotal() < 1000000 ? (GetTotal() + 30000) : GetTotal();
+            if (_httpContextAccessor.HttpContext.Session.GetString("Voucher").Length > 0)
+            {
+                model.CartTotal = decimal.Parse(_httpContextAccessor.HttpContext.Session.GetString("Voucher"));
+                ViewBag.session = "ha";
+            }
+            else
+                model.CartTotal = GetTotal() < 1000000 ? (GetTotal() + 30000) : GetTotal();
             return View(model);
         }
 
@@ -574,7 +598,7 @@ namespace figma.Controllers
         public IActionResult GetVoucher(string code)
         {
             if (code.Length != 6)
-                return Ok(false);
+                return Ok(new { result = false, tt = "Voucher chưa đúng, xin bạn vui lòng nhập lại nha !" });
             var sumprice = GetTotal() < 1000000 ? (GetTotal() + 30000) : GetTotal();
             decimal mucgiam = 0;
             var voucher = _unitOfWork.VoucherRepository.Get(x => x.Code.Equals(code) && x.Active).FirstOrDefault();
@@ -607,9 +631,10 @@ namespace figma.Controllers
                         mucgiam = sumprice - voucher.Value > 0 ? sumprice - voucher.Value : 0;
                 }
                 _httpContextAccessor.HttpContext.Session.SetString("Voucher", mucgiam.ToString());
+                _httpContextAccessor.HttpContext.Session.SetString("VoucherCode", code);
                 return Ok(new { result = true, t = mucgiam });
             }
-            return Ok(false);
+            return Ok(new { result = false, tt = "Voucher chưa đúng, xin bạn vui lòng nhập lại nha !" });
         }
         #endregion
         protected override void Dispose(bool disposing)
