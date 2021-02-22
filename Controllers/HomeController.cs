@@ -50,7 +50,7 @@ namespace figma.Controllers
         }
 
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var model = new HomeViewModel
             {
@@ -66,8 +66,8 @@ namespace figma.Controllers
                     Sort = y.Sort,
                     Quantity = y.Quantity
                 }),
-                Banners = _unitOfWork.BannerRepository.Get(a => a.Active, q => q.OrderBy(a => a.Soft)),
-                ConfigSites = _unitOfWork.ConfigSiteRepository.Get()
+                Banners = await _unitOfWork.BannerRepository.GetAync(a => a.Active, q => q.OrderBy(a => a.Soft)),
+                ConfigSites = await _unitOfWork.ConfigSiteRepository.GetAync()
             };
             return View(model);
         }
@@ -342,7 +342,7 @@ namespace figma.Controllers
 
         #endregion
         [Route("{name}-{proId}.html")]
-        public IActionResult Product(int proId = 0)
+        public async Task<IActionResult> Product(int proId = 0)
         {
             if (_httpContextAccessor.HttpContext.Request.Cookies[CartCookieKey] == null)
             {
@@ -394,19 +394,17 @@ namespace figma.Controllers
             {
                 return RedirectToActionPermanent("Index");
             }
-            var products = _unitOfWork.ProductRepository.Get(
+            var products = await _unitOfWork.ProductRepository.GetAync(
                 a => a.Active && a.ProductCategorieID == product.ProductCategorieID && a.ProductID != proId,
                 q => q.OrderByDescending(a => a.Sort), 8);
             var model = new ProductDetailViewModel
             {
                 Product = product,
                 Products = products,
-                ProductLike = _unitOfWork.ProductLikeRepository.Get(x => x.MemberId == int.Parse(userId) && x.ProductID == proId),
-                //   ViewProducts = _unitOfWork.ProductRepository.Get().ToList(),
+                ProductLike = await _unitOfWork.ProductLikeRepository.GetAync(x => x.MemberId == int.Parse(userId) && x.ProductID == proId),
                 RootCategory = _unitOfWork.ProductCategoryRepository.Get(a => a.Active, q => q.OrderByDescending(a => a.Soft)).SingleOrDefault(a => a.ProductCategorieID == product.ProductCategorieID),
                 Collection = _unitOfWork.CollectionRepository.Get(a => a.Active).SingleOrDefault(a => a.CollectionID == product.CollectionID),
-                TagProducts = _unitOfWork.TagsProductsRepository.Get(a => a.ProductID == proId, includeProperties: "Tags,Products"),
-                //  ProductSizeColors = _unitOfWork.ProductSCRepository.Get(includeProperties: "Size,Color").ToList(),
+                TagProducts = await _unitOfWork.TagsProductsRepository.GetAync(a => a.ProductID == proId, includeProperties: "Tags,Products"),
                 GetColors = _unitOfWork.ProductSCRepository.Get(x => x.ProductID == proId && !x.Color.NameColor.Equals("Không màu"), includeProperties: "Color").GroupBy(x => new { x.Color.NameColor, x.Color.Code }).Select(y => new GetColorId { NameColor = y.Key.NameColor, Code = y.Key.Code }),
                 GetSizes = _unitOfWork.ProductSCRepository.Get(x => x.ProductID == proId && !x.Size.SizeProduct.Equals("Không Size"), includeProperties: "Size").GroupBy(x => x.Size.SizeProduct).Select(y => new GetSizeId { SizeProduc = y.Key.Trim() })
             };
