@@ -1,7 +1,14 @@
 ﻿@model figma.ViewModel.HeaderViewModel
+
 @{
     SlugCovert slugCovert = new SlugCovert();
 }
+@using System.Globalization
+@using Microsoft.AspNetCore.Http.Features
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jQuery.mmenu/8.5.20/mmenu.min.css" integrity="sha512-gIn3+aW4xrkqoIvXsJ7F3woKfU+KTvEzXm0IXKmWqXZ8oyD9TfzFEdGDMF0egqto86E91yZVPzoa82a/dgSMig==" crossorigin="anonymous" />
 <header>
     <cache>
@@ -49,11 +56,11 @@
                     <nav class="main-nav text-center">
                         <ul class="clearfix">
                             <li>
-                                <a asp-area="" asp-controller="Home" asp-action="Index">Trang chủ</a>
+                                <a asp-area="" asp-controller="Home" asp-action="Index">@Localizer["Trang chủ"]</a>
                             </li>
                             <li>
-                                <a asp-area="" asp-controller="Home" asp-action="Search">Search</a>
-                            </li>
+                                <a asp-area="" asp-controller="Home" asp-action="Search">@Localizer["Search"]</a>
+</li>
                             <li>
                                 <a asp-area="" asp-controller="Home" asp-action="Privacy">Sản phẩm <i class="fa fa-chevron-down" aria-hidden="true"></i></a>
 
@@ -139,7 +146,7 @@
                     <a asp-area="" asp-controller="Home" asp-action="Search">Search</a>
                 </li>
                 <li>
-                    <a >Sản phẩm <i class="fa fa-chevron-down" aria-hidden="true"></i></a>
+                    <a>Sản phẩm <i class="fa fa-chevron-down" aria-hidden="true"></i></a>
 
                     <ul class="sub_menu">
 

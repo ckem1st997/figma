@@ -26,6 +26,7 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Localization;
 
 namespace figma.Controllers
 {
@@ -42,6 +43,20 @@ namespace figma.Controllers
             _unitOfWork = unitOfWork;
             _mailer = mailer;
             _clientFactory = clientFactory;
+        }
+
+
+        //SetLanguage
+        [HttpPost]
+        public IActionResult SetLanguage(string culture, string returnUrl)
+        {
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+            );
+
+            return Redirect(returnUrl);
         }
 
         public IActionResult Chat()

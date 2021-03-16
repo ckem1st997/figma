@@ -34,6 +34,8 @@ using Hangfire.Dashboard;
 using Microsoft.AspNetCore.ResponseCompression;
 using System.IO.Compression;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Localization;
 
 namespace figma
 {
@@ -76,7 +78,7 @@ namespace figma
             services.AddControllers();
             services.AddSingleton<IFileProvider>(new PhysicalFileProvider(
         Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
-            services.AddMvc();
+            //   services.AddMvc();
             services.AddDbContext<ShopProductContext>(options =>
         options.UseSqlServer(Configuration.GetConnectionString("ShopProductContext")));
             //
@@ -184,6 +186,25 @@ namespace figma
             {
                 options.Level = CompressionLevel.Optimal;
             });
+            // languege
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+            services.AddMvc()
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                .AddDataAnnotationsLocalization();
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supportedCultures = new[] { "vi", "en" };
+                options.SetDefaultCulture(supportedCultures[0])
+                    .AddSupportedCultures(supportedCultures)
+                    .AddSupportedUICultures(supportedCultures);
+                //options.AddInitialRequestCultureProvider(new CustomRequestCultureProvider(async context =>
+                //{
+                //    // My custom request culture logic
+                //    return new ProviderCultureResult("vi");
+                //}));
+            });
+            //   services.AddMvc();
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IBackgroundJobClient backgroundJobs, ILoggerFactory loggerFactor)
         {
@@ -197,6 +218,15 @@ namespace figma
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            var supportedCultures = new[] { "vi", "en" };
+            var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(supportedCultures[0])
+                .AddSupportedCultures(supportedCultures)
+                .AddSupportedUICultures(supportedCultures);
+
+            app.UseRequestLocalization(localizationOptions);
+            //
+
             app.UseResponseCompression();
             app.UseImageSharp();
             var loggingOptions = this.Configuration.GetSection("Log4NetCore")
@@ -233,6 +263,7 @@ namespace figma
                 endpoints.MapHangfireDashboard();
                 endpoints.MapHub<ChatHub>("/chathub");
             });
+
         }
 
     }

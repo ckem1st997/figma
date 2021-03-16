@@ -1,4 +1,6 @@
-﻿$(".btn-pay-product").click(function (e) {
+﻿
+
+$(".btn-pay-product").click(function (e) {
     var v = $("#inputPassword2").val();
     var p = parseInt($("#sumpricett").text().replace(' ', '').replace('đ', '').replace('.', ''));
     if (v.length != 6)
@@ -83,6 +85,12 @@ $(".info .row .col-4").hover(
 );
 
 $(document).ready(function () {
+    //$("img").on("error", function () {
+    //    $(this).unbind("error").attr("src", "/image/Ui-12-512.webp");
+    //});
+    //$("source").on("error", function () {
+    //    $(this).unbind("error").attr("srcset", "/image/Ui-12-512.webp");
+    //});
     $(".datepicker").datepicker();
     $("#exampleModal5").modal('show');
     if (!$("div.carousel-inner div").hasClass("carousel-item")) {
