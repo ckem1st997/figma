@@ -27,8 +27,9 @@
                         <div class="title-header d-none d-lg-block">Hotline: 0989999999</div>
                     }
                     <div class="title-header d-none d-lg-block">
-                        Freeship cho tất cả các đơn hàng giá trị trên 1.000.000 đ
+                        Freeship  @Localizer["cho tất cả các đơn hàng giá trị trên 1.000.000 đ"]
                     </div>
+                    @await Html.PartialAsync("_SelectLanguagePartial")
                     <div class="d-none d-lg-block">
                         <a class="title-header" href="@item.Linkedin">
                             Facebook
@@ -73,7 +74,7 @@
                                     {
                                         <li>
                                             <a class="" asp-controller="Home" asp-action="Info" asp-route-name="@slugCovert.UrlFriendly(item.Name)" asp-route-catId="@item.ProductCategorieID" title="@item.Name">
-                                                @item.Name
+                                                @Localizer[item.Name]
                                                 @if (Model.ProductCategories.Any(a => a.ParentId == item.ProductCategorieID))
                                                 {
                                                     <i class="fa fa-chevron-right" aria-hidden="true"></i>
@@ -85,7 +86,7 @@
                                                     @foreach (var children in Model.ProductCategories.Where(a => a.ParentId == item.ProductCategorieID))
                                                     {
                                                         <li>
-                                                            <a class="" asp-controller="Home" asp-action="Info" asp-route-name="@slugCovert.UrlFriendly(children.Name)" asp-route-catId="@children.ProductCategorieID">@children.Name</a>
+                                                            <a class="" asp-controller="Home" asp-action="Info" asp-route-name="@slugCovert.UrlFriendly(children.Name)" asp-route-catId="@children.ProductCategorieID">@Localizer[children.Name]</a>
                                                         </li>
                                                     }
                                                 </ul>
@@ -98,13 +99,13 @@
                                 <a class="" asp-action="ListReview">Blog</a>
                             </li>
                             <li>
-                                <a class="" asp-area="" asp-controller="Home" asp-action="Privacy">Liên hệ</a>
+                                <a class="" asp-area="" asp-controller="Home" asp-action="Privacy">@Localizer["Liên hệ"]</a>
                             </li>
                             <li>
-                                <a class=" " asp-area="" asp-controller="Home" asp-action="OrderDetails">Tra cứu đơn hàng</a>
+                                <a class=" " asp-area="" asp-controller="Home" asp-action="OrderDetails">@Localizer["Tra cứu đơn hàng"]</a>
                             </li>
                             <li>
-                                <a class="" asp-area="" asp-controller="Home" asp-action="Privacy">Bộ sưu tập</a>
+                                <a class="" asp-area="" asp-controller="Home" asp-action="Privacy"> @Localizer["Bộ sưu tập"]</a>
                             </li>
                         </ul>
                     </nav>

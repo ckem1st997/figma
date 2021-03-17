@@ -120,11 +120,20 @@
   <data name="Bộ sưu tập" xml:space="preserve">
     <value>Collection</value>
   </data>
-  <data name="cho tất cả các đơn hàng giá trị trên cho tất cả các đơn hàng giá trị trên 1.000.000 đ" xml:space="preserve">
+  <data name="cho tất cả các đơn hàng giá trị trên 1.000.000 đ" xml:space="preserve">
     <value>for all above value orders 50 USD</value>
   </data>
   <data name="Liên hệ" xml:space="preserve">
     <value>Contact</value>
+  </data>
+  <data name="Phụ kiện" xml:space="preserve">
+    <value>Accessories</value>
+  </data>
+  <data name="Quần" xml:space="preserve">
+    <value>Trousers</value>
+  </data>
+  <data name="String2" xml:space="preserve">
+    <value />
   </data>
   <data name="Sản phẩm" xml:space="preserve">
     <value>Product</value>
@@ -134,5 +143,11 @@
   </data>
   <data name="Trang chủ" xml:space="preserve">
     <value>Home</value>
+  </data>
+  <data name="Váy" xml:space="preserve">
+    <value>Dress</value>
+  </data>
+  <data name="Áo" xml:space="preserve">
+    <value>Shirt</value>
   </data>
 </root>
