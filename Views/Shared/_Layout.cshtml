@@ -1,14 +1,4 @@
 ﻿
-@{
-    SlugCovert slugCovert = new SlugCovert();
-}
-@using System.Globalization
-@using Microsoft.AspNetCore.Http.Features
-@using Microsoft.AspNetCore.Localization
-@using Microsoft.AspNetCore.Mvc.Localization
-
-@inject IViewLocalizer Localizer
-
 <!DOCTYPE html>
 <html lang="en">
 <head xmlns="http://www.w3.org/1999/xhtml" prefix="og:http://ogp.me/ns# fb:http://www.facebook.com/2008/fbml">
@@ -51,18 +41,20 @@
 <body>
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @functions{ public string GetAntiXsrfRequestToken()
-                {
-                    return Xsrf.GetAndStoreTokens(Context).RequestToken;
-                } }
+        {
+            return Xsrf.GetAndStoreTokens(Context).RequestToken;
+        } }
     <input type="hidden" id="RequestVerificationToken"
            name="RequestVerificationToken" value="@GetAntiXsrfRequestToken()">
+
+
     @await Component.InvokeAsync("HeaderList")
+    @await Html.PartialAsync("_SelectLanguagePartial")
+    @*<partial name="_SelectLanguagePartial" />*@
+
     <cache>
         @await Component.InvokeAsync("Phone")
     </cache>
-    <div>
-        @Localizer["haha"]
-    </div>
     <div class="container-fluid">
         @*<partial name="_CookieConsentPartial" />*@
         <main role="main" class="pb-3">

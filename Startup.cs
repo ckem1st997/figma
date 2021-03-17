@@ -36,6 +36,7 @@ using System.IO.Compression;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Localization;
+using System.Globalization;
 
 namespace figma
 {
@@ -45,7 +46,7 @@ namespace figma
         {
             Configuration = configuration;
         }
-
+        private const string enUSCulture = "vi-VN";
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
@@ -192,19 +193,26 @@ namespace figma
             services.AddMvc()
                 .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
                 .AddDataAnnotationsLocalization();
+
+
             services.Configure<RequestLocalizationOptions>(options =>
             {
-                var supportedCultures = new[] { "vi", "en" };
-                options.SetDefaultCulture(supportedCultures[0])
-                    .AddSupportedCultures(supportedCultures)
-                    .AddSupportedUICultures(supportedCultures);
-                //options.AddInitialRequestCultureProvider(new CustomRequestCultureProvider(async context =>
-                //{
-                //    // My custom request culture logic
-                //    return new ProviderCultureResult("vi");
-                //}));
+                var supportedCultures = new[]
+                {
+                    new CultureInfo(enUSCulture),
+                    new CultureInfo("en-US")
+                };
+
+                options.DefaultRequestCulture = new RequestCulture(culture: "en-US", uiCulture: "en-US");
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
+
+                options.AddInitialRequestCultureProvider(new CustomRequestCultureProvider(async context =>
+                {
+                    // My custom request culture logic
+                    return new ProviderCultureResult("vi");
+                }));
             });
-            //   services.AddMvc();
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IBackgroundJobClient backgroundJobs, ILoggerFactory loggerFactor)
         {
@@ -219,14 +227,12 @@ namespace figma
                 app.UseHsts();
             }
 
-            var supportedCultures = new[] { "vi", "en" };
-            var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(supportedCultures[0])
+            var supportedCultures = new[] { "vi-VN", "en-US" };
+            var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture("vi-VN")
                 .AddSupportedCultures(supportedCultures)
                 .AddSupportedUICultures(supportedCultures);
 
             app.UseRequestLocalization(localizationOptions);
-            //
-
             app.UseResponseCompression();
             app.UseImageSharp();
             var loggingOptions = this.Configuration.GetSection("Log4NetCore")
@@ -262,7 +268,7 @@ namespace figma
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapHangfireDashboard();
                 endpoints.MapHub<ChatHub>("/chathub");
-            });
+            });;
 
         }
 

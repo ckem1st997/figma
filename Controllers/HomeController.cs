@@ -48,15 +48,15 @@ namespace figma.Controllers
 
         //SetLanguage
         [HttpPost]
-        public IActionResult SetLanguage(string culture, string returnUrl)
+        public async Task<IActionResult> SetLanguage(string culture, string returnUrl)
         {
-            Response.Cookies.Append(
+            _httpContextAccessor.HttpContext.Response.Cookies.Append(
                 CookieRequestCultureProvider.DefaultCookieName,
                 CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
                 new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
             );
 
-            return Redirect(returnUrl);
+            return LocalRedirect(returnUrl);
         }
 
         public IActionResult Chat()

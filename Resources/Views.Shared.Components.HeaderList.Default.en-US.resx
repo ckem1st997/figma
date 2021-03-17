@@ -117,6 +117,21 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Bộ sưu tập" xml:space="preserve">
+    <value>Collection</value>
+  </data>
+  <data name="cho tất cả các đơn hàng giá trị trên cho tất cả các đơn hàng giá trị trên 1.000.000 đ" xml:space="preserve">
+    <value>for all above value orders 50 USD</value>
+  </data>
+  <data name="Liên hệ" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="Sản phẩm" xml:space="preserve">
+    <value>Product</value>
+  </data>
+  <data name="Tra cứu đơn hàng" xml:space="preserve">
+    <value>Look up orders</value>
+  </data>
   <data name="Trang chủ" xml:space="preserve">
     <value>Home</value>
   </data>
