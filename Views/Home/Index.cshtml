@@ -1,5 +1,9 @@
 ﻿
 @model figma.ViewModel.HomeViewModel
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+
 @{
     foreach (var item in Model.ConfigSites)
     {
@@ -14,7 +18,7 @@
     }
 }
 @*<button id="addpro" class="btn btn-success">ADD</button>*@
-<cache expires-after="@TimeSpan.FromMinutes(5)">
+<cache expires-after="@TimeSpan.FromMinutes(5)" vary-by-cookie=".AspNetCore.Culture">
     <div class="home-index wrapper-collection-2">
         <div class="banner">
             @*<img loading="lazy" class="" src="~/image/Rectangle 2.png?width=1440&height=632&quality=70&format=jpg" style="opacity:0;" />
@@ -178,7 +182,7 @@
         </div>
         <div class="welcome">
             <div class="title-we mt-5 mb-5 wow animate__fadeInLeftBig" data-wow-duration="1s" data-wow-delay="0.5s">
-                Chào mừng bạn đến với Lucas58
+               @Localizer["Chào mừng bạn đến với NKH"] 
             </div>
             <div class="list-trend">
                 <div>
@@ -187,24 +191,24 @@
                             <a class=" active text-header1 text-header wow animate__fadeInUpBig"
                                data-wow-duration="1s" data-wow-delay="0.5s" id="pills-home-tab"
                                data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home"
-                               aria-selected="true">Hàng mới về</a>
+                               aria-selected="true"> @Localizer["Hàng mới về"] </a>
                         </li>
                         <li class="nav-item col-md-3 col-lg-3 col-6">
                             <a class="text-header1 text-header wow animate__fadeInUpBig"
                                data-wow-duration="1.3s" data-wow-delay="0.5s" id="pills-profile-tab"
                                data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile"
-                               aria-selected="false">Xu hướng</a>
+                               aria-selected="false">@Localizer["Xu hướng"]</a>
                         </li>
                         <li class="nav-item col-md-3 col-lg-3 col-6">
                             <a class="text-header1 text-header wow animate__fadeInUpBig"
                                data-wow-duration="1.6s" data-wow-delay="0.5s" id="pills-contact-tab"
                                data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact"
-                               aria-selected="false">Nổi bật</a>
+                               aria-selected="false">@Localizer["Nổi bật"]</a>
                         </li>
                         <li class="nav-item col-md-3 col-lg-3 col-6">
                             <a class="text-header1 text-header wow animate__fadeInUpBig"
                                data-wow-duration="1.9s" data-wow-delay="0.5s" id="pills-new-tab" data-toggle="pill"
-                               href="#pills-new" role="tab" aria-controls="pills-new" aria-selected="false">Đặc điểm</a>
+                               href="#pills-new" role="tab" aria-controls="pills-new" aria-selected="false">@Localizer["Đặc điểm"]</a>
                         </li>
                     </ul>
                     <div class="tab-content" id="pills-tabContent">
@@ -610,11 +614,11 @@
         </div>
         <div class="welcome bst mt-5">
             <p class="title-long title-we wow animate__fadeInLeftBig" data-wow-duration="1s" data-wow-delay="0.5s">
-                Các bộ sưu tập mới nhất
+                @Localizer["Các bộ sưu tập mới nhất"]  
             </p>
             <div class="list-trend">
                 <div class=" text-center wow animate__fadeInLeftBig" data-wow-duration="1.2s" data-wow-delay="0.5s">
-                    <p>Ghé thăm cửa hàng của chúng tôi để cập nhập những BST thời trang thiết kế mới nhất</p>
+                    <p>@Localizer["Ghé thăm cửa hàng của chúng tôi để cập nhập những BST thời trang thiết kế mới nhất"]</p>
 
                 </div>
                 <div class="container-fluid mt-5">

@@ -1,5 +1,8 @@
 ﻿@model IEnumerable<figma.Models.ConfigSites>
 
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
 @{
     foreach (var item in Model)
     {
@@ -19,7 +22,7 @@
                         </h4>
 
                         <div class="info-fanpage mb-4 text-white">
-                            Enjoy shopping with us:<br />
+                            @Localizer["Thỏa sức mua sắm với chúng tôi:"] <br />
 
                             <a class="text-white" href="@item.GoogleAnalytics">
                                 <i class="fas fa-long-arrow-alt-right border border-primary bg-primary mr-1 mt-4"></i>
@@ -78,7 +81,7 @@
                     </div>
                     <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-12 info-lucas">
                         <h4 class="text-white">
-                            LIÊN HỆ
+                            @Localizer["LIÊN HỆ"]
                         </h4>
                         <div class="info-fanpage container mt-4 text-white">
                             <div class="row">
@@ -120,18 +123,18 @@
                     </div>
                     <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-12 info-lucas">
                         <h4 class="text-white">
-                            LINKS NHANH
+                            LINKS
                         </h4>
                         <div class="info-fanpage mt-4 ">
                             <ul class="list-group">
                                 <li>
                                     <a asp-action="Index" class="text-white">
-                                        Trang chủ
+                                        @Localizer["Trang chủ"]     
                                     </a>
                                 </li>
                                 <li>
                                     <a asp-action="Index" class="text-white">
-                                        Sản phẩm
+                                        @Localizer["Sản phẩm"]   
                                     </a>
                                 </li>
                                 <li>
@@ -141,7 +144,7 @@
                                 </li>
                                 <li>
                                     <a asp-action="Index" class="text-white">
-                                        Liên hệ
+                                        @Localizer["Liên hệ"]   
                                     </a>
                                 </li>
                             </ul>

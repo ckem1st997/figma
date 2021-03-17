@@ -79,7 +79,7 @@
         @*<div class="cm-spinner"></div>*@
         @*<img src="/index.svg" style="opacity: 1; visibility: visible;">*@
     </div>
-    <cache>
+    <cache vary-by-cookie=".AspNetCore.Culture">
         @await Component.InvokeAsync("FooterList")
     </cache>
     <cache>
