@@ -1,0 +1,286 @@
+2021-04-03 11:44:57,718  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:7484:3936cec5 successfully announced in 600.507 ms
+ 2021-04-03 11:44:57,759  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:7484:3936cec5 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+ 2021-04-03 11:44:57,796  INFO Hangfire.Server.ServerWatchdog.? [?] - MESSAGE: 1 servers were removed due to timeout
+ 2021-04-03 11:44:57,823  INFO Hangfire.Server.BackgroundServerProcess.? [?] - MESSAGE: Server desktop-itlr9t6:7484:3936cec5 all the dispatchers started
+ 2021-04-03 11:44:58,086  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Now listening on: http://127.0.0.1:21380
+ 2021-04-03 11:44:58,091  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2021-04-03 11:44:58,091  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2021-04-03 11:44:58,091  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: C:\Users\16879\source\repos\figma
+ 2021-04-03 11:45:00,260  WARN Microsoft.EntityFrameworkCore.Model.Validation.? [?] - MESSAGE: No type was specified for the decimal column 'OrderId' on entity type 'OrderInfo'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'HasColumnType()'.
+ 2021-04-03 11:45:00,261  WARN Microsoft.EntityFrameworkCore.Model.Validation.? [?] - MESSAGE: No type was specified for the decimal column 'Amount' on entity type 'OrderInfo'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'HasColumnType()'.
+ 2021-04-03 11:45:00,262  WARN Microsoft.EntityFrameworkCore.Model.Validation.? [?] - MESSAGE: No type was specified for the decimal column 'vnp_TransactionNo' on entity type 'OrderInfo'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'HasColumnType()'.
+ 2021-04-03 11:45:00,263  WARN Microsoft.EntityFrameworkCore.Model.Validation.? [?] - MESSAGE: No type was specified for the decimal column 'SumHD' on entity type 'UserVoucher'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'HasColumnType()'.
+ 2021-04-03 11:45:00,263  WARN Microsoft.EntityFrameworkCore.Model.Validation.? [?] - MESSAGE: No type was specified for the decimal column 'Value' on entity type 'Voucher'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values using 'HasColumnType()'.
+ 2021-04-03 11:45:31,568  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435742633171449.png?quality=90&format=jpg'. Cached Key: 'a4852a5f0db3'
+ 2021-04-03 11:45:31,635  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435743935625358.png?width=460&height=340&quality=70&format=jpg&rmode=crop'. Cached Key: '909a612b5f76'
+ 2021-04-03 11:45:31,657  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435744642995742.png?width=460&height=340&quality=70&format=jpg&rmode=crop'. Cached Key: '5cac540bd789'
+ 2021-04-03 11:45:31,679  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435745094336439.png?width=460&height=340&quality=70&format=jpg&rmode=crop'. Cached Key: 'd1caaa6164dd'
+ 2021-04-03 11:45:31,695  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437459952111105.png?width=460&height=340&quality=70&format=jpg&rmode=crop'. Cached Key: '83ce58614202'
+ 2021-04-03 11:45:31,724  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437460233626947.png?width=460&height=340&quality=70&format=jpg&rmode=crop'. Cached Key: '9e6a38657110'
+ 2021-04-03 11:45:31,738  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437464695985839.png?width=460&height=340&quality=70&format=jpg&rmode=crop'. Cached Key: '77f959ef7822'
+ 2021-04-03 11:45:31,752  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437465243101790.png?width=460&height=340&quality=70&format=jpg&rmode=crop'. Cached Key: 'c4d313539227'
+ 2021-04-03 11:45:31,767  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437465496769226.png?width=460&height=340&quality=70&format=jpg&rmode=crop'. Cached Key: 'e2c246e103cf'
+ 2021-04-03 11:45:31,848  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435743418820065.png?quality=90&format=jpg'. Cached Key: '536235323bea'
+ 2021-04-03 11:45:31,932  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509925989910.jpg?width=480&height=480&quality=70&format=jpg'. Cached Key: 'c731aa13af1b'
+ 2021-04-03 11:45:32,502  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514273065693.jpg?width=480&height=480&quality=70&format=jpg'. Cached Key: '03e339045d3f'
+ 2021-04-03 11:45:32,508  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514272276492.jpg?width=480&height=480&quality=70&format=jpg'. Cached Key: '282a2f485cd1'
+ 2021-04-03 11:45:33,103  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/image/Rectangle 214.png?quality=70&format=jpg'. Cached Key: '268b3422134e'
+ 2021-04-03 11:45:33,163  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509926969849.jpg?width=480&height=480&quality=70&format=jpg'. Cached Key: 'c01111c3a226'
+ 2021-04-03 11:45:33,452  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509185535127.jpg?width=480&height=480&quality=70&format=jpg'. Cached Key: '843bd880fae9'
+ 2021-04-03 11:45:33,463  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450508499578916.jpg?width=480&height=480&quality=70&format=jpg'. Cached Key: '785289da076a'
+ 2021-04-03 11:45:33,468  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509184786404.jpg?width=480&height=480&quality=70&format=jpg'. Cached Key: '91f8a9a65609'
+ 2021-04-03 11:45:33,517 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736705873514.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:45:33,517 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736708922105.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:45:33,550 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736366333089.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:45:33,617 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736369311489.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:45:33,667 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735954234595.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:45:33,669 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735951790896.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:45:33,727  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450508503182823.jpg?width=480&height=480&quality=70&format=jpg'. Cached Key: '834f181a5486'
+ 2021-04-03 11:45:33,741 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735563298472.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:45:33,741 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735566364804.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:45:33,795 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735253593281.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:45:33,831 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735256435652.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:45:33,833 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734932870348.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:45:33,845 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734935739906.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:45:33,855 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734556263309.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:45:33,879 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734559207086.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:45:33,900 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/06/132438363534870618.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:45:33,916 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/06/132438363539334740.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:45:33,927 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/06/132438363534870618.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:45:33,939 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/06/132438363539334740.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:45:33,944 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736705873514.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:45:33,952 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736708922105.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:45:33,972 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734556263309.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:45:33,973 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734559207086.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:45:33,976 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735951790896.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:45:34,001 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735954234595.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:45:34,003 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734932870348.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:45:34,010 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734935739906.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:45:34,036 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735253593281.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:45:34,041 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735256435652.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:45:34,049 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735563298472.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:45:34,070 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735566364804.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:45:34,078 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736366333089.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:45:34,094 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736369311489.png?width=480&height=479&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:45:34,108  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450508499578916.jpg?width=480&height=479&quality=70&format=jpg'. Cached Key: 'b1bc09f044cb'
+ 2021-04-03 11:45:34,112  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450508503182823.jpg?width=480&height=479&quality=70&format=jpg'. Cached Key: '24ff54b9ff7a'
+ 2021-04-03 11:45:34,132  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509184786404.jpg?width=480&height=479&quality=70&format=jpg'. Cached Key: '5ce72464c83e'
+ 2021-04-03 11:45:34,140  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509185535127.jpg?width=480&height=479&quality=70&format=jpg'. Cached Key: 'c6eca2a5171e'
+ 2021-04-03 11:45:34,146  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509925989910.jpg?width=480&height=479&quality=70&format=jpg'. Cached Key: '2293ea4fb5d4'
+ 2021-04-03 11:45:34,165  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450509926969849.jpg?width=480&height=479&quality=70&format=jpg'. Cached Key: '4ab6985f4ea8'
+ 2021-04-03 11:45:34,185  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437486135555556.png?quality=70&format=jpg'. Cached Key: 'f7d9635259d6'
+ 2021-04-03 11:45:34,203  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/05/132437488550744852.png?quality=70&format=jpg'. Cached Key: '73438671da55'
+ 2021-04-03 11:45:34,216  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435747379058863.png?quality=70&format=jpg'. Cached Key: '6d19acd1184e'
+ 2021-04-03 11:45:34,231  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/03/132435757857854843.png?quality=70&format=jpg'. Cached Key: '480e429173f7'
+ 2021-04-03 11:45:34,243  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/10/132441852020443783.jpg?width=480&height=320&quality=80&format=jpg'. Cached Key: '01dd63859fac'
+ 2021-04-03 11:45:34,268  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514272276492.jpg?width=480&height=479&quality=70&format=jpg'. Cached Key: 'bd57a76f8c9d'
+ 2021-04-03 11:45:34,271  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/20/132450514273065693.jpg?width=480&height=479&quality=70&format=jpg'. Cached Key: '3052d197378e'
+ 2021-04-03 11:45:34,279  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/15/132446353902878113.png?width=480&height=320&quality=80&format=jpg'. Cached Key: '0bf7685131cc'
+ 2021-04-03 11:45:34,321  INFO SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: Sending image. Request uri: 'https://localhost:44302/uploads/2020/09/15/132446353225621988.png?width=480&height=320&quality=80&format=jpg'. Cached Key: '23dfee34e028'
+ 2021-04-03 11:45:52,589 ERROR Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Failed executing DbCommand (16ms) [Parameters=[@__user_Username_0='?' (Size = 50)], CommandType='Text', CommandTimeout='30']
+SELECT [m].[MemberId], [m].[Active], [m].[Address], [m].[ConfirmEmail], [m].[CreateDate], [m].[Email], [m].[Fullname], [m].[HomePage], [m].[LockAccount], [m].[Mobile], [m].[Password], [m].[Role], [m].[token]
+FROM [Members] AS [m]
+WHERE [m].[Email] = @__user_Username_0
+ 2021-04-03 11:45:52,692 ERROR Microsoft.EntityFrameworkCore.Query.? [?] - MESSAGE: An exception occurred while iterating over the results of a query for context type 'figma.Data.ShopProductContext'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'LockAccount'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.InitializeReader(DbContext _, Boolean result)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.MoveNext()
+ClientConnectionId:e5af485e-3866-408c-91e8-d2703669d0ec
+Error Number:207,State:1,Class:16
+ Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'LockAccount'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.InitializeReader(DbContext _, Boolean result)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.MoveNext()
+ClientConnectionId:e5af485e-3866-408c-91e8-d2703669d0ec
+Error Number:207,State:1,Class:16
+2021-04-03 11:45:52,847 ERROR Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.? [?] - MESSAGE: An unhandled exception has occurred while executing the request.
+ Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'LockAccount'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.InitializeReader(DbContext _, Boolean result)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at figma.Data.GenericRepository`1.Get(Expression`1 filter, Func`2 orderBy, Int32 records, String includeProperties) in C:\Users\16879\source\repos\figma\DAL\GenericRepository.cs:line 53
+   at figma.Controllers.HomeController.Login(LoginViewModel user, String returnUrl) in C:\Users\16879\source\repos\figma\Controllers\HomeController.cs:line 636
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Builder.Extensions.MapMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.ResponseCompression.ResponseCompressionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+ClientConnectionId:e5af485e-3866-408c-91e8-d2703669d0ec
+Error Number:207,State:1,Class:16
+2021-04-03 11:46:01,873 ERROR Microsoft.EntityFrameworkCore.Database.Command.? [?] - MESSAGE: Failed executing DbCommand (2ms) [Parameters=[@__user_Username_0='?' (Size = 50)], CommandType='Text', CommandTimeout='30']
+SELECT [m].[MemberId], [m].[Active], [m].[Address], [m].[ConfirmEmail], [m].[CreateDate], [m].[Email], [m].[Fullname], [m].[HomePage], [m].[LockAccount], [m].[Mobile], [m].[Password], [m].[Role], [m].[token]
+FROM [Members] AS [m]
+WHERE [m].[Email] = @__user_Username_0
+ 2021-04-03 11:46:01,876 ERROR Microsoft.EntityFrameworkCore.Query.? [?] - MESSAGE: An exception occurred while iterating over the results of a query for context type 'figma.Data.ShopProductContext'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'LockAccount'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.InitializeReader(DbContext _, Boolean result)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.MoveNext()
+ClientConnectionId:e5af485e-3866-408c-91e8-d2703669d0ec
+Error Number:207,State:1,Class:16
+ Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'LockAccount'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.InitializeReader(DbContext _, Boolean result)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.MoveNext()
+ClientConnectionId:e5af485e-3866-408c-91e8-d2703669d0ec
+Error Number:207,State:1,Class:16
+2021-04-03 11:46:01,890 ERROR Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.? [?] - MESSAGE: An unhandled exception has occurred while executing the request.
+ Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'LockAccount'.
+   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
+   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.ExecuteReader()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.InitializeReader(DbContext _, Boolean result)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at figma.Data.GenericRepository`1.Get(Expression`1 filter, Func`2 orderBy, Int32 records, String includeProperties) in C:\Users\16879\source\repos\figma\DAL\GenericRepository.cs:line 53
+   at figma.Controllers.HomeController.Login(LoginViewModel user, String returnUrl) in C:\Users\16879\source\repos\figma\Controllers\HomeController.cs:line 636
+   at lambda_method(Closure , Object )
+   at Microsoft.Extensions.Internal.ObjectMethodExecutorAwaitable.Awaiter.GetResult()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Builder.Extensions.MapMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.ResponseCompression.ResponseCompressionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+ClientConnectionId:e5af485e-3866-408c-91e8-d2703669d0ec
+Error Number:207,State:1,Class:16
+2021-04-03 11:49:34,216 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736705873514.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:49:34,217 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735563298472.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:49:34,217 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735954234595.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:49:34,219 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735566364804.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:49:34,228 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735951790896.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:49:34,219 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736369311489.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:49:34,232 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735253593281.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:49:34,233 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736366333089.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:49:34,233 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435736708922105.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:49:34,234 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435735256435652.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:49:34,237 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/06/132438363534870618.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:49:34,237 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734556263309.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:49:34,238 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734559207086.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:49:34,240 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734935739906.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:49:34,241 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/03/132435734932870348.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 2021-04-03 11:49:34,246 ERROR SixLabors.ImageSharp.Web.Middleware.ImageSharpMiddleware.? [?] - MESSAGE: The image 'https://localhost:44302/uploads/2020/09/06/132438363539334740.png?width=480&height=480&quality=70&format=jpg' could not be resolved
+ 
