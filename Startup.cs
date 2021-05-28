@@ -38,6 +38,7 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
 
+
 namespace figma
 {
     public class Startup
@@ -82,6 +83,7 @@ namespace figma
             //   services.AddMvc();
             services.AddDbContext<ShopProductContext>(options =>
         options.UseSqlServer(Configuration.GetConnectionString("ShopProductContext")));
+            services.AddScoped<IDapper, Dapperr>();
             //
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
      .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, config =>

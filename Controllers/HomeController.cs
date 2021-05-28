@@ -27,22 +27,28 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Localization;
+using BenchmarkDotNet.Attributes;
+using System.Data;
 
 namespace figma.Controllers
 {
+    // dapper truy vấn lấy ra, ef để ghi vì an toàn
     public class HomeController : Controller
     {
+        private readonly IDapper _dapper;
         private readonly UnitOfWork _unitOfWork;
         private readonly IMailer _mailer;
         private readonly IHttpClientFactory _clientFactory;
         private const string CartCookieKey = "CartID";
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public HomeController(UnitOfWork unitOfWork, IMailer mailer, IHttpClientFactory clientFactory, IHttpContextAccessor httpContextAccesso)
+
+        public HomeController(IDapper dapper, UnitOfWork unitOfWork, IMailer mailer, IHttpClientFactory clientFactory, IHttpContextAccessor httpContextAccesso)
         {
             _httpContextAccessor = httpContextAccesso;
             _unitOfWork = unitOfWork;
             _mailer = mailer;
             _clientFactory = clientFactory;
+            _dapper = dapper;
         }
 
 
@@ -854,6 +860,19 @@ namespace figma.Controllers
             _unitOfWork.Dispose();
             base.Dispose(disposing);
         }
+
+        //
+        [Benchmark]
+        public IActionResult TestSQL()
+        {
+            //  var data = _unitOfWork.ProductRepository.Get();
+            var data = _dapper.GetAll<Products>($"select * from Products", null, commandType: CommandType.Text);
+            //  ViewBag.hihi = await _unitOfWorkDapper.Products.GetAllAsync();
+
+            return View(data);
+        }
+
+
         //
 
         //public virtual bool IsSignedIn(ClaimsPrincipal principal)
