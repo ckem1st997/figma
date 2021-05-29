@@ -405,18 +405,16 @@ namespace figma.Controllers
                              });
             }
             string userId;
-            try
-            {
-                var claims = HttpContext.User.Claims;
-                userId = claims.FirstOrDefault(c => c.Type == "UserId").Value;
-            }
-            catch (Exception)
-            {
+
+            var claims = HttpContext.User.Claims;
+            if (!claims.Any())
                 userId = "0";
-            }
+            else
+                userId = claims.FirstOrDefault(c => c.Type == "UserId").Value;
 
 
-            var product = _unitOfWork.ProductRepository.GetByID(proId);
+            //  var product = _unitOfWork.ProductRepository.GetByID(proId);
+            var product = _dapper.Get<Products>("select * from Products where ProductID=" + proId + "", null, CommandType.Text);
             if (product == null)
             {
                 return RedirectToActionPermanent("Index");
@@ -424,6 +422,19 @@ namespace figma.Controllers
             var products = await _unitOfWork.ProductRepository.GetAync(
                 a => a.Active && a.ProductCategorieID == product.ProductCategorieID && a.ProductID != proId,
                 q => q.OrderByDescending(a => a.Sort), 8);
+            //    var products = _dapper.GetAll<Products>("select * from Products inner join ProductCategories on ProductCategories.ProductCategorieID=Products.ProductCategorieID where Products.Active=1 and Products.ProductCategorieID=" + product.ProductCategorieID + " and Products.ProductID !=" + proId + " order by Products.Sort desc OFFSET 0 ROWS FETCH NEXT 8 ROWS ONLY", null, CommandType.Text);
+
+            //var model = new ProductDetailViewModel
+            //{
+            //    Product = product,
+            //    Products = products,
+            //    ProductLikeo = _dapper.Get<ProductLike>("select ProductID from ProductLikes where MemberId=" + int.Parse(userId) + " and ProductID=" + proId + "", null, CommandType.Text),
+            //    RootCategory = _unitOfWork.ProductCategoryRepository.Get(a => a.Active, q => q.OrderByDescending(a => a.Soft)).SingleOrDefault(a => a.ProductCategorieID == product.ProductCategorieID),
+            //    Collection = _unitOfWork.CollectionRepository.Get(a => a.Active).SingleOrDefault(a => a.CollectionID == product.CollectionID),
+            //    TagProducts = await _unitOfWork.TagsProductsRepository.GetAync(a => a.ProductID == proId, includeProperties: "Tags,Products"),
+            //    GetColors = _unitOfWork.ProductSCRepository.Get(x => x.ProductID == proId && !x.Color.NameColor.Equals("Không màu"), includeProperties: "Color").GroupBy(x => new { x.Color.NameColor, x.Color.Code }).Select(y => new GetColorId { NameColor = y.Key.NameColor, Code = y.Key.Code }),
+            //    GetSizes = _unitOfWork.ProductSCRepository.Get(x => x.ProductID == proId && !x.Size.SizeProduct.Equals("Không Size"), includeProperties: "Size").GroupBy(x => x.Size.SizeProduct).Select(y => new GetSizeId { SizeProduc = y.Key.Trim() })
+            //};
             var model = new ProductDetailViewModel
             {
                 Product = product,
@@ -435,7 +446,6 @@ namespace figma.Controllers
                 GetColors = _unitOfWork.ProductSCRepository.Get(x => x.ProductID == proId && !x.Color.NameColor.Equals("Không màu"), includeProperties: "Color").GroupBy(x => new { x.Color.NameColor, x.Color.Code }).Select(y => new GetColorId { NameColor = y.Key.NameColor, Code = y.Key.Code }),
                 GetSizes = _unitOfWork.ProductSCRepository.Get(x => x.ProductID == proId && !x.Size.SizeProduct.Equals("Không Size"), includeProperties: "Size").GroupBy(x => x.Size.SizeProduct).Select(y => new GetSizeId { SizeProduc = y.Key.Trim() })
             };
-
             return View(model);
         }
 
