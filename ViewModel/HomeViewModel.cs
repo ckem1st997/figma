@@ -31,7 +31,12 @@ namespace figma.ViewModel
         public string NameColor { get; set; }
         public string Code { get; set; }
     }
-
+    public class ProductCategoryListSP
+    {
+        public string Name { get; set; }
+        public string ProductCategorieID { get; set; }
+        public string Image { get; set; }
+    }
     public class ViewProducts
     {
         public DateTime CreateDate { get; set; }

@@ -31,14 +31,25 @@ namespace figma.DAL
 
         public T Get<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.Text)
         {
-            using IDbConnection db = new SqlConnection(_config.GetConnectionString(Connectionstring));
-            return db.Query<T>(sp, parms, commandType: commandType).FirstOrDefault();
+            using var connection = new SqlConnection(_config.GetConnectionString(Connectionstring));
+            return connection.Query<T>(sp, parms, commandType: commandType).FirstOrDefault();
+        }
+        public T GetAync<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.Text)
+        {
+            using var connection = new SqlConnection(_config.GetConnectionString(Connectionstring));
+            return connection.QueryAsync<T>(sp, parms, commandType: commandType).Result.FirstOrDefault();
         }
 
         public List<T> GetAll<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure)
         {
-            using IDbConnection db = new SqlConnection(_config.GetConnectionString(Connectionstring));
-            return db.Query<T>(sp, parms, commandType: commandType).ToList();
+            using var connection = new SqlConnection(_config.GetConnectionString(Connectionstring));
+            return connection.Query<T>(sp, parms, commandType: commandType).ToList();
+        }
+        public List<T> GetAllAync<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure)
+        {
+            //  Console.WriteLine(sp);
+            using var connection = new SqlConnection(_config.GetConnectionString(Connectionstring));
+            return connection.QueryAsync<T>(sp, parms, commandType: commandType).Result.ToList();
         }
 
         public DbConnection GetDbconnection()
@@ -49,16 +60,16 @@ namespace figma.DAL
         public T Insert<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure)
         {
             T result;
-            using IDbConnection db = new SqlConnection(_config.GetConnectionString(Connectionstring));
+            using var connection = new SqlConnection(_config.GetConnectionString(Connectionstring));
             try
             {
-                if (db.State == ConnectionState.Closed)
-                    db.Open();
+                if (connection.State == ConnectionState.Closed)
+                    connection.Open();
 
-                using var tran = db.BeginTransaction();
+                using var tran = connection.BeginTransaction();
                 try
                 {
-                    result = db.Query<T>(sp, parms, commandType: commandType, transaction: tran).FirstOrDefault();
+                    result = connection.Query<T>(sp, parms, commandType: commandType, transaction: tran).FirstOrDefault();
                     tran.Commit();
                 }
                 catch (Exception ex)
@@ -73,8 +84,8 @@ namespace figma.DAL
             }
             finally
             {
-                if (db.State == ConnectionState.Open)
-                    db.Close();
+                if (connection.State == ConnectionState.Open)
+                    connection.Close();
             }
 
             return result;
@@ -83,16 +94,16 @@ namespace figma.DAL
         public T Update<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure)
         {
             T result;
-            using IDbConnection db = new SqlConnection(_config.GetConnectionString(Connectionstring));
+            using var connection = new SqlConnection(_config.GetConnectionString(Connectionstring));
             try
             {
-                if (db.State == ConnectionState.Closed)
-                    db.Open();
+                if (connection.State == ConnectionState.Closed)
+                    connection.Open();
 
-                using var tran = db.BeginTransaction();
+                using var tran = connection.BeginTransaction();
                 try
                 {
-                    result = db.Query<T>(sp, parms, commandType: commandType, transaction: tran).FirstOrDefault();
+                    result = connection.Query<T>(sp, parms, commandType: commandType, transaction: tran).FirstOrDefault();
                     tran.Commit();
                 }
                 catch (Exception ex)
@@ -107,8 +118,8 @@ namespace figma.DAL
             }
             finally
             {
-                if (db.State == ConnectionState.Open)
-                    db.Close();
+                if (connection.State == ConnectionState.Open)
+                    connection.Close();
             }
 
             return result;

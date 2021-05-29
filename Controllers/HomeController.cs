@@ -71,24 +71,30 @@ namespace figma.Controllers
         }
 
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
+            //var model = new HomeViewModel
+            //{
+            //    Products = _unitOfWork.ProductRepository.Get(a => a.Active, q => q.OrderBy(a => a.Sort), 12).Select(y => new ViewProducts
+            //    {
+            //        Name = y.Name,
+            //        CreateDate = y.CreateDate,
+            //        Hot = y.Hot,
+            //        Image = y.Image,
+            //        Price = y.Price,
+            //        ProductID = y.ProductID,
+            //        SaleOff = y.SaleOff,
+            //        Sort = y.Sort,
+            //        Quantity = y.Quantity
+            //    }),
+            //    Banners = await _unitOfWork.BannerRepository.GetAync(a => a.Active, q => q.OrderBy(a => a.Soft)),
+            //    ConfigSites = await _unitOfWork.ConfigSiteRepository.GetAync()
+            //};
             var model = new HomeViewModel
             {
-                Products = _unitOfWork.ProductRepository.Get(a => a.Active, q => q.OrderBy(a => a.Sort), 12).Select(y => new ViewProducts
-                {
-                    Name = y.Name,
-                    CreateDate = y.CreateDate,
-                    Hot = y.Hot,
-                    Image = y.Image,
-                    Price = y.Price,
-                    ProductID = y.ProductID,
-                    SaleOff = y.SaleOff,
-                    Sort = y.Sort,
-                    Quantity = y.Quantity
-                }),
-                Banners = await _unitOfWork.BannerRepository.GetAync(a => a.Active, q => q.OrderBy(a => a.Soft)),
-                ConfigSites = await _unitOfWork.ConfigSiteRepository.GetAync()
+                Products = _dapper.GetAllAync<ViewProducts>("select Name,CreateDate,Hot,Image,Price,ProductID,SaleOff,Sort,Quantity from Products where Active=1 order by Sort OFFSET 0 ROWS FETCH NEXT 12 ROWS ONLY", null, CommandType.Text),
+                Banners = _dapper.GetAllAync<Banners>("Select * from Banners where Active=1 order by Soft", null, CommandType.Text),
+                ConfigSites = _dapper.GetAllAync<ConfigSites>("Select * from ConfigSites", null, CommandType.Text)
             };
             return View(model);
         }
@@ -480,9 +486,10 @@ namespace figma.Controllers
         };
         //
         [Route("collections/{name}-{catId}")]
-        public async Task<IActionResult> Info(int catId, string sortOrder, string currentFilter, string searchString, int? pageNumber)
+        public IActionResult Info(int catId, string sortOrder, string currentFilter, string searchString, int pageNumber = 1)
         {
-            var category = _unitOfWork.ProductCategoryRepository.GetByID(catId);
+            // var category = _unitOfWork.ProductCategoryRepository.GetByID(catId);
+            var category = _dapper.GetAync<ProductCategoryListSP>("Select Name,ProductCategorieID,Image from ProductCategories where ProductCategorieID=" + catId + "", null, CommandType.Text);
             if (category == null)
             {
                 return RedirectToActionPermanent("Index");
@@ -501,34 +508,51 @@ namespace figma.Controllers
                 searchString = currentFilter;
             }
             ViewData["CurrentFilter"] = searchString;
-            var Products = await _unitOfWork.ProductRepository.GetAync(a => a.Active && (a.ProductCategorieID == catId || a.ProductCategories.ParentId == catId), orderBy: q => q.OrderBy(a => a.Name));
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                Products = Products.Where(s => s.Name.Contains(searchString));
-            }
-            Products = sortOrder switch
-            {
-                "name_desc" => Products.OrderByDescending(a => a.Name),
-                "Date" => Products.OrderBy(a => a.CreateDate),
-                "date_desc" => Products.OrderByDescending(a => a.CreateDate),
-                "Price" => Products.OrderBy(a => a.Price),
-                "price_desc" => Products.OrderByDescending(a => a.Price),
-                _ => Products.OrderBy(a => a.Name),
-            };
-            IEnumerable<ViewProducts> view = Products.Select(y => new ViewProducts
-            {
-                Name = y.Name,
-                CreateDate = y.CreateDate,
-                Hot = y.Hot,
-                Image = y.Image,
-                Price = y.Price,
-                ProductID = y.ProductID,
-                SaleOff = y.SaleOff,
-                Sort = y.Sort,
-                Quantity = y.Quantity
-            });
+            //var Products = await _unitOfWork.ProductRepository.GetAync(a => a.Active && (a.ProductCategorieID == catId || a.ProductCategories.ParentId == catId), orderBy: q => q.OrderBy(a => a.Name));
+            //if (!String.IsNullOrEmpty(searchString))
+            //{
+            //    Products = Products.Where(s => s.Name.Contains(searchString));
+            //}
+            //Products = sortOrder switch
+            //{
+            //    "name_desc" => Products.OrderByDescending(a => a.Name),
+            //    "Date" => Products.OrderBy(a => a.CreateDate),
+            //    "date_desc" => Products.OrderByDescending(a => a.CreateDate),
+            //    "Price" => Products.OrderBy(a => a.Price),
+            //    "price_desc" => Products.OrderByDescending(a => a.Price),
+            //    _ => Products.OrderBy(a => a.Name),
+            //};
+            //IEnumerable<ViewProducts> view = Products.Select(y => new ViewProducts
+            //{
+            //    Name = y.Name,
+            //    CreateDate = y.CreateDate,
+            //    Hot = y.Hot,
+            //    Image = y.Image,
+            //    Price = y.Price,
+            //    ProductID = y.ProductID,
+            //    SaleOff = y.SaleOff,
+            //    Sort = y.Sort,
+            //    Quantity = y.Quantity
+            //});
             int pageSize = 20;
-            return View(PaginatedList<ViewProducts>.CreateAsync(view, pageNumber ?? 1, pageSize));
+
+            int skip = (pageNumber - 1) * pageSize;
+            // Console.WriteLine("select Products.Name,CreateDate,Hot,Products.Image,Price,ProductID,SaleOff,Sort,Quantity from Products inner join ProductCategories on ProductCategories.ProductCategorieID=Products.ProductCategorieID where Products.Active=1 and (Products.ProductCategorieID=" + catId + " or ProductCategories.ParentId=" + catId + ") and Products.Name like '%" + searchString + "%' order by Name OFFSET  " + skip + " ROWS FETCH NEXT 20 ROWS ONLY");
+            var Products = sortOrder switch
+            {
+                //"name_desc" => Products.OrderByDescending(a => a.Name),
+                "name_desc" => _dapper.GetAll<ViewProducts>("select Products.Name,CreateDate,Hot,Products.Image,Price,ProductID,SaleOff,Sort,Quantity from Products inner join ProductCategories on ProductCategories.ProductCategorieID=Products.ProductCategorieID where Products.Active=1 and (Products.ProductCategorieID=" + catId + " or ProductCategories.ParentId=" + catId + ") and Products.Name like '%" + searchString + "%' order by Name desc OFFSET " + skip + " ROWS FETCH NEXT 20 ROWS ONLY", null, CommandType.Text),
+                "Date" => _dapper.GetAll<ViewProducts>("select Products.Name,CreateDate,Hot,Products.Image,Price,ProductID,SaleOff,Sort,Quantity from Products inner join ProductCategories on ProductCategories.ProductCategorieID=Products.ProductCategorieID where Products.Active=1 and (Products.ProductCategorieID=" + catId + " or ProductCategories.ParentId=" + catId + ") and Products.Name like '%" + searchString + "%' order by CreateDate OFFSET " + skip + " ROWS FETCH NEXT 20 ROWS ONLY", null, CommandType.Text),
+                "date_desc" => _dapper.GetAll<ViewProducts>("select Products.Name,CreateDate,Hot,Products.Image,Price,ProductID,SaleOff,Sort,Quantity from Products inner join ProductCategories on ProductCategories.ProductCategorieID=Products.ProductCategorieID where Products.Active=1 and (Products.ProductCategorieID=" + catId + " or ProductCategories.ParentId=" + catId + ") and Products.Name like '%" + searchString + "%' order by CreateDate desc OFFSET " + skip + " ROWS FETCH NEXT 20 ROWS ONLY", null, CommandType.Text),
+                "Price" => _dapper.GetAll<ViewProducts>("select Products.Name,CreateDate,Hot,Products.Image,Price,ProductID,SaleOff,Sort,Quantity from Products inner join ProductCategories on ProductCategories.ProductCategorieID=Products.ProductCategorieID where Products.Active=1 and (Products.ProductCategorieID=" + catId + " or ProductCategories.ParentId=" + catId + ") and Products.Name like '%" + searchString + "%' order by Price OFFSET " + skip + " ROWS FETCH NEXT 20 ROWS ONLY", null, CommandType.Text),
+                "price_desc" => _dapper.GetAll<ViewProducts>("select Products.Name,CreateDate,Hot,Products.Image,Price,ProductID,SaleOff,Sort,Quantity from Products inner join ProductCategories on ProductCategories.ProductCategorieID=Products.ProductCategorieID where Products.Active=1 and (Products.ProductCategorieID=" + catId + " or ProductCategories.ParentId=" + catId + ") and Products.Name like '%" + searchString + "%' order by Price desc OFFSET " + skip + " ROWS FETCH NEXT 20 ROWS ONLY", null, CommandType.Text),
+                _ => _dapper.GetAll<ViewProducts>("select Products.Name,CreateDate,Hot,Products.Image,Price,ProductID,SaleOff,Sort,Quantity from Products inner join ProductCategories on ProductCategories.ProductCategorieID=Products.ProductCategorieID where Products.Active=1 and (Products.ProductCategorieID=" + catId + " or ProductCategories.ParentId=" + catId + ") and Products.Name like '%" + searchString + "%' order by Name OFFSET " + skip + " ROWS FETCH NEXT 20 ROWS ONLY", null, CommandType.Text)
+            };
+            ViewBag.HasPreviousPage = skip > 1 ? true : false;
+            ViewBag.HasNextPage = skip < (int)Math.Ceiling(Products.Count() / (double)pageSize);
+            ViewBag.PageIndex = pageNumber;
+            // return View(PaginatedList<ViewProducts>.CreateAsync(view, pageNumber ?? 1, pageSize));
+            return View(Products);
         }
 
         public async Task<IActionResult> Search(string sortOrder, string currentFilter, string searchString, int? pageNumber)
@@ -855,41 +879,107 @@ namespace figma.Controllers
         }
 
         #endregion
-        protected override void Dispose(bool disposing)
-        {
-            _unitOfWork.Dispose();
-            base.Dispose(disposing);
-        }
+
 
         //
         [Benchmark]
         public IActionResult TestSQL()
         {
             //  var data = _unitOfWork.ProductRepository.Get();
-            var data = _dapper.GetAll<Products>($"select * from Products", null, commandType: CommandType.Text);
+            //  var data = _dapper.GetAll<Products>($"select * from Products", null, commandType: CommandType.Text);
             //  ViewBag.hihi = await _unitOfWorkDapper.Products.GetAllAsync();
-
-            return View(data);
+            return View();
         }
 
 
-        //
-
-        //public virtual bool IsSignedIn(ClaimsPrincipal principal)
+        //public void Add()
         //{
-        //    if (principal == null)
+        //    // Random random = new Random();
+        //    //        ProductID,Name,Description,Image,Body,ProductCategorieID,Quantity,
+        //    //Factory,Price,SaleOff,QuyCach,Sort,Hot,Home,Active,TitleMeta,
+        //    //DescriptionMeta,GiftInfo,Content,StatusProduct,CollectionID,BarCode,CreateDate,CreateBy
+        //    string name = "Váy STELLA BE cổ vuông chun vai";
+        //    string[] img = { "uploads/2020/09/06/132438363534870618.png,uploads/2020/09/06/132438363539334740.png,uploads/2020/09/06/132438363541560735.png,uploads/2020/09/06/132438363544079376.png,uploads/2020/09/06/132438363547063270.png,uploads/2020/09/06/132438363549254747.png", "uploads/2020/09/03/132435734556263309.png,uploads/2020/09/03/132435734559207086.png,uploads/2020/09/03/132435734561526431.png,uploads/2020/09/03/132435734565776953.png,uploads/2020/09/03/132435734568138937.png,uploads/2020/09/03/132435734570197372.png,uploads/2020/09/03/132435734572503314.png", "uploads/2020/09/03/132435734932870348.png,uploads/2020/09/03/132435734935739906.png,uploads/2020/09/03/132435734938064048.png,uploads/2020/09/03/132435734939979281.png,uploads/2020/09/03/132435734942204032.png,uploads/2020/09/03/132435734944396254.png,uploads/2020/09/03/132435734946580826.png,uploads/2020/09/03/132435734948894694.png", "uploads/2020/09/03/132435735253593281.png,uploads/2020/09/03/132435735256435652.png,uploads/2020/09/03/132435735258660281.png,uploads/2020/09/03/132435735260562887.png,uploads/2020/09/03/132435735262847997.png,uploads/2020/09/03/132435735265158821.png,uploads/2020/09/03/132435735267492917.png", "uploads/2020/09/03/132435735563298472.png,uploads/2020/09/03/132435735566364804.png,uploads/2020/09/03/132435735568691340.png,uploads/2020/09/03/132435735570584196.png,uploads/2020/09/03/132435735572904220.png,uploads/2020/09/03/132435735575345447.png,uploads/2020/09/03/132435735577225153.png", "uploads/2020/09/03/132435735951790896.png,uploads/2020/09/03/132435735954234595.png,uploads/2020/09/03/132435735956085355.png,uploads/2020/09/03/132435735958246157.png,uploads/2020/09/03/132435735960310306.png,uploads/2020/09/03/132435735962146364.png", "uploads/2020/09/03/132435736366333089.png,uploads/2020/09/03/132435736369311489.png,uploads/2020/09/03/132435736371620431.png,uploads/2020/09/03/132435736373535857.png,uploads/2020/09/03/132435736375898195.png,uploads/2020/09/03/132435736378024042.png,uploads/2020/09/03/132435736380043009.png", "uploads/2020/09/03/132435736705873514.png,uploads/2020/09/03/132435736708922105.png,uploads/2020/09/03/132435736711443768.png,uploads/2020/09/03/132435736713435462.png,uploads/2020/09/03/132435736715715778.png,uploads/2020/09/03/132435736717949521.png,uploads/2020/09/03/132435736719937440.png", "uploads/2020/09/20/132450508499578916.jpg,uploads/2020/09/20/132450508503182823.jpg,uploads/2020/09/20/132450508504649804.jpg,uploads/2020/09/20/132450508506052883.jpg,uploads/2020/09/20/132450508507255832.jpg,uploads/2020/09/20/132450508507905622.jpg,uploads/2020/09/20/132450508508454478.jpg", "uploads/2020/09/20/132450509184786404.jpg,uploads/2020/09/20/132450509185535127.jpg,uploads/2020/09/20/132450509186245184.jpg,uploads/2020/09/20/132450509186811881.jpg,uploads/2020/09/20/132450509187311790.jpg,uploads/2020/09/20/132450509187834360.jpg,uploads/2020/09/20/132450509188318371.jpg", "uploads/2020/09/20/132450509925989910.jpg,uploads/2020/09/20/132450509926969849.jpg,uploads/2020/09/20/132450509928094111.jpg,uploads/2020/09/20/132450509928744734.jpg,uploads/2020/09/20/132450509929254189.jpg,uploads/2020/09/20/132450509929777010.jpg,uploads/2020/09/20/132450509930267158.jpg", "uploads/2020/09/20/132450510235331261.jpg,uploads/2020/09/20/132450510236311537.jpg,uploads/2020/09/20/132450510237067016.jpg,uploads/2020/09/20/132450510237643353.jpg,uploads/2020/09/20/132450510238144788.jpg,uploads/2020/09/20/132450510238660206.jpg,uploads/2020/09/20/132450510239167509.jpg", "uploads/2020/09/20/132450510569896054.jpg,uploads/2020/09/20/132450510570666055.jpg,uploads/2020/09/20/132450510571453837.jpg,uploads/2020/09/20/132450510572185988.jpg,uploads/2020/09/20/132450510572686764.jpg,uploads/2020/09/20/132450510573330928.jpg,uploads/2020/09/20/132450510573854815.jpg", "uploads/2020/09/20/132450510941022590.jpg,uploads/2020/09/20/132450510942112914.jpg,uploads/2020/09/20/132450510942855545.jpg,uploads/2020/09/20/132450510943481997.jpg,uploads/2020/09/20/132450510944116804.jpg,uploads/2020/09/20/132450510944732560.jpg,uploads/2020/09/20/132450510945248503.jpg", "uploads/2020/09/20/132450513718160233.jpg,uploads/2020/09/20/132450513718933077.jpg,uploads/2020/09/20/132450513719401577.jpg,uploads/2020/09/20/132450513719919186.jpg", "uploads/2020/09/20/132450513942758055.jpg,uploads/2020/09/20/132450513943699541.jpg,uploads/2020/09/20/132450513944219267.jpg,uploads/2020/09/20/132450513944597805.jpg,uploads/2020/09/20/132450513944973670.jpg,uploads/2020/09/20/132450513945533886.jpg" };
+        //    string Description = "Váy STELLA BE cổ vuông chun vai";
+        //    int ProductCategorieID = 6;
+        //    int Quantity = 1;
+        //    string[] Factory = { "Việt Nam", "Mỹ", "Hàn Quốc" };
+        //    decimal Price = 600000;
+        //    decimal SaleOff = 100000;
+        //    string[] CreateBy = { "Admin", "NV1", "NV2" };
+        //    int Home = 1;
+        //    int Sort = 1;
+        //    int active = 1;
+        //    string TitleMeta = "váy cao cấp 2018, rèm vải đẹp hà nội";
+        //    int CollectionID = 2;
+        //    double BarCode = 1;
+        //    bool[] Hot = { true, false };
+        //    int StatusProduct = 1;
+        //    string[] Body = { "", "" };
+        //    string DescriptionMeta = "Rèm vải đẹp, mẫu mã đa dạng, Rèm Nam An –đơn vị cung cấp rèm uy tin chất lượng, bảo hành trọn đời sản phẩm. Giảm giá ngay 10% khi đặt hàng online. Miễn phí phụ kiện và công lắp đặt.";
+
+        //    for (int i = 1; i < 12224; i++)
         //    {
-        //        throw new ArgumentNullException(nameof(principal));
+        //        Random random = new Random();
+        //        Products products = new Products();
+        //        products.Name = name + "" + i + "";
+        //        products.Image = img[random.Next(0, img.Length)];
+        //        products.Description = Description + "" + i + "";
+        //        products.ProductCategorieID = 6;
+        //        products.Quantity = random.Next(1, 1000);
+        //        products.Factory = Factory[random.Next(0, Factory.Length)];
+        //        products.Price = random.Next(100000, 1000000);
+        //        products.SaleOff = random.Next(0, 100000);
+        //        products.CreateBy = CreateBy[random.Next(0, CreateBy.Length)];
+        //        products.Home = true;
+        //        products.Sort = _unitOfWork.ProductRepository.Get().Count() + i;
+        //        products.Active = true;
+        //        products.TitleMeta = TitleMeta;
+        //        products.CollectionID = 2;
+        //        products.BarCode = random.Next(100000000, 999999999).ToString();
+        //        products.Hot = Hot[random.Next(0, Hot.Length)];
+        //        products.StatusProduct = true;
+        //        products.Description = DescriptionMeta;
+        //        _unitOfWork.ProductRepository.Insert(products);
+        //        _unitOfWork.Save();
+        //        //  var products = _unitOfWork.ProductRepository.GetByID(i);
+        //        //if (products != null)
+        //        //{
+        //        //    products.Description = "SP-ASP.NET" + i + "";
+        //        //    _unitOfWork.ProductRepository.Update(products);
+        //        //    _unitOfWork.SaveNotAync();
+        //        //    Console.WriteLine(i);
+        //        //}
+        //        //  else
+        //        //  continue;
         //    }
-        //    return principal?.Identities != null &&
-        //        principal.Identities.Any(i => i.AuthenticationType == IdentityConstants.ApplicationScheme);
         //}
-        //public virtual Task SignInAsync(TUser user, bool isPersistent, string authenticationMethod = null)
-        //{
-        //    return SignInAsync(user, new AuthenticationProperties { IsPersistent = isPersistent }, authenticationMethod);
-        //}
-
+        protected override void Dispose(bool disposing)
+        {
+            _unitOfWork.Dispose();
+            base.Dispose(disposing);
+        }
     }
+
+
+
+
+    //
+
+    //public virtual bool IsSignedIn(ClaimsPrincipal principal)
+    //{
+    //    if (principal == null)
+    //    {
+    //        throw new ArgumentNullException(nameof(principal));
+    //    }
+    //    return principal?.Identities != null &&
+    //        principal.Identities.Any(i => i.AuthenticationType == IdentityConstants.ApplicationScheme);
+    //}
+    //public virtual Task SignInAsync(TUser user, bool isPersistent, string authenticationMethod = null)
+    //{
+    //    return SignInAsync(user, new AuthenticationProperties { IsPersistent = isPersistent }, authenticationMethod);
+    //}
+
 }
 //{
 //  "VNPAY:vnp_Url": "http://sandbox.vnpayment.vn/paymentv2/vpcpay.html",
@@ -917,72 +1007,3 @@ namespace figma.Controllers
 //  "Kestrel:Certificates:Development:Password": "bbed3394-bd97-4649-81d0-9c672cebbb6e"
 //}
 //Password_01
-//public JsonResult Add()
-//{
-//    //ProductID,Name,Description,Image,Body,ProductCategorieID,Quantity,
-//    //Factory,Price,SaleOff,QuyCach,Sort,Hot,Home,Active,TitleMeta,
-//    //DescriptionMeta,GiftInfo,Content,StatusProduct,CollectionID,BarCode,CreateDate,CreateBy
-//    //string name = "Váy STELLA BE cổ vuông chun vai";
-//    //string[] img = { "uploads/2020/09/06/132438363534870618.png,uploads/2020/09/06/132438363539334740.png,uploads/2020/09/06/132438363541560735.png,uploads/2020/09/06/132438363544079376.png,uploads/2020/09/06/132438363547063270.png,uploads/2020/09/06/132438363549254747.png", "uploads/2020/09/03/132435734556263309.png,uploads/2020/09/03/132435734559207086.png,uploads/2020/09/03/132435734561526431.png,uploads/2020/09/03/132435734565776953.png,uploads/2020/09/03/132435734568138937.png,uploads/2020/09/03/132435734570197372.png,uploads/2020/09/03/132435734572503314.png", "uploads/2020/09/03/132435734932870348.png,uploads/2020/09/03/132435734935739906.png,uploads/2020/09/03/132435734938064048.png,uploads/2020/09/03/132435734939979281.png,uploads/2020/09/03/132435734942204032.png,uploads/2020/09/03/132435734944396254.png,uploads/2020/09/03/132435734946580826.png,uploads/2020/09/03/132435734948894694.png", "uploads/2020/09/03/132435735253593281.png,uploads/2020/09/03/132435735256435652.png,uploads/2020/09/03/132435735258660281.png,uploads/2020/09/03/132435735260562887.png,uploads/2020/09/03/132435735262847997.png,uploads/2020/09/03/132435735265158821.png,uploads/2020/09/03/132435735267492917.png", "uploads/2020/09/03/132435735563298472.png,uploads/2020/09/03/132435735566364804.png,uploads/2020/09/03/132435735568691340.png,uploads/2020/09/03/132435735570584196.png,uploads/2020/09/03/132435735572904220.png,uploads/2020/09/03/132435735575345447.png,uploads/2020/09/03/132435735577225153.png", "uploads/2020/09/03/132435735951790896.png,uploads/2020/09/03/132435735954234595.png,uploads/2020/09/03/132435735956085355.png,uploads/2020/09/03/132435735958246157.png,uploads/2020/09/03/132435735960310306.png,uploads/2020/09/03/132435735962146364.png", "uploads/2020/09/03/132435736366333089.png,uploads/2020/09/03/132435736369311489.png,uploads/2020/09/03/132435736371620431.png,uploads/2020/09/03/132435736373535857.png,uploads/2020/09/03/132435736375898195.png,uploads/2020/09/03/132435736378024042.png,uploads/2020/09/03/132435736380043009.png", "uploads/2020/09/03/132435736705873514.png,uploads/2020/09/03/132435736708922105.png,uploads/2020/09/03/132435736711443768.png,uploads/2020/09/03/132435736713435462.png,uploads/2020/09/03/132435736715715778.png,uploads/2020/09/03/132435736717949521.png,uploads/2020/09/03/132435736719937440.png", "uploads/2020/09/20/132450508499578916.jpg,uploads/2020/09/20/132450508503182823.jpg,uploads/2020/09/20/132450508504649804.jpg,uploads/2020/09/20/132450508506052883.jpg,uploads/2020/09/20/132450508507255832.jpg,uploads/2020/09/20/132450508507905622.jpg,uploads/2020/09/20/132450508508454478.jpg", "uploads/2020/09/20/132450509184786404.jpg,uploads/2020/09/20/132450509185535127.jpg,uploads/2020/09/20/132450509186245184.jpg,uploads/2020/09/20/132450509186811881.jpg,uploads/2020/09/20/132450509187311790.jpg,uploads/2020/09/20/132450509187834360.jpg,uploads/2020/09/20/132450509188318371.jpg", "uploads/2020/09/20/132450509925989910.jpg,uploads/2020/09/20/132450509926969849.jpg,uploads/2020/09/20/132450509928094111.jpg,uploads/2020/09/20/132450509928744734.jpg,uploads/2020/09/20/132450509929254189.jpg,uploads/2020/09/20/132450509929777010.jpg,uploads/2020/09/20/132450509930267158.jpg", "uploads/2020/09/20/132450510235331261.jpg,uploads/2020/09/20/132450510236311537.jpg,uploads/2020/09/20/132450510237067016.jpg,uploads/2020/09/20/132450510237643353.jpg,uploads/2020/09/20/132450510238144788.jpg,uploads/2020/09/20/132450510238660206.jpg,uploads/2020/09/20/132450510239167509.jpg", "uploads/2020/09/20/132450510569896054.jpg,uploads/2020/09/20/132450510570666055.jpg,uploads/2020/09/20/132450510571453837.jpg,uploads/2020/09/20/132450510572185988.jpg,uploads/2020/09/20/132450510572686764.jpg,uploads/2020/09/20/132450510573330928.jpg,uploads/2020/09/20/132450510573854815.jpg", "uploads/2020/09/20/132450510941022590.jpg,uploads/2020/09/20/132450510942112914.jpg,uploads/2020/09/20/132450510942855545.jpg,uploads/2020/09/20/132450510943481997.jpg,uploads/2020/09/20/132450510944116804.jpg,uploads/2020/09/20/132450510944732560.jpg,uploads/2020/09/20/132450510945248503.jpg", "uploads/2020/09/20/132450513718160233.jpg,uploads/2020/09/20/132450513718933077.jpg,uploads/2020/09/20/132450513719401577.jpg,uploads/2020/09/20/132450513719919186.jpg", "uploads/2020/09/20/132450513942758055.jpg,uploads/2020/09/20/132450513943699541.jpg,uploads/2020/09/20/132450513944219267.jpg,uploads/2020/09/20/132450513944597805.jpg,uploads/2020/09/20/132450513944973670.jpg,uploads/2020/09/20/132450513945533886.jpg" };
-//    //string Description = "Váy STELLA BE cổ vuông chun vai";
-//    //int ProductCategorieID = 6;
-//    //int Quantity = 1;
-//    //string[] Factory = { "Việt Nam", "Mỹ", "Hàn Quốc" };
-//    //decimal Price = 600000;
-//    //decimal SaleOff = 100000;
-//    //string[] CreateBy = { "Admin", "NV1", "NV2" };
-//    //int Home = 1;
-//    //int Sort = 1;
-//    //int active = 1;
-//    //string TitleMeta = "váy cao cấp 2018, rèm vải đẹp hà nội";
-//    //int CollectionID = 2;
-//    //double BarCode = 1;
-//    //bool[] Hot = { true, false };
-//    //int StatusProduct = 1;
-//    //string[] Body = { "", "" };
-//    //string DescriptionMeta = "Rèm vải đẹp, mẫu mã đa dạng, Rèm Nam An –đơn vị cung cấp rèm uy tin chất lượng, bảo hành trọn đời sản phẩm. Giảm giá ngay 10% khi đặt hàng online. Miễn phí phụ kiện và công lắp đặt.";
-//    try
-//    {
-//        for (int i = 1; i < 12224; i++)
-//        {
-//            // Random random = new Random();
-//            //  Products products = new Products();
-//            //products.Name = name + "" + i + "";
-//            //products.Image = img[random.Next(0, img.Length)];
-//            //products.Description = Description + "" + i + "";
-//            //products.ProductCategorieID = 6;
-//            //products.Quantity = random.Next(1, 1000);
-//            //products.Factory = Factory[random.Next(0, Factory.Length)];
-//            //products.Price = random.Next(100000, 1000000);
-//            //products.SaleOff = random.Next(0, 100000);
-//            //products.CreateBy = CreateBy[random.Next(0, CreateBy.Length)];
-//            //products.Home = true;
-//            //products.Sort = _unitOfWork.ProductRepository.Get().Count() + i;
-//            //products.Active = true;
-//            //products.TitleMeta = TitleMeta;
-//            //products.CollectionID = 2;
-//            //products.BarCode = random.Next(100000000, 999999999).ToString();
-//            //products.Hot = Hot[random.Next(0, Hot.Length)];
-//            //products.StatusProduct = true;
-//            //   products.Description = DescriptionMeta;
-//            var products = _unitOfWork.ProductRepository.GetByID(i);
-//            if (products != null)
-//            {
-//                products.Description = "SP-ASP.NET" + i + "";
-//                _unitOfWork.ProductRepository.Update(products);
-//                _unitOfWork.SaveNotAync();
-//                Console.WriteLine(i);
-//            }
-//            else
-//                continue;
-//        }
-
-//        return Json(new { result = 1 });
-//    }
-//    catch (Exception)
-//    {
-
-//        return Json(new { result = 2 });
-//    }
-//}
-

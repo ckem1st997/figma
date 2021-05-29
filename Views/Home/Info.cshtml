@@ -1,4 +1,5 @@
-﻿@model PaginatedList<figma.ViewModel.ViewProducts>
+﻿@*@model PaginatedList<figma.ViewModel.ViewProducts>*@
+@model IEnumerable<figma.ViewModel.ViewProducts>
 @{
     ViewData["Title"] = ViewBag.category.Name;
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -138,20 +139,38 @@
         }
     </div>
     @{
-        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+        //var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+        //var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+        var prevDisabled = !ViewBag.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !ViewBag.HasNextPage ? "disabled" : "";
     }
+    @*<div class="text-center">
+            <a asp-action="Info"
+               asp-route-sortOrder="@ViewData["CurrentSort"]"
+               asp-route-pageNumber="@(Model.PageIndex - 1)"
+               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               class="btn btn-success @prevDisabled">
+                Previous
+            </a>
+            <a asp-action="Info"
+               asp-route-sortOrder="@ViewData["CurrentSort"]"
+               asp-route-pageNumber="@(Model.PageIndex + 1)"
+               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               class="btn btn-success @nextDisabled">
+                Next
+            </a>
+        </div>*@
     <div class="text-center">
         <a asp-action="Info"
            asp-route-sortOrder="@ViewData["CurrentSort"]"
-           asp-route-pageNumber="@(Model.PageIndex - 1)"
+           asp-route-pageNumber="@(ViewBag.PageIndex - 1)"
            asp-route-currentFilter="@ViewData["CurrentFilter"]"
            class="btn btn-success @prevDisabled">
             Previous
         </a>
         <a asp-action="Info"
            asp-route-sortOrder="@ViewData["CurrentSort"]"
-           asp-route-pageNumber="@(Model.PageIndex + 1)"
+           asp-route-pageNumber="@(ViewBag.PageIndex + 1)"
            asp-route-currentFilter="@ViewData["CurrentFilter"]"
            class="btn btn-success @nextDisabled">
             Next
