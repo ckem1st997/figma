@@ -19,9 +19,10 @@ namespace figma.DAL
         {
             _config = config;
         }
+
         public void Dispose()
         {
-
+            GC.SuppressFinalize(this);
         }
 
         public int Execute(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure)
@@ -72,15 +73,15 @@ namespace figma.DAL
                     result = connection.Query<T>(sp, parms, commandType: commandType, transaction: tran).FirstOrDefault();
                     tran.Commit();
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     tran.Rollback();
-                    throw ex;
+                    throw;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
             finally
             {
@@ -106,15 +107,15 @@ namespace figma.DAL
                     result = connection.Query<T>(sp, parms, commandType: commandType, transaction: tran).FirstOrDefault();
                     tran.Commit();
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     tran.Rollback();
-                    throw ex;
+                    throw;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
             finally
             {

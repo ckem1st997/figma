@@ -369,7 +369,7 @@ namespace figma.Controllers
 
         #endregion
         [Route("{name}-{proId}.html")]
-        public async Task<IActionResult> Product(int proId = 0)
+        public IActionResult Product(int proId = 0)
         {
             if (_httpContextAccessor.HttpContext.Request.Cookies[CartCookieKey] == null)
             {
@@ -414,15 +414,15 @@ namespace figma.Controllers
 
 
             //  var product = _unitOfWork.ProductRepository.GetByID(proId);
-            var product = _dapper.Get<Products>("select * from Products where ProductID=" + proId + "", null, CommandType.Text);
+            var product = _dapper.GetAync<Products>("select * from Products where ProductID=" + proId + "", null, CommandType.Text);
             if (product == null)
             {
                 return RedirectToActionPermanent("Index");
             }
-            var products = await _unitOfWork.ProductRepository.GetAync(
-                a => a.Active && a.ProductCategorieID == product.ProductCategorieID && a.ProductID != proId,
-                q => q.OrderByDescending(a => a.Sort), 8);
-            //    var products = _dapper.GetAll<Products>("select * from Products inner join ProductCategories on ProductCategories.ProductCategorieID=Products.ProductCategorieID where Products.Active=1 and Products.ProductCategorieID=" + product.ProductCategorieID + " and Products.ProductID !=" + proId + " order by Products.Sort desc OFFSET 0 ROWS FETCH NEXT 8 ROWS ONLY", null, CommandType.Text);
+            //var products = await _unitOfWork.ProductRepository.GetAync(
+            //    a => a.Active && a.ProductCategorieID == product.ProductCategorieID && a.ProductID != proId,
+            //    q => q.OrderByDescending(a => a.Sort), 8);
+            //  var products = 
 
             //var model = new ProductDetailViewModel
             //{
@@ -435,16 +435,17 @@ namespace figma.Controllers
             //    GetColors = _unitOfWork.ProductSCRepository.Get(x => x.ProductID == proId && !x.Color.NameColor.Equals("Không màu"), includeProperties: "Color").GroupBy(x => new { x.Color.NameColor, x.Color.Code }).Select(y => new GetColorId { NameColor = y.Key.NameColor, Code = y.Key.Code }),
             //    GetSizes = _unitOfWork.ProductSCRepository.Get(x => x.ProductID == proId && !x.Size.SizeProduct.Equals("Không Size"), includeProperties: "Size").GroupBy(x => x.Size.SizeProduct).Select(y => new GetSizeId { SizeProduc = y.Key.Trim() })
             //};
+            //  Console.WriteLine("select * from Products inner join ProductCategories on ProductCategories.ProductCategorieID=Products.ProductCategorieID where Products.Active=1 and Products.ProductCategorieID=" + product.ProductCategorieID + " and Products.ProductID !=" + proId + " order by Products.Sort desc OFFSET 0 ROWS FETCH NEXT 8 ROWS ONLY");
             var model = new ProductDetailViewModel
             {
                 Product = product,
-                Products = products,
-                ProductLike = await _unitOfWork.ProductLikeRepository.GetAync(x => x.MemberId == int.Parse(userId) && x.ProductID == proId),
-                RootCategory = _unitOfWork.ProductCategoryRepository.Get(a => a.Active, q => q.OrderByDescending(a => a.Soft)).SingleOrDefault(a => a.ProductCategorieID == product.ProductCategorieID),
-                Collection = _unitOfWork.CollectionRepository.Get(a => a.Active).SingleOrDefault(a => a.CollectionID == product.CollectionID),
-                TagProducts = await _unitOfWork.TagsProductsRepository.GetAync(a => a.ProductID == proId, includeProperties: "Tags,Products"),
-                GetColors = _unitOfWork.ProductSCRepository.Get(x => x.ProductID == proId && !x.Color.NameColor.Equals("Không màu"), includeProperties: "Color").GroupBy(x => new { x.Color.NameColor, x.Color.Code }).Select(y => new GetColorId { NameColor = y.Key.NameColor, Code = y.Key.Code }),
-                GetSizes = _unitOfWork.ProductSCRepository.Get(x => x.ProductID == proId && !x.Size.SizeProduct.Equals("Không Size"), includeProperties: "Size").GroupBy(x => x.Size.SizeProduct).Select(y => new GetSizeId { SizeProduc = y.Key.Trim() })
+                Products = _dapper.GetAllAync<ViewProducts>("select Products.Name,Products.CreateDate,Products.Hot,Products.Image,Products.Price,Products.ProductID,Products.SaleOff,Products.Sort,Products.Quantity from Products inner join ProductCategories on ProductCategories.ProductCategorieID=Products.ProductCategorieID where Products.Active=1 and Products.ProductCategorieID=" + product.ProductCategorieID + " and Products.ProductID !=" + proId + " order by Products.Sort desc OFFSET 0 ROWS FETCH NEXT 8 ROWS ONLY", null, CommandType.Text),
+                ProductLike = _dapper.GetAync<ProductLike>("select * from ProductLikes where MemberId=" + int.Parse(userId) + " and ProductID=" + proId + "", null, CommandType.Text),
+                RootCategory = _dapper.Get<ProductCategories>("select * from ProductCategories where Active=1 and ProductCategorieID=" + product.ProductCategorieID + "", null, CommandType.Text),
+                Collection = _dapper.Get<Collection>("select * from Collections where Active=1 and CollectionID=" + product.CollectionID + "", null, CommandType.Text),
+                TagProducts = _dapper.GetAll<TagProducts>("select * from TagProducts inner join Tags on Tags.TagID=TagProducts.TagID inner join Products on Products.ProductID=TagProducts.ProductID where TagProducts.ProductID=" + proId + "", null, CommandType.Text),
+                GetColors = _dapper.GetAll<GetColorId>("select NameColor,Code from ProductSizeColors inner join Colors on Colors.ColorID=ProductSizeColors.ColorID where ProductID = " + proId + " and Colors.NameColor not like N'%Không màu%'", null, CommandType.Text),
+                GetSizes = _dapper.GetAll<GetSizeId>("select SizeProduct from ProductSizeColors inner join Sizes on Sizes.SizeID=ProductSizeColors.SizeID where ProductID=" + proId + " and SizeProduct not like N'%Không Size%'", null, CommandType.Text),
             };
             return View(model);
         }

@@ -1,19 +1,17 @@
-﻿@model IEnumerable<figma.Models.ConfigSites>
+﻿@model figma.Models.ConfigSites
 
 @using Microsoft.AspNetCore.Mvc.Localization
 
 @inject IViewLocalizer Localizer
 @{
-    foreach (var item in Model)
-    {
         <footer>
             <div class="container">
                 <div class="row">
                     <div class="col-xl-3  col-lg-6 col-md-6 col-sm-6 col-12 info-lucas">
                         <h4>
-                            @if (item.CoverImage != null)
+                            @if (Model.CoverImage != null)
                             {
-                                <img src="~/@item.CoverImage" />
+                                <img src="~/@Model.CoverImage" />
                             }
                             else
                             {
@@ -24,12 +22,12 @@
                         <div class="info-fanpage mb-4 text-white">
                             @Localizer["Thỏa sức mua sắm với chúng tôi:"] <br />
 
-                            <a class="text-white" href="@item.GoogleAnalytics">
+                            <a class="text-white" href="@Model.GoogleAnalytics">
                                 <i class="fas fa-long-arrow-alt-right border border-primary bg-primary mr-1 mt-4"></i>
                                 @{
-                                    if (item.Youtube != null)
+                                    if (Model.Youtube != null)
                                     {
-                                        <label> INSTAGRAM: @item.Youtube</label>
+                                        <label> INSTAGRAM: @Model.Youtube</label>
                                     }
                                     else
                                     {
@@ -38,13 +36,13 @@
                                 }
                                 <br />
                             </a>
-                            <a class="text-white" href="@item.LiveChat">
+                            <a class="text-white" href="@Model.LiveChat">
                                 <i class="fas fa-long-arrow-alt-right border border-primary bg-primary mr-1 mt-4"></i>
                                 @{
-                                    if (item.nameShopee != null)
+                                    if (Model.nameShopee != null)
                                     {
                                         <label>
-                                            SHOPEE:  @item.nameShopee
+                                            SHOPEE:  @Model.nameShopee
                                         </label>
                                     }
                                     else
@@ -55,15 +53,15 @@
 
                                 <br />
                             </a>
-                            <a class="text-white" href="@item.urlWeb">
+                            <a class="text-white" href="@Model.urlWeb">
 
                                 <i class="fas fa-long-arrow-alt-right border border-primary bg-primary mr-1 mt-4"></i> ️
 
                                 @{
-                                    if (item.urlWeb != null)
+                                    if (Model.urlWeb != null)
                                     {
                                         <label>
-                                            SHOPEE:  @item.urlWeb
+                                            SHOPEE:  @Model.urlWeb
                                         </label>
                                     }
                                     else
@@ -74,9 +72,9 @@
                             </a>
                         </div>
                         <div class="info-icon">
-                            <a href="@item.Linkedin"><i class="fab fa-facebook-f"></i></a>
-                            <a href="@item.Twitter"> <i class="fab fa-twitter"></i></a>
-                            <a href="@item.GooglePlus"><i class="fab fa-google-plus-g"></i></a>
+                            <a href="@Model.Linkedin"><i class="fab fa-facebook-f"></i></a>
+                            <a href="@Model.Twitter"> <i class="fab fa-twitter"></i></a>
+                            <a href="@Model.GooglePlus"><i class="fab fa-google-plus-g"></i></a>
                         </div>
                     </div>
                     <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-12 info-lucas">
@@ -91,9 +89,9 @@
                                 </div>
                                 <div class="col-9 content-main-fanpage">
                                     @{
-                                        if (item.ContactInfo != null)
+                                        if (Model.ContactInfo != null)
                                         {
-                                            @Html.Raw(item.ContactInfo)
+                                            @Html.Raw(Model.ContactInfo)
                                         }
                                         else
                                         {
@@ -110,9 +108,9 @@
                             <i class="fas fa-phone-volume"></i>
                             <span>
 
-                                @if (item.Hotline != null)
+                                @if (Model.Hotline != null)
                                 {
-                                    <label>Hotline: @item.Hotline</label>
+                                    <label>Hotline: @Model.Hotline</label>
                                 }
                                 else
                                 {
@@ -155,13 +153,12 @@
                             FACEBOOK FANPAGE
                         </h4>
                         <div class="embed-responsive embed-responsive-16by9">
-                            @Html.Raw(item.FbMessage)
+                            @Html.Raw(Model.FbMessage)
                             @*<iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fgiaitri24h24p24s%2F&tabs&width=340&height=214&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true" width="340" height="214" style="border: none; overflow: hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>*@
                         </div>
                     </div>
                 </div>
             </div>
         </footer>
-    }
 }
 
