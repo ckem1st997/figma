@@ -37,7 +37,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
-
+using figma.DapperDI;
 
 namespace figma
 {
@@ -131,6 +131,11 @@ namespace figma
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped(typeof(GenericRepository<>));
             services.AddScoped<UnitOfWork>();
+            //
+
+            services.AddScoped<IApplicationReadDbConnection, ApplicationReadDbConnection>();
+
+
             services.AddSingleton<HtmlEncoder>(HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.BasicLatin, UnicodeRanges.CjkUnifiedIdeographs }));
             //services.AddAntiforgery(options =>
             //{
