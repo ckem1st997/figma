@@ -70,7 +70,7 @@ namespace figma.Controllers
             return View();
         }
 
-
+        // chạy bất đồng bộ thì nhanh, cơ mà phải hạn chế
         public IActionResult Index()
         {
             //var model = new HomeViewModel
@@ -92,7 +92,7 @@ namespace figma.Controllers
             //};
             var model = new HomeViewModel
             {
-                Products = _dapper.GetAllAync<ViewProducts>("select Name,CreateDate,Hot,Image,Price,ProductID,SaleOff,Sort,Quantity from Products where Active=1 order by Sort OFFSET 0 ROWS FETCH NEXT 12 ROWS ONLY", null, CommandType.Text),
+                Products = _dapper.GetAll<ViewProducts>("select Name,CreateDate,Hot,Image,Price,ProductID,SaleOff,Sort,Quantity from Products where Active=1 order by Sort OFFSET 0 ROWS FETCH NEXT 12 ROWS ONLY", null, CommandType.Text),
                 Banners = _dapper.GetAllAync<Banners>("Select * from Banners where Active=1 order by Soft", null, CommandType.Text),
                 ConfigSites = _dapper.GetAllAync<ConfigSites>("Select * from ConfigSites", null, CommandType.Text)
             };

@@ -41,6 +41,16 @@ using figma.DapperDI;
 
 namespace figma
 {
+
+
+    //    Add-Migration
+    //Drop-Database
+    //Get-DbContext
+    //Get-Migration
+    //Remove-Migration
+    //Scaffold-DbContext
+    //Script-Migration: xem câu lệnh sql mà ef chuyển đổi
+    //Update-Database
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -275,7 +285,7 @@ namespace figma
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapHangfireDashboard();
                 endpoints.MapHub<ChatHub>("/chathub");
-            });;
+            }); ;
 
         }
 
