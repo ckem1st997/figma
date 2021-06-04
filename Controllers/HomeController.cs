@@ -71,7 +71,7 @@ namespace figma.Controllers
         }
 
         // chạy bất đồng bộ thì nhanh, cơ mà phải hạn chế
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             //var model = new HomeViewModel
             //{
@@ -93,8 +93,8 @@ namespace figma.Controllers
             var model = new HomeViewModel
             {
                 Products = _dapper.GetAll<ViewProducts>("select Name,CreateDate,Hot,Image,Price,ProductID,SaleOff,Sort,Quantity from Products where Active=1 order by Sort OFFSET 0 ROWS FETCH NEXT 12 ROWS ONLY", null, CommandType.Text),
-                Banners = _dapper.GetAllAync<Banners>("Select * from Banners where Active=1 order by Soft", null, CommandType.Text),
-                ConfigSites = _dapper.GetAllAync<ConfigSites>("Select * from ConfigSites", null, CommandType.Text)
+                Banners = await _dapper.GetAllAync<Banners>("Select * from Banners where Active=1 order by Soft", null, CommandType.Text),
+                ConfigSites = await _dapper.GetAllAync<ConfigSites>("Select * from ConfigSites", null, CommandType.Text)
             };
             return View(model);
         }
@@ -369,7 +369,7 @@ namespace figma.Controllers
 
         #endregion
         [Route("{name}-{proId}.html")]
-        public IActionResult Product(int proId = 0)
+        public async Task<IActionResult> Product(int proId = 0)
         {
             if (_httpContextAccessor.HttpContext.Request.Cookies[CartCookieKey] == null)
             {
@@ -414,7 +414,7 @@ namespace figma.Controllers
 
 
             //  var product = _unitOfWork.ProductRepository.GetByID(proId);
-            var product = _dapper.GetAync<Products>("select * from Products where ProductID=" + proId + "", null, CommandType.Text);
+            var product = await _dapper.GetAync<Products>("select * from Products where ProductID=" + proId + "", null, CommandType.Text);
             if (product == null)
             {
                 return RedirectToActionPermanent("Index");
@@ -439,13 +439,13 @@ namespace figma.Controllers
             var model = new ProductDetailViewModel
             {
                 Product = product,
-                Products = _dapper.GetAllAync<ViewProducts>("select Products.Name,Products.CreateDate,Products.Hot,Products.Image,Products.Price,Products.ProductID,Products.SaleOff,Products.Sort,Products.Quantity from Products inner join ProductCategories on ProductCategories.ProductCategorieID=Products.ProductCategorieID where Products.Active=1 and Products.ProductCategorieID=" + product.ProductCategorieID + " and Products.ProductID !=" + proId + " order by Products.Sort desc OFFSET 0 ROWS FETCH NEXT 8 ROWS ONLY", null, CommandType.Text),
-                ProductLike = _dapper.GetAync<ProductLike>("select * from ProductLikes where MemberId=" + int.Parse(userId) + " and ProductID=" + proId + "", null, CommandType.Text),
+                Products = _dapper.GetAll<ViewProducts>("select Products.Name,Products.CreateDate,Products.Hot,Products.Image,Products.Price,Products.ProductID,Products.SaleOff,Products.Sort,Products.Quantity from Products inner join ProductCategories on ProductCategories.ProductCategorieID=Products.ProductCategorieID where Products.Active=1 and Products.ProductCategorieID=" + product.ProductCategorieID + " and Products.ProductID !=" + proId + " order by Products.Sort desc OFFSET 0 ROWS FETCH NEXT 8 ROWS ONLY", null, CommandType.Text),
+                ProductLike = _dapper.Get<ProductLike>("select * from ProductLikes where MemberId=" + int.Parse(userId) + " and ProductID=" + proId + "", null, CommandType.Text),
                 RootCategory = _dapper.Get<ProductCategories>("select * from ProductCategories where Active=1 and ProductCategorieID=" + product.ProductCategorieID + "", null, CommandType.Text),
                 Collection = _dapper.Get<Collection>("select * from Collections where Active=1 and CollectionID=" + product.CollectionID + "", null, CommandType.Text),
-                TagProducts = _dapper.GetAll<TagProducts>("select * from TagProducts inner join Tags on Tags.TagID=TagProducts.TagID inner join Products on Products.ProductID=TagProducts.ProductID where TagProducts.ProductID=" + proId + "", null, CommandType.Text),
-                GetColors = _dapper.GetAll<GetColorId>("select NameColor,Code from ProductSizeColors inner join Colors on Colors.ColorID=ProductSizeColors.ColorID where ProductID = " + proId + " and Colors.NameColor not like N'%Không màu%'", null, CommandType.Text),
-                GetSizes = _dapper.GetAll<GetSizeId>("select SizeProduct from ProductSizeColors inner join Sizes on Sizes.SizeID=ProductSizeColors.SizeID where ProductID=" + proId + " and SizeProduct not like N'%Không Size%'", null, CommandType.Text),
+                TagProducts = await _dapper.GetAllAync<TagProducts>("select * from TagProducts inner join Tags on Tags.TagID=TagProducts.TagID inner join Products on Products.ProductID=TagProducts.ProductID where TagProducts.ProductID=" + proId + "", null, CommandType.Text),
+                GetColors = await _dapper.GetAllAync<GetColorId>("select NameColor,Code from ProductSizeColors inner join Colors on Colors.ColorID=ProductSizeColors.ColorID where ProductID = " + proId + " and Colors.NameColor not like N'%Không màu%'", null, CommandType.Text),
+                GetSizes = await _dapper.GetAllAync<GetSizeId>("select SizeProduct from ProductSizeColors inner join Sizes on Sizes.SizeID=ProductSizeColors.SizeID where ProductID=" + proId + " and SizeProduct not like N'%Không Size%'", null, CommandType.Text),
             };
             return View(model);
         }
@@ -497,10 +497,10 @@ namespace figma.Controllers
         };
         //
         [Route("collections/{name}-{catId}")]
-        public IActionResult Info(int catId, string sortOrder, string currentFilter, string searchString, int pageNumber = 1)
+        public async Task<IActionResult> Info(int catId, string sortOrder, string currentFilter, string searchString, int pageNumber = 1)
         {
             // var category = _unitOfWork.ProductCategoryRepository.GetByID(catId);
-            var category = _dapper.GetAync<ProductCategoryListSP>("Select Name,ProductCategorieID,Image from ProductCategories where ProductCategorieID=" + catId + "", null, CommandType.Text);
+            var category = await _dapper.GetAync<ProductCategoryListSP>("Select Name,ProductCategorieID,Image from ProductCategories where ProductCategorieID=" + catId + "", null, CommandType.Text);
             if (category == null)
             {
                 return RedirectToActionPermanent("Index");

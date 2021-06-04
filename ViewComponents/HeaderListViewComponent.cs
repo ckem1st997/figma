@@ -32,10 +32,10 @@ namespace figma.ViewComponents
                 //ArticleCategories = await _unitOfWork.ArticleCategoryRepository.GetAync(),
                 //ProductCategories = await _unitOfWork.ProductCategoryRepository.GetAync(a => a.Active && a.Home, q => q.OrderBy(a => a.Soft)),
                 //Carts = await _unitOfWork.CartRepository.GetAync(a => a.CartID == id)
-                ConfigSites = _dapper.GetAync<ConfigSites>("select * from ConfigSites", null, CommandType.Text),
+                ConfigSites = await _dapper.GetAync<ConfigSites>("select * from ConfigSites", null, CommandType.Text),
                 //  ArticleCategories = await _unitOfWork.ArticleCategoryRepository.GetAync(),
-                ProductCategories = _dapper.GetAllAync<ProductCategories>("select ParentId,Name,ProductCategorieID from ProductCategories where Active=1  and Home=1 order by Soft", null, CommandType.Text),
-                Carts = _dapper.GetAync<int>("select COUNT(*) from Carts where CartID='" + id + "'", null, CommandType.Text)
+                ProductCategories = await _dapper.GetAllAync<ProductCategories>("select ParentId,Name,ProductCategorieID from ProductCategories where Active=1  and Home=1 order by Soft", null, CommandType.Text),
+                Carts = await _dapper.GetAync<int>("select COUNT(*) from Carts where CartID='" + id + "'", null, CommandType.Text)
             };
             return View(items);
         }

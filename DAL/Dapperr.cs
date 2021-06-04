@@ -35,22 +35,22 @@ namespace figma.DAL
             using var connection = new SqlConnection(_config.GetConnectionString(Connectionstring));
             return connection.Query<T>(sp, parms, commandType: commandType).FirstOrDefault();
         }
-        public T GetAync<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.Text)
+        public async Task<T> GetAync<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.Text)
         {
             using var connection = new SqlConnection(_config.GetConnectionString(Connectionstring));
-            return connection.QueryAsync<T>(sp, parms, commandType: commandType).Result.FirstOrDefault();
+            return await connection.QueryFirstOrDefaultAsync<T>(sp, parms, commandType: commandType);
         }
 
-        public List<T> GetAll<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure)
+        public IEnumerable<T> GetAll<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure)
         {
             using var connection = new SqlConnection(_config.GetConnectionString(Connectionstring));
             return connection.Query<T>(sp, parms, commandType: commandType).ToList();
         }
-        public List<T> GetAllAync<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure)
+        public async Task<IEnumerable<T>> GetAllAync<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure)
         {
             //  Console.WriteLine(sp);
             using var connection = new SqlConnection(_config.GetConnectionString(Connectionstring));
-            return connection.QueryAsync<T>(sp, parms, commandType: commandType).Result.ToList();
+            return await connection.QueryAsync<T>(sp, parms, commandType: commandType);
         }
 
         public DbConnection GetDbconnection()
