@@ -21,7 +21,9 @@ using OfficeOpenXml;
 
 namespace figma.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    // sẽ được 2 quyền riêng biệt là Admin và ADMIN1, nên cần quyền nào thì chỉ cần ngăn cách nhau bằng dấu phẩy
+
+    [Authorize(Roles = "Admin,ADMIN1")]
     public class CsmController : Controller
     {
         private readonly UnitOfWork _unitOfWork;
