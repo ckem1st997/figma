@@ -29,6 +29,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Localization;
 using BenchmarkDotNet.Attributes;
 using System.Data;
+using figma.CUnit;
 
 namespace figma.Controllers
 {
@@ -41,14 +42,16 @@ namespace figma.Controllers
         private readonly IHttpClientFactory _clientFactory;
         private const string CartCookieKey = "CartID";
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IUnitOfWork _unitOf;
 
-        public HomeController(IDapper dapper, UnitOfWork unitOfWork, IMailer mailer, IHttpClientFactory clientFactory, IHttpContextAccessor httpContextAccesso)
+        public HomeController(IUnitOfWork unitOf,IDapper dapper, UnitOfWork unitOfWork, IMailer mailer, IHttpClientFactory clientFactory, IHttpContextAccessor httpContextAccesso)
         {
             _httpContextAccessor = httpContextAccesso;
             _unitOfWork = unitOfWork;
             _mailer = mailer;
             _clientFactory = clientFactory;
             _dapper = dapper;
+            _unitOf = unitOf;
         }
 
 
@@ -67,6 +70,7 @@ namespace figma.Controllers
 
         public IActionResult Chat()
         {
+            ViewBag.c = _unitOf.Products.Get().Count();
             return View();
         }
 

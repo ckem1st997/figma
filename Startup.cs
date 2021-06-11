@@ -38,6 +38,7 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
 using figma.DapperDI;
+using figma.CUnit;
 
 namespace figma
 {
@@ -61,6 +62,7 @@ namespace figma
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddRepository();
             services.AddImageSharp(options =>
             {
                 options.MemoryStreamManager = new RecyclableMemoryStreamManager();
