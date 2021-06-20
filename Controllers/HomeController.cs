@@ -73,10 +73,14 @@ namespace figma.Controllers
             return View();
         }
 
-        public IActionResult GetProduct()
+
+
+        public IActionResult GetProduct(int start, int length, [FromQuery(Name = "search[value]")] string page)
         {
-            var list = _dapper.GetAll<ViewProducts>("select * from Products", null, CommandType.Text);
-            return Ok(new { data = list,t=true });
+            //[FromQuery(Name = "search[value]")] lấy dữ liệu trên url
+            //   Console.WriteLine(page);
+            var list = _dapper.GetAll<Products>("select ProductID, Name, Description, Image, CreateDate, Price, Active from Products where Name like N'%" + page + "%' ORDER BY ProductID OFFSET " + start + " ROWS FETCH NEXT " + length + " ROWS ONLY; ", null, CommandType.Text);
+            return Ok(new { data = list, t = true });
         }
 
         public IActionResult Chat()

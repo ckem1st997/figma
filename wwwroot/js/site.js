@@ -1,40 +1,61 @@
-﻿$('#kt_datatable').DataTable({
+﻿
+$('#kt_datatable').DataTable({
     responsive: true,
     processing: true,
-    //  serverSide: true,
+    searchDelay: 500,
+    serverSide: true,
+    //paging: true,
+    //pageLength: 10,
     ajax: {
         url: '/home/GetProduct',
+        type: 'GET',
         dataSrc: 'data'
     },
     columns: [
         { data: 'productID' },
         { data: 'name' },
+        { data: 'description' },
         { data: 'price' },
         { data: 'createDate' },
-        { data: 'saleOff' },
-        { data: 'hot' }
+        { data: 'image' },
+        { data: 'active' }
     ],
     columnDefs: [{
         // xử lí cột có vị trí là 3 tính từ 0
-        targets: 3,
+        targets: 4,
         render: function (data, type, row) {
             return data.substr(0, 10);
         }
     },
     {
         // xử lí cột có vị trí là 3 tính từ 0
+        targets: 2,
+        render: function (data, type, row) {
+            return data.substr(0, 20);
+        }
+    }, {
+        // xử lí cột có vị trí là 3 tính từ 0
         targets: 5,
+        render: function (data, type, row) {
+            var list = data.split(",")
+            return '<img src = "/' + list[0] + '" class="align-self-end" alt = "" />';
+        }
+    },
+    {
+        // xử lí cột có vị trí là 3 tính từ 0
+        targets: 6,
         render: function (data, type, row) {
             //data: dữ liệu của cột
             //row:dữ liệu của hàng
             //console.log(row)
             if (data)
-                return '<span class="badge badge-success">Đã kích hoạt ' + row.productID + '</span>'
+                // return '<span class="badge badge-success">Đã kích hoạt ' + row.productID + '</span>'
+                return '<span class="badge badge-success">Đã kích hoạt</span>'
             return '<span class="badge badge-danger">Chưa kích hoạt</span>';
         }
     },
     {
-        targets: 6,
+        targets: 7,
         title: 'Actions',
         orderable: false,
         render: function (data, type, full, meta) {
