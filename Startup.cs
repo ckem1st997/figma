@@ -39,6 +39,7 @@ using Microsoft.AspNetCore.Localization;
 using System.Globalization;
 using figma.DapperDI;
 using figma.CUnit;
+using System.Security.Claims;
 
 namespace figma
 {
@@ -62,6 +63,29 @@ namespace figma
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthorization(options =>
+            {
+                // tạo một policy chung
+                options.AddPolicy("GopAdmin",
+                     // bắt buộc trong coolie phải có Claim Role và Role phải là có giá là một trong những giá trị Admin1 và User1
+                     // thuận lợi cho việc gom nhóm dữ liệu
+                     policy => policy.RequireRole("Admin1", "User1"));
+
+                options.AddPolicy("test2",
+                    // chỉ cần trong cookie tồn tại Claim thuộc kiểu "UserName"
+                    policy => policy.RequireClaim("UserName"));
+                options.AddPolicy("test3",
+                    // chỉ cần trong cookie tồn tại Claim thuộc kiểu Actor
+                    policy => policy.RequireClaim(ClaimTypes.Actor));
+                options.AddPolicy("test4",
+                   // chỉ cần trong cookie tồn tại Claim thuộc kiểu Email của ClaimTypes
+                   policy => policy.RequireClaim(ClaimTypes.Email));
+                options.AddPolicy("test5",
+                  // chỉ cần trong cookie tồn tại Claim thuộc kiểu Role của ClaimTypes và có một trong những dữ liệu thuộc params truyền vào
+                  // ở đây là Admin và Users
+                  policy => policy.RequireClaim(ClaimTypes.Role, "Admin", "Users"));
+            });
+
             services.AddRepository();
             services.AddImageSharp(options =>
             {
