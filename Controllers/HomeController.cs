@@ -44,7 +44,7 @@ namespace figma.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IUnitOfWork _unitOf;
 
-        public HomeController(IUnitOfWork unitOf,IDapper dapper, UnitOfWork unitOfWork, IMailer mailer, IHttpClientFactory clientFactory, IHttpContextAccessor httpContextAccesso)
+        public HomeController(IUnitOfWork unitOf, IDapper dapper, UnitOfWork unitOfWork, IMailer mailer, IHttpClientFactory clientFactory, IHttpContextAccessor httpContextAccesso)
         {
             _httpContextAccessor = httpContextAccesso;
             _unitOfWork = unitOfWork;
@@ -66,6 +66,17 @@ namespace figma.Controllers
             );
 
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult TestDataTable()
+        {
+            return View();
+        }
+
+        public IActionResult GetProduct()
+        {
+            var list = _dapper.GetAll<ViewProducts>("select * from Products", null, CommandType.Text);
+            return Ok(new { data = list,t=true });
         }
 
         public IActionResult Chat()

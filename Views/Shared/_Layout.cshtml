@@ -100,8 +100,9 @@
         @*<script type="text/javascript" src="~/js/site.js" asp-append-version="true"></script>*@
         @*<script src="~/slick-1.8.1/slick/slick.min.js"></script>*@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
         <script type="text/javascript" src="~/js/site.min.js" asp-append-version="true"></script>
     </cache>
-    @RenderSection("Scripts", required: false)
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

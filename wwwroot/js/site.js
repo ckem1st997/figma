@@ -1,4 +1,55 @@
-﻿
+﻿$('#kt_datatable').DataTable({
+    responsive: true,
+    processing: true,
+    //  serverSide: true,
+    ajax: {
+        url: '/home/GetProduct',
+        dataSrc: 'data'
+    },
+    columns: [
+        { data: 'productID' },
+        { data: 'name' },
+        { data: 'price' },
+        { data: 'createDate' },
+        { data: 'saleOff' },
+        { data: 'hot' }
+    ],
+    columnDefs: [{
+        // xử lí cột có vị trí là 3 tính từ 0
+        targets: 3,
+        render: function (data, type, row) {
+            return data.substr(0, 10);
+        }
+    },
+    {
+        // xử lí cột có vị trí là 3 tính từ 0
+        targets: 5,
+        render: function (data, type, row) {
+            //data: dữ liệu của cột
+            //row:dữ liệu của hàng
+            //console.log(row)
+            if (data)
+                return '<span class="badge badge-success">Đã kích hoạt ' + row.productID + '</span>'
+            return '<span class="badge badge-danger">Chưa kích hoạt</span>';
+        }
+    },
+    {
+        targets: 6,
+        title: 'Actions',
+        orderable: false,
+        render: function (data, type, full, meta) {
+            return '\
+							<a asp-action="Product" asp-route-proId="1" class="btn btn-primary" title="Edit details">\
+								<i class="la la-edit">Click</i>\
+							</a>\
+							<a href="javascript:;" class="btn btn-primary" title="Delete">\
+								<i class="la la-trash">Click</i>\
+							</a>\
+						';
+        },
+    },
+    ]
+});
 
 $(".btn-pay-product").click(function (e) {
     var v = $("#inputPassword2").val();
